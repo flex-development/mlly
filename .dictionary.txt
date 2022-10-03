@@ -41,6 +41,7 @@ npmrc
 nums
 nvmrc
 ohmyzsh
+pathe
 pkgs
 preid
 safecrlf
