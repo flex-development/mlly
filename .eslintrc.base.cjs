@@ -626,7 +626,7 @@ const config = {
     'unicorn/prefer-optional-catch-binding': 2,
     'unicorn/prefer-prototype-methods': 2,
     'unicorn/prefer-reflect-apply': 2,
-    'unicorn/prefer-regexp-test': 2,
+    'unicorn/prefer-regexp-test': 0,
     'unicorn/prefer-set-has': 2,
     'unicorn/prefer-spread': 2,
     'unicorn/prefer-string-replace-all': 0,
