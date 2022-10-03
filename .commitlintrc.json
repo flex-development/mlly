@@ -18,6 +18,7 @@
         "esm",
         "exports",
         "github",
+        "interfaces",
         "lib",
         "patches",
         "pkg",
