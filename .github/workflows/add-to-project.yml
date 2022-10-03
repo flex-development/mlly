@@ -1,0 +1,30 @@
+# Add To Project
+#
+# Add new issues and pull requests to the project board.
+#
+# References:
+#
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#issues
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://github.com/actions/add-to-project
+
+---
+name: add-to-project
+on:
+  issues:
+    types:
+      - opened
+  pull_request:
+    types:
+      - opened
+jobs:
+  add-to-project:
+    runs-on: ubuntu-latest
+    steps:
+      - id: add
+        name: Add ${{ format('#{0}', github.event.number || github.event.issue.number) }} to project
+        uses: actions/add-to-project@v0.3.0
+        with:
+          github-token: ${{ secrets.PAT_BOT }}
+          project-url: |
+            ${{ format('{0}/orgs/{1}/projects/{2}', github.server_url, github.repository_owner, secrets.GH_PROJECT_ID) }}

@@ -1,0 +1,37 @@
+{
+  "arrowParens": "avoid",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "css",
+  "jsxSingleQuote": true,
+  "proseWrap": "always",
+  "quoteProps": "as-needed",
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "useTabs": false,
+  "overrides": [
+    {
+      "files": [
+        "*.sh",
+        "*.txt",
+        ".editorconfig",
+        ".env*",
+        ".husky/commit-msg",
+        ".husky/pre-commit",
+        ".husky/pre-push"
+      ],
+      "options": {
+        "functionNextLine": true,
+        "indent": 2,
+        "keepComments": true,
+        "keepPadding": false,
+        "parser": "sh",
+        "spaceRedirects": true,
+        "switchCaseIndent": true,
+        "variant": 0
+      }
+    }
+  ]
+}

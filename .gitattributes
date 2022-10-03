@@ -1,0 +1,44 @@
+# GITATTRIBUTES
+# https://github.com/alexkaratarakis/gitattributes/blob/master/Web.gitattributes
+#
+# details per file setting:
+#   binary:  these files are binary and should be left untouched
+#   text:    these files should be normalized (i.e. convert crlf to lf)
+#
+# note that binary is a macro for -text -diff.
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# AUTO DETECT
+# handle line endings automatically for files detected as text and leave files
+# detected as binary untouched. this will catch all files not defined below.
+# ------------------------------------------------------------------------------
+* text=auto
+
+# ------------------------------------------------------------------------------
+# TEXT FILE ATTRIBUTES
+# ------------------------------------------------------------------------------
+*.cjs text eol=lf
+*.cts text eol=lf
+*.gql text eol=lf
+*.hbs text eol=lf
+*.json text eol=lf
+*.jsonc text eol=lf
+*.md text eol=lf diff=markdown
+*.mjs text eol=lf
+*.sh text eol=lf
+*.snap text eol=lf
+*.ts text eol=lf
+*.txt text eol=lf
+*.yml text eol=lf
+
+# configuration files
+# ------------------------------------------------------------------------------
+*.*ignore text eol=lf
+*.*rc text eol=lf
+.editorconfig text eol=lf
+.env* text eol=lf
+.gitattributes text eol=lf
+.gitconfig text eol=lf
+package.json text eol=lf
+yarn.lock text -diff

@@ -1,0 +1,55 @@
+{
+  "defaultIgnores": true,
+  "extends": ["@commitlint/config-conventional"],
+  "formatter": "@commitlint/format",
+  "ignores": [],
+  "rules": {
+    "scope-case": [2, "always", ["kebab-case", "lower-case"]],
+    "scope-enum": [
+      2,
+      "always",
+      [
+        "cjs",
+        "deps",
+        "deps-bundle",
+        "deps-dev",
+        "deps-opt",
+        "deps-peer",
+        "esm",
+        "exports",
+        "github",
+        "lib",
+        "patches",
+        "pkg",
+        "release",
+        "resolve",
+        "scripts",
+        "syntax",
+        "tests",
+        "ts",
+        "vscode",
+        "workflows",
+        "yarn"
+      ]
+    ],
+    "subject-case": [1, "always", "lower-case"],
+    "type-enum": [
+      2,
+      "always",
+      [
+        "build",
+        "chore",
+        "ci",
+        "docs",
+        "feat",
+        "fix",
+        "perf",
+        "refactor",
+        "revert",
+        "style",
+        "test",
+        "wip"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+name: Feature
+description: Suggest new feature or improvement
+title: 👀 <title>
+labels:
+  - type:feat
+  - status:needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for submitting a suggestion.
+        Complete the form below to ensure the necessary details are captured to provide a response.
+  - id: desired-behavior
+    type: textarea
+    attributes:
+      label: 💡 Idea
+      description: A concise description of the desired behavior
+    validations:
+      required: true
+  - id: linked-issue
+    type: input
+    attributes:
+      label: Linked issue
+      description: Is this related to an existing issue?
+      placeholder: '#1'
+    validations:
+      required: false
+  - id: frequency
+    type: dropdown
+    attributes:
+      label: Usage frequency
+      description: How often would this feature or improvement be used?
+      options:
+        - biweekly
+        - daily
+        - monthly
+        - quarterly
+        - weekly
+        - yearly
+    validations:
+      required: true
+  - id: context
+    type: textarea
+    attributes:
+      label: How does this tie into our current product?
+      description: |
+        Is this request related to an existing workflow, feature, or something else in the product? Or, does this open the project up to new ideas?
+    validations:
+      required: true
+  - id: scale
+    type: dropdown
+    attributes:
+      label: Difficulty scale
+      description: Filled out post-triage by a maintainer
+      options:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+    validations:
+      required: false

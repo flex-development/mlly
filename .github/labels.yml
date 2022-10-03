@@ -1,0 +1,149 @@
+# REPOSITORY LABELS
+
+# flag labels
+# indicate additional work is needed
+
+- name: flag:breaking-change
+  description: contains changes that require major version bump
+  color: fbca04
+
+- name: flag:duplicate
+  description: issue, pull request, or discussion already exists
+  color: fbca04
+
+- name: flag:needs-discussion
+  description: discussion required before implementation
+  color: fbca04
+
+- name: flag:needs-docs
+  description: missing documentation or needs existing documentation update
+  color: fbca04
+
+- name: flag:needs-refactor
+  description: code improvements required before being merged
+  color: fbca04
+
+# scope labels
+# project-specific groups for issues, pull requests, and discussions
+
+- name: scope:dependencies
+  description: dependency updates
+  color: 74cefc
+
+- name: scope:esm
+  description: es modules
+  color: 74cefc
+
+- name: scope:patches
+  description: patches
+  color: 74cefc
+
+- name: scope:release
+  description: package release
+  color: 74cefc
+
+- name: scope:tests
+  description: testing
+  color: 74cefc
+
+- name: scope:ts
+  description: typescript support
+  color: 74cefc
+
+# status labels
+# current state of an issue, pull request, or discussion
+
+- name: status:awaiting-answers
+  description: needs clarification or more information from author
+  color: e7034b
+
+- name: status:blocked
+  description: blocked by other work tracked in different issue
+  color: e7034b
+
+- name: status:cannot-reproduce
+  description: bug report cannot be reproduced
+  color: e7034b
+
+- name: status:fixed
+  description: fixed, but not released
+  color: e7034b
+
+- name: status:help-wanted
+  description: extra attention is needed
+  color: e7034b
+
+- name: status:icebox
+  description: changes that won't be implemented
+  color: e7034b
+
+- name: status:invalid
+  description: no action to be taken or missing information
+  color: e7034b
+
+- name: status:merged
+  description: merged, but not released
+  color: e7034b
+
+- name: status:needs-triage
+  description: needs further assessment
+  color: e7034b
+
+- name: status:prereleased
+  description: merged and prereleased
+  color: e7034b
+
+- name: status:released
+  description: merged and released
+  color: e7034b
+
+- name: status:stale
+  description: superseded by different issue, pull request, or discussion
+  color: e7034b
+
+- name: status:wip
+  description: work in progress
+  color: e7034b
+
+# type labels
+# types of issues, pull requests, and discussions
+
+- name: type:build
+  description: changes to the build system or external dependencies
+  color: 0052cc
+
+- name: type:chore
+  description: housekeeping tasks / changes that don't impact external users
+  color: 0052cc
+
+- name: type:ci
+  description: ci/cd configuration
+  color: 0052cc
+
+- name: type:docs
+  description: documentation improvements
+  color: 0052cc
+
+- name: type:feat
+  description: new features and improvements
+  color: 0052cc
+
+- name: type:fix
+  description: bug reports and fixes
+  color: 0052cc
+
+- name: type:perf
+  description: performance updates
+  color: 0052cc
+
+- name: type:question
+  description: questions
+  color: 0052cc
+
+- name: type:refactor
+  description: code improvements
+  color: 0052cc
+
+- name: type:task
+  description: project tasks
+  color: 0052cc

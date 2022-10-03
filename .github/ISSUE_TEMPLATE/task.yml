@@ -1,0 +1,57 @@
+name: Task
+description: Project task (maintainers only)
+title: 🔨 <title>
+labels:
+  - type:task
+body:
+  - id: prerequisites
+    type: checkboxes
+    attributes:
+      label: Prerequisites
+      options:
+        - label: i am a project maintainer
+          required: true
+  - id: proposal
+    type: textarea
+    attributes:
+      label: Proposed work
+      description: High-level overview of what is being implemented
+    validations:
+      required: true
+  - id: criteria
+    type: textarea
+    attributes:
+      label: Success criteria
+      description: Checklist containing the criteria that must be met to consider the task a success
+      value: |
+        - [ ]
+    validations:
+      required: true
+  - id: related-documents
+    type: textarea
+    attributes:
+      label: Related documents
+      description: Relevant documentation, issues, proposals, technical specs, etc
+      value: |
+        -
+        -
+        -
+    validations:
+      required: false
+  - id: additional-context
+    type: textarea
+    attributes:
+      label: Additional context
+      description: Add any other details about the task here
+    validations:
+      required: false
+  - id: linked-issues
+    type: textarea
+    attributes:
+      label: Linked issues
+      description: Related issues and pull requests
+      placeholder: |
+        - #<issue-number>
+        - resolves #<issue-number>
+    validations:
+      required: false

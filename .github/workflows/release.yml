@@ -1,0 +1,157 @@
+# Release
+#
+# Publish a GitHub release when a `release/*` branch is merged into `main` or on workflow dispatch.
+#
+# References:
+#
+# - https://cli.github.com/manual/gh_release_create
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://docs.github.com/actions/using-workflows/using-github-cli-in-workflows
+# - https://github.com/actions/checkout
+# - https://github.com/bdougie/close-issues-based-on-label
+# - https://github.com/crazy-max/ghaction-import-gpg
+# - https://github.com/dawidd6/action-delete-branch
+# - https://github.com/hmarr/debug-action
+
+---
+name: release
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: pull request merge commit sha
+        required: true
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  metadata:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (startsWith(github.head_ref, 'release/') && github.event.pull_request.merged)
+    runs-on: ubuntu-latest
+    env:
+      REF: ${{ github.event.inputs.sha || github.head_ref }}
+    outputs:
+      prerelease: ${{ steps.dist-tag.outputs.prerelease }}
+      tag: ${{ steps.tag.outputs.result }}
+      version: ${{ steps.version.outputs.result }}
+    steps:
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.0.1
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.0.2
+        with:
+          ref: ${{ env.REF }}
+      - id: version
+        name: Get version
+        run: echo "::set-output name=result::$(jq .version package.json -r)"
+      - id: tag-prefix
+        name: Get release tag prefix
+        run: echo "::set-output name=result::$(jq .tagPrefix package.json -r)"
+      - id: tag
+        name: Get release tag
+        run: |
+          echo "::set-output name=result::${{ format('{0}{1}', steps.tag-prefix.outputs.result, steps.version.outputs.result) }}"
+      - id: dist-tag
+        name: Get dist tag
+        uses: flex-development/dist-tag-action@1.1.1
+        with:
+          target: ${{ steps.version.outputs.result }}
+  publish:
+    needs: metadata
+    permissions:
+      contents: write
+      packages: read
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url:
+        ${{ format('{0}/{1}/releases/tag/{2}', github.server_url, github.repository,
+        needs.metadata.outputs.tag) }}
+    env:
+      NOTES_FILE: ./RELEASE_NOTES.md
+      TAG: ${{ needs.metadata.outputs.tag }}
+    steps:
+      - id: checkout
+        name: Checkout ${{ github.event.inputs.sha || 'event.pull_request.merge_commit_sha' }}
+        uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.inputs.sha || github.event.pull_request.merge_commit_sha }}
+      - id: gpg-import
+        name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v5.1.0
+        with:
+          git_config_global: true
+          git_tag_gpgsign: true
+          git_user_signingkey: true
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+      # todo: remove when https://github.com/crazy-max/ghaction-import-gpg/issues/118 is resolved
+      - id: gpg-trust
+        name: Set trust on GPG key
+        run: |
+          gpg --no-tty --command-fd 0 --edit-key ${{ steps.gpg-import.outputs.keyid }} << EOTRUST
+          trust
+          5
+          y
+          quit
+          EOTRUST
+      - id: yarn
+        name: Install dependencies
+        run: yarn
+        env:
+          HUSKY: 0
+      - id: pack
+        name: Pack project
+        run: yarn pack -o %s-%v.tgz
+        env:
+          NODE_ENV: production
+      - id: release-notes
+        name: Generate release notes
+        run: yarn conventional-changelog -o $NOTES_FILE
+        env:
+          NODE_NO_WARNINGS: 1
+      - id: tag
+        name: Create annotated tag
+        run: |
+          git tag --annotate --force --sign $TAG --message "release: $TAG"
+          git tag --verify $TAG
+          git push origin --tags
+        env:
+          GIT_AUTHOR_EMAIL: ${{ steps.gpg-import.outputs.email }}
+          GIT_AUTHOR_NAME: ${{ steps.gpg-import.outputs.name }}
+          GIT_COMMITTER_EMAIL: ${{ steps.gpg-import.outputs.email }}
+          GIT_COMMITTER_NAME: ${{ steps.gpg-import.outputs.name }}
+      - id: publish
+        name: Publish release
+        run: gh release create $TAG *.tgz -t=$TAG -F=$NOTES_FILE -p=$PRERELEASE
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_BOT }}
+          PRERELEASE: ${{ needs.metadata.outputs.prerelease }}
+  cleanup:
+    needs: [metadata, publish]
+    permissions:
+      contents: write
+      issues: write
+    runs-on: ubuntu-latest
+    steps:
+      - id: close-released-issues
+        name: Close released issues
+        uses: bdougie/close-issues-based-on-label@master
+        env:
+          LABEL: status:${{ (needs.metadata.outputs.prerelease && 'prereleased') || 'released' }}
+      - id: delete-release-branch
+        name: Delete release/${{ needs.metadata.outputs.version }}
+        uses: dawidd6/action-delete-branch@v3.1.0
+        with:
+          branches: release/
+          soft_fail: true
+          suffix: ${{ needs.metadata.outputs.version }}

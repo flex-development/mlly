@@ -1,0 +1,103 @@
+# Publish
+#
+# Cross-publish package to GitHub Package Registry and NPM when a GitHub release is published or on
+# workflow dispatch.
+#
+# References:
+#
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#release
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://github.com/actions/checkout
+# - https://github.com/actions/setup-node
+# - https://github.com/hmarr/debug-action
+
+---
+name: publish
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      artifact:
+        description: release artifact download url
+        required: true
+      tag:
+        description: release tag
+        required: true
+env:
+  ARTIFACT:
+    ${{ github.event.inputs.artifact || github.event.release.assets[0].browser_download_url }}
+  NODE_VERSION: 16
+  SCOPE: ${{ format('@{0}', github.repository_owner) }}
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.inputs.tag || github.event.release.tag_name }}
+    outputs:
+      dist-tag: ${{ steps.dist-tag.outputs.flag }}
+      version: ${{ steps.version.outputs.result }}
+    steps:
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.0.1
+      - id: checkout
+        name: Checkout ${{ env.TAG }}
+        uses: actions/checkout@v3.0.2
+        with:
+          ref: ${{ format('refs/tags/{0}', env.TAG) }}
+      - id: version
+        name: Get package version
+        run: echo "::set-output name=result::$(jq .version package.json -r)"
+      - id: dist-tag
+        name: Get dist tag
+        uses: flex-development/dist-tag-action@1.1.1
+        with:
+          target: ${{ steps.version.outputs.result }}
+  gpr:
+    needs: metadata
+    permissions:
+      packages: write
+    runs-on: ubuntu-latest
+    environment:
+      name: gpr
+      url: |
+        ${{ format('{0}/{1}/pkgs/npm/{2}', github.server_url, github.repository,
+        github.event.repository.name) }}
+    steps:
+      - id: npmrc
+        name: Setup .npmrc file
+        uses: actions/setup-node@v3.5.0
+        with:
+          always-auth: true
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://npm.pkg.github.com
+          scope: ${{ env.SCOPE }}
+      - id: publish
+        name: Publish package
+        run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  npm:
+    needs: [metadata, gpr]
+    runs-on: ubuntu-latest
+    environment:
+      name: npm
+      url: |
+        ${{ format('https://npmjs.com/package/@{0}/v/{1}', github.repository,
+        needs.metadata.outputs.version) }}
+    steps:
+      - id: npmrc
+        name: Setup .npmrc file
+        uses: actions/setup-node@v3.5.0
+        with:
+          always-auth: true
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://registry.npmjs.org
+          scope: ${{ env.SCOPE }}
+      - id: publish
+        name: Publish package
+        run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

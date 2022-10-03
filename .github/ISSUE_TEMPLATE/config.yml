@@ -1,0 +1,15 @@
+# ISSUE TEMPLATE CHOOSER
+# https://docs.github.com/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#configuring-the-template-chooser
+
+---
+blank_issues_enabled: false
+contact_links:
+  - name: Discuss an idea
+    url: https://github.com/flex-development/mlly/discussions/new?category=ideas
+    about: Discuss an idea before submitting a feature request
+  - name: Q&A
+    url: https://github.com/flex-development/mlly/discussions/new?category=q-a
+    about: Ask and answer questions
+  - name: Show and tell
+    url: https://github.com/flex-development/mlly/discussions/new?category=show-and-tell
+    about: Show the community how you integrated this project into yours

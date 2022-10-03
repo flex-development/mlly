@@ -1,0 +1,169 @@
+{
+  "[handlebars]": {
+    "editor.defaultFormatter": "Greenbyte.handlebars-preview",
+    "editor.rulers": [100],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100,
+    "rewrap.wrappingColumn": 100
+  },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jest-snapshot]": {
+    "editor.rulers": [130],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 130,
+    "rewrap.wrappingColumn": 130
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.rulers": [100],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100,
+    "rewrap.wrappingColumn": 100
+  },
+  "[txt]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.rulers": [100],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100,
+    "rewrap.wrappingColumn": 100
+  },
+  "cSpell.enabled": true,
+  "debug.showBreakpointsInOverviewRuler": true,
+  "editor.autoClosingBrackets": "always",
+  "emmet.showExpandedAbbreviation": "always",
+  "emmet.triggerExpansionOnTab": true,
+  "eslint.enable": true,
+  "eslint.nodePath": "./node_modules/eslint",
+  "eslint.options": {
+    "extensions": [
+      "cjs",
+      "cts",
+      "gql",
+      "json",
+      "jsonc",
+      "md",
+      "mjs",
+      "ts",
+      "yml"
+    ],
+    "overrideConfigFile": "./.eslintrc.cjs"
+  },
+  "eslint.validate": [
+    "graphql",
+    "javascript",
+    "json",
+    "jsonc",
+    "markdown",
+    "typescript",
+    "yaml"
+  ],
+  "files.associations": {
+    "*.snap": "jest-snapshot",
+    ".env.zsh": "shellscript",
+    ".markdownlintignore": "ignore",
+    "commit-msg": "shellscript",
+    "pre-commit": "shellscript",
+    "pre-push": "shellscript"
+  },
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/yarn.lock": true
+  },
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "markdownlint.ignore": "./.markdownlintignore",
+  "npm-intellisense.scanDevDependencies": true,
+  "prettier.configPath": "./.prettierrc.json",
+  "prettier.enable": true,
+  "prettier.ignorePath": "./.prettierignore",
+  "prettier.prettierPath": "./node_modules/prettier",
+  "prettier.resolveGlobalModules": false,
+  "prettier.useEditorConfig": true,
+  "shellformat.flag": "-ci -fn -i=2 -sr",
+  "typescript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.completeJSDocs": true,
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "vsicons.associations.files": [
+    {
+      "extensions": [".eslintrc.base.cjs"],
+      "format": "svg",
+      "icon": "eslint"
+    },
+    {
+      "extensions": [".graphqlrc.yml"],
+      "format": "svg",
+      "icon": "graphql"
+    },
+    {
+      "extensions": ["build.json"],
+      "format": "svg",
+      "icon": "tsconfig"
+    },
+    {
+      "extensions": ["snap"],
+      "format": "svg",
+      "icon": "vitest"
+    },
+    {
+      "extensions": ["yarnrc.yml"],
+      "format": "svg",
+      "icon": "yarn"
+    }
+  ],
+  "vsicons.associations.folders": [
+    {
+      "extensions": ["__fixtures__"],
+      "format": "svg",
+      "icon": "data"
+    },
+    {
+      "extensions": ["__snapshots__"],
+      "format": "svg",
+      "icon": "temp"
+    },
+    {
+      "extensions": ["patches"],
+      "format": "svg",
+      "icon": "include"
+    },
+    {
+      "extensions": ["setup"],
+      "format": "svg",
+      "icon": "config"
+    },
+    {
+      "extensions": ["types"],
+      "format": "svg",
+      "icon": "typings"
+    }
+  ],
+  "workbench.iconTheme": "vscode-icons",
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-issue-config": "/.github/ISSUE_TEMPLATE/config.yml",
+    "https://json.schemastore.org/github-workflow": "/.github/workflows/*.yml"
+  }
+}

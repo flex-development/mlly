@@ -1,0 +1,49 @@
+# Integrity Check
+#
+# References:
+#
+# - https://github.com/actions/checkout
+# - https://yarnpkg.com/cli/dedupe
+
+---
+name: integrity
+on:
+  create:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - .github/workflows/integrity.yml
+      - .yarnrc.yml
+      - yarn.lock
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/integrity.yml
+      - .yarnrc.yml
+      - yarn.lock
+  workflow_dispatch:
+env:
+  REF: ${{ github.head_ref || github.ref_name }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  integrity:
+    permissions:
+      packages: read
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.0.2
+        with:
+          persist-credentials: false
+          ref: ${{ env.REF }}
+      - id: dedupe-check
+        name: Check for duplicate dependencies in lockfile
+        run: yarn dedupe --check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

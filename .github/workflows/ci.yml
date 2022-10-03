@@ -1,0 +1,79 @@
+# Continuous Integration
+#
+# References:
+#
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://github.com/actions/checkout
+# - https://github.com/hmarr/debug-action
+
+---
+name: ci
+on:
+  pull_request:
+  push:
+    branches:
+      - feat/**
+      - hotfix/**
+      - main
+  workflow_dispatch:
+permissions:
+  packages: read
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  HUSKY: 0
+  REF: ${{ github.head_ref || github.ref_name }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ci:
+    if: |
+      github.event_name == 'pull_request' ||
+      github.event_name == 'workflow_dispatch' ||
+      !startsWith(github.event.head_commit.message, 'release:')
+    runs-on: ubuntu-latest
+    steps:
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.0.1
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.0.2
+        with:
+          ref: ${{ env.REF }}
+      - id: yarn
+        name: Install dependencies
+        if: github.actor != 'dependabot[bot]'
+        run: yarn
+      - id: yarn-dependabot
+        name: Install dependencies for dependabot
+        if: github.actor == 'dependabot[bot]'
+        run: yarn --no-immutable
+      - id: format
+        name: Check code formatting
+        run: yarn check:format
+      - id: lint
+        name: Check lint status
+        run: yarn check:lint
+      - id: spelling
+        name: Check spelling
+        run: yarn check:spelling
+      - id: types
+        name: Check types
+        run: yarn check:types
+      - id: types-build
+        name: Check types build
+        run: yarn check:types:build
+      - id: test
+        name: Run tests
+        run: yarn test:cov
+        env:
+          NODE_NO_WARNINGS: 1
+          VITEST_SEGFAULT_RETRY: 3
+      - id: pack
+        name: Pack project
+        run: yarn pack -o %s-%v.tgz
+        env:
+          NODE_ENV: production

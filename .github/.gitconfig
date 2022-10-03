@@ -1,0 +1,119 @@
+# GIT CONFIGURATION
+# http://michaelwales.com/articles/make-gitconfig-work-for-you
+
+# aliases - basic helpers
+[alias]
+# add and commit
+ac = "!f() { git add . && git cm \"$@\"; }; f"
+
+# add new remote
+ar = "!f() { git remote add \"$0\" \"$1\"; }; f"
+
+# delete branch locally
+bdel = "!f() { git branch -d $@; }; f"
+
+# delete branch remotely
+bdelr = "!f() { git push origin --no-verify --delete $@; }; f"
+
+# rename branch
+bren = "!f() { git branch -m $@ && git pou $@; }; f"
+
+# checkout and push new branch to origin
+chb = "!f() { git checkout -b \"$@\" && git pou \"$@\"; }; f"
+
+# checkout branch and pull latest version
+chp = "!f() { git checkout $@ && git pull; }; f"
+
+# commit with message
+cm = "!f() { git commit -s -m \"$@\"; }; f"
+
+# tell git to start tracking branch and push to origin
+pou = "!f() { git push origin --no-verify -u $@; }; f"
+
+# remove local .git directory
+restart = "!f() { rm -rf .git; echo \"removed .git directory.\"; }; f"
+
+# create new local repo and perform initial commit
+setup = "!f() { git init && git config branch.autosetuprebase always && git config core.ignorecase false && git config pull.rebase true && git config rebase.autoStash true && git ac \"initial commit\"; }; f"
+
+# undo last commit
+ulc = "!f() { git reset head~1 --soft; }; f"
+
+# aliases - branch naming conventions
+[alias]
+# create new feature branch and push upstream
+chbfeat = "!f() { git chb feat/$@; }; f"
+
+# create new bugfix (feature) branch and push upstream
+chbfix = "!f() { git chb feat/fix/$@; }; f"
+
+# create new hotfix branch and push upstream
+chbhotfix = "!f() { git chb hotfix/$@; }; f"
+
+# create new release branch and push upstream
+chbrelease = "!f() { git chb release/$@; }; f"
+
+# aliases - husky
+[alias]
+# force push commits without running `pre-push` hook
+fpnv = "!f() { git pnv --force ; }; f"
+
+# push commits without running `pre-push` hook
+pnv = "!f() { git push --no-verify $@; }; f"
+
+[branch]
+autosetuprebase = always
+
+[checkout]
+defaultRemote = origin
+
+[color]
+ui = true
+
+[commit]
+gpgsign = true
+
+[core]
+autocrlf = false
+editor = code-insiders --wait
+ignorecase = false
+safecrlf = false
+
+[diff]
+tool = vscode
+
+[difftool "vscode"]
+cmd = code-insiders --wait --diff $LOCAL $REMOTE
+
+[gitflow "prefix"]
+feature = feat/
+hotfix = hotfix/
+release = release/
+support = feat/fix/
+
+[gpg]
+program = gpg2
+
+[init]
+defaultBranch = main
+
+[merge]
+tool = vscode
+
+[mergetool "vscode"]
+cmd = code-insiders --wait --merge $REMOTE $LOCAL $BASE $MERGED
+
+[pull]
+rebase = true
+
+[rebase]
+autoStash = true
+
+[url "git@bitbucket.org:"]
+insteadOf = bb:
+
+[url "git@github.com:"]
+insteadOf = gh:
+
+[url "https://gist.github.com/"]
+insteadOf = gist:

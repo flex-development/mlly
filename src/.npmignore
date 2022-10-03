@@ -1,0 +1,8 @@
+# NPM IGNORE
+# https://npm.github.io/publishing-pkgs-docs/publishing/the-npmignore-file.html
+# https://github.com/yarnpkg/yarn/issues/685#issuecomment-457618561
+
+# DIRECTORIES & FILES
+**/__mocks__/**
+**/__snapshots__/**
+**/__tests__/**

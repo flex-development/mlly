@@ -1,0 +1,7 @@
+## {{#if @root.linkCompare~}}
+  [{{currentTag}}]({{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}})
+{{~else}}
+  {{~currentTag}}
+{{~/if}}
+{{~#if title}} "{{title}}"{{~/if}}
+{{~#if date}} ({{date}}){{/if}}

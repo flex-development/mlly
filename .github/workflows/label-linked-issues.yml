@@ -1,0 +1,89 @@
+# Label Linked Issues
+#
+# Add the `status:merged`, `status:prereleased`, or `status:released` label to a pull request's
+# linked issues when a pull request is merged into `main` or on workflow dispatch.
+#
+# References:
+#
+# - https://docs.github.com/graphql/reference/objects#pullrequest
+# - https://github.com/actions/github-script
+# - https://github.com/octokit/graphql-action
+
+---
+name: label-linked-issues
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: pull request number
+        required: true
+permissions:
+  issues: write
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  label-linked-issues:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout main
+        uses: actions/checkout@v3.0.2
+        with:
+          persist-credentials: false
+          ref: main
+      - id: version
+        name: Get project version
+        run: echo "::set-output name=result::$(jq .version package.json -r)"
+      - id: query
+        name: Query linked issues
+        uses: octokit/graphql-action@v2.2.22
+        with:
+          query: |
+            query ($limit: Int = 20, $owner: String!, $pr: Int!, $repo: String!) {
+              repository(name: $repo, owner: $owner) {
+                pullRequest(number: $pr) {
+                  closingIssuesReferences(
+                    first: $limit
+                    orderBy: { direction: ASC, field: CREATED_AT }
+                  ) {
+                    edges {
+                      node {
+                        number
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          owner: ${{ github.repository_owner }}
+          pr: ${{ github.event.inputs.pr || github.event.number }}
+          repo: ${{ github.event.repository.name }}
+      - id: label
+        name: Label linked issues
+        uses: actions/github-script@v6.3.1
+        env:
+          DATA: ${{ steps.query.outputs.data }}
+          PRERELEASE: ${{ contains(steps.version.outputs.result, '-') }}
+          RELEASE_BRANCH: ${{ contains(github.head_ref || github.ref_name, 'release/') }}
+        with:
+          script: |
+            const { closingIssuesReferences } = JSON.parse(process.env.DATA).repository.pullRequest
+
+            const issues = closingIssuesReferences.edges.map(edge => edge.node.number)
+
+            const release = JSON.parse(process.env.RELEASE_BRANCH || 'false')
+            const prerelease = JSON.parse(process.env.PRERELEASE || 'false')
+
+            for (const issue_number of issues) {
+              await github.rest.issues.addLabels({
+                ...context.repo,
+                issue_number,
+                labels: [release ? `status:${prerelease ? 'pre' : ''}released` : 'status:merged']
+              })
+            }

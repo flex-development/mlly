@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "isolatedModules": true,
+    "noEmitOnError": true,
+    "skipLibCheck": false,
+    "target": "es2020"
+  },
+  "exclude": ["**/__mocks__/**", "**/__snapshots__/**", "**/__tests__/**"],
+  "extends": "./tsconfig.json",
+  "include": ["./src"]
+}

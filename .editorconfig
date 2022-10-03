@@ -1,0 +1,31 @@
+# EDITORCONFIG
+# https://editorconfig.org
+
+# indicate top-most editorconfig file
+root = true
+
+# universal rules
+[*]
+charset = 'utf-8'
+end_of_line = lf
+indent_size = 2
+indent_style = 'space'
+insert_final_newline = true
+max_line_length = 80
+trim_trailing_whitespace = true
+
+# handlebars
+[*.hbs]
+max_line_length = 100
+
+# shellscript
+[*.sh]
+max_line_length = 100
+
+# snapshots
+[*.snap]
+max_line_length = 130
+
+# yaml
+[*.yml]
+max_line_length = 100

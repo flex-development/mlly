@@ -1,0 +1,7 @@
+# GRAPHQL CONFIG
+# https://graphql-config.com/docs/user/usage
+
+---
+documents:
+  - ./.github/graphql/**/*.gql
+schema: https://raw.githubusercontent.com/octokit/graphql-schema/master/schema.graphql

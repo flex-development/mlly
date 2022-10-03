@@ -1,0 +1,86 @@
+name: Bug report
+description: Something isn't working
+title: 🐛 <title>
+labels:
+  - status:needs-triage
+  - type:fix
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting the issue you are facing.
+        Complete the form below to ensure the necessary details are captured to assist you.
+  - id: prerequisites
+    type: checkboxes
+    attributes:
+      label: Prerequisites
+      options:
+        - label: read documentation
+          required: true
+        - label: searched open issues for existing bug report
+          required: true
+        - label: searched closed issues for solution(s) or feedback
+          required: true
+  - id: current-behavior
+    type: textarea
+    attributes:
+      label: Current behavior
+      description: A concise description of what you're experiencing
+    validations:
+      required: true
+  - id: repro
+    type: textarea
+    attributes:
+      label: Reproduction
+      description: |
+        [Minimal, reproducible example](https://stackoverflow.com/help/minimal-reproducible-example)
+    validations:
+      required: true
+  - id: expected-behavior
+    type: textarea
+    attributes:
+      label: Expected behavior
+      description: A concise description of what you expected to happen
+    validations:
+      required: true
+  - id: version
+    type: input
+    attributes:
+      label: Package version
+      description: Version identified from `npm info <package-name>` or `yarn info <package-name>`
+    validations:
+      required: true
+  - id: node-version
+    type: input
+    attributes:
+      label: Node.js version
+      description: Output of `node --version`
+    validations:
+      required: true
+  - id: package-manager
+    type: input
+    attributes:
+      label: Package manager version
+      description: Output of `npm --version` or `yarn --version`
+    validations:
+      required: true
+  - id: os
+    type: dropdown
+    attributes:
+      label: Operating system (environment)
+      description: Provide the operating system that you are using
+      options:
+        - linux
+        - macos
+        - other
+        - windows
+    validations:
+      required: true
+  - id: additional-context
+    type: textarea
+    attributes:
+      label: Additional context
+      description: |
+        Add any other details about the problem here. Include links as necessary (e.g. relevant docs, issues, pull requests, etc)
+    validations:
+      required: false
