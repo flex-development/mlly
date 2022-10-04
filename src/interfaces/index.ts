@@ -4,3 +4,4 @@
  */
 
 export type { default as Statement } from './statement'
+export type { default as ImportStatement } from './statement-import'
