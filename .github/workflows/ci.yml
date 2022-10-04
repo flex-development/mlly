@@ -40,7 +40,7 @@ jobs:
         uses: hmarr/debug-action@v2.0.1
       - id: checkout
         name: Checkout ${{ env.REF }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ env.REF }}
       - id: yarn
