@@ -14,6 +14,5 @@ type StatementType =
   | 'require.resolve'
   | 'require'
   | 'star'
-  | 'static'
 
 export type { StatementType as default }
