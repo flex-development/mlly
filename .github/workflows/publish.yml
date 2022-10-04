@@ -44,7 +44,7 @@ jobs:
         uses: hmarr/debug-action@v2.0.1
       - id: checkout
         name: Checkout ${{ env.TAG }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ format('refs/tags/{0}', env.TAG) }}
       - id: version

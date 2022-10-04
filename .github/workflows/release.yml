@@ -47,7 +47,7 @@ jobs:
         uses: hmarr/debug-action@v2.0.1
       - id: checkout
         name: Checkout ${{ env.REF }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           ref: ${{ env.REF }}
       - id: version
@@ -82,7 +82,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ github.event.inputs.sha || 'event.pull_request.merge_commit_sha' }}
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           fetch-depth: 0
           ref: ${{ github.event.inputs.sha || github.event.pull_request.merge_commit_sha }}
