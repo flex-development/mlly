@@ -1,0 +1,140 @@
+// Vitest Snapshot v1
+
+exports[`unit:lib/findDynamicImports > should find dynamic import 1`] = `
+[
+  {
+    "code": "await import(\\"bar\\")",
+    "end": 19,
+    "imports": [],
+    "specifier": "bar",
+    "specifier_type": "static",
+    "start": 0,
+    "type": "dynamic",
+  },
+]
+`;
+
+exports[`unit:lib/findDynamicImports > should find dynamic import declaration 1`] = `
+[
+  {
+    "code": "const foo = await import(\\"./bar\\")",
+    "end": 33,
+    "imports": [
+      "foo",
+    ],
+    "specifier": "./bar",
+    "specifier_type": "static",
+    "start": 0,
+    "type": "dynamic",
+  },
+]
+`;
+
+exports[`unit:lib/findDynamicImports > should find dynamic import declaration with dynamic specifier 1`] = `
+[
+  {
+    "code": "const foo = await import(./bar)",
+    "end": 31,
+    "imports": [
+      "foo",
+    ],
+    "specifier": "./bar",
+    "specifier_type": "dynamic",
+    "start": 0,
+    "type": "dynamic",
+  },
+]
+`;
+
+exports[`unit:lib/findDynamicImports > should find dynamic import declaration without await 1`] = `
+[
+  {
+    "code": "const promise = import(\\"./foo\\")",
+    "end": 31,
+    "imports": [
+      "promise",
+    ],
+    "specifier": "./foo",
+    "specifier_type": "static",
+    "start": 0,
+    "type": "dynamic",
+  },
+]
+`;
+
+exports[`unit:lib/findDynamicImports > should find dynamic import with dynamic specifier 1`] = `
+[
+  {
+    "code": "await import(bar)",
+    "end": 17,
+    "imports": [],
+    "specifier": "bar",
+    "specifier_type": "dynamic",
+    "start": 0,
+    "type": "dynamic",
+  },
+]
+`;
+
+exports[`unit:lib/findDynamicImports > should find named dynamic imports in multi-line statement 1`] = `
+[
+  {
+    "code": "const {
+  addFive,
+  addFour,
+  addThree,
+  addTwo,
+  squareFive,
+  squareFour,
+  squareThree,
+  squareTwo
+} = await import('./lib')",
+    "end": 132,
+    "imports": [
+      "addFive",
+      "addFour",
+      "addThree",
+      "addTwo",
+      "squareFive",
+      "squareFour",
+      "squareThree",
+      "squareTwo",
+    ],
+    "specifier": "./lib",
+    "specifier_type": "static",
+    "start": 0,
+    "type": "dynamic",
+  },
+]
+`;
+
+exports[`unit:lib/findDynamicImports > should find named dynamic imports in single-line statement 1`] = `
+[
+  {
+    "code": "const { foo, bar } = await import(\\"foobar\\")",
+    "end": 43,
+    "imports": [
+      "foo",
+      "bar",
+    ],
+    "specifier": "foobar",
+    "specifier_type": "static",
+    "start": 0,
+    "type": "dynamic",
+  },
+]
+`;
+
+exports[`unit:lib/findDynamicImports > should find transpiled dynamic import 1`] = `
+[
+  {
+    "code": "await import('buzz')",
+    "end": 20,
+    "imports": [],
+    "specifier": "buzz",
+    "specifier_type": "static",
+    "start": 0,
+    "type": "dynamic",
+  },
+]
+`;
