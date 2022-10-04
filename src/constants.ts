@@ -26,3 +26,11 @@ export const DYNAMIC_IMPORT_REGEX: RegExp =
  */
 export const ESM_SYNTAX_REGEX: RegExp =
   /(?<!(?:\/\/|\*).*)((?:export|import)[\s\w*,{}]*(?=\sfrom)|export\b\s*(?:[*{]|async function|(?:abstract\s)?class|const|default|enum|function|interface|let|type|var)|await import|import\.meta\.(?:env(?:\.\w+)?|resolve|url))/gm
+
+/**
+ * Static import statement regex.
+ *
+ * @const {RegExp} STATIC_IMPORT_REGEX
+ */
+export const STATIC_IMPORT_REGEX: RegExp =
+  /(?<!(?:\/\/|\*).*)import\s*(?:[\s"']*(?<imports>[\w\t\n\r $*,/{}]+)from\s*)?["']\s*(?<specifier>(?<="\s*)[^"']*[^\s"'](?=\s*")|(?<=["']\s*)[^']*[^\s'](?=\s*'))\s*["']\s*/gm

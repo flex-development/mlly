@@ -1,0 +1,135 @@
+// Vitest Snapshot v1
+
+exports[`unit:lib/findStaticImports > should find default static import 1`] = `
+[
+  {
+    "code": "import pb from \\"pretty-bytes\\"",
+    "end": 29,
+    "imports": [
+      "pb",
+    ],
+    "specifier": "pretty-bytes",
+    "start": 0,
+    "type": "default",
+  },
+]
+`;
+
+exports[`unit:lib/findStaticImports > should find default type import 1`] = `
+[
+  {
+    "code": "import type Nullable from '@flex-development/tutils/types/nullable'",
+    "end": 67,
+    "imports": [
+      "Nullable",
+    ],
+    "specifier": "@flex-development/tutils/types/nullable",
+    "start": 0,
+    "type": "default",
+  },
+]
+`;
+
+exports[`unit:lib/findStaticImports > should find named static imports in multi-line statement 1`] = `
+[
+  {
+    "code": "import {
+  addFive,
+  addFour,
+  addThree,
+  addTwo,
+  squareFive,
+  squareFour,
+  squareThree,
+  squareTwo
+} from './lib'",
+    "end": 122,
+    "imports": [
+      "addFive",
+      "addFour",
+      "addThree",
+      "addTwo",
+      "squareFive",
+      "squareFour",
+      "squareThree",
+      "squareTwo",
+    ],
+    "specifier": "./lib",
+    "start": 0,
+    "type": "named",
+  },
+]
+`;
+
+exports[`unit:lib/findStaticImports > should find named static imports in single-line statement 1`] = `
+[
+  {
+    "code": "import { readPackage, type PackageJson } from \\"read-pkg\\"",
+    "end": 56,
+    "imports": [
+      "readPackage",
+      "type PackageJson",
+    ],
+    "specifier": "read-pkg",
+    "start": 0,
+    "type": "named",
+  },
+]
+`;
+
+exports[`unit:lib/findStaticImports > should find named type imports in multi-line statement 1`] = `
+[
+  {
+    "code": "import type {
+  BuildOptions,
+  BuildResult,
+  OutputFile,
+  Plugin,
+  PluginBuild
+} from 'esbuild'",
+    "end": 99,
+    "imports": [
+      "BuildOptions",
+      "BuildResult",
+      "OutputFile",
+      "Plugin",
+      "PluginBuild",
+    ],
+    "specifier": "esbuild",
+    "start": 0,
+    "type": "named",
+  },
+]
+`;
+
+exports[`unit:lib/findStaticImports > should find named type imports in single-line statement 1`] = `
+[
+  {
+    "code": "import type { Join, Nullable, Overwrite } from '@flex-development/tutils'",
+    "end": 73,
+    "imports": [
+      "Join",
+      "Nullable",
+      "Overwrite",
+    ],
+    "specifier": "@flex-development/tutils",
+    "start": 0,
+    "type": "named",
+  },
+]
+`;
+
+exports[`unit:lib/findStaticImports > should find star static import 1`] = `
+[
+  {
+    "code": "import * as color from \\"colorette\\"",
+    "end": 34,
+    "imports": [
+      "* as color",
+    ],
+    "specifier": "colorette",
+    "start": 0,
+    "type": "star",
+  },
+]
+`;
