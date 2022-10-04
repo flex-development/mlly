@@ -594,7 +594,7 @@ const config = {
     'unicorn/no-thenable': 2,
     'unicorn/no-this-assignment': 2,
     'unicorn/no-unreadable-array-destructuring': 2,
-    'unicorn/no-unsafe-regex': 2,
+    'unicorn/no-unsafe-regex': 0,
     'unicorn/no-unused-properties': 2,
     'unicorn/no-useless-fallback-in-spread': 2,
     'unicorn/no-useless-length-check': 2,
