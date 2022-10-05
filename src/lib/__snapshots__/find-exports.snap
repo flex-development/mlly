@@ -1,0 +1,747 @@
+// Vitest Snapshot v1
+
+exports[`unit:lib/findExports > declaration > abstract class > should find export abstract class 1`] = `
+[
+  {
+    "code": "export abstract class Person",
+    "declaration": "abstract class",
+    "end": 28,
+    "exports": [
+      "Person",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > abstract class > should find export declare abstract class 1`] = `
+[
+  {
+    "code": "export declare abstract class Person",
+    "declaration": "abstract class",
+    "end": 36,
+    "exports": [
+      "Person",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > async function > should find export async function 1`] = `
+[
+  {
+    "code": "export async function foo",
+    "declaration": "async function",
+    "end": 25,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > async function > should find export declare async function 1`] = `
+[
+  {
+    "code": "export declare async function foo",
+    "declaration": "async function",
+    "end": 33,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > async function* > should find export async function* 1`] = `
+[
+  {
+    "code": "export async function* foo",
+    "declaration": "async function*",
+    "end": 26,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > async function* > should find export declare async function* 1`] = `
+[
+  {
+    "code": "export declare async function* foo",
+    "declaration": "async function*",
+    "end": 34,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > class > should find export class 1`] = `
+[
+  {
+    "code": "export class Point",
+    "declaration": "class",
+    "end": 18,
+    "exports": [
+      "Point",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > class > should find export declare class 1`] = `
+[
+  {
+    "code": "export declare class Point",
+    "declaration": "class",
+    "end": 26,
+    "exports": [
+      "Point",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > const > should find export const 1`] = `
+[
+  {
+    "code": "export const hello",
+    "declaration": "const",
+    "end": 18,
+    "exports": [
+      "hello",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > const > should find export declare const 1`] = `
+[
+  {
+    "code": "export declare const hello",
+    "declaration": "const",
+    "end": 26,
+    "exports": [
+      "hello",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > const enum > should find export const enum 1`] = `
+[
+  {
+    "code": "export const enum Snack",
+    "declaration": "const enum",
+    "end": 23,
+    "exports": [
+      "Snack",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > const enum > should find export declare const enum 1`] = `
+[
+  {
+    "code": "export declare const enum Snack",
+    "declaration": "const enum",
+    "end": 31,
+    "exports": [
+      "Snack",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default > should find export default 1`] = `
+[
+  {
+    "code": "export default foo",
+    "declaration": "default",
+    "end": 18,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "default",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default > should find export default if anonymous 1`] = `
+[
+  {
+    "code": "export default",
+    "declaration": "default",
+    "end": 14,
+    "exports": [
+      "default",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "default",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default async > should find export default async 1`] = `
+[
+  {
+    "code": "export default async",
+    "declaration": "default async",
+    "end": 20,
+    "exports": [
+      "default",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default async function > should find export default async function 1`] = `
+[
+  {
+    "code": "export default async function foo",
+    "declaration": "default async function",
+    "end": 33,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default async function > should find export default async function if anonymous 1`] = `
+[
+  {
+    "code": "export default async function",
+    "declaration": "default async function",
+    "end": 29,
+    "exports": [
+      "default",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default async function* > should find export default async function* 1`] = `
+[
+  {
+    "code": "export default async function* foo",
+    "declaration": "default async function*",
+    "end": 34,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default async function* > should find export default async function* if anonymous 1`] = `
+[
+  {
+    "code": "export default async function*",
+    "declaration": "default async function*",
+    "end": 30,
+    "exports": [
+      "default",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default function > should find export default function 1`] = `
+[
+  {
+    "code": "export default function foo",
+    "declaration": "default function",
+    "end": 27,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default function > should find export default function if anonymous 1`] = `
+[
+  {
+    "code": "export default function",
+    "declaration": "default function",
+    "end": 23,
+    "exports": [
+      "default",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default function* > should find export default function* 1`] = `
+[
+  {
+    "code": "export default function* foo",
+    "declaration": "default function*",
+    "end": 28,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > default function* > should find export default function* if anonymous 1`] = `
+[
+  {
+    "code": "export default function*",
+    "declaration": "default function*",
+    "end": 24,
+    "exports": [
+      "default",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > enum > should find export declare enum 1`] = `
+[
+  {
+    "code": "export declare enum ShapeKind",
+    "declaration": "enum",
+    "end": 29,
+    "exports": [
+      "ShapeKind",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > enum > should find export enum 1`] = `
+[
+  {
+    "code": "export enum ShapeKind",
+    "declaration": "enum",
+    "end": 21,
+    "exports": [
+      "ShapeKind",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > function > should find export declare function 1`] = `
+[
+  {
+    "code": "export declare function foo",
+    "declaration": "function",
+    "end": 27,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > function > should find export function 1`] = `
+[
+  {
+    "code": "export function foo",
+    "declaration": "function",
+    "end": 19,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > function* > should find export declare function* 1`] = `
+[
+  {
+    "code": "export declare function* foo",
+    "declaration": "function*",
+    "end": 28,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > function* > should find export function* 1`] = `
+[
+  {
+    "code": "export function* foo",
+    "declaration": "function*",
+    "end": 20,
+    "exports": [
+      "foo",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > interface > should find export declare interface 1`] = `
+[
+  {
+    "code": "export declare interface User",
+    "declaration": "interface",
+    "end": 29,
+    "exports": [
+      "User",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > interface > should find export interface 1`] = `
+[
+  {
+    "code": "export interface User",
+    "declaration": "interface",
+    "end": 21,
+    "exports": [
+      "User",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > let > should find export declare let 1`] = `
+[
+  {
+    "code": "export declare let x",
+    "declaration": "let",
+    "end": 20,
+    "exports": [
+      "x",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > let > should find export let 1`] = `
+[
+  {
+    "code": "export let x",
+    "declaration": "let",
+    "end": 12,
+    "exports": [
+      "x",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > namespace > should find export declare namespace 1`] = `
+[
+  {
+    "code": "export declare namespace Validation",
+    "declaration": "namespace",
+    "end": 35,
+    "exports": [
+      "Validation",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > namespace > should find export namespace 1`] = `
+[
+  {
+    "code": "export namespace Validation",
+    "declaration": "namespace",
+    "end": 27,
+    "exports": [
+      "Validation",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > type > should find export declare type 1`] = `
+[
+  {
+    "code": "export declare type Nullable",
+    "declaration": "type",
+    "end": 28,
+    "exports": [
+      "Nullable",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > type > should find export type 1`] = `
+[
+  {
+    "code": "export type Nullable",
+    "declaration": "type",
+    "end": 20,
+    "exports": [
+      "Nullable",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > var > should find export declare var 1`] = `
+[
+  {
+    "code": "export declare var k",
+    "declaration": "var",
+    "end": 20,
+    "exports": [
+      "k",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > declaration > var > should find export var 1`] = `
+[
+  {
+    "code": "export var k",
+    "declaration": "var",
+    "end": 12,
+    "exports": [
+      "k",
+    ],
+    "specifier": undefined,
+    "start": 0,
+    "type": "declaration",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > named > should find named exports in multi-line statement 1`] = `
+[
+  {
+    "code": "export {
+  addFive,
+  addFour,
+  addThree,
+  addTwo,
+  squareFive,
+  squareFour,
+  squareThree,
+  squareTwo
+} from './lib'",
+    "declaration": undefined,
+    "end": 122,
+    "exports": [
+      "addFive",
+      "addFour",
+      "addThree",
+      "addTwo",
+      "squareFive",
+      "squareFour",
+      "squareThree",
+      "squareTwo",
+    ],
+    "specifier": "./lib",
+    "start": 0,
+    "type": "named",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > named > should find named exports in single-line statement 1`] = `
+[
+  {
+    "code": "export { default } from \\"./make\\"",
+    "declaration": undefined,
+    "end": 32,
+    "exports": [
+      "default",
+    ],
+    "specifier": "./make",
+    "start": 0,
+    "type": "default",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > named > should find named type exports in multi-line statement 1`] = `
+[
+  {
+    "code": "export type {
+   BuildOptions,
+   BuildResult,
+   OutputFile,
+   Plugin,
+   PluginBuild
+} from 'esbuild'",
+    "declaration": undefined,
+    "end": 104,
+    "exports": [
+      "BuildOptions",
+      "BuildResult",
+      "OutputFile",
+      "Plugin",
+      "PluginBuild",
+    ],
+    "specifier": "esbuild",
+    "start": 0,
+    "type": "named",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > named > should find named type exports in single-line statement 1`] = `
+[
+  {
+    "code": "export type { default as Config } from \\"./config\\"",
+    "declaration": undefined,
+    "end": 49,
+    "exports": [
+      "default as Config",
+    ],
+    "specifier": "./config",
+    "start": 0,
+    "type": "named",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > star > should find star export 1`] = `
+[
+  {
+    "code": "export * from \\"./constants\\"",
+    "declaration": undefined,
+    "end": 27,
+    "exports": [
+      "*",
+    ],
+    "specifier": "./constants",
+    "start": 0,
+    "type": "star",
+  },
+]
+`;
+
+exports[`unit:lib/findExports > star > should find star export with alias 1`] = `
+[
+  {
+    "code": "export * as constants from \\"./constants\\"",
+    "declaration": undefined,
+    "end": 40,
+    "exports": [
+      "* as constants",
+    ],
+    "specifier": "./constants",
+    "start": 0,
+    "type": "star",
+  },
+]
+`;
