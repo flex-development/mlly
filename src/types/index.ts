@@ -3,4 +3,5 @@
  * @module mlly/types
  */
 
+export type { default as Declaration } from './declaration'
 export type { default as StatementType } from './statement-type'
