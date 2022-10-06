@@ -1,0 +1,101 @@
+// Vitest Snapshot v1
+
+exports[`unit:lib/findRequires > require > should find require 1`] = `
+[
+  {
+    "code": "require(\\"./lib\\")",
+    "end": 16,
+    "imports": [],
+    "specifier": "./lib",
+    "start": 0,
+    "type": "require",
+  },
+]
+`;
+
+exports[`unit:lib/findRequires > require > should find require declaration 1`] = `
+[
+  {
+    "code": "const lib = require(\\"./lib\\")",
+    "end": 28,
+    "imports": [
+      "default",
+    ],
+    "specifier": "./lib",
+    "start": 0,
+    "type": "require",
+  },
+]
+`;
+
+exports[`unit:lib/findRequires > require > should find require with named imports 1`] = `
+[
+  {
+    "code": "const { addFive } = require(\\"./lib\\")",
+    "end": 36,
+    "imports": [
+      "addFive",
+    ],
+    "specifier": "./lib",
+    "start": 0,
+    "type": "require",
+  },
+]
+`;
+
+exports[`unit:lib/findRequires > require > should find require with named imports in multi-line statement 1`] = `
+[
+  {
+    "code": "const {
+  addFive,
+  addFour,
+  addThree,
+  addTwo,
+  squareFive,
+  squareFour,
+  squareThree,
+  squareTwo
+} = require('./lib')",
+    "end": 127,
+    "imports": [
+      "addFive",
+      "addFour",
+      "addThree",
+      "addTwo",
+      "squareFive",
+      "squareFour",
+      "squareThree",
+      "squareTwo",
+    ],
+    "specifier": "./lib",
+    "start": 0,
+    "type": "require",
+  },
+]
+`;
+
+exports[`unit:lib/findRequires > require.resolve > should find require.resolve 1`] = `
+[
+  {
+    "code": "require.resolve(\\"tsconfig-loader\\")",
+    "end": 34,
+    "imports": [],
+    "specifier": "tsconfig-loader",
+    "start": 0,
+    "type": "require.resolve",
+  },
+]
+`;
+
+exports[`unit:lib/findRequires > require.resolve > should find require.resolve declaration 1`] = `
+[
+  {
+    "code": "const loader = require.resolve(\\"tsconfig-loader\\")",
+    "end": 49,
+    "imports": [],
+    "specifier": "tsconfig-loader",
+    "start": 0,
+    "type": "require.resolve",
+  },
+]
+`;

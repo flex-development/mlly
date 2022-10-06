@@ -56,6 +56,14 @@ export const EXPORT_STAR_REGEX: RegExp =
   /(?<!(?:\/\/|\*).*)\bexport\s*\*(?:\s*as\s+(?<name>[\w$]+)\s+)?\s*(?:\s*from\s*["']\s*(?<specifier>(?<="\s*)[^"]*[^\s"](?=\s*")|(?<='\s*)[^']*[^\s'](?=\s*'))\s*["'][^\n;]*)?/gm
 
 /**
+ * Require statement regex.
+ *
+ * @const {RegExp} REQUIRE_STATEMENT_REGEX
+ */
+export const REQUIRE_STATEMENT_REGEX: RegExp =
+  /(?<!(?:\/\/|\*).*)(?:\bconst[ {]+(?<imports>[\w\t\n\r $*,/]+)[ =}]+)?(?<type>\brequire(?:\.resolve)?)\(["'](?<specifier>[\w./-]+)["']\)/gm
+
+/**
  * Static import statement regex.
  *
  * @const {RegExp} STATIC_IMPORT_REGEX
