@@ -14,17 +14,20 @@ import type { DynamicImport } from '#src/interfaces'
  */
 const findDynamicImports = (code: string): DynamicImport[] => {
   return [...code.matchAll(DYNAMIC_IMPORT_REGEX)].map(match => {
-    const { 0: statement, index, groups = {} } = match
+    const { 0: statement = '', index: start = 0, groups = {} } = match
+    const { expression = '', name = '', names = '' } = groups
 
     return {
-      code: statement!,
-      end: index! + statement!.length,
-      imports: groups.name
-        ? [groups.name.trim()]
-        : groups.names?.split(',').map(name => name.trim()) ?? [],
-      specifier: groups.expression!.replace(/["']/g, ''),
-      specifier_type: /^["']/g.test(groups.expression!) ? 'static' : 'dynamic',
-      start: index!,
+      code: statement,
+      end: start + statement.length,
+      imports: name.trim()
+        ? [name.trim()]
+        : names.trim()
+        ? names.split(',').map(name => name.trim())
+        : [],
+      specifier: expression.replace(/["']/g, ''),
+      specifier_type: /^["']/g.test(expression) ? 'static' : 'dynamic',
+      start,
       type: 'dynamic'
     }
   })

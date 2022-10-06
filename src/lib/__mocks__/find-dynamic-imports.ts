@@ -1,6 +1,6 @@
 /**
- * @file Mock Utilities - findDynamicImports
- * @module mkbuild/utils/mocks/findDynamicImports
+ * @file Mock Library - findDynamicImports
+ * @module mlly/lib/mocks/findDynamicImports
  */
 
 /**

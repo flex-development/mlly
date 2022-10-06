@@ -1,6 +1,6 @@
 /**
- * @file Mock Utilities - findStaticImports
- * @module mkbuild/utils/mocks/findStaticImports
+ * @file Mock Library - findStaticImports
+ * @module mlly/lib/mocks/findStaticImports
  */
 
 /**

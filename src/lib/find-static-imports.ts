@@ -22,7 +22,7 @@ const findStaticImports = (code: string): StaticImport[] => {
      *
      * @const {boolean} star
      */
-    const star: boolean = groups.imports!.startsWith('* as')
+    const star: boolean = imports.startsWith('* as')
 
     return {
       code: statement,

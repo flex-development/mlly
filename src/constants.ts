@@ -61,7 +61,7 @@ export const EXPORT_STAR_REGEX: RegExp =
  * @const {RegExp} REQUIRE_STATEMENT_REGEX
  */
 export const REQUIRE_STATEMENT_REGEX: RegExp =
-  /(?<!(?:\/\/|\*).*)(?:\bconst[ {]+(?<imports>[\w\t\n\r $*,/]+)[ =}]+)?(?<type>\brequire(?:\.resolve)?)\(["'](?<specifier>[\w./-]+)["']\)/gm
+  /(?<!(?:\/\/|\*).*)(?:\bconst[ {]+(?<imports>[\w\t\n\r $*,/]+)[ =}]+)?(?<type>\brequire(?:\.resolve)?)\(["'] *(?<specifier>(?<="\s*)[^"']*[^\s"'](?=\s*")|(?<=["']\s*)[^']*[^\s'](?=\s*')) *["']\)/gm
 
 /**
  * Default resolvable file extensions.

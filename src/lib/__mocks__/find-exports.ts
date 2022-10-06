@@ -1,6 +1,6 @@
 /**
- * @file Mock Utilities - findExports
- * @module mkbuild/utils/mocks/findExports
+ * @file Mock Library - findExports
+ * @module mlly/lib/mocks/findExports
  */
 
 /**

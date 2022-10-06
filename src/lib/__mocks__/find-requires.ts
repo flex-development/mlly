@@ -1,6 +1,6 @@
 /**
- * @file Mock Utilities - findRequires
- * @module mkbuild/utils/mocks/findRequires
+ * @file Mock Library - findRequires
+ * @module mlly/lib/mocks/findRequires
  */
 
 /**
