@@ -69,6 +69,10 @@
     "test:cov": "yarn test --coverage",
     "test:watch": "vitest"
   },
+  "dependencies": {
+    "pathe": "0.3.8",
+    "tsconfig-paths": "4.1.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "17.1.2",
     "@commitlint/config-conventional": "17.1.0",

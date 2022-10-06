@@ -64,6 +64,24 @@ export const REQUIRE_STATEMENT_REGEX: RegExp =
   /(?<!(?:\/\/|\*).*)(?:\bconst[ {]+(?<imports>[\w\t\n\r $*,/]+)[ =}]+)?(?<type>\brequire(?:\.resolve)?)\(["'](?<specifier>[\w./-]+)["']\)/gm
 
 /**
+ * Default resolvable file extensions.
+ *
+ * @const {ReadonlyArray<string>} RESOLVE_EXTENSIONS
+ */
+export const RESOLVE_EXTENSIONS: readonly string[] = Object.freeze([
+  '.cjs',
+  '.css',
+  '.cts',
+  '.js',
+  '.json',
+  '.jsx',
+  '.mjs',
+  '.mts',
+  '.ts',
+  '.tsx'
+])
+
+/**
  * Static import statement regex.
  *
  * @const {RegExp} STATIC_IMPORT_REGEX
