@@ -3,7 +3,7 @@
  * @module mlly/lib/resolveAliases
  */
 
-import type { AliasResolverOptions } from '#src/interfaces'
+import type { ResolveAliasOptions } from '#src/interfaces'
 import * as pathe from 'pathe'
 import { loadTsconfig, type Tsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
 import extractStatements from './extract-statements'
@@ -12,9 +12,9 @@ import resolveAlias from './resolve-alias'
 /**
  * Batch path alias resolution options.
  *
- * @see {@link AliasResolverOptions}
+ * @see {@link ResolveAliasOptions}
  */
-type Options = Omit<AliasResolverOptions, 'baseUrl' | 'paths' | 'url'>
+type Options = Omit<ResolveAliasOptions, 'baseUrl' | 'parent' | 'paths'>
 
 /**
  * Resolves path aliases in `code`.
@@ -22,14 +22,14 @@ type Options = Omit<AliasResolverOptions, 'baseUrl' | 'paths' | 'url'>
  * @see [`resolveAlias`](./resolve-alias)
  *
  * @param {string} code - Code containing path aliases
- * @param {string} url - Absolute path to file containing `code`
+ * @param {string} parent - Absolute path to file containing `code`
  * @param {Options} [options={}] - Resolve options
  * @param {string} [options.tsconfig=pathe.resolve('tsconfig.json')] - Tsconfig
  * @return {string} `code` unmodified or with path aliases resolved
  */
 const resolveAliases = (
   code: string,
-  url: string,
+  parent: string,
   options: Options = {}
 ): string => {
   // set tsconfig path
@@ -63,9 +63,9 @@ const resolveAliases = (
     const specifier: string = resolveAlias(statement.specifier, {
       ...options,
       baseUrl: pathe.resolve(pathe.dirname(options.tsconfig), baseUrl),
+      parent,
       paths,
-      tsconfig: undefined,
-      url
+      tsconfig: undefined
     })
 
     // do nothing if specifier did not contain path alias

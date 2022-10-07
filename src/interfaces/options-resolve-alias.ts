@@ -1,6 +1,6 @@
 /**
- * @file Interfaces - AliasResolverOptions
- * @module mlly/interfaces/AliasResolverOptions
+ * @file Interfaces - ResolveAliasOptions
+ * @module mlly/interfaces/ResolveAliasOptions
  */
 
 import type { OneOrMany } from '@flex-development/tutils'
@@ -10,7 +10,7 @@ import type { OneOrMany } from '@flex-development/tutils'
  *
  * @see https://github.com/dividab/tsconfig-paths
  */
-interface AliasResolverOptions {
+interface ResolveAliasOptions {
   /**
    * Base directory to resolve non-absolute module names.
    *
@@ -45,6 +45,11 @@ interface AliasResolverOptions {
   mainFields?: OneOrMany<string>[]
 
   /**
+   * Absolute path to file containing path alias.
+   */
+  parent?: string
+
+  /**
    * Path mappings.
    *
    * **Note**: Should be relative to {@link baseUrl}.
@@ -67,11 +72,6 @@ interface AliasResolverOptions {
    * Absolute path to tsconfig file.
    */
   tsconfig?: string
-
-  /**
-   * Absolute path to file containing path alias.
-   */
-  url?: string
 }
 
-export type { AliasResolverOptions as default }
+export type { ResolveAliasOptions as default }

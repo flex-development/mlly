@@ -4,7 +4,7 @@
  */
 
 import { RESOLVE_EXTENSIONS } from '#src/constants'
-import type { AliasResolverOptions as Options } from '#src/interfaces'
+import type { ResolveAliasOptions as Options } from '#src/interfaces'
 import * as pathe from 'pathe'
 import { createMatchPath, type MatchPath } from 'tsconfig-paths'
 import { loadTsconfig, type Tsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
@@ -28,9 +28,9 @@ const resolveAlias = (specifier: string, options: Options = {}): string => {
     extensions = RESOLVE_EXTENSIONS,
     fileExists,
     mainFields = ['main', 'module'],
+    parent,
     readFile,
-    tsconfig,
-    url
+    tsconfig
   } = options
 
   // get initial baseUrl and paths
@@ -88,9 +88,9 @@ const resolveAlias = (specifier: string, options: Options = {}): string => {
   // convert match to bare or relative specifier
   match = /\/node_modules\//.test(match)
     ? match.replace(/.+\/node_modules\//, '')
-    : url
+    : parent
     ? pathe
-        .relative(pathe.dirname(url), match)
+        .relative(pathe.dirname(parent), match)
         .replace(/^(\w)/, './$1')
         .replace(/(\/index)$/, '')
     : match

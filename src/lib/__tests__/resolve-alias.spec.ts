@@ -3,7 +3,7 @@
  * @module mlly/lib/tests/resolveAlias/unit
  */
 
-import type { AliasResolverOptions as Options } from '#src/interfaces'
+import type { ResolveAliasOptions as Options } from '#src/interfaces'
 import path from 'node:path'
 import testSubject from '../resolve-alias'
 
@@ -16,7 +16,7 @@ describe('unit:lib/resolveAlias', () => {
     ]
   }
 
-  it('should convert alias from unknown source to absolute specifier', () => {
+  it('should convert alias from unknown parent to absolute specifier', () => {
     // Act
     const result = testSubject('#src/lib/detect-syntax', { paths })
 
@@ -26,21 +26,21 @@ describe('unit:lib/resolveAlias', () => {
 
   it('should convert current directory alias to relative specifier', () => {
     // Arrange
+    const parent = path.resolve('src/index.ts')
     const specifier = '#src/constants'
-    const url = path.resolve('src/index.ts')
 
     // Act + Expect
-    expect(testSubject(specifier, { paths, url })).to.equal('./constants')
+    expect(testSubject(specifier, { parent, paths })).to.equal('./constants')
   })
 
   it('should convert module alias to relative specifier', () => {
     // Arrange
     const expected = '../../../__fixtures__/aggregate-error-ponyfill.cjs'
+    const parent = path.resolve('src/lib/__tests__/detect-syntax.spec.ts')
     const specifier = '#fixtures/aggregate-error-ponyfill.cjs'
-    const url = path.resolve('src/lib/__tests__/detect-syntax.spec.ts')
 
     // Act + Expect
-    expect(testSubject(specifier, { paths, url })).to.equal(expected)
+    expect(testSubject(specifier, { parent, paths })).to.equal(expected)
   })
 
   it('should convert node_modules alias to bare specifier', () => {
@@ -52,12 +52,12 @@ describe('unit:lib/resolveAlias', () => {
     expect(testSubject(specifier, { paths })).to.equal(expected)
   })
 
-  it('should convert parent directory alias to relative specifier', () => {
+  it('should convert outer directory alias to relative specifier', () => {
     // Arrange
-    const url = path.resolve('src/interfaces/statement.ts')
+    const parent = path.resolve('src/interfaces/statement.ts')
 
     // Act + Expect
-    expect(testSubject('#src/types', { paths, url })).to.equal('../types')
+    expect(testSubject('#src/types', { parent, paths })).to.equal('../types')
   })
 
   it('should return specifier if path match was not found', () => {
