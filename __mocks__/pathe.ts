@@ -19,5 +19,6 @@ type Actual = typeof import('pathe')
 const actual: Actual = await vi.importActual<Actual>('pathe')
 
 export const dirname = vi.fn(actual.dirname)
+export const isAbsolute = vi.fn(actual.isAbsolute)
 export const relative = vi.fn(actual.relative)
 export const resolve = vi.fn(actual.resolve)
