@@ -8,6 +8,7 @@ import type { ResolveAliasOptions as Options } from '#src/interfaces'
 import * as pathe from 'pathe'
 import { createMatchPath, type MatchPath } from 'tsconfig-paths'
 import { loadTsconfig, type Tsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
+import toRelativeSpecifier from './to-relative-specifier'
 
 /**
  * Resolves a path alias in `specifier`.
@@ -89,10 +90,7 @@ const resolveAlias = (specifier: string, options: Options = {}): string => {
   match = /\/node_modules\//.test(match)
     ? match.replace(/.+\/node_modules\//, '')
     : parent
-    ? pathe
-        .relative(pathe.dirname(parent), match)
-        .replace(/^(\w)/, './$1')
-        .replace(/(\/index)$/, '')
+    ? toRelativeSpecifier(match, parent)
     : match
 
   return match
