@@ -12,6 +12,17 @@ export const CJS_SYNTAX_REGEX: RegExp =
   /(?<!(?:\/\/|\*).*)((?:module\.)?exports(?:\.\w+|(?<!\s+=))|require(?=\(.)|require\.\w+|__dirname|__filename)/gm
 
 /**
+ * Default export conditions.
+ *
+ * @see https://nodejs.org/api/packages.html#conditional-exports
+ *
+ * @const {Readonly<Set<string>>} CONDITIONS
+ */
+export const CONDITIONS: Readonly<Set<string>> = Object.freeze(
+  new Set(['node', 'import'])
+)
+
+/**
  * Dynamic import statement regex.
  *
  * @const {RegExp} DYNAMIC_IMPORT_REGEX
