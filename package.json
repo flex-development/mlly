@@ -70,6 +70,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@flex-development/is-builtin": "1.0.1",
     "pathe": "0.3.8",
     "tsconfig-paths": "4.1.0"
   },

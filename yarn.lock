@@ -791,6 +791,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/is-builtin@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@flex-development/is-builtin@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fis-builtin%2F1.0.1%2Fa67edcfa3b5642f100fa7a1647f62e78641ca015"
+  checksum: f8e25c26ab4e69381f9dcc2cd4af8f4c5aa4b023951118b140827493cc6803eef333d51eece9735029389ae0433f71c636f2db9581bfccab3e3ef635892491d1
+  languageName: node
+  linkType: hard
+
 "@flex-development/mkbuild@npm:1.0.0-alpha.6":
   version: 1.0.0-alpha.6
   resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.6%2Feafa02640ad813d30c234739773eb1790df9e60d"
@@ -826,6 +833,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:17.1.0"
     "@commitlint/types": "npm:17.0.0"
     "@faker-js/faker": "npm:7.5.0"
+    "@flex-development/is-builtin": "npm:1.0.1"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.6"
     "@flex-development/tutils": "npm:5.0.1"
     "@graphql-eslint/eslint-plugin": "npm:3.11.2"
