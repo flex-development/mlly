@@ -10,8 +10,8 @@ import type { ErrnoException } from 'import-meta-resolve'
 import { codes as errors } from 'import-meta-resolve/lib/errors'
 import { findPathInExports, parseModuleId } from 'node-package-exports'
 import { fileURLToPath, URL } from 'node:url'
-import * as pathe from 'pathe'
 import { readPackageUp, type PackageJson, type ReadResult } from 'read-pkg-up'
+import upath from 'upath'
 
 /**
  * Converts `specifier` into a bare specifier.
@@ -71,11 +71,12 @@ const toBareSpecifier = async (
    * @return {string} `p` normalized
    */
   const normalize = (p: string): string => {
-    return pathe
+    return upath
       .format({
-        dir: pathe.dirname(p),
+        base: '',
+        dir: upath.dirname(p),
         ext: '',
-        name: pathe.basename(p, pathe.extname(p)),
+        name: upath.basename(p, upath.extname(p)),
         root: ''
       })
       .replace(/^(\w)/, './$1')
@@ -108,7 +109,7 @@ const toBareSpecifier = async (
   }
 
   // parse possible package path
-  const { dir, name: basename, root } = pathe.parse(path.replace(/^\.\//, ''))
+  const { dir, name: basename, root } = upath.parse(path.replace(/^\.\//, ''))
 
   /**
    * Paths to attempt finding in {@link exports}.
@@ -118,12 +119,12 @@ const toBareSpecifier = async (
   const tries: Set<string> = new Set(
     [
       path || '.',
-      path.replace('./' + root, '.').replace(/^\.\/index$/, '.'),
-      path.replace('./' + dir, '.'),
+      path.replace(root, ''),
+      path.replace(dir, ''),
       './' + basename
-    ].filter(trypath => {
-      return trypath === '.' || (trypath.length > 2 && trypath !== './index')
-    })
+    ]
+      .map(trypath => (/^\.\/index(?:\..*)?$/.test(trypath) ? '.' : trypath))
+      .filter(trypath => trypath === '.' || trypath.length > 2)
   )
 
   // find subpath export
@@ -138,11 +139,11 @@ const toBareSpecifier = async (
     ])
 
     // return subpath export if export path was found
-    if (exportpath) return pathe.join(name, trypath)
+    if (exportpath) return upath.join(name, trypath)
   }
 
   throw new errors.ERR_PACKAGE_PATH_NOT_EXPORTED(
-    pathe.dirname(pkg.path) + '/',
+    upath.dirname(pkg.path) + '/',
     tries[0]
   )
 }

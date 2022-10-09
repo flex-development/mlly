@@ -46,6 +46,7 @@ pkgs
 preid
 safecrlf
 syncer
+upath
 vates
 vitest
 vsicons

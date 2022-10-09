@@ -887,7 +887,6 @@ __metadata:
     lint-staged: "npm:13.0.3"
     node-notifier: "npm:10.0.1"
     node-package-exports: "npm:1.0.2"
-    pathe: "npm:0.3.8"
     prettier: "npm:2.7.1"
     prettier-plugin-sh: "npm:0.12.8"
     pretty-format: "npm:29.1.2"
@@ -897,6 +896,7 @@ __metadata:
     ts-node: "npm:10.9.1"
     tsconfig-paths: "npm:4.1.0"
     typescript: "npm:4.8.4"
+    upath: "npm:2.0.1"
     version-bump-prompt: "npm:6.1.0"
     vite: "npm:3.1.4"
     vite-tsconfig-paths: "npm:3.5.1"
@@ -7780,6 +7780,13 @@ __metadata:
   dependencies:
     normalize-path: "npm:^2.1.1"
   checksum: 09e972942c02864a3e334bac934829314a324efc48dcf71eaa8d1c7628b8590b0a65f4ee456be049eb29a92953253cc1505a25b16c4bc4f7099d7cae4a211567
+  languageName: node
+  linkType: hard
+
+"upath@npm:2.0.1":
+  version: 2.0.1
+  resolution: "upath@npm:2.0.1"
+  checksum: d7a734749333a30627f128a89c714766c6f960d676ba978585adfad50771b00ec96569461dfc11c0e1306651435b7db56bcdb6a48e81da5ebee621b399c13aa8
   languageName: node
   linkType: hard
 

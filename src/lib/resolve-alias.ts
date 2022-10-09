@@ -5,9 +5,9 @@
 
 import { RESOLVE_EXTENSIONS } from '#src/constants'
 import type { ResolveAliasOptions as Options } from '#src/interfaces'
-import * as pathe from 'pathe'
 import { createMatchPath, type MatchPath } from 'tsconfig-paths'
 import { loadTsconfig, type Tsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
+import upath from 'upath'
 import toRelativeSpecifier from './to-relative-specifier'
 
 /**
@@ -55,7 +55,7 @@ const resolveAlias = (specifier: string, options: Options = {}): string => {
     const { baseUrl: b = '.', paths: p = paths } = compilerOptions
 
     // reset baseUrl and paths
-    baseUrl = pathe.resolve(pathe.dirname(tsconfig), b)
+    baseUrl = upath.resolve(upath.dirname(tsconfig), b)
     paths = p
   }
 

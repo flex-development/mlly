@@ -4,7 +4,7 @@
  */
 
 import { fileURLToPath, pathToFileURL, URL } from 'node:url'
-import * as pathe from 'pathe'
+import upath from 'upath'
 
 /**
  * Converts `specifier` into an absolute specifier.
@@ -31,7 +31,7 @@ const toAbsoluteSpecifier = (
   if (specifier.startsWith('file:')) specifier = fileURLToPath(specifier)
 
   // convert non-absolute specifier to absolute specifier
-  if (!pathe.isAbsolute(specifier)) specifier = pathe.resolve(cwd, specifier)
+  if (!upath.isAbsolute(specifier)) specifier = upath.resolve(cwd, specifier)
 
   // convert cwd to file url string
   cwd = pathToFileURL(cwd).href.replace(/\/$/, '') + '/'

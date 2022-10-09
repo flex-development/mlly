@@ -4,7 +4,7 @@
  */
 
 import { fileURLToPath, URL } from 'node:url'
-import * as pathe from 'pathe'
+import upath from 'upath'
 
 /**
  * Converts `specifier` into a relative specifier.
@@ -30,8 +30,8 @@ const toRelativeSpecifier = (
   if (parent.startsWith('file:')) parent = fileURLToPath(parent)
   if (specifier.startsWith('file:')) specifier = fileURLToPath(specifier)
 
-  return pathe
-    .relative(pathe.dirname(parent), specifier)
+  return upath
+    .relative(upath.dirname(parent), specifier)
     .replace(/^(\w)/, './$1')
 }
 

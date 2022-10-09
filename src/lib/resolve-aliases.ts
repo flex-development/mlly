@@ -4,8 +4,8 @@
  */
 
 import type { ResolveAliasOptions } from '#src/interfaces'
-import * as pathe from 'pathe'
 import { loadTsconfig, type Tsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
+import upath from 'upath'
 import extractStatements from './extract-statements'
 import resolveAlias from './resolve-alias'
 
@@ -33,7 +33,7 @@ const resolveAliases = (
   options: Options = {}
 ): string => {
   // set tsconfig path
-  options.tsconfig = options.tsconfig ?? pathe.resolve('tsconfig.json')
+  options.tsconfig = options.tsconfig ?? upath.resolve('tsconfig.json')
 
   /**
    * Tsconfig object.
@@ -62,7 +62,7 @@ const resolveAliases = (
      */
     const specifier: string = resolveAlias(statement.specifier, {
       ...options,
-      baseUrl: pathe.resolve(pathe.dirname(options.tsconfig), baseUrl),
+      baseUrl: upath.resolve(upath.dirname(options.tsconfig), baseUrl),
       parent,
       paths,
       tsconfig: undefined

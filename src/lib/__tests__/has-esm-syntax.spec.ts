@@ -250,7 +250,7 @@ describe('unit:lib/hasESMSyntax', () => {
 
     describe('named', () => {
       it('should detect named import', () => {
-        expect(testSubject('import { resolve } from "pathe"')).to.be.true
+        expect(testSubject('import { resolve } from "upath"')).to.be.true
       })
 
       it('should detect named imports spanning multiple lines', () => {
@@ -261,7 +261,7 @@ describe('unit:lib/hasESMSyntax', () => {
             dirname,
             extname,
             resolve
-          } from 'pathe'
+          } from 'upath'
         `
 
         // Act + Expect
@@ -273,7 +273,7 @@ describe('unit:lib/hasESMSyntax', () => {
         const code = dedent`
           /**
            * @example
-           *  import { resolve } from "pathe"
+           *  import { resolve } from 'upath'
            */
         `
 
@@ -282,13 +282,13 @@ describe('unit:lib/hasESMSyntax', () => {
       })
 
       it('should ignore named import in single-line comment', () => {
-        expect(testSubject('// import { resolve } from "pathe"')).to.be.false
+        expect(testSubject('// import { resolve } from "upath"')).to.be.false
       })
     })
 
     describe('star', () => {
       it('should detect star import', () => {
-        expect(testSubject('import * as pathe from "pathe"')).to.be.true
+        expect(testSubject('import * as foo from "foo-pkg"')).to.be.true
       })
 
       it('should ignore star import in multi-line comment', () => {
@@ -296,7 +296,7 @@ describe('unit:lib/hasESMSyntax', () => {
         const code = dedent`
           /**
            * @example
-           *  import * as pathe from "pathe"
+           *  import * as foo from "foo-pkg"
            */
         `
 
@@ -305,7 +305,7 @@ describe('unit:lib/hasESMSyntax', () => {
       })
 
       it('should ignore star import in single-line comment', () => {
-        expect(testSubject('// import * as pathe from "pathe"')).to.be.false
+        expect(testSubject('// import * as foo from "foo-pkg"')).to.be.false
       })
     })
   })

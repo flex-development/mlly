@@ -74,9 +74,9 @@
     "@flex-development/tutils": "5.0.1",
     "import-meta-resolve": "2.1.0",
     "node-package-exports": "1.0.2",
-    "pathe": "0.3.8",
     "read-pkg-up": "9.1.0",
-    "tsconfig-paths": "4.1.0"
+    "tsconfig-paths": "4.1.0",
+    "upath": "2.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "17.1.2",
