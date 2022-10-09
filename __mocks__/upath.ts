@@ -20,6 +20,7 @@ const actual: Actual = await vi.importActual<Actual>('upath')
 
 export default {
   basename: vi.fn(actual.basename),
+  changeExt: vi.fn(actual.changeExt),
   dirname: vi.fn(actual.dirname),
   extname: vi.fn(actual.extname),
   format: vi.fn(actual.format),
@@ -27,5 +28,6 @@ export default {
   join: vi.fn(actual.join),
   parse: vi.fn(actual.parse),
   relative: vi.fn(actual.relative),
+  removeExt: vi.fn(actual.removeExt),
   resolve: vi.fn(actual.resolve)
 }
