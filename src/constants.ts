@@ -3,6 +3,8 @@
  * @module mlly/constants
  */
 
+import type { Ext } from './types'
+
 /**
  * CommonJS syntax regex.
  *
@@ -77,9 +79,9 @@ export const REQUIRE_STATEMENT_REGEX: RegExp =
 /**
  * Default resolvable file extensions.
  *
- * @const {ReadonlyArray<string>} RESOLVE_EXTENSIONS
+ * @const {ReadonlyArray<Ext>} RESOLVE_EXTENSIONS
  */
-export const RESOLVE_EXTENSIONS: readonly string[] = Object.freeze([
+export const RESOLVE_EXTENSIONS: readonly Ext[] = Object.freeze([
   '.cjs',
   '.css',
   '.cts',
