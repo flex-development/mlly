@@ -34,6 +34,10 @@
   description: es modules
   color: 74cefc
 
+- name: scope:internal
+  description: internals
+  color: 74cefc
+
 - name: scope:patches
   description: patches
   color: 74cefc
