@@ -30,7 +30,10 @@ interface ResolveOptions {
   ext?:
     | Ext
     | false
-    | ((resolved: string) => EmptyString | Ext | PromiseLike<EmptyString | Ext>)
+    | ((
+        specifier: string,
+        resolved: string
+      ) => EmptyString | Ext | PromiseLike<EmptyString | Ext>)
 
   /**
    * Module extensions to probe for.

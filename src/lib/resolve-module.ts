@@ -153,7 +153,7 @@ const resolveModule = async (
     } else if (type === 'relative') {
       resolved = upath.changeExt(
         resolved,
-        typeof ext === 'function' ? await ext(resolved) : ext
+        typeof ext === 'function' ? await ext(specifier, resolved) : ext
       )
     }
 
