@@ -39,6 +39,8 @@ describe('functional:lib/resolveModules', () => {
       import type { SpecifierType } from '../types'
       import toBareSpecifier from './to-bare-specifier'
       import toRelativeSpecifier from './to-relative-specifier'
+
+      await import(foo)
     `
 
     // Act
@@ -48,6 +50,7 @@ describe('functional:lib/resolveModules', () => {
     })
 
     // Expect
+    expect(resolveModule).toHaveBeenCalledTimes(9)
     expect(result).toMatchSnapshot()
   })
 })
