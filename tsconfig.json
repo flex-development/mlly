@@ -12,6 +12,7 @@
     "exactOptionalPropertyTypes": false,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
     "isolatedModules": false,
     "lib": ["es2020"],
     "module": "esnext",

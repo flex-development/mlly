@@ -3,7 +3,7 @@
  * @module mlly/lib/tests/toDataURL/unit
  */
 
-import { MIMEType } from '#src/types'
+import type { MIMEType } from '#src/types'
 import dedent from 'ts-dedent'
 import testSubject from '../to-data-url'
 
