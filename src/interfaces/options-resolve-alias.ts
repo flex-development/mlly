@@ -33,7 +33,7 @@ interface ResolveAliasOptions {
    * @param {string} path - Path to check
    * @return {boolean} `true` if file exists, `false` otherwise
    */
-  fileExists?(path: string): boolean
+  fileExists?(this: void, path: string): boolean
 
   /**
    * `package.json` fields to check when resolving modules.
@@ -66,7 +66,7 @@ interface ResolveAliasOptions {
    * @param {string} filename - Filename
    * @return {string} Contents of `filename`
    */
-  readFile?(filename: string): string
+  readFile?(this: void, filename: string): string
 
   /**
    * Absolute path to tsconfig file.

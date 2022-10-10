@@ -14,9 +14,9 @@ const config = {
   overrides: [
     ...require('./.eslintrc.base.cjs').overrides,
     {
-      files: ['src/lib/resolve-alias.ts'],
+      files: ['src/lib/__tests__/get-compiler-options.spec.ts'],
       rules: {
-        '@typescript-eslint/unbound-method': 0
+        'unicorn/no-keyword-prefix': 0
       }
     }
   ]

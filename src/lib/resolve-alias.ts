@@ -6,8 +6,8 @@
 import { RESOLVE_EXTENSIONS } from '#src/constants'
 import type { ResolveAliasOptions as Options } from '#src/interfaces'
 import { createMatchPath, type MatchPath } from 'tsconfig-paths'
-import { loadTsconfig, type Tsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
 import upath from 'upath'
+import getCompilerOptions from './get-compiler-options'
 import toRelativeSpecifier from './to-relative-specifier'
 
 /**
@@ -39,20 +39,8 @@ const resolveAlias = (specifier: string, options: Options = {}): string => {
 
   // use baseUrl and paths from tsconfig
   if (tsconfig) {
-    /**
-     * Tsconfig object.
-     *
-     * @const {Tsconfig | undefined} config
-     */
-    const config: Tsconfig | undefined = loadTsconfig(
-      tsconfig,
-      fileExists,
-      readFile
-    )
-
     // get compiler options
-    const { compilerOptions = {} } = config ?? {}
-    const { baseUrl: b = '.', paths: p = paths } = compilerOptions
+    const { baseUrl: b = '.', paths: p = paths } = getCompilerOptions(tsconfig)
 
     // reset baseUrl and paths
     baseUrl = upath.resolve(upath.dirname(tsconfig), b)

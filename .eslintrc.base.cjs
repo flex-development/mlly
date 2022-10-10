@@ -214,7 +214,7 @@ const config = {
       2,
       {
         allowInGenericTypeArguments: true,
-        allowAsThisParameter: false
+        allowAsThisParameter: true
       }
     ],
     '@typescript-eslint/no-loop-func': 2,
