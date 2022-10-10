@@ -11,7 +11,7 @@
  * @const {RegExp} CJS_SYNTAX_REGEX
  */
 export const CJS_SYNTAX_REGEX: RegExp =
-  /(?<!(?:\/\/|\*).*)((?:module\.)?exports(?:\.\w+|(?<!\s+=))|require(?=\(.)|require\.\w+|__dirname|__filename)/gm
+  /(?<!(?:\/\/|\*).*)((?:module\.)?exports(?:\.\w+|(?<!\s+=))|require(?=\(.)|require\.\w+|__dirname|__filename|await import)/gm
 
 /**
  * Dynamic import statement regex.

@@ -64,6 +64,29 @@ describe('unit:lib/hasCJSSyntax', () => {
     })
   })
 
+  describe('await import', () => {
+    it('should detect await import', () => {
+      expect(testSubject('await import("read-pkg")')).to.be.true
+    })
+
+    it('should ignore await import in multi-line comment', () => {
+      // Arrange
+      const code = dedent`
+        /**
+         * @example
+         *  await import('read-pkg')
+         */
+      `
+
+      // Act + Expect
+      expect(testSubject(code)).to.be.false
+    })
+
+    it('should ignore await import in single-line comment', () => {
+      expect(testSubject('// await import("read-pkg")')).to.be.false
+    })
+  })
+
   describe('exports', () => {
     it('should detect default export', () => {
       expect(testSubject('exports = {}')).to.be.true
