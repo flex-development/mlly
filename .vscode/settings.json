@@ -146,6 +146,11 @@
       "icon": "temp"
     },
     {
+      "extensions": ["internal"],
+      "format": "svg",
+      "icon": "private"
+    },
+    {
       "extensions": ["patches"],
       "format": "svg",
       "icon": "include"

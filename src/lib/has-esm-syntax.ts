@@ -3,7 +3,7 @@
  * @module mlly/lib/hasESMSyntax
  */
 
-import { ESM_SYNTAX_REGEX } from '#src/constants'
+import { ESM_SYNTAX_REGEX } from '#src/internal'
 
 /**
  * Detects if `code` contains ESM syntax. Ignores matches in comments.

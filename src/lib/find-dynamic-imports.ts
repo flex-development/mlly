@@ -3,8 +3,8 @@
  * @module mlly/lib/findDynamicImports
  */
 
-import { DYNAMIC_IMPORT_REGEX } from '#src/constants'
 import type { DynamicImport } from '#src/interfaces'
+import { DYNAMIC_IMPORT_REGEX } from '#src/internal'
 
 /**
  * Finds all dynamic import statements in `code`.

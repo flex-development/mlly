@@ -3,8 +3,8 @@
  * @module mlly/lib/findRequires
  */
 
-import { REQUIRE_STATEMENT_REGEX } from '#src/constants'
 import type { RequireStatement } from '#src/interfaces'
+import { REQUIRE_STATEMENT_REGEX } from '#src/internal'
 
 /**
  * Finds all `require` and `require.resolve` statements in `code`.

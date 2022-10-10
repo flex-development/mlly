@@ -3,8 +3,8 @@
  * @module mlly/lib/findStaticImports
  */
 
-import { STATIC_IMPORT_REGEX } from '#src/constants'
 import type { StaticImport } from '#src/interfaces'
+import { STATIC_IMPORT_REGEX } from '#src/internal'
 
 /**
  * Finds all static import statements in `code`.

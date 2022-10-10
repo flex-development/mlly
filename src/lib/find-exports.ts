@@ -3,12 +3,12 @@
  * @module mlly/lib/findExports
  */
 
+import type { ExportStatement } from '#src/interfaces'
 import {
   EXPORT_DECLARATION_REGEX,
   EXPORT_NAMED_REGEX,
   EXPORT_STAR_REGEX
-} from '#src/constants'
-import type { ExportStatement } from '#src/interfaces'
+} from '#src/internal'
 import type { Declaration } from '#src/types'
 
 /**

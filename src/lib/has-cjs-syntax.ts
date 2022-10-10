@@ -3,7 +3,7 @@
  * @module mlly/lib/hasCJSSyntax
  */
 
-import { CJS_SYNTAX_REGEX } from '#src/constants'
+import { CJS_SYNTAX_REGEX } from '#src/internal'
 
 /**
  * Detects if `code` contains CommonJS syntax. Ignores matches in comments.
