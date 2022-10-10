@@ -4,6 +4,7 @@
  */
 
 import { CONDITIONS } from '#src/constants'
+import type { ResolveOptions } from '#src/interfaces'
 import isBuiltin from '@flex-development/is-builtin'
 import { isNIL, type Nullable } from '@flex-development/tutils'
 import type { ErrnoException } from 'import-meta-resolve'
@@ -29,13 +30,13 @@ import upath from 'upath'
  * @async
  *
  * @param {URL | string} specifier - File url or path to convert
- * @param {Set<string> | string[]} [conditions=CONDITIONS] - Export conditions
+ * @param {ResolveOptions['conditions']} [conditions=CONDITIONS] - Conditions
  * @return {string} `specifier` as bare specifier
  * @throws {ErrnoException}
  */
 const toBareSpecifier = async (
   specifier: URL | string,
-  conditions: Set<string> | string[] = CONDITIONS
+  conditions: ResolveOptions['conditions'] = CONDITIONS
 ): Promise<string> => {
   // convert file url object to file url string
   if (specifier instanceof URL) specifier = specifier.href

@@ -20,7 +20,7 @@ interface ResolveOptions {
    *
    * @default CONDITIONS
    */
-  conditions?: Set<string> | string[]
+  conditions?: Set<string> | string[] | readonly string[]
 
   /**
    * Remove or replace file extension.
@@ -37,7 +37,7 @@ interface ResolveOptions {
    *
    * @default RESOLVE_EXTENSIONS
    */
-  extensions?: string[]
+  extensions?: string[] | readonly string[]
 
   /**
    * Parent module URL or path to resolve from.

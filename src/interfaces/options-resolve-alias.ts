@@ -25,7 +25,7 @@ interface ResolveAliasOptions {
    *
    * @default RESOLVE_EXTENSIONS
    */
-  extensions?: string[]
+  extensions?: string[] | readonly string[]
 
   /**
    * Checks for the existence of a file at `path`.
