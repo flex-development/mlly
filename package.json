@@ -33,9 +33,8 @@
   "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
-      "*": [
-        "./dist/*.d.mts",
-        "./dist/index.d.mts"
+      "./lib/*": [
+        "./dist/lib/*.d.mts"
       ]
     }
   },
