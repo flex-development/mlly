@@ -20,6 +20,7 @@
         "exports",
         "github",
         "interfaces",
+        "internal",
         "lib",
         "patches",
         "pkg",
