@@ -18,5 +18,6 @@ type Actual = typeof import('node-package-exports')
  */
 const actual: Actual = await vi.importActual<Actual>('node-package-exports')
 
+export const findEntryInExports = vi.fn(actual.findEntryInExports)
 export const findPathInExports = vi.fn(actual.findPathInExports)
 export const parseModuleId = vi.fn(actual.parseModuleId)

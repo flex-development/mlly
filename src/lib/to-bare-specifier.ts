@@ -8,7 +8,11 @@ import isBuiltin from '@flex-development/is-builtin'
 import { isNIL, type Nullable } from '@flex-development/tutils'
 import type { ErrnoException } from 'import-meta-resolve'
 import { codes as errors } from 'import-meta-resolve/lib/errors'
-import { findPathInExports, parseModuleId } from 'node-package-exports'
+import {
+  findEntryInExports,
+  findPathInExports,
+  parseModuleId
+} from 'node-package-exports'
 import { fileURLToPath, URL } from 'node:url'
 import { readPackageUp, type PackageJson, type ReadResult } from 'read-pkg-up'
 import upath from 'upath'
@@ -108,6 +112,9 @@ const toBareSpecifier = async (
     return path === main || normalize(path) === main ? name : bare
   }
 
+  // return package name if specifier is exports
+  if (path === findEntryInExports(exports, [...conditions])) return name
+
   // parse possible package path
   const { dir, name: basename, root } = upath.parse(path.replace(/^\.\//, ''))
 
@@ -144,7 +151,7 @@ const toBareSpecifier = async (
 
   throw new errors.ERR_PACKAGE_PATH_NOT_EXPORTED(
     upath.dirname(pkg.path) + '/',
-    tries[0]
+    [...tries][0]
   )
 }
 
