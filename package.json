@@ -145,6 +145,14 @@
     "vitest-github-actions-reporter": "0.8.3",
     "yaml-eslint-parser": "1.1.0"
   },
+  "peerDependencies": {
+    "typescript": "*"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
   "resolutions": {
     "@ardatan/sync-fetch": "larsgw/sync-fetch#head=worker_threads",
     "esbuild": "0.15.10"
