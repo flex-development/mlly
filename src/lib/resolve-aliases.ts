@@ -3,18 +3,11 @@
  * @module mlly/lib/resolveAliases
  */
 
-import type { ResolveAliasOptions } from '#src/interfaces'
-import { loadTsconfig, type Tsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
+import type { ResolveAliasOptions as Options } from '#src/interfaces'
 import upath from 'upath'
 import extractStatements from './extract-statements'
+import getCompilerOptions from './get-compiler-options'
 import resolveAlias from './resolve-alias'
-
-/**
- * Batch path alias resolution options.
- *
- * @see {@link ResolveAliasOptions}
- */
-type Options = Omit<ResolveAliasOptions, 'baseUrl' | 'parent' | 'paths'>
 
 /**
  * Resolves path aliases in `code`.
@@ -22,33 +15,21 @@ type Options = Omit<ResolveAliasOptions, 'baseUrl' | 'parent' | 'paths'>
  * @see [`resolveAlias`](./resolve-alias)
  *
  * @param {string} code - Code containing path aliases
- * @param {string} parent - Absolute path to file containing `code`
  * @param {Options} [options={}] - Resolve options
- * @param {string} [options.tsconfig=pathe.resolve('tsconfig.json')] - Tsconfig
  * @return {string} `code` unmodified or with path aliases resolved
  */
-const resolveAliases = (
-  code: string,
-  parent: string,
-  options: Options = {}
-): string => {
-  // set tsconfig path
-  options.tsconfig = options.tsconfig ?? upath.resolve('tsconfig.json')
+const resolveAliases = (code: string, options: Options = {}): string => {
+  const { tsconfig } = options
+  let { baseUrl = process.cwd(), paths = {} } = options
 
-  /**
-   * Tsconfig object.
-   *
-   * @const {Tsconfig | undefined} tsconfig
-   */
-  const tsconfig: Tsconfig | undefined = loadTsconfig(
-    options.tsconfig,
-    options.fileExists,
-    options.readFile
-  )
+  // use baseUrl and paths from tsconfig
+  if (tsconfig) {
+    const { baseUrl: b = '.', paths: p = paths } = getCompilerOptions(tsconfig)
 
-  // get compiler options
-  const { compilerOptions = {} } = tsconfig ?? {}
-  const { baseUrl = '.', paths = {} } = compilerOptions
+    // reset baseUrl and paths
+    baseUrl = upath.resolve(upath.dirname(tsconfig), b)
+    paths = p
+  }
 
   // resolve path aliases
   for (const statement of extractStatements(code)) {
@@ -62,8 +43,7 @@ const resolveAliases = (
      */
     const specifier: string = resolveAlias(statement.specifier, {
       ...options,
-      baseUrl: upath.resolve(upath.dirname(options.tsconfig), baseUrl),
-      parent,
+      baseUrl,
       paths,
       tsconfig: undefined
     })

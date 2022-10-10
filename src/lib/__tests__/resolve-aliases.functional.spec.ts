@@ -3,25 +3,24 @@
  * @module mlly/lib/tests/resolveAlias/functional
  */
 
-import type { Spy } from '#tests/interfaces'
+import type { ResolveAliasOptions as Options } from '#src/interfaces'
 import fs from 'node:fs'
 import path from 'node:path'
-import { loadTsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
 import extractStatements from '../extract-statements'
 import resolveAlias from '../resolve-alias'
 import testSubject from '../resolve-aliases'
 
-vi.mock('tsconfig-paths/lib/tsconfig-loader')
 vi.mock('../extract-statements')
+vi.mock('../get-compiler-options')
 vi.mock('../resolve-alias')
 
 describe('functional:lib/resolveAliases', () => {
-  const url: string = path.resolve('__fixtures__/path-aliases.cts')
+  const parent: string = path.resolve('__fixtures__/path-aliases.cts')
+  const options: Options = { parent, tsconfig: path.resolve('tsconfig.json') }
 
   it('should do nothing if no path aliases are found', () => {
     // Act
-    ;(loadTsconfig as unknown as Spy).mockReturnValueOnce(undefined)
-    testSubject('export const foo = "bar"', url)
+    testSubject('export const foo = "bar"', options)
 
     // Expect
     expect(extractStatements).toHaveBeenCalledOnce()
@@ -30,7 +29,7 @@ describe('functional:lib/resolveAliases', () => {
 
   it('should resolve path aliases in code', () => {
     // Act
-    const result = testSubject(fs.readFileSync(url, 'utf8'), url)
+    const result = testSubject(fs.readFileSync(parent, 'utf8'), options)
 
     // Expect
     expect(extractStatements).toHaveBeenCalledOnce()
