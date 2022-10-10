@@ -24,7 +24,6 @@
     "dist",
     "src"
   ],
-  "bin": "./dist/cli.mjs",
   "exports": {
     ".": "./dist/index.mjs",
     "./lib/*": "./dist/lib/*.mjs",

@@ -903,8 +903,6 @@ __metadata:
     vitest: "npm:0.23.4"
     vitest-github-actions-reporter: "npm:0.8.3"
     yaml-eslint-parser: "npm:1.1.0"
-  bin:
-    mlly: ./dist/cli.mjs
   languageName: unknown
   linkType: soft
 
