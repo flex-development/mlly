@@ -5,9 +5,9 @@
 
 import { RESOLVE_EXTENSIONS } from '#src/constants'
 import type { ResolveAliasOptions as Options } from '#src/interfaces'
+import { getCompilerOptions } from '#src/internal'
 import { createMatchPath, type MatchPath } from 'tsconfig-paths'
 import upath from 'upath'
-import getCompilerOptions from './get-compiler-options'
 import toRelativeSpecifier from './to-relative-specifier'
 
 /**

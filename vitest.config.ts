@@ -53,6 +53,7 @@ const config = (): UserConfig => {
           '**/__tests__/**',
           '**/index.ts',
           'src/interfaces',
+          'src/internal/compiler-options-json.ts',
           'src/types'
         ],
         extension: ['.ts'],

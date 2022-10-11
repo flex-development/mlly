@@ -1,6 +1,6 @@
 /**
  * @file Internals - Constants
- * @module mlly/internals/constants
+ * @module mlly/internal/constants
  */
 
 /**

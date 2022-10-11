@@ -3,17 +3,17 @@
  * @module mlly/lib/tests/resolveAlias/functional
  */
 
+import getCompilerOptions from '#src/internal/get-compiler-options'
 import type { Spy } from '#tests/interfaces'
 import path from 'node:path'
 import { createMatchPath } from 'tsconfig-paths'
 import upath from 'upath'
 import tsconfig from '../../../tsconfig.json' assert { type: 'json' }
-import getCompilerOptions from '../get-compiler-options'
 import testSubject from '../resolve-alias'
 
+vi.mock('#src/internal/get-compiler-options')
 vi.mock('tsconfig-paths')
 vi.mock('upath')
-vi.mock('../get-compiler-options')
 
 describe('functional:lib/resolveAlias', () => {
   const specifier: string = '#src/lib/resolve-alias'

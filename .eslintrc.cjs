@@ -14,7 +14,10 @@ const config = {
   overrides: [
     ...require('./.eslintrc.base.cjs').overrides,
     {
-      files: ['src/lib/__tests__/get-compiler-options.spec.ts'],
+      files: [
+        'src/internal/__tests__/get-compiler-options.spec.ts',
+        'src/internal/compiler-options-json.ts'
+      ],
       rules: {
         'unicorn/no-keyword-prefix': 0
       }

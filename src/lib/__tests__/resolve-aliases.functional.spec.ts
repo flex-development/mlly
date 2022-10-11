@@ -11,7 +11,6 @@ import resolveAlias from '../resolve-alias'
 import testSubject from '../resolve-aliases'
 
 vi.mock('../extract-statements')
-vi.mock('../get-compiler-options')
 vi.mock('../resolve-alias')
 
 describe('functional:lib/resolveAliases', () => {

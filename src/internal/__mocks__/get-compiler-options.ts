@@ -1,6 +1,6 @@
 /**
- * @file Mock Library - getCompilerOptions
- * @module mlly/lib/mocks/getCompilerOptions
+ * @file Mock Internals - getCompilerOptions
+ * @module mlly/internal/mocks/getCompilerOptions
  */
 
 /**

@@ -1,12 +1,14 @@
 /**
- * @file Interfaces - CompilerOptionsJson
- * @module mlly/interfaces/CompilerOptionsJson
+ * @file Internals - CompilerOptionsJson
+ * @module mlly/internal/CompilerOptionsJson
  */
 
 import type { CompilerOptionsValue, MapLike } from 'typescript'
 
 /**
  * TypeScript compiler options provided by a user.
+ *
+ * @internal
  *
  * @see https://www.typescriptlang.org/tsconfig
  */

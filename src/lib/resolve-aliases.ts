@@ -4,9 +4,9 @@
  */
 
 import type { ResolveAliasOptions as Options } from '#src/interfaces'
+import { getCompilerOptions } from '#src/internal'
 import upath from 'upath'
 import extractStatements from './extract-statements'
-import getCompilerOptions from './get-compiler-options'
 import resolveAlias from './resolve-alias'
 
 /**
