@@ -31,7 +31,7 @@ jobs:
     steps:
       - id: debug
         name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.0.1
+        uses: hmarr/debug-action@v2.1.0
       - id: metadata
         name: Fetch metadata
         uses: dependabot/fetch-metadata@v1.3.4

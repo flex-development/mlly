@@ -41,7 +41,7 @@ jobs:
     steps:
       - id: debug
         name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.0.1
+        uses: hmarr/debug-action@v2.1.0
       - id: checkout
         name: Checkout ${{ env.TAG }}
         uses: actions/checkout@v3.1.0
