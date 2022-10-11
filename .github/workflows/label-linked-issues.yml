@@ -42,7 +42,7 @@ jobs:
         run: echo "::set-output name=result::$(jq .version package.json -r)"
       - id: query
         name: Query linked issues
-        uses: octokit/graphql-action@v2.2.22
+        uses: octokit/graphql-action@v2.2.23
         with:
           query: |
             query ($limit: Int = 20, $owner: String!, $pr: Int!, $repo: String!) {
