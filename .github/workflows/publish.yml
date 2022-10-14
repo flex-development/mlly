@@ -68,7 +68,7 @@ jobs:
     steps:
       - id: npmrc
         name: Setup .npmrc file
-        uses: actions/setup-node@v3.5.0
+        uses: actions/setup-node@v3.5.1
         with:
           always-auth: true
           node-version: ${{ env.NODE_VERSION }}
@@ -90,7 +90,7 @@ jobs:
     steps:
       - id: npmrc
         name: Setup .npmrc file
-        uses: actions/setup-node@v3.5.0
+        uses: actions/setup-node@v3.5.1
         with:
           always-auth: true
           node-version: ${{ env.NODE_VERSION }}
