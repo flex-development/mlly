@@ -22,19 +22,19 @@ export const CONDITIONS: Readonly<Set<string>> = Object.freeze(
  * @const {ReadonlyArray<Ext>} RESOLVE_EXTENSIONS
  */
 export const RESOLVE_EXTENSIONS: readonly Ext[] = Object.freeze([
-  '.cjs',
-  '.css',
-  '.cts',
-  '.js',
-  '.json',
-  '.jsx',
   '.mjs',
   '.mts',
-  '.node',
+  '.cjs',
+  '.cts',
+  '.js',
   '.ts',
+  '.jsx',
   '.tsx',
+  '.css',
+  '.json',
+  '.node',
   '.wasm',
-  '.d.ts',
   '.d.mts',
-  '.d.cts'
+  '.d.cts',
+  '.d.ts'
 ])
