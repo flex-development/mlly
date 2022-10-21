@@ -94,23 +94,26 @@ const toBareSpecifier = async (
     raw: bare
   } = parseModuleId(specifier.replace(/.*node_modules\//, ''))
 
+  // return package name without scope if @types is detected
+  if (name.startsWith('@types')) return name.replace(/^@types\/(\w+)$/g, '$1')
+
   // get package exports
   const { exports }: PackageJson = pkg.packageJson
 
-  // check package name and main entry point if no exports
+  // check package name + main and types entry points if no exports
   if (isNIL(exports)) {
-    // return package name if specifier is package name
-    if (bare === name) return name
+    // get entry points
+    const { main = '', types = '' }: PackageJson = pkg.packageJson
 
-    // get main entrypoint
-    let { main = '' }: PackageJson = pkg.packageJson
+    // return package name if specifier is package name or entry point
+    if (bare === name || path === main || path === types) return name
 
-    // add leading './' and remove file extension from main
-    main = normalize(main)
+    // return package name if specifier is entry point without file extension
+    if ([normalize(main), normalize(types)].includes(normalize(path))) {
+      return name
+    }
 
-    // return package name if specifier is main with or without file extension,
-    // or return bare specifier
-    return path === main || normalize(path) === main ? name : bare
+    return bare
   }
 
   // return package name if specifier is exports

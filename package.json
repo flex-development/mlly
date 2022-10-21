@@ -155,7 +155,8 @@
   },
   "resolutions": {
     "@ardatan/sync-fetch": "larsgw/sync-fetch#head=worker_threads",
-    "esbuild": "0.15.10"
+    "esbuild": "0.15.10",
+    "vite": "3.1.4"
   },
   "engines": {
     "node": ">=14",

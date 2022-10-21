@@ -27,6 +27,10 @@ describe('unit:lib/toBareSpecifier', () => {
     expect(parseModuleId).toHaveBeenCalledTimes(0)
   })
 
+  it('should return pkg name w/o scope if @types is detected', async () => {
+    expect(await testSubject('node_modules/@types/chai')).to.equal('chai')
+  })
+
   it(`should throw ${errno} if package.json is not found`, async () => {
     // Arrange
     const specifier = 'foo-package/utils'
