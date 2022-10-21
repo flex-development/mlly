@@ -19,6 +19,7 @@ import toRelativeSpecifier from './to-relative-specifier'
  * Adds support for:
  *
  * - Resolving without file extensions and explicit `/index` usage
+ * - Resolving `@types/*` with **and** without explicit `@types/*` usage
  * - Converting resolved modules into bare and relative specifiers
  * - Removing and replacing file extensions
  *
@@ -71,7 +72,11 @@ const resolveModule = async (
   const tries: string[] =
     isBuiltin(specifier) || /^(?:data|https?):/.test(specifier)
       ? []
-      : extensions.flatMap(ext => [specifier + ext, specifier + '/index' + ext])
+      : extensions.flatMap(ext => {
+          return [specifier + ext, specifier + '/index' + ext].flatMap($try => {
+            return [$try, '@types/' + $try]
+          })
+        })
 
   // ensure attempt to resolve original specifier is first
   tries.unshift(specifier)

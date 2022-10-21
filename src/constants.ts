@@ -33,5 +33,8 @@ export const RESOLVE_EXTENSIONS: readonly Ext[] = Object.freeze([
   '.node',
   '.ts',
   '.tsx',
-  '.wasm'
+  '.wasm',
+  '.d.ts',
+  '.d.mts',
+  '.d.cts'
 ])
