@@ -120,7 +120,7 @@ const toBareSpecifier = async (
   if (path === findEntryInExports(exports, [...conditions])) return name
 
   // parse possible package path
-  const { dir, name: basename, root } = upath.parse(path.replace(/^\.\//, ''))
+  const { dir } = upath.parse(path.replace(/^\.\//, ''))
 
   /**
    * Paths to attempt finding in {@link exports}.
@@ -130,9 +130,7 @@ const toBareSpecifier = async (
   const tries: Set<string> = new Set(
     [
       path || '.',
-      path.replace(root, ''),
-      path.replace(dir, ''),
-      './' + basename
+      ...dir.split('/').map(seg => './' + (path.split(seg + '/')[1] ?? ''))
     ]
       .map(trypath => (/^\.\/index(?:\..*)?$/.test(trypath) ? '.' : trypath))
       .filter(trypath => trypath === '.' || trypath.length > 2)

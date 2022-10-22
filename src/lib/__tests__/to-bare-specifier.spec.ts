@@ -86,13 +86,13 @@ describe('unit:lib/toBareSpecifier', () => {
 
     it('should return specifier as bare specifier', async () => {
       // Arrange
-      const specifier = 'node_modules/@flex-development/mkbuild/dist/make'
+      const specifier = `node_modules/@flex-development/mkbuild/dist/plugins/dts/plugin`
 
       // Act
       const result = await testSubject(path.resolve(specifier))
 
       // Expect
-      expect(result).to.equal('@flex-development/mkbuild/make')
+      expect(result).to.equal('@flex-development/mkbuild/plugins/dts/plugin')
     })
 
     it(`should throw ${errno} if subpath export is not found`, async () => {
