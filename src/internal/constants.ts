@@ -83,4 +83,4 @@ export const REQUIRE_STATEMENT_REGEX: RegExp =
  * @const {RegExp} STATIC_IMPORT_REGEX
  */
 export const STATIC_IMPORT_REGEX: RegExp =
-  /(?<!(?:\/\/|\*).*)import\s*(?:[\s"']*(?<imports>[\w\t\n\r $*,/{}]+)from\s*)?["']\s*(?<specifier>(?<="\s*)[^"]*[^\s":](?=\s*")|(?<=["']\s*)[^']*[^\s':](?=\s*'))\s*["']\s*/gm
+  /(?<!(?:\/\/|\*).*)(?<=\s|^|;)import\s*([\s"']*(?<imports>[\w\t\n\r $*,/{}]+)from\s*)?["']\s*(?<specifier>(?<="\s*)[^"]*[^\s"](?=\s*")|(?<='\s*)[^']*[^\s'](?=\s*'))\s*["'][\s;]*/gm
