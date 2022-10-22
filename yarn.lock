@@ -798,10 +798,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/mkbuild@npm:1.0.0-alpha.6":
-  version: 1.0.0-alpha.6
-  resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.6%2Feafa02640ad813d30c234739773eb1790df9e60d"
+"@flex-development/mkbuild@npm:1.0.0-alpha.8":
+  version: 1.0.0-alpha.8
+  resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.8::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.8%2Fea0dad048ae2835b695f793a045cfd5b22cafaa3"
   dependencies:
+    "@flex-development/mlly": "github:flex-development/mlly"
     "@flex-development/tutils": "npm:5.0.1"
     colorette: "npm:2.0.19"
     consola: "npm:2.15.3"
@@ -810,10 +811,8 @@ __metadata:
     escape-string-regexp: "npm:5.0.0"
     fs-extra: "npm:10.1.0"
     globby: "npm:13.1.2"
-    mlly: "npm:0.5.16"
     pathe: "npm:0.3.8"
     pkg-types: "npm:0.3.5"
-    postinstall-postinstall: "npm:2.1.0"
     pretty-bytes: "npm:6.0.0"
     tsconfig-paths: "npm:4.1.0"
   peerDependencies:
@@ -821,7 +820,27 @@ __metadata:
     typescript: ">=3.7.2"
   bin:
     mkbuild: dist/cli.mjs
-  checksum: 9ebe00b31081c6f2c1eba70aa5a9d38ad0e85f950da11cdf54b38197f219b05d773706e7afc20366f26afe4e2d3eb32af5ec13bd57f73c031d9923a5490c1589
+  checksum: f92337c29a5123d2e6bd3e6022471ffdf038cdd65baaa5de6c9036d1742ec669600f1f40dfd31f4bb168c41e62e2cd70981275a584f3bde0d38a59b04d7f0a00
+  languageName: node
+  linkType: hard
+
+"@flex-development/mlly@github:flex-development/mlly":
+  version: 0.0.0
+  resolution: "@flex-development/mlly@https://github.com/flex-development/mlly.git#commit=a58ec2055750747743bc537f32f33ad7676fdcf4"
+  dependencies:
+    "@flex-development/is-builtin": "npm:1.0.1"
+    "@flex-development/tutils": "npm:5.0.1"
+    import-meta-resolve: "npm:2.1.0"
+    node-package-exports: "npm:1.0.2"
+    read-pkg-up: "npm:9.1.0"
+    tsconfig-paths: "npm:4.1.0"
+    upath: "npm:2.0.1"
+  peerDependencies:
+    typescript: "*"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 9aa018cdaddd824af25cf52eb2ba463891dcb78cb2cdc72ff60f248ce81eddb6eecb0db69ed1b29acbb410622b93dddec0da90949e715ed076c03211a284bc94
   languageName: node
   linkType: hard
 
@@ -834,7 +853,7 @@ __metadata:
     "@commitlint/types": "npm:17.0.0"
     "@faker-js/faker": "npm:7.6.0"
     "@flex-development/is-builtin": "npm:1.0.1"
-    "@flex-development/mkbuild": "npm:1.0.0-alpha.6"
+    "@flex-development/mkbuild": "npm:1.0.0-alpha.8"
     "@flex-development/tutils": "npm:5.0.1"
     "@graphql-eslint/eslint-plugin": "npm:3.12.0"
     "@types/chai": "npm:4.3.3"
@@ -5741,7 +5760,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mlly@npm:0.5.16, mlly@npm:^0.5.14":
+"mlly@npm:^0.5.14":
   version: 0.5.16
   resolution: "mlly@npm:0.5.16"
   dependencies:
@@ -6393,13 +6412,6 @@ __metadata:
     picocolors: "npm:^1.0.0"
     source-map-js: "npm:^1.0.2"
   checksum: ad8962d10de59ce815b230f316356d608ce48deec3d50b36eb74a06c8d0bdff69b862475fc7d58229d067c2ffe1fb5f91f27ae1f5691bd78fd743032c83bc3df
-  languageName: node
-  linkType: hard
-
-"postinstall-postinstall@npm:2.1.0":
-  version: 2.1.0
-  resolution: "postinstall-postinstall@npm:2.1.0"
-  checksum: 96ce970adc32a1f0fbf35d7d165a013d652a57a9b9eb8cb77f91fbaef11d1221c6feb1bb96b460481715e82909e9bb68bd5b5ac2ad4e9fa340476a091c18087b
   languageName: node
   linkType: hard
 
