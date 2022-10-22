@@ -17,30 +17,38 @@ yarn add @flex-development/mlly
 
 ### GitHub Package Registry
 
-To install from the GitHub Package Registry, setup a `.npmrc` or `.yarnrc.yml`
-file to authenticate with the registry.
+To install from the GitHub Package Registry:
 
-A [Personal Access Token with the `read:packages` scope][2] is required.
+1. Setup a `.npmrc` or `.yarnrc.yml` file to authenticate with the registry
 
-#### `.npmrc`
+   **`.npmrc`**
 
-```utf-8
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-@flex-development:registry=https://npm.pkg.github.com/
-```
+   ```ini
+   //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+   @flex-development:registry=https://npm.pkg.github.com/
+   ```
 
-#### `.yarnrc.yml`
+   **`.yarnrc.yml`**
 
-```yaml
-npmRegistries:
-  //npm.pkg.github.com:
-    npmAlwaysAuth: true
-    npmAuthToken: ${GITHUB_TOKEN}
+   ```yaml
+   npmRegistries:
+     //npm.pkg.github.com:
+       npmAlwaysAuth: true
+       npmAuthToken: ${GITHUB_TOKEN}
 
-npmScopes:
-  flex-development:
-    npmRegistryServer: https://npm.pkg.github.com
-```
+   npmScopes:
+     flex-development:
+       npmRegistryServer: https://npm.pkg.github.com
+   ```
+
+   where `GITHUB_TOKEN` is a [Personal Access Token with the `read:packages`
+   scope][2].
+
+2. Run install command
+
+   ```sh
+   yarn add @flex-development/mlly
+   ```
 
 ### Git
 
