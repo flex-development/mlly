@@ -41,6 +41,8 @@ Follow the steps below to setup your local development environment:
    git config --global user.username <username>
    ```
 
+   See [`.gitconfig`](.github/.gitconfig) for a global Git config example.
+
 6. Install dependencies
 
    ```sh
@@ -54,7 +56,7 @@ Follow the steps below to setup your local development environment:
    with the project's Yarn configuration, or the Yarn 2 API. Missing environment
    variables will also yield an error.
 
-7. [ZSH](docs/ZSH.md) setup
+7. [ZSH][4] setup
 
 8. Update `$ZDOTDIR/.zprofile`:
 
@@ -115,7 +117,7 @@ See [`.github/.gitconfig`](.github/.gitconfig) for an exhaustive list.
 
 ## Contributing Code
 
-[Husky][4] is used to locally enforce coding and commit message standards, as
+[Husky][5] is used to locally enforce coding and commit message standards, as
 well as run tests pre-push.
 
 Any code merged into the [trunk](#branching-model) must confront the following
@@ -128,8 +130,8 @@ criteria:
 
 ### Branching Model
 
-This project follows a [Trunk Based Development][5] workflow, specifically the
-[short-lived branch style][6].
+This project follows a [Trunk Based Development][6] workflow, specifically the
+[short-lived branch style][7].
 
 - Trunk Branch: `main`
 - Short-Lived Branches: `feat/*`, `hotfix/*`, `release/*`
@@ -152,7 +154,7 @@ When creating a new branch, the name should match the following format:
 
 ### Commit Messages
 
-This project follows [Conventional Commit][7] standards and uses [commitlint][8]
+This project follows [Conventional Commit][8] standards and uses [commitlint][9]
 to enforce those standards.
 
 This means every commit must conform to the following format:
@@ -200,7 +202,7 @@ See [`.commitlintrc.json`](.commitlintrc.json) to view all commit guidelines.
 
 ### Code Style
 
-[Prettier][9] is used to format code and [ESLint][10] to lint files.
+[Prettier][10] is used to format code and [ESLint][11] to lint files.
 
 #### ESLint Configuration
 
@@ -219,18 +221,18 @@ Source code is located in [`src`](src) directory.
 
 ### Documentation
 
-- JavaScript & TypeScript: [JSDoc][11]; linted with [`eslint-plugin-jsdoc`][12]
+- JavaScript & TypeScript: [JSDoc][12]; linted with [`eslint-plugin-jsdoc`][13]
 
 Before making a pull request, be sure your code is well documented, as it will
 be part of your code review.
 
 ### Testing
 
-This project uses [Vitest][13] to run tests.
+This project uses [Vitest][14] to run tests.
 
 [Husky](#contributing-code) is configured to run tests against changed files.
 
-Be sure to use [`it.skip`][14] or [`it.todo`][15] where appropriate.
+Be sure to use [`it.skip`][15] or [`it.todo`][16] where appropriate.
 
 #### Running Tests
 
@@ -241,9 +243,9 @@ Be sure to use [`it.skip`][14] or [`it.todo`][15] where appropriate.
 ### Getting Help
 
 If you need help, make note of any issues in their respective files in the form
-of a [JSDoc comment][11]. If you need help with a test, don't forget to use
-[`it.skip`][14] and/or [`it.todo`][15]. Afterwards, [start a discussion in the
-Q&A category][16].
+of a [JSDoc comment][12]. If you need help with a test, don't forget to use
+[`it.skip`][15] and/or [`it.todo`][16]. Afterwards, [start a discussion in the
+Q&A category][17].
 
 ## Labels
 
@@ -266,7 +268,7 @@ re-visited, open a new issue.
 A well-written issue
 
 - contains a well-written summary of the bug, feature, or improvement
-- contains a [minimal, reproducible example][17] (if applicable)
+- contains a [minimal, reproducible example][18] (if applicable)
 - includes links to related articles and documentation (if any)
 - includes an emoji in the title :wink:
 
@@ -369,26 +371,27 @@ Before deploying, the following steps must be completed:
      - on release publish, [publish workflow](.github/workflows/publish.yml)
        will fire
        - if successful, the workflow will:
-         - publish package to [github package registry][18]
-         - publish package to [npm][19]
+         - publish package to [github package registry][19]
+         - publish package to [npm][20]
 
 [1]: https://brew.sh
 [2]:
   https://docs.github.com/authentication/managing-commit-signature-verification/about-commit-signature-verification#gpg-commit-signature-verification
 [3]: https://yarnpkg.com/getting-started
-[4]: https://github.com/typicode/husky
-[5]: https://trunkbaseddevelopment.com
-[6]: https://trunkbaseddevelopment.com/styles/#short-lived-feature-branches
-[7]: https://conventionalcommits.org
-[8]: https://github.com/conventional-changelog/commitlint
-[9]: https://prettier.io
-[10]: https://eslint.org
-[11]: https://jsdoc.app
-[12]: https://github.com/gajus/eslint-plugin-jsdoc
-[13]: https://vitest.dev
-[14]: https://vitest.dev/api/#test-skip
-[15]: https://vitest.dev/api/#test-todo
-[16]: https://github.com/flex-development/mlly/discussions/new?category=q-a
-[17]: https://stackoverflow.com/help/minimal-reproducible-example
-[18]: https://github.com/features/packages
-[19]: https://npmjs.com
+[4]: https://github.com/ohmyzsh/ohmyzsh
+[5]: https://github.com/typicode/husky
+[6]: https://trunkbaseddevelopment.com
+[7]: https://trunkbaseddevelopment.com/styles/#short-lived-feature-branches
+[8]: https://conventionalcommits.org
+[9]: https://github.com/conventional-changelog/commitlint
+[10]: https://prettier.io
+[11]: https://eslint.org
+[12]: https://jsdoc.app
+[13]: https://github.com/gajus/eslint-plugin-jsdoc
+[14]: https://vitest.dev
+[15]: https://vitest.dev/api/#test-skip
+[16]: https://vitest.dev/api/#test-todo
+[17]: https://github.com/flex-development/mlly/discussions/new?category=q-a
+[18]: https://stackoverflow.com/help/minimal-reproducible-example
+[19]: https://github.com/features/packages
+[20]: https://npmjs.com
