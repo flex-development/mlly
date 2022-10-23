@@ -43,6 +43,13 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml",
+    "editor.rulers": [100],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 100,
+    "rewrap.wrappingColumn": 100
+  },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.rulers": [100],
@@ -53,6 +60,11 @@
   "cSpell.enabled": true,
   "debug.showBreakpointsInOverviewRuler": true,
   "editor.autoClosingBrackets": "always",
+  "emmet.excludeLanguages": [],
+  "emmet.includeLanguages": {
+    "markdown": "html",
+    "vue": "html"
+  },
   "emmet.showExpandedAbbreviation": "always",
   "emmet.triggerExpansionOnTab": true,
   "eslint.enable": true,
@@ -167,6 +179,12 @@
     }
   ],
   "workbench.iconTheme": "vscode-icons",
+  "xml.format.closingBracketNewLine": true,
+  "xml.format.experimental": true,
+  "xml.format.maxLineWidth": 100,
+  "xml.format.spaceBeforeEmptyCloseTag": false,
+  "xml.format.splitAttributes": true,
+  "xml.format.splitAttributesIndentSize": 0,
   "yaml.schemas": {
     "https://json.schemastore.org/github-issue-config": "/.github/ISSUE_TEMPLATE/config.yml",
     "https://json.schemastore.org/github-workflow": "/.github/workflows/*.yml"

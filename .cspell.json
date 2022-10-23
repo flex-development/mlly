@@ -19,11 +19,13 @@
     ".env*",
     ".git/",
     ".husky/_/",
+    ".vercel/",
     ".yarn/",
     "CHANGELOG.md",
     "LICENSE.md",
     "__tests__/report.json",
     "dist/",
+    "docs/.vitepress/dist/",
     "patches/",
     "yarn.lock"
   ],

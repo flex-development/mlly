@@ -14,7 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
     "isolatedModules": false,
-    "lib": ["es2020"],
+    "lib": ["dom", "es2020"],
     "module": "esnext",
     "moduleDetection": "force",
     "moduleResolution": "node",
@@ -35,6 +35,7 @@
       "#src/*": ["src/*"],
       "#tests/*": ["__tests__/*"]
     },
+    "plugins": [{ "name": "typescript-vue-plugin" }],
     "preserveConstEnums": true,
     "preserveSymlinks": true,
     "pretty": true,
@@ -57,7 +58,8 @@
     "**/**.mjs",
     "**/**.mts",
     "**/**.ts",
-    "**/.*.cjs"
+    "**/.*.cjs",
+    "./docs/.vitepress/**/*.ts"
   ],
   "ts-node": {
     "compilerOptions": {},

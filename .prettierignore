@@ -14,10 +14,12 @@
 .markdownlintignore
 .nvmrc
 .prettierignore
+.vercel/*
 .yarn/*
 Brewfile
 __tests__/report.json
 coverage/*
 dist/*
+docs/.vitepress/dist/*
 node_modules/*
 yarn.lock

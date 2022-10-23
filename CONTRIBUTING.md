@@ -98,7 +98,10 @@ Follow the steps below to setup your local development environment:
 
 | name                    |
 | ----------------------- |
+| `ALGOLIA_API_KEY`       |
 | `CI`                    |
+| `GITHUB_TOKEN`          |
+| `HOSTNAME`              |
 | `NODE_ENV`              |
 | `NODE_NO_WARNINGS`      |
 | `NODE_OPTIONS`          |

@@ -26,6 +26,10 @@ max_line_length = 100
 [*.snap]
 max_line_length = 130
 
+# xml
+[*.xml]
+max_line_length = 100
+
 # yaml
 [*.yml]
 max_line_length = 100

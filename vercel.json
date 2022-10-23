@@ -1,0 +1,46 @@
+{
+  "buildCommand": "yarn docs:build",
+  "cleanUrls": true,
+  "devCommand": null,
+  "framework": null,
+  "ignoreCommand": null,
+  "installCommand": null,
+  "github": {
+    "autoJobCancelation": true,
+    "enabled": false,
+    "silent": false
+  },
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "outputDirectory": "docs/.vitepress/dist",
+  "public": false,
+  "redirects": [
+    {
+      "source": "/algolia",
+      "destination": "https://algolia.com/apps/DG3R131QAX/dashboard"
+    },
+    {
+      "source": "/gpr",
+      "destination": "https://github.com/flex-development/mlly/pkgs/npm/mlly"
+    },
+    {
+      "source": "/npm",
+      "destination": "https://npmjs.com/package/@flex-development/mlly"
+    },
+    {
+      "source": "/repo",
+      "destination": "https://github.com/flex-development/mlly",
+      "permanent": true
+    }
+  ],
+  "rewrites": []
+}

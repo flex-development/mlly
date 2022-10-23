@@ -77,3 +77,10 @@ jobs:
         run: yarn pack -o %s-%v.tgz
         env:
           NODE_ENV: production
+      - id: docs
+        name: Build docs
+        run: yarn docs:build
+        env:
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          HOSTNAME: ${{ secrets.HOSTNAME }}
+          NODE_ENV: production
