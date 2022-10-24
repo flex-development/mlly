@@ -30,6 +30,10 @@
   description: dependency updates
   color: 74cefc
 
+- name: scope:docs
+  description: docs site
+  color: 74cefc
+
 - name: scope:esm
   description: es modules
   color: 74cefc
