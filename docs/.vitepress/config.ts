@@ -131,6 +131,17 @@ const config: UserConfig = defineConfig({
   },
   cleanUrls: 'with-subfolders',
   description: pkg.description,
+  head: [
+    // improve speed of first search query
+    [
+      'link',
+      {
+        crossorigin: '',
+        href: 'https://' + pupa('{0}-dsn.algolia.net', [algolia.appId]),
+        rel: 'preconnect'
+      }
+    ]
+  ],
   ignoreDeadLinks: false,
   lastUpdated: true,
   markdown: {
