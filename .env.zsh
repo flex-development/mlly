@@ -7,4 +7,4 @@
 NODE_NO_WARNINGS=1
 VITEST_SEGFAULT_RETRY=3
 
-[ -f $PWD/docs/.vitepress/.env.local ] && source $PWD/docs/.vitepress/.env.local
+[ -f $PWD/.env.local ] && source $PWD/.env.local

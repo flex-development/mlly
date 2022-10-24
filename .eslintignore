@@ -1,18 +1,25 @@
 # ESLINT IGNORE
-# https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories
+# https://eslint.org/docs/user-guide/configuring/ignoring-code#the-eslintignore-file
 
 # DIRECTORIES & FILES
 **/*.snap
 **/.DS_Store
-.eslintcache
-.vercel/*
-.yarn/*
+**/dist/
+**/node_modules/
 __tests__/report.json
-coverage/*
-dist/*
-docs/.vitepress/dist/*
-node_modules/*
+coverage/
 yarn.lock
 
 # NEGATED PATTERNS
-!/.*
+!.commitlintrc.json
+!.cspell.json
+!.eslintrc.base.cjs
+!.eslintrc.cjs
+!.github/
+!.graphqlrc.yml
+!.lintstagedrc.json
+!.markdownlint.jsonc
+!.prettierrc.json
+!.vscode/
+!.yarnrc.yml
+!docs/.vitepress/

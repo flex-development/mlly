@@ -8,10 +8,8 @@
 import type { SearchOptions } from '@algolia/client-search'
 import search, { type SearchClient } from 'algoliasearch'
 import { load as cheerio, type CheerioAPI } from 'cheerio'
-import { config as dotenv } from 'dotenv-defaults'
-import { expand } from 'dotenv-expand'
-import fs from 'fs/promises'
 import { globby } from 'globby'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { SitemapStream, streamToPromise } from 'sitemap'
@@ -25,12 +23,21 @@ import {
 } from 'vitepress'
 import pkg from '../../package.json' assert { type: 'json' }
 
+const {
+  ALGOLIA_API_KEY = '',
+  HOSTNAME = '',
+  NODE_ENV,
+  VERCEL_ENV,
+  VERCEL_URL = ''
+} = process.env
+
 /**
- * Environment files directory.
+ * Site url.
  *
- * @const {string} envDir
+ * @const {string} SITE_URL
  */
-const envDir: string = path.dirname(fileURLToPath(import.meta.url))
+const SITE_URL: string =
+  VERCEL_ENV === 'preview' ? VERCEL_URL || HOSTNAME : HOSTNAME
 
 /**
  * GitHub repository url.
@@ -39,15 +46,12 @@ const envDir: string = path.dirname(fileURLToPath(import.meta.url))
  */
 const repository: string = pkg.repository.replace(/\.git$/, '')
 
-// load environment variables
-expand(dotenv({ defaults: path.resolve(envDir, '.env.defaults') }))
-
 /**
  * Algolia search client.
  *
  * @const {SearchClient} algolia
  */
-const algolia: SearchClient = search('DG3R131QAX', process.env.ALGOLIA_API_KEY!)
+const algolia: SearchClient = search('DG3R131QAX', ALGOLIA_API_KEY)
 
 /**
  * Algolia search index name.
@@ -82,9 +86,7 @@ const config: UserConfig = defineConfig({
      *
      * @var {SitemapStream} stream
      */
-    let stream: SitemapStream = new SitemapStream({
-      hostname: process.env.HOSTNAME
-    })
+    let stream: SitemapStream = new SitemapStream({ hostname: SITE_URL })
 
     /**
      * Sitemap routes.
@@ -106,7 +108,7 @@ const config: UserConfig = defineConfig({
     for (const [url, $] of routes.sort((a, b) => a[0]!.localeCompare(b[0]!))) {
       stream.write({
         changefreq: $('meta[name=changefreq]').attr('content'),
-        lastmod: $('.VPLastUpdated > time').attr('datatime') ?? new Date(),
+        lastmod: $('.VPLastUpdated > time').attr('datatime'),
         priority: $('meta[name=priority]').attr('content'),
         url
       })
@@ -117,6 +119,8 @@ const config: UserConfig = defineConfig({
 
     // write sitemap.xml
     await fs.writeFile(`${outDir}/sitemap.xml`, await streamToPromise(stream))
+
+    return void 0
   },
   cleanUrls: 'with-subfolders',
   description: pkg.description,
@@ -128,8 +132,8 @@ const config: UserConfig = defineConfig({
   },
   themeConfig: {
     algolia: {
+      apiKey: ALGOLIA_API_KEY,
       appId: algolia.appId,
-      apiKey: process.env.ALGOLIA_API_KEY!,
       indexName: index,
       searchParameters: {} as SearchOptions
     },
@@ -187,9 +191,9 @@ const config: UserConfig = defineConfig({
      */
     const url: string =
       pageData.relativePath === 'index.md'
-        ? process.env.HOSTNAME!
+        ? SITE_URL
         : path
-            .join(process.env.HOSTNAME!, pageData.relativePath)
+            .join(SITE_URL, pageData.relativePath)
             .replace(/\.md$/, '.html')
             .replace(/index\.html$/, '')
 
@@ -224,11 +228,11 @@ const config: UserConfig = defineConfig({
   },
   vite: {
     cacheDir: path.resolve('node_modules/.vitepress'),
-    envDir,
+    envDir: path.dirname(fileURLToPath(import.meta.url)),
     plugins: [tsconfigpaths({ projects: [path.resolve('tsconfig.json')] })],
     server: { hmr: { overlay: false } }
   },
-  vue: { isProduction: process.env.NODE_ENV === 'production' }
+  vue: { isProduction: [NODE_ENV, VERCEL_ENV].includes('production') }
 })
 
 export default config

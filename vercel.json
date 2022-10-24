@@ -1,8 +1,9 @@
 {
-  "buildCommand": "yarn docs:build",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "vitepress build docs",
   "cleanUrls": true,
-  "devCommand": null,
-  "framework": null,
+  "devCommand": "vitepress dev docs",
+  "framework": "vite",
   "ignoreCommand": null,
   "installCommand": null,
   "github": {

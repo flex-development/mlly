@@ -105,6 +105,8 @@ Follow the steps below to setup your local development environment:
 | `NODE_ENV`              |
 | `NODE_NO_WARNINGS`      |
 | `NODE_OPTIONS`          |
+| `VERCEL_ORG_ID`         |
+| `VERCEL_PROJECT_ID`     |
 | `VITEST_SEGFAULT_RETRY` |
 | `ZSH_DOTENV_FILE`       |
 

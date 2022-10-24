@@ -1106,8 +1106,6 @@ __metadata:
     conventional-changelog-cli: "npm:2.2.2"
     conventional-recommended-bump: "npm:6.1.0"
     cspell: "npm:6.12.0"
-    dotenv-defaults: "npm:5.0.2"
-    dotenv-expand: "npm:9.0.0"
     esbuild: "npm:0.15.12"
     escape-string-regexp: "npm:5.0.0"
     eslint: "npm:8.26.0"
@@ -4474,29 +4472,6 @@ __metadata:
   dependencies:
     is-obj: "npm:^2.0.0"
   checksum: 640302936faf887e4772e97f33efdc1d12adc33183503497687f0400ef832f1596e81f19a9d0f641a8e3312e9cbaa1a5d6620783dda0113871064dc9dec4a30d
-  languageName: node
-  linkType: hard
-
-"dotenv-defaults@npm:5.0.2":
-  version: 5.0.2
-  resolution: "dotenv-defaults@npm:5.0.2"
-  dependencies:
-    dotenv: "npm:^14.0.0"
-  checksum: 844f8c58389711429de1cedb4ce668f6b88cde39ef994b852caa2b5aa97cb06f53994037ac1d0786c535b69b7d4b9fa7cc78b6b962731ce9d00ec2d955038388
-  languageName: node
-  linkType: hard
-
-"dotenv-expand@npm:9.0.0":
-  version: 9.0.0
-  resolution: "dotenv-expand@npm:9.0.0"
-  checksum: be5569f785d9eabe655beb947cce8bb39b45f7788cea09ad4f68157aea71addaf07f8e7f07cf1458d5504e76ffe65a4f7124f109a0315a766387d2039a499992
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^14.0.0":
-  version: 14.3.2
-  resolution: "dotenv@npm:14.3.2"
-  checksum: 9f0e1fae21eecfb6969b9a8645743ab9d955a07e5b0aceaff5737b6b0bcfa693d080bde55dc0bb25d12e9041c67466dcf471f3d2fd05275c9960086dac950b39
   languageName: node
   linkType: hard
 

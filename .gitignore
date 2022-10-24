@@ -51,8 +51,7 @@ coverage/
 
 # Builds
 # ------------------------------------------------------------------------------
-dist/
-docs/.vitepress/dist/
+**/dist/
 !typings/**/dist/
 
 # Vercel
