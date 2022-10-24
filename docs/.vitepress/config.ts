@@ -12,6 +12,7 @@ import { globby } from 'globby'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import pupa from 'pupa'
 import { SitemapStream, streamToPromise } from 'sitemap'
 import tsconfigpaths from 'vite-tsconfig-paths'
 import {
@@ -59,32 +60,34 @@ const index: string = pkg.name.replace(/.+\//, '')
 const config: UserConfig = defineConfig({
   appearance: 'dark',
   /**
-   * Performs post-build tasks.
+   * Performs postbuild tasks.
    *
    * This includes:
    *
-   * - Building and writing `sitemap.xml`
+   * 1. Writing `sitemap.xml` to `config.outDir`
+   * 2. Writing `robots.txt` to `config.outDir`
    *
    * @async
    *
    * @param {SiteConfig} config - Site configuration
    * @param {string} config.outDir - Absolute path to output directory
+   * @param {string} config.root - Absolute path to project directory
    * @return {Promise<void>} Nothing when complete
    */
-  async buildEnd({ outDir }: SiteConfig): Promise<void> {
-    /**
-     * Sitemap stream.
-     *
-     * @var {SitemapStream} stream
-     */
-    let stream: SitemapStream = new SitemapStream({ hostname: HOSTNAME })
-
+  async buildEnd({ outDir, root }: SiteConfig): Promise<void> {
     /**
      * Sitemap routes.
      *
      * @const {[string, CheerioAPI][]} routes
      */
     const routes: [string, CheerioAPI][] = []
+
+    /**
+     * Sitemap stream.
+     *
+     * @const {SitemapStream} stream
+     */
+    const stream: SitemapStream = new SitemapStream({ hostname: HOSTNAME })
 
     // get sitemap routes
     for (const route of await globby('**.html', { cwd: outDir })) {
@@ -105,11 +108,24 @@ const config: UserConfig = defineConfig({
       })
     }
 
-    // end stream
-    stream = stream.end()
-
     // write sitemap.xml
-    await fs.writeFile(`${outDir}/sitemap.xml`, await streamToPromise(stream))
+    await fs.writeFile(
+      path.resolve(outDir, 'sitemap.xml'),
+      await streamToPromise(stream.end())
+    )
+
+    /**
+     * `robots.txt` template file path.
+     *
+     * @const {string} robots
+     */
+    const robots: string = path.resolve(root, '.vitepress/templates/robots.txt')
+
+    // write robots.txt
+    await fs.writeFile(
+      path.resolve(outDir, 'robots.txt'),
+      pupa(await fs.readFile(robots, 'utf8'), { HOSTNAME })
+    )
 
     return void 0
   },
