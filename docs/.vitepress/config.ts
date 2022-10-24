@@ -27,17 +27,8 @@ const {
   ALGOLIA_API_KEY = '',
   HOSTNAME = '',
   NODE_ENV,
-  VERCEL_ENV,
-  VERCEL_URL = ''
+  VERCEL_ENV
 } = process.env
-
-/**
- * Site url.
- *
- * @const {string} SITE_URL
- */
-const SITE_URL: string =
-  VERCEL_ENV === 'preview' ? VERCEL_URL || HOSTNAME : HOSTNAME
 
 /**
  * GitHub repository url.
@@ -86,7 +77,7 @@ const config: UserConfig = defineConfig({
      *
      * @var {SitemapStream} stream
      */
-    let stream: SitemapStream = new SitemapStream({ hostname: SITE_URL })
+    let stream: SitemapStream = new SitemapStream({ hostname: HOSTNAME })
 
     /**
      * Sitemap routes.
@@ -191,9 +182,9 @@ const config: UserConfig = defineConfig({
      */
     const url: string =
       pageData.relativePath === 'index.md'
-        ? SITE_URL
+        ? HOSTNAME
         : path
-            .join(SITE_URL, pageData.relativePath)
+            .join(HOSTNAME, pageData.relativePath)
             .replace(/\.md$/, '.html')
             .replace(/index\.html$/, '')
 

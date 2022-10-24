@@ -5,7 +5,7 @@
   "devCommand": "vitepress dev docs",
   "framework": "vite",
   "ignoreCommand": null,
-  "installCommand": null,
+  "installCommand": "yarn --immutable",
   "github": {
     "autoJobCancelation": true,
     "enabled": false,

@@ -1,0 +1,61 @@
+# Vercel Preview
+#
+# References:
+#
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://github.com/actions/checkout
+# - https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
+
+---
+name: preview
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - feat/**
+      - hotfix/**
+      - main
+    paths:
+      - .vercelignore
+      - docs/**
+      - vercel.json
+  workflow_dispatch:
+permissions:
+  packages: read
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  HUSKY: 0
+  REF: ${{ github.head_ref || github.ref_name }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  preview:
+    if: |
+      github.actor != 'dependabot[bot]' && !startsWith(github.event.head_commit.message, 'release:')
+    runs-on: ubuntu-latest
+    environment: preview
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.1.0
+        with:
+          ref: ${{ env.REF }}
+      - id: install
+        name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - id: env
+        name: Pull environment
+        run: vc pull --environment=preview --yes --token=${{ secrets.VERCEL_TOKEN }}
+      - id: build
+        name: Build docs
+        run: vc build --token=${{ secrets.VERCEL_TOKEN }}
+      - id: deploy
+        name: Deploy docs preview
+        run: vc deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
