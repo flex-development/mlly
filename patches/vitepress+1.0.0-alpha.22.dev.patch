@@ -1,0 +1,13 @@
+diff --git a/dist/client/theme-default/components/VPAlgoliaSearchBox.vue b/dist/client/theme-default/components/VPAlgoliaSearchBox.vue
+index v1.0.0-alpha.22..v1.0.0-alpha.22 100644
+--- a/dist/client/theme-default/components/VPAlgoliaSearchBox.vue
++++ b/dist/client/theme-default/components/VPAlgoliaSearchBox.vue
+@@ -70,7 +70,7 @@
+         ref: undefined,
+         constructor: undefined,
+         key: undefined,
+-        props: { href: hit.url, children }
++        props: { href: hit.url, children, target: '_blank' }
+       }
+     }
+   })

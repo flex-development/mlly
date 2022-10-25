@@ -39,7 +39,7 @@
   },
   "scripts": {
     "build": "mkbuild",
-    "check:ci": "yarn dedupe --check && yarn check:format && yarn check:lint && yarn check:spelling && yarn check:types && yarn check:types:build && yarn test:cov && NODE_ENV=production yarn pack -o %s-%v.tgz && yarn clean:pack && yarn docs:build",
+    "check:ci": "yarn dedupe --check && yarn check:format && yarn check:lint && yarn check:spelling && yarn check:types && yarn check:types:build && yarn test:cov && NODE_ENV=production yarn pack -o %s-%v.tgz && yarn clean:pack",
     "check:format": "prettier --check .",
     "check:lint": "eslint --exit-on-fatal-error --ext cjs,cts,gql,json,jsonc,md,mjs,ts,yml --max-warnings 0 .",
     "check:spelling": "cspell lint --color --no-progress --relative $@ \"**\"",
@@ -171,7 +171,8 @@
   "resolutions": {
     "@ardatan/sync-fetch": "larsgw/sync-fetch#head=worker_threads",
     "esbuild": "0.15.12",
-    "vite": "3.1.8"
+    "vite": "3.1.8",
+    "vitepress@npm:1.0.0-alpha.22": "patch:vitepress@npm%3A1.0.0-alpha.22#patches/vitepress+1.0.0-alpha.22.dev.patch"
   },
   "engines": {
     "node": ">=14",

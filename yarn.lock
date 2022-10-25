@@ -10091,6 +10091,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vitepress@patch:vitepress@npm%3A1.0.0-alpha.22#patches/vitepress+1.0.0-alpha.22.dev.patch::locator=%40flex-development%2Fmlly%40workspace%3A.":
+  version: 1.0.0-alpha.22
+  resolution: "vitepress@patch:vitepress@npm%3A1.0.0-alpha.22#patches/vitepress+1.0.0-alpha.22.dev.patch::version=1.0.0-alpha.22&hash=2fd50f&locator=%40flex-development%2Fmlly%40workspace%3A."
+  dependencies:
+    "@docsearch/css": "npm:^3.2.1"
+    "@docsearch/js": "npm:^3.2.1"
+    "@vitejs/plugin-vue": "npm:^3.1.2"
+    "@vue/devtools-api": "npm:^6.4.4"
+    "@vueuse/core": "npm:^9.3.0"
+    body-scroll-lock: "npm:4.0.0-beta.0"
+    shiki: "npm:^0.11.1"
+    vite: "npm:^3.1.6"
+    vue: "npm:^3.2.40"
+  bin:
+    vitepress: bin/vitepress.js
+  checksum: 66db3dddf8d52e8e11aaa2f5f9fab77185d684159ab0aee69be905be83e05a46d9a2b02df090473a605f21892821e0f797e553bcbbf467230327687a86a94577
+  languageName: node
+  linkType: hard
+
 "vitest-github-actions-reporter@npm:0.8.3":
   version: 0.8.3
   resolution: "vitest-github-actions-reporter@npm:0.8.3"
