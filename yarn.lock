@@ -1106,6 +1106,7 @@ __metadata:
     conventional-changelog-cli: "npm:2.2.2"
     conventional-recommended-bump: "npm:6.1.0"
     cspell: "npm:6.12.0"
+    dotenv: "npm:16.0.3"
     esbuild: "npm:0.15.12"
     escape-string-regexp: "npm:5.0.0"
     eslint: "npm:8.26.0"
@@ -4473,6 +4474,13 @@ __metadata:
   dependencies:
     is-obj: "npm:^2.0.0"
   checksum: 640302936faf887e4772e97f33efdc1d12adc33183503497687f0400ef832f1596e81f19a9d0f641a8e3312e9cbaa1a5d6620783dda0113871064dc9dec4a30d
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:16.0.3":
+  version: 16.0.3
+  resolution: "dotenv@npm:16.0.3"
+  checksum: abce82d99b45e2ebbd42625a78cadbfafe03072c15e6538b6a3a7ed204b6e091c0de929dd09231edc61f78afbdcd5b8a2f21b9e933e8ab27d75bee865a0e58c9
   languageName: node
   linkType: hard
 

@@ -14,6 +14,7 @@ import {
   type Cheerio,
   type CheerioAPI
 } from 'cheerio'
+import { config as dotenv } from 'dotenv'
 import { globby } from 'globby'
 import fs from 'node:fs/promises'
 import path from 'node:path'
@@ -30,6 +31,17 @@ import {
 } from 'vitepress'
 import pkg from '../../package.json' assert { type: 'json' }
 
+/**
+ * Environment file directory.
+ *
+ * @const {string} ENV_DIR
+ */
+const ENV_DIR: string = path.dirname(fileURLToPath(import.meta.url))
+
+// load environment variables
+dotenv({ path: path.resolve(ENV_DIR, '.env') })
+
+// environment variables
 const { ALGOLIA_API_KEY = '', CI = 'false', NODE_ENV, VERCEL_ENV } = process.env
 
 /**
@@ -503,7 +515,7 @@ const config: UserConfig = defineConfig({
   },
   vite: {
     cacheDir: path.resolve('node_modules/.vitepress'),
-    envDir: path.dirname(fileURLToPath(import.meta.url)),
+    envDir: ENV_DIR,
     plugins: [tsconfigpaths({ projects: [path.resolve('tsconfig.json')] })],
     server: { hmr: { overlay: false } }
   },

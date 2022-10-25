@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "vitepress build docs",
   "cleanUrls": true,
-  "devCommand": "vitepress dev docs",
+  "devCommand": null,
   "framework": "vite",
   "ignoreCommand": null,
   "installCommand": "yarn --immutable",
