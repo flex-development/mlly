@@ -25,6 +25,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": false
+    },
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[properties]": {
@@ -42,6 +45,11 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": false
+    }
   },
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml",
@@ -119,6 +127,9 @@
   "typescript.suggest.completeJSDocs": true,
   "typescript.tsdk": "./node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "volar.doctor.statusBarItem": true,
+  "volar.takeOverMode.enabled": false,
+  "volar.vueserver.vitePress.processMdFile": true,
   "vsicons.associations.files": [
     {
       "extensions": [".eslintrc.base.cjs"],

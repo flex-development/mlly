@@ -3,7 +3,7 @@
  * @module mlly/lib/resolveAliases
  */
 
-import type { ResolveAliasOptions as Options } from '#src/interfaces'
+import type { ResolveAliasOptions } from '#src/interfaces'
 import { getCompilerOptions } from '#src/internal'
 import upath from 'upath'
 import extractStatements from './extract-statements'
@@ -12,13 +12,16 @@ import resolveAlias from './resolve-alias'
 /**
  * Resolves path aliases in `code`.
  *
- * @see [`resolveAlias`](./resolve-alias)
+ * @see {@link resolveAlias}
  *
  * @param {string} code - Code containing path aliases
- * @param {Options} [options={}] - Resolve options
+ * @param {ResolveAliasOptions} [options={}] - Resolve alias options
  * @return {string} `code` unmodified or with path aliases resolved
  */
-const resolveAliases = (code: string, options: Options = {}): string => {
+const resolveAliases = (
+  code: string,
+  options: ResolveAliasOptions = {}
+): string => {
   const { tsconfig } = options
   let { baseUrl = process.cwd(), paths = {} } = options
 

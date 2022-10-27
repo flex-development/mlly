@@ -8,6 +8,8 @@
 **/node_modules/
 __tests__/report.json
 coverage/
+docs/.vitepress/.temp/
+docs/.vitepress/config.*.timestamp*
 yarn.lock
 
 # NEGATED PATTERNS

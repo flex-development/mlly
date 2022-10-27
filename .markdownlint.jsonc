@@ -79,6 +79,8 @@
   "MD032": true,
   "MD033": {
     "allowed_elements": [
+      "ApiDoc",
+      "ThemeConfig",
       "a",
       "br",
       "code",
@@ -86,6 +88,7 @@
       "figcaption",
       "figure",
       "img",
+      "script",
       "small",
       "sub",
       "sup"

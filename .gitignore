@@ -53,6 +53,8 @@ coverage/
 # Builds
 # ------------------------------------------------------------------------------
 **/dist/
+docs/.vitepress/.temp/
+docs/.vitepress/config.*.timestamp*
 !typings/**/dist/
 
 # Vercel

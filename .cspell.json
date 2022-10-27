@@ -23,6 +23,7 @@
     ".husky/_/",
     ".prettierignore",
     ".vercel/",
+    ".vscode/settings.json",
     ".yarn/",
     "CHANGELOG.md",
     "LICENSE.md",

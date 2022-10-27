@@ -12,9 +12,7 @@ import { ESM_SYNTAX_REGEX } from '#src/internal'
  *
  * - `export` (declaration, default, named, star)
  * - `import` (default, dynamic, named, star)
- * - `import.meta.env`
- * - `import.meta.resolve`
- * - `import.meta.url`
+ * - `import.meta.(env|resolve|url)`
  *
  * @param {string} code - Code to check
  * @return {boolean} `true` if `code` contains cjs syntax, `false` otherwise

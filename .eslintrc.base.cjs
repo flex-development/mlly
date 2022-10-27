@@ -51,7 +51,7 @@ const config = {
       impliedStrict: true
     },
     emitDecoratorMetadata: tsconfig.compilerOptions.emitDecoratorMetadata,
-    extraFileExtensions: [],
+    extraFileExtensions: ['.vue'],
     project: ['./tsconfig.json'],
     sourceType: 'module',
     tsconfigRootDir: __dirname,
@@ -655,7 +655,7 @@ const config = {
   },
   overrides: [
     {
-      files: ['*.cjs', '*.cts', '*.mjs', '*.ts'],
+      files: ['*.cjs', '*.cts', '*.mjs', '*.ts', '*.vue'],
       rules: {
         '@typescript-eslint/await-thenable': 2,
         '@typescript-eslint/consistent-type-exports': [
@@ -932,6 +932,25 @@ const config = {
       parser: 'eslint-plugin-markdownlint/parser',
       plugins: ['markdown', 'markdownlint'],
       processor: 'markdown/markdown'
+    },
+    {
+      files: ['*.vue'],
+      extends: ['plugin:vue/vue3-recommended'],
+      parser: 'vue-eslint-parser',
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        sourceType: 'module'
+      },
+      rules: {
+        'vue/max-attributes-per-line': 0,
+        'unicorn/filename-case': [
+          2,
+          {
+            cases: { pascalCase: true },
+            ignore: []
+          }
+        ]
+      }
     },
     {
       files: ['*.yml'],

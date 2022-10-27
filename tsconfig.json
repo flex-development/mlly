@@ -13,8 +13,9 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
-    "isolatedModules": false,
-    "lib": ["dom", "es2020"],
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "es2020"],
     "module": "esnext",
     "moduleDetection": "force",
     "moduleResolution": "node",
@@ -35,9 +36,10 @@
       "#src/*": ["src/*"],
       "#tests/*": ["__tests__/*"]
     },
-    "plugins": [{ "name": "typescript-vue-plugin" }],
+    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "preserveConstEnums": true,
     "preserveSymlinks": true,
+    "preserveValueImports": true,
     "pretty": true,
     "resolveJsonModule": true,
     "rootDir": ".",
@@ -59,7 +61,8 @@
     "**/**.mts",
     "**/**.ts",
     "**/.*.cjs",
-    "./docs/.vitepress/**/*.ts"
+    "./docs/.vitepress/**/*.ts",
+    "./docs/.vitepress/**/*.vue"
   ],
   "ts-node": {
     "compilerOptions": {},

@@ -3,7 +3,7 @@
  * @module mlly/lib/resolveModules
  */
 
-import type { DynamicImport, ResolveOptions as Options } from '#src/interfaces'
+import type { DynamicImport, ResolveOptions } from '#src/interfaces'
 import type { SpecifierType } from '#src/types'
 import upath from 'upath'
 import extractStatements from './extract-statements'
@@ -12,17 +12,17 @@ import resolveModule from './resolve-module'
 /**
  * Resolves all modules in `code`.
  *
- * @see [`resolveModule`](./resolve-module.ts)
+ * @see {@link resolveModule}
  *
  * @async
  *
  * @param {string} code - Code containing module specifiers
- * @param {Omit<Options, 'type'>} [options={}] - Resolve options
+ * @param {ResolveOptions} [options={}] - Resolve options
  * @return {Promise<string>} `code` with modules resolved
  */
 const resolveModules = async (
   code: string,
-  options: Options = {}
+  options: ResolveOptions = {}
 ): Promise<string> => {
   for (const statement of extractStatements(code)) {
     if (!statement.specifier) continue

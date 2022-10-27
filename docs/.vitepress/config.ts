@@ -5,8 +5,6 @@
  * @see https://vitepress.vuejs.org/config/theme-configs
  */
 
-import type { StoredDocSearchHit } from '@docsearch/react/dist/esm/types'
-import type { Nullable } from '@flex-development/tutils'
 import search, { type SearchClient, type SearchIndex } from 'algoliasearch'
 import {
   load as cheerio,
@@ -23,13 +21,17 @@ import pupa from 'pupa'
 import { SitemapStream, streamToPromise } from 'sitemap'
 import tsconfigpaths from 'vite-tsconfig-paths'
 import {
-  defineConfig,
+  defineConfigWithTheme as defineConfig,
   type HeadConfig,
   type SiteConfig,
   type TransformContext,
   type UserConfig
 } from 'vitepress'
 import pkg from '../../package.json' assert { type: 'json' }
+import useComments from './composables/use-comments'
+import type ThemeConfig from './theme/config'
+import type IndexObject from './theme/index-object'
+import MARKDOWN_OPTIONS from './theme/markdown-options'
 
 /**
  * Environment file directory.
@@ -55,11 +57,18 @@ const HOSTNAME: string =
     : pupa('http://localhost:{0}', [VERCEL_ENV === 'development' ? 5173 : 8080])
 
 /**
+ * Project version as GitHub branch name or release tag.
+ *
+ * @const {string} GITHUB_VERSION
+ */
+const GITHUB_VERSION: string = pkg.version === '0.0.0' ? 'main' : pkg.version
+
+/**
  * GitHub repository url.
  *
- * @const {string} repository
+ * @const {string} REPOSITORY
  */
-const repository: string = pkg.repository.replace(/\.git$/, '')
+const REPOSITORY: string = pkg.repository.replace(/\.git$/, '')
 
 /**
  * Algolia search client.
@@ -83,21 +92,6 @@ const index_name: string =
  */
 const index: SearchIndex = algolia.initIndex(index_name)
 
-/**
- * Search index object type.
- *
- * @extends {Omit<StoredDocSearchHit, '_distinctSeqID' | '_rankingInfo'>}
- */
-interface IndexObject
-  extends Omit<StoredDocSearchHit, '_distinctSeqID' | '_rankingInfo'> {
-  lang: string
-  weight: {
-    level: Nullable<number>
-    pageRank: string
-    position: Nullable<number>
-  }
-}
-
 // clear search index
 if (VERCEL_ENV === 'preview' || VERCEL_ENV === 'production') {
   await index.clearObjects()
@@ -106,9 +100,9 @@ if (VERCEL_ENV === 'preview' || VERCEL_ENV === 'production') {
 /**
  * VitePress configuration options.
  *
- * @const {UserConfig} config
+ * @const {UserConfig<ThemeConfig>} config
  */
-const config: UserConfig = defineConfig({
+const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
   appearance: 'dark',
   /**
    * Performs postbuild tasks.
@@ -240,33 +234,35 @@ const config: UserConfig = defineConfig({
   ],
   ignoreDeadLinks: false,
   lastUpdated: true,
-  markdown: {
-    headers: { level: [0, 0] },
-    theme: { dark: 'github-dark', light: 'github-light' }
-  },
+  markdown: MARKDOWN_OPTIONS,
   themeConfig: {
     algolia: {
       apiKey: ALGOLIA_API_KEY,
       appId: algolia.appId,
       indexName: index.indexName
     },
+    apidocs: await useComments(),
     editLink: {
-      pattern: `${repository}/edit/main/docs/:path`,
+      pattern: `${REPOSITORY}/edit/${GITHUB_VERSION}/docs/:path`,
       text: 'Edit this page on GitHub'
     },
     nav: [
       {
+        link: '/api/',
+        text: 'API'
+      },
+      {
         items: [
           {
-            link: repository + '/blob/main/CHANGELOG.md',
+            link: `${REPOSITORY}/blob/${GITHUB_VERSION}/CHANGELOG.md`,
             text: 'Changelog'
           },
           {
-            link: repository + '/blob/main/CONTRIBUTING.md',
+            link: `${REPOSITORY}/blob/${GITHUB_VERSION}/CONTRIBUTING.md`,
             text: 'Contributing'
           },
           {
-            link: repository + '/releases',
+            link: REPOSITORY + '/releases',
             text: 'Releases'
           }
         ],
@@ -276,11 +272,15 @@ const config: UserConfig = defineConfig({
     outline: [2, 3],
     sidebar: [
       {
-        items: [{ link: '#install', text: 'Install' }],
+        items: [{ link: '/#install', text: 'Install' }],
         text: 'Getting Started'
+      },
+      {
+        items: [{ link: '/api/', text: 'API Reference' }],
+        text: 'API'
       }
     ],
-    socialLinks: [{ icon: 'github', link: repository }]
+    socialLinks: [{ icon: 'github', link: REPOSITORY }]
   },
   title: pkg.name,
   /**
@@ -390,14 +390,26 @@ const config: UserConfig = defineConfig({
 
     // index headings
     for (const [type, heading] of [
-      [...$('.vp-doc > div > h1').toArray()].map(el => ['lvl1', $(el)]),
-      [...$('.vp-doc > div > h2').toArray()].map(el => ['lvl2', $(el)]),
-      [...$('.vp-doc > div > h3').toArray()].map(el => ['lvl3', $(el)]),
-      [...$('.vp-doc > div > h4').toArray()].map(el => ['lvl4', $(el)]),
-      [...$('.vp-doc > div > h5').toArray()].map(el => ['lvl5', $(el)]),
-      [...$('.vp-doc > div > h6').toArray()].map(el => ['lvl6', $(el)])
+      [...$('.vp-doc > div h1').toArray()].map(el => ['lvl1', $(el)]),
+      [...$('.vp-doc > div h2').toArray()].map(el => ['lvl2', $(el)]),
+      [...$('.vp-doc > div h3').toArray()].map(el => ['lvl3', $(el)]),
+      [...$('.vp-doc > div h4').toArray()].map(el => ['lvl4', $(el)]),
+      [...$('.vp-doc > div h5').toArray()].map(el => ['lvl5', $(el)]),
+      [...$('.vp-doc > div h6').toArray()].map(el => ['lvl6', $(el)])
     ].flat() as [IndexObject['type']?, Cheerio<AnyNode>?][]) {
       if (!type || !heading) continue
+
+      /**
+       * Heading level.
+       *
+       * @const {number} position
+       */
+      const position: number = +type.replace(/lvl/, '')
+
+      // skip indexing headings past level 2 on api reference page
+      if (ctx.pageData.relativePath.startsWith('api/') && position > 2) {
+        continue
+      }
 
       /**
        * Heading anchor.
@@ -412,13 +424,6 @@ const config: UserConfig = defineConfig({
        * @const {string} objectID
        */
       const objectID: string = [url, anchor].join('#')
-
-      /**
-       * Heading level.
-       *
-       * @const {number} position
-       */
-      const position: number = +type.replace(/lvl/, '')
 
       /**
        * Retrieves heading text from `node`.
@@ -443,11 +448,11 @@ const config: UserConfig = defineConfig({
         hierarchy: {
           lvl0: 'Documentation',
           lvl1: ctx.pageData.title,
-          lvl2: 2 <= position ? lvl($('.vp-doc > div > h2').last()) : null,
-          lvl3: 3 <= position ? lvl($('.vp-doc > div > h3').last()) : null,
-          lvl4: 4 <= position ? lvl($('.vp-doc > div > h4').last()) : null,
-          lvl5: 5 <= position ? lvl($('.vp-doc > div > h5').last()) : null,
-          lvl6: 6 <= position ? lvl($('.vp-doc > div > h6').last()) : null,
+          lvl2: 2 <= position ? lvl($('.vp-doc > div h2').last()) : null,
+          lvl3: 3 <= position ? lvl($('.vp-doc > div h3').last()) : null,
+          lvl4: 4 <= position ? lvl($('.vp-doc > div h4').last()) : null,
+          lvl5: 5 <= position ? lvl($('.vp-doc > div h5').last()) : null,
+          lvl6: 6 <= position ? lvl($('.vp-doc > div h6').last()) : null,
           [type]: content
         },
         lang: ctx.siteData.lang,
@@ -460,13 +465,16 @@ const config: UserConfig = defineConfig({
     }
 
     // index page content
-    for (const p of [...$('.vp-doc p').toArray()].map(el => $(el))) {
+    for (const el of [
+      ...$('.vp-doc p').toArray(),
+      ...$('.vp-doc li').toArray()
+    ].map(el => $(el))) {
       /**
        * Page content.
        *
        * @const {string} content
        */
-      const content: string = p.first().text().trim()
+      const content: string = el.first().text().trim()
 
       // do nothing if content is empty string
       if (!content) continue

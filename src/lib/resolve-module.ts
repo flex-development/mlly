@@ -4,7 +4,7 @@
  */
 
 import { CONDITIONS, RESOLVE_EXTENSIONS } from '#src/constants'
-import type { ResolveOptions as Options } from '#src/interfaces'
+import type { ResolveOptions } from '#src/interfaces'
 import type { SpecifierType } from '#src/types'
 import isBuiltin from '@flex-development/is-builtin'
 import { moduleResolve, type ErrnoException } from 'import-meta-resolve'
@@ -24,24 +24,21 @@ import toRelativeSpecifier from './to-relative-specifier'
  * - Removing and replacing file extensions
  *
  * [1]: https://nodejs.org/api/esm.html#esm_resolver_algorithm
- * [2]: ../interfaces/resolve-options.ts
- * [3]: ./to-bare-specifier.ts
- * [4]: ./to-relative-specifier.ts
  *
- * @see [`Options`][2]
- * @see [`toBareSpecifier`][3]
- * @see [`toRelativeSpecifier`][4]
+ * @see {@link ResolveOptions}
+ * @see {@link toBareSpecifier}
+ * @see {@link toRelativeSpecifier}
  *
  * @async
  *
  * @param {string} specifier - Module specifier to resolve
- * @param {Options} [options={}] - Resolve options
+ * @param {ResolveOptions} [options={}] - Resolve options
  * @return {Promise<string>} Resolved module
  * @throws {ErrnoException}
  */
 const resolveModule = async (
   specifier: string,
-  options: Options = {}
+  options: ResolveOptions = {}
 ): Promise<string> => {
   const {
     conditions = CONDITIONS,

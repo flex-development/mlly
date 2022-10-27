@@ -12,6 +12,7 @@ import { CJS_SYNTAX_REGEX } from '#src/internal'
  *
  * - `__dirname`
  * - `__filename`
+ * - `await import`
  * - `exports`
  * - `module.exports`
  * - `require`

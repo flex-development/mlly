@@ -14,6 +14,12 @@ const config = {
   overrides: [
     ...require('./.eslintrc.base.cjs').overrides,
     {
+      files: ['docs/.vitepress/components/ApiDoc.vue'],
+      rules: {
+        'vue/no-v-html': 0
+      }
+    },
+    {
       files: ['docs/.vitepress/config.ts'],
       rules: {
         'unicorn/string-content': 0

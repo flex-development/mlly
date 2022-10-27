@@ -21,8 +21,10 @@ import upath from 'upath'
 /**
  * Converts `specifier` into a bare specifier.
  *
- * **Note**: The returned specifier will only include a file extension if the
- * original specifier includes an extension.
+ * ::: info
+ * The returned specifier will only include a file extension if the original
+ * specifier includes an extension.
+ * :::
  *
  * @see https://nodejs.org/api/esm.html#terminology
  * @see {@link ErrnoException}

@@ -13,10 +13,10 @@ import findStaticImports from './find-static-imports'
  * Finds all `export`, `import`, `require`, and/or `require.resolve` statements
  * in `code`.
  *
- * @see [`findDynamicImports`](/find-dynamic-imports.ts)
- * @see [`findExports`](/find-exports.ts)
- * @see [`findRequires`](/find-requires.ts)
- * @see [`findStaticImports`](/find-static-imports.ts)
+ * @see {@link findDynamicImports}
+ * @see {@link findExports}
+ * @see {@link findRequires}
+ * @see {@link findStaticImports}
  *
  * @param {string} [code=''] - Code to extract statements from
  * @return {Statement[]} Extracted statements

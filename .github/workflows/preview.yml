@@ -23,7 +23,9 @@ on:
     paths:
       - .vercelignore
       - docs/**
+      - src/lib/*.ts
       - vercel.json
+      - '!src/lib/index.ts'
   workflow_dispatch:
 permissions:
   packages: read

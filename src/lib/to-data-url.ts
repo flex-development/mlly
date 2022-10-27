@@ -8,9 +8,13 @@ import type { MIMEType } from '#src/types'
 /**
  * Converts `code` into a [`data:` URL][1] using `base64` encoding.
  *
- * **Note**: `data:` URLs only resolve [bare specifiers][2] for builtin modules
- * and [absolute specifiers][2]. To ensure all specifiers are absolute or bare,
- * be sure to call [`await resolveModules(code)`][3] ***before*** `toDataURL`.
+ * ::: tip
+ * `data:` URLs only resolve [bare specifiers][2] for builtin modules and
+ * [absolute specifiers][2].
+ *
+ * Call [`await resolveModules(code)`][3] to ensure all specifiers are absolute
+ * or bare.
+ * :::
  *
  * [1]: https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
  * [2]: https://nodejs.org/api/esm.html#terminology

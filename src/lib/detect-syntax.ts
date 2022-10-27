@@ -8,10 +8,15 @@ import hasESMSyntax from './has-esm-syntax'
 
 /**
  * Detects if `code` contains CommonJS syntax, ESM syntax, or a mixture of both.
+ *
  * Ignores matches in comments.
  *
  * @see {@link hasCJSSyntax}
  * @see {@link hasESMSyntax}
+ *
+ * @example
+ *  const code: string = 'export default {}'
+ *  detectSyntax(code) // { cjs: false, esm: true, mixed: false }
  *
  * @param {string} code - Code to check
  * @return {{ cjs: boolean; esm: boolean; mixed: boolean }} Detection result
