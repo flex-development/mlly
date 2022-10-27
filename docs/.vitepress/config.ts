@@ -45,7 +45,13 @@ const ENV_DIR: string = path.dirname(fileURLToPath(import.meta.url))
 dotenv({ path: path.resolve(ENV_DIR, '.env') })
 
 // environment variables
-const { ALGOLIA_API_KEY = '', CI = 'false', NODE_ENV, VERCEL_ENV } = process.env
+const {
+  ALGOLIA_API_KEY = '',
+  CI = 'false',
+  MEASUREMENT_ID,
+  NODE_ENV,
+  VERCEL_ENV
+} = process.env
 
 /**
  * Site url.
@@ -328,7 +334,21 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       ['meta', { content: 'vitepress', property: 'generator' }],
 
       // prevent duplicate content issues
-      ['link', { href: url, rel: 'canonical' }]
+      ['link', { href: url, rel: 'canonical' }],
+
+      // google analytics
+      [
+        'script',
+        {
+          async: '',
+          src: `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`
+        }
+      ],
+      [
+        'script',
+        {},
+        `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}\ngtag('js',new Date());gtag('config','${MEASUREMENT_ID}')`
+      ]
     ]
   },
   /**
