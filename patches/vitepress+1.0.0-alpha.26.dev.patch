@@ -7,7 +7,7 @@ index v1.0.0-alpha.26..v1.0.0-alpha.26 100644
          constructor: undefined,
          key: undefined,
 -        props: { href: hit.url, children }
-+        props: { href: hit.url, children, target: '_blank' }
++        props: { children, href: hit.url, rel: 'noopener', target: '_blank' }
        }
      }
    })
