@@ -50,7 +50,8 @@ const {
   CI = 'false',
   MEASUREMENT_ID,
   NODE_ENV,
-  VERCEL_ENV
+  VERCEL_ENV,
+  VERIFICATION_ID = ''
 } = process.env
 
 /**
@@ -329,6 +330,9 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       ['meta', { content: description, property: 'twitter:description' }],
       ['meta', { content: title, property: 'twitter:title' }],
       ['meta', { content: url, property: 'twitter:url' }],
+
+      // verify website ownership
+      ['meta', { content: VERIFICATION_ID, name: 'google-site-verification' }],
 
       // software used to build site
       ['meta', { content: 'vitepress', property: 'generator' }],
