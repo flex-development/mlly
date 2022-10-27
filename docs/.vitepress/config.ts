@@ -308,9 +308,6 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       .replace(/index\.html$/, '')
 
     return [
-      // document description
-      ['meta', { content: description, property: 'description' }],
-
       // control behavior of search engine crawling and indexing
       ['meta', { content: 'index,follow', property: 'robots' }],
       ['meta', { content: 'index,follow', property: 'googlebot' }],
