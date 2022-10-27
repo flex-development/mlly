@@ -29,6 +29,7 @@ import {
 } from 'vitepress'
 import pkg from '../../package.json' assert { type: 'json' }
 import useComments from './composables/use-comments'
+import usePageUrl from './composables/use-page-url'
 import type ThemeConfig from './theme/config'
 import type IndexObject from './theme/index-object'
 import MARKDOWN_OPTIONS from './theme/markdown-options'
@@ -302,10 +303,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
      *
      * @const {string} url
      */
-    const url: string = path
-      .join(HOSTNAME, pageData.relativePath)
-      .replace(/\.md$/, '.html')
-      .replace(/index\.html$/, '')
+    const url: string = usePageUrl(HOSTNAME, pageData.relativePath)
 
     return [
       // control behavior of search engine crawling and indexing
@@ -373,10 +371,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
      *
      * @const {string} url
      */
-    const url: string = path
-      .join(HOSTNAME, ctx.pageData.relativePath)
-      .replace(/\.md$/, '.html')
-      .replace(/index\.html$/, '')
+    const url: string = usePageUrl(HOSTNAME, ctx.pageData.relativePath)
 
     /**
      * Search index objects.
