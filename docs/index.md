@@ -80,5 +80,5 @@ See [Git - Protocols][4] for details on requesting a branch, commit, or tag.
 [1]: https://nodejs.org/api/esm.html
 [2]:
     https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries
-[3]: https://docs.npmjs.com/cli/v8/commands/npm-install#description
-[4]: https://yarnpkg.com/features/protocols#git
+[3]: https://docs.npmjs.com/cli/v8/commands/npm-install/#description
+[4]: https://yarnpkg.com/features/protocols/#git
