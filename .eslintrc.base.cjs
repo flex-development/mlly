@@ -414,8 +414,8 @@ const config = {
     'jsdoc/require-returns-check': [
       1,
       {
-        exemptAsync: false,
-        exemptGenerators: false,
+        exemptAsync: true,
+        exemptGenerators: true,
         reportMissingReturnForUndefinedTypes: false
       }
     ],
