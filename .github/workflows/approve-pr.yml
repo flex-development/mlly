@@ -27,7 +27,7 @@ jobs:
       - id: dependabot-metadata
         name: Fetch dependabot metadata
         if: github.actor == 'dependabot[bot]'
-        uses: dependabot/fetch-metadata@v1.3.4
+        uses: dependabot/fetch-metadata@v1.3.5
         with:
           skip-commit-verification: true
       - id: checkout
