@@ -1036,20 +1036,18 @@ __metadata:
 
 "@flex-development/docast@github:flex-development/docast":
   version: 0.0.0
-  resolution: "@flex-development/docast@https://github.com/flex-development/docast.git#commit=ee4975dd4b69bdb8a68586696eba33c408ff2983"
+  resolution: "@flex-development/docast@https://github.com/flex-development/docast.git#commit=48367224ce9b9aa804d872071fc7e6fc6a2f38b3"
   dependencies:
-    "@flex-development/mlly": "github:flex-development/mlly"
     "@flex-development/tutils": "npm:5.0.1"
     unist-builder: "npm:3.0.0"
     vfile: "npm:5.3.5"
     vfile-location: "npm:4.0.1"
   peerDependencies:
     "@types/unist": ">=2.0.6"
-    typescript: "*"
   peerDependenciesMeta:
     "@types/unist":
       optional: true
-  checksum: c095a197bdb3f68f0c5ec285dc1a14e32f8e3360dcde50d8a20ecb7cd2912a7867d9d8d540d61a070553445b783def2720ed5780e77732ab2a3a9b56cd57455f
+  checksum: e9eb8eb794d2eea17fa30ef398da056077d81b55fbd77f671e86d717b2d27c5417335387b50def777c285f197842ee81591f236dd2a7420a222f72a697dbbe05
   languageName: node
   linkType: hard
 

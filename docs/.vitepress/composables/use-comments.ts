@@ -74,8 +74,8 @@ async function useComments(): Promise<[string, string][]> {
     // implicit description and block tag nodes
     const [description, ...tags] = children
 
-    // symbol name
-    const { identifier } = data.symbol!
+    // get comment context
+    const { identifier } = data.context!
 
     /**
      * Creates a subheading.
