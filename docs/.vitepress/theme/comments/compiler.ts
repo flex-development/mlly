@@ -41,6 +41,9 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
 
     // compile tree
     switch (true) {
+      case this.file.path.endsWith('src/constants.ts'):
+        result.push(...this.compileConstants())
+        break
       case /src\/lib\/[\w-]+\.ts$/.test(this.file.path):
         result.push(this.compileFunction())
         break
@@ -48,6 +51,58 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
 
     // return markdown documentation snippets as html
     return result.map(res => md.render(res.trim()))
+  }
+
+  /**
+   * Compiler for trees generated from files containing API constants.
+   *
+   * @protected
+   *
+   * @return {string[]} Markdown documentation snippets
+   */
+  protected compileConstants(): string[] {
+    /**
+     * Documentation snippets.
+     *
+     * @const {string[]} snippets
+     */
+    const snippets: string[] = []
+
+    // get snippets
+    for (const { children, data } of this.tree.children) {
+      // do nothing if comment does not have context
+      if (!data.context) continue
+
+      // implicit description and block tags
+      const [description, ...tags] = children as [
+        ImplicitDescription,
+        ...BlockTag[]
+      ]
+
+      // get declaration name and code snippet position
+      const { identifier, position } = data.context
+
+      /**
+       * Documentation snippet.
+       *
+       * @const {string} snippet
+       */
+      const snippet: string = dedent`
+        ## \`${identifier}\`
+
+        ${description.data.value}
+        ${this.references(tags)}
+
+        \`\`\`ts
+        ${this.snippet(position.start.offset, position.end.offset)}
+        \`\`\`
+      `
+
+      // add snippet
+      snippets.push(snippet)
+    }
+
+    return snippets
   }
 
   /**
@@ -235,6 +290,19 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
     if (refs.length > 0) refs.unshift('\n', '**References**')
 
     return refs.join('\n')
+  }
+
+  /**
+   * Returns a snippet from {@link file}.
+   *
+   * @protected
+   *
+   * @param {number} offset1 - Index to begin snippet
+   * @param {number} offset2 - Index to end snippet
+   * @return {string} `file` snippet
+   */
+  protected snippet(offset1: number, offset2: number): string {
+    return this.file.toString().slice(offset1, offset2).trim()
   }
 
   /**
