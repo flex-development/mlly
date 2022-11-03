@@ -7,7 +7,7 @@
 import type { App } from '@vue/runtime-core'
 import type { EnhanceAppContext, Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import ApiDoc from '../components/ApiDoc.vue'
+import Doc from '../components/Doc.vue'
 
 /**
  * VitePress theme configuration.
@@ -31,7 +31,7 @@ const theme: Theme = {
    * @return {void} Nothing when complete
    */
   enhanceApp({ app }: EnhanceAppContext): void {
-    app.component('ApiDoc', ApiDoc)
+    app.component('Doc', Doc)
   }
 }
 

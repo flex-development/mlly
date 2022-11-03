@@ -14,7 +14,7 @@ const config = {
   overrides: [
     ...require('./.eslintrc.base.cjs').overrides,
     {
-      files: ['docs/.vitepress/components/ApiDoc.vue'],
+      files: ['docs/.vitepress/components/Doc.vue'],
       rules: {
         'vue/no-v-html': 0
       }

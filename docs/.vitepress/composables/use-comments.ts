@@ -3,60 +3,71 @@
  * @module docs/vitepress/composables/useComments
  */
 
-import docast, {
-  type BlockTag,
-  type Comment,
-  type Options,
-  type Root
-} from '@flex-development/docast'
+import docast, { type Options, type Root } from '@flex-development/docast'
 import { globby } from 'globby'
-import type MarkdownIt from 'markdown-it'
 import fs from 'node:fs/promises'
-import path from 'node:path'
-import { dedent } from 'ts-dedent'
+import path, { type ParsedPath } from 'node:path'
 import { unified } from 'unified'
-import { createMarkdownRenderer } from 'vitepress'
-import MARKDOWN_OPTIONS from '../theme/markdown-options'
+import { VFile } from 'vfile'
+import attacher from '../theme/comments/plugin'
+import type Documentation from '../theme/documentation'
 
 /**
- * Extracts API documentation from JSDoc comments.
- *
- * @todo resolve links to source files and symbols
+ * Generates API documentation from JSDoc comments.
  *
  * @async
  *
- * @return {Promise<[string, string][]>} API identifiers mapped to documentation
+ * @return {Promise<Documentation[]>} Documentation objects
  */
-async function useComments(): Promise<[string, string][]> {
+async function useComments(): Promise<Documentation[]> {
   /**
-   * API identifiers mapped to documentation.
+   * Documentation objects.
    *
-   * @const {[string, string][]} docs
+   * @const {Documentation[]} objects
    */
-  const docs: [string, string][] = []
+  const objects: Documentation[] = []
 
   /**
-   * Names of files containing API documentation.
+   * Glob patterns referencing files containing comments with API documentation.
    *
-   * @const {string[]} files
+   * @const {string[]} patterns
    */
-  const files: string[] = await globby('*.ts', {
-    cwd: path.resolve(process.cwd(), 'src', 'lib'),
-    ignore: ['index.ts']
-  })
+  const patterns: string[] = ['lib/*.ts']
 
-  /**
-   * Markdown renderer.
-   *
-   * @const {MarkdownIt} md
-   */
-  const md: MarkdownIt = await createMarkdownRenderer(
-    path.resolve('docs'),
-    MARKDOWN_OPTIONS
-  )
+  // get comments
+  for (let p of await globby(patterns, {
+    cwd: path.resolve(process.cwd(), 'src'),
+    ignore: ['**/index.ts']
+  })) {
+    /**
+     * Source code associated with {@link p}.
+     *
+     * @const {Buffer} buffer
+     */
+    const buffer: Buffer = await fs.readFile((p = path.resolve('src', p)))
 
-  // get api documentation
-  for (const file of files) {
+    /**
+     * Virtual file representation of {@link buffer}.
+     *
+     * @const {VFile} file
+     */
+    const file: VFile = new VFile(buffer)
+
+    // get virtual file properties
+    const {
+      base: basename,
+      dir: dirname,
+      ext: extname,
+      name: stem
+    }: ParsedPath = path.parse(p)
+
+    // set virtual file properties
+    file.path = p
+    file.basename = basename
+    file.dirname = dirname
+    file.extname = extname
+    file.stem = stem
+
     /**
      * Docblock abstract syntax tree for {@link file}.
      *
@@ -66,183 +77,22 @@ async function useComments(): Promise<[string, string][]> {
      */
     const tree: Root = unified()
       .use<[Options?], string, Root>(docast)
-      .parse(await fs.readFile(path.resolve('src', 'lib', file)))
-
-    // comment node containing documentation
-    const [, { children, data }] = tree.children as [Comment, Comment]
-
-    // implicit description and block tag nodes
-    const [description, ...tags] = children
-
-    // get comment context
-    const { identifier } = data.context!
+      .parse(file)
 
     /**
-     * Creates a subheading.
+     * API documentation extracted from {@link file}.
      *
-     * @param {string} subtitle - Subheading text
-     * @param {number} level - Heading level
-     * @return {string} Subheading HTML
+     * @const {string[]} compilation
      */
-    const subheading = (subtitle: string, level: number): string => {
-      /**
-       * Subheading HTML.
-       *
-       * @const {string} html
-       */
-      const html: string = md.render(`${'#'.repeat(level)} ${subtitle}`)
+    const compilation: string[] = unified()
+      .use<[], Root, string[]>(attacher)
+      .stringify(tree, file)
 
-      return html
-        .replace(/id="(.+)"/, `id="${identifier.toLowerCase()}--$1"`)
-        .replace(/#(\w+)/, `#${identifier.toLowerCase()}--$1`)
-    }
-
-    /**
-     * API examples.
-     *
-     * @const {string[]} examples
-     */
-    const examples: string[] = (tags as BlockTag[])
-      .filter(node => node.data.tag === '@example')
-      .map(node => {
-        return node.data.text.startsWith('`')
-          ? node.data.text
-          : dedent`
-            \`\`\`ts
-            ${node.data.text}
-            \`\`\`
-          `
-      })
-
-    /**
-     * Function parameters as markdown table.
-     *
-     * @const {string[]} params
-     */
-    const params: string[] = tags
-      .filter(node => node.data.tag === '@param')
-      .map(node => {
-        /**
-         * Match for parameter name, description, and type.
-         *
-         * **Note**: Name will include default value if provided.
-         *
-         * @const {RegExpMatchArray} match
-         */
-        const match: RegExpMatchArray = node.data.value
-          .matchAll(/^@\w+ (?<type>{.+}) (?<name>.+?) - (?<description>.+)/g)
-          .next().value
-
-        // normalize parameter type
-        match.groups!.type = match.groups!.type!.replace('|', '\\|')
-
-        // parameter description, name, and type
-        const { description, name, type } = match.groups!
-
-        return `| \`${type}\` | \`${name}\` | ${description} |`
-      })
-
-    /**
-     * Reference links.
-     *
-     * @const {string[]} references
-     */
-    const references: string[] = (tags as BlockTag[])
-      .filter(node => node.data.tag === '@see')
-      .filter(node => node.data.text.startsWith('http'))
-      .map(node => `- ${node.data.text}`)
-
-    /**
-     * Return type and description as markdown table.
-     *
-     * @const {string[]} returns
-     */
-    const returns: string[] = tags
-      .filter(node => node.data.tag === '@return')
-      .map(node => {
-        /**
-         * Match for `@return` tag description and type.
-         *
-         * @const {RegExpMatchArray} match
-         */
-        const match: RegExpMatchArray = node.data.value
-          .matchAll(/^@return (?<type>{.+}) (?<description>.+)/g)
-          .next().value
-
-        // normalize parameter type
-        match.groups!.type = match.groups!.type!.replace('|', '\\|')
-
-        return `| \`${match.groups!.type}\` | ${match.groups!.description} |`
-      })
-
-    /**
-     * Error type and description as custom markdown container.
-     *
-     * @see https://vitepress.vuejs.org/guide/markdown#custom-containers
-     *
-     * @const {string | undefined} throws
-     */
-    const throws: string | undefined = tags
-      .filter(node => node.data.tag === '@throws')
-      .map(node => {
-        /**
-         * Match for `@throws` tag description and type.
-         *
-         * @const {RegExpMatchArray} match
-         */
-        const match: RegExpMatchArray = node.data.value
-          .matchAll(/^@throws (?<type>{.+})(?: (?<description>.+))?/g)
-          .next().value
-
-        // normalize parameter type
-        match.groups!.type = match.groups!.type!.replace('|', '\\|')
-
-        return dedent`
-          ::: danger ${subheading(`Throws \`${match.groups!.type}\``, 3)}
-          ${match.groups!.description ?? ''}
-          :::
-        `
-      })
-      .shift()
-
-    // add section header to examples
-    if (examples.length > 0) examples.unshift('\n', subheading('Examples', 3))
-
-    // add headers to parameters table
-    if (params.length > 0) {
-      params.unshift(subheading('Parameters', 3), '| | | |', '| :- | :- | :- |')
-    }
-
-    // add section header to references
-    if (references.length > 0) references.unshift('\n', '**References**')
-
-    // add headers to returns table
-    if (returns.length > 0) {
-      returns.unshift(subheading('Returns', 3), '| | |', '| :- | :- |')
-    }
-
-    /**
-     * API documentation as markdown.
-     *
-     * @const {string} documentation
-     */
-    const documentation: string = dedent`
-      ## \`${identifier}\`
-
-      ${description!.data.value}
-      ${references.join('\n')}
-
-      ${examples.join('\n')}
-      ${params.join('\n')}
-      ${returns.join('\n')}
-      ${throws ?? ''}
-    `
-
-    // add api documentation
-    docs.push([identifier, md.render(documentation.trim())])
+    // add docs
+    for (const doc of compilation) objects.push({ doc, file: p })
   }
 
-  return docs
+  return objects
 }
 
 export default useComments

@@ -1,6 +1,9 @@
 ---
 head:
   - - meta
+    - name: description
+      content: API reference for @flex-development/mlly
+  - - meta
     - name: keywords
       content:
         - ecmascript
@@ -22,9 +25,19 @@ Documentation in progress.
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import type ThemeConfig from '../.vitepress/theme/config'
+import type Documentation from '../.vitepress/theme/documentation'
 
 const { site } = useData<ThemeConfig>()
-const { apidocs } = site.value.themeConfig
+const { documentation } = site.value.themeConfig
+
+/**
+ * Documentation objects.
+ *
+ * @const {Documentation[]} docs
+ */
+const docs: Documentation[] = documentation.filter(doc => {
+  return /src\/lib\/[\w-]+\.ts$/.test(doc.file)
+})
 </script>
 
-<ApiDoc v-for="[identifier, doc] in apidocs" :doc="doc" :key="identifier" />
+<Doc v-for="doc in docs" :doc="doc.doc" :key="doc.file" />

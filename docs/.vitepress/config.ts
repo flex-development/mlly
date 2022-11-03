@@ -249,7 +249,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       appId: algolia.appId,
       indexName: index.indexName
     },
-    apidocs: await useComments(),
+    documentation: await useComments(),
     editLink: {
       pattern: `${REPOSITORY}/edit/${GITHUB_VERSION}/docs/:path`,
       text: 'Edit this page on GitHub'

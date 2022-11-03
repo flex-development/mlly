@@ -4,6 +4,7 @@
  */
 
 import type { DefaultTheme } from 'vitepress'
+import type Documentation from './documentation'
 
 /**
  * VitePress theme configuration schema.
@@ -16,7 +17,7 @@ interface ThemeConfig extends DefaultTheme.Config {
   /**
    * API documentation.
    */
-  apidocs: [string, string][]
+  documentation: Documentation[]
 
   /**
    * Header navigation menu configuration.

@@ -79,7 +79,7 @@
   "MD032": true,
   "MD033": {
     "allowed_elements": [
-      "ApiDoc",
+      "Doc",
       "ThemeConfig",
       "a",
       "br",

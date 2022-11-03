@@ -943,6 +943,7 @@ const config = {
       },
       rules: {
         'vue/max-attributes-per-line': 0,
+        'vue/multi-word-component-names': 0,
         'unicorn/filename-case': [
           2,
           {
