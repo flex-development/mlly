@@ -14,7 +14,7 @@ import type ImportStatement from './statement-import'
  */
 interface DynamicImport extends ImportStatement {
   /**
-   * {@link specifier} type.
+   * Module specifier type.
    */
   specifier_type: 'dynamic' | 'static'
 

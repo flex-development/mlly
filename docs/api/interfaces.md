@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Type definitions exported from @flex-development/mlly
+      content: TypeScript interfaces exported from @flex-development/mlly
   - - meta
     - name: keywords
       content:
@@ -14,11 +14,12 @@ head:
   - - meta
     - name: priority
       content: 0.7
+outline: 2
 ---
 
-# Types
+# Interfaces
 
-Type definitions exported from `mlly`.
+TypeScript interfaces exported from `mlly`.
 
 <script setup lang="ts">
 import { useData } from 'vitepress'
@@ -34,7 +35,7 @@ const { documentation } = site.value.themeConfig
  * @const {Documentation[]} docs
  */
 const docs: Documentation[] = documentation.filter(doc => {
-  return /src\/types\/[\w-]+\.ts$/.test(doc.file)
+  return /src\/interfaces\/[\w-]+\.ts$/.test(doc.file)
 })
 </script>
 

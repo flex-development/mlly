@@ -44,6 +44,9 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
       case this.file.path.endsWith('src/constants.ts'):
         result.push(...this.compileConstants())
         break
+      case /src\/interfaces\/[\w-]+\.ts$/.test(this.file.path):
+        result.push(this.compileInterface())
+        break
       case /src\/lib\/[\w-]+\.ts$/.test(this.file.path):
         result.push(this.compileFunction())
         break
@@ -116,7 +119,7 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
    * @return {string} Markdown documentation snippet
    */
   protected compileFunction(): string {
-    // get comment node containing function documentation
+    // get node containing function documentation
     const [, { children, data }] = this.tree.children as [Comment, Comment]
 
     // function name
@@ -267,6 +270,40 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
       ${params.join('\n')}
       ${returns.join('\n')}
       ${throws ?? ''}
+    `
+  }
+
+  /**
+   * Compiler for trees generated from files containing interfaces.
+   *
+   * @todo display interface members in subsections
+   *
+   * @protected
+   *
+   * @return {string} Markdown documentation snippet
+   */
+  protected compileInterface(): string {
+    // get node containing interface documentation
+    const [, { children, data }] = this.tree.children as [Comment, Comment]
+
+    // interface name and code snippet position
+    const { identifier, position } = data.context!
+
+    // implicit description and block tags
+    const [description, ...tags] = children as [
+      ImplicitDescription,
+      ...BlockTag[]
+    ]
+
+    return dedent`
+      ## \`${identifier}\`
+
+      ${description.data.value}
+      ${this.references(tags)}
+
+      \`\`\`ts
+      ${this.snippet(position.start.offset, position.end.offset)}
+      \`\`\`
     `
   }
 

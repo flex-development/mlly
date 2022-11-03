@@ -287,7 +287,8 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
         items: [
           { link: '/api/', text: 'API Reference' },
           { link: '/api/constants', text: 'Constants' },
-          { link: '/api/types', text: 'Type Definitions' }
+          { link: '/api/interfaces', text: 'Interfaces' },
+          { link: '/api/types', text: 'Types' }
         ],
         text: 'API'
       }
@@ -426,7 +427,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
        */
       const position: number = +type.replace(/lvl/, '')
 
-      // skip indexing headings past level 2 on api reference page
+      // skip indexing headings past level 2 on api pages
       if (ctx.pageData.relativePath.startsWith('api/') && position > 2) {
         continue
       }

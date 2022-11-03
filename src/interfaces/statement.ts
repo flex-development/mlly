@@ -8,7 +8,7 @@ import type { StatementType } from '#src/types'
 /**
  * CommonJS or ESM statement object schema.
  *
- * @see [`StatementType`](../types/statement-type.ts)
+ * @see {@link StatementType}
  */
 interface Statement {
   /**

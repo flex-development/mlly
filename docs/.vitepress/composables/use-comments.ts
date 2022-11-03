@@ -32,7 +32,12 @@ async function useComments(): Promise<Documentation[]> {
    *
    * @const {string[]} patterns
    */
-  const patterns: string[] = ['constants.ts', 'lib/*.ts', 'types/*.ts']
+  const patterns: string[] = [
+    'constants.ts',
+    'interfaces/*.ts',
+    'lib/*.ts',
+    'types/*.ts'
+  ]
 
   // get comments
   for (let p of await globby(patterns, {

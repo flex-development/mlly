@@ -25,7 +25,7 @@ interface ResolveOptions {
   /**
    * Remove or replace file extension.
    *
-   * **Note**: [`type`](#type) must be `relative`.
+   * **Note**: {@link type} must be set to `relative`.
    */
   ext?:
     | Ext
@@ -59,7 +59,7 @@ interface ResolveOptions {
   /**
    * Module specifier type.
    *
-   * @see https://nodejs.org/api/esm.html#terminology
+   * @see {@link SpecifierType}
    *
    * @default 'absolute'
    */
