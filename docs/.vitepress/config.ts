@@ -286,7 +286,8 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       {
         items: [
           { link: '/api/', text: 'API Reference' },
-          { link: '/api/constants', text: 'Constants' }
+          { link: '/api/constants', text: 'Constants' },
+          { link: '/api/types', text: 'Type Definitions' }
         ],
         text: 'API'
       }

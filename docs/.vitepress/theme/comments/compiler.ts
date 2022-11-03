@@ -47,6 +47,9 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
       case /src\/lib\/[\w-]+\.ts$/.test(this.file.path):
         result.push(this.compileFunction())
         break
+      case /src\/types\/[\w-]+\.ts$/.test(this.file.path):
+        result.push(this.compileType())
+        break
     }
 
     // return markdown documentation snippets as html
@@ -54,7 +57,7 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
   }
 
   /**
-   * Compiler for trees generated from files containing API constants.
+   * Compiler for trees generated from files containing constant values.
    *
    * @protected
    *
@@ -73,14 +76,14 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
       // do nothing if comment does not have context
       if (!data.context) continue
 
+      // declaration name and code snippet position
+      const { identifier, position } = data.context
+
       // implicit description and block tags
       const [description, ...tags] = children as [
         ImplicitDescription,
         ...BlockTag[]
       ]
-
-      // get declaration name and code snippet position
-      const { identifier, position } = data.context
 
       /**
        * Documentation snippet.
@@ -106,7 +109,7 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
   }
 
   /**
-   * Compiler for trees generated from files containing API functions.
+   * Compiler for trees generated from files containing library functions.
    *
    * @protected
    *
@@ -119,7 +122,7 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
     // function name
     const { identifier } = data.context!
 
-    // implicit description and block tag nodes
+    // implicit description and block tags
     const [description, ...tags] = children as [
       ImplicitDescription,
       ...BlockTag[]
@@ -264,6 +267,38 @@ class CommentTreeCompiler extends UnifiedCompiler<Root, string[]> {
       ${params.join('\n')}
       ${returns.join('\n')}
       ${throws ?? ''}
+    `
+  }
+
+  /**
+   * Compiler for trees generated from files containing type definitions.
+   *
+   * @protected
+   *
+   * @return {string} Markdown documentation snippet
+   */
+  protected compileType(): string {
+    // get comment node containing type definition documentation
+    const [, { children, data }] = this.tree.children as [Comment, Comment]
+
+    // type definition name and code snippet position
+    const { identifier, position } = data.context!
+
+    // implicit description and block tags
+    const [description, ...tags] = children as [
+      ImplicitDescription,
+      ...BlockTag[]
+    ]
+
+    return dedent`
+      ## \`${identifier}\`
+
+      ${description.data.value}
+      ${this.references(tags)}
+
+      \`\`\`ts
+      ${this.snippet(position.start.offset, position.end.offset)}
+      \`\`\`
     `
   }
 

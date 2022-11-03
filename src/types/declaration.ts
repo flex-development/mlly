@@ -4,7 +4,7 @@
  */
 
 /**
- * Declarations.
+ * Export declaration kinds.
  */
 type Declaration =
   | 'abstract class'
