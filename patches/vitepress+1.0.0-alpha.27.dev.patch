@@ -1,5 +1,5 @@
 diff --git a/dist/client/theme-default/components/VPAlgoliaSearchBox.vue b/dist/client/theme-default/components/VPAlgoliaSearchBox.vue
-index v1.0.0-alpha.26..v1.0.0-alpha.26 100644
+index v1.0.0-alpha.27..v1.0.0-alpha.27 100644
 --- a/dist/client/theme-default/components/VPAlgoliaSearchBox.vue
 +++ b/dist/client/theme-default/components/VPAlgoliaSearchBox.vue
 @@ -70,7 +70,7 @@
@@ -12,7 +12,7 @@ index v1.0.0-alpha.26..v1.0.0-alpha.26 100644
      }
    })
 diff --git a/dist/client/theme-default/components/VPDocFooter.vue b/dist/client/theme-default/components/VPDocFooter.vue
-index v1.0.0-alpha.26..v1.0.0-alpha.26 100644
+index v1.0.0-alpha.27..v1.0.0-alpha.27 100644
 --- a/dist/client/theme-default/components/VPDocFooter.vue
 +++ b/dist/client/theme-default/components/VPDocFooter.vue
 @@ -43,13 +43,13 @@
