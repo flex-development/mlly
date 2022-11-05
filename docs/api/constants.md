@@ -21,7 +21,7 @@ Constant values exported from `mlly`.
 
 These values are used as defaults for several [library functions](index.md).
 
-<script setup lang="ts">
+<script setup lang='ts'>
 import { useData } from 'vitepress'
 import type ThemeConfig from '../.vitepress/theme/config'
 import type Documentation from '../.vitepress/theme/documentation'
@@ -39,4 +39,4 @@ const docs: Documentation[] = documentation.filter(doc => {
 })
 </script>
 
-<Doc v-for="doc in docs" :doc="doc.doc" :key="doc.file" />
+<Doc v-for='doc in docs' :doc='doc.doc' :key='doc.file' />
