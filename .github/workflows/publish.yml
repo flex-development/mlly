@@ -1,7 +1,7 @@
 # Publish
 #
-# Cross-publish package to GitHub Package Registry and NPM when a GitHub release is published or on
-# workflow dispatch.
+# Cross-publish package to the GitHub Package Registry and NPM + deploy production docs site to
+# Vercel when a GitHub release is published, or on workflow dispatch.
 #
 # References:
 #
@@ -10,6 +10,7 @@
 # - https://github.com/actions/checkout
 # - https://github.com/actions/setup-node
 # - https://github.com/hmarr/debug-action
+# - https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 
 ---
 name: publish
@@ -101,3 +102,34 @@ jobs:
         run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  docs:
+    needs: [metadata, gpr, npm]
+    permissions:
+      packages: read
+    runs-on: ubuntu-latest
+    environment:
+      name: docs
+      url: https://mlly.vercel.app/
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      HUSKY: 0
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.TAG }}
+        uses: actions/checkout@v3.1.0
+        with:
+          ref: ${{ format('refs/tags/{0}', env.TAG) }}
+      - id: install
+        name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - id: env
+        name: Pull environment
+        run: vc pull --environment=production --yes --token=${{ secrets.VERCEL_TOKEN }}
+      - id: build
+        name: Build docs
+        run: vc build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - id: deploy
+        name: Deploy docs
+        run: vc deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
