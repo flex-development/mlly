@@ -24,6 +24,7 @@ import {
   defineConfigWithTheme as defineConfig,
   type HeadConfig,
   type SiteConfig,
+  type SiteData,
   type TransformContext,
   type UserConfig
 } from 'vitepress'
@@ -117,73 +118,23 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
    *
    * This includes:
    *
-   * 1. Writing `sitemap.xml` to `config.outDir`
-   * 2. Writing `robots.txt` to `config.outDir`
-   * 3. Applying {@link index} settings
+   * 1. Applying search index settings
+   * 2. Indexing page headings and content
+   * 3. Writing `sitemap.xml` to `config.outDir`
+   * 4. Writing `robots.txt` to `config.outDir`
    *
    * @async
    *
    * @param {SiteConfig} config - Site configuration
    * @param {string} config.outDir - Absolute path to output directory
    * @param {string} config.root - Absolute path to project directory
+   * @param {SiteData} config.site - Site data
    * @return {Promise<void>} Nothing when complete
    */
-  async buildEnd({ outDir, root }: SiteConfig): Promise<void> {
-    /**
-     * Sitemap routes.
-     *
-     * @const {[string, CheerioAPI][]} routes
-     */
-    const routes: [string, CheerioAPI][] = []
-
-    /**
-     * Sitemap stream.
-     *
-     * @const {SitemapStream} stream
-     */
-    const stream: SitemapStream = new SitemapStream({ hostname: HOSTNAME })
-
-    // get sitemap routes
-    for (const route of await globby('**.html', { cwd: outDir })) {
-      routes.push([
-        route.replace(/\.html$/, '').replace(/index$/, ''),
-        cheerio(await fs.readFile(path.resolve(outDir, route), 'utf8'))
-      ])
-    }
-
-    // update sitemap stream
-    // see: https://sitemaps.org/protocol.html#xmlTagDefinitions
-    for (const [url, $] of routes.sort((a, b) => a[0]!.localeCompare(b[0]!))) {
-      stream.write({
-        changefreq: $('meta[name=changefreq]').attr('content'),
-        lastmod: $('.VPLastUpdated > time').attr('datatime'),
-        priority: +($('meta[name=priority]').attr('content') ?? '0.5'),
-        url
-      })
-    }
-
-    // write sitemap.xml
-    await fs.writeFile(
-      path.resolve(outDir, 'sitemap.xml'),
-      await streamToPromise(stream.end())
-    )
-
-    /**
-     * `robots.txt` template file path.
-     *
-     * @const {string} robots
-     */
-    const robots: string = path.resolve(root, '.vitepress/templates/robots.txt')
-
-    // write robots.txt
-    await fs.writeFile(
-      path.resolve(outDir, 'robots.txt'),
-      pupa(await fs.readFile(robots, 'utf8'), { HOSTNAME })
-    )
-
+  async buildEnd({ outDir, root, site }: SiteConfig): Promise<void> {
     // set search index settings
     // see: https://docsearch.algolia.com/docs/templates/#vitepress-template
-    return void (await index.setSettings({
+    await index.setSettings({
       advancedSyntax: true,
       allowTyposOnNumericTokens: false,
       attributeCriteriaComputedByMinProximity: true,
@@ -225,7 +176,247 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
         'unordered(hierarchy.lvl5)',
         'unordered(hierarchy.lvl6)'
       ]
-    }))
+    })
+
+    /**
+     * Sitemap routes.
+     *
+     * @const {[string, CheerioAPI][]} routes
+     */
+    const routes: [string, CheerioAPI][] = []
+
+    // update search index + get sitemap routes
+    for (const route of await globby('**.html', { cwd: outDir })) {
+      /**
+       * Absolute path to HTML output.
+       *
+       * @const {string} outfile
+       */
+      const outfile: string = path.resolve(outDir, route)
+
+      /**
+       * Output HTML.
+       *
+       * @const {string} code
+       */
+      const code: string = await fs.readFile(outfile, 'utf8')
+
+      /**
+       * API for traversing/manipulating {@link code}.
+       *
+       * @see https://github.com/cheeriojs/cheerio
+       *
+       * @const {CheerioAPI} $
+       */
+      const $: CheerioAPI = cheerio(code)
+
+      // index page headings and content
+      if (!route.endsWith('404.html')) {
+        /**
+         * Page priority.
+         *
+         * @see https://sitemaps.org/protocol.html#xmlTagDefinitions
+         *
+         * @const {string} pageRank
+         */
+        const pageRank: string =
+          $('meta[name=priority]').attr('content') ?? '0.5'
+
+        /**
+         * Page title.
+         *
+         * @const {string} title
+         */
+        const title: string = $('title').text().replace(/ |.+/, '')
+
+        /**
+         * Page url.
+         *
+         * @const {string} url
+         */
+        const url: string = usePageUrl(HOSTNAME, route.replace(/html$/, 'md'))
+
+        /**
+         * Search index objects.
+         *
+         * @const {IndexObject[]} objects
+         */
+        const objects: IndexObject[] = []
+
+        // index headings
+        for (const [type, heading] of [
+          [...$('.vp-doc > div h1').toArray()].map(el => ['lvl1', $(el)]),
+          [...$('.vp-doc > div h2').toArray()].map(el => ['lvl2', $(el)]),
+          [...$('.vp-doc > div h3').toArray()].map(el => ['lvl3', $(el)]),
+          [...$('.vp-doc > div h4').toArray()].map(el => ['lvl4', $(el)]),
+          [...$('.vp-doc > div h5').toArray()].map(el => ['lvl5', $(el)]),
+          [...$('.vp-doc > div h6').toArray()].map(el => ['lvl6', $(el)])
+        ].flat() as [IndexObject['type']?, Cheerio<AnyNode>?][]) {
+          if (!type || !heading) continue
+
+          /**
+           * Heading level.
+           *
+           * @const {number} position
+           */
+          const position: number = +type.replace(/lvl/, '')
+
+          // skip indexing headings past level 2 on api pages
+          if (route.startsWith('api/') && position > 2) continue
+
+          /**
+           * Heading anchor.
+           *
+           * @const {string} anchor
+           */
+          const anchor: string = heading.attr('id')!
+
+          /**
+           * Heading search index object id.
+           *
+           * @const {string} objectID
+           */
+          const objectID: string = [url, anchor].join('#')
+
+          /**
+           * Retrieves heading text from `node`.
+           *
+           * @param {Cheerio<AnyNode>} node - Node to retrieve text from
+           * @return {string} Heading text
+           */
+          const lvl = (node: Cheerio<AnyNode>): string => {
+            return node.text().split('#')[0]!.trim()
+          }
+
+          /**
+           * Heading text.
+           *
+           * @const {string} content
+           */
+          const content: string = lvl(heading.first())
+
+          // add search index object
+          objects.push({
+            anchor,
+            content,
+            hierarchy: {
+              lvl0: 'Documentation',
+              lvl1: title,
+              lvl2: 2 <= position ? lvl($('.vp-doc > div h2').last()) : null,
+              lvl3: 3 <= position ? lvl($('.vp-doc > div h3').last()) : null,
+              lvl4: 4 <= position ? lvl($('.vp-doc > div h4').last()) : null,
+              lvl5: 5 <= position ? lvl($('.vp-doc > div h5').last()) : null,
+              lvl6: 6 <= position ? lvl($('.vp-doc > div h6').last()) : null,
+              [type]: content
+            },
+            lang: site.lang,
+            objectID,
+            type,
+            url: objectID,
+            url_without_anchor: url,
+            weight: { level: 100 - position * 10, pageRank, position }
+          })
+        }
+
+        // index page content
+        for (const el of [
+          ...$('.vp-doc p').toArray(),
+          ...$('.vp-doc li').toArray()
+        ].map(el => $(el))) {
+          /**
+           * Page content.
+           *
+           * @const {string} content
+           */
+          const content: string = el.first().text().trim()
+
+          // do nothing if content is empty string
+          if (!content) continue
+
+          /**
+           * Page content anchor.
+           *
+           * @see https://web.dev/text-fragments/
+           *
+           * @const {string} anchor
+           */
+          const anchor: string = ':~:text=' + encodeURI(content)
+
+          /**
+           * Page content index object id.
+           *
+           * @const {string} objectID
+           */
+          const objectID: string = [url, anchor].join('#')
+
+          // add search index object
+          objects.push({
+            anchor,
+            content,
+            hierarchy: {
+              lvl0: 'Documentation',
+              lvl1: title,
+              lvl2: null,
+              lvl3: null,
+              lvl4: null,
+              lvl5: null,
+              lvl6: null
+            },
+            lang: site.lang,
+            objectID,
+            type: 'content',
+            url: objectID,
+            url_without_anchor: url,
+            weight: { level: 30, pageRank, position: 7 }
+          })
+        }
+
+        // update search index
+        for (const object of objects) await index.saveObject(object)
+      }
+
+      // add sitemap route
+      routes.push([route.replace(/\.html$/, '').replace(/index$/, ''), $])
+    }
+
+    /**
+     * Sitemap stream.
+     *
+     * @const {SitemapStream} stream
+     */
+    const stream: SitemapStream = new SitemapStream({ hostname: HOSTNAME })
+
+    // update sitemap stream
+    // see: https://sitemaps.org/protocol.html#xmlTagDefinitions
+    for (const [url, $] of routes.sort((a, b) => a[0]!.localeCompare(b[0]!))) {
+      stream.write({
+        changefreq: $('meta[name=changefreq]').attr('content'),
+        lastmod: $('.VPLastUpdated > time').attr('datatime'),
+        priority: +($('meta[name=priority]').attr('content') ?? '0.5'),
+        url
+      })
+    }
+
+    // write sitemap.xml
+    await fs.writeFile(
+      path.resolve(outDir, 'sitemap.xml'),
+      await streamToPromise(stream.end())
+    )
+
+    /**
+     * `robots.txt` template file path.
+     *
+     * @const {string} robots
+     */
+    const robots: string = path.resolve(root, '.vitepress/templates/robots.txt')
+
+    // write robots.txt
+    await fs.writeFile(
+      path.resolve(outDir, 'robots.txt'),
+      pupa(await fs.readFile(robots, 'utf8'), { HOSTNAME })
+    )
+
+    return void 0
   },
   cleanUrls: 'without-subfolders',
   description: pkg.description,
@@ -306,9 +497,10 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
    * @return {HeadConfig[]} Additional `<head>` entries
    */
   transformHead(ctx: TransformContext): HeadConfig[] {
-    if (ctx.title.startsWith('404')) return []
-
     const { description, pageData, siteData, title } = ctx
+
+    // skip pushing additional entries for 404 page
+    if (title.startsWith('404')) return []
 
     /**
      * {@link pageData.relativePath} as page url.
@@ -359,188 +551,6 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
         `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}\ngtag('js',new Date());gtag('config','${MEASUREMENT_ID}')`
       ]
     ]
-  },
-  /**
-   * Indexes page headings and content in `code`.
-   *
-   * @async
-   *
-   * @param {string} code - HTML content
-   * @param {string} id - Absolute path to `code`
-   * @param {TransformContext} ctx - Vitepress transform context
-   * @return {Promise<void>} Nothing when complete
-   */
-  async transformHtml(
-    code: string,
-    id: string,
-    ctx: TransformContext
-  ): Promise<void> {
-    if (id.endsWith('404.html')) return
-
-    /**
-     * API for traversing/manipulating for {@link code}.
-     *
-     * @see https://github.com/cheeriojs/cheerio
-     *
-     * @const {CheerioAPI} $
-     */
-    const $: CheerioAPI = cheerio(code)
-
-    /**
-     * Page priority.
-     *
-     * @see https://sitemaps.org/protocol.html#xmlTagDefinitions
-     *
-     * @const {string} pageRank
-     */
-    const pageRank: string = $('meta[name=priority]').attr('content') ?? '0.5'
-
-    /**
-     * {@link ctx.pageData.relativePath} as relative url.
-     *
-     * @const {string} url
-     */
-    const url: string = usePageUrl(HOSTNAME, ctx.pageData.relativePath)
-
-    /**
-     * Search index objects.
-     *
-     * @const {IndexObject[]} objects
-     */
-    const objects: IndexObject[] = []
-
-    // index headings
-    for (const [type, heading] of [
-      [...$('.vp-doc > div h1').toArray()].map(el => ['lvl1', $(el)]),
-      [...$('.vp-doc > div h2').toArray()].map(el => ['lvl2', $(el)]),
-      [...$('.vp-doc > div h3').toArray()].map(el => ['lvl3', $(el)]),
-      [...$('.vp-doc > div h4').toArray()].map(el => ['lvl4', $(el)]),
-      [...$('.vp-doc > div h5').toArray()].map(el => ['lvl5', $(el)]),
-      [...$('.vp-doc > div h6').toArray()].map(el => ['lvl6', $(el)])
-    ].flat() as [IndexObject['type']?, Cheerio<AnyNode>?][]) {
-      if (!type || !heading) continue
-
-      /**
-       * Heading level.
-       *
-       * @const {number} position
-       */
-      const position: number = +type.replace(/lvl/, '')
-
-      // skip indexing headings past level 2 on api pages
-      if (ctx.pageData.relativePath.startsWith('api/') && position > 2) {
-        continue
-      }
-
-      /**
-       * Heading anchor.
-       *
-       * @const {string} anchor
-       */
-      const anchor: string = heading.attr('id')!
-
-      /**
-       * Heading search index object id.
-       *
-       * @const {string} objectID
-       */
-      const objectID: string = [url, anchor].join('#')
-
-      /**
-       * Retrieves heading text from `node`.
-       *
-       * @param {Cheerio<AnyNode>} node - Node to retrieve text from
-       * @return {string} Heading text
-       */
-      const lvl = (node: Cheerio<AnyNode>): string => {
-        return node.text().split('#')[0]!.trim()
-      }
-
-      /**
-       * Heading text.
-       *
-       * @const {string} content
-       */
-      const content: string = lvl(heading.first())
-
-      objects.push({
-        anchor,
-        content,
-        hierarchy: {
-          lvl0: 'Documentation',
-          lvl1: ctx.pageData.title,
-          lvl2: 2 <= position ? lvl($('.vp-doc > div h2').last()) : null,
-          lvl3: 3 <= position ? lvl($('.vp-doc > div h3').last()) : null,
-          lvl4: 4 <= position ? lvl($('.vp-doc > div h4').last()) : null,
-          lvl5: 5 <= position ? lvl($('.vp-doc > div h5').last()) : null,
-          lvl6: 6 <= position ? lvl($('.vp-doc > div h6').last()) : null,
-          [type]: content
-        },
-        lang: ctx.siteData.lang,
-        objectID,
-        type,
-        url: objectID,
-        url_without_anchor: url,
-        weight: { level: 100 - position * 10, pageRank, position }
-      })
-    }
-
-    // index page content
-    for (const el of [
-      ...$('.vp-doc p').toArray(),
-      ...$('.vp-doc li').toArray()
-    ].map(el => $(el))) {
-      /**
-       * Page content.
-       *
-       * @const {string} content
-       */
-      const content: string = el.first().text().trim()
-
-      // do nothing if content is empty string
-      if (!content) continue
-
-      /**
-       * Page content anchor.
-       *
-       * @see https://web.dev/text-fragments/
-       *
-       * @const {string} anchor
-       */
-      const anchor: string = ':~:text=' + encodeURI(content)
-
-      /**
-       * Page content index object id.
-       *
-       * @const {string} objectID
-       */
-      const objectID: string = [url, anchor].join('#')
-
-      objects.push({
-        anchor,
-        content,
-        hierarchy: {
-          lvl0: 'Documentation',
-          lvl1: ctx.pageData.title,
-          lvl2: null,
-          lvl3: null,
-          lvl4: null,
-          lvl5: null,
-          lvl6: null
-        },
-        lang: ctx.siteData.lang,
-        objectID,
-        type: 'content',
-        url: objectID,
-        url_without_anchor: url,
-        weight: { level: 30, pageRank, position: 7 }
-      })
-    }
-
-    // update search index
-    for (const object of objects) await index.saveObject(object)
-
-    return void objects
   },
   vite: {
     cacheDir: path.resolve('node_modules/.vitepress'),
