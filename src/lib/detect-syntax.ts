@@ -14,10 +14,6 @@ import hasESMSyntax from './has-esm-syntax'
  * @see {@link hasCJSSyntax}
  * @see {@link hasESMSyntax}
  *
- * @example
- *  const code: string = 'export default {}'
- *  detectSyntax(code) // { cjs: false, esm: true, mixed: false }
- *
  * @param {string} code - Code to check
  * @return {{ cjs: boolean; esm: boolean; mixed: boolean }} Detection result
  */
