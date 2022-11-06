@@ -33,12 +33,12 @@ exports[`unit:lib/findDynamicImports > should find dynamic import declaration 1`
 exports[`unit:lib/findDynamicImports > should find dynamic import declaration with dynamic specifier 1`] = `
 [
   {
-    "code": "const foo = await import(./bar)",
-    "end": 31,
+    "code": "const foo = await import(bar)",
+    "end": 29,
     "imports": [
       "foo",
     ],
-    "specifier": "./bar",
+    "specifier": "bar",
     "specifier_type": "dynamic",
     "start": 0,
     "type": "dynamic",

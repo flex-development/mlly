@@ -36,7 +36,7 @@ describe('unit:lib/findDynamicImports', () => {
 
   it('should find dynamic import declaration with dynamic specifier', () => {
     // Act
-    const results = testSubject('const foo = await import(./bar)')
+    const results = testSubject('const foo = await import(bar)')
 
     // Expect
     expect(results).to.be.an('array').of.length(1)
