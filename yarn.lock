@@ -1058,11 +1058,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/mkbuild@npm:1.0.0-alpha.8":
-  version: 1.0.0-alpha.8
-  resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.8::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.8%2Fea0dad048ae2835b695f793a045cfd5b22cafaa3"
+"@flex-development/mkbuild@npm:1.0.0-alpha.9":
+  version: 1.0.0-alpha.9
+  resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.9%2F3a3a13859b4938ebf8959061f10b7b0d7e44c597"
   dependencies:
-    "@flex-development/mlly": "github:flex-development/mlly"
+    "@flex-development/mlly": "npm:1.0.0-alpha.2"
     "@flex-development/tutils": "npm:5.0.1"
     colorette: "npm:2.0.19"
     consola: "npm:2.15.3"
@@ -1080,13 +1080,13 @@ __metadata:
     typescript: ">=3.7.2"
   bin:
     mkbuild: dist/cli.mjs
-  checksum: f92337c29a5123d2e6bd3e6022471ffdf038cdd65baaa5de6c9036d1742ec669600f1f40dfd31f4bb168c41e62e2cd70981275a584f3bde0d38a59b04d7f0a00
+  checksum: ed8033755a1665d7e80ee1b02c2b21d04d7564f7eb4e01dc8f55c61303106fe4122851a84af14cdfbb1c3a847656d0c4ddbb521989dc02f61c2844c84875c90c
   languageName: node
   linkType: hard
 
-"@flex-development/mlly@github:flex-development/mlly":
-  version: 0.0.0
-  resolution: "@flex-development/mlly@https://github.com/flex-development/mlly.git#commit=a58ec2055750747743bc537f32f33ad7676fdcf4"
+"@flex-development/mlly@npm:1.0.0-alpha.2":
+  version: 1.0.0-alpha.2
+  resolution: "@flex-development/mlly@npm:1.0.0-alpha.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmlly%2F1.0.0-alpha.2%2F5582d4ecf84ae2eb149f24af4783dac3e01948fc"
   dependencies:
     "@flex-development/is-builtin": "npm:1.0.1"
     "@flex-development/tutils": "npm:5.0.1"
@@ -1097,10 +1097,7 @@ __metadata:
     upath: "npm:2.0.1"
   peerDependencies:
     typescript: "*"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 9aa018cdaddd824af25cf52eb2ba463891dcb78cb2cdc72ff60f248ce81eddb6eecb0db69ed1b29acbb410622b93dddec0da90949e715ed076c03211a284bc94
+  checksum: ec8cca3db4d9602ecb61c72e7a23722e57a9c09920bb7c6decf66f3b545f48dbdc58f32057a8e8c85644761428a0cb5a53382c2103656e6aa20eb1e39deef32e
   languageName: node
   linkType: hard
 
@@ -1114,7 +1111,7 @@ __metadata:
     "@faker-js/faker": "npm:7.6.0"
     "@flex-development/docast": "github:flex-development/docast"
     "@flex-development/is-builtin": "npm:1.0.1"
-    "@flex-development/mkbuild": "npm:1.0.0-alpha.8"
+    "@flex-development/mkbuild": "npm:1.0.0-alpha.9"
     "@flex-development/tutils": "npm:5.0.1"
     "@graphql-eslint/eslint-plugin": "npm:3.13.0"
     "@sindresorhus/slugify": "npm:2.1.1"
