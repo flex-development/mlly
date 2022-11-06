@@ -18,6 +18,8 @@ head:
 
 ## Install
 
+This package is **[ESM only][2]**.
+
 ```sh
 yarn add @flex-development/mlly
 ```
@@ -49,7 +51,7 @@ To install from the GitHub Package Registry:
    ```
 
    where `GITHUB_TOKEN` is a [Personal Access Token with the `read:packages`
-   scope][2].
+   scope][3].
 
 2. Run install command
 
@@ -67,7 +69,7 @@ To install from the GitHub Package Registry:
 npm i flex-development/mlly
 ```
 
-See [npm-install][3] for details on requesting a branch, commit, or tag.
+See [npm-install][4] for details on requesting a branch, commit, or tag.
 
 #### Yarn
 
@@ -75,10 +77,11 @@ See [npm-install][3] for details on requesting a branch, commit, or tag.
 yarn add @flex-development/mlly@flex-development/mlly
 ```
 
-See [Git - Protocols][4] for details on requesting a branch, commit, or tag.
+See [Git - Protocols][5] for details on requesting a branch, commit, or tag.
 
 [1]: https://nodejs.org/api/esm.html
-[2]:
+[2]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+[3]:
     https://docs.github.com/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries
-[3]: https://docs.npmjs.com/cli/v8/commands/npm-install/#description
-[4]: https://yarnpkg.com/features/protocols/#git
+[4]: https://docs.npmjs.com/cli/v8/commands/npm-install/#description
+[5]: https://yarnpkg.com/features/protocols/#git
