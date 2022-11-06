@@ -19,7 +19,8 @@ head:
 
 Constant values exported from `mlly`.
 
-These values are used as defaults for several [library functions](index.md).
+These values are used as defaults for several [API functions](index.md) and
+[interface definitions](interfaces.md).
 
 <script setup lang='ts'>
 import { useData } from 'vitepress'
