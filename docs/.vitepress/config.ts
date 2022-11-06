@@ -552,6 +552,33 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       ]
     ]
   },
+  /**
+   * Performs HTML transformations on `code`.
+   *
+   * This includes:
+   *
+   * - Specifying text directionality by adding `dir='ltr'` to `<html>`
+   *
+   * @see https://developer.mozilla.org/docs/Web/HTML/Global_attributes/dir
+   *
+   * @param {string} code - HTML content to transform
+   * @return {string} Transformed `code`
+   */
+  transformHtml(code: string): string {
+    /**
+     * API for traversing/manipulating for {@link code}.
+     *
+     * @see https://github.com/cheeriojs/cheerio
+     *
+     * @const {CheerioAPI} $
+     */
+    const $: CheerioAPI = cheerio(code)
+
+    // specify text directionality
+    $('html').attr('dir', 'ltr')
+
+    return $.html()
+  },
   vite: {
     cacheDir: path.resolve('node_modules/.vitepress'),
     envDir: ENV_DIR,
