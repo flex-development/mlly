@@ -1,3 +1,10 @@
+## [1.0.0-alpha.2](https://github.com/flex-development/mlly/compare/1.0.0-alpha.1...1.0.0-alpha.2) (2022-11-06)
+
+
+### :robot: Continuous Integration
+
+* **workflows:** fix production docs deployment ([511fb53](https://github.com/flex-development/mlly/commit/511fb53ae423fe6d77b0447427affb0a1c0e2802))
+
 ## 1.0.0-alpha.1 (2022-11-06)
 
 
