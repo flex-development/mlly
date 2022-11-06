@@ -13,6 +13,8 @@ import findStaticImports from './find-static-imports'
  * Finds all `export`, `import`, `require`, and/or `require.resolve` statements
  * in `code`.
  *
+ * Ignores matches in comments.
+ *
  * @see {@link findDynamicImports}
  * @see {@link findExports}
  * @see {@link findRequires}

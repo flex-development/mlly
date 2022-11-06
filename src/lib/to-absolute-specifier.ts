@@ -10,10 +10,11 @@ import upath from 'upath'
  * Converts `specifier` into an absolute specifier.
  *
  * ::: info
- * The returned specifier will only include a file extension if the original
- * specifier includes an extension.
+ * The absolute specifier will only include a file extension if `specifier`
+ * includes a file extension.
  * :::
  *
+ * @see {@link URL}
  * @see https://nodejs.org/api/esm.html#terminology
  *
  * @param {URL | string} specifier - Module specifier to convert

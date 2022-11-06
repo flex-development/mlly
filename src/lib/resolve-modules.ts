@@ -12,6 +12,7 @@ import resolveModule from './resolve-module'
 /**
  * Resolves all modules in `code`.
  *
+ * @see {@link ResolveOptions}
  * @see {@link resolveModule}
  *
  * @async

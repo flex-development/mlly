@@ -9,6 +9,7 @@ import type Statement from './statement'
 /**
  * Export statement object schema.
  *
+ * @see {@link Declaration}
  * @see {@link Statement}
  *
  * @extends {Statement}
@@ -16,6 +17,8 @@ import type Statement from './statement'
 interface ExportStatement extends Statement {
   /**
    * Export declaration, if any.
+   *
+   * @see {@link Declaration}
    */
   declaration: Declaration | undefined
 

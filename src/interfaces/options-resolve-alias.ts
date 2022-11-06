@@ -23,6 +23,8 @@ interface ResolveAliasOptions {
   /**
    * Module extensions to probe for.
    *
+   * **Note**: Should be sorted by priority.
+   *
    * @default RESOLVE_EXTENSIONS
    */
   extensions?: string[] | readonly string[]

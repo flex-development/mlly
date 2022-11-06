@@ -17,7 +17,7 @@ import toRelativeSpecifier from './to-relative-specifier'
  * If `options.tsconfig` is found, `options.baseUrl` and `options.paths` will
  * be overridden with values from the config file.
  *
- * @see https://github.com/dividab/tsconfig-paths
+ * @see {@link ResolveAliasOptions}
  *
  * @param {string} specifier - Module specifier
  * @param {ResolveAliasOptions} [options={}] - Resolve alias options

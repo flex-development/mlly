@@ -28,6 +28,7 @@ import toRelativeSpecifier from './to-relative-specifier'
  * [3]: {@link toRelativeSpecifier}
  *
  * @see {@link ResolveOptions}
+ * @see {@link ErrnoException}
  *
  * @async
  *

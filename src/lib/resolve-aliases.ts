@@ -12,6 +12,7 @@ import resolveAlias from './resolve-alias'
 /**
  * Resolves path aliases in `code`.
  *
+ * @see {@link ResolveAliasOptions}
  * @see {@link resolveAlias}
  *
  * @param {string} code - Code containing path aliases

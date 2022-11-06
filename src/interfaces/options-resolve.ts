@@ -26,6 +26,8 @@ interface ResolveOptions {
    * Remove or replace file extension.
    *
    * **Note**: {@link type} must be set to `relative`.
+   *
+   * @see {@link Ext}
    */
   ext?:
     | Ext
@@ -37,6 +39,8 @@ interface ResolveOptions {
 
   /**
    * Module extensions to probe for.
+   *
+   * **Note**: Should be sorted by priority.
    *
    * @default RESOLVE_EXTENSIONS
    */
@@ -57,7 +61,7 @@ interface ResolveOptions {
   preserveSymlinks?: boolean
 
   /**
-   * Module specifier type.
+   * Module specifier type or a function to determine module specifier type.
    *
    * @see {@link SpecifierType}
    *

@@ -9,6 +9,10 @@ import { REQUIRE_STATEMENT_REGEX } from '#src/internal'
 /**
  * Finds all `require` and `require.resolve` statements in `code`.
  *
+ * Ignores matches in comments.
+ *
+ * @see {@link RequireStatement}
+ *
  * @param {string} code - Code to check
  * @return {RequireStatement[]} Require statement objects
  */

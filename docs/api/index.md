@@ -18,10 +18,6 @@ outline: 2
 
 # API Reference
 
-::: warning
-Documentation in progress.
-:::
-
 As [ECMAScript module][1] support grows, there are still several features
 missing from the Node.js ecosystem - some of which were available prior to the
 evolution of ESM.

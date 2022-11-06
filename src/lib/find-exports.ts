@@ -12,7 +12,9 @@ import {
 import type { Declaration } from '#src/types'
 
 /**
- * Finds all export statements in `code`.
+ * Finds all export statements in `code`. Ignores matches in comments.
+ *
+ * @see {@link ExportStatement}
  *
  * @param {string} code - Code to check
  * @return {ExportStatement[]} Export statement objects
