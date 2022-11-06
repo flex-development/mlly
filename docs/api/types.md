@@ -14,6 +14,7 @@ head:
   - - meta
     - name: priority
       content: 0.7
+outline: 2
 ---
 
 # Types

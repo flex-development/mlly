@@ -18,7 +18,7 @@ import type { MIMEType } from '#src/types'
  *
  * [1]: https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/Data_URIs
  * [2]: https://nodejs.org/api/esm.html#terminology
- * [3]: ./resolve-modules.ts
+ * [3]: {@link ./resolve-modules.ts}
  *
  * @see https://nodejs.org/api/esm.html#esm_data_imports
  *

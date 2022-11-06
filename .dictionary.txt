@@ -13,6 +13,7 @@ chbrelease
 colorette
 commitlintrc
 dawidd
+decamelize
 dedupe
 dessant
 docast
@@ -22,6 +23,8 @@ fbca
 fpnv
 globby
 gpgsign
+hascjssyntax
+hasesmsyntax
 hmarr
 iife
 jsxdev
@@ -36,7 +39,10 @@ nums
 pkgs
 preid
 safecrlf
+sindresorhus
 syncer
+toabsolutespecifier
+todataurl
 unist
 upath
 vates

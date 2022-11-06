@@ -13,6 +13,7 @@ head:
   - - meta
     - name: priority
       content: 0.8
+outline: 2
 ---
 
 # Constants

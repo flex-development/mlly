@@ -22,11 +22,6 @@ defineProps<{ doc: Documentation['doc'] }>()
   display: none;
 }
 
-.Doc tbody {
-  display: inline-table;
-  width: 100%;
-}
-
 .Doc tr,
 .Doc tr > td {
   border-top: 0;
@@ -47,25 +42,22 @@ defineProps<{ doc: Documentation['doc'] }>()
   min-width: 100%;
 }
 
-.Doc h3[id$='-returns'] + table + .danger {
+.Doc h3[id$='-returns'] + p + .danger {
   margin: 32px 0 -12px;
   padding: 8px 16px;
 }
 
-.Doc h3[id$='-returns'] + table > tbody > tr > td {
-  padding-block: 0;
+.Doc h3[id$='-see-also'] {
+  font-size: 16px;
+  margin-top: 16px;
 }
 
-.Doc h3[id$='-returns'] + table > tbody > tr > td:first-of-type {
-  padding-left: 0;
-}
-
-.Doc h3[id*='-throws-'],
-.Doc h3[id*='-throws-'] > code {
+.Doc h3[id*='-throws'],
+.Doc h3[id*='-throws'] > code {
   font-size: 14px;
 }
 
-.Doc h3[id*='-throws-'] {
+.Doc h3[id*='-throws'] {
   line-height: 24px;
   margin: 8px 0;
   text-transform: uppercase;

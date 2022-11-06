@@ -20,14 +20,14 @@ import toRelativeSpecifier from './to-relative-specifier'
  *
  * - Resolving without file extensions and explicit `/index` usage
  * - Resolving `@types/*` with **and** without explicit `@types/*` usage
- * - Converting resolved modules into bare and relative specifiers
+ * - Converting resolved modules into [bare][2] and [relative][3] specifiers
  * - Removing and replacing file extensions
  *
  * [1]: https://nodejs.org/api/esm.html#esm_resolver_algorithm
+ * [2]: {@link toBareSpecifier}
+ * [3]: {@link toRelativeSpecifier}
  *
  * @see {@link ResolveOptions}
- * @see {@link toBareSpecifier}
- * @see {@link toRelativeSpecifier}
  *
  * @async
  *

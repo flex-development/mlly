@@ -11,6 +11,7 @@ import type { MarkdownOptions } from 'vitepress'
  * @see https://vitepress.vuejs.org/config/app-configs#markdown
  */
 const MARKDOWN_OPTIONS: MarkdownOptions = {
+  attrs: { allowedAttributes: ['id'] },
   headers: { level: [0, 0] },
   theme: 'github-dark'
 }

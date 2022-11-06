@@ -97,7 +97,7 @@ async function useComments(): Promise<Documentation[]> {
     for (const doc of compilation) objects.push({ doc, file: p })
   }
 
-  return objects
+  return objects.sort((obj1, obj2) => obj1.doc.localeCompare(obj2.doc))
 }
 
 export default useComments

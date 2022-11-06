@@ -1117,6 +1117,7 @@ __metadata:
     "@flex-development/mkbuild": "npm:1.0.0-alpha.8"
     "@flex-development/tutils": "npm:5.0.1"
     "@graphql-eslint/eslint-plugin": "npm:3.13.0"
+    "@sindresorhus/slugify": "npm:2.1.1"
     "@types/chai": "npm:4.3.3"
     "@types/chai-string": "npm:1.4.2"
     "@types/conventional-changelog": "npm:3.1.1"
@@ -1188,6 +1189,9 @@ __metadata:
     tsconfig-paths: "npm:4.1.0"
     typescript: "npm:4.8.4"
     unified: "npm:10.1.2"
+    unist-util-remove: "npm:3.1.0"
+    unist-util-source: "npm:4.0.1"
+    unist-util-visit: "npm:4.1.1"
     upath: "npm:2.0.1"
     vercel: "npm:28.4.14"
     version-bump-prompt: "npm:6.1.0"
@@ -1807,6 +1811,26 @@ __metadata:
   version: 0.14.0
   resolution: "@sindresorhus/is@npm:0.14.0"
   checksum: e1bdaa32fb78c4c018dfc03f642635b417e4022817fb373997731942bc06c6b62b9be7270da4fc6ba19071af7cb724d7ceb1ede13166ff737a86b299ae83c361
+  languageName: node
+  linkType: hard
+
+"@sindresorhus/slugify@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@sindresorhus/slugify@npm:2.1.1"
+  dependencies:
+    "@sindresorhus/transliterate": "npm:^1.0.0"
+    escape-string-regexp: "npm:^5.0.0"
+  checksum: 976207a73abeefc607e4a5582afbc15458616e536a82f158cdda0546d82e60f865f63febba7c6785517c2ab44f642f1433dc86e0a615108740d85a0efe4ea7a9
+  languageName: node
+  linkType: hard
+
+"@sindresorhus/transliterate@npm:^1.0.0":
+  version: 1.5.0
+  resolution: "@sindresorhus/transliterate@npm:1.5.0"
+  dependencies:
+    escape-string-regexp: "npm:^5.0.0"
+    lodash.deburr: "npm:^4.1.0"
+  checksum: 3f4605fde27388d162171c36b02f33a92706ef3090e6fe24f7399ef045a3780bb5b70d404af0e9b657dee53035a634b8c05d1171cf72faeb0526c9387ee4e7d1
   languageName: node
   linkType: hard
 
@@ -5017,7 +5041,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"escape-string-regexp@npm:5.0.0":
+"escape-string-regexp@npm:5.0.0, escape-string-regexp@npm:^5.0.0":
   version: 5.0.0
   resolution: "escape-string-regexp@npm:5.0.0"
   checksum: 9c968d6e975030ef1349f1f011348de4b1fe5e13d5e0c407d38ab141d5e8a8b163ba727a9df22f3e796211aa340b73080455d3a1784af90409e2b8afaed02f76
@@ -7110,6 +7134,13 @@ __metadata:
   version: 4.3.0
   resolution: "lodash.camelcase@npm:4.3.0"
   checksum: 773d36b52707814ad5b6880fe8ccefa1a490a69cb5d233b9600e00a310ef64b639f56760e383743ac06901f2c073ee4c317b19896397bf1cf94d1cbcf2706923
+  languageName: node
+  linkType: hard
+
+"lodash.deburr@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "lodash.deburr@npm:4.1.0"
+  checksum: b3a3746bbfc3666b1cc36c7f07d3498e96abbc653d6cd1d048b77910eec819aa0af550ed1c5ef007c6589f6d4257afe9277538fc4d16661445755c784a8a1566
   languageName: node
   linkType: hard
 
@@ -10215,6 +10246,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unist-util-is@npm:^5.0.0":
+  version: 5.1.1
+  resolution: "unist-util-is@npm:5.1.1"
+  checksum: b9fb01ea928b0626bb26c85cd4e7ffbeb4ed95ee9ab32c31a99a3971d220ddc3aef9155c435c190cefc022bd8503febf982bb2a8bdb7b5e257788af0b637ac6c
+  languageName: node
+  linkType: hard
+
+"unist-util-remove@npm:3.1.0":
+  version: 3.1.0
+  resolution: "unist-util-remove@npm:3.1.0"
+  dependencies:
+    "@types/unist": "npm:^2.0.0"
+    unist-util-is: "npm:^5.0.0"
+    unist-util-visit-parents: "npm:^5.0.0"
+  checksum: 947582750430decc878c0bd0c51c46047c68ea4e22ab2d1f586878d430f7e3cacb784e520327f7663c92f7b442764454eafb724182db263d1a432e615c0e5b39
+  languageName: node
+  linkType: hard
+
+"unist-util-source@npm:4.0.1":
+  version: 4.0.1
+  resolution: "unist-util-source@npm:4.0.1"
+  dependencies:
+    "@types/unist": "npm:^2.0.0"
+    vfile: "npm:^5.0.0"
+    vfile-location: "npm:^4.0.0"
+  checksum: 926c41a1c472eadeadbe0712ca3e97492db2d0c8f5cc079eb62e4fcf9d85eab2c90d52d57d180e1275ac911a9afcf29eb947bb5b6e0981df26eacf3ff2d8fd13
+  languageName: node
+  linkType: hard
+
 "unist-util-stringify-position@npm:^2.0.0":
   version: 2.0.3
   resolution: "unist-util-stringify-position@npm:2.0.3"
@@ -10230,6 +10290,27 @@ __metadata:
   dependencies:
     "@types/unist": "npm:^2.0.0"
   checksum: 7124b98685226bcc826903faa6acd4c3c4e27837f4c57d5f2411c877a38fab22be68714019a18e020ca7719e035d6060532d2396d70fe1cfd14286e360e90ace
+  languageName: node
+  linkType: hard
+
+"unist-util-visit-parents@npm:^5.0.0, unist-util-visit-parents@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "unist-util-visit-parents@npm:5.1.1"
+  dependencies:
+    "@types/unist": "npm:^2.0.0"
+    unist-util-is: "npm:^5.0.0"
+  checksum: aa40e8d146ff3859a24a9ec919e9faf7bb6cf70c796c3c2e5273c6af96c13365f4e255147010fa03d4b24ba0781b0cc767582c790045408e684b50cc221e1340
+  languageName: node
+  linkType: hard
+
+"unist-util-visit@npm:4.1.1":
+  version: 4.1.1
+  resolution: "unist-util-visit@npm:4.1.1"
+  dependencies:
+    "@types/unist": "npm:^2.0.0"
+    unist-util-is: "npm:^5.0.0"
+    unist-util-visit-parents: "npm:^5.1.1"
+  checksum: aee1abf402934515ce3ff77b8159b4e87d4b13d7cacdad64fe00393fbeecd588b7d5eb1f7999b3e39bf9d68a30760564ec66ff5e0359ddf5f66da93a3d20230b
   languageName: node
   linkType: hard
 
@@ -10422,7 +10503,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vfile-location@npm:4.0.1":
+"vfile-location@npm:4.0.1, vfile-location@npm:^4.0.0":
   version: 4.0.1
   resolution: "vfile-location@npm:4.0.1"
   dependencies:

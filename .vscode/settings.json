@@ -87,6 +87,7 @@
       "md",
       "mjs",
       "ts",
+      "vue",
       "yml"
     ],
     "overrideConfigFile": "./.eslintrc.cjs"
@@ -98,6 +99,7 @@
     "jsonc",
     "markdown",
     "typescript",
+    "vue",
     "yaml"
   ],
   "files.associations": {
