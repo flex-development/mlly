@@ -16,11 +16,17 @@ head:
 outline: 2
 ---
 
-# API
+# API Reference
 
 ::: warning
 Documentation in progress.
 :::
+
+As [ECMAScript module][1] support grows, there are still several features
+missing from the Node.js ecosystem - some of which were available prior to the
+evolution of ESM.
+
+`mlly` exposes several tools to bridge this gap.
 
 <script setup lang='ts'>
 import { useData } from 'vitepress'
@@ -41,3 +47,5 @@ const docs: Documentation[] = documentation.filter(doc => {
 </script>
 
 <Doc v-for='doc in docs' :doc='doc.doc' :key='doc.file' />
+
+[1]: https://nodejs.org/api/esm.html
