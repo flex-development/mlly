@@ -39,7 +39,6 @@
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "preserveConstEnums": true,
     "preserveSymlinks": true,
-    "preserveValueImports": true,
     "pretty": true,
     "resolveJsonModule": true,
     "rootDir": ".",
