@@ -227,7 +227,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       ]
     }))
   },
-  cleanUrls: 'with-subfolders',
+  cleanUrls: 'without-subfolders',
   description: pkg.description,
   head: [
     // improve speed of first search query
