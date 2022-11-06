@@ -31,11 +31,10 @@ env:
     ${{ github.event.inputs.artifact || github.event.release.assets[0].browser_download_url }}
   NODE_VERSION: 16
   SCOPE: ${{ format('@{0}', github.repository_owner) }}
+  TAG: ${{ github.event.inputs.tag || github.event.release.tag_name }}
 jobs:
   metadata:
     runs-on: ubuntu-latest
-    env:
-      TAG: ${{ github.event.inputs.tag || github.event.release.tag_name }}
     outputs:
       dist-tag: ${{ steps.dist-tag.outputs.flag }}
       version: ${{ steps.version.outputs.result }}
