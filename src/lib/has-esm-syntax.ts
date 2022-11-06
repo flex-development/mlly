@@ -15,7 +15,7 @@ import { ESM_SYNTAX_REGEX } from '#src/internal'
  * - `import.meta.(env|resolve|url)`
  *
  * @param {string} code - Code to check
- * @return {boolean} `true` if `code` contains cjs syntax, `false` otherwise
+ * @return {boolean} `true` if `code` contains esm syntax, `false` otherwise
  */
 const hasESMSyntax = (code: string): boolean => !!code.match(ESM_SYNTAX_REGEX)
 
