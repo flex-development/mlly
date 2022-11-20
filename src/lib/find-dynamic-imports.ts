@@ -9,7 +9,7 @@ import { DYNAMIC_IMPORT_REGEX } from '#src/internal'
 /**
  * Finds all dynamic import statements in `code`. Ignores matches in comments.
  *
- * @see {@link DynamicImport}
+ * @see {@linkcode DynamicImport}
  *
  * @param {string} code - Code to check
  * @return {DynamicImport[]} Dynamic import statement objects

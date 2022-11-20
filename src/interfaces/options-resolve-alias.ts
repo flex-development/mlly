@@ -54,7 +54,7 @@ interface ResolveAliasOptions {
   /**
    * Path mappings.
    *
-   * **Note**: Should be relative to {@link baseUrl}.
+   * **Note**: Should be relative to {@linkcode baseUrl}.
    *
    * @see https://www.typescriptlang.org/tsconfig#paths
    *

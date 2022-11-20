@@ -9,7 +9,7 @@ import { STATIC_IMPORT_REGEX } from '#src/internal'
 /**
  * Finds all static import statements in `code`. Ignores matches in comments.
  *
- * @see {@link StaticImport}
+ * @see {@linkcode StaticImport}
  *
  * @param {string} code - Code to check
  * @return {StaticImport[]} Static import statement objects

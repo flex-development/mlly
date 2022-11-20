@@ -14,7 +14,7 @@ import type { Declaration } from '#src/types'
 /**
  * Finds all export statements in `code`. Ignores matches in comments.
  *
- * @see {@link ExportStatement}
+ * @see {@linkcode ExportStatement}
  *
  * @param {string} code - Code to check
  * @return {ExportStatement[]} Export statement objects
@@ -33,7 +33,7 @@ const findExports = (code: string): ExportStatement[] => {
     const { declaration = 'default', name = '' } = groups
 
     /**
-     * {@link statement} copy.
+     * {@linkcode statement} copy.
      *
      * @const {string} stmt
      */

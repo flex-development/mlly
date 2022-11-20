@@ -24,11 +24,11 @@ import toRelativeSpecifier from './to-relative-specifier'
  * - Removing and replacing file extensions
  *
  * [1]: https://nodejs.org/api/esm.html#esm_resolver_algorithm
- * [2]: {@link toBareSpecifier}
- * [3]: {@link toRelativeSpecifier}
+ * [2]: {@link ./to-bare-specifier.ts}
+ * [3]: {@link ./to-relative-specifier.ts}
  *
- * @see {@link ResolveOptions}
- * @see {@link ErrnoException}
+ * @see {@linkcode ResolveOptions}
+ * @see {@linkcode ErrnoException}
  *
  * @async
  *
@@ -51,7 +51,7 @@ const resolveModule = async (
   } = options
 
   /**
-   * Parent module URL to resolve {@link specifier} from.
+   * Parent module URL to resolve {@linkcode specifier} from.
    *
    * @const {URL} base
    */
@@ -80,11 +80,11 @@ const resolveModule = async (
   tries.unshift(specifier)
 
   /**
-   * {@link moduleResolve} error codes to ignore when attempting to resolve
+   * {@linkcode moduleResolve} error codes to ignore when attempting to resolve
    * module ids without URL schemes.
    *
    * **Note**: If an error is thrown, it'll be reported **_after_** all module
-   * ids in {@link tries} have been evaluated.
+   * ids in {@linkcode tries} have been evaluated.
    *
    * @const {Set<NonNullable<ErrnoException['code']>>} ignore
    */

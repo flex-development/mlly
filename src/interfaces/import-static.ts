@@ -8,7 +8,7 @@ import type ImportStatement from './statement-import'
 /**
  * Static import statement object schema.
  *
- * @see {@link ImportStatement}
+ * @see {@linkcode ImportStatement}
  *
  * @extends {ImportStatement}
  */

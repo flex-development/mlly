@@ -11,8 +11,8 @@ import hasESMSyntax from './has-esm-syntax'
  *
  * Ignores matches in comments.
  *
- * @see {@link hasCJSSyntax}
- * @see {@link hasESMSyntax}
+ * @see {@linkcode hasCJSSyntax}
+ * @see {@linkcode hasESMSyntax}
  *
  * @param {string} code - Code to check
  * @return {{ cjs: boolean; esm: boolean; mixed: boolean }} Detection result

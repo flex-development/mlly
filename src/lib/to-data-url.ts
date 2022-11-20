@@ -20,7 +20,7 @@ import type { MIMEType } from '#src/types'
  * [2]: https://nodejs.org/api/esm.html#terminology
  * [3]: {@link ./resolve-modules.ts}
  *
- * @see {@link MIMEType}
+ * @see {@linkcode MIMEType}
  * @see https://nodejs.org/api/esm.html#esm_data_imports
  *
  * @param {string} code - Code to convert

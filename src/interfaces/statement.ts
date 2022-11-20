@@ -8,7 +8,7 @@ import type { StatementType } from '#src/types'
 /**
  * CommonJS or ESM statement object schema.
  *
- * @see {@link StatementType}
+ * @see {@linkcode StatementType}
  */
 interface Statement {
   /**
@@ -17,7 +17,7 @@ interface Statement {
   code: string
 
   /**
-   * Ending index of {@link code} in source content.
+   * Ending index of {@linkcode code} in source content.
    */
   end: number
 
@@ -27,7 +27,7 @@ interface Statement {
   specifier: string | undefined
 
   /**
-   * Starting index of {@link code} in source content.
+   * Starting index of {@linkcode code} in source content.
    */
   start: number
 

@@ -17,7 +17,7 @@ import toRelativeSpecifier from './to-relative-specifier'
  * If `options.tsconfig` is found, `options.baseUrl` and `options.paths` will
  * be overridden with values from the config file.
  *
- * @see {@link ResolveAliasOptions}
+ * @see {@linkcode ResolveAliasOptions}
  *
  * @param {string} specifier - Module specifier
  * @param {ResolveAliasOptions} [options={}] - Resolve alias options
@@ -62,7 +62,7 @@ const resolveAlias = (
   )
 
   /**
-   * Possible path match for {@link specifier}.
+   * Possible path match for {@linkcode specifier}.
    *
    * @var {string | undefined} match
    */

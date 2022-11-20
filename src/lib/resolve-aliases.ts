@@ -12,8 +12,8 @@ import resolveAlias from './resolve-alias'
 /**
  * Resolves path aliases in `code`.
  *
- * @see {@link ResolveAliasOptions}
- * @see {@link resolveAlias}
+ * @see {@linkcode ResolveAliasOptions}
+ * @see {@linkcode resolveAlias}
  *
  * @param {string} code - Code containing path aliases
  * @param {ResolveAliasOptions} [options={}] - Resolve alias options

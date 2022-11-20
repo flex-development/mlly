@@ -14,7 +14,7 @@ import upath from 'upath'
  * includes a file extension.
  * :::
  *
- * @see {@link URL}
+ * @see {@linkcode URL}
  * @see https://nodejs.org/api/esm.html#terminology
  *
  * @param {URL | string} specifier - Module specifier to convert

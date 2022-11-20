@@ -11,7 +11,7 @@ import { REQUIRE_STATEMENT_REGEX } from '#src/internal'
  *
  * Ignores matches in comments.
  *
- * @see {@link RequireStatement}
+ * @see {@linkcode RequireStatement}
  *
  * @param {string} code - Code to check
  * @return {RequireStatement[]} Require statement objects

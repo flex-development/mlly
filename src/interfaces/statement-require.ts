@@ -8,7 +8,7 @@ import type Statement from './statement'
 /**
  * Require statement object schema.
  *
- * @see {@link Statement}
+ * @see {@linkcode Statement}
  *
  * @extends {Statement}
  */

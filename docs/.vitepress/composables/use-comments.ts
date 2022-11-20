@@ -3,7 +3,8 @@
  * @module docs/vitepress/composables/useComments
  */
 
-import docast, { type Options, type Root } from '@flex-development/docast'
+import type { Root } from '@flex-development/docast'
+import docastParse, { type Options } from '@flex-development/docast-parse'
 import { globby } from 'globby'
 import fs from 'node:fs/promises'
 import path, { type ParsedPath } from 'node:path'
@@ -81,7 +82,7 @@ async function useComments(): Promise<Documentation[]> {
      * @const {Root} tree
      */
     const tree: Root = unified()
-      .use<[Options?], string, Root>(docast)
+      .use<[Options?], string, Root>(docastParse)
       .parse(file)
 
     /**

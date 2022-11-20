@@ -52,7 +52,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
         if (node.type !== Type.COMMENT) return false
 
         // remove comments not associated with declarations
-        if (node.data.context === null) return true
+        if ((node as Comment).context === null) return true
 
         // remove function and interface member comments
         return node.position?.start.column !== 1
@@ -111,7 +111,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
         case this.isConstant(node):
         case this.isInterface(node):
         case this.isType(node):
-          doc += this.snippet(node.data.context!.position) + '\n\n'
+          doc += this.snippet(node.context!.position) + '\n\n'
           doc += this.references(node)
           break
       }
@@ -180,7 +180,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
     const visitor: BuildVisitor<Comment, Type.IMPLICIT_DESCRIPTION> = (
       visited: ImplicitDescription
     ): VisitorResult => {
-      description = visited.data.value + '\n\n'
+      description = visited.value + '\n\n'
       return EXIT
     }
 
@@ -217,12 +217,12 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
       visited: BlockTag
     ): VisitorResult => {
       // do nothing if tag name is not @example
-      if (visited.data.tag !== '@example') return CONTINUE
+      if (visited.tag !== '@example') return CONTINUE
 
       // add example
-      example += visited.data.text.startsWith('`')
-        ? visited.data.text + '\n'
-        : `\`\`\`ts\n${visited.data.text}\n\`\`\`\n`
+      example += visited.text.startsWith('`')
+        ? visited.text + '\n'
+        : `\`\`\`ts\n${visited.text}\n\`\`\`\n`
 
       return EXIT
     }
@@ -258,7 +258,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    * @return {string} Declaration name as markdown heading
    */
   protected identifier(node: Comment, depth: 1 | 2 | 3 | 4 | 5 | 6): string {
-    return this.heading(`\`${node.data.context!.identifier}\``, depth)
+    return this.heading(`\`${node.context!.identifier}\``, depth)
   }
 
   /**
@@ -270,7 +270,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    * @return {boolean} `true` if `node` represents arrow function
    */
   protected isArrowFunction(node: Comment): boolean {
-    return node.data.context?.kind === Kind.CONST && this.returns(node) !== ''
+    return node.context?.kind === Kind.CONST && this.returns(node) !== ''
   }
 
   /**
@@ -299,7 +299,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
     const visitor: BuildVisitor<Comment, Type.BLOCK_TAG> = (
       visited: BlockTag
     ): VisitorResult => {
-      if (visited.data.tag !== '@const') return CONTINUE
+      if (visited.tag !== '@const') return CONTINUE
       constant = true
       return EXIT
     }
@@ -319,7 +319,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    * @return {boolean} `true` if `node` represents interface
    */
   protected isInterface(node: Comment): boolean {
-    return node.data.context?.kind === Kind.INTERFACE
+    return node.context?.kind === Kind.INTERFACE
   }
 
   /**
@@ -331,7 +331,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    * @return {boolean} `true` if `node` represents type definition
    */
   protected isType(node: Comment): boolean {
-    return node.data.context?.kind === Kind.TYPE
+    return node.context?.kind === Kind.TYPE
   }
 
   /**
@@ -346,7 +346,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    */
   protected params(node: Comment): string {
     // get declaration name
-    const { identifier } = node.data.context!
+    const { identifier } = node.context!
 
     /**
      * Markdown table containing function parameters.
@@ -364,7 +364,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
     const visitor: BuildVisitor<Comment, Type.BLOCK_TAG> = (
       visited: BlockTag
     ): VisitorResult => {
-      if (visited.data.tag !== '@param') return CONTINUE
+      if (visited.tag !== '@param') return CONTINUE
 
       // add table headers
       if (params === '') {
@@ -373,7 +373,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
       }
 
       // get parameter name, description, and type
-      const { groups }: RegExpMatchArray = visited.data.value
+      const { groups }: RegExpMatchArray = visited.value
         .matchAll(/^@\w+ {(?<type>.+)} (?<name>.+?) - (?<description>.+)/g)
         .next().value
 
@@ -399,7 +399,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    */
   protected references(node: Comment): string {
     // get declaration name
-    const { identifier } = node.data.context!
+    const { identifier } = node.context!
 
     /**
      * Markdown list containing reference links.
@@ -419,7 +419,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
       visited: BlockTag
     ): VisitorResult => {
       // do nothing if tag name is not @see
-      if (visited.data.tag !== '@see') return CONTINUE
+      if (visited.tag !== '@see') return CONTINUE
 
       // add list header
       if (list.length === 0) {
@@ -427,11 +427,11 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
       }
 
       // add list item
-      if (visited.data.text.startsWith('{@link')) {
-        const [{ data }] = visited.children as [InlineTag]
-        list += `- [\`${data.text}\`](${visited.data.text})\n`
+      if (visited.text.startsWith('{@link')) {
+        const [{ text }] = visited.children as [InlineTag]
+        list += `- [\`${text}\`](${visited.text})\n`
       } else {
-        list += `- ${visited.data.text}\n`
+        list += `- ${visited.text}\n`
       }
 
       return CONTINUE
@@ -455,7 +455,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    */
   protected returns(node: Comment): string {
     // get declaration name
-    const { identifier } = node.data.context!
+    const { identifier } = node.context!
 
     /**
      * Markdown section documenting the value a function returns.
@@ -479,7 +479,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
        *
        * @const {RegExpMatchArray | undefined} match
        */
-      const match: RegExpMatchArray | undefined = visited.data.value
+      const match: RegExpMatchArray | undefined = visited.value
         .matchAll(/^@return {(?<type>.+)} (?<description>.+)/g)
         .next().value
 
@@ -557,7 +557,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    */
   protected throws(node: Comment): string {
     // get declaration name
-    const { identifier } = node.data.context!
+    const { identifier } = node.context!
 
     /**
      * Markdown section documenting the value a function throws.
@@ -581,7 +581,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
        *
        * @const {RegExpMatchArray | undefined} match
        */
-      const match: RegExpMatchArray | undefined = visited.data.value
+      const match: RegExpMatchArray | undefined = visited.value
         .matchAll(/^@throws {(?<type>.+)}(?: (?<description>.+))?/g)
         .next().value
 

@@ -15,10 +15,10 @@ import findStaticImports from './find-static-imports'
  *
  * Ignores matches in comments.
  *
- * @see {@link findDynamicImports}
- * @see {@link findExports}
- * @see {@link findRequires}
- * @see {@link findStaticImports}
+ * @see {@linkcode findDynamicImports}
+ * @see {@linkcode findExports}
+ * @see {@linkcode findRequires}
+ * @see {@linkcode findStaticImports}
  *
  * @param {string} [code=''] - Code to extract statements from
  * @return {Statement[]} Extracted statements

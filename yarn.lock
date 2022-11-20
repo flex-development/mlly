@@ -1034,20 +1034,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/docast@github:flex-development/docast":
+"@flex-development/docast-parse@github:flex-development/docast-parse":
   version: 0.0.0
-  resolution: "@flex-development/docast@https://github.com/flex-development/docast.git#commit=dd4b6c3b2d4e770df99f3a2b90032f228dcd76a8"
+  resolution: "@flex-development/docast-parse@https://github.com/flex-development/docast-parse.git#commit=27c73c7c03df4d92585c538c1f8214886b1fd0a9"
   dependencies:
+    "@flex-development/docast": "npm:1.0.0-alpha.9"
     "@flex-development/tutils": "npm:5.0.1"
+    "@types/unist": "npm:2.0.6"
+    detab: "npm:3.0.2"
+    escape-string-regexp: "npm:5.0.0"
     unist-builder: "npm:3.0.0"
-    vfile: "npm:5.3.5"
+    unist-util-source: "npm:4.0.1"
+    vfile: "npm:5.3.6"
     vfile-location: "npm:4.0.1"
+  checksum: 8e4f9e4c379ca3298c348d209cbbbf606800f07618460373bc929e58a099d715f96aa8a398ce93331e240e613e37aa7b39beaa2cbff75af82717613e306c183c
+  languageName: node
+  linkType: hard
+
+"@flex-development/docast@npm:1.0.0-alpha.9":
+  version: 1.0.0-alpha.9
+  resolution: "@flex-development/docast@npm:1.0.0-alpha.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fdocast%2F1.0.0-alpha.9%2F66ff339ebec32a579949cdadfca879963472ff4b"
   peerDependencies:
+    "@flex-development/tutils": ">=5.0.1"
     "@types/unist": ">=2.0.6"
-  peerDependenciesMeta:
-    "@types/unist":
-      optional: true
-  checksum: 568eb2b0bb0e60be49ac4dc019bf28e9cef1671af70881e3d0964061419f9e6a4867dcf1fb28cb74ca110ac8a61744fa7672576aef0fdc74d03981f93c13455c
+  checksum: 6f12286ac8ef6ec164730cb34c30a5f366ace7f137636c851fa6ccf8bc0aeb8ce5dfcc49a2b43aebc0850c7f3e9142a1ff4db9e5df593eb85f87e9411b9f23e7
   languageName: node
   linkType: hard
 
@@ -1109,7 +1119,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:17.2.0"
     "@commitlint/types": "npm:17.0.0"
     "@faker-js/faker": "npm:7.6.0"
-    "@flex-development/docast": "github:flex-development/docast"
+    "@flex-development/docast-parse": "github:flex-development/docast-parse"
     "@flex-development/is-builtin": "npm:1.0.1"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.9"
     "@flex-development/tutils": "npm:5.0.1"
@@ -4565,6 +4575,13 @@ __metadata:
   version: 1.1.2
   resolution: "depd@npm:1.1.2"
   checksum: e9fb93771e7cf3d88c4e38ca95742f7c58cae31928eb5e67a1a14d970325a02755451bb7fafc2db72333a5cf7fc14e07e4f8d709c0df70143355e77e8d090bac
+  languageName: node
+  linkType: hard
+
+"detab@npm:3.0.2":
+  version: 3.0.2
+  resolution: "detab@npm:3.0.2"
+  checksum: ccd42aa42a082ff0944ba26b60919d4867559878503478c419c08619dfb11994f94928a0c8467d56895dc6096f24a764d33456cd98900662a023c2a16beea393
   languageName: node
   linkType: hard
 
@@ -10520,15 +10537,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vfile@npm:5.3.5, vfile@npm:^5.0.0":
-  version: 5.3.5
-  resolution: "vfile@npm:5.3.5"
+"vfile@npm:5.3.6, vfile@npm:^5.0.0":
+  version: 5.3.6
+  resolution: "vfile@npm:5.3.6"
   dependencies:
     "@types/unist": "npm:^2.0.0"
     is-buffer: "npm:^2.0.0"
     unist-util-stringify-position: "npm:^3.0.0"
     vfile-message: "npm:^3.0.0"
-  checksum: 4218377dc295aa22dd99ed47d148d75b73a6137d6de98cdc6d13694b7075411b1722867ce7a7e02b624ddd86e80a84afdde77489dbacec5e65532259beee6b55
+  checksum: a31b69ea7dd0aa23da7c99b0b96fa6e3f9cfd57f2a1010dad4493762b5e3a38688638ca8ca9fb0f93602f67f47208fedbee189d81fd949ef42b8bb335c1a824f
   languageName: node
   linkType: hard
 

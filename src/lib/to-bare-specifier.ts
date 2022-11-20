@@ -26,9 +26,9 @@ import upath from 'upath'
  * a file extension.
  * :::
  *
- * @see {@link CONDITIONS}
- * @see {@link URL}
- * @see {@link ErrnoException}
+ * @see {@linkcode CONDITIONS}
+ * @see {@linkcode URL}
+ * @see {@linkcode ErrnoException}
  * @see https://nodejs.org/api/esm.html#terminology
  *
  * @async
@@ -127,7 +127,7 @@ const toBareSpecifier = async (
   const { dir } = upath.parse(path.replace(/^\.\//, ''))
 
   /**
-   * Paths to attempt finding in {@link exports}.
+   * Paths to attempt finding in {@linkcode exports}.
    *
    * @const {Set<string>} tries
    */
