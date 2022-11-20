@@ -3,7 +3,9 @@
   "description": "ECMAScript module utilities",
   "version": "1.0.0-alpha.2",
   "keywords": [
+    "ecmascript-modules",
     "esm",
+    "esmodules",
     "module",
     "typescript"
   ],
