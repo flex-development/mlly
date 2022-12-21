@@ -45,6 +45,7 @@ yarn-error.log*
 *.lcov
 __tests__/report.json
 coverage/
+vitest.config.*.timestamp-*.mjs
 
 # ESLint
 # ------------------------------------------------------------------------------

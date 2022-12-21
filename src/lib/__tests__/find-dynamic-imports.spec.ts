@@ -3,7 +3,7 @@
  * @module mlly/lib/tests/findDynamicImports/unit
  */
 
-import dedent from 'ts-dedent'
+import { dedent } from 'ts-dedent'
 import testSubject from '../find-dynamic-imports'
 
 describe('unit:lib/findDynamicImports', () => {

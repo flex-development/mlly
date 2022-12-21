@@ -3,7 +3,7 @@
  * @module mlly/lib/tests/findExports/unit
  */
 
-import dedent from 'ts-dedent'
+import { dedent } from 'ts-dedent'
 import testSubject from '../find-exports'
 
 describe('unit:lib/findExports', () => {

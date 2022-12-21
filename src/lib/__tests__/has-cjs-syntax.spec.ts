@@ -4,7 +4,7 @@
  */
 
 import aggregate_error_ponyfill from '#fixtures/aggregate-error-ponyfill.cjs'
-import dedent from 'ts-dedent'
+import { dedent } from 'ts-dedent'
 import testSubject from '../has-cjs-syntax'
 
 describe('unit:lib/hasCJSSyntax', () => {

@@ -4,7 +4,7 @@
  */
 
 import type { MIMEType } from '#src/types'
-import dedent from 'ts-dedent'
+import { dedent } from 'ts-dedent'
 import testSubject from '../to-data-url'
 
 describe('unit:lib/toDataURL', () => {

@@ -3,7 +3,7 @@
  * @module mlly/lib/tests/hasESMSyntax/unit
  */
 
-import dedent from 'ts-dedent'
+import { dedent } from 'ts-dedent'
 import testSubject from '../has-esm-syntax'
 
 describe('unit:lib/hasESMSyntax', () => {

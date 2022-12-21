@@ -3,7 +3,7 @@
  * @module mlly/lib/tests/findRequires/unit
  */
 
-import dedent from 'ts-dedent'
+import { dedent } from 'ts-dedent'
 import testSubject from '../find-requires'
 
 describe('unit:lib/findRequires', () => {

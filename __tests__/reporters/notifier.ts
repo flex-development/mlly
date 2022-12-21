@@ -8,7 +8,7 @@ import notifier from 'node-notifier'
 import type NotificationCenter from 'node-notifier/notifiers/notificationcenter'
 import { performance } from 'node:perf_hooks'
 import { promisify } from 'node:util'
-import dedent from 'ts-dedent'
+import { dedent } from 'ts-dedent'
 import type { File, Reporter, Task, Test, Vitest } from 'vitest'
 
 /**
@@ -81,7 +81,7 @@ class Notifier implements Reporter {
 
       message = dedent`
         ${passes} tests passed in ${
-        time <= 1000 ? `${Math.round(time)}ms` : `${(time / 1000).toFixed(2)}s`
+        time > 1000 ? `${(time / 1000).toFixed(2)}ms` : `${Math.round(time)}ms`
       }
       `
 
@@ -128,7 +128,7 @@ class Notifier implements Reporter {
    */
   public onInit(context: Vitest): void {
     this.ctx = context
-    this.start = performance.now()
+    return void (this.start = performance.now())
   }
 
   /**
@@ -140,10 +140,18 @@ class Notifier implements Reporter {
    * @return {Test[]} `Test` object array
    */
   protected tests(tasks: OneOrMany<Task> = []): Test[] {
-    return (Array.isArray(tasks) ? tasks : [tasks]).flatMap(task => {
-      if (task.type === 'benchmark') return []
+    const { mode } = this.ctx
 
-      return task.type === 'test'
+    return (Array.isArray(tasks) ? tasks : [tasks]).flatMap(task => {
+      const { type } = task
+
+      if (mode === 'typecheck' && type === 'suite' && task.tasks.length === 0) {
+        return [task] as unknown as [Test]
+      }
+
+      return type === 'benchmark' || type === 'typecheck'
+        ? []
+        : type === 'test'
         ? [task]
         : task.tasks.flatMap(t => (t.type === 'test' ? [t] : this.tests(t)))
     })

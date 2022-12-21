@@ -4,7 +4,7 @@
  */
 
 import { pathToFileURL } from 'node:url'
-import dedent from 'ts-dedent'
+import { dedent } from 'ts-dedent'
 import resolveModule from '../resolve-module'
 import testSubject from '../resolve-modules'
 
