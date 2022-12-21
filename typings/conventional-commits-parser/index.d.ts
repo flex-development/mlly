@@ -21,6 +21,6 @@ declare module 'conventional-commits-parser' {
   export interface Commit extends CommitRaw {
     raw: CommitRaw
     shortHash: string
-    version?: string
+    version?: string | undefined
   }
 }

@@ -9,7 +9,7 @@
     "declarationMap": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "exactOptionalPropertyTypes": false,
+    "exactOptionalPropertyTypes": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",

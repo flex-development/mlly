@@ -18,7 +18,7 @@ interface ResolveAliasOptions {
    *
    * @default process.cwd()
    */
-  baseUrl?: string
+  baseUrl?: string | undefined
 
   /**
    * Module extensions to probe for.
@@ -27,7 +27,7 @@ interface ResolveAliasOptions {
    *
    * @default RESOLVE_EXTENSIONS
    */
-  extensions?: string[] | readonly string[]
+  extensions?: string[] | readonly string[] | undefined
 
   /**
    * Checks for the existence of a file at `path`.
@@ -44,12 +44,12 @@ interface ResolveAliasOptions {
    *
    * @default ['main', 'module']
    */
-  mainFields?: OneOrMany<string>[]
+  mainFields?: OneOrMany<string>[] | undefined
 
   /**
    * Absolute path to file containing path alias.
    */
-  parent?: string
+  parent?: string | undefined
 
   /**
    * Path mappings.
@@ -60,7 +60,7 @@ interface ResolveAliasOptions {
    *
    * @default {}
    */
-  paths?: Record<string, string[]>
+  paths?: Record<string, string[]> | undefined
 
   /**
    * Synchronously returns the contents of `filename`.
@@ -73,7 +73,7 @@ interface ResolveAliasOptions {
   /**
    * Absolute path to tsconfig file.
    */
-  tsconfig?: string
+  tsconfig?: string | undefined
 }
 
 export type { ResolveAliasOptions as default }

@@ -20,7 +20,7 @@ interface ResolveOptions {
    *
    * @default CONDITIONS
    */
-  conditions?: Set<string> | string[] | readonly string[]
+  conditions?: Set<string> | string[] | readonly string[] | undefined
 
   /**
    * Remove or replace file extension.
@@ -36,6 +36,7 @@ interface ResolveOptions {
         specifier: string,
         resolved: string
       ) => EmptyString | Ext | PromiseLike<EmptyString | Ext>)
+    | undefined
 
   /**
    * Module extensions to probe for.
@@ -44,21 +45,21 @@ interface ResolveOptions {
    *
    * @default RESOLVE_EXTENSIONS
    */
-  extensions?: string[] | readonly string[]
+  extensions?: string[] | readonly string[] | undefined
 
   /**
    * Parent module URL or path to resolve from.
    *
    * @default import.meta.url
    */
-  parent?: URL | string
+  parent?: URL | string | undefined
 
   /**
    * Keep symlinks instead of resolving them.
    *
    * @default false
    */
-  preserveSymlinks?: boolean
+  preserveSymlinks?: boolean | undefined
 
   /**
    * Module specifier type or a function to determine module specifier type.
@@ -70,6 +71,7 @@ interface ResolveOptions {
   type?:
     | SpecifierType
     | ((resolved: string) => PromiseLike<SpecifierType> | SpecifierType)
+    | undefined
 }
 
 export type { ResolveOptions as default }
