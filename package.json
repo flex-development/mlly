@@ -77,6 +77,7 @@
   "dependencies": {
     "@flex-development/is-builtin": "1.0.1",
     "@flex-development/pathe": "1.0.1",
+    "@flex-development/tsconfig-types": "2.0.1",
     "@flex-development/tutils": "6.0.0-alpha.7",
     "import-meta-resolve": "2.1.0",
     "node-package-exports": "1.0.2",
@@ -174,14 +175,6 @@
     "vue-eslint-parser": "9.1.0",
     "vue-tsc": "1.0.9",
     "yaml-eslint-parser": "1.1.0"
-  },
-  "peerDependencies": {
-    "typescript": "*"
-  },
-  "peerDependenciesMeta": {
-    "typescript": {
-      "optional": true
-    }
   },
   "resolutions": {
     "@ardatan/sync-fetch": "larsgw/sync-fetch#head=worker_threads",

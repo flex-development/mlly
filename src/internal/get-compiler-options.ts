@@ -4,8 +4,8 @@
  */
 
 import pathe from '@flex-development/pathe'
+import type { CompilerOptions } from '@flex-development/tsconfig-types'
 import { loadTsconfig } from 'tsconfig-paths/lib/tsconfig-loader'
-import type CompilerOptionsJson from './compiler-options-json'
 
 /**
  * Retrieves TypeScript compiler options from `path`.
@@ -19,19 +19,19 @@ import type CompilerOptionsJson from './compiler-options-json'
  * @param {string} [path=pathe.resolve('tsconfig.json')] - Tsconfig path
  * @param {(path: string) => boolean} [exists] - File existence checker
  * @param {(filename: string) => string} [read] - File content reader
- * @return {CompilerOptionsJson} User compiler options
+ * @return {CompilerOptions} User compiler options
  */
 const getCompilerOptions = (
   path: string = pathe.resolve('tsconfig.json'),
   exists?: (path: string) => boolean,
   read?: (filename: string) => string
-): CompilerOptionsJson => {
+): CompilerOptions => {
   /**
    * Tsconfig object.
    *
-   * @const {{ compilerOptions?: CompilerOptionsJson } | undefined} t
+   * @const {{ compilerOptions?: CompilerOptions } | undefined} t
    */
-  const t: { compilerOptions?: CompilerOptionsJson } | undefined = loadTsconfig(
+  const t: { compilerOptions?: CompilerOptions } | undefined = loadTsconfig(
     path,
     exists,
     read
