@@ -250,7 +250,11 @@ describe('unit:lib/hasESMSyntax', () => {
 
     describe('named', () => {
       it('should detect named import', () => {
-        expect(testSubject('import { resolve } from "upath"')).to.be.true
+        // Arrange
+        const code = 'import { resolve } from "@flex-development/pathe"'
+
+        // Act + Expect
+        expect(testSubject(code)).to.be.true
       })
 
       it('should detect named imports spanning multiple lines', () => {
@@ -261,7 +265,7 @@ describe('unit:lib/hasESMSyntax', () => {
             dirname,
             extname,
             resolve
-          } from 'upath'
+          } from '@flex-development/pathe'
         `
 
         // Act + Expect
@@ -273,7 +277,7 @@ describe('unit:lib/hasESMSyntax', () => {
         const code = dedent`
           /**
            * @example
-           *  import { resolve } from 'upath'
+           *  import { resolve } from '@flex-development/pathe'
            */
         `
 
@@ -282,7 +286,11 @@ describe('unit:lib/hasESMSyntax', () => {
       })
 
       it('should ignore named import in single-line comment', () => {
-        expect(testSubject('// import { resolve } from "upath"')).to.be.false
+        // Arrange
+        const code = '// import { resolve } from "@flex-development/pathe"'
+
+        // Act + Expect
+        expect(testSubject(code)).to.be.false
       })
     })
 

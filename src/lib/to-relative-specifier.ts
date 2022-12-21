@@ -3,8 +3,8 @@
  * @module mlly/lib/toRelativeSpecifier
  */
 
+import pathe from '@flex-development/pathe'
 import { fileURLToPath, URL } from 'node:url'
-import upath from 'upath'
 
 /**
  * Converts `specifier` into a relative specifier.
@@ -33,8 +33,8 @@ const toRelativeSpecifier = (
   if (parent.startsWith('file:')) parent = fileURLToPath(parent)
   if (specifier.startsWith('file:')) specifier = fileURLToPath(specifier)
 
-  return upath
-    .relative(upath.dirname(parent), specifier)
+  return pathe
+    .relative(pathe.dirname(parent), specifier)
     .replace(/^(\w)/, './$1')
 }
 

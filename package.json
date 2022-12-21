@@ -76,12 +76,12 @@
   },
   "dependencies": {
     "@flex-development/is-builtin": "1.0.1",
-    "@flex-development/tutils": "5.0.1",
+    "@flex-development/pathe": "1.0.1",
+    "@flex-development/tutils": "6.0.0-alpha.7",
     "import-meta-resolve": "2.1.0",
     "node-package-exports": "1.0.2",
     "read-pkg-up": "9.1.0",
-    "tsconfig-paths": "4.1.0",
-    "upath": "2.0.1"
+    "tsconfig-paths": "4.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "17.2.0",
@@ -185,6 +185,7 @@
   },
   "resolutions": {
     "@ardatan/sync-fetch": "larsgw/sync-fetch#head=worker_threads",
+    "@flex-development/tutils": "6.0.0-alpha.7",
     "esbuild": "0.15.12",
     "vite": "3.2.2",
     "vitepress@npm:1.0.0-alpha.27": "patch:vitepress@npm%3A1.0.0-alpha.27#patches/vitepress+1.0.0-alpha.27.dev.patch"

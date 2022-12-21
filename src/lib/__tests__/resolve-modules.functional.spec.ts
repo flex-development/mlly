@@ -31,9 +31,9 @@ describe('functional:lib/resolveModules', () => {
     // Arrange
     const code = dedent`
       import isBuiltin from '@flex-development/is-builtin'
+      import pathe from '@flex-development/pathe'
       import { moduleResolve, type ErrnoException } from 'import-meta-resolve'
       import { pathToFileURL, URL } from 'node:url'
-      import upath from 'upath'
       import { CONDITIONS, RESOLVE_EXTENSIONS } from '../constants'
       import type { ResolveOptions as Options } from '../interfaces'
       import type { SpecifierType } from '../types'

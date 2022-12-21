@@ -7,9 +7,9 @@ import { CONDITIONS, RESOLVE_EXTENSIONS } from '#src/constants'
 import type { ResolveOptions } from '#src/interfaces'
 import type { SpecifierType } from '#src/types'
 import isBuiltin from '@flex-development/is-builtin'
+import pathe from '@flex-development/pathe'
 import { moduleResolve, type ErrnoException } from 'import-meta-resolve'
 import { pathToFileURL, URL } from 'node:url'
-import upath from 'upath'
 import toBareSpecifier from './to-bare-specifier'
 import toRelativeSpecifier from './to-relative-specifier'
 
@@ -152,9 +152,9 @@ const resolveModule = async (
   // remove or replace file extension
   if (ext !== undefined) {
     if (ext === false) {
-      resolved = upath.removeExt(resolved, upath.extname(resolved))
+      resolved = pathe.removeExt(resolved, pathe.extname(resolved))
     } else if (type === 'relative') {
-      resolved = upath.changeExt(
+      resolved = pathe.changeExt(
         resolved,
         typeof ext === 'function' ? await ext(specifier, resolved) : ext
       )

@@ -6,8 +6,8 @@
 import { RESOLVE_EXTENSIONS } from '#src/constants'
 import type { ResolveAliasOptions } from '#src/interfaces'
 import { getCompilerOptions } from '#src/internal'
+import pathe from '@flex-development/pathe'
 import { createMatchPath, type MatchPath } from 'tsconfig-paths'
-import upath from 'upath'
 import toRelativeSpecifier from './to-relative-specifier'
 
 /**
@@ -45,7 +45,7 @@ const resolveAlias = (
     const { baseUrl: b = '.', paths: p = paths } = getCompilerOptions(tsconfig)
 
     // reset baseUrl and paths
-    baseUrl = upath.resolve(upath.dirname(tsconfig), b)
+    baseUrl = pathe.resolve(pathe.dirname(tsconfig), b)
     paths = p
   }
 

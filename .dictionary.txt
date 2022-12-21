@@ -37,6 +37,7 @@ mkbuild
 nocheck
 npmrc
 nums
+pathe
 pkgs
 preid
 safecrlf

@@ -5,7 +5,7 @@
 
 import type { DynamicImport, ResolveOptions } from '#src/interfaces'
 import type { SpecifierType } from '#src/types'
-import upath from 'upath'
+import pathe from '@flex-development/pathe'
 import extractStatements from './extract-statements'
 import resolveModule from './resolve-module'
 
@@ -38,7 +38,7 @@ const resolveModules = async (
      * @return {SpecifierType} Module specifier type for `resolved`
      */
     const type = (resolved: string): SpecifierType => {
-      return upath.isAbsolute(statement.specifier!) ||
+      return pathe.isAbsolute(statement.specifier!) ||
         statement.specifier!.startsWith('file:')
         ? 'absolute'
         : /\/node_modules\//.test(resolved)

@@ -5,15 +5,15 @@
 
 import getCompilerOptions from '#src/internal/get-compiler-options'
 import type { Spy } from '#tests/interfaces'
+import pathe from '@flex-development/pathe'
 import path from 'node:path'
 import { createMatchPath } from 'tsconfig-paths'
-import upath from 'upath'
 import tsconfig from '../../../tsconfig.json' assert { type: 'json' }
 import testSubject from '../resolve-alias'
 
 vi.mock('#src/internal/get-compiler-options')
+vi.mock('@flex-development/pathe')
 vi.mock('tsconfig-paths')
-vi.mock('upath')
 
 describe('functional:lib/resolveAlias', () => {
   const specifier: string = '#src/lib/resolve-alias'
@@ -38,10 +38,10 @@ describe('functional:lib/resolveAlias', () => {
     testSubject(specifier, { tsconfig: tscpath })
 
     // Expect
-    expect(upath.dirname).toHaveBeenCalledOnce()
-    expect(upath.dirname).toHaveBeenCalledWith(tscpath)
-    expect(upath.resolve).toHaveBeenCalledOnce()
-    expect(upath.resolve).toHaveBeenCalledWith(path.dirname(tscpath), baseUrl)
+    expect(pathe.dirname).toHaveBeenCalledOnce()
+    expect(pathe.dirname).toHaveBeenCalledWith(tscpath)
+    expect(pathe.resolve).toHaveBeenCalledOnce()
+    expect(pathe.resolve).toHaveBeenCalledWith(path.dirname(tscpath), baseUrl)
     expect(createMatchPath).toHaveBeenCalledOnce()
     expect(createMatchPath).toHaveBeenCalledWith(
       path.resolve(path.dirname(tscpath), baseUrl),

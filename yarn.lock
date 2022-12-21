@@ -1123,7 +1123,8 @@ __metadata:
     "@flex-development/docast-parse": "github:flex-development/docast-parse"
     "@flex-development/is-builtin": "npm:1.0.1"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.9"
-    "@flex-development/tutils": "npm:5.0.1"
+    "@flex-development/pathe": "npm:1.0.1"
+    "@flex-development/tutils": "npm:6.0.0-alpha.7"
     "@graphql-eslint/eslint-plugin": "npm:3.13.0"
     "@sindresorhus/slugify": "npm:2.1.1"
     "@types/chai": "npm:4.3.3"
@@ -1200,7 +1201,6 @@ __metadata:
     unist-util-remove: "npm:3.1.0"
     unist-util-source: "npm:4.0.1"
     unist-util-visit: "npm:4.1.1"
-    upath: "npm:2.0.1"
     vercel: "npm:28.4.14"
     version-bump-prompt: "npm:6.1.0"
     vite: "npm:3.2.2"
@@ -1220,10 +1220,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flex-development/tutils@npm:5.0.1":
-  version: 5.0.1
-  resolution: "@flex-development/tutils@npm:5.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftutils%2F5.0.1%2Fc43853516a4e36e79b2ae3d7831518fbc904bcc4"
-  checksum: 5ac3ef0cfa6f300b7407dc7a4d36af138c021efadbb7ffe2465c01b3ff983dd13b6c4f467c643d0fc7259a825fc8a33c959ae57001d2dfaa1cbbaf294f133f5c
+"@flex-development/pathe@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@flex-development/pathe@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fpathe%2F1.0.1%2Fa912f1582fff84bcbff292758a482db8d3f15726"
+  dependencies:
+    "@flex-development/tutils": "npm:6.0.0-alpha.7"
+    node-inspect-extracted: "npm:2.0.0"
+  checksum: 31e3838cdc1cb8186069d9e76882fba1384e88a7538a138447136e81fec53f6d2e25e8e139e80a03ff058e1fe1dccccd05b653e738003270dd5b25ee9db12db7
+  languageName: node
+  linkType: hard
+
+"@flex-development/tutils@npm:6.0.0-alpha.7":
+  version: 6.0.0-alpha.7
+  resolution: "@flex-development/tutils@npm:6.0.0-alpha.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftutils%2F6.0.0-alpha.7%2F786916dcfd30bf076b5ac74cb31ca4031f74e1f0"
+  peerDependencies:
+    typescript: ">=4.7"
+  checksum: 626d2df21cd31cfe0445c94e0946b7ca77a3c95ca93c92b20c512820bad32e7fe34c4c59f870eddcdc449decc0c364614df4fc1c3f4fef1b76592d5ec53c59d3
   languageName: node
   linkType: hard
 
@@ -7837,6 +7849,13 @@ __metadata:
   bin:
     node-gyp: bin/node-gyp.js
   checksum: 7cfa4c7843c37a68ab2123ffbab5f269cc2d36e697c37154566b701b1fe3bfd861260e0e00530a720ae1a2a92589fa19b85565e36bdcb8a4683a4a4e207338b6
+  languageName: node
+  linkType: hard
+
+"node-inspect-extracted@npm:2.0.0":
+  version: 2.0.0
+  resolution: "node-inspect-extracted@npm:2.0.0"
+  checksum: d99c560d4687695f191d27585877893428101082d8ce1b52d79e968650b03c626cd3472f98cae98f17c98859ed0aa1e1a53954d82ba04659115ebb4e6e5565b4
   languageName: node
   linkType: hard
 

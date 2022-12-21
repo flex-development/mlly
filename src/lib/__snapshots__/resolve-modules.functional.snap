@@ -2,9 +2,9 @@
 
 exports[`functional:lib/resolveModules > should resolve modules in code 1`] = `
 "import isBuiltin from '@flex-development/is-builtin'
+import pathe from '@flex-development/pathe'
 import { moduleResolve, type ErrnoException } from 'import-meta-resolve'
 import { pathToFileURL, URL } from 'node:url'
-import upath from 'upath'
 import { CONDITIONS, RESOLVE_EXTENSIONS } from '../constants.mjs'
 import type { ResolveOptions as Options } from '../interfaces/index.mjs'
 import type { SpecifierType } from '../types/index.mjs'

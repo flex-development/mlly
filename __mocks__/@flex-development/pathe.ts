@@ -1,22 +1,22 @@
 /**
- * @file Mocks - upath
- * @module mocks/upath
- * @see https://github.com/anodynos/upath
+ * @file Mocks - @flex-development/pathe
+ * @module mocks/flex-development/pathe
+ * @see https://github.com/flex-development/pathe
  */
 
 /**
- * [`upath`][1] module type.
+ * [`@flex-development/pathe`][1] module type.
  *
- * [1]: https://github.com/anodynos/upath
+ * [1]: https://github.com/flex-development/pathe
  */
-type Actual = typeof import('upath')
+type Actual = typeof import('@flex-development/pathe')
 
 /**
- * `upath` module.
+ * `@flex-development/pathe` module.
  *
  * @const {Actual} actual
  */
-const actual: Actual = await vi.importActual<Actual>('upath')
+const actual: Actual = await vi.importActual<Actual>('@flex-development/pathe')
 
 export default {
   basename: vi.fn(actual.basename),

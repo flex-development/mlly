@@ -5,7 +5,7 @@
   "devCommand": null,
   "framework": "vite",
   "ignoreCommand": null,
-  "installCommand": "yarn --immutable",
+  "installCommand": "yarn --no-immutable",
   "github": {
     "autoJobCancelation": true,
     "enabled": false,

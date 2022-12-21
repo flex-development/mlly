@@ -6,6 +6,7 @@
 import { CONDITIONS } from '#src/constants'
 import type { ResolveOptions } from '#src/interfaces'
 import isBuiltin from '@flex-development/is-builtin'
+import pathe from '@flex-development/pathe'
 import { isNIL, type Nullable } from '@flex-development/tutils'
 import type { ErrnoException } from 'import-meta-resolve'
 import { codes as errors } from 'import-meta-resolve/lib/errors'
@@ -16,7 +17,6 @@ import {
 } from 'node-package-exports'
 import { fileURLToPath, URL } from 'node:url'
 import { readPackageUp, type PackageJson, type ReadResult } from 'read-pkg-up'
-import upath from 'upath'
 
 /**
  * Converts `specifier` into a bare specifier.
@@ -80,12 +80,12 @@ const toBareSpecifier = async (
    * @return {string} `p` normalized
    */
   const normalize = (p: string): string => {
-    return upath
+    return pathe
       .format({
         base: '',
-        dir: upath.dirname(p),
+        dir: pathe.dirname(p),
         ext: '',
-        name: upath.basename(p, upath.extname(p)),
+        name: pathe.basename(p, pathe.extname(p)),
         root: ''
       })
       .replace(/^(\w)/, './$1')
@@ -124,7 +124,7 @@ const toBareSpecifier = async (
   if (path === findEntryInExports(exports, [...conditions])) return name
 
   // parse possible package path
-  const { dir } = upath.parse(path.replace(/^\.\//, ''))
+  const { dir } = pathe.parse(path.replace(/^\.\//, ''))
 
   /**
    * Paths to attempt finding in {@linkcode exports}.
@@ -152,11 +152,11 @@ const toBareSpecifier = async (
     ])
 
     // return subpath export if export path was found
-    if (exportpath) return upath.join(name, trypath)
+    if (exportpath) return pathe.join(name, trypath)
   }
 
   throw new errors.ERR_PACKAGE_PATH_NOT_EXPORTED(
-    upath.dirname(pkg.path) + '/',
+    pathe.dirname(pkg.path) + '/',
     [...tries][0]
   )
 }

@@ -45,11 +45,6 @@ jobs:
           ref: ${{ env.REF }}
       - id: yarn
         name: Install dependencies
-        if: github.actor != 'dependabot[bot]'
-        run: yarn
-      - id: yarn-dependabot
-        name: Install dependencies for dependabot
-        if: github.actor == 'dependabot[bot]'
         run: yarn --no-immutable
       - id: format
         name: Check code formatting
