@@ -2,12 +2,14 @@
 #
 # References:
 #
+# - https://docs.github.com/actions/automating-builds-and-tests/building-and-testing-nodejs
 # - https://docs.github.com/actions/learn-github-actions/contexts
 # - https://docs.github.com/actions/using-jobs/using-a-matrix-for-your-jobs
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 # - https://github.com/actions/checkout
+# - https://github.com/actions/upload-artifact
 # - https://github.com/hmarr/debug-action
 
 ---
@@ -82,3 +84,13 @@ jobs:
         run: yarn pack -o %s-%v.tgz
         env:
           NODE_ENV: production
+      - id: version
+        name: Get package version
+        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
+      - id: archive
+        name: Archive production artifacts
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: |
+            ${{ format('@{0}-{1}-{2}', github.repository_owner, github.event.repository.name, steps.version.outputs.result) }}
+          path: '*.tgz'
