@@ -1,0 +1,13 @@
+diff --git a/dist/chunk-snapshot-manager.8c94a052.js b/dist/chunk-snapshot-manager.8c94a052.js
+index v0.26.2..v0.26.2 100644
+--- a/dist/chunk-snapshot-manager.8c94a052.js
++++ b/dist/chunk-snapshot-manager.8c94a052.js
+@@ -8045,7 +8045,7 @@ class DefaultReporter extends BaseReporter {
+     super.onWatcherStart();
+   }
+   onCollected() {
+-    if (this.isTTY) {
++    if (this.isTTY || this.mode === "typecheck") {
+       this.rendererOptions.logger = this.ctx.logger;
+       this.rendererOptions.showHeap = this.ctx.config.logHeapUsage;
+       this.rendererOptions.mode = this.mode;

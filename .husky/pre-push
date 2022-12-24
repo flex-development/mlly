@@ -6,6 +6,5 @@
 #
 # - https://vitest.dev/guide/cli.html#changed
 
-yarn check:types
 yarn test --changed HEAD^
 yarn build

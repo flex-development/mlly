@@ -10,8 +10,7 @@ import findRequires from './find-requires'
 import findStaticImports from './find-static-imports'
 
 /**
- * Finds all `export`, `import`, `require`, and/or `require.resolve` statements
- * in `code`.
+ * Finds all `export`, `import`, and/or  `require` statements in `code`.
  *
  * Ignores matches in comments.
  *
@@ -20,11 +19,12 @@ import findStaticImports from './find-static-imports'
  * @see {@linkcode findRequires}
  * @see {@linkcode findStaticImports}
  *
- * @param {string} [code=''] - Code to extract statements from
+ * @param {string} [code=''] - Code to evaluate
  * @return {Statement[]} Extracted statements
  */
 const extractStatements = (code: string = ''): Statement[] => {
-  if (!code) return []
+  // code shorter than first shortest keyword => no possible matches
+  if (code.trim().length < 'export'.length) return []
 
   return [
     ...findDynamicImports(code),

@@ -1,135 +1,158 @@
 // Vitest Snapshot v1
 
-exports[`unit:lib/findStaticImports > should find default static import 1`] = `
+exports[`unit:lib/findStaticImports > should return StaticImport object array 1`] = `
 [
   {
-    "code": "import pb from \\"pretty-bytes\\"",
-    "end": 29,
+    "assertion": "",
+    "code": "import { defineBuildConfig, type Config } from '@flex-development/mkbuild'",
+    "end": 74,
     "imports": [
-      "pb",
+      "defineBuildConfig",
+      "type Config",
     ],
-    "specifier": "pretty-bytes",
+    "kind": "import",
+    "specifier": "@flex-development/mkbuild",
+    "specifier_kind": "static",
     "start": 0,
-    "type": "default",
+    "syntax": "named",
+    "type": false,
   },
-]
-`;
-
-exports[`unit:lib/findStaticImports > should find default type import 1`] = `
-[
   {
-    "code": "import type Nullable from '@flex-development/tutils/types/nullable'",
-    "end": 67,
-    "imports": [
-      "Nullable",
-    ],
-    "specifier": "@flex-development/tutils/types/nullable",
-    "start": 0,
-    "type": "default",
-  },
-]
-`;
-
-exports[`unit:lib/findStaticImports > should find named static imports in multi-line statement 1`] = `
-[
-  {
-    "code": "import {
-  addFive,
-  addFour,
-  addThree,
-  addTwo,
-  squareFive,
-  squareFour,
-  squareThree,
-  squareTwo
-} from './lib'",
-    "end": 122,
-    "imports": [
-      "addFive",
-      "addFour",
-      "addThree",
-      "addTwo",
-      "squareFive",
-      "squareFour",
-      "squareThree",
-      "squareTwo",
-    ],
-    "specifier": "./lib",
-    "start": 0,
-    "type": "named",
-  },
-]
-`;
-
-exports[`unit:lib/findStaticImports > should find named static imports in single-line statement 1`] = `
-[
-  {
-    "code": "import { readPackage, type PackageJson } from \\"read-pkg\\"",
-    "end": 56,
-    "imports": [
-      "readPackage",
-      "type PackageJson",
-    ],
-    "specifier": "read-pkg",
-    "start": 0,
-    "type": "named",
-  },
-]
-`;
-
-exports[`unit:lib/findStaticImports > should find named type imports in multi-line statement 1`] = `
-[
-  {
+    "assertion": "",
     "code": "import type {
-  BuildOptions,
-  BuildResult,
-  OutputFile,
-  Plugin,
-  PluginBuild
-} from 'esbuild'",
-    "end": 99,
-    "imports": [
-      "BuildOptions",
-      "BuildResult",
-      "OutputFile",
-      "Plugin",
-      "PluginBuild",
-    ],
-    "specifier": "esbuild",
-    "start": 0,
-    "type": "named",
-  },
-]
-`;
-
-exports[`unit:lib/findStaticImports > should find named type imports in single-line statement 1`] = `
-[
-  {
-    "code": "import type { Join, Nullable, Overwrite } from '@flex-development/tutils'",
-    "end": 73,
+  Join,
+  Nullable,
+  Opaque,
+  Simplify
+} from '@flex-development/tutils'",
+    "end": 163,
     "imports": [
       "Join",
       "Nullable",
-      "Overwrite",
+      "Opaque",
+      "Simplify",
     ],
+    "kind": "import",
     "specifier": "@flex-development/tutils",
-    "start": 0,
-    "type": "named",
+    "specifier_kind": "static",
+    "start": 75,
+    "syntax": "named",
+    "type": true,
   },
-]
-`;
-
-exports[`unit:lib/findStaticImports > should find star static import 1`] = `
-[
   {
-    "code": "import * as color from \\"colorette\\"",
-    "end": 34,
+    "assertion": "",
+    "code": "import * as color from 'colorette'",
+    "end": 198,
     "imports": [
       "* as color",
     ],
+    "kind": "import",
     "specifier": "colorette",
-    "start": 0,
-    "type": "star",
+    "specifier_kind": "static",
+    "start": 164,
+    "syntax": "namespace",
+    "type": false,
+  },
+  {
+    "assertion": "",
+    "code": "import consola from 'consola'",
+    "end": 228,
+    "imports": [
+      "consola",
+    ],
+    "kind": "import",
+    "specifier": "consola",
+    "specifier_kind": "static",
+    "start": 199,
+    "syntax": "default",
+    "type": false,
+  },
+  {
+    "assertion": "{ type: 'json' }",
+    "code": "import tsconfig from './tsconfig.json' assert { type: 'json' }",
+    "end": 291,
+    "imports": [
+      "tsconfig",
+    ],
+    "kind": "import",
+    "specifier": "./tsconfig.json",
+    "specifier_kind": "static",
+    "start": 229,
+    "syntax": "default",
+    "type": false,
+  },
+  {
+    "assertion": "",
+    "code": "import { export1, export2 as alias2 } from \\"module-name\\"",
+    "end": 348,
+    "imports": [
+      "export1",
+      "export2 as alias2",
+    ],
+    "kind": "import",
+    "specifier": "module-name",
+    "specifier_kind": "static",
+    "start": 292,
+    "syntax": "named",
+    "type": false,
+  },
+  {
+    "assertion": "",
+    "code": "import { 'string name' as alias } from \\"module-name\\"",
+    "end": 402,
+    "imports": [
+      "'string name' as alias",
+    ],
+    "kind": "import",
+    "specifier": "module-name",
+    "specifier_kind": "static",
+    "start": 350,
+    "syntax": "named",
+    "type": false,
+  },
+  {
+    "assertion": "",
+    "code": "import defaultExport, { export1 } from \\"module-name\\"",
+    "end": 456,
+    "imports": [
+      "defaultExport",
+      "export1",
+    ],
+    "kind": "import",
+    "specifier": "module-name",
+    "specifier_kind": "static",
+    "start": 404,
+    "syntax": "default-with-named",
+    "type": false,
+  },
+  {
+    "assertion": "",
+    "code": "import defaultExport, * as name from \\"module-name\\"",
+    "end": 508,
+    "imports": [
+      "defaultExport",
+      "* as name",
+    ],
+    "kind": "import",
+    "specifier": "module-name",
+    "specifier_kind": "static",
+    "start": 458,
+    "syntax": "default-with-namespace",
+    "type": false,
+  },
+  {
+    "assertion": "",
+    "code": "import { \\"h-i\\" as hi } from './hi.js'",
+    "end": 547,
+    "imports": [
+      "\\"h-i\\" as hi",
+    ],
+    "kind": "import",
+    "specifier": "./hi.js",
+    "specifier_kind": "static",
+    "start": 510,
+    "syntax": "named",
+    "type": false,
   },
 ]
 `;

@@ -55,18 +55,12 @@ jobs:
       - id: spelling
         name: Check spelling
         run: yarn check:spelling
-      - id: types
-        name: Check types
-        run: yarn check:types
-      - id: types-build
-        name: Check types build
-        run: yarn check:types:build
+      - id: typecheck
+        name: Run typecheck
+        run: yarn typecheck && yarn check:types:build
       - id: test
         name: Run tests
-        run: yarn test:cov
-        env:
-          NODE_NO_WARNINGS: 1
-          VITEST_SEGFAULT_RETRY: 3
+        run: yarn test:cov --segfault-retry=3
       - id: pack
         name: Pack project
         run: yarn pack -o %s-%v.tgz

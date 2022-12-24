@@ -17,6 +17,7 @@
         "deps-opt",
         "deps-peer",
         "docs",
+        "enums",
         "esm",
         "exports",
         "github",

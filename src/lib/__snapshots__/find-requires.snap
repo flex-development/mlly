@@ -1,63 +1,88 @@
 // Vitest Snapshot v1
 
-exports[`unit:lib/findRequires > require > should find require 1`] = `
+exports[`unit:lib/findRequires > should return RequireStatement object array 1`] = `
 [
   {
-    "code": "require(\\"./lib\\")",
-    "end": 16,
-    "imports": [],
-    "specifier": "./lib",
-    "start": 0,
-    "type": "require",
-  },
-]
-`;
-
-exports[`unit:lib/findRequires > require > should find require declaration 1`] = `
-[
-  {
-    "code": "const lib = require(\\"./lib\\")",
+    "code": "require('./side-effect.cjs')",
     "end": 28,
-    "imports": [
-      "default",
-    ],
-    "specifier": "./lib",
+    "imports": [],
+    "kind": "require",
+    "specifier": "./side-effect.cjs",
+    "specifier_kind": "static",
     "start": 0,
-    "type": "require",
+    "syntax": "require",
   },
-]
-`;
-
-exports[`unit:lib/findRequires > require > should find require with named imports 1`] = `
-[
   {
-    "code": "const { addFive } = require(\\"./lib\\")",
-    "end": 36,
+    "code": "const mod=require('./lib')",
+    "end": 55,
     "imports": [
-      "addFive",
+      "mod",
     ],
+    "kind": "require",
     "specifier": "./lib",
-    "start": 0,
-    "type": "require",
+    "specifier_kind": "static",
+    "start": 29,
+    "syntax": "require",
   },
-]
-`;
-
-exports[`unit:lib/findRequires > require > should find require with named imports in multi-line statement 1`] = `
-[
+  {
+    "code": "const{createPathMatch}=require('tsconfig-paths')",
+    "end": 105,
+    "imports": [
+      "createPathMatch",
+    ],
+    "kind": "require",
+    "specifier": "tsconfig-paths",
+    "specifier_kind": "static",
+    "start": 57,
+    "syntax": "require",
+  },
+  {
+    "code": "const mod = require('lib')",
+    "end": 133,
+    "imports": [
+      "mod",
+    ],
+    "kind": "require",
+    "specifier": "lib",
+    "specifier_kind": "static",
+    "start": 107,
+    "syntax": "require",
+  },
+  {
+    "code": "require(id)",
+    "end": 146,
+    "imports": [],
+    "kind": "require",
+    "specifier": "id",
+    "specifier_kind": "dynamic",
+    "start": 135,
+    "syntax": "require",
+  },
+  {
+    "code": "require('#src/lib/resolve-aliases')",
+    "end": 182,
+    "imports": [],
+    "kind": "require",
+    "specifier": "#src/lib/resolve-aliases",
+    "specifier_kind": "static",
+    "start": 147,
+    "syntax": "require",
+  },
   {
     "code": "const {
+  default: myDefault,
   addFive,
-  addFour,
-  addThree,
-  addTwo,
-  squareFive,
-  squareFour,
-  squareThree,
-  squareTwo
+	addFour,
+	addThree,
+	addTwo,
+	squareFive,
+	squareFour,
+	squareThree,
+	squareTwo
 } = require('./lib')",
-    "end": 127,
+    "end": 325,
     "imports": [
+      "default: myDefault",
       "addFive",
       "addFour",
       "addThree",
@@ -67,35 +92,11 @@ exports[`unit:lib/findRequires > require > should find require with named import
       "squareThree",
       "squareTwo",
     ],
+    "kind": "require",
     "specifier": "./lib",
-    "start": 0,
-    "type": "require",
-  },
-]
-`;
-
-exports[`unit:lib/findRequires > require.resolve > should find require.resolve 1`] = `
-[
-  {
-    "code": "require.resolve(\\"tsconfig-loader\\")",
-    "end": 34,
-    "imports": [],
-    "specifier": "tsconfig-loader",
-    "start": 0,
-    "type": "require.resolve",
-  },
-]
-`;
-
-exports[`unit:lib/findRequires > require.resolve > should find require.resolve declaration 1`] = `
-[
-  {
-    "code": "const loader = require.resolve(\\"tsconfig-loader\\")",
-    "end": 49,
-    "imports": [],
-    "specifier": "tsconfig-loader",
-    "start": 0,
-    "type": "require.resolve",
+    "specifier_kind": "static",
+    "start": 183,
+    "syntax": "require",
   },
 ]
 `;

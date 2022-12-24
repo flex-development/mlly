@@ -3,36 +3,50 @@
  * @module mlly/lib/findRequires
  */
 
+import { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
 import type { RequireStatement } from '#src/interfaces'
-import { REQUIRE_STATEMENT_REGEX } from '#src/internal'
 
 /**
- * Finds all `require` and `require.resolve` statements in `code`.
- *
- * Ignores matches in comments.
+ * Finds all `require` statements in `code`. Ignores matches in comments.
  *
  * @see {@linkcode RequireStatement}
+ * @see https://regex101.com/r/uCqSYB
+ * @see https://nodejs.org/api/modules.html#requireid
  *
- * @param {string} code - Code to check
+ * @param {string} code - Code to evaluate
  * @return {RequireStatement[]} Require statement objects
  */
 const findRequires = (code: string): RequireStatement[] => {
-  return [...code.matchAll(REQUIRE_STATEMENT_REGEX)].map(match => {
-    const { 0: statement = '', index: start = 0, groups = {} } = match
-    const { imports = '', specifier = '', type = '' } = groups
+  /**
+   * `require` statement regex.
+   *
+   * @const {RegExp} REQUIRE_REGEX
+   */
+  const REQUIRE_REGEX: RegExp =
+    /(?<=^|[\s;])\b(?:(?:const\s*|let\s*|var\s*)?(?<imports>(?:[$_\p{ID_Start}][$\u200C\u200D\p{ID_Continue}]*)|(?:[\w\t\n\r "$'*,./:{}-]+?))?\s*=?\s*(?<kind>require)\((?<specifier>["']?[\S\t\n\r]+?["']?)\)(?=;?\n?))(?<!(?:\/\/|\*).*)/gu
+
+  return [...code.matchAll(REQUIRE_REGEX)].map(match => {
+    const { 0: code = '', index: start = 0, groups = {} } = match
+    const { imports = '', specifier = '' } = groups
 
     return {
-      code: statement,
-      end: start + statement.length,
+      code,
+      end: start + code.length,
       imports:
-        imports === '' || type === 'require.resolve'
+        imports === ''
           ? []
-          : /const *\w/.test(statement)
-          ? ['default']
-          : imports.split(',').map(name => name.trim()),
-      specifier,
+          : imports
+              .replace(/^{|}$/g, '')
+              .split(',')
+              .map(e => e.trim())
+              .filter(e => e.length > 0),
+      kind: StatementKind.REQUIRE,
+      specifier: specifier.replace(/^["']|["']$/g, ''),
+      specifier_kind: /^["']/g.test(specifier)
+        ? SpecifierKind.STATIC
+        : SpecifierKind.DYNAMIC,
       start,
-      type: type as RequireStatement['type']
+      syntax: SyntaxKind.REQUIRE
     }
   })
 }

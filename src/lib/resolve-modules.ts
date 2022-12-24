@@ -3,7 +3,8 @@
  * @module mlly/lib/resolveModules
  */
 
-import type { DynamicImport, ResolveOptions } from '#src/interfaces'
+import { SpecifierKind } from '#src/enums'
+import type { ResolveOptions } from '#src/interfaces'
 import type { SpecifierType } from '#src/types'
 import pathe from '@flex-development/pathe'
 import extractStatements from './extract-statements'
@@ -26,10 +27,11 @@ const resolveModules = async (
   options: ResolveOptions = {}
 ): Promise<string> => {
   for (const statement of extractStatements(code)) {
+    // do nothing if statement does not have specifier
     if (!statement.specifier) continue
 
-    // ignore dynamic import statements with dynamic specifiers
-    if ((statement as DynamicImport).specifier_type === 'dynamic') continue
+    // ignore statements with dynamic specifiers
+    if (statement.specifier_kind === SpecifierKind.DYNAMIC) continue
 
     /**
      * Determines a module specifier type for `resolved`.

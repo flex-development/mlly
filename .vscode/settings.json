@@ -1,50 +1,53 @@
 {
   "[handlebars]": {
     "editor.defaultFormatter": "Greenbyte.handlebars-preview",
-    "editor.rulers": [100],
-    "editor.wordWrap": "wordWrapColumn",
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 100
+      }
+    ],
     "editor.wordWrapColumn": 100,
     "rewrap.wrappingColumn": 100
   },
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[jest-snapshot]": {
-    "editor.rulers": [130],
-    "editor.wordWrap": "wordWrapColumn",
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 130
+      }
+    ],
     "editor.wordWrapColumn": 130,
     "rewrap.wrappingColumn": 130
   },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[markdown]": {
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": false
-    },
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.markdown-language-features",
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 120
+      }
+    ],
+    "editor.wordWrapColumn": 120,
+    "rewrap.wrappingColumn": 120
   },
   "[properties]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[shellscript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.rulers": [100],
+    "editor.defaultFormatter": "foxundermoon.shell-format",
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 100
+      }
+    ],
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 100,
     "rewrap.wrappingColumn": 100
-  },
-  "[txt]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[vue]": {
     "editor.codeActionsOnSave": {
@@ -59,15 +62,47 @@
     "rewrap.wrappingColumn": 100
   },
   "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.rulers": [100],
-    "editor.wordWrap": "wordWrapColumn",
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 100
+      }
+    ],
     "editor.wordWrapColumn": 100,
     "rewrap.wrappingColumn": 100
   },
   "cSpell.enabled": true,
   "debug.showBreakpointsInOverviewRuler": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": false,
+  "editor.acceptSuggestionOnEnter": "smart",
   "editor.autoClosingBrackets": "always",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.sortJSON": false,
+    "source.organizeImports": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": false,
+  "editor.renderFinalNewline": false,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.guides.indentation": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.overviewRulerBorder": true,
+  "editor.rulers": [
+    {
+      // microsoft/vscode#166261
+      "color": "var(--vscode-editorRuler-foreground)",
+      "column": 80
+    }
+  ],
+  "editor.tabSize": 2,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 80,
   "emmet.excludeLanguages": [],
   "emmet.includeLanguages": {
     "markdown": "html",
@@ -114,17 +149,28 @@
     "**/.DS_Store": true,
     "**/yarn.lock": true
   },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
   "git.autofetch": true,
   "git.enableSmartCommit": true,
-  "markdownlint.ignore": "./.markdownlintignore",
+  "markdown.extension.toc.slugifyMode": "github",
+  "markdown.extension.toc.updateOnSave": false,
+  "markdownlint.ignore": ".markdownlintignore",
+  "markdownlint.lintWorkspaceGlobs": [
+    "**/*.md",
+    "!**/node_modules",
+    "!**/.git",
+    "!**/CHANGELOG.md",
+    "!**/LICENSE.md"
+  ],
   "npm-intellisense.scanDevDependencies": true,
-  "prettier.configPath": "./.prettierrc.json",
-  "prettier.enable": true,
-  "prettier.ignorePath": "./.prettierignore",
-  "prettier.prettierPath": "./node_modules/prettier",
-  "prettier.resolveGlobalModules": false,
+  "prettier.configPath": ".prettierrc.json",
+  "prettier.enable": false,
+  "prettier.prettierPath": "node_modules/prettier",
   "prettier.useEditorConfig": true,
   "shellformat.flag": "-ci -fn -i=2 -sr",
+  "shellformat.useEditorConfig": true,
   "typescript.suggest.completeFunctionCalls": true,
   "typescript.suggest.completeJSDocs": true,
   "typescript.tsdk": "./node_modules/typescript/lib",
@@ -144,7 +190,7 @@
       "icon": "graphql"
     },
     {
-      "extensions": ["build.json"],
+      "extensions": ["build.json", "typecheck.json"],
       "format": "svg",
       "icon": "tsconfig"
     },

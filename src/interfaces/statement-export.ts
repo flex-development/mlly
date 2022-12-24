@@ -3,14 +3,17 @@
  * @module mlly/interfaces/ExportStatement
  */
 
-import type { Declaration } from '#src/types'
+import type { StatementKind } from '#src/enums'
+import type { Declaration, SyntaxKindExport } from '#src/types'
+import type { Nullable } from '@flex-development/tutils'
 import type Statement from './statement'
 
 /**
- * Export statement object schema.
+ * Export statement object.
  *
  * @see {@linkcode Declaration}
  * @see {@linkcode Statement}
+ * @see {@linkcode SyntaxKindExport}
  *
  * @extends {Statement}
  */
@@ -18,7 +21,7 @@ interface ExportStatement extends Statement {
   /**
    * Export declaration, if any.
    */
-  declaration: Declaration | undefined
+  declaration: Nullable<Declaration>
 
   /**
    * Export names.
@@ -26,9 +29,24 @@ interface ExportStatement extends Statement {
   exports: string[]
 
   /**
-   * Export statement type.
+   * Statement kind.
    */
-  type: 'declaration' | 'default' | 'named' | 'star'
+  kind: StatementKind.EXPORT
+
+  /**
+   * Modifier keywords.
+   */
+  modifiers: string[]
+
+  /**
+   * Statement syntax kind.
+   */
+  syntax: SyntaxKindExport
+
+  /**
+   * Type-only export statement check.
+   */
+  type: boolean
 }
 
 export type { ExportStatement as default }

@@ -33,6 +33,12 @@ const config = {
       rules: {
         'unicorn/no-keyword-prefix': 0
       }
+    },
+    {
+      files: ['src/lib/find-exports.ts'],
+      rules: {
+        'unicorn/prefer-module': 0
+      }
     }
   ]
 }

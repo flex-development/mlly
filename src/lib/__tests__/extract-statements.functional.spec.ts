@@ -18,7 +18,7 @@ vi.mock('../find-static-imports')
 describe('functional:lib/extractStatements', () => {
   it('should exit early if no code to evaluate', () => {
     // Act
-    const results = testSubject('')
+    const results = testSubject(' ')
 
     // Expect
     expect(results).to.be.an('array').of.length(0)

@@ -3,8 +3,6 @@
  * @module mlly/lib/hasCJSSyntax
  */
 
-import { CJS_SYNTAX_REGEX } from '#src/internal'
-
 /**
  * Detects if `code` contains CommonJS syntax. Ignores matches in comments.
  *
@@ -18,9 +16,23 @@ import { CJS_SYNTAX_REGEX } from '#src/internal'
  * - `require`
  * - `require.*`
  *
- * @param {string} code - Code to check
+ * @see https://regex101.com/r/Co77SJ
+ *
+ * @param {string} code - Code to evaluate
  * @return {boolean} `true` if `code` contains cjs syntax, `false` otherwise
  */
-const hasCJSSyntax = (code: string): boolean => !!code.match(CJS_SYNTAX_REGEX)
+const hasCJSSyntax = (code: string): boolean => {
+  /**
+   * CommonJS syntax regex.
+   *
+   * @see https://regex101.com/r/Co77SJ
+   *
+   * @const {RegExp} CJS_SYNTAX_REGEX
+   */
+  const CJS_SYNTAX_REGEX: RegExp =
+    /(?<!(?:\/\/|\*).*)((?:module\.)?exports(?:\.\w+|(?<!\s+=))|require(?=\(.)|require\.\w+|__dirname|__filename|await import)/gm
+
+  return !!code.match(CJS_SYNTAX_REGEX)
+}
 
 export default hasCJSSyntax

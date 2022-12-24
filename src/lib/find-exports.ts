@@ -3,82 +3,137 @@
  * @module mlly/lib/findExports
  */
 
+import { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
 import type { ExportStatement } from '#src/interfaces'
-import {
-  EXPORT_DECLARATION_REGEX,
-  EXPORT_NAMED_REGEX,
-  EXPORT_STAR_REGEX
-} from '#src/internal'
 import type { Declaration } from '#src/types'
+import * as regex from '@flex-development/export-regex'
 
 /**
  * Finds all export statements in `code`. Ignores matches in comments.
  *
  * @see {@linkcode ExportStatement}
+ * @see https://regex101.com/r/JtvRUt
+ * @see https://regex101.com/r/8HpMrA
+ * @see https://regex101.com/r/G7GhEt
+ * @see https://regex101.com/r/KQEDdZ
+ * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export
  *
- * @param {string} code - Code to check
+ * @param {string} code - Code to evaluate
  * @return {ExportStatement[]} Export statement objects
  */
 const findExports = (code: string): ExportStatement[] => {
   /**
-   * Export statement objects.
+   * `export` statement objects.
    *
    * @const {ExportStatement[]} statements
    */
   const statements: ExportStatement[] = []
 
+  // get aggregate export statements
+  for (const match of code.matchAll(regex.EXPORT_AGGREGATE_REGEX)) {
+    const { 0: code = '', index: start = 0, groups = {} } = match
+    const { exports = '', specifier = '', type = '' } = groups
+
+    statements.push({
+      code,
+      declaration: null,
+      end: start + code.length,
+      exports: exports.startsWith('*')
+        ? [exports]
+        : exports
+            .replace(/^{|}$/g, '')
+            .split(',')
+            .map(e => e.trim())
+            .filter(e => e.length > 0),
+      kind: StatementKind.EXPORT,
+      modifiers: [],
+      specifier,
+      specifier_kind: SpecifierKind.STATIC,
+      start,
+      syntax: exports.startsWith('{') ? SyntaxKind.NAMED : SyntaxKind.NAMESPACE,
+      type: !!type
+    })
+  }
+
   // get declaration export statements
-  for (const match of code.matchAll(EXPORT_DECLARATION_REGEX)) {
-    const { 0: statement = '', index: start = 0, groups = {} } = match
-    const { declaration = 'default', name = '' } = groups
-
-    /**
-     * {@linkcode statement} copy.
-     *
-     * @const {string} stmt
-     */
-    const stmt: string = statement.trim()
+  for (const match of code.matchAll(regex.EXPORT_DECLARATION_REGEX)) {
+    const { 0: code = '', index: start = 0, groups = {} } = match
+    const { declaration = '', exports = '', modifiers = '' } = groups
 
     statements.push({
-      code: stmt,
+      code,
       declaration: declaration as Declaration,
-      end: start + stmt.length,
-      exports: [name === '' ? 'default' : name.trim()],
-      specifier: undefined,
+      end: start + code.length,
+      exports: /^\w+$/.test(exports)
+        ? [exports]
+        : exports
+            .replace(/^[[{]|[\]}]$/g, '')
+            .split(',')
+            .map(e => e.trim().replace(/\s*=\s*.*$/, ''))
+            .filter(e => e.length > 0),
+      kind: StatementKind.EXPORT,
+      modifiers:
+        modifiers === ''
+          ? []
+          : modifiers
+              .split(' ')
+              .map(e => e.trim())
+              .filter(e => e.length > 0),
+      specifier: null,
+      specifier_kind: null,
       start,
-      type: declaration === 'default' ? 'default' : 'declaration'
+      syntax: SyntaxKind.DECLARATION,
+      type: false
     })
   }
 
-  // get named export statements
-  for (const match of code.matchAll(EXPORT_NAMED_REGEX)) {
-    const { 0: statement = '', index: start = 0, groups = {} } = match
-    const { exports: exp = '', specifier = '' } = groups
+  // get export default statements
+  for (const match of code.matchAll(regex.EXPORT_DEFAULT_REGEX)) {
+    const { 0: code = '', index: start = 0, groups = {} } = match
+    const { exports = '', kind: declaration = '', modifiers = '' } = groups
 
     statements.push({
-      code: statement,
-      declaration: undefined,
-      end: start + statement.length,
-      exports: exp.split(',').map(name => name.trim()),
-      specifier,
+      code,
+      declaration: declaration ? (declaration as Declaration) : null,
+      end: start + code.length,
+      exports: exports === '' ? [] : [exports],
+      kind: StatementKind.EXPORT,
+      modifiers:
+        modifiers === ''
+          ? []
+          : modifiers
+              .split(' ')
+              .map(e => e.trim())
+              .filter(e => e.length > 0),
+      specifier: null,
+      specifier_kind: null,
       start,
-      type: exp.trim() === 'default' ? 'default' : 'named'
+      syntax: SyntaxKind.DEFAULT,
+      type: false
     })
   }
 
-  // get star export statements
-  for (const match of code.matchAll(EXPORT_STAR_REGEX)) {
-    const { 0: statement = '', index: start = 0, groups = {} } = match
-    const { name = '*', specifier = '' } = groups
+  // get list export statements
+  for (const match of code.matchAll(regex.EXPORT_LIST_REGEX)) {
+    const { 0: code = '', index: start = 0, groups = {} } = match
+    const { exports = '', type = '' } = groups
 
     statements.push({
-      code: statement,
-      declaration: undefined,
-      end: start + statement.length,
-      exports: [name === '*' ? name : name.replace(/(\w+)/, '* as $1').trim()],
-      specifier,
+      code,
+      declaration: null,
+      end: start + code.length,
+      exports: exports
+        .replace(/^{|}$/g, '')
+        .split(',')
+        .map(e => e.trim())
+        .filter(e => e.length > 0),
+      kind: StatementKind.EXPORT,
+      modifiers: [],
+      specifier: null,
+      specifier_kind: null,
       start,
-      type: 'star'
+      syntax: SyntaxKind.LIST,
+      type: !!type
     })
   }
 

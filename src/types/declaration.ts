@@ -7,18 +7,9 @@
  * Export declaration kinds.
  */
 type Declaration =
-  | 'abstract class'
-  | 'async function'
-  | 'async function*'
   | 'class'
   | 'const enum'
   | 'const'
-  | 'default async function'
-  | 'default async function*'
-  | 'default async'
-  | 'default function'
-  | 'default function*'
-  | 'default'
   | 'enum'
   | 'function'
   | 'function*'

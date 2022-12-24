@@ -1,85 +1,100 @@
 // Vitest Snapshot v1
 
-exports[`unit:lib/findDynamicImports > should find dynamic import 1`] = `
+exports[`unit:lib/findDynamicImports > should return DynamicImport object array 1`] = `
 [
   {
-    "code": "await import(\\"bar\\")",
+    "code": "await import('foo')",
     "end": 19,
+    "expression": "import('foo')",
     "imports": [],
-    "specifier": "bar",
-    "specifier_type": "static",
+    "kind": "import",
+    "options": "",
+    "specifier": "foo",
+    "specifier_kind": "static",
     "start": 0,
-    "type": "dynamic",
+    "syntax": "dynamic",
   },
-]
-`;
-
-exports[`unit:lib/findDynamicImports > should find dynamic import declaration 1`] = `
-[
   {
-    "code": "const foo = await import(\\"./bar\\")",
-    "end": 33,
-    "imports": [
-      "foo",
-    ],
-    "specifier": "./bar",
-    "specifier_type": "static",
-    "start": 0,
-    "type": "dynamic",
+    "code": "await import(\\"/modules/my-module.js\\")",
+    "end": 57,
+    "expression": "import(\\"/modules/my-module.js\\")",
+    "imports": [],
+    "kind": "import",
+    "options": "",
+    "specifier": "/modules/my-module.js",
+    "specifier_kind": "static",
+    "start": 20,
+    "syntax": "dynamic",
   },
-]
-`;
-
-exports[`unit:lib/findDynamicImports > should find dynamic import declaration with dynamic specifier 1`] = `
-[
+  {
+    "code": "await import('foo.json', { assert: { type: 'json' } })",
+    "end": 112,
+    "expression": "import('foo.json', { assert: { type: 'json' } })",
+    "imports": [],
+    "kind": "import",
+    "options": "{ assert: { type: 'json' } }",
+    "specifier": "foo.json",
+    "specifier_kind": "static",
+    "start": 58,
+    "syntax": "dynamic",
+  },
   {
     "code": "const foo = await import(bar)",
-    "end": 29,
+    "end": 143,
+    "expression": "import(bar)",
     "imports": [
       "foo",
     ],
+    "kind": "import",
+    "options": "",
     "specifier": "bar",
-    "specifier_type": "dynamic",
-    "start": 0,
-    "type": "dynamic",
+    "specifier_kind": "dynamic",
+    "start": 114,
+    "syntax": "dynamic",
   },
-]
-`;
-
-exports[`unit:lib/findDynamicImports > should find dynamic import declaration without await 1`] = `
-[
   {
-    "code": "const promise = import(\\"./foo\\")",
-    "end": 31,
+    "code": "myModule = await import(\\"module-used-on-server\\")",
+    "end": 247,
+    "expression": "import(\\"module-used-on-server\\")",
     "imports": [
-      "promise",
+      "myModule",
     ],
-    "specifier": "./foo",
-    "specifier_type": "static",
-    "start": 0,
-    "type": "dynamic",
+    "kind": "import",
+    "options": "",
+    "specifier": "module-used-on-server",
+    "specifier_kind": "static",
+    "start": 199,
+    "syntax": "dynamic",
   },
-]
-`;
-
-exports[`unit:lib/findDynamicImports > should find dynamic import with dynamic specifier 1`] = `
-[
   {
-    "code": "await import(bar)",
-    "end": 17,
-    "imports": [],
-    "specifier": "bar",
-    "specifier_type": "dynamic",
-    "start": 0,
-    "type": "dynamic",
+    "code": "myModule = await import(\\"module-used-in-browser\\")",
+    "end": 309,
+    "expression": "import(\\"module-used-in-browser\\")",
+    "imports": [
+      "myModule",
+    ],
+    "kind": "import",
+    "options": "",
+    "specifier": "module-used-in-browser",
+    "specifier_kind": "static",
+    "start": 260,
+    "syntax": "dynamic",
   },
-]
-`;
-
-exports[`unit:lib/findDynamicImports > should find named dynamic imports in multi-line statement 1`] = `
-[
+  {
+    "code": "import(\`/modules/module-\${index}.js\`)",
+    "end": 407,
+    "expression": "import(\`/modules/module-\${index}.js\`)",
+    "imports": [],
+    "kind": "import",
+    "options": "",
+    "specifier": "\`/modules/module-\${index}.js\`",
+    "specifier_kind": "dynamic",
+    "start": 370,
+    "syntax": "dynamic",
+  },
   {
     "code": "const {
+  default: myDefault,
   addFive,
   addFour,
   addThree,
@@ -89,8 +104,10 @@ exports[`unit:lib/findDynamicImports > should find named dynamic imports in mult
   squareThree,
   squareTwo
 } = await import('./lib')",
-    "end": 132,
+    "end": 566,
+    "expression": "import('./lib')",
     "imports": [
+      "default: myDefault",
       "addFive",
       "addFour",
       "addThree",
@@ -100,41 +117,24 @@ exports[`unit:lib/findDynamicImports > should find named dynamic imports in mult
       "squareThree",
       "squareTwo",
     ],
+    "kind": "import",
+    "options": "",
     "specifier": "./lib",
-    "specifier_type": "static",
-    "start": 0,
-    "type": "dynamic",
+    "specifier_kind": "static",
+    "start": 412,
+    "syntax": "dynamic",
   },
-]
-`;
-
-exports[`unit:lib/findDynamicImports > should find named dynamic imports in single-line statement 1`] = `
-[
   {
-    "code": "const { foo, bar } = await import(\\"foobar\\")",
-    "end": 43,
-    "imports": [
-      "foo",
-      "bar",
-    ],
-    "specifier": "foobar",
-    "specifier_type": "static",
-    "start": 0,
-    "type": "dynamic",
-  },
-]
-`;
-
-exports[`unit:lib/findDynamicImports > should find transpiled dynamic import 1`] = `
-[
-  {
-    "code": "await import('buzz')",
-    "end": 20,
+    "code": "import(\\"/modules/my-module.js\\")",
+    "end": 794,
+    "expression": "import(\\"/modules/my-module.js\\")",
     "imports": [],
-    "specifier": "buzz",
-    "specifier_type": "static",
-    "start": 0,
-    "type": "dynamic",
+    "kind": "import",
+    "options": "",
+    "specifier": "/modules/my-module.js",
+    "specifier_kind": "static",
+    "start": 763,
+    "syntax": "dynamic",
   },
 ]
 `;

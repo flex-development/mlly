@@ -5,7 +5,8 @@
 # References:
 #
 # - https://github.com/okonet/lint-staged#command-line-flags
+# - https://vitest.dev/guide/cli.html#changed
 
-yarn check:types
+yarn typecheck --changed HEAD^
 yarn check:types:build
 lint-staged
