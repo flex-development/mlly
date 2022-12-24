@@ -4,7 +4,7 @@
  */
 
 import type { ResolveAliasOptions } from '#src/interfaces'
-import { getCompilerOptions } from '#src/internal'
+import getCompilerOptions from '#src/internal/get-compiler-options'
 import pathe from '@flex-development/pathe'
 import extractStatements from './extract-statements'
 import resolveAlias from './resolve-alias'
