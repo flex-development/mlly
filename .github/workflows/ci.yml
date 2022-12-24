@@ -9,6 +9,8 @@
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 # - https://github.com/actions/checkout
+# - https://github.com/actions/setup-node
+# - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
 # - https://github.com/actions/upload-artifact
 # - https://github.com/codecov/codecov-action
 # - https://github.com/hmarr/debug-action
@@ -61,13 +63,14 @@ jobs:
         uses: actions/setup-node@v3.5.1
         with:
           cache: yarn
+          cache-dependency-path: yarn.lock
           node-version: ${{ matrix.node-version }}
       - id: debug
         name: Print environment variables and event payload
         uses: hmarr/debug-action@v2.1.0
       - id: yarn
         name: Install dependencies
-        run: yarn --no-immutable
+        run: yarn --immutable
       - id: format
         name: Check code formatting
         run: yarn check:format
