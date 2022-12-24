@@ -44,7 +44,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
         ],
         extension: ['.ts'],
         include: ['src'],
-        reporter: ['json-summary', 'lcov', 'text'],
+        reporter: [ci ? 'lcovonly' : 'lcov', 'text'],
         reportsDirectory: './coverage',
         skipFull: false
       },

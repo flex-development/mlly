@@ -1,4 +1,7 @@
 {
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
   "[handlebars]": {
     "editor.defaultFormatter": "Greenbyte.handlebars-preview",
     "editor.rulers": [

@@ -53,6 +53,8 @@
     "clean:modules": "trash ./.yarn/{cache,*.gz} ./node_modules",
     "clean:pack": "trash ./*.tgz",
     "clean:test": "yarn clean:coverage && trash ./__tests__/report.json",
+    "codecov": "yarn test:cov && yarn test:cov:upload",
+    "codecov:validate": "cat .codecov.yml | curl --data-binary @- https://codecov.io/validate",
     "conventional-changelog": "node --loader=./loader.mjs ./node_modules/.bin/conventional-changelog -n ./changelog.config.cts",
     "docs:build": "vc pull --environment=preview && vc build",
     "docs:build:prod": "vc pull --environment=production && vc build --prod",
@@ -73,6 +75,8 @@
     "release": "bash ./scripts/release.sh",
     "test": "vitest run",
     "test:cov": "yarn clean:coverage; yarn test --coverage",
+    "test:cov:serve": "serve ./coverage/lcov-report",
+    "test:cov:upload": "./codecov -t $CODECOV_TOKEN -f ./coverage/lcov.info",
     "test:watch": "vitest",
     "typecheck": "vitest typecheck --run",
     "typecheck:watch": "vitest typecheck"

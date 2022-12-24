@@ -1,0 +1,109 @@
+# CODECOV CONFIGURATION
+# https://docs.codecov.com/docs/codecovyml-reference
+
+---
+codecov:
+  notify:
+    after_n_builds: 4
+    wait_for_ci: true
+  require_ci_to_pass: true
+
+comment:
+  after_n_builds: 4
+  behavior: default
+  layout: header,diff,flags,components,tree,footer
+  require_base: false
+  require_changes: false
+  require_head: true
+  show_carryforward_flags: true
+  show_critical_paths: true
+
+component_management:
+  default_rules:
+    statuses:
+      - type: project
+        target: 100%
+  individual_components:
+    - component_id: internal
+      name: internal
+      paths:
+        - src/internal/
+    - component_id: lib
+      name: lib
+      paths:
+        - src/lib/
+
+coverage:
+  precision: 2
+  range: 90..100
+  round: nearest
+  status:
+    changes:
+      default:
+        branches:
+          - feat/*
+          - hotfix/*
+          - main
+          - release/*
+        if_ci_failed: error
+        if_not_found: success
+        informational: false
+        only_pulls: false
+    patch:
+      default:
+        branches:
+          - feat/*
+          - hotfix/*
+          - main
+          - release/*
+        if_ci_failed: error
+        if_not_found: success
+        informational: false
+        only_pulls: false
+        target: 100%
+        threshold: 0%
+    project:
+      default:
+        branches:
+          - feat/*
+          - hotfix/*
+          - main
+          - release/*
+        if_ci_failed: error
+        if_not_found: success
+        informational: false
+        only_pulls: false
+        target: 100%
+        threshold: 0%
+
+flags:
+  node19:
+    carryforward: false
+    paths:
+      - src/
+  node18:
+    carryforward: false
+    paths:
+      - src/
+  node16:
+    carryforward: false
+    paths:
+      - src/
+  node14:
+    carryforward: false
+    paths:
+      - src/
+
+github_checks:
+  annotations: true
+
+ignore:
+  - '**/__mocks__/**'
+  - '**/__tests__/**'
+  - '**/index.ts'
+  - src/interfaces/
+  - src/types/
+
+profiling:
+  critical_files_paths:
+    - src/lib/*.ts

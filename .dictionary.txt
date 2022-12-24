@@ -10,6 +10,7 @@ chbfeat
 chbfix
 chbhotfix
 chbrelease
+codecov
 colorette
 commitlintrc
 dawidd

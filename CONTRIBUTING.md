@@ -1,7 +1,8 @@
 # Contributing Guide
 
-This document aims to describe the workflows and rules used for developing this
-project. This includes, but is not limited to:
+This document aims to describe the workflows and rules used for developing this project.
+
+This includes, but is not limited to:
 
 - how to contribute code (coding standards, testing, documenting source code)
 - how pull requests are handled
@@ -49,12 +50,10 @@ Follow the steps below to setup your local development environment:
    yarn
    ```
 
-   **Note**: This project uses [Yarn 2][3]. Consult [`.yarnrc.yml`](.yarnrc.yml)
-   for an overview of configuration options and required environment variables.
-   Furthermore, if you already have a global Yarn configuration, or any `YARN_*`
-   environment variables set, an error will be thrown if any settings conflict
-   with the project's Yarn configuration, or the Yarn 2 API. Missing environment
-   variables will also yield an error.
+   **Note**: This project uses [Yarn 2][3]. Consult [`.yarnrc.yml`](.yarnrc.yml) for an overview of configuration
+   options and required environment variables. Furthermore, if you already have a global Yarn configuration, or any
+   `YARN_*` environment variables set, an error will be thrown if any settings conflict with the project's Yarn
+   configuration, or the Yarn 2 API. Missing environment variables will also yield an error.
 
 7. [ZSH][4] setup
 
@@ -77,7 +76,9 @@ Follow the steps below to setup your local development environment:
 
    # LOAD ENVIRONMENT VARIABLES IN CURRENT WORKING DIRECTORY
    # 1. $GITHUB_WORKSPACE
+   # 2. environment variables (local)
    [ -d $PWD/.git ] && export GITHUB_WORKSPACE=$(git rev-parse --show-toplevel)
+   [ -f $PWD/.env.local ] && source $PWD/.env.local
    ```
 
 9. Load `dotenv` plugin via `$ZDOTDIR/.zshrc`:
@@ -99,15 +100,13 @@ Follow the steps below to setup your local development environment:
 | name                    |
 | ----------------------- |
 | `ALGOLIA_API_KEY`       |
-| `CI`                    |
+| `CODECOV_TOKEN`         |
 | `GITHUB_TOKEN`          |
 | `HOSTNAME`              |
 | `NODE_ENV`              |
 | `NODE_NO_WARNINGS`      |
-| `NODE_OPTIONS`          |
 | `VERCEL_ORG_ID`         |
 | `VERCEL_PROJECT_ID`     |
-| `VITEST_SEGFAULT_RETRY` |
 | `ZSH_DOTENV_FILE`       |
 
 #### GitHub Actions
@@ -122,11 +121,9 @@ See [`.github/.gitconfig`](.github/.gitconfig) for an exhaustive list.
 
 ## Contributing Code
 
-[Husky][5] is used to locally enforce coding and commit message standards, as
-well as run tests pre-push.
+[Husky][5] is used to locally enforce coding and commit message standards, as well as run tests pre-push.
 
-Any code merged into the [trunk](#branching-model) must confront the following
-criteria:
+Any code merged into the [trunk](#branching-model) must confront the following criteria:
 
 - changes should be discussed prior to implementation
 - changes have been tested properly
@@ -135,8 +132,7 @@ criteria:
 
 ### Branching Model
 
-This project follows a [Trunk Based Development][6] workflow, specifically the
-[short-lived branch style][7].
+This project follows a [Trunk Based Development][6] workflow, specifically the [short-lived branch style][7].
 
 - Trunk Branch: `main`
 - Short-Lived Branches: `feat/*`, `hotfix/*`, `release/*`
@@ -159,8 +155,7 @@ When creating a new branch, the name should match the following format:
 
 ### Commit Messages
 
-This project follows [Conventional Commit][8] standards and uses [commitlint][9]
-to enforce those standards.
+This project follows [Conventional Commit][8] standards and uses [commitlint][9] to enforce those standards.
 
 This means every commit must conform to the following format:
 
@@ -228,8 +223,7 @@ Source code is located in [`src`](src) directory.
 
 - JavaScript & TypeScript: [JSDoc][12]; linted with [`eslint-plugin-jsdoc`][13]
 
-Before making a pull request, be sure your code is well documented, as it will
-be part of your code review.
+Before making a pull request, be sure your code is well documented, as it will be part of your code review.
 
 ### Testing
 
@@ -245,17 +239,36 @@ Be sure to use [`it.skip`][15] or [`it.todo`][16] where appropriate.
 - `yarn test:cov`
   - See terminal for coverage output
 
+#### Code Coverage
+
+Code coverage is reported using [Codecov][17].
+
+To manually upload coverage reports:
+
+1. Retrieve `CODECOV_TOKEN` from a maintainer
+
+2. Add `CODECOV_TOKEN` to `.env.local`
+
+3. Reload shell
+
+   ```sh
+   exec $SHELL
+   ```
+
+4. Install the [Codecov Uploader][18]
+
+5. Run `yarn codecov`
+
 ### Getting Help
 
-If you need help, make note of any issues in their respective files in the form
-of a [JSDoc comment][12]. If you need help with a test, don't forget to use
-[`it.skip`][15] and/or [`it.todo`][16]. Afterwards, [start a discussion in the
-Q&A category][17].
+If you need help, make note of any issues in their respective files in the form of a [JSDoc comment][12]. If you need
+help with a test, don't forget to use [`it.skip`][15] and/or [`it.todo`][16]. Afterwards, [start a discussion in the
+Q&A category][19].
 
 ## Labels
 
-This project uses a well-defined list of labels to organize issues and pull
-requests. Most labels are scoped (i.e: `status:`).
+This project uses a well-defined list of labels to organize issues and pull requests. Most labels are scoped (i.e:
+`status:`).
 
 A list of labels can be found in [`.github/labels.yml`](.github/labels.yml).
 
@@ -267,20 +280,18 @@ Before opening an issue, make sure you have:
 - checked that the issue hasn't already been filed by searching open issues
 - searched closed issues for solution(s) or feedback
 
-If you haven't found a related open issue, or feel that a closed issue should be
-re-visited, open a new issue.
+If you haven't found a related open issue, or feel that a closed issue should be re-visited, open a new issue.
 
 A well-written issue
 
 - contains a well-written summary of the bug, feature, or improvement
-- contains a [minimal, reproducible example][18] (if applicable)
+- contains a [minimal, reproducible example][20] (if applicable)
 - includes links to related articles and documentation (if any)
 - includes an emoji in the title :wink:
 
 ## Pull Requests
 
-When you're ready to submit your changes, open a pull request (PR) against
-`main`:
+When you're ready to submit your changes, open a pull request (PR) against `main`:
 
 ```sh
 https://github.com/flex-development/mlly/compare/main...$branch
@@ -303,13 +314,12 @@ Every PR you open should:
 
 ### Pull Request Titles
 
-To keep in line with [commit message standards](#commit-messages) after PRs are
-merged, PR titles are expected to adhere to the same rules.
+To keep in line with [commit message standards](#commit-messages) after PRs are merged, PR titles are expected to adhere
+to the same rules.
 
 ## Merge Strategies
 
-In every repository, the `rebase and merge` and `squash and merge` options are
-enabled.
+In every repository, the `rebase and merge` and `squash and merge` options are enabled.
 
 - **rebase and merge**: PR has one commit or commits that are not grouped
 - **squash and merge**: PR has one commit or a group of commits
@@ -340,8 +350,7 @@ e.g:
 ## Deployment
 
 > Note: Package and release publication is executed via GitHub workflow.\
-> This is so invalid or malicious versions cannot be published without merging those
-> changes into `main` first.
+> This is so invalid or malicious versions cannot be published without merging those changes into `main` first.
 
 Before deploying, the following steps must be completed:
 
@@ -373,11 +382,10 @@ Before deploying, the following steps must be completed:
        - create and publish github release
        - make sure all prereleased or released issues are closed
        - delete the release branch
-     - on release publish, [publish workflow](.github/workflows/publish.yml)
-       will fire
+     - on release publish, [publish workflow](.github/workflows/publish.yml) will fire
        - if successful, the workflow will:
-         - publish package to [github package registry][19]
-         - publish package to [npm][20]
+         - publish package to [github package registry][21]
+         - publish package to [npm][22]
 
 [1]: https://brew.sh
 [2]:
@@ -396,7 +404,9 @@ Before deploying, the following steps must be completed:
 [14]: https://vitest.dev
 [15]: https://vitest.dev/api/#test-skip
 [16]: https://vitest.dev/api/#test-todo
-[17]: https://github.com/flex-development/mlly/discussions/new?category=q-a
-[18]: https://stackoverflow.com/help/minimal-reproducible-example
-[19]: https://github.com/features/packages
-[20]: https://npmjs.com
+[17]: https://codecov.io
+[18]: https://docs.codecov.com/docs/codecov-uploader
+[19]: https://github.com/flex-development/mlly/discussions/new?category=q-a
+[20]: https://stackoverflow.com/help/minimal-reproducible-example
+[21]: https://github.com/features/packages
+[22]: https://npmjs.com
