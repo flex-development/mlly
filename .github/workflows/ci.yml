@@ -2,6 +2,8 @@
 #
 # References:
 #
+# - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/using-jobs/using-a-matrix-for-your-jobs
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
@@ -34,15 +36,29 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       !startsWith(github.event.head_commit.message, 'release:')
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 19
+          - 18
+          - 16
+          - 14
     steps:
-      - id: debug
-        name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.1.0
       - id: checkout
         name: Checkout ${{ env.REF }}
         uses: actions/checkout@v3.1.0
         with:
           ref: ${{ env.REF }}
+      - id: node
+        name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: yarn
+          node-version: ${{ matrix.node-version }}
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.1.0
       - id: yarn
         name: Install dependencies
         run: yarn --no-immutable
