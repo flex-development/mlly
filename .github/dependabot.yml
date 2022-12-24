@@ -4,28 +4,27 @@
 #
 # - https://docs.github.com/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates
 
+---
 version: 2
 updates:
   - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: daily
     commit-message:
       prefix: ci
       include: scope
+    directory: /
     labels:
       - scope:dependencies
       - type:ci
     reviewers:
       - flex-development/dependabot-review
       - flexdevelopment
-  - package-ecosystem: npm
-    directory: /
     schedule:
       interval: daily
+  - package-ecosystem: npm
     commit-message:
       prefix: build
       include: scope
+    directory: /
     ignore:
       - dependency-name: '@types/node'
     labels:
@@ -34,3 +33,5 @@ updates:
     reviewers:
       - flex-development/dependabot-review
       - flexdevelopment
+    schedule:
+      interval: daily
