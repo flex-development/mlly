@@ -105,12 +105,18 @@ jobs:
         name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v3.1.1
         with:
-          env_vars: GITHUB_JOB,GITHUB_REF_NAME,GITHUB_SHA,GITHUB_WORKSPACE
+          env_vars: GITHUB_JOB,GITHUB_REF,GITHUB_REF_TYPE,GITHUB_SHA,GITHUB_WORKSPACE
           fail_ci_if_error: true
           file: ./coverage/lcov.info
           flags: ${{ format('node{0}', matrix.node-version) }}
           override_branch: ${{ env.REF }}
           override_build: ${{ github.run_id }}
-          override_commit: ${{ github.sha	}}
+          override_commit: ${{ github.sha }}
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
+        env:
+          GITHUB_JOB: ${{ github.job }}
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_REF_TYPE: ${{ github.ref_type }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_WORKSPACE: ${{ github.workspace }}
