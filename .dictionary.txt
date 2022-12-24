@@ -38,6 +38,7 @@ mkbuild
 nocheck
 npmrc
 nums
+nvmrc
 pathe
 pkgs
 preid
