@@ -13,7 +13,7 @@ vi.mock('tsconfig-paths/lib/tsconfig-loader')
 describe('unit:internal/getCompilerOptions', () => {
   const loadTsconfig = loader.loadTsconfig as unknown as Spy
 
-  it('should return empty object is tsconfig is not found', () => {
+  it('should return empty object if tsconfig is not found', () => {
     // Arrange
     loadTsconfig.mockImplementationOnce(() => void 0)
 

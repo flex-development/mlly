@@ -1013,16 +1013,18 @@ const config = {
       }
     },
     {
-      files: ['**/__tests__/*.spec.*'],
+      files: ['**/__tests__/*.spec.*', '**/__tests__/*.spec-d.*'],
       globals: {
         afterAll: true,
         afterEach: true,
         assert: true,
+        assertType: true,
         beforeAll: true,
         beforeEach: true,
         chai: true,
         describe: true,
         expect: true,
+        expectTypeOf: true,
         faker: true,
         it: true,
         pf: true,
@@ -1107,7 +1109,11 @@ const config = {
       }
     },
     {
-      files: ['.github/dependabot.yml', '.github/workflows/*.yml'],
+      files: [
+        '.github/dependabot.yml',
+        '.github/mergeable.yml',
+        '.github/workflows/*.yml'
+      ],
       rules: {
         'yml/sort-keys': 0
       }

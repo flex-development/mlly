@@ -114,7 +114,7 @@
   "emmet.showExpandedAbbreviation": "always",
   "emmet.triggerExpansionOnTab": true,
   "eslint.enable": true,
-  "eslint.nodePath": "./node_modules/eslint",
+  "eslint.nodePath": "node_modules/eslint",
   "eslint.options": {
     "extensions": [
       "cjs",
@@ -128,7 +128,7 @@
       "vue",
       "yml"
     ],
-    "overrideConfigFile": "./.eslintrc.cjs"
+    "overrideConfigFile": ".eslintrc.cjs"
   },
   "eslint.validate": [
     "graphql",
@@ -176,11 +176,12 @@
   "shellformat.useEditorConfig": true,
   "typescript.suggest.completeFunctionCalls": true,
   "typescript.suggest.completeJSDocs": true,
-  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "volar.doctor.statusBarItem": true,
   "volar.takeOverMode.enabled": false,
   "volar.vueserver.vitePress.processMdFile": true,
+  "versionlens.npm.dependencyProperties": ["dependencies", "devDependencies"],
   "vsicons.associations.files": [
     {
       "extensions": [".eslintrc.base.cjs"],
@@ -248,7 +249,7 @@
   "xml.format.splitAttributes": true,
   "xml.format.splitAttributesIndentSize": 0,
   "yaml.schemas": {
-    "https://json.schemastore.org/github-issue-config": "/.github/ISSUE_TEMPLATE/config.yml",
-    "https://json.schemastore.org/github-workflow": "/.github/workflows/*.yml"
+    "https://json.schemastore.org/github-issue-config": ".github/ISSUE_TEMPLATE/config.yml",
+    "https://json.schemastore.org/github-workflow": ".github/workflows/*.yml"
   }
 }
