@@ -1330,7 +1330,7 @@ __metadata:
     "@vates/toggle-scripts": "npm:1.0.0"
     "@vitest/coverage-c8": "npm:0.26.2"
     "@vitest/ui": "npm:0.26.2"
-    "@vuedx/typescript-plugin-vue": "npm:0.7.6-next-1666251997.0"
+    "@vuedx/typescript-plugin-vue": "npm:0.7.6"
     chai: "npm:4.3.7"
     chai-each: "npm:0.0.1"
     chai-quantifiers: "npm:1.0.17"
@@ -2898,104 +2898,104 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vuedx/compiler-sfc@npm:0.7.2-next-1666251997.0":
-  version: 0.7.2-next-1666251997.0
-  resolution: "@vuedx/compiler-sfc@npm:0.7.2-next-1666251997.0"
+"@vuedx/compiler-sfc@npm:0.7.2":
+  version: 0.7.2
+  resolution: "@vuedx/compiler-sfc@npm:0.7.2"
   dependencies:
     "@vue/compiler-core": "npm:^3.2.31"
-    "@vuedx/shared": "npm:0.7.5-next-1666251997.0"
-    "@vuedx/template-ast-types": "npm:0.7.4-next-1666251997.0"
+    "@vuedx/shared": "npm:0.7.5"
+    "@vuedx/template-ast-types": "npm:0.7.4"
     lru-cache: "npm:^6.0.0"
     source-map: "npm:^0.6.1"
-  checksum: 24233141b41c0937a82909057c39ed28268ccfc48688c9ab76543a453bf1b6cf696c9975a3e4511b87853a97053f12b1b175905f3bbc84be168f239ded980ebe
+  checksum: 09830637d78f196173be23a5473603cb63d056f0fe9ea000eb636408b0f89e05e02a157ca42325ed34a6938cdbd1d8c970dda8c8d51013e2ce0eff24424c1452
   languageName: node
   linkType: hard
 
-"@vuedx/compiler-tsx@npm:0.8.1-next-1666251997.0":
-  version: 0.8.1-next-1666251997.0
-  resolution: "@vuedx/compiler-tsx@npm:0.8.1-next-1666251997.0"
+"@vuedx/compiler-tsx@npm:0.8.1":
+  version: 0.8.1
+  resolution: "@vuedx/compiler-tsx@npm:0.8.1"
   dependencies:
     "@babel/parser": "npm:7.12.3"
     "@babel/types": "npm:7.12.1"
     "@vue/compiler-core": "npm:^3.2.31"
-    "@vuedx/compiler-sfc": "npm:0.7.2-next-1666251997.0"
-    "@vuedx/shared": "npm:0.7.5-next-1666251997.0"
-    "@vuedx/template-ast-types": "npm:0.7.4-next-1666251997.0"
-    "@vuedx/transforms": "npm:0.7.6-next-1666251997.0"
+    "@vuedx/compiler-sfc": "npm:0.7.2"
+    "@vuedx/shared": "npm:0.7.5"
+    "@vuedx/template-ast-types": "npm:0.7.4"
+    "@vuedx/transforms": "npm:0.7.6"
     magic-string: "npm:^0.26.2"
     source-map: "npm:^0.6.1"
     sourcemap-codec: "npm:^1.4.8"
-  checksum: 8e2af4f216335b99038d6d90ae0ee52f7f80e9a386fcc47d8852e9278804e5479eb74adad1aa82e61b81073ab3d158f47a22b2111f04b78958aa91c7fb592c3c
+  checksum: 94a501e534f746eef482ce9fe6d4caaa1cd46a744b1a7bc2e807cace489dd5e3820cf2f8c3917a8cec1c917ba4fba7ba55c67f954aa3850b6aa5f8d479d96d3e
   languageName: node
   linkType: hard
 
-"@vuedx/projectconfig@npm:0.7.3-next-1666251997.0":
-  version: 0.7.3-next-1666251997.0
-  resolution: "@vuedx/projectconfig@npm:0.7.3-next-1666251997.0"
+"@vuedx/projectconfig@npm:0.7.3":
+  version: 0.7.3
+  resolution: "@vuedx/projectconfig@npm:0.7.3"
   dependencies:
-    "@vuedx/shared": "npm:0.7.5-next-1666251997.0"
+    "@vuedx/shared": "npm:0.7.5"
     json5: "npm:^2.2.0"
-  checksum: f97f985758913e65d82d15b95d405ef962785b608e9b4f2bef2052b4264b9a5d6b95f4d1174a4a8e914c7cc033f54d64c04ea51d4af8b092b45d761d00fa3ed2
+  checksum: 6e143653958d227325f7c2f0a79e4cd16e18c46ea5b3c249e7a144e71e4d4ebc0af24c92f4ebe04d258a4df5e13df1713fda6aa99ae09f8673610f37084c9463
   languageName: node
   linkType: hard
 
-"@vuedx/shared@npm:0.7.5-next-1666251997.0":
-  version: 0.7.5-next-1666251997.0
-  resolution: "@vuedx/shared@npm:0.7.5-next-1666251997.0"
+"@vuedx/shared@npm:0.7.5":
+  version: 0.7.5
+  resolution: "@vuedx/shared@npm:0.7.5"
   dependencies:
     "@sentry/node": "npm:^5.30.0"
     sourcemap-codec: "npm:^1.4.8"
-  checksum: 501fc34225ab4b396dd608a41eb83cf7a9283020b810ab7c1ac0222d462ea30b73140cb1d046c1a1887ca4dd44d4526563edb6ac83d2fcffc1da5fc9d2a897b4
+  checksum: efb1d2d5124060f49ea5b079cfa6235017ee394b09a19b05e2314b68dd65bf2313bdfda87afe3d9898848b058890045f59d63b1c3ef69a458d22b8dc299fa4f8
   languageName: node
   linkType: hard
 
-"@vuedx/template-ast-types@npm:0.7.4-next-1666251997.0":
-  version: 0.7.4-next-1666251997.0
-  resolution: "@vuedx/template-ast-types@npm:0.7.4-next-1666251997.0"
+"@vuedx/template-ast-types@npm:0.7.4":
+  version: 0.7.4
+  resolution: "@vuedx/template-ast-types@npm:0.7.4"
   dependencies:
     "@vue/compiler-core": "npm:^3.2.31"
-  checksum: 7b94f5d29f567c6c38894e31566512f336c9664ba4c441429cbdb80b50187a594f38d99a6512ac21cf3b3f9f251e42ac727fb8ae51edd557a0cdfa6d3909927a
+  checksum: 7a82475dd2078c20843d3af74de6baa33f319cf52a6864fe02246dee774f94d964a31c47582b7cfe6b4c74b8c2a5737e64d51c29d49bbfe15f634116ac0f3a3e
   languageName: node
   linkType: hard
 
-"@vuedx/transforms@npm:0.7.6-next-1666251997.0":
-  version: 0.7.6-next-1666251997.0
-  resolution: "@vuedx/transforms@npm:0.7.6-next-1666251997.0"
+"@vuedx/transforms@npm:0.7.6":
+  version: 0.7.6
+  resolution: "@vuedx/transforms@npm:0.7.6"
   dependencies:
-    "@vuedx/shared": "npm:0.7.5-next-1666251997.0"
-  checksum: 202cc865264291ed41f353cddeaf5fe7294d9235c40dac2b64801babcb938ff450475ea2657c1cd34c3bd0e5e0cdc039a226bdacf76629a955b54bca319d25f1
+    "@vuedx/shared": "npm:0.7.5"
+  checksum: 4b45a91ad168d022cc91c3f51090b47ca1e3a122ecae06a7f34ba72cc7a46b1ed298298f0b5965065f5a209a5a68767d5adde5d57ee13245dd78340fedbdbbc7
   languageName: node
   linkType: hard
 
-"@vuedx/typescript-plugin-vue@npm:0.7.6-next-1666251997.0":
-  version: 0.7.6-next-1666251997.0
-  resolution: "@vuedx/typescript-plugin-vue@npm:0.7.6-next-1666251997.0"
+"@vuedx/typescript-plugin-vue@npm:0.7.6":
+  version: 0.7.6
+  resolution: "@vuedx/typescript-plugin-vue@npm:0.7.6"
   dependencies:
-    "@vuedx/projectconfig": "npm:0.7.3-next-1666251997.0"
-    "@vuedx/shared": "npm:0.7.5-next-1666251997.0"
-    "@vuedx/template-ast-types": "npm:0.7.4-next-1666251997.0"
-    "@vuedx/vue-virtual-textdocument": "npm:0.7.6-next-1666251997.0"
+    "@vuedx/projectconfig": "npm:0.7.3"
+    "@vuedx/shared": "npm:0.7.5"
+    "@vuedx/template-ast-types": "npm:0.7.4"
+    "@vuedx/vue-virtual-textdocument": "npm:0.7.6"
     inversify: "npm:^5.1.1"
     json5: "npm:^2.2.0"
     node-ipc: "npm:10.1.0"
     reflect-metadata: "npm:^0.1.13"
-  checksum: 3df079fd90f118d98323150581874adaf2eae88b4ebc11a7fa842cd1217361f1b22bba51facded1c83e1dc3c481ce06daa6eac91d49cf53195e8a41674218f87
+  checksum: ef055bd2740e8b7a53ad681271be09be731ae8a66db776f839f5caafeb3957db965431b5389870b8b4ef16839bc95b3497c9b444182ab823f8e4f6f6eca93c62
   languageName: node
   linkType: hard
 
-"@vuedx/vue-virtual-textdocument@npm:0.7.6-next-1666251997.0":
-  version: 0.7.6-next-1666251997.0
-  resolution: "@vuedx/vue-virtual-textdocument@npm:0.7.6-next-1666251997.0"
+"@vuedx/vue-virtual-textdocument@npm:0.7.6":
+  version: 0.7.6
+  resolution: "@vuedx/vue-virtual-textdocument@npm:0.7.6"
   dependencies:
-    "@vuedx/compiler-sfc": "npm:0.7.2-next-1666251997.0"
-    "@vuedx/compiler-tsx": "npm:0.8.1-next-1666251997.0"
-    "@vuedx/shared": "npm:0.7.5-next-1666251997.0"
-    "@vuedx/template-ast-types": "npm:0.7.4-next-1666251997.0"
-    "@vuedx/transforms": "npm:0.7.6-next-1666251997.0"
+    "@vuedx/compiler-sfc": "npm:0.7.2"
+    "@vuedx/compiler-tsx": "npm:0.8.1"
+    "@vuedx/shared": "npm:0.7.5"
+    "@vuedx/template-ast-types": "npm:0.7.4"
+    "@vuedx/transforms": "npm:0.7.6"
     sourcemap-codec: "npm:^1.4.8"
     vscode-languageserver-textdocument: "npm:^1.0.1"
     vscode-uri: "npm:^2.1.2"
-  checksum: d56cdb62411f3713a57145de2c35cd0fc6cfc7acbe0a09e2dcf9ccb94a233e66041386926625303a7ce2c243843b2016ba7a71a7f4ab6222cdc8568de517ad8e
+  checksum: 6efe88d775ce8ad41648556535e9a9044332920d972c2aa0ec9cc9b6f30e1fb0bca545bc1a1911d5361d31a7456b8c21c8f3cebcd2697455d35b19b60684deb8
   languageName: node
   linkType: hard
 

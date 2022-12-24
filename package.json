@@ -124,7 +124,7 @@
     "@vates/toggle-scripts": "1.0.0",
     "@vitest/coverage-c8": "0.26.2",
     "@vitest/ui": "0.26.2",
-    "@vuedx/typescript-plugin-vue": "0.7.6-next-1666251997.0",
+    "@vuedx/typescript-plugin-vue": "0.7.6",
     "chai": "4.3.7",
     "chai-each": "0.0.1",
     "chai-quantifiers": "1.0.17",
