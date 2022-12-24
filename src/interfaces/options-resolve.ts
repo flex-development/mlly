@@ -3,7 +3,8 @@
  * @module mlly/interfaces/ResolveOptions
  */
 
-import type { Ext, ModuleSpecifierType } from '#src/types'
+import type { ModuleSpecifierType } from '#src/types'
+import type { Ext } from '@flex-development/pathe'
 import type { EmptyString } from '@flex-development/tutils'
 import type { URL } from 'node:url'
 

@@ -3,7 +3,7 @@
  * @module mlly/constants
  */
 
-import type { Ext } from './types'
+import type { Ext } from '@flex-development/pathe'
 
 /**
  * Default export conditions.
@@ -18,6 +18,8 @@ export const CONDITIONS: Readonly<Set<string>> = Object.freeze(
 
 /**
  * Default resolvable file extensions.
+ *
+ * @see {@linkcode Ext}
  *
  * @const {ReadonlyArray<Ext>} RESOLVE_EXTENSIONS
  */
