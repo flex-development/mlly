@@ -1387,7 +1387,7 @@ __metadata:
     version-bump-prompt: "npm:6.1.0"
     vite: "npm:4.0.3"
     vite-tsconfig-paths: "npm:4.0.3"
-    vitepress: "npm:1.0.0-alpha.32"
+    vitepress: "npm:1.0.0-alpha.33"
     vitest: "npm:0.26.2"
     vitest-github-actions-reporter: "npm:0.9.0"
     vue: "npm:3.2.45"
@@ -2999,31 +2999,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/core@npm:^9.6.0":
-  version: 9.8.2
-  resolution: "@vueuse/core@npm:9.8.2"
+"@vueuse/core@npm:^9.8.2":
+  version: 9.9.0
+  resolution: "@vueuse/core@npm:9.9.0"
   dependencies:
     "@types/web-bluetooth": "npm:^0.0.16"
-    "@vueuse/metadata": "npm:9.8.2"
-    "@vueuse/shared": "npm:9.8.2"
+    "@vueuse/metadata": "npm:9.9.0"
+    "@vueuse/shared": "npm:9.9.0"
     vue-demi: "npm:*"
-  checksum: f079d9807be3272318e33070304f306f6aece5060835a67ba0aefbe31819416e6990257629f44a1ae2cc200bda82fa48a8184ff6dcf22ac45d7a0a2a7338a7ca
+  checksum: ec05a0afe01ca133046fe7890dd4d0a9f35663340c1c00e2973e2e0cc5c4bc778a54c60fbb80aa7655e4c5d9290e0b9f49946da69fb96fbadfd52e63f913f891
   languageName: node
   linkType: hard
 
-"@vueuse/metadata@npm:9.8.2":
-  version: 9.8.2
-  resolution: "@vueuse/metadata@npm:9.8.2"
-  checksum: 5f1863033a77c0f201c48726460e88114e10af75d15dcb04110617d85022123a13d32f5083de696911f632dcee4cdd24816d9f4ef7d004fbc1d1ca2bac83d05b
+"@vueuse/metadata@npm:9.9.0":
+  version: 9.9.0
+  resolution: "@vueuse/metadata@npm:9.9.0"
+  checksum: 3891a61deb14a3282de80c45369582762043816ab0c577b542e28f76944248bd6af4cd4c695f7ce066ebc491c168c9e118a279c0aac6b97100f1e8b419dbdb25
   languageName: node
   linkType: hard
 
-"@vueuse/shared@npm:9.8.2":
-  version: 9.8.2
-  resolution: "@vueuse/shared@npm:9.8.2"
+"@vueuse/shared@npm:9.9.0":
+  version: 9.9.0
+  resolution: "@vueuse/shared@npm:9.9.0"
   dependencies:
     vue-demi: "npm:*"
-  checksum: 63f61c87eb998ecba768b789a6c957fd9032091fd08e8a261fb773e7c39c684d218395e7fa07ddc14769f15a85677295d904065e6dd8d99d22fbbc7560b7a0a6
+  checksum: 57f43296a91a5d555dea38521b49d3bcd15805144521937eb906183eb0c75f7629f3a65d0a44a482509d5ff7ad71a116e19bf5c79653e0b6f3743be2883f9435
   languageName: node
   linkType: hard
 
@@ -7070,7 +7070,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonc-parser@npm:^3.0.0, jsonc-parser@npm:^3.2.0":
+"jsonc-parser@npm:^3.2.0":
   version: 3.2.0
   resolution: "jsonc-parser@npm:3.2.0"
   checksum: dffa53dd8b8aa897575bcd31b767f1a5c90a0229902e4fcf7aaae73d11a2a343eee6f852d432f7f9328b14520f487805014c2284fbe358e904c41f004964b54a
@@ -9497,14 +9497,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shiki@npm:^0.11.1":
-  version: 0.11.1
-  resolution: "shiki@npm:0.11.1"
+"shiki@npm:^0.12.1":
+  version: 0.12.1
+  resolution: "shiki@npm:0.12.1"
   dependencies:
-    jsonc-parser: "npm:^3.0.0"
-    vscode-oniguruma: "npm:^1.6.1"
-    vscode-textmate: "npm:^6.0.0"
-  checksum: 9135c668f16159cc713757ef8448f25810af33c9511daccc6730c3367bb684c0d83874298152dfed4fb4c1ab471abade0057529819fb68d1e109f9a69371b8df
+    jsonc-parser: "npm:^3.2.0"
+    vscode-oniguruma: "npm:^1.7.0"
+    vscode-textmate: "npm:^8.0.0"
+  checksum: 94b00e8e1ba14373b6a35454da49d15f9d3b7b0531c84b0ec1874e143a9831d4a7b27e29d4827ee017e45505762b2918e39e50604e5d8708ab51fb23022ef633
   languageName: node
   linkType: hard
 
@@ -10838,41 +10838,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitepress@npm:1.0.0-alpha.32":
-  version: 1.0.0-alpha.32
-  resolution: "vitepress@npm:1.0.0-alpha.32"
+"vitepress@npm:1.0.0-alpha.33":
+  version: 1.0.0-alpha.33
+  resolution: "vitepress@npm:1.0.0-alpha.33"
   dependencies:
     "@docsearch/css": "npm:^3.3.0"
     "@docsearch/js": "npm:^3.3.0"
     "@vitejs/plugin-vue": "npm:^4.0.0"
     "@vue/devtools-api": "npm:^6.4.5"
-    "@vueuse/core": "npm:^9.6.0"
+    "@vueuse/core": "npm:^9.8.2"
     body-scroll-lock: "npm:4.0.0-beta.0"
-    shiki: "npm:^0.11.1"
-    vite: "npm:^4.0.0"
+    shiki: "npm:^0.12.1"
+    vite: "npm:^4.0.2"
     vue: "npm:^3.2.45"
   bin:
     vitepress: bin/vitepress.js
-  checksum: be3f174cf69b5adf6b29f96a1389fefacf250566a284b24e4d25e8856cfaa52e111545cdb52c2ec556b2275ff936fec2a52adcca0a7100fbe7d469ae62145777
-  languageName: node
-  linkType: hard
-
-"vitepress@patch:vitepress@npm%3A1.0.0-alpha.32#patches/vitepress+1.0.0-alpha.32.dev.patch::locator=%40flex-development%2Fmlly%40workspace%3A.":
-  version: 1.0.0-alpha.32
-  resolution: "vitepress@patch:vitepress@npm%3A1.0.0-alpha.32#patches/vitepress+1.0.0-alpha.32.dev.patch::version=1.0.0-alpha.32&hash=e03d53&locator=%40flex-development%2Fmlly%40workspace%3A."
-  dependencies:
-    "@docsearch/css": "npm:^3.3.0"
-    "@docsearch/js": "npm:^3.3.0"
-    "@vitejs/plugin-vue": "npm:^4.0.0"
-    "@vue/devtools-api": "npm:^6.4.5"
-    "@vueuse/core": "npm:^9.6.0"
-    body-scroll-lock: "npm:4.0.0-beta.0"
-    shiki: "npm:^0.11.1"
-    vite: "npm:^4.0.0"
-    vue: "npm:^3.2.45"
-  bin:
-    vitepress: bin/vitepress.js
-  checksum: 4c1ad5aae1525a83786271308fbecc435248f5e01a659172cf93f8055c3875c01057e9ba40eda2677c00b7d4066c0f35a736c59f98963a803c5955586a2fe33a
+  checksum: c7ae0388b1dfa09962887a51238d096b83af9960b76bd69cc7a0706515468c192622a76dd866526cde21780139b066f930e029772a3af4d360644cde9cb7f1f0
   languageName: node
   linkType: hard
 
@@ -10978,17 +10959,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vscode-oniguruma@npm:^1.6.1":
-  version: 1.6.2
-  resolution: "vscode-oniguruma@npm:1.6.2"
-  checksum: f0f2612889456a6c86c413d7d87489280819036f2a2f466355efa0514eee02b8573a34f0ed0c07936e8891cb2a184203ae9790e4333b66974598a13fbe618775
+"vscode-oniguruma@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "vscode-oniguruma@npm:1.7.0"
+  checksum: be926f3eda5c37574ac42f9630969576e1035b3eb78a724921de367e76c84888847864bc2d9779e73ca61789fb27e5a0cda207c3a0aeb55dbb6b2f84449ab807
   languageName: node
   linkType: hard
 
-"vscode-textmate@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "vscode-textmate@npm:6.0.0"
-  checksum: b93dd05194bbae5cf58bc415976e23a2034c78c208e3b13111c1b74158853eff3f5fc8783fac310f67429292ebc45a680edbd7aa515ce2ecda050cfb2fbc8d22
+"vscode-textmate@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "vscode-textmate@npm:8.0.0"
+  checksum: 19efb37dda3a3090aec8b97267b5ac71fedbf155140ab560b5f5aced5c8d4ca565060748eabe85e820735415cc64f970b47126cfa1ee00c29d25b9f322b42eb0
   languageName: node
   linkType: hard
 
