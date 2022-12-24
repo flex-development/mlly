@@ -5,7 +5,7 @@
 
 import { SpecifierKind } from '#src/enums'
 import type { ResolveOptions } from '#src/interfaces'
-import type { SpecifierType } from '#src/types'
+import type { ModuleSpecifierType } from '#src/types'
 import pathe from '@flex-development/pathe'
 import extractStatements from './extract-statements'
 import resolveModule from './resolve-module'
@@ -37,9 +37,9 @@ const resolveModules = async (
      * Determines a module specifier type for `resolved`.
      *
      * @param {string} resolved - Resolved module
-     * @return {SpecifierType} Module specifier type for `resolved`
+     * @return {ModuleSpecifierType} Module specifier type for `resolved`
      */
-    const type = (resolved: string): SpecifierType => {
+    const type = (resolved: string): ModuleSpecifierType => {
       return pathe.isAbsolute(statement.specifier!) ||
         statement.specifier!.startsWith('file:')
         ? 'absolute'

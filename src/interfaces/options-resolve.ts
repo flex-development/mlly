@@ -3,7 +3,7 @@
  * @module mlly/interfaces/ResolveOptions
  */
 
-import type { Ext, SpecifierType } from '#src/types'
+import type { Ext, ModuleSpecifierType } from '#src/types'
 import type { EmptyString } from '@flex-development/tutils'
 import type { URL } from 'node:url'
 
@@ -64,13 +64,15 @@ interface ResolveOptions {
   /**
    * Module specifier type or a function to determine module specifier type.
    *
-   * @see {@linkcode SpecifierType}
+   * @see {@linkcode ModuleSpecifierType}
    *
    * @default 'absolute'
    */
   type?:
-    | SpecifierType
-    | ((resolved: string) => PromiseLike<SpecifierType> | SpecifierType)
+    | ModuleSpecifierType
+    | ((
+        resolved: string
+      ) => ModuleSpecifierType | PromiseLike<ModuleSpecifierType>)
     | undefined
 }
 

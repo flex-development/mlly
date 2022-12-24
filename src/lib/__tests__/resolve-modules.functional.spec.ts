@@ -36,7 +36,7 @@ describe('functional:lib/resolveModules', () => {
       import { pathToFileURL, URL } from 'node:url'
       import { CONDITIONS, RESOLVE_EXTENSIONS } from '../constants'
       import type { ResolveOptions as Options } from '../interfaces'
-      import type { SpecifierType } from '../types'
+      import type { ModuleSpecifierType } from '../types'
       import toBareSpecifier from './to-bare-specifier'
       import toRelativeSpecifier from './to-relative-specifier'
 

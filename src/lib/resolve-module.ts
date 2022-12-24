@@ -5,7 +5,7 @@
 
 import { CONDITIONS, RESOLVE_EXTENSIONS } from '#src/constants'
 import type { ResolveOptions } from '#src/interfaces'
-import type { SpecifierType } from '#src/types'
+import type { ModuleSpecifierType } from '#src/types'
 import isBuiltin from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
 import { moduleResolve, type ErrnoException } from 'import-meta-resolve'
@@ -136,9 +136,9 @@ const resolveModule = async (
   /**
    * Module specifier type.
    *
-   * @const {SpecifierType} type
+   * @const {ModuleSpecifierType} type
    */
-  const type: SpecifierType =
+  const type: ModuleSpecifierType =
     typeof opts.type === 'function'
       ? await opts.type(resolved)
       : opts.type ?? 'absolute'

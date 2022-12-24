@@ -7,7 +7,7 @@ import { moduleResolve, type ErrnoException } from 'import-meta-resolve'
 import { pathToFileURL, URL } from 'node:url'
 import { CONDITIONS, RESOLVE_EXTENSIONS } from '../constants.mjs'
 import type { ResolveOptions as Options } from '../interfaces/index.mjs'
-import type { SpecifierType } from '../types/index.mjs'
+import type { ModuleSpecifierType } from '../types/index.mjs'
 import toBareSpecifier from './to-bare-specifier.mjs'
 import toRelativeSpecifier from './to-relative-specifier.mjs'
 
