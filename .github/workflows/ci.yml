@@ -10,6 +10,7 @@
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 # - https://github.com/actions/checkout
 # - https://github.com/actions/upload-artifact
+# - https://github.com/codecov/codecov-action
 # - https://github.com/hmarr/debug-action
 
 ---
@@ -45,7 +46,10 @@ jobs:
           - 19
           - 18
           - 16
-          - 14
+          # node 14 does not support `assert { type: 'json' }`
+          # this node version will fail for packages installed from github that also use mkbuild
+          # fails silently otherwise (e.g yarn pack)
+          # - 14
     steps:
       - id: checkout
         name: Checkout ${{ env.REF }}
@@ -94,3 +98,16 @@ jobs:
           name: |
             ${{ format('@{0}-{1}-{2}', github.repository_owner, github.event.repository.name, steps.version.outputs.result) }}
           path: '*.tgz'
+      - id: codecov
+        name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v3.1.1
+        with:
+          env_vars: GITHUB_JOB,GITHUB_REF_NAME,GITHUB_SHA,GITHUB_WORKSPACE
+          fail_ci_if_error: true
+          file: ./coverage/lcov.info
+          flags: ${{ format('node{0}', matrix.node-version) }}
+          override_branch: ${{ env.REF }}
+          override_build: ${{ github.run_id }}
+          override_commit: ${{ github.sha	}}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
