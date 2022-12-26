@@ -26,6 +26,10 @@
 # scope labels
 # project-specific groups for issues, pull requests, and discussions
 
+- name: scope:analyze
+  description: import/export analysis
+  color: 74cefc
+
 - name: scope:dependencies
   description: dependency updates
   color: 74cefc
