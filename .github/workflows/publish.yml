@@ -70,6 +70,9 @@ jobs:
         uses: actions/checkout@v3.2.0
         with:
           ref: ${{ format('refs/tags/{0}', env.TAG) }}
+      - id: npmrc-cleanup
+        name: Remove stale .npmrc file
+        run: rm .npmrc
       - id: npmrc
         name: Setup .npmrc file
         uses: actions/setup-node@v3.5.1
@@ -86,7 +89,6 @@ jobs:
         run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PAT_BOT: ${{ secrets.GITHUB_TOKEN }}
   npm:
     needs: [metadata, gpr]
     permissions:
@@ -103,6 +105,9 @@ jobs:
         uses: actions/checkout@v3.2.0
         with:
           ref: ${{ format('refs/tags/{0}', env.TAG) }}
+      - id: npmrc-cleanup
+        name: Remove stale .npmrc file
+        run: rm .npmrc
       - id: npmrc
         name: Setup .npmrc file
         uses: actions/setup-node@v3.5.1
@@ -119,7 +124,6 @@ jobs:
         run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          PAT_BOT: ${{ secrets.GITHUB_TOKEN }}
   docs:
     needs: [metadata, gpr, npm]
     permissions:
