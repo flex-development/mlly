@@ -5866,7 +5866,7 @@ __metadata:
 
 "fsevents@patch:fsevents@npm%3A~2.3.2#optional!builtin<compat/fsevents>":
   version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
   dependencies:
     node-gyp: "npm:latest"
   conditions: os=darwin
@@ -9207,7 +9207,7 @@ __metadata:
 
 "resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.10.1#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#optional!builtin<compat/resolve>":
   version: 1.22.1
-  resolution: "resolve@patch:resolve@npm%3A1.22.1#optional!builtin<compat/resolve>::version=1.22.1&hash=07638b"
+  resolution: "resolve@patch:resolve@npm%3A1.22.1#optional!builtin<compat/resolve>::version=1.22.1&hash=c3c19d"
   dependencies:
     is-core-module: "npm:^2.9.0"
     path-parse: "npm:^1.0.7"
@@ -10369,7 +10369,7 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A4.3.4#optional!builtin<compat/typescript>":
   version: 4.3.4
-  resolution: "typescript@patch:typescript@npm%3A4.3.4#optional!builtin<compat/typescript>::version=4.3.4&hash=f456af"
+  resolution: "typescript@patch:typescript@npm%3A4.3.4#optional!builtin<compat/typescript>::version=4.3.4&hash=dba6d9"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -10379,11 +10379,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A4.9.4#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^4.6.4#optional!builtin<compat/typescript>":
   version: 4.9.4
-  resolution: "typescript@patch:typescript@npm%3A4.9.4#optional!builtin<compat/typescript>::version=4.9.4&hash=f456af"
+  resolution: "typescript@patch:typescript@npm%3A4.9.4#optional!builtin<compat/typescript>::version=4.9.4&hash=ad5954"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: b53b083cf90883c6c73d66ce2e8b39115f06a642dfc538085c32e030687cf9872c5ea8720c5f361d4d2d14a8af946bb5423e0bf6b472b11f776e020ba6332ced
+  checksum: e7321aeb1e2c0e3c19599808707208e2b730de8d17a5624f0a7297b9a1ffa39974edd4a819108b3b635bc00171476ddfa339e04d928a03ce8d8c6944cb8ec008
   languageName: node
   linkType: hard
 
@@ -10859,7 +10859,7 @@ __metadata:
 
 "vitepress@patch:vitepress@npm%3A1.0.0-alpha.32#patches/vitepress+1.0.0-alpha.32.dev.patch::locator=%40flex-development%2Fmlly%40workspace%3A.":
   version: 1.0.0-alpha.32
-  resolution: "vitepress@patch:vitepress@npm%3A1.0.0-alpha.32#patches/vitepress+1.0.0-alpha.32.dev.patch::version=1.0.0-alpha.32&hash=e03d53&locator=%40flex-development%2Fmlly%40workspace%3A."
+  resolution: "vitepress@patch:vitepress@npm%3A1.0.0-alpha.32#patches/vitepress+1.0.0-alpha.32.dev.patch::version=1.0.0-alpha.32&hash=806ad6&locator=%40flex-development%2Fmlly%40workspace%3A."
   dependencies:
     "@docsearch/css": "npm:^3.3.0"
     "@docsearch/js": "npm:^3.3.0"
@@ -10931,7 +10931,7 @@ __metadata:
 
 "vitest@patch:vitest@npm%3A0.26.2#patches/vitest+0.26.2.dev.patch::locator=%40flex-development%2Fmlly%40workspace%3A.":
   version: 0.26.2
-  resolution: "vitest@patch:vitest@npm%3A0.26.2#patches/vitest+0.26.2.dev.patch::version=0.26.2&hash=06da94&locator=%40flex-development%2Fmlly%40workspace%3A."
+  resolution: "vitest@patch:vitest@npm%3A0.26.2#patches/vitest+0.26.2.dev.patch::version=0.26.2&hash=5d0070&locator=%40flex-development%2Fmlly%40workspace%3A."
   dependencies:
     "@types/chai": "npm:^4.3.4"
     "@types/chai-subset": "npm:^1.3.3"
