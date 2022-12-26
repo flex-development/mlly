@@ -99,7 +99,7 @@
     "@commitlint/types": "17.0.0",
     "@faker-js/faker": "7.6.0",
     "@flex-development/docast": "1.0.0-alpha.9",
-    "@flex-development/docast-parse": "github:flex-development/docast-parse",
+    "@flex-development/docast-parse": "1.0.0-alpha.4",
     "@flex-development/mkbuild": "1.0.0-alpha.9",
     "@graphql-eslint/eslint-plugin": "3.13.1",
     "@sindresorhus/slugify": "2.1.1",

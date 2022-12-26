@@ -1233,9 +1233,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/docast-parse@github:flex-development/docast-parse":
+"@flex-development/docast-parse@npm:1.0.0-alpha.4":
   version: 1.0.0-alpha.4
-  resolution: "@flex-development/docast-parse@https://github.com/flex-development/docast-parse.git#commit=5c895d292546aebefdf9aa2ebc00b9dfe881e22f"
+  resolution: "@flex-development/docast-parse@npm:1.0.0-alpha.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fdocast-parse%2F1.0.0-alpha.4%2F94186339fb85b5e85ec5df37150067bf05805f33"
   dependencies:
     "@flex-development/docast": "npm:1.0.0-alpha.9"
     "@flex-development/tutils": "npm:6.0.0-alpha.7"
@@ -1333,7 +1333,7 @@ __metadata:
     "@commitlint/types": "npm:17.0.0"
     "@faker-js/faker": "npm:7.6.0"
     "@flex-development/docast": "npm:1.0.0-alpha.9"
-    "@flex-development/docast-parse": "github:flex-development/docast-parse"
+    "@flex-development/docast-parse": "npm:1.0.0-alpha.4"
     "@flex-development/export-regex": "npm:1.0.0"
     "@flex-development/import-regex": "npm:2.0.0"
     "@flex-development/is-builtin": "npm:1.0.1"
