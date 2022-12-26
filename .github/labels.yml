@@ -66,6 +66,10 @@
   description: resolving modules
   color: 74cefc
 
+- name: scope:specifiers
+  description: module specifiers
+  color: 74cefc
+
 - name: scope:tests
   description: testing
   color: 74cefc
