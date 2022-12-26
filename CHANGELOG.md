@@ -1,3 +1,80 @@
+## [1.0.0-alpha.3](https://github.com/flex-development/mlly/compare/1.0.0-alpha.2...1.0.0-alpha.3) (2022-12-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **types:** remove `Ext`
+* **types:** `SpecifierType` -> `ModuleSpecifierType`
+* statements
+
+### :package: Build
+
+* **deps-dev:** add @flex-development/docast ([42b8ed2](https://github.com/flex-development/mlly/commit/42b8ed2360e8b4478202ba7db7e2b5cacae9ec90))
+* **deps-dev:** bump @flex-development/docast-parse to 1.0.0-alpha.4 ([9634f8d](https://github.com/flex-development/mlly/commit/9634f8d4ec4375e7d29ad709c36ce1d398293718))
+* **deps-dev:** bump @flex-development/mkbuild from 1.0.0-alpha.8 to 1.0.0-alpha.9 ([0262207](https://github.com/flex-development/mlly/commit/026220768f780149e143c0a5e6d35f9c2a4f0215))
+* **deps-dev:** bump deps according to `yarn upgrade-interactive` ([ab0b8ce](https://github.com/flex-development/mlly/commit/ab0b8ced1e664a9bb6a9f4a7189d870bdf76c8c0))
+* **deps-dev:** bump deps according to `yarn upgrade-interactive` ([bddfa7c](https://github.com/flex-development/mlly/commit/bddfa7c3f8864ab38fe35dc295ab46e472df187e))
+* **deps:** add @flex-development/tsconfig-types ([a7c38e5](https://github.com/flex-development/mlly/commit/a7c38e50ea583dde948078569b41e0aebde8cfbf))
+* **deps:** replace upath with @flex-development/pathe ([8a584d6](https://github.com/flex-development/mlly/commit/8a584d6dc2fed8c4cae491c290cf58ded9ca038e))
+* **docs:** [site] use flex-development/docast-parse@27c73c7c03df4d92585c538c1f8214886b1fd0a9 ([b696cf6](https://github.com/flex-development/mlly/commit/b696cf676ecb0ace14647727415a49d03092d0d5))
+
+
+### :robot: Continuous Integration
+
+* configure private package registry for [@dependabot](https://github.com/dependabot) ([e188761](https://github.com/flex-development/mlly/commit/e1887618c8a2c5fe9cb69babd15498b618e64e66))
+* fix [@dependabot](https://github.com/dependabot) npm package-ecosystem x yarn integration ([126dfab](https://github.com/flex-development/mlly/commit/126dfab8d937f3526ea109acc91565accf3b2653))
+* **deps:** bump actions/add-to-project from 0.3.0 to 0.4.0 ([b5e8279](https://github.com/flex-development/mlly/commit/b5e8279269f75cee5076d86b7c34578b74f306df))
+* **deps:** bump actions/checkout from 3.1.0 to 3.2.0 ([0637831](https://github.com/flex-development/mlly/commit/063783140fb475f29f821408837389219c471625))
+* **deps:** bump dessant/lock-threads from 3.0.0 to 4.0.0 ([ba6063c](https://github.com/flex-development/mlly/commit/ba6063cb88556d106fb01c3948ba03d8f4848a47))
+* **deps:** bump flex-development/dist-tag-action from 1.1.1 to 1.1.2 ([e19b975](https://github.com/flex-development/mlly/commit/e19b97514d655b2c89e7fa4b09aa3ea93a0f8415))
+* **workflows:** [`add-to-project`] add items from repo admin account ([e271e8a](https://github.com/flex-development/mlly/commit/e271e8afe22244e3d270aa02a833ccb4b077f296))
+* **workflows:** [`ci`] add node.js matrix ([28a0fa6](https://github.com/flex-development/mlly/commit/28a0fa6d809c94af458c6d5c9b661bb9d564b70a))
+* **workflows:** [`ci`] archive production artifacts ([701caea](https://github.com/flex-development/mlly/commit/701caea0edc1e2d36d7a1323a88e1e714e88743d))
+* **workflows:** [`ci`] let [@dependabot](https://github.com/dependabot) modify lockfile ([74ec538](https://github.com/flex-development/mlly/commit/74ec5381fd5339d0d29b1a5529e48d8b86fc2419))
+* **workflows:** [`ci`] re-add node14 to matrix ([44801d8](https://github.com/flex-development/mlly/commit/44801d803774588c46299050ff858027605a2079))
+* **workflows:** [`ci`] update codecov environment ([32518bd](https://github.com/flex-development/mlly/commit/32518bdd2650e01bc92dd6e212ef9420f239ac9f))
+* **workflows:** [`ci`] update node setup ([b326f5d](https://github.com/flex-development/mlly/commit/b326f5d35c968fd4f1145a50a769e8d645190941)), closes [/github.com/actions/setup-node/blob/v3.5.1/docs/advanced-usage.md#yarn2](https://github.com/flex-development//github.com/actions/setup-node/blob/v3.5.1/docs/advanced-usage.md/issues/yarn2)
+* **workflows:** [`ci`] upload coverage reports to codecov ([a24776b](https://github.com/flex-development/mlly/commit/a24776ba0c3aad87e36881f5558eba58f5f7a866))
+* **workflows:** [`publish`] cleanup registry scope ([ba5b355](https://github.com/flex-development/mlly/commit/ba5b355f30e62cb863abd35eddaa28b5b0885f56)), closes [/github.com/actions/setup-node/blob/v3.5.1/src/authutil.ts#L28-L30](https://github.com/flex-development//github.com/actions/setup-node/blob/v3.5.1/src/authutil.ts/issues/L28-L30)
+* **workflows:** [`publish`] print contents of `.npmrc` file ([2c16ff6](https://github.com/flex-development/mlly/commit/2c16ff62786d8ecc1f403d364af4d6db372e5a75))
+* **workflows:** [`publish`] use node version file ([80d68c1](https://github.com/flex-development/mlly/commit/80d68c13aac5cdb0005c236d56bb8db90bd831a0)), closes [/github.com/actions/setup-node/blob/v3.5.1/action.yml#L10-L11](https://github.com/flex-development//github.com/actions/setup-node/blob/v3.5.1/action.yml/issues/L10-L11)
+* **workflows:** [`release`] publish releases from repo admin account ([bbda19c](https://github.com/flex-development/mlly/commit/bbda19ca37155411a0a4e9bf4e734a7b7ad959c8))
+
+
+### :pencil: Documentation
+
+* add "contributor covenant code of conduct" ([8f1285b](https://github.com/flex-development/mlly/commit/8f1285b12b7c74401c962d614e2c79a6a0c89585))
+
+
+### :bug: Fixes
+
+* **install:** [git] make `postinstall` script work with git install ([1a70af2](https://github.com/flex-development/mlly/commit/1a70af2bed20cbb6667ca0dd3e8d2e7d6a38da4b))
+
+
+### :house_with_garden: Housekeeping
+
+* project qa ([4acf639](https://github.com/flex-development/mlly/commit/4acf639b6b28c20a782e39d6f4a8c4b2adb0ae20))
+* project qa ([3120990](https://github.com/flex-development/mlly/commit/312099035d0a90f044688e6619ec84dd6049d8bb))
+* **github:** add commit scope `install` ([065dbbb](https://github.com/flex-development/mlly/commit/065dbbbfd271e576d5031fcd155e91007cb95f62))
+* **github:** add label `scope:install` ([3ddc9c2](https://github.com/flex-development/mlly/commit/3ddc9c29e92e0e254f48f87ce7052196b79c9cc1))
+* **internal:** remove barrel file ([e0ba89c](https://github.com/flex-development/mlly/commit/e0ba89cceee97e99111dd4ab7c63601b593a24d5))
+* **pkg:** add keywords `ecmascript-modules` and `esmodules` ([e994f4b](https://github.com/flex-development/mlly/commit/e994f4bb182f0861f3c1c3c68c1a9d0a9a3d6631))
+* **tests:** local codecov integration ([bdbae1d](https://github.com/flex-development/mlly/commit/bdbae1d44cc60409a3dabb23acae79f8180b187a))
+* **yarn:** bump yarn from 4.0.0-rc.14 to 4.0.0-rc.34 ([045ee62](https://github.com/flex-development/mlly/commit/045ee6252342027657771d7bbdab6748fbb9a36a))
+
+
+### :zap: Refactors
+
+* statements ([731bd2a](https://github.com/flex-development/mlly/commit/731bd2a770671ad771ff38e8b12fce513034db27))
+* **ts:** enforce `exactOptionalPropertyTypes` ([f3109b4](https://github.com/flex-development/mlly/commit/f3109b4cb6b33528ac2655e9c90eb86a2512b00d))
+* **types:** `SpecifierType` -> `ModuleSpecifierType` ([263e98b](https://github.com/flex-development/mlly/commit/263e98b4e8189315157dfb4940df76e61a661922))
+* **types:** remove `Ext` ([303de20](https://github.com/flex-development/mlly/commit/303de200e3eddf4c6c33fd41db6f6f0ad84fe8ec))
+
+
+### :white_check_mark: Testing
+
+* **ts:** add remaining type tests ([7a5430f](https://github.com/flex-development/mlly/commit/7a5430f4d95392b9fa6637d09765dcdd79d275b4))
+
 ## [1.0.0-alpha.2](https://github.com/flex-development/mlly/compare/1.0.0-alpha.1...1.0.0-alpha.2) (2022-11-06)
 
 
