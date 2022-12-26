@@ -47,7 +47,7 @@ jobs:
           ref: ${{ format('refs/tags/{0}', env.TAG) }}
       - id: version
         name: Get package version
-        run: echo "::set-output name=result::$(jq .version package.json -r)"
+        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
       - id: dist-tag
         name: Get dist tag
         uses: flex-development/dist-tag-action@1.1.2

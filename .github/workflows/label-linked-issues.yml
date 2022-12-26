@@ -39,7 +39,7 @@ jobs:
           ref: main
       - id: version
         name: Get project version
-        run: echo "::set-output name=result::$(jq .version package.json -r)"
+        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
       - id: query
         name: Query linked issues
         uses: octokit/graphql-action@v2.2.23

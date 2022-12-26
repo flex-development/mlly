@@ -52,14 +52,14 @@ jobs:
           ref: ${{ env.REF }}
       - id: version
         name: Get version
-        run: echo "::set-output name=result::$(jq .version package.json -r)"
+        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
       - id: tag-prefix
         name: Get release tag prefix
-        run: echo "::set-output name=result::$(jq .tagPrefix package.json -r)"
+        run: echo "result=$(jq .tagPrefix package.json -r)" >> $GITHUB_OUTPUT
       - id: tag
         name: Get release tag
         run: |
-          echo "::set-output name=result::${{ format('{0}{1}', steps.tag-prefix.outputs.result, steps.version.outputs.result) }}"
+          echo "result=${{ format('{0}{1}', steps.tag-prefix.outputs.result, steps.version.outputs.result) }}" >> $GITHUB_OUTPUT
       - id: dist-tag
         name: Get dist tag
         uses: flex-development/dist-tag-action@1.1.2
