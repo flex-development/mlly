@@ -25,6 +25,6 @@ jobs:
         name: Add ${{ format('#{0}', github.event.number || github.event.issue.number) }} to project
         uses: actions/add-to-project@v0.3.0
         with:
-          github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.PAT_REPO }}
           project-url: |
             ${{ format('{0}/orgs/{1}/projects/{2}', github.server_url, github.repository_owner, secrets.GH_PROJECT_ID) }}
