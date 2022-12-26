@@ -113,6 +113,10 @@
   description: superseded by different issue, pull request, or discussion
   color: e7034b
 
+- name: status:triaged
+  description: bug confirmed
+  color: e7034b
+
 - name: status:wip
   description: work in progress
   color: e7034b
