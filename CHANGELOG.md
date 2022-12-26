@@ -1,3 +1,11 @@
+## [1.0.0-alpha.5](https://github.com/flex-development/mlly/compare/1.0.0-alpha.4...1.0.0-alpha.5) (2022-12-26)
+
+
+### :robot: Continuous Integration
+
+* **workflows:** [`publish`] remove stale `.npmrc` file from checkout ([da570a6](https://github.com/flex-development/mlly/commit/da570a6ce355c267ab09fd94c41c99eaef892f2e))
+* **workflows:** use environment files ([03f8097](https://github.com/flex-development/mlly/commit/03f8097c0213f46fc110c61265345d21b09dee76))
+
 ## [1.0.0-alpha.4](https://github.com/flex-development/mlly/compare/1.0.0-alpha.3...1.0.0-alpha.4) (2022-12-26)
 
 
