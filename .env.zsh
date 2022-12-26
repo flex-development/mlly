@@ -4,7 +4,5 @@
 #
 # - https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv
 
-NODE_NO_WARNINGS=1
-VITEST_SEGFAULT_RETRY=3
-
 [ -f $PWD/.env.local ] && source $PWD/.env.local
+NODE_NO_WARNINGS=1

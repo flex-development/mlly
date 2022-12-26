@@ -1125,12 +1125,6 @@ const config = {
       }
     },
     {
-      files: ['helpers/tsconfig-paths.cjs'],
-      rules: {
-        'node/no-deprecated-api': 0
-      }
-    },
-    {
       files: ['tsconfig*.json'],
       rules: {
         'jsonc/no-comments': 0

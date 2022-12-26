@@ -76,9 +76,7 @@ Follow the steps below to setup your local development environment:
 
    # LOAD ENVIRONMENT VARIABLES IN CURRENT WORKING DIRECTORY
    # 1. $GITHUB_WORKSPACE
-   # 2. environment variables (local)
    [ -d $PWD/.git ] && export GITHUB_WORKSPACE=$(git rev-parse --show-toplevel)
-   [ -f $PWD/.env.local ] && source $PWD/.env.local
    ```
 
 9. Load `dotenv` plugin via `$ZDOTDIR/.zshrc`:

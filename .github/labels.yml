@@ -39,7 +39,7 @@
   color: 74cefc
 
 - name: scope:internal
-  description: internals
+  description: internal-only modules
   color: 74cefc
 
 - name: scope:patches
