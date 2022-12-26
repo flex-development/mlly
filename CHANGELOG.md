@@ -1,3 +1,15 @@
+## [1.0.0-alpha.4](https://github.com/flex-development/mlly/compare/1.0.0-alpha.3...1.0.0-alpha.4) (2022-12-26)
+
+
+### :robot: Continuous Integration
+
+* **workflows:** [`publish`] fix registry url ([c06d3ca](https://github.com/flex-development/mlly/commit/c06d3ca72de415e507d901864afc410c9f5239b3))
+
+
+### :pencil: Documentation
+
+* fix changelog entries ([128f8f4](https://github.com/flex-development/mlly/commit/128f8f450eda1fc10ff89ac272fbe8bde870c516))
+
 ## [1.0.0-alpha.3](https://github.com/flex-development/mlly/compare/1.0.0-alpha.2...1.0.0-alpha.3) (2022-12-26)
 
 
