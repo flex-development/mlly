@@ -120,7 +120,7 @@
     "@types/prettier": "2.7.2",
     "@types/unist": "2.0.6",
     "@typescript-eslint/eslint-plugin": "5.47.0",
-    "@typescript-eslint/parser": "5.47.0",
+    "@typescript-eslint/parser": "5.47.1",
     "@vates/toggle-scripts": "1.0.0",
     "@vitest/coverage-c8": "0.26.2",
     "@vitest/ui": "0.26.2",
