@@ -6,6 +6,12 @@
 
 ---
 version: 2
+registries:
+  github:
+    replaces-base: true
+    token: ${{ secrets.PAT_BOT }}
+    type: npm-registry
+    url: https://npm.pkg.github.com/flex-development
 updates:
   - package-ecosystem: github-actions
     commit-message:
@@ -32,6 +38,8 @@ updates:
     labels:
       - scope:dependencies
       - type:build
+    registries:
+      - github
     reviewers:
       - flex-development/dependabot-review
       - flexdevelopment
