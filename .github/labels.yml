@@ -70,6 +70,10 @@
   description: module specifiers
   color: 74cefc
 
+- name: scope:syntax
+  description: syntax detection
+  color: 74cefc
+
 - name: scope:tests
   description: testing
   color: 74cefc
