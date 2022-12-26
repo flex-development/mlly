@@ -29,7 +29,6 @@ on:
 env:
   ARTIFACT:
     ${{ github.event.inputs.artifact || github.event.release.assets[0].browser_download_url }}
-  SCOPE: ${{ format('@{0}', github.repository_owner) }}
   TAG: ${{ github.event.inputs.tag || github.event.release.tag_name }}
 jobs:
   metadata:
@@ -77,7 +76,7 @@ jobs:
           always-auth: true
           node-version-file: .nvmrc
           registry-url: https://npm.pkg.github.com
-          scope: ${{ env.SCOPE }}
+          scope: ${{ github.repository_owner }}
       - id: publish
         name: Publish package
         run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
@@ -104,7 +103,7 @@ jobs:
           always-auth: true
           node-version-file: .nvmrc
           registry-url: https://registry.npmjs.org
-          scope: ${{ env.SCOPE }}
+          scope: ${{ github.repository_owner }}
       - id: publish
         name: Publish package
         run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
