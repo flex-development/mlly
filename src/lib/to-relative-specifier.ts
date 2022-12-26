@@ -33,9 +33,17 @@ const toRelativeSpecifier = (
   if (parent.startsWith('file:')) parent = fileURLToPath(parent)
   if (specifier.startsWith('file:')) specifier = fileURLToPath(specifier)
 
-  return pathe
-    .relative(pathe.dirname(parent), specifier)
+  // convert specifier to relative specifier
+  specifier = pathe
+    .relative(pathe.resolve(parent), pathe.resolve(specifier))
+    .replace(/^\.\.\/?/, '')
     .replace(/^(\w)/, './$1')
+
+  // set specifier to dot character if empty string
+  // this occurs when specifier is a directory, but is not fully specified
+  if (!specifier) specifier = '.'
+
+  return specifier
 }
 
 export default toRelativeSpecifier
