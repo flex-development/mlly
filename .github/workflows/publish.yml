@@ -50,7 +50,7 @@ jobs:
         run: echo "::set-output name=result::$(jq .version package.json -r)"
       - id: dist-tag
         name: Get dist tag
-        uses: flex-development/dist-tag-action@1.1.1
+        uses: flex-development/dist-tag-action@1.1.2
         with:
           target: ${{ steps.version.outputs.result }}
   gpr:

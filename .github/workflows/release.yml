@@ -62,7 +62,7 @@ jobs:
           echo "::set-output name=result::${{ format('{0}{1}', steps.tag-prefix.outputs.result, steps.version.outputs.result) }}"
       - id: dist-tag
         name: Get dist tag
-        uses: flex-development/dist-tag-action@1.1.1
+        uses: flex-development/dist-tag-action@1.1.2
         with:
           target: ${{ steps.version.outputs.result }}
   publish:
