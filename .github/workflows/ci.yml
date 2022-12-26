@@ -48,10 +48,7 @@ jobs:
           - 19
           - 18
           - 16
-          # node 14 does not support `assert { type: 'json' }`
-          # this node version will fail for packages installed from github that also use mkbuild
-          # fails silently otherwise (e.g yarn pack)
-          # - 14
+          - 14
     steps:
       - id: checkout
         name: Checkout ${{ env.REF }}
