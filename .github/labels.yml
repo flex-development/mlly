@@ -62,6 +62,10 @@
   description: package release
   color: 74cefc
 
+- name: scope:resolve
+  description: resolving modules
+  color: 74cefc
+
 - name: scope:tests
   description: testing
   color: 74cefc
