@@ -1395,7 +1395,7 @@ __metadata:
     graphql-config: "npm:4.3.6"
     growl: "npm:1.10.5"
     husky: "npm:8.0.2"
-    import-meta-resolve: "npm:2.1.0"
+    import-meta-resolve: "npm:2.2.0"
     is-ci: "npm:3.0.1"
     jsonc-eslint-parser: "npm:2.1.0"
     lint-staged: "npm:13.1.0"
@@ -6666,6 +6666,13 @@ __metadata:
   version: 2.1.0
   resolution: "import-meta-resolve@npm:2.1.0"
   checksum: 0f6016ba6fb1e5125340a0958d33c1cb24dc14e24e74021969e19db90d65e85814d581a8f52cf43f92bad8a13491773d90f129e82d950f7313e55f7215b95557
+  languageName: node
+  linkType: hard
+
+"import-meta-resolve@npm:2.2.0":
+  version: 2.2.0
+  resolution: "import-meta-resolve@npm:2.2.0"
+  checksum: 2f38c7d90d673b22839963963e47bd8f417d8d7d1ef3edbc22c35f45b095ce279af2fefd17a9b692a35707b50a1e8ff9347848f97c77d5b49da7d40977d77e9c
   languageName: node
   linkType: hard
 

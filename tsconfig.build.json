@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "noEmitOnError": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "target": "es2020"
   },
   "exclude": ["**/__mocks__/**", "**/__snapshots__/**", "**/__tests__/**"],
