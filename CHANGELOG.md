@@ -33,11 +33,11 @@
 * **workflows:** [`ci`] let [@dependabot](https://github.com/dependabot) modify lockfile ([74ec538](https://github.com/flex-development/mlly/commit/74ec5381fd5339d0d29b1a5529e48d8b86fc2419))
 * **workflows:** [`ci`] re-add node14 to matrix ([44801d8](https://github.com/flex-development/mlly/commit/44801d803774588c46299050ff858027605a2079))
 * **workflows:** [`ci`] update codecov environment ([32518bd](https://github.com/flex-development/mlly/commit/32518bdd2650e01bc92dd6e212ef9420f239ac9f))
-* **workflows:** [`ci`] update node setup ([b326f5d](https://github.com/flex-development/mlly/commit/b326f5d35c968fd4f1145a50a769e8d645190941)), closes [/github.com/actions/setup-node/blob/v3.5.1/docs/advanced-usage.md#yarn2](https://github.com/flex-development//github.com/actions/setup-node/blob/v3.5.1/docs/advanced-usage.md/issues/yarn2)
+* **workflows:** [`ci`] update node setup ([b326f5d](https://github.com/flex-development/mlly/commit/b326f5d35c968fd4f1145a50a769e8d645190941))
 * **workflows:** [`ci`] upload coverage reports to codecov ([a24776b](https://github.com/flex-development/mlly/commit/a24776ba0c3aad87e36881f5558eba58f5f7a866))
-* **workflows:** [`publish`] cleanup registry scope ([ba5b355](https://github.com/flex-development/mlly/commit/ba5b355f30e62cb863abd35eddaa28b5b0885f56)), closes [/github.com/actions/setup-node/blob/v3.5.1/src/authutil.ts#L28-L30](https://github.com/flex-development//github.com/actions/setup-node/blob/v3.5.1/src/authutil.ts/issues/L28-L30)
+* **workflows:** [`publish`] cleanup registry scope ([ba5b355](https://github.com/flex-development/mlly/commit/ba5b355f30e62cb863abd35eddaa28b5b0885f56))
 * **workflows:** [`publish`] print contents of `.npmrc` file ([2c16ff6](https://github.com/flex-development/mlly/commit/2c16ff62786d8ecc1f403d364af4d6db372e5a75))
-* **workflows:** [`publish`] use node version file ([80d68c1](https://github.com/flex-development/mlly/commit/80d68c13aac5cdb0005c236d56bb8db90bd831a0)), closes [/github.com/actions/setup-node/blob/v3.5.1/action.yml#L10-L11](https://github.com/flex-development//github.com/actions/setup-node/blob/v3.5.1/action.yml/issues/L10-L11)
+* **workflows:** [`publish`] use node version file ([80d68c1](https://github.com/flex-development/mlly/commit/80d68c13aac5cdb0005c236d56bb8db90bd831a0))
 * **workflows:** [`release`] publish releases from repo admin account ([bbda19c](https://github.com/flex-development/mlly/commit/bbda19ca37155411a0a4e9bf4e734a7b7ad959c8))
 
 
@@ -197,10 +197,10 @@
 ### :house_with_garden: Housekeeping
 
 * add empty changelog ([7dfb431](https://github.com/flex-development/mlly/commit/7dfb431e5f7ced07d6a9a5028347016f2dd5b4c9))
-* disable eslint rule `unicorn/no-unsafe-regex` ([8d24eda](https://github.com/flex-development/mlly/commit/8d24edada5a7c6edfee6d316239cd29dc076531c)), closes [sindresorhus/eslint-plugin-unicorn#153](https://github.com/sindresorhus/eslint-plugin-unicorn/issues/153)
+* disable eslint rule `unicorn/no-unsafe-regex` ([8d24eda](https://github.com/flex-development/mlly/commit/8d24edada5a7c6edfee6d316239cd29dc076531c))
 * improve vercel integration ([1db75bc](https://github.com/flex-development/mlly/commit/1db75bc420b42652c440ec0a09742dc319c857f5))
 * update editorconfig properties ([60256a8](https://github.com/flex-development/mlly/commit/60256a822ddc721781fe6d6579459fcc9e51a2ec))
-* **docs:** scrap `vc dev` usage ([5ce8c0f](https://github.com/flex-development/mlly/commit/5ce8c0f0468b2def494922f8f3b58ebb60a5a19c)), closes [vercel/vercel#8121](https://github.com/vercel/vercel/issues/8121)
+* **docs:** scrap `vc dev` usage ([5ce8c0f](https://github.com/flex-development/mlly/commit/5ce8c0f0468b2def494922f8f3b58ebb60a5a19c))
 * **github:** add commit scope `analyze` ([f3aaee9](https://github.com/flex-development/mlly/commit/f3aaee92ddbac08744d671cb7b905dbb36dba0f6))
 * **github:** add commit scope `docs` ([6111249](https://github.com/flex-development/mlly/commit/61112490c88de111f1906a4725d98abaa5c7247a))
 * **github:** add commit scope `interfaces` ([15fc6d9](https://github.com/flex-development/mlly/commit/15fc6d97ff06304710b55bf67768cb14e4ba4295))
@@ -230,4 +230,3 @@
 * **resolve:** [options] pass original module specifier to `ext` ([4615851](https://github.com/flex-development/mlly/commit/46158510fdd0e3d8e0e60757290a655606ad836e))
 * **resolve:** sort `RESOLVE_EXTENSIONS` according to priority ([0266ca9](https://github.com/flex-development/mlly/commit/0266ca9a5593d0c66e950ba1fe2c8f6df8422ff9))
 * **specifiers:** [`toBareSpecifier`] improve `exports` path search ([36c4b74](https://github.com/flex-development/mlly/commit/36c4b7475c9bb6c924f5e75c8d6d215a8d23e79c))
-
