@@ -38,6 +38,10 @@
   description: es modules
   color: 74cefc
 
+- name: scope:install
+  description: package install
+  color: 74cefc
+
 - name: scope:internal
   description: internal-only modules
   color: 74cefc
