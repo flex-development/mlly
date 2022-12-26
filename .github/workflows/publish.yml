@@ -77,6 +77,9 @@ jobs:
           node-version-file: .nvmrc
           registry-url: https://npm.pkg.github.com
           scope: ${{ github.repository_owner }}
+      - id: npmrc-print
+        name: Print contents of .npmrc file
+        run: cat $NPM_CONFIG_USERCONFIG
       - id: publish
         name: Publish package
         run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
@@ -104,6 +107,9 @@ jobs:
           node-version-file: .nvmrc
           registry-url: https://registry.npmjs.org
           scope: ${{ github.repository_owner }}
+      - id: npmrc-print
+        name: Print contents of .npmrc file
+        run: cat $NPM_CONFIG_USERCONFIG
       - id: publish
         name: Publish package
         run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
