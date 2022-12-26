@@ -28,7 +28,7 @@ on:
 permissions:
   packages: read
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN || secrets.GH_TOKEN }}
   HUSKY: 0
   REF: ${{ github.head_ref || github.ref_name }}
 concurrency:

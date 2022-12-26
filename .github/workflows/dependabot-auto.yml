@@ -22,7 +22,7 @@
 name: dependabot-auto
 on: pull_request
 env:
-  GITHUB_TOKEN: ${{ secrets.PAT_BOT }}
+  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
   YARN_ENABLE_IMMUTABLE_INSTALLS: false
 jobs:
   dependabot-auto:

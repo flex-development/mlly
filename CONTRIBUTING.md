@@ -101,6 +101,7 @@ Follow the steps below to setup your local development environment:
 | ----------------------- |
 | `ALGOLIA_API_KEY`       |
 | `CODECOV_TOKEN`         |
+| `GH_TOKEN`              |
 | `GITHUB_TOKEN`          |
 | `HOSTNAME`              |
 | `NODE_ENV`              |
