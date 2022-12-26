@@ -47,7 +47,11 @@
   color: 74cefc
 
 - name: scope:internal
-  description: internal-only modules
+  description: internal-only api
+  color: 74cefc
+
+- name: scope:lib
+  description: public api
   color: 74cefc
 
 - name: scope:patches
