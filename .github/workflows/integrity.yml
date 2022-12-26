@@ -38,7 +38,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.REF }}
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.2.0
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
