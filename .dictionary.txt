@@ -41,6 +41,7 @@ nums
 nvmrc
 pathe
 pkgs
+pnpm
 preid
 safecrlf
 sindresorhus
