@@ -1,7 +1,7 @@
 {
   "name": "@flex-development/mlly",
   "description": "ECMAScript module utilities",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "keywords": [
     "ecmascript-modules",
     "esm",

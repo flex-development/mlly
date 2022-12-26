@@ -1,3 +1,28 @@
+## [1.0.0-alpha.6](https://github.com/flex-development/mlly/compare/1.0.0-alpha.5...1.0.0-alpha.6) (2022-12-26)
+
+
+### :package: Build
+
+* **deps-dev:** bump vue-tsc from 1.0.17 to 1.0.18 ([68255dc](https://github.com/flex-development/mlly/commit/68255dc3ad4be30eae7ea61598d4494d1913717b))
+* **deps:** bump import-meta-resolve from 2.1.0 to 2.2.0 ([8ce9cfc](https://github.com/flex-development/mlly/commit/8ce9cfc6a49b3b69c4b129b42b171d60ce3d2b91))
+* **deps:** bump tsconfig-paths from 4.1.0 to 4.1.1 ([6cb2847](https://github.com/flex-development/mlly/commit/6cb2847c229d0d0ba0715a725da4689752a5a899))
+
+
+### :bug: Fixes
+
+* **specifiers:** `toRelativeSpecifier` logic ([#27](https://github.com/flex-development/mlly/issues/27)) ([a34d974](https://github.com/flex-development/mlly/commit/a34d97448135da0e0f46654b720ba60fc84abcea))
+
+
+### :house_with_garden: Housekeeping
+
+* **github:** add "package manager" dropdown to bug report template ([2942a31](https://github.com/flex-development/mlly/commit/2942a312411de0a2b4113e163214ca8ef064c87b))
+* **github:** add label `scope:analyze` ([241ac69](https://github.com/flex-development/mlly/commit/241ac6992361ee57631779f48cc87525d4e3f220))
+* **github:** add label `scope:lib` ([25b2d67](https://github.com/flex-development/mlly/commit/25b2d679f9d400afdef52bd159afd477daf60077))
+* **github:** add label `scope:resolve` ([36159e6](https://github.com/flex-development/mlly/commit/36159e688680db513417a9d9f7ce0cf72a45695c))
+* **github:** add label `scope:specifiers` ([5ca8266](https://github.com/flex-development/mlly/commit/5ca8266c8c3a7f5448eadad734530837bdeae434))
+* **github:** add label `scope:syntax` ([54b2585](https://github.com/flex-development/mlly/commit/54b25854b8da7875087d42f79164ec73794c054f))
+* **github:** add label `status:triaged` ([35523e0](https://github.com/flex-development/mlly/commit/35523e06028b34b8c82f9b5ba2553fd0bd28b7e7))
+
 ## [1.0.0-alpha.5](https://github.com/flex-development/mlly/compare/1.0.0-alpha.4...1.0.0-alpha.5) (2022-12-26)
 
 
