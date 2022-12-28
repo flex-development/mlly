@@ -1341,7 +1341,7 @@ __metadata:
     "@flex-development/pathe": "npm:1.0.1"
     "@flex-development/tsconfig-types": "npm:2.0.1"
     "@flex-development/tutils": "npm:6.0.0-alpha.7"
-    "@graphql-eslint/eslint-plugin": "npm:3.13.1"
+    "@graphql-eslint/eslint-plugin": "npm:3.14.3"
     "@sindresorhus/slugify": "npm:2.1.1"
     "@types/chai": "npm:4.3.4"
     "@types/chai-string": "npm:1.4.2"
@@ -1466,9 +1466,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-eslint/eslint-plugin@npm:3.13.1":
-  version: 3.13.1
-  resolution: "@graphql-eslint/eslint-plugin@npm:3.13.1"
+"@graphql-eslint/eslint-plugin@npm:3.14.3":
+  version: 3.14.3
+  resolution: "@graphql-eslint/eslint-plugin@npm:3.14.3"
   dependencies:
     "@babel/code-frame": "npm:^7.18.6"
     "@graphql-tools/code-file-loader": "npm:^7.3.6"
@@ -1477,12 +1477,13 @@ __metadata:
     chalk: "npm:^4.1.2"
     debug: "npm:^4.3.4"
     fast-glob: "npm:^3.2.12"
-    graphql-config: "npm:^4.3.6"
+    graphql-config: "npm:^4.4.0"
     graphql-depth-limit: "npm:^1.1.0"
     lodash.lowercase: "npm:^4.3.0"
+    tslib: "npm:^2.4.1"
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 5fbd893accb6a38bd89c1ef4ef909544d0b563d022a53fa95163ccfa704a836dd1d414d2248314f8bf29528995843dc1ec4ba1046ebca4bb463ecb417d06e6ff
+  checksum: 6087ef5c67cd755fc014814a86b68d112799715779b392f60af170b8e78293fb37375388f771aff8c986ed9fd77c08177b73f9998842b86d1d9259e1bff153fe
   languageName: node
   linkType: hard
 
@@ -4599,6 +4600,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cosmiconfig@npm:8.0.0, cosmiconfig@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "cosmiconfig@npm:8.0.0"
+  dependencies:
+    import-fresh: "npm:^3.2.1"
+    js-yaml: "npm:^4.1.0"
+    parse-json: "npm:^5.0.0"
+    path-type: "npm:^4.0.0"
+  checksum: 436a849ca0a434b4a7344e9213db6314512c6af23c0b187728d21b0292736eec8c2df046a95b8c796a9304afbd9d154bf5e9aeeae535e6303d835d44835cad6d
+  languageName: node
+  linkType: hard
+
 "cosmiconfig@npm:^7.0.0":
   version: 7.1.0
   resolution: "cosmiconfig@npm:7.1.0"
@@ -4609,18 +4622,6 @@ __metadata:
     path-type: "npm:^4.0.0"
     yaml: "npm:^1.10.0"
   checksum: 8add352f0abd55fc5eaef0823937c33992e5ae670831418c8ff98bb301952260467533b09b8e9257dc360baa270610a7a92b288d94eb25d6f577a0d7e507801b
-  languageName: node
-  linkType: hard
-
-"cosmiconfig@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "cosmiconfig@npm:8.0.0"
-  dependencies:
-    import-fresh: "npm:^3.2.1"
-    js-yaml: "npm:^4.1.0"
-    parse-json: "npm:^5.0.0"
-    path-type: "npm:^4.0.0"
-  checksum: 436a849ca0a434b4a7344e9213db6314512c6af23c0b187728d21b0292736eec8c2df046a95b8c796a9304afbd9d154bf5e9aeeae535e6303d835d44835cad6d
   languageName: node
   linkType: hard
 
@@ -6362,7 +6363,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-config@npm:4.3.6, graphql-config@npm:^4.3.6":
+"graphql-config@npm:4.3.6":
   version: 4.3.6
   resolution: "graphql-config@npm:4.3.6"
   dependencies:
@@ -6382,6 +6383,28 @@ __metadata:
   peerDependencies:
     graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
   checksum: 80cd871ac7fa46671159a5a7e141bbcc0bccc59e5d3b9af5439aec21ab1f1f500e6dd467a51b56c25580b193de6c741fd03411e6c21b39d0e073a8c4eb2b637e
+  languageName: node
+  linkType: hard
+
+"graphql-config@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "graphql-config@npm:4.4.0"
+  dependencies:
+    "@graphql-tools/graphql-file-loader": "npm:^7.3.7"
+    "@graphql-tools/json-file-loader": "npm:^7.3.7"
+    "@graphql-tools/load": "npm:^7.5.5"
+    "@graphql-tools/merge": "npm:^8.2.6"
+    "@graphql-tools/url-loader": "npm:^7.9.7"
+    "@graphql-tools/utils": "npm:^9.0.0"
+    cosmiconfig: "npm:8.0.0"
+    minimatch: "npm:4.2.1"
+    string-env-interpolation: "npm:1.0.1"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    cosmiconfig-toml-loader: ^1.0.0
+    cosmiconfig-typescript-loader: ^4.0.0
+    graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 64f26d71ce3e3cf9913742b2d29046a60023a566ad472868746a38e21968b6cb919239b738088c97ecc378f1e7a9ba3f6ffb58b97df77456c64903fbf4a3bf7e
   languageName: node
   linkType: hard
 
