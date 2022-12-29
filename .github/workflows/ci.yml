@@ -102,7 +102,7 @@ jobs:
         name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v3.1.1
         with:
-          env_vars: GITHUB_JOB,GITHUB_REF,GITHUB_REF_TYPE,GITHUB_SHA,GITHUB_WORKSPACE
+          env_vars: GITHUB_JOB,GITHUB_REF,GITHUB_REF_TYPE,GITHUB_RUN_ID,GITHUB_SHA,GITHUB_WORKSPACE
           fail_ci_if_error: true
           file: ./coverage/lcov.info
           flags: ${{ format('node{0}', matrix.node-version) }}
@@ -115,5 +115,6 @@ jobs:
           GITHUB_JOB: ${{ github.job }}
           GITHUB_REF: ${{ github.ref }}
           GITHUB_REF_TYPE: ${{ github.ref_type }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_WORKSPACE: ${{ github.workspace }}
