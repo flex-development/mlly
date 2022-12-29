@@ -1260,6 +1260,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/errnode@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@flex-development/errnode@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ferrnode%2F1.0.1%2F3314864efc1693b9103051546d4e4e16a21267b2"
+  dependencies:
+    "@flex-development/tutils": "npm:6.0.0-alpha.7"
+    node-inspect-extracted: "npm:2.0.0"
+  checksum: 41af0fa70b37d9c8e53b652f63c96183145134d6caf694d04b85afc18c58693263e05b10c89ef38e6d7093bf83fe5e8b8ca250d247d2ff68ceff2df876336242
+  languageName: node
+  linkType: hard
+
 "@flex-development/export-regex@npm:1.0.0":
   version: 1.0.0
   resolution: "@flex-development/export-regex@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fexport-regex%2F1.0.0%2Fee7486c94c3ecbb392ae3beff0c9ecc4f1ce7282"
@@ -1338,7 +1348,7 @@ __metadata:
     "@flex-development/import-regex": "npm:2.0.0"
     "@flex-development/is-builtin": "npm:1.0.1"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.9"
-    "@flex-development/pathe": "npm:1.0.1"
+    "@flex-development/pathe": "npm:1.0.2"
     "@flex-development/tsconfig-types": "npm:2.0.1"
     "@flex-development/tutils": "npm:6.0.0-alpha.7"
     "@graphql-eslint/eslint-plugin": "npm:3.14.3"
@@ -1431,13 +1441,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flex-development/pathe@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@flex-development/pathe@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fpathe%2F1.0.1%2Fa912f1582fff84bcbff292758a482db8d3f15726"
+"@flex-development/pathe@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@flex-development/pathe@npm:1.0.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fpathe%2F1.0.2%2Fb3d762581405fdac9eee64e45b6d2e1f6cd5d4b3"
   dependencies:
+    "@flex-development/errnode": "npm:1.0.1"
     "@flex-development/tutils": "npm:6.0.0-alpha.7"
-    node-inspect-extracted: "npm:2.0.0"
-  checksum: 31e3838cdc1cb8186069d9e76882fba1384e88a7538a138447136e81fec53f6d2e25e8e139e80a03ff058e1fe1dccccd05b653e738003270dd5b25ee9db12db7
+  checksum: cb3cf62f1b3cfe3ccedc4845948e0e1dc9c878df07d567cf9b431568f51dc475ceaee8e67e5efea918a670c47ea7188221f2f17b6e544ca51c70146cba2c691f
   languageName: node
   linkType: hard
 
