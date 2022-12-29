@@ -464,6 +464,7 @@ const config = {
     'no-array-constructor': 0,
     'no-case-declarations': 0,
     'no-duplicate-imports': 0,
+    'no-empty': [2, { allowEmptyCatch: true }],
     'no-empty-function': 0,
     'no-ex-assign': 0,
     'no-invalid-this': 0,
@@ -677,7 +678,7 @@ const config = {
         '@typescript-eslint/no-base-to-string': [
           2,
           {
-            ignoredTypeNames: ['RegExp']
+            ignoredTypeNames: ['Error', 'RegExp', 'URL', 'URLSearchParams']
           }
         ],
         '@typescript-eslint/no-floating-promises': [
@@ -1053,6 +1054,7 @@ const config = {
         'promise/prefer-await-to-callbacks': 0,
         'promise/valid-params': 0,
         'unicorn/consistent-destructuring': 0,
+        'unicorn/error-message': 0,
         'unicorn/explicit-length-check': 0,
         'unicorn/no-array-for-each': 0,
         'unicorn/prefer-at': 0,
@@ -1109,11 +1111,7 @@ const config = {
       }
     },
     {
-      files: [
-        '.github/dependabot.yml',
-        '.github/mergeable.yml',
-        '.github/workflows/*.yml'
-      ],
+      files: ['.github/dependabot.yml', '.github/workflows/*.yml'],
       rules: {
         'yml/sort-keys': 0
       }

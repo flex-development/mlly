@@ -89,7 +89,7 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": false,
-  "editor.renderFinalNewline": false,
+  "editor.renderFinalNewline": "off",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
@@ -181,7 +181,11 @@
   "volar.doctor.statusBarItem": true,
   "volar.takeOverMode.enabled": false,
   "volar.vueserver.vitePress.processMdFile": true,
-  "versionlens.npm.dependencyProperties": ["dependencies", "devDependencies"],
+  "versionlens.npm.dependencyProperties": [
+    "dependencies",
+    "devDependencies",
+    "resolutions"
+  ],
   "vsicons.associations.files": [
     {
       "extensions": [".eslintrc.base.cjs"],
@@ -202,6 +206,11 @@
       "extensions": ["snap"],
       "format": "svg",
       "icon": "vitest"
+    },
+    {
+      "extensions": ["spec-d.ts"],
+      "format": "svg",
+      "icon": "testts"
     },
     {
       "extensions": ["yarnrc.yml"],
@@ -243,7 +252,6 @@
   ],
   "workbench.iconTheme": "vscode-icons",
   "xml.format.closingBracketNewLine": true,
-  "xml.format.experimental": true,
   "xml.format.maxLineWidth": 100,
   "xml.format.spaceBeforeEmptyCloseTag": false,
   "xml.format.splitAttributes": true,

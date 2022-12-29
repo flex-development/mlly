@@ -103,6 +103,7 @@ Follow the steps below to setup your local development environment:
 | `HOSTNAME`              |
 | `NODE_ENV`              |
 | `NODE_NO_WARNINGS`      |
+| `PAT_BOT`               |
 | `VERCEL_ORG_ID`         |
 | `VERCEL_PROJECT_ID`     |
 | `ZSH_DOTENV_FILE`       |
