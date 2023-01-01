@@ -30,6 +30,7 @@
 *.snap text eol=lf
 *.ts text eol=lf
 *.txt text eol=lf
+*.vue text eol=lf
 *.yml text eol=lf
 
 # configuration files
