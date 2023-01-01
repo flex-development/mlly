@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "@flex-development/export-regex": "1.0.0",
-    "@flex-development/import-regex": "2.0.0",
+    "@flex-development/import-regex": "2.0.1",
     "@flex-development/is-builtin": "1.0.1",
     "@flex-development/pathe": "1.0.2",
     "@flex-development/tsconfig-types": "2.0.1",
