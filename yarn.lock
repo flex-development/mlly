@@ -1260,13 +1260,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/errnode@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@flex-development/errnode@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ferrnode%2F1.0.1%2F3314864efc1693b9103051546d4e4e16a21267b2"
+"@flex-development/errnode@npm:1.2.0":
+  version: 1.2.0
+  resolution: "@flex-development/errnode@npm:1.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ferrnode%2F1.2.0%2F8e54e66e637d392299cd2d422224da9cf5d16cab"
   dependencies:
     "@flex-development/tutils": "npm:6.0.0-alpha.7"
     node-inspect-extracted: "npm:2.0.0"
-  checksum: 41af0fa70b37d9c8e53b652f63c96183145134d6caf694d04b85afc18c58693263e05b10c89ef38e6d7093bf83fe5e8b8ca250d247d2ff68ceff2df876336242
+  peerDependencies:
+    "@types/node": ">=14"
+  checksum: 2a81fe290873db979a83bc0dbe1d645f4d73a88a8f0258412b43d55406a2a47384c13c97e176c5985890912e40ac16a2c3173f314c0a2d3f663d870c63d7d2b8
   languageName: node
   linkType: hard
 
@@ -1348,7 +1350,7 @@ __metadata:
     "@flex-development/import-regex": "npm:2.0.1"
     "@flex-development/is-builtin": "npm:1.0.1"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.9"
-    "@flex-development/pathe": "npm:1.0.2"
+    "@flex-development/pathe": "npm:1.0.3"
     "@flex-development/tsconfig-types": "npm:2.0.1"
     "@flex-development/tutils": "npm:6.0.0-alpha.7"
     "@graphql-eslint/eslint-plugin": "npm:3.14.3"
@@ -1441,13 +1443,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flex-development/pathe@npm:1.0.2":
-  version: 1.0.2
-  resolution: "@flex-development/pathe@npm:1.0.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fpathe%2F1.0.2%2Fb3d762581405fdac9eee64e45b6d2e1f6cd5d4b3"
+"@flex-development/pathe@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@flex-development/pathe@npm:1.0.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fpathe%2F1.0.3%2F097d5bd49df40304b86645ee9fd50be7711eac56"
   dependencies:
-    "@flex-development/errnode": "npm:1.0.1"
+    "@flex-development/errnode": "npm:1.2.0"
     "@flex-development/tutils": "npm:6.0.0-alpha.7"
-  checksum: cb3cf62f1b3cfe3ccedc4845948e0e1dc9c878df07d567cf9b431568f51dc475ceaee8e67e5efea918a670c47ea7188221f2f17b6e544ca51c70146cba2c691f
+  checksum: 8e5d5fac78de147469dad1ca5ba24426dc7fbe022974f02e79e35a65a4dbc3682794bdba16d4560370424bbe4d54077f46df0e980efde1115507bbc4f13d9693
   languageName: node
   linkType: hard
 
