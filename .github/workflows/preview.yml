@@ -25,12 +25,12 @@ on:
       - docs/**
       - src/constants.ts
       - src/interfaces/*.ts
-      - src/lib/*.ts
       - src/types/*.ts
+      - src/utils/*.ts
       - vercel.json
       - '!src/interfaces/index.ts'
-      - '!src/lib/index.ts'
       - '!src/types/index.ts'
+      - '!src/utils/index.ts'
   workflow_dispatch:
 permissions:
   packages: read

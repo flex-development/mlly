@@ -28,10 +28,10 @@ component_management:
       name: internal
       paths:
         - src/internal/*.ts
-    - component_id: lib
-      name: lib
+    - component_id: utils
+      name: utils
       paths:
-        - src/lib/*.ts
+        - src/utils/*.ts
 
 coverage:
   precision: 2
@@ -109,4 +109,4 @@ ignore:
 
 profiling:
   critical_files_paths:
-    - src/lib/*.ts
+    - src/utils/*.ts

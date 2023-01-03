@@ -36,8 +36,8 @@ async function useComments(): Promise<Documentation[]> {
   const patterns: string[] = [
     'constants.ts',
     'interfaces/*.ts',
-    'lib/*.ts',
-    'types/*.ts'
+    'types/*.ts',
+    'utils/*.ts'
   ]
 
   // get comments

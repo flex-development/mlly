@@ -26,16 +26,13 @@ const config = {
       }
     },
     {
-      files: [
-        'src/internal/__tests__/get-compiler-options.spec.ts',
-        'src/internal/compiler-options-json.ts'
-      ],
+      files: ['src/internal/__tests__/get-compiler-options.spec.ts'],
       rules: {
         'unicorn/no-keyword-prefix': 0
       }
     },
     {
-      files: ['src/lib/find-exports.ts'],
+      files: ['src/utils/find-exports.ts'],
       rules: {
         'unicorn/prefer-module': 0
       }

@@ -38,7 +38,7 @@ const { documentation } = site.value.themeConfig
  * @const {Documentation[]} docs
  */
 const docs: Documentation[] = documentation.filter(doc => {
-  return /src\/lib\/[\w-]+\.ts$/.test(doc.file)
+  return /src\/utils\/[\w-]+\.ts$/.test(doc.file)
 })
 </script>
 

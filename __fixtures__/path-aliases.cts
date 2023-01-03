@@ -3,12 +3,12 @@
  * @module fixtures/path-aliases
  */
 
-import '#src/lib/extract-statements'
+import '#src/utils/extract-statements'
 
-require('#src/lib/resolve-aliases')
+require('#src/utils/resolve-aliases')
 require('./aggregate-error-ponyfill.cjs')
 
-await import('#src/lib/detect-syntax')
+await import('#src/utils/detect-syntax')
 
 export * from '#src/constants'
 export * from '#src/interfaces'

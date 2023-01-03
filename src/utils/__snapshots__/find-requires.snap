@@ -1,0 +1,102 @@
+// Vitest Snapshot v1
+
+exports[`unit:utils/findRequires > should return RequireStatement object array 1`] = `
+[
+  {
+    "code": "require('./side-effect.cjs')",
+    "end": 28,
+    "imports": [],
+    "kind": "require",
+    "specifier": "./side-effect.cjs",
+    "specifier_kind": "static",
+    "start": 0,
+    "syntax": "require",
+  },
+  {
+    "code": "const mod=require('./lib')",
+    "end": 55,
+    "imports": [
+      "mod",
+    ],
+    "kind": "require",
+    "specifier": "./lib",
+    "specifier_kind": "static",
+    "start": 29,
+    "syntax": "require",
+  },
+  {
+    "code": "const{createPathMatch}=require('tsconfig-paths')",
+    "end": 105,
+    "imports": [
+      "createPathMatch",
+    ],
+    "kind": "require",
+    "specifier": "tsconfig-paths",
+    "specifier_kind": "static",
+    "start": 57,
+    "syntax": "require",
+  },
+  {
+    "code": "const mod = require('lib')",
+    "end": 133,
+    "imports": [
+      "mod",
+    ],
+    "kind": "require",
+    "specifier": "lib",
+    "specifier_kind": "static",
+    "start": 107,
+    "syntax": "require",
+  },
+  {
+    "code": "require(id)",
+    "end": 146,
+    "imports": [],
+    "kind": "require",
+    "specifier": "id",
+    "specifier_kind": "dynamic",
+    "start": 135,
+    "syntax": "require",
+  },
+  {
+    "code": "require('#src/utils/resolve-aliases')",
+    "end": 184,
+    "imports": [],
+    "kind": "require",
+    "specifier": "#src/utils/resolve-aliases",
+    "specifier_kind": "static",
+    "start": 147,
+    "syntax": "require",
+  },
+  {
+    "code": "const {
+  default: myDefault,
+  addFive,
+	addFour,
+	addThree,
+	addTwo,
+	squareFive,
+	squareFour,
+	squareThree,
+	squareTwo
+} = require('./lib')",
+    "end": 327,
+    "imports": [
+      "default: myDefault",
+      "addFive",
+      "addFour",
+      "addThree",
+      "addTwo",
+      "squareFive",
+      "squareFour",
+      "squareThree",
+      "squareTwo",
+    ],
+    "kind": "require",
+    "specifier": "./lib",
+    "specifier_kind": "static",
+    "start": 185,
+    "syntax": "require",
+  },
+]
+`;
