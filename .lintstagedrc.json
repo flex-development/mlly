@@ -1,5 +1,7 @@
 {
-  "*": ["yarn check:format", "yarn check:spelling"],
-  "**/*.{cjs,cts,gql,json,jsonc,md,mjs,ts,vue,yml}": ["yarn check:lint"],
+  "*": ["prettier --check", "cspell lint --color --no-progress --relative $@"],
+  "**/*.{cjs,cts,gql,json,jsonc,md,mjs,ts,vue,yml}": [
+    "eslint --exit-on-fatal-error"
+  ],
   "**/yarn.lock": "yarn dedupe --check"
 }
