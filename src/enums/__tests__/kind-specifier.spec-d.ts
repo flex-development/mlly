@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - SpecifierKind
+ * @file Type Tests - SpecifierKind
  * @module mlly/enums/tests/unit-d/SpecifierKind
  */
 

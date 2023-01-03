@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - StaticImport
+ * @file Type Tests - StaticImport
  * @module mlly/interfaces/tests/unit-d/StaticImport
  */
 

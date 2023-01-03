@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - DynamicImport
+ * @file Type Tests - DynamicImport
  * @module mlly/interfaces/tests/unit-d/DynamicImport
  */
 

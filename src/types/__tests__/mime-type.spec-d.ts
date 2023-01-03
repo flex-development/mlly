@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - MIMEType
+ * @file Type Tests - MIMEType
  * @module mlly/types/tests/unit-d/MIMEType
  */
 

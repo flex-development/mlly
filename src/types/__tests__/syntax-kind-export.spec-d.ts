@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - SyntaxKindExport
+ * @file Type Tests - SyntaxKindExport
  * @module mlly/types/tests/unit-d/SyntaxKindExport
  */
 

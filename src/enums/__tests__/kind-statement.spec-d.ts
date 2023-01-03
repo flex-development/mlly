@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - StatementKind
+ * @file Type Tests - StatementKind
  * @module mlly/enums/tests/unit-d/StatementKind
  */
 

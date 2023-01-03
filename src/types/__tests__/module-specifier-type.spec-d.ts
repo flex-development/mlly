@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - ModuleSpecifierType
+ * @file Type Tests - ModuleSpecifierType
  * @module mlly/types/tests/unit-d/ModuleSpecifierType
  */
 

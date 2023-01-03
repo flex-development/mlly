@@ -1,6 +1,6 @@
 /**
  * @file Unit Tests - getCompilerOptions
- * @module mlly/internal/tests/getCompilerOptions/unit
+ * @module mlly/internal/tests/unit/getCompilerOptions
  */
 
 import type { Spy } from '#tests/interfaces'

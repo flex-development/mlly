@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - Statement
+ * @file Type Tests - Statement
  * @module mlly/interfaces/tests/unit-d/Statement
  */
 

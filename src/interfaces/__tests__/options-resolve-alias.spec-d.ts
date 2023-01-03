@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - ResolveAliasOptions
+ * @file Type Tests - ResolveAliasOptions
  * @module mlly/interfaces/tests/unit-d/ResolveAliasOptions
  */
 

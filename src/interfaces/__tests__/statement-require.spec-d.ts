@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - RequireStatement
+ * @file Type Tests - RequireStatement
  * @module mlly/interfaces/tests/unit-d/RequireStatement
  */
 

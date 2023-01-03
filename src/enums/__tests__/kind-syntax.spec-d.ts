@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - SyntaxKind
+ * @file Type Tests - SyntaxKind
  * @module mlly/enums/tests/unit-d/SyntaxKind
  */
 

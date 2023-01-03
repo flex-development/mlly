@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - SyntaxKindRequire
+ * @file Type Tests - SyntaxKindRequire
  * @module mlly/types/tests/unit-d/SyntaxKindRequire
  */
 

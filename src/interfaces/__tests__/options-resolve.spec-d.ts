@@ -1,5 +1,5 @@
 /**
- * @file Unit Tests - ResolveOptions
+ * @file Type Tests - ResolveOptions
  * @module mlly/interfaces/tests/unit-d/ResolveOptions
  */
 
