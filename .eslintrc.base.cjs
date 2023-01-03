@@ -829,14 +829,9 @@ const config = {
       files: ['*.d.ts'],
       rules: {
         '@typescript-eslint/ban-types': 0,
-        '@typescript-eslint/lines-between-class-members': 0,
-        '@typescript-eslint/no-redundant-type-constituents': 0,
         '@typescript-eslint/triple-slash-reference': 0,
         'jsdoc/no-undefined-types': 0,
-        'jsdoc/require-file-overview': 0,
         'no-var': 0,
-        'unicorn/filename-case': 0,
-        'unicorn/no-empty-file': 0,
         'unicorn/no-keyword-prefix': 0
       }
     },
@@ -1072,6 +1067,13 @@ const config = {
       rules: {
         'jsdoc/check-indentation': 0,
         'unicorn/no-keyword-prefix': 0
+      }
+    },
+    {
+      files: ['**/typings/**/*.d.ts', '*-env.d.ts'],
+      rules: {
+        'jsdoc/require-file-overview': 0,
+        'unicorn/filename-case': 0
       }
     },
     {
