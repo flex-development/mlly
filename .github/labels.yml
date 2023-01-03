@@ -82,6 +82,10 @@
   description: typescript support
   color: 74cefc
 
+- name: scope:utils
+  description: utilities
+  color: 74cefc
+
 # status labels
 # current state of an issue, pull request, or discussion
 
