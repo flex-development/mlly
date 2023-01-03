@@ -4,6 +4,8 @@
  */
 
 import type { Statement } from '#src/interfaces'
+import validateString from '#src/internal/validate-string'
+import type { NodeError } from '@flex-development/errnode'
 import findDynamicImports from './find-dynamic-imports'
 import findExports from './find-exports'
 import findRequires from './find-requires'
@@ -21,8 +23,11 @@ import findStaticImports from './find-static-imports'
  *
  * @param {string} [code=''] - Code to evaluate
  * @return {Statement[]} Extracted statements
+ * @throws {NodeError<TypeError>} If `code` is not a string
  */
 const extractStatements = (code: string = ''): Statement[] => {
+  validateString(code, 'code')
+
   // code shorter than first shortest keyword => no possible matches
   if (code.trim().length < 'export'.length) return []
 

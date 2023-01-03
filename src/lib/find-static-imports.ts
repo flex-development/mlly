@@ -5,6 +5,8 @@
 
 import { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
 import type { StaticImport } from '#src/interfaces'
+import validateString from '#src/internal/validate-string'
+import type { NodeError } from '@flex-development/errnode'
 import { STATIC_IMPORT_REGEX } from '@flex-development/import-regex'
 
 /**
@@ -14,10 +16,13 @@ import { STATIC_IMPORT_REGEX } from '@flex-development/import-regex'
  * @see https://regex101.com/r/wlYQUN
  * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import
  *
- * @param {string} code - Code to evaluate
+ * @param {string} [code=''] - Code to evaluate
  * @return {StaticImport[]} Static import statement objects
+ * @throws {NodeError<TypeError>} If `code` is not a string
  */
-const findStaticImports = (code: string): StaticImport[] => {
+const findStaticImports = (code: string = ''): StaticImport[] => {
+  validateString(code, 'code')
+
   return [...code.matchAll(STATIC_IMPORT_REGEX)].map(match => {
     const { 0: code = '', index: start = 0, groups = {} } = match
     const { assertion = '', imports = '', specifier = '', type = '' } = groups

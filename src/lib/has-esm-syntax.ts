@@ -3,6 +3,9 @@
  * @module mlly/lib/hasESMSyntax
  */
 
+import validateString from '#src/internal/validate-string'
+import type { NodeError } from '@flex-development/errnode'
+
 /**
  * Detects if `code` contains ESM syntax. Ignores matches in comments.
  *
@@ -16,8 +19,11 @@
  *
  * @param {string} code - Code to evaluate
  * @return {boolean} `true` if `code` contains esm syntax, `false` otherwise
+ * @throws {NodeError<TypeError>} If `code` is not a string
  */
 const hasESMSyntax = (code: string): boolean => {
+  validateString(code, 'code')
+
   /**
    * ESM syntax regex.
    *

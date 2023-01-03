@@ -3,7 +3,9 @@
  * @module mlly/lib/toDataURL
  */
 
+import validateString from '#src/internal/validate-string'
 import type { MIMEType } from '#src/types'
+import type { NodeError } from '@flex-development/errnode'
 
 /**
  * Converts `code` into a [`data:` URL][1] using `base64` encoding.
@@ -26,11 +28,14 @@ import type { MIMEType } from '#src/types'
  * @param {string} code - Code to convert
  * @param {MIMEType} [mime='text/javascript'] - MIME type
  * @return {string} `code` as `data:` URL
+ * @throws {NodeError<TypeError>} If `code` or `mime` is not a string
  */
 const toDataURL = (
   code: string,
   mime: MIMEType = 'text/javascript'
 ): string => {
+  validateString(code, 'code')
+  validateString(mime, 'mime')
   return `data:${mime};base64,${Buffer.from(code).toString('base64')}`
 }
 

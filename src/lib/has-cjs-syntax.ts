@@ -3,6 +3,9 @@
  * @module mlly/lib/hasCJSSyntax
  */
 
+import validateString from '#src/internal/validate-string'
+import type { NodeError } from '@flex-development/errnode'
+
 /**
  * Detects if `code` contains CommonJS syntax. Ignores matches in comments.
  *
@@ -20,8 +23,11 @@
  *
  * @param {string} code - Code to evaluate
  * @return {boolean} `true` if `code` contains cjs syntax, `false` otherwise
+ * @throws {NodeError<TypeError>} If `code` is not a string
  */
 const hasCJSSyntax = (code: string): boolean => {
+  validateString(code, 'code')
+
   /**
    * CommonJS syntax regex.
    *

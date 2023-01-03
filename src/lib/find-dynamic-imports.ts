@@ -5,6 +5,8 @@
 
 import { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
 import type { DynamicImport } from '#src/interfaces'
+import validateString from '#src/internal/validate-string'
+import type { NodeError } from '@flex-development/errnode'
 import { DYNAMIC_IMPORT_REGEX } from '@flex-development/import-regex'
 
 /**
@@ -14,10 +16,13 @@ import { DYNAMIC_IMPORT_REGEX } from '@flex-development/import-regex'
  * @see https://regex101.com/r/PTPAvU
  * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/import
  *
- * @param {string} code - Code to evaluate
+ * @param {string} [code=''] - Code to evaluate
  * @return {DynamicImport[]} Dynamic import statement objects
+ * @throws {NodeError<TypeError>} If `code` is not a string
  */
-const findDynamicImports = (code: string): DynamicImport[] => {
+const findDynamicImports = (code: string = ''): DynamicImport[] => {
+  validateString(code, 'code')
+
   return [...code.matchAll(DYNAMIC_IMPORT_REGEX)].map(match => {
     const { 0: code = '', index: start = 0, groups = {} } = match
     const {

@@ -5,6 +5,8 @@
 
 import { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
 import type { RequireStatement } from '#src/interfaces'
+import validateString from '#src/internal/validate-string'
+import type { NodeError } from '@flex-development/errnode'
 
 /**
  * Finds all `require` statements in `code`. Ignores matches in comments.
@@ -13,10 +15,13 @@ import type { RequireStatement } from '#src/interfaces'
  * @see https://regex101.com/r/uCqSYB
  * @see https://nodejs.org/api/modules.html#requireid
  *
- * @param {string} code - Code to evaluate
+ * @param {string} [code=''] - Code to evaluate
  * @return {RequireStatement[]} Require statement objects
+ * @throws {NodeError<TypeError>} If `code` is not a string
  */
-const findRequires = (code: string): RequireStatement[] => {
+const findRequires = (code: string = ''): RequireStatement[] => {
+  validateString(code, 'code')
+
   /**
    * `require` statement regex.
    *

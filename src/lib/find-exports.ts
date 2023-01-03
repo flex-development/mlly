@@ -5,8 +5,15 @@
 
 import { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
 import type { ExportStatement } from '#src/interfaces'
+import validateString from '#src/internal/validate-string'
 import type { Declaration } from '#src/types'
-import * as regex from '@flex-development/export-regex'
+import type { NodeError } from '@flex-development/errnode'
+import {
+  EXPORT_AGGREGATE_REGEX,
+  EXPORT_DECLARATION_REGEX,
+  EXPORT_DEFAULT_REGEX,
+  EXPORT_LIST_REGEX
+} from '@flex-development/export-regex'
 
 /**
  * Finds all export statements in `code`. Ignores matches in comments.
@@ -18,10 +25,13 @@ import * as regex from '@flex-development/export-regex'
  * @see https://regex101.com/r/KQEDdZ
  * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export
  *
- * @param {string} code - Code to evaluate
+ * @param {string} [code=''] - Code to evaluate
  * @return {ExportStatement[]} Export statement objects
+ * @throws {NodeError<TypeError>} If `code` is not a string
  */
-const findExports = (code: string): ExportStatement[] => {
+const findExports = (code: string = ''): ExportStatement[] => {
+  validateString(code, 'code')
+
   /**
    * `export` statement objects.
    *
@@ -30,7 +40,7 @@ const findExports = (code: string): ExportStatement[] => {
   const statements: ExportStatement[] = []
 
   // get aggregate export statements
-  for (const match of code.matchAll(regex.EXPORT_AGGREGATE_REGEX)) {
+  for (const match of code.matchAll(EXPORT_AGGREGATE_REGEX)) {
     const { 0: code = '', index: start = 0, groups = {} } = match
     const { exports = '', specifier = '', type = '' } = groups
 
@@ -56,7 +66,7 @@ const findExports = (code: string): ExportStatement[] => {
   }
 
   // get declaration export statements
-  for (const match of code.matchAll(regex.EXPORT_DECLARATION_REGEX)) {
+  for (const match of code.matchAll(EXPORT_DECLARATION_REGEX)) {
     const { 0: code = '', index: start = 0, groups = {} } = match
     const { declaration = '', exports = '', modifiers = '' } = groups
 
@@ -88,7 +98,7 @@ const findExports = (code: string): ExportStatement[] => {
   }
 
   // get export default statements
-  for (const match of code.matchAll(regex.EXPORT_DEFAULT_REGEX)) {
+  for (const match of code.matchAll(EXPORT_DEFAULT_REGEX)) {
     const { 0: code = '', index: start = 0, groups = {} } = match
     const { exports = '', kind: declaration = '', modifiers = '' } = groups
 
@@ -114,7 +124,7 @@ const findExports = (code: string): ExportStatement[] => {
   }
 
   // get list export statements
-  for (const match of code.matchAll(regex.EXPORT_LIST_REGEX)) {
+  for (const match of code.matchAll(EXPORT_LIST_REGEX)) {
     const { 0: code = '', index: start = 0, groups = {} } = match
     const { exports = '', type = '' } = groups
 

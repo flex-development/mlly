@@ -1346,6 +1346,7 @@ __metadata:
     "@faker-js/faker": "npm:7.6.0"
     "@flex-development/docast": "npm:1.0.0-alpha.9"
     "@flex-development/docast-parse": "npm:1.0.0-alpha.4"
+    "@flex-development/errnode": "npm:1.2.0"
     "@flex-development/export-regex": "npm:1.0.0"
     "@flex-development/import-regex": "npm:2.0.1"
     "@flex-development/is-builtin": "npm:1.0.1"
