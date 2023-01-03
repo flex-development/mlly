@@ -9,4 +9,4 @@
 
 yarn typecheck --changed HEAD^
 yarn check:types:build
-lint-staged
+lint-staged --config=.lintstagedrc.json

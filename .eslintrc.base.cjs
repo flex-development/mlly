@@ -619,7 +619,7 @@ const config = {
     'unicorn/prefer-default-parameters': 2,
     'unicorn/prefer-export-from': [2, { ignoreUsedVariables: true }],
     'unicorn/prefer-includes': 2,
-    'unicorn/prefer-json-parse-buffer': 2,
+    'unicorn/prefer-json-parse-buffer': 0,
     'unicorn/prefer-math-trunc': 2,
     'unicorn/prefer-module': 2,
     'unicorn/prefer-negative-index': 2,
@@ -1058,7 +1058,6 @@ const config = {
         'unicorn/no-useless-undefined': 0,
         'unicorn/prefer-at': 0,
         'unicorn/prefer-dom-node-append': 0,
-        'unicorn/prefer-json-parse-buffer': 0,
         'unicorn/string-content': 0
       }
     },

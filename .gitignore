@@ -48,6 +48,7 @@ codecov
 coverage/
 tsconfig.temp.json
 vitest.config.*.timestamp-*.mjs
+!__fixtures__/node_modules/
 
 # ESLint
 # ------------------------------------------------------------------------------

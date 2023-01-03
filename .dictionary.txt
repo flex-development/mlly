@@ -22,6 +22,7 @@ iife
 keyid
 larsgw
 lcov
+lintstagedrc
 micnncim
 mkbuild
 nocheck
