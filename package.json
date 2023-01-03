@@ -27,18 +27,10 @@
   ],
   "exports": {
     ".": "./dist/index.mjs",
-    "./lib/*": "./dist/lib/*.mjs",
     "./package.json": "./package.json"
   },
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "./lib/*": [
-        "./dist/lib/*.d.mts"
-      ]
-    }
-  },
   "scripts": {
     "build": "mkbuild",
     "check:ci": "yarn dedupe --check && yarn check:format && yarn check:lint && yarn check:spelling && yarn typecheck && yarn check:types:build && yarn test:cov && NODE_ENV=production yarn pack -o %s-%v.tgz && yarn docs:build && yarn clean:pack",
