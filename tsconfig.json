@@ -47,7 +47,6 @@
     "strict": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "suppressImplicitAnyIndexErrors": true,
     "target": "esnext",
     "useDefineForClassFields": true,
     "useUnknownInCatchVariables": true
