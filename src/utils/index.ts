@@ -3,6 +3,7 @@
  * @module mlly/utils
  */
 
+export { default as compareSubpaths } from './compare-subpaths'
 export { default as detectSyntax } from './detect-syntax'
 export { default as extractStatements } from './extract-statements'
 export { default as findDynamicImports } from './find-dynamic-imports'
