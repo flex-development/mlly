@@ -8,6 +8,8 @@
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://github.com/actions/cache
+# - https://github.com/actions/cache/discussions/650
 # - https://github.com/actions/checkout
 # - https://github.com/actions/setup-node
 # - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
@@ -24,10 +26,12 @@ on:
       - feat/**
       - hotfix/**
       - main
+      - release/**
   workflow_dispatch:
 permissions:
   packages: read
 env:
+  CACHE_PATH: node_modules
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   HUSKY: 0
   REF: ${{ github.head_ref || github.ref_name }}
@@ -35,11 +39,139 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  ci:
+  setup:
     if: |
       github.event_name == 'pull_request' ||
       github.event_name == 'workflow_dispatch' ||
       !startsWith(github.event.head_commit.message, 'release:')
+    runs-on: ubuntu-latest
+    steps:
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.1.0
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.2.0
+        with:
+          ref: ${{ env.REF }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: yarn
+        name: Install dependencies
+        run: yarn ${{ github.actor == 'dependabot[bot]' && '--no-immutable' || '--immutable' }}
+      - id: cache
+        name: Cache dependencies
+        uses: actions/cache@v3.2.2
+        with:
+          key: ${{ runner.os }}-${{ github.run_id }}
+          path: ${{ env.CACHE_PATH }}
+  format:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.2.0
+        with:
+          ref: ${{ env.REF }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: cache
+        name: Restore dependencies cache
+        uses: actions/cache@v3.2.2
+        with:
+          key: ${{ runner.os }}-${{ github.run_id }}
+          path: ${{ env.CACHE_PATH }}
+      - id: format
+        name: Check code formatting
+        run: yarn check:format
+  lint:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.2.0
+        with:
+          ref: ${{ env.REF }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: cache
+        name: Restore dependencies cache
+        uses: actions/cache@v3.2.2
+        with:
+          key: ${{ runner.os }}-${{ github.run_id }}
+          path: ${{ env.CACHE_PATH }}
+      - id: lint
+        name: Check lint status
+        run: yarn check:lint
+  spelling:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.2.0
+        with:
+          ref: ${{ env.REF }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: cache
+        name: Restore dependencies cache
+        uses: actions/cache@v3.2.2
+        with:
+          key: ${{ runner.os }}-${{ github.run_id }}
+          path: ${{ env.CACHE_PATH }}
+      - id: spelling
+        name: Check spelling
+        run: yarn check:spelling
+  typecheck:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.2.0
+        with:
+          ref: ${{ env.REF }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: cache
+        name: Restore dependencies cache
+        uses: actions/cache@v3.2.2
+        with:
+          key: ${{ runner.os }}-${{ github.run_id }}
+          path: ${{ env.CACHE_PATH }}
+      - id: typecheck
+        name: Run typecheck
+        run: yarn typecheck && yarn check:types:build
+  test:
+    needs: setup
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -56,48 +188,21 @@ jobs:
         with:
           ref: ${{ env.REF }}
       - id: node
-        name: Use Node.js ${{ matrix.node-version }}
+        name: Setup Node.js v${{ matrix.node-version }}
         uses: actions/setup-node@v3.5.1
         with:
           cache: yarn
           cache-dependency-path: yarn.lock
           node-version: ${{ matrix.node-version }}
-      - id: debug
-        name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.1.0
-      - id: yarn
-        name: Install dependencies
-        run: yarn ${{ github.actor == 'dependabot[bot]' && '--no-immutable' || '--immutable' }}
-      - id: format
-        name: Check code formatting
-        run: yarn check:format
-      - id: lint
-        name: Check lint status
-        run: yarn check:lint
-      - id: spelling
-        name: Check spelling
-        run: yarn check:spelling
-      - id: typecheck
-        name: Run typecheck
-        run: yarn typecheck && yarn check:types:build
+      - id: cache
+        name: Restore dependencies cache
+        uses: actions/cache@v3.2.2
+        with:
+          key: ${{ runner.os }}-${{ github.run_id }}
+          path: ${{ env.CACHE_PATH }}
       - id: test
         name: Run tests
         run: yarn test:cov --segfault-retry=3
-      - id: pack
-        name: Pack project
-        run: yarn pack -o %s-%v.tgz
-        env:
-          NODE_ENV: production
-      - id: version
-        name: Get package version
-        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
-      - id: archive
-        name: Archive production artifacts
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: |
-            ${{ format('@{0}-{1}-{2}', github.repository_owner, github.event.repository.name, steps.version.outputs.result) }}
-          path: '*.tgz'
       - id: codecov
         name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v3.1.1
@@ -118,3 +223,40 @@ jobs:
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_WORKSPACE: ${{ github.workspace }}
+  build:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.2.0
+        with:
+          ref: ${{ env.REF }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: cache
+        name: Restore dependencies cache
+        uses: actions/cache@v3.2.2
+        with:
+          key: ${{ runner.os }}-${{ github.run_id }}
+          path: ${{ env.CACHE_PATH }}
+      - id: pack
+        name: Pack project
+        run: yarn pack -o %s-%v.tgz
+        env:
+          NODE_ENV: production
+      - id: version
+        name: Get package version
+        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
+      - id: archive
+        name: Archive production artifacts
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: |
+            ${{ format('@{0}-{1}-{2}', github.repository_owner, github.event.repository.name, steps.version.outputs.result) }}
+          path: '*.tgz'
