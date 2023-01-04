@@ -145,9 +145,17 @@ jobs:
       - id: spelling
         name: Check spelling
         run: yarn check:spelling
-  typecheck:
+  typescript:
     needs: setup
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        typescript-version:
+          - latest
+          - ~4.9.0
+          - ~4.8.0
+          - ~4.7.0
     steps:
       - id: checkout
         name: Checkout ${{ env.REF }}
@@ -167,6 +175,9 @@ jobs:
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
+      - id: typescript
+        name: Install typescript@${{ matrix.typescript-version }}
+        run: yarn add -D typescript@${{ matrix.typescript-version }}
       - id: typecheck
         name: Run typecheck
         run: yarn typecheck && yarn check:types:build
