@@ -9,6 +9,8 @@
   "{@linkcode ExportStatement}": "/api/interfaces#exportstatement",
   "{@linkcode Ext}": "https://github.com/flex-development/pathe/blob/main/src/types/ext.ts",
   "{@linkcode ImportStatement}": "/api/interfaces#importstatement",
+  "{@linkcode PackageJson}": "https://github.com/flex-development/pkg-types/blob/2.0.0/src/interfaces/package-json.ts",
+  "{@linkcode PackageScope}": "/api/interfaces/#packagescope",
   "{@linkcode MIMEType}": "/api/types#mimetype",
   "{@linkcode ModuleSpecifierType}": "/api/types#modulespecifiertype",
   "{@linkcode RESOLVE_EXTENSIONS}": "/api/constants#resolve-extensions",
