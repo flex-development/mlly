@@ -17,6 +17,7 @@ on:
   pull_request:
     types:
       - opened
+      - synchronize
 jobs:
   add-to-project:
     runs-on: ubuntu-latest
