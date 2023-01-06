@@ -13,6 +13,7 @@
   "{@linkcode PackageScope}": "/api/interfaces/#packagescope",
   "{@linkcode MIMEType}": "/api/types#mimetype",
   "{@linkcode ModuleSpecifierType}": "/api/types#modulespecifiertype",
+  "{@linkcode NodeError}": "https://github.com/flex-development/errnode/blob/1.2.0/src/types/node-error.ts",
   "{@linkcode RESOLVE_EXTENSIONS}": "/api/constants#resolve-extensions",
   "{@linkcode RequireStatement}": "/api/interfaces#requirestatement",
   "{@linkcode ResolveAliasOptions}": "/api/interfaces#resolvealiasoptions",

@@ -3,7 +3,9 @@
  * @module mlly/utils/readPackageJson
  */
 
+import validateString from '#src/internal/validate-string'
 import {
+  ERR_INVALID_ARG_TYPE,
   ERR_INVALID_PACKAGE_CONFIG,
   type NodeError
 } from '@flex-development/errnode'
@@ -18,22 +20,34 @@ import { URL, fileURLToPath } from 'node:url'
  *
  * Returns `null` if a file is not found.
  *
- * Throws [`ERR_INVALID_PACKAGE_CONFIG`][1] if the file found is not valid JSON.
- *
- * [1]: https://nodejs.org/api/errors.html#err_invalid_package_config
+ * @see {@linkcode NodeError}
+ * @see {@linkcode PackageJson}
  *
  * @param {URL | string} [dir='.'] - Id of directory containing `package.json`
  * @param {string?} [specifier] - Module specifier passed by user to initiate
  * reading of `package.json` file
  * @param {string?} [parent] - Id of module `specifier` is relative to
  * @return {?PackageJson} `package.json` object or `null` if file is not found
- * @throws {NodeError} If `package.json` file does not contain valid JSON
+ * @throws {NodeError<Error | TypeError>} If `dir` is not a string or instance
+ * of {@linkcode URL}, if `specifier` is not a string, if `parent` is not a
+ * string, or if a `package.json` is file found and does not contain valid JSON
  */
 const readPackageJson = (
   dir: URL | string = '.',
   specifier?: string,
   parent?: string
 ): Nullable<PackageJson> => {
+  // ensure is an instance of URL or a string
+  if (!(dir instanceof URL) && typeof dir !== 'string') {
+    throw new ERR_INVALID_ARG_TYPE('dir', ['URL', 'string'], dir)
+  }
+
+  // ensure specifier is a string
+  if (specifier !== undefined) validateString(specifier, 'specifier')
+
+  // ensure parent is a string
+  if (parent !== undefined) validateString(parent, 'parent')
+
   // ensure dir is a path
   if (dir instanceof URL) dir = dir.pathname
   else if (dir.startsWith('file:')) dir = fileURLToPath(dir)

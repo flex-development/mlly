@@ -29,6 +29,23 @@ describe('unit:utils/readPackageJson', () => {
     expect(testSubject(pathe.resolve('dist'))).to.be.null
   })
 
+  it('should throw if dir is not a string or an instance of URL', () => {
+    // Arrange
+    const code: ErrorCode = ErrorCode.ERR_INVALID_ARG_TYPE
+    let error: NodeError<TypeError>
+
+    // Act
+    try {
+      testSubject(null as unknown as string)
+    } catch (e: unknown) {
+      error = e as typeof error
+    }
+
+    // Expect
+    expect(error!).to.not.be.undefined
+    expect(error!).to.have.property('code').equal(code)
+  })
+
   it('should throw if package.json file is not valid json', () => {
     // Arrange
     const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_CONFIG
