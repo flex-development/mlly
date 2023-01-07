@@ -1,3 +1,5 @@
+import type { Format } from '#src/types'
+
 declare global {
   /**
    * Determines how `url` should be interpreted, retrieved, and parsed.
@@ -9,7 +11,7 @@ declare global {
    *
    * @param {string} url - `file:` url of module
    * @param {LoadHookContext} context - Hook context
-   * @param {(LoaderHookFormat | null)?} [context.format] - Module format
+   * @param {(Format | null)?} [context.format] - Module format
    * @param {ImportAssertions} context.importAssertions - Import assertions map
    * @param {LoadHook} defaultLoad - Default Node.js `load` function
    * @return {Promise<LoadHookResult>} Hook result
@@ -42,24 +44,13 @@ declare global {
     /**
      * Module format.
      */
-    format: LoaderHookFormat
+    format: Format
 
     /**
      * Source code
      */
     source?: ArrayBuffer | Buffer | string | undefined
   }
-
-  /**
-   * Valid module formats.
-   */
-  declare type LoaderHookFormat =
-    | 'builtin'
-    | 'commonjs'
-    | 'dynamic'
-    | 'json'
-    | 'module'
-    | 'wasm'
 
   /**
    * Returns the resolved file URL for `specifier` and `context.parentURL` and,
@@ -90,7 +81,7 @@ declare global {
     /**
      * Import conditions.
      */
-    conditions: LoaderHookFormat | null
+    conditions: Format | null
 
     /**
      * Import assertions map.
@@ -110,7 +101,7 @@ declare global {
     /**
      * Module format.
      */
-    format?: LoaderHookFormat | null
+    format?: Format | null
 
     /**
      * Absolute url to import target.
@@ -121,5 +112,3 @@ declare global {
     url: string
   }
 }
-
-export {}
