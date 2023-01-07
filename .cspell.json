@@ -33,6 +33,7 @@
     "yarn.lock"
   ],
   "ignoreRegExpList": [
+    "/0x*/",
     "/@flex-development\\/.*/",
     "/from\\s+(['\"]).*\\1/",
     "import\\(.*\\)"

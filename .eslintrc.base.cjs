@@ -605,8 +605,9 @@ const config = {
     'unicorn/no-useless-spread': 2,
     'unicorn/no-useless-undefined': 2,
     'unicorn/no-zero-fractions': 2,
-    'unicorn/number-literal-case': 2,
-    'unicorn/numeric-separators-style': 2,
+    'unicorn/number-literal-case': 0,
+    // https://github.com/sindresorhus/eslint-plugin-unicorn/issues/2003
+    'unicorn/numeric-separators-style': 0,
     'unicorn/prefer-add-event-listener': 2,
     'unicorn/prefer-array-find': 2,
     'unicorn/prefer-array-flat': [2, { functions: [] }],
