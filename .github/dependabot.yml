@@ -33,8 +33,10 @@ updates:
     directory: /
     ignore:
       - dependency-name: '@types/node'
+      - dependency-name: '@vitest/*'
       - dependency-name: '@vuedx/typescript-plugin-vue'
       - dependency-name: vitepress
+      - dependency-name: vitest
     labels:
       - scope:dependencies
       - type:build
