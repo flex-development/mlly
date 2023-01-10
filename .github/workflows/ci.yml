@@ -8,6 +8,7 @@
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions
 # - https://github.com/actions/cache
 # - https://github.com/actions/cache/discussions/650
 # - https://github.com/actions/checkout
@@ -16,6 +17,7 @@
 # - https://github.com/actions/upload-artifact
 # - https://github.com/codecov/codecov-action
 # - https://github.com/hmarr/debug-action
+# - https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 
 ---
 name: ci
@@ -39,12 +41,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  setup:
+  metadata:
     if: |
-      github.event_name == 'pull_request' ||
-      github.event_name == 'workflow_dispatch' ||
-      !startsWith(github.event.head_commit.message, 'release:')
+      github.event_name == 'pull_request'
+      || github.event_name == 'workflow_dispatch'
+      || !startsWith(github.event.head_commit.message, 'release:')
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.result }}
     steps:
       - id: debug
         name: Print environment variables and event payload
@@ -70,8 +74,11 @@ jobs:
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
+      - id: version
+        name: Get package version
+        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
   format:
-    needs: setup
+    needs: metadata
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -96,7 +103,7 @@ jobs:
         name: Check code formatting
         run: yarn check:format
   lint:
-    needs: setup
+    needs: metadata
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -121,7 +128,7 @@ jobs:
         name: Check lint status
         run: yarn check:lint
   spelling:
-    needs: setup
+    needs: metadata
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -146,7 +153,7 @@ jobs:
         name: Check spelling
         run: yarn check:spelling
   typescript:
-    needs: setup
+    needs: metadata
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -182,7 +189,7 @@ jobs:
         name: Run typecheck
         run: yarn typecheck
   test:
-    needs: setup
+    needs: metadata
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -235,7 +242,7 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_WORKSPACE: ${{ github.workspace }}
   build:
-    needs: setup
+    needs: metadata
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -261,13 +268,65 @@ jobs:
         run: yarn pack -o %s-%v.tgz
         env:
           NODE_ENV: production
-      - id: version
-        name: Get package version
-        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
       - id: archive
         name: Archive production artifacts
         uses: actions/upload-artifact@v3.1.1
         with:
           name: |
-            ${{ format('@{0}-{1}-{2}', github.repository_owner, github.event.repository.name, steps.version.outputs.result) }}
+            ${{ format('@{0}-{1}-{2}', github.repository_owner, github.event.repository.name, needs.metadata.outputs.version) }}
           path: '*.tgz'
+  docs:
+    needs:
+      - build
+      - format
+      - lint
+      - metadata
+      - spelling
+      - test
+      - typescript
+    if: github.actor != 'dependabot[bot]' && github.actor != 'flexdevelopment'
+    runs-on: ubuntu-latest
+    environment: preview
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.2.0
+        with:
+          ref: ${{ env.REF }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: cache
+        name: Restore dependencies cache
+        uses: actions/cache@v3.2.2
+        with:
+          key: ${{ runner.os }}-${{ github.run_id }}
+          path: ${{ env.CACHE_PATH }}
+      - id: local-binaries
+        name: Add local binaries to $PATH
+        run: echo "$GITHUB_WORKSPACE/$CACHE_PATH/.bin" >> $GITHUB_PATH
+      - id: env
+        name: Pull environment
+        run: vc pull --environment=preview --yes --token=${{ secrets.VERCEL_TOKEN }}
+      - id: build
+        name: Build docs
+        run: vc build --token=${{ secrets.VERCEL_TOKEN }}
+      - id: deploy
+        name: Deploy docs preview
+        run: vc deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+      - id: archive
+        name: Archive production artifacts
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: |
+            ${{ format('@{0}-{1}-{2}-docs', github.repository_owner, github.event.repository.name, needs.metadata.outputs.version) }}
+          path: |
+            .vercel/output/
+            docs/.vitepress/dist/
