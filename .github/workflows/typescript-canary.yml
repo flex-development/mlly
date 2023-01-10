@@ -57,6 +57,9 @@ jobs:
       - id: typescript
         name: Install typescript@${{ matrix.typescript-version }}
         run: yarn add -D typescript@${{ matrix.typescript-version }}
+      - id: typescript-version
+        name: Print TypeScript version
+        run: jq .devDependencies.typescript package.json -r
       - id: typecheck
         name: Run typecheck
         run: yarn typecheck
