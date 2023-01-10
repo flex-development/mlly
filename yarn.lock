@@ -10548,6 +10548,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:4.3.4":
+  version: 4.3.4
+  resolution: "typescript@npm:4.3.4"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: a5b7eb2d67ba99c3acdbe24ac12e94d303d07cadd4defc7782811cbde08b5a73a28c394d8ef61f8029a7b183173ce894ca4f756a2e6a5155ccc32dbc2347ee05
+  languageName: node
+  linkType: hard
+
 "typescript@npm:5.0.0-dev.20230102":
   version: 5.0.0-dev.20230102
   resolution: "typescript@npm:5.0.0-dev.20230102"
@@ -10558,6 +10568,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^4.6.4":
+  version: 4.9.4
+  resolution: "typescript@npm:4.9.4"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: b142d5e50785d0e5055771e4d9e712b01be58985ff29be3d3acc64f0fddd5fd8ade8b28583ba502f2565783c23bd5b509c5abcc1a93a2d7d4f05b8e4ee731fc9
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A4.3.4#optional!builtin<compat/typescript>":
+  version: 4.3.4
+  resolution: "typescript@patch:typescript@npm%3A4.3.4#optional!builtin<compat/typescript>::version=4.3.4&hash=dba6d9"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 491135d54d303d199b6879ad29630ad95418b57b4c5c85f91770564685df4c71e41299d6c8cf6cfbacf2783de408b31e48c2d46fee970afb23e97a8dbc930dca
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@npm%3A5.0.0-dev.20230102#optional!builtin<compat/typescript>":
   version: 5.0.0-dev.20230102
   resolution: "typescript@patch:typescript@npm%3A5.0.0-dev.20230102#optional!builtin<compat/typescript>::version=5.0.0-dev.20230102&hash=ad5954"
@@ -10565,6 +10595,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 2d82aea4517a5e463acdbe8d9061ab9bc79faef030f7aaefe4a5f5b324b500577c8a1eab2e2c9bb11745c3ddca999d1430de3a01a80e70ecf833988ed3e882d5
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^4.6.4#optional!builtin<compat/typescript>":
+  version: 4.9.4
+  resolution: "typescript@patch:typescript@npm%3A4.9.4#optional!builtin<compat/typescript>::version=4.9.4&hash=ad5954"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: e7321aeb1e2c0e3c19599808707208e2b730de8d17a5624f0a7297b9a1ffa39974edd4a819108b3b635bc00171476ddfa339e04d928a03ce8d8c6944cb8ec008
   languageName: node
   linkType: hard
 

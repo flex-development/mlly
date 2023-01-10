@@ -183,7 +183,6 @@
     "@ardatan/sync-fetch": "larsgw/sync-fetch#head=worker_threads",
     "@flex-development/tutils": "6.0.0-alpha.9",
     "esbuild": "0.16.12",
-    "typescript": "5.0.0-dev.20230102",
     "vite": "4.0.3",
     "vitepress@npm:1.0.0-alpha.34": "patch:vitepress@npm%3A1.0.0-alpha.34#patches/vitepress+1.0.0-alpha.34.dev.patch",
     "vitest@npm:0.26.3": "patch:vitest@npm%3A0.26.3#patches/vitest+0.26.3.dev.patch"
