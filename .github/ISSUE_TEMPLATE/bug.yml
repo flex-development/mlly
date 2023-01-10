@@ -61,7 +61,7 @@ body:
     type: dropdown
     attributes:
       label: Package manager
-      description: Provide the package manager that you are using
+      description: Package manager you are using
       options:
         - npm
         - other
@@ -76,11 +76,18 @@ body:
       description: Output of `npm --version` or `yarn --version`
     validations:
       required: true
+  - id: typescript-version
+    type: input
+    attributes:
+      label: TypeScript version
+      description: TypeScript version you are using
+    validations:
+      required: true
   - id: os
     type: dropdown
     attributes:
       label: Operating system (environment)
-      description: Provide the operating system that you are using
+      description: Operating system you are using
       options:
         - linux
         - macos
