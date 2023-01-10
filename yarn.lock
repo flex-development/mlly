@@ -1272,6 +1272,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/errnode@npm:1.3.0":
+  version: 1.3.0
+  resolution: "@flex-development/errnode@npm:1.3.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ferrnode%2F1.3.0%2F2036f4923d1e39f7510890fe6c7cf15ec9b0378c"
+  dependencies:
+    "@flex-development/tutils": "npm:6.0.0-alpha.9"
+    node-inspect-extracted: "npm:2.0.0"
+  peerDependencies:
+    "@types/node": ">=14"
+  checksum: 1f8f3b3a4c706ee0f3a5b7173bbffbe947fb322f9cbfec340b06484c5e25f0966d88f62e40c0ec9e9ec9fa2c3510dafd1194b128c823cedf4d526cb71ed70d6d
+  languageName: node
+  linkType: hard
+
 "@flex-development/export-regex@npm:1.0.0":
   version: 1.0.0
   resolution: "@flex-development/export-regex@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fexport-regex%2F1.0.0%2Fee7486c94c3ecbb392ae3beff0c9ecc4f1ce7282"
@@ -1346,7 +1358,7 @@ __metadata:
     "@faker-js/faker": "npm:7.6.0"
     "@flex-development/docast": "npm:1.0.0-alpha.9"
     "@flex-development/docast-parse": "npm:1.0.0-alpha.4"
-    "@flex-development/errnode": "npm:1.2.0"
+    "@flex-development/errnode": "npm:1.3.0"
     "@flex-development/export-regex": "npm:1.0.0"
     "@flex-development/import-regex": "npm:2.0.1"
     "@flex-development/is-builtin": "npm:1.0.1"

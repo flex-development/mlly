@@ -74,7 +74,7 @@
     "typecheck:watch": "vitest typecheck"
   },
   "dependencies": {
-    "@flex-development/errnode": "1.2.0",
+    "@flex-development/errnode": "1.3.0",
     "@flex-development/export-regex": "1.0.0",
     "@flex-development/import-regex": "2.0.1",
     "@flex-development/is-builtin": "1.0.1",
