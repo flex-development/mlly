@@ -32,6 +32,7 @@ const theme: Theme = {
    */
   enhanceApp({ app }: EnhanceAppContext): void {
     app.component('Doc', Doc)
+    return void 0
   }
 }
 

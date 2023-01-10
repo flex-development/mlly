@@ -2,10 +2,10 @@
  * @file Custom Loader
  * @module loader
  * @see https://github.com/TypeStrong/ts-node/issues/1007
- * @see https://nodejs.org/docs/latest-v16.x/api/all.html#all_esm_loaders
+ * @see https://nodejs.org/docs/latest-v16.x/api/esm.html#loaders
  */
 
-import path from 'node:path'
+import pathe from '@flex-development/pathe'
 import { createEsmHooks, register } from 'ts-node'
 import { createMatchPath, loadConfig } from 'tsconfig-paths'
 
@@ -18,52 +18,51 @@ const hooks = createEsmHooks(register())
 /**
  * Determines how `url` should be interpreted, retrieved, and parsed.
  *
- * @see https://nodejs.org/docs/latest-v16.x/api/all.html#all_esm_loadurl-context-defaultload
+ * @see {@linkcode LoadHookContext}
+ * @see https://nodejs.org/docs/latest-v16.x/api/esm.html#loadurl-context-nextload
  *
  * @async
  *
- * @param {string} url - `file:` url of module
+ * @param {string} url - Module URL
  * @param {LoadHookContext} context - Hook context
- * @param {?LoaderHookFormat} [context.format] - Module format
- * @param {ImportAssertions} context.importAssertions - Import assertions map
- * @param {LoadHook} defaultLoad - Default Node.js `load` function
+ * @param {LoadHook} nextLoad - Subsequent `load` hook in the chain or default
+ * Node.js `load` hook after last user-supplied `load` hook
  * @return {Promise<LoadHookResult>} Hook result
  */
-export const load = async (url, context, defaultLoad) => {
+export const load = async (url, context, nextLoad) => {
   // support for extensionless files in "bin" scripts
   // https://github.com/nodejs/modules/issues/488#issuecomment-804895142
-  if (/^file:\/{3}.*\/bin\//.test(url) && !path.extname(url)) {
+  if (/^file:\/{3}.*\/bin\//.test(url) && !pathe.extname(url)) {
     context.format = 'commonjs'
   }
 
-  return hooks.load(url, context, defaultLoad)
+  return hooks.load(url, context, nextLoad)
 }
 
 /**
- * Returns the resolved file URL for `specifier` and `context.parentURL` and,
- * optionally, its format as a hint to {@link load}.
+ * Resolves a file URL for a given module specifier and parent URL, and
+ * optionally its format (such as `'module'`) as a hint to {@linkcode load}.
  *
  * **Note**: Path aliases found in tsconfig(s) are respected during resolution.
  *
- * @see https://nodejs.org/docs/latest-v16.x/api/all.html#all_esm_resolvespecifier-context-defaultresolve
+ * @see {@linkcode ResolveHookContext}
+ * @see https://nodejs.org/docs/latest-v16.x/api/esm.html#resolvespecifier-context-nextresolve
  *
  * @async
  *
  * @param {string} specifier - Module specifier
  * @param {ResolveHookContext} context - Hook context
- * @param {string[]} context.conditions - Import conditions
- * @param {ImportAssertions} context.importAssertions - Import assertions map
- * @param {string} [context.parentURL] - `file:` url of importer
- * @param {ResolveHook} defaultResolve - Node.js default resolver
+ * @param {ResolveHook} nextResolve - Subsequent `resolve` hook in the chain
+ * or default Node.js `resolve` hook after last user-supplied `resolve` hook
  * @return {Promise<ResolveHookResult>} Hook result
  * @throws {Error}
  */
-export const resolve = async (specifier, context, defaultResolve) => {
+export const resolve = async (specifier, context, nextResolve) => {
   /**
    * @type {import('tsconfig-paths').ConfigLoaderResult}
    * @const result - `tsconfig-paths` config loader result
    */
-  const result = loadConfig(path.resolve('.'))
+  const result = loadConfig(pathe.resolve('.'))
 
   if (result.resultType === 'failed') throw new Error(result.message)
 
@@ -86,5 +85,5 @@ export const resolve = async (specifier, context, defaultResolve) => {
       '.tsx'
     ]) ?? specifier
 
-  return hooks.resolve(specifier, context, defaultResolve)
+  return hooks.resolve(specifier, context, nextResolve)
 }

@@ -10,5 +10,5 @@
  * @return {void} Nothing when complete
  */
 export function teardown(): void {
-  return
+  return void 0
 }

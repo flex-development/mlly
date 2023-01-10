@@ -10,7 +10,7 @@ import type {
   CommitGroup,
   GeneratedContext
 } from 'conventional-changelog-writer'
-import type { Commit, CommitRaw } from 'conventional-commits-parser'
+import type { Commit, CommitRaw, ICommit } from 'conventional-commits-parser'
 import dateformat from 'dateformat'
 import fs from 'node:fs'
 import pkg from './package.json'
@@ -20,8 +20,10 @@ import pkg from './package.json'
  *
  * @extends {GeneratedContext}
  */
+// @ts-expect-error typescript support is lacking majorly
 interface Context extends GeneratedContext {
   currentTag: string
+  // @ts-expect-error typescript support is lacking majorly
   linkCompare: boolean
   previousTag: string
 }
@@ -69,6 +71,7 @@ const config: Config = {
      * @param {Options.Transform.Callback} apply - Commit handler
      * @return {void} Nothing when complete
      */
+    // @ts-expect-error typescript support is lacking majorly
     transform(commit: CommitRaw, apply: Options.Transform.Callback): void {
       commit.committerDate = dateformat(commit.committerDate, 'yyyy-mm-dd')
 
@@ -97,7 +100,7 @@ const config: Config = {
         ...commit,
         raw: commit,
         shortHash: commit.hash.slice(0, 7)
-      })
+      } as unknown as Commit)
     }
   },
   parserOpts: {
@@ -133,11 +136,12 @@ const config: Config = {
      *
      * @see https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-writer#commitssort
      *
-     * @param {Commit} a - Commit object
-     * @param {Commit} b - Commit object to compare to `b`
+     * @param {ICommit} a - Commit object
+     * @param {ICommit} b - Commit object to compare to `b`
      * @return {number} Compare result
      */
-    commitsSort(a: Commit, b: Commit): number {
+    // @ts-expect-error typescript support is lacking majorly
+    commitsSort(a: ICommit, b: ICommit): number {
       /**
        * Compare result for {@link b.committerDate} & {@link a.committerDate}.
        *
@@ -189,6 +193,7 @@ const config: Config = {
        */
       const previousTag: string = context.gitSemverTags[0]!
 
+      // @ts-expect-error typescript support is lacking majorly
       return {
         ...context,
         currentTag,

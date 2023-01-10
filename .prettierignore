@@ -23,4 +23,5 @@ __tests__/report.json
 coverage/
 docs/.vitepress/.temp/
 docs/.vitepress/config.*.timestamp*
+tsconfig.temp.json
 yarn.lock

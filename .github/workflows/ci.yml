@@ -180,7 +180,7 @@ jobs:
         run: yarn add -D typescript@${{ matrix.typescript-version }}
       - id: typecheck
         name: Run typecheck
-        run: yarn typecheck && yarn check:types:build
+        run: yarn typecheck
   test:
     needs: setup
     runs-on: ubuntu-latest

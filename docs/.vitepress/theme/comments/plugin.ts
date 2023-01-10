@@ -21,6 +21,7 @@ import Compiler from './compiler'
  */
 function attacher(this: Processor<void, void, Root, string[]>): void {
   this.Compiler = Compiler
+  return void 0
 }
 
 export default attacher

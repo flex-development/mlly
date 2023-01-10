@@ -39,7 +39,6 @@ const config = {
     LoadHookResult: 'readonly',
     LoaderHookFormat: 'readonly',
     NodeJS: 'readonly',
-    ResolveFilename: 'readonly',
     ResolveHook: 'readonly',
     ResolveHookContext: 'readonly',
     ResolveHookResult: 'readonly'
@@ -418,7 +417,7 @@ const config = {
       {
         exemptAsync: false,
         exemptGenerators: true,
-        reportMissingReturnForUndefinedTypes: false
+        reportMissingReturnForUndefinedTypes: true
       }
     ],
     'jsdoc/require-returns-description': 1,

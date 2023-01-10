@@ -27,7 +27,7 @@ on:
         description: release tag
         required: true
 env:
-  ARTIFACT:
+  ARTIFACT: |
     ${{ github.event.inputs.artifact || github.event.release.assets[0].browser_download_url }}
   TAG: ${{ github.event.inputs.tag || github.event.release.tag_name }}
 jobs:

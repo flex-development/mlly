@@ -30,6 +30,7 @@
     "LICENSE.md",
     "__tests__/report.json",
     "patches/",
+    "tsconfig.temp.json",
     "yarn.lock"
   ],
   "ignoreRegExpList": [

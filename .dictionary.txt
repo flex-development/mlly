@@ -42,5 +42,6 @@ vates
 vercel
 vercelignore
 vitepress
+vitest
 vuedx
 yarnrc
