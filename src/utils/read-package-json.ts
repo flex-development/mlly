@@ -4,8 +4,8 @@
  */
 
 import validateString from '#src/internal/validate-string'
+import validateURLString from '#src/internal/validate-url-string'
 import {
-  ERR_INVALID_ARG_TYPE,
   ERR_INVALID_PACKAGE_CONFIG,
   type NodeError
 } from '@flex-development/errnode'
@@ -37,10 +37,8 @@ const readPackageJson = (
   specifier?: string,
   parent?: string
 ): Nullable<PackageJson> => {
-  // ensure is an instance of URL or a string
-  if (!(dir instanceof URL) && typeof dir !== 'string') {
-    throw new ERR_INVALID_ARG_TYPE('dir', ['URL', 'string'], dir)
-  }
+  // ensure dir is an instance of URL or a string
+  validateURLString(dir, 'dir')
 
   // ensure specifier is a string
   if (specifier !== undefined) validateString(specifier, 'specifier')
@@ -49,8 +47,7 @@ const readPackageJson = (
   if (parent !== undefined) validateString(parent, 'parent')
 
   // ensure dir is a path
-  if (dir instanceof URL) dir = dir.pathname
-  else if (dir.startsWith('file:')) dir = fileURLToPath(dir)
+  if (dir instanceof URL || dir.startsWith('file:')) dir = fileURLToPath(dir)
 
   /**
    * Full path to `package.json` file.
