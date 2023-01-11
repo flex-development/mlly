@@ -14,6 +14,7 @@
   "{@linkcode NodeError}": "https://github.com/flex-development/errnode/blob/1.2.0/src/types/node-error.ts",
   "{@linkcode PackageJson}": "https://github.com/flex-development/pkg-types/blob/2.0.0/src/interfaces/package-json.ts",
   "{@linkcode PackageScope}": "/api/interfaces/#packagescope",
+  "{@linkcode Protocol}": "/api/types#protocol",
   "{@linkcode RESOLVE_EXTENSIONS}": "/api/constants#resolve-extensions",
   "{@linkcode RequireStatement}": "/api/interfaces#requirestatement",
   "{@linkcode ResolveAliasOptions}": "/api/interfaces#resolvealiasoptions",
