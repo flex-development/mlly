@@ -4,6 +4,7 @@
  */
 
 export { default as compareSubpaths } from './compare-subpaths'
+export { default as CONDITIONS } from './conditions'
 export { default as detectSyntax } from './detect-syntax'
 export { default as extractStatements } from './extract-statements'
 export { default as findDynamicImports } from './find-dynamic-imports'
@@ -19,6 +20,7 @@ export { default as lookupPackageScope } from './lookup-package-scope'
 export { default as readPackageJson } from './read-package-json'
 export { default as resolveAlias } from './resolve-alias'
 export { default as resolveAliases } from './resolve-aliases'
+export { default as RESOLVE_EXTENSIONS } from './resolve-extensions'
 export { default as resolveModule } from './resolve-module'
 export { default as resolveModules } from './resolve-modules'
 export { default as toAbsoluteSpecifier } from './to-absolute-specifier'

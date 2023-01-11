@@ -3,13 +3,14 @@
  * @module mlly/utils/resolveModule
  */
 
-import { CONDITIONS, RESOLVE_EXTENSIONS } from '#src/constants'
 import type { ResolveOptions } from '#src/interfaces'
 import type { ModuleSpecifierType } from '#src/types'
 import isBuiltin from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
 import { moduleResolve, type ErrnoException } from 'import-meta-resolve'
 import { URL, pathToFileURL } from 'node:url'
+import CONDITIONS from './conditions'
+import RESOLVE_EXTENSIONS from './resolve-extensions'
 import toBareSpecifier from './to-bare-specifier'
 import toRelativeSpecifier from './to-relative-specifier'
 

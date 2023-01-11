@@ -5,6 +5,7 @@
 
 import type { Root } from '@flex-development/docast'
 import docastParse, { type Options } from '@flex-development/docast-parse'
+import { CompareResult } from '@flex-development/tutils'
 import { globby } from 'globby'
 import fs from 'node:fs/promises'
 import path, { type ParsedPath } from 'node:path'
@@ -29,16 +30,19 @@ async function useComments(): Promise<Documentation[]> {
   const objects: Documentation[] = []
 
   /**
+   * Regular expression matching documentation snippets that have titles in all
+   * caps.
+   *
+   * @const {RegExp} capitalized
+   */
+  const capitalized: RegExp = /^<h2.*?><code>[A-Z_]+?<\/code>/
+
+  /**
    * Glob patterns referencing files containing comments with API documentation.
    *
    * @const {string[]} patterns
    */
-  const patterns: string[] = [
-    'constants.ts',
-    'interfaces/*.ts',
-    'types/*.ts',
-    'utils/*.ts'
-  ]
+  const patterns: string[] = ['interfaces/*.ts', 'types/*.ts', 'utils/*.ts']
 
   // get comments
   for (let p of await globby(patterns, {
@@ -98,7 +102,31 @@ async function useComments(): Promise<Documentation[]> {
     for (const doc of compilation) objects.push({ doc, file: p })
   }
 
-  return objects.sort((obj1, obj2) => obj1.doc.localeCompare(obj2.doc))
+  return objects.sort((obj1: Documentation, obj2: Documentation): number => {
+    /**
+     * Comparison result for {@linkcode obj1} and {@linkcode obj2}.
+     *
+     * @var {number} result
+     */
+    let result: number = Number.NaN
+
+    switch (true) {
+      case capitalized.test(obj1.doc) && !capitalized.test(obj2.doc):
+        result = CompareResult.LESS_THAN
+        break
+      case !capitalized.test(obj1.doc) && capitalized.test(obj2.doc):
+        result = CompareResult.GREATER_THAN
+        break
+      default:
+        result = obj1.doc.localeCompare(obj2.doc, undefined, {
+          caseFirst: 'upper',
+          numeric: true
+        })
+        break
+    }
+
+    return result
+  })
 }
 
 export default useComments

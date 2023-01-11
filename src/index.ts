@@ -3,7 +3,6 @@
  * @module mlly
  */
 
-export * from './constants'
 export * from './enums'
 export * from './interfaces'
 export * from './types'

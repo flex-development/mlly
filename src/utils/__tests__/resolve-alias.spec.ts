@@ -27,10 +27,10 @@ describe('unit:utils/resolveAlias', () => {
   it('should convert current directory alias to relative specifier', () => {
     // Arrange
     const parent = path.resolve('src/index.ts')
-    const specifier = '#src/constants'
+    const specifier = '#src/interfaces'
 
     // Act + Expect
-    expect(testSubject(specifier, { parent, paths })).to.equal('./constants')
+    expect(testSubject(specifier, { parent, paths })).to.equal('./interfaces')
   })
 
   it('should convert module alias to relative specifier', () => {

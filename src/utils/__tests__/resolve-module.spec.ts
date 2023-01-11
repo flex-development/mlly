@@ -69,10 +69,10 @@ describe('unit:utils/resolveModule', () => {
 
     it('should resolve module', async () => {
       // Arrange
-      const expected = pathToFileURL('src/constants.ts').href
+      const expected = pathToFileURL('src/index.ts').href
 
       // Act + Expect
-      expect(await testSubject('../constants.ts')).to.equal(expected)
+      expect(await testSubject('../index.ts')).to.equal(expected)
     })
 
     it('should resolve module as directory index w/o /index*', async () => {

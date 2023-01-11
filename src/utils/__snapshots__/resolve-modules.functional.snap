@@ -5,7 +5,6 @@ exports[`functional:utils/resolveModules > should resolve modules in code 1`] = 
 import pathe from '@flex-development/pathe'
 import { moduleResolve, type ErrnoException } from 'import-meta-resolve'
 import { pathToFileURL, URL } from 'node:url'
-import { CONDITIONS, RESOLVE_EXTENSIONS } from '../constants.mjs'
 import type { ResolveOptions as Options } from '../interfaces/index.mjs'
 import type { ModuleSpecifierType } from '../types/index.mjs'
 import toBareSpecifier from './to-bare-specifier.mjs'

@@ -3,11 +3,11 @@
  * @module mlly/utils/resolveAlias
  */
 
-import { RESOLVE_EXTENSIONS } from '#src/constants'
 import type { ResolveAliasOptions } from '#src/interfaces'
 import getCompilerOptions from '#src/internal/get-compiler-options'
 import pathe from '@flex-development/pathe'
 import { createMatchPath, type MatchPath } from 'tsconfig-paths'
+import RESOLVE_EXTENSIONS from './resolve-extensions'
 import toRelativeSpecifier from './to-relative-specifier'
 
 /**

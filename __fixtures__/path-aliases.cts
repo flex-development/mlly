@@ -10,5 +10,4 @@ require('./aggregate-error-ponyfill.cjs')
 
 await import('#src/utils/detect-syntax')
 
-export * from '#src/constants'
 export * from '#src/interfaces'

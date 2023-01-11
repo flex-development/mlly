@@ -3,7 +3,6 @@
  * @module mlly/utils/toBareSpecifier
  */
 
-import { CONDITIONS } from '#src/constants'
 import type { ResolveOptions } from '#src/interfaces'
 import isBuiltin from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
@@ -15,8 +14,9 @@ import {
   findPathInExports,
   parseModuleId
 } from 'node-package-exports'
-import { fileURLToPath, URL } from 'node:url'
+import { URL, fileURLToPath } from 'node:url'
 import { readPackageUp, type PackageJson, type ReadResult } from 'read-pkg-up'
+import CONDITIONS from './conditions'
 
 /**
  * Converts `specifier` into a bare specifier.

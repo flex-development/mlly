@@ -14,8 +14,8 @@ describe('functional:utils/resolveModules', () => {
   it('should do nothing if module specifier is missing', async () => {
     // Arrange
     const code = dedent`
-      import '${process.cwd()}/src/constants'
-      import '${pathToFileURL('src/constants').href}'
+      import '${process.cwd()}/src/index'
+      import '${pathToFileURL('src/index').href}'
 
       export const hello = 'world'
     `
@@ -34,7 +34,6 @@ describe('functional:utils/resolveModules', () => {
       import pathe from '@flex-development/pathe'
       import { moduleResolve, type ErrnoException } from 'import-meta-resolve'
       import { pathToFileURL, URL } from 'node:url'
-      import { CONDITIONS, RESOLVE_EXTENSIONS } from '../constants'
       import type { ResolveOptions as Options } from '../interfaces'
       import type { ModuleSpecifierType } from '../types'
       import toBareSpecifier from './to-bare-specifier'
@@ -50,7 +49,7 @@ describe('functional:utils/resolveModules', () => {
     })
 
     // Expect
-    expect(resolveModule).toHaveBeenCalledTimes(9)
+    expect(resolveModule).toHaveBeenCalledTimes(8)
     expect(result).toMatchSnapshot()
   })
 })
