@@ -1,11 +1,11 @@
 /**
- * @file Type Tests - MIMEType
- * @module mlly/types/tests/unit-d/MIMEType
+ * @file Type Tests - MimeType
+ * @module mlly/types/tests/unit-d/MimeType
  */
 
 import type TestSubject from '../mime-type'
 
-describe('unit-d:types/MIMEType', () => {
+describe('unit-d:types/MimeType', () => {
   it('should extract "application/json"', () => {
     expectTypeOf<TestSubject>().extract<'application/json'>().toBeString()
   })

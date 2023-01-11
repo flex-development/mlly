@@ -3,7 +3,7 @@
  * @module mlly/utils/tests/unit/toDataURL
  */
 
-import type { MIMEType } from '#src/types'
+import type { MimeType } from '#src/types'
 import { dedent } from 'ts-dedent'
 import testSubject from '../to-data-url'
 
@@ -18,7 +18,7 @@ describe('unit:utils/toDataURL', () => {
 
   it('should return json data url', () => {
     // Arrange
-    const mime: MIMEType = 'application/json'
+    const mime: MimeType = 'application/json'
 
     // Act
     const result = testSubject(JSON.stringify({ hello: 'world' }), mime)
@@ -29,7 +29,7 @@ describe('unit:utils/toDataURL', () => {
 
   it('should return wasm data url', () => {
     // Arrange
-    const mime: MIMEType = 'application/wasm'
+    const mime: MimeType = 'application/wasm'
     const code = dedent`
       (module
         (type $i32_=>_i32 (func (param i32) (result i32)))

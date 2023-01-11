@@ -4,7 +4,7 @@
  */
 
 import validateString from '#src/internal/validate-string'
-import type { MIMEType } from '#src/types'
+import type { MimeType } from '#src/types'
 import type { NodeError } from '@flex-development/errnode'
 
 /**
@@ -22,17 +22,17 @@ import type { NodeError } from '@flex-development/errnode'
  * [2]: https://nodejs.org/api/esm.html#terminology
  * [3]: {@link ./resolve-modules.ts}
  *
- * @see {@linkcode MIMEType}
+ * @see {@linkcode MimeType}
  * @see https://nodejs.org/api/esm.html#esm_data_imports
  *
  * @param {string} code - Code to convert
- * @param {MIMEType} [mime='text/javascript'] - MIME type
+ * @param {MimeType} [mime='text/javascript'] - MIME type
  * @return {string} `code` as `data:` URL
  * @throws {NodeError<TypeError>} If `code` or `mime` is not a string
  */
 const toDataURL = (
   code: string,
-  mime: MIMEType = 'text/javascript'
+  mime: MimeType = 'text/javascript'
 ): string => {
   validateString(code, 'code')
   validateString(mime, 'mime')

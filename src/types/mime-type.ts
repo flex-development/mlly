@@ -1,13 +1,15 @@
 /**
- * @file Type Definitions - MIMEType
- * @module mlly/types/MIMEType
+ * @file Type Definitions - MimeType
+ * @module mlly/types/MimeType
  */
 
 /**
- * Supported MIME types.
+ * Supported [MIME types][1].
+ *
+ * [1]: https://developer.mozilla.org/docs/Web/HTTP/Basics_of_HTTP/MIME_types
  *
  * @see https://nodejs.org/api/esm.html#esm_data_imports
  */
-type MIMEType = 'application/json' | 'application/wasm' | 'text/javascript'
+type MimeType = 'application/json' | 'application/wasm' | 'text/javascript'
 
-export type { MIMEType as default }
+export type { MimeType as default }
