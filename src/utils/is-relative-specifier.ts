@@ -21,7 +21,8 @@ import type { NodeError } from '@flex-development/errnode'
  * @throws {NodeError<TypeError>} If `specifier` is not a string
  */
 const isRelativeSpecifier = (specifier: string): boolean => {
-  return validateString(specifier, 'specifier').startsWith('.')
+  validateString(specifier, 'specifier')
+  return specifier.startsWith('.')
     ? specifier.length === 1 || specifier[1] === '/'
       ? true
       : specifier[1] === '.' && (specifier.length === 2 || specifier[2] === '/')

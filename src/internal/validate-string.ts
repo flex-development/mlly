@@ -16,11 +16,11 @@ import { ERR_INVALID_ARG_TYPE, type NodeError } from '@flex-development/errnode'
  *
  * @param {unknown} value - Value supplied by user
  * @param {string} name - Name of invalid argument or property
- * @return {string} `value` if `value` is a string
+ * @return {value is string} `true` if `value` is a string
  * @throws {NodeError<TypeError>} If `value` is not a string
  */
-const validateString = (value: unknown, name: string): string => {
-  if (typeof value === 'string') return value
+const validateString = (value: unknown, name: string): value is string => {
+  if (typeof value === 'string') return true
   throw new ERR_INVALID_ARG_TYPE(name, 'string', value)
 }
 

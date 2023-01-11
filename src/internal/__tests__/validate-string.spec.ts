@@ -13,8 +13,8 @@ describe('unit:internal/validateString', () => {
     name = 'id'
   })
 
-  it('should return value if value is typeof string', () => {
-    expect(testSubject(faker.datatype.string(13), name)).to.be.a('string')
+  it('should return true if value is typeof string', () => {
+    expect(testSubject(faker.datatype.string(13), name)).to.be.true
   })
 
   it('should throw if value is not typeof string', () => {
