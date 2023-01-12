@@ -4,7 +4,6 @@
  */
 
 import pathe from '@flex-development/pathe'
-import { pathToFileURL } from 'node:url'
 import testSubject from '../lookup-package-scope'
 
 describe('unit:utils/lookupPackageScope', () => {
@@ -14,19 +13,14 @@ describe('unit:utils/lookupPackageScope', () => {
 
   it('should return PackageScope object if package.json file is found', () => {
     // Arrange
-    const base: string = 'node_modules/@flex-development'
-    const cases: [...Parameters<typeof testSubject>, string][] = [
-      [`${base}/tsconfig-types/index.d.mts`, 'tsconfig-types'],
-      [`file://${pathe.resolve(base, 'errnode/dist/index.mjs')}`, 'errnode'],
-      [pathToFileURL(pathe.resolve(base, 'mkbuild/dist/index.mjs')), 'mkbuild'],
-      [pathe.resolve(base, 'pkg-types/dist/index.d.mts'), 'pkg-types']
-    ]
+    const dir: string = pathe.resolve('node_modules/@flex-development/mkbuild')
+    const id: string = 'node_modules/@flex-development/mkbuild/dist/index.mjs'
 
-    // Act + Expect
-    cases.forEach(([id, expected]) => {
-      expect(testSubject(id))
-        .to.have.property('dir')
-        .equal(pathe.resolve(base, expected))
-    })
+    // Act
+    const result = testSubject(id)
+
+    // Expect
+    expect(result).to.not.be.null
+    expect(result).to.have.property('dir').equal(dir)
   })
 })

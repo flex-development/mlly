@@ -7,8 +7,9 @@ import type { PackageScope } from '#src/interfaces'
 import pathe from '@flex-development/pathe'
 import type { PackageJson } from '@flex-development/pkg-types'
 import type { Nullable } from '@flex-development/tutils'
-import { URL, fileURLToPath } from 'node:url'
+import type { URL } from 'node:url'
 import readPackageJson from './read-package-json'
+import toURL from './to-url'
 
 /**
  * Lookups a package scope for a given module `id`.
@@ -16,21 +17,21 @@ import readPackageJson from './read-package-json'
  * @see {@linkcode PackageScope}
  *
  * @param {URL | string} id - Module id to get package scope for
+ * @param {(URL | string)?} [base] - Base URL to resolve `id` against if `id` is
+ * not absolute
  * @return {?PackageScope} Package scope result or `null` if `package.json` file
  * is not found
  */
-const lookupPackageScope = (id: URL | string): Nullable<PackageScope> => {
+const lookupPackageScope = (
+  id: URL | string,
+  base?: URL | string
+): Nullable<PackageScope> => {
   /**
    * Path to directory containing `package.json` file.
    *
    * @var {string} dir
    */
-  let dir: string =
-    id instanceof URL
-      ? id.pathname
-      : typeof id === 'string' && id.startsWith('file:')
-      ? fileURLToPath(id)
-      : id
+  let dir: string = toURL(id, base).pathname
 
   // search for package.json
   while (dir && dir !== pathe.sep && !dir.endsWith('node_modules')) {
