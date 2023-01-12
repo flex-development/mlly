@@ -3,6 +3,7 @@
  * @module mlly/utils/readPackageJson
  */
 
+import isFile from '#src/internal/is-file'
 import validateString from '#src/internal/validate-string'
 import validateURLString from '#src/internal/validate-url-string'
 import {
@@ -57,7 +58,7 @@ const readPackageJson = (
   const path: string = pathe.toNamespacedPath(pathe.join(dir, 'package.json'))
 
   // return null if package.json file does not exist
-  if (!fs.existsSync(path)) return null
+  if (!isFile(path)) return null
 
   /**
    * Possible `package.json` object.
