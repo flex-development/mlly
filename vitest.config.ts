@@ -24,7 +24,6 @@ import { BaseSequencer } from 'vitest/node'
 const config: UserConfigExport = defineConfig((): UserConfig => {
   return {
     define: {
-      'import.meta.env.CI': JSON.stringify(ci),
       'import.meta.env.NODE_ENV': JSON.stringify(NodeEnv.TEST)
     },
     mode: NodeEnv.TEST,

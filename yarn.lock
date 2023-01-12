@@ -7998,14 +7998,14 @@ __metadata:
   linkType: hard
 
 "mlly@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "mlly@npm:1.0.0"
+  version: 1.1.0
+  resolution: "mlly@npm:1.1.0"
   dependencies:
     acorn: "npm:^8.8.1"
     pathe: "npm:^1.0.0"
-    pkg-types: "npm:^1.0.0"
-    ufo: "npm:^1.0.0"
-  checksum: 654985e2a5c8ebdc651dce28d889d876838e94395a3c487c17c990c492d0dd97d18c2852261f25915170dcbe56907bce8d97390c44033318cd293f4c91a52bdf
+    pkg-types: "npm:^1.0.1"
+    ufo: "npm:^1.0.1"
+  checksum: 976a68112302c8bb9a466a792e2dfe2840ced8dff48a3665fcdac756a2535aca529c2b10188d97e5548613079ecc57bebb5259a76daa902f7cdfe6b82e27c91e
   languageName: node
   linkType: hard
 
@@ -8849,7 +8849,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pkg-types@npm:^1.0.0":
+"pkg-types@npm:^1.0.0, pkg-types@npm:^1.0.1":
   version: 1.0.1
   resolution: "pkg-types@npm:1.0.1"
   dependencies:
@@ -10622,7 +10622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ufo@npm:^1.0.0":
+"ufo@npm:^1.0.0, ufo@npm:^1.0.1":
   version: 1.0.1
   resolution: "ufo@npm:1.0.1"
   checksum: d1de3b4cb0b5081d5333ae571a3dcc93752400e8dcc8d034043766aba09937d4159ce9a1a8c4fb9899ae365986b18a77fc97bcde1eae5facec5a965f8180faf0
@@ -11142,48 +11142,6 @@ __metadata:
   bin:
     vitest: vitest.mjs
   checksum: 261e3d410f455d289558b8e933be3a089e4dfd20dbb87e70a657e1d09b354ac1844325f2d4160802ed174e7d305810b60c2f8763f5bbebbf90cae66f222e4fe7
-  languageName: node
-  linkType: hard
-
-"vitest@patch:vitest@npm%3A0.26.3#patches/vitest+0.26.3.dev.patch::locator=%40flex-development%2Fmlly%40workspace%3A.":
-  version: 0.26.3
-  resolution: "vitest@patch:vitest@npm%3A0.26.3#patches/vitest+0.26.3.dev.patch::version=0.26.3&hash=dfec30&locator=%40flex-development%2Fmlly%40workspace%3A."
-  dependencies:
-    "@types/chai": "npm:^4.3.4"
-    "@types/chai-subset": "npm:^1.3.3"
-    "@types/node": "npm:*"
-    acorn: "npm:^8.8.1"
-    acorn-walk: "npm:^8.2.0"
-    chai: "npm:^4.3.7"
-    debug: "npm:^4.3.4"
-    local-pkg: "npm:^0.4.2"
-    source-map: "npm:^0.6.1"
-    strip-literal: "npm:^1.0.0"
-    tinybench: "npm:^2.3.1"
-    tinypool: "npm:^0.3.0"
-    tinyspy: "npm:^1.0.2"
-    vite: "npm:^3.0.0 || ^4.0.0"
-    vite-node: "npm:0.26.3"
-  peerDependencies:
-    "@edge-runtime/vm": "*"
-    "@vitest/browser": "*"
-    "@vitest/ui": "*"
-    happy-dom: "*"
-    jsdom: "*"
-  peerDependenciesMeta:
-    "@edge-runtime/vm":
-      optional: true
-    "@vitest/browser":
-      optional: true
-    "@vitest/ui":
-      optional: true
-    happy-dom:
-      optional: true
-    jsdom:
-      optional: true
-  bin:
-    vitest: vitest.mjs
-  checksum: f32fa09234d053e17782a24a6001283acc3a50b9c764cfec6b7d39b0dac72f7f1839a4bd96c5ffa2de1becd97d8674a43c20cc01a82d2b90d1a8aedc9daa8524
   languageName: node
   linkType: hard
 

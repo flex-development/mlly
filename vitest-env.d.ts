@@ -2,7 +2,6 @@
 
 interface ImportMetaEnv {
   readonly BASE_URL: string
-  readonly CI: 'false' | 'true'
   readonly DEV: '1' | import('@flex-development/tutils').EmptyString
   readonly MODE: import('@flex-development/tutils').NodeEnv.TEST
   readonly NODE_ENV: import('@flex-development/tutils').NodeEnv.TEST

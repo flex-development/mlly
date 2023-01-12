@@ -145,15 +145,13 @@ class Notifier implements Reporter {
     return (Array.isArray(tasks) ? tasks : [tasks]).flatMap(task => {
       const { type } = task
 
-      if (mode === 'typecheck' && type === 'suite' && task.tasks.length === 0) {
-        return [task] as unknown as [Test]
-      }
-
-      return type === 'benchmark' || type === 'typecheck'
-        ? []
+      return mode === 'typecheck' && type === 'suite' && task.tasks.length === 0
+        ? ([task] as unknown as [Test])
         : type === 'test'
         ? [task]
-        : task.tasks.flatMap(t => (t.type === 'test' ? [t] : this.tests(t)))
+        : 'tasks' in task
+        ? task.tasks.flatMap(t => (t.type === 'test' ? [t] : this.tests(t)))
+        : []
     })
   }
 }
