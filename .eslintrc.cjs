@@ -36,6 +36,12 @@ const config = {
       rules: {
         'unicorn/prefer-module': 0
       }
+    },
+    {
+      files: ['src/utils/parse-data-url.ts'],
+      rules: {
+        'unicorn/no-unreadable-array-destructuring': 0
+      }
     }
   ]
 }

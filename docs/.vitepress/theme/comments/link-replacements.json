@@ -37,6 +37,7 @@
   "{@linkcode findStaticImports}": "/api/#findstaticimports",
   "{@linkcode hasCJSSyntax}": "/api/#hascjssyntax",
   "{@linkcode hasESMSyntax}": "/api/#hasesmsyntax",
+  "{@linkcode parseDataURL}": "/api/#parsedataurl",
   "{@linkcode resolveAliases}": "/api/#resolvealiases",
   "{@linkcode resolveAlias}": "/api/#resolvealias",
   "{@linkcode resolveModules}": "/api/#resolvemodules",
