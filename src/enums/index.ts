@@ -3,6 +3,7 @@
  * @module mlly/enums
  */
 
+export { default as AssertType } from './assert-type'
 export { default as Format } from './format'
 export { default as SpecifierKind } from './kind-specifier'
 export { default as StatementKind } from './kind-statement'
