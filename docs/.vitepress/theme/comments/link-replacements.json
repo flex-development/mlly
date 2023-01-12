@@ -8,6 +8,7 @@
   "{@linkcode ErrnoException}": "https://github.com/wooorm/import-meta-resolve/blob/2.1.0/lib/errors.js#L1-L10",
   "{@linkcode ExportStatement}": "/api/interfaces#exportstatement",
   "{@linkcode Ext}": "https://github.com/flex-development/pathe/blob/main/src/types/ext.ts",
+  "{@linkcode Format}": "/api/enums#format",
   "{@linkcode ImportStatement}": "/api/interfaces#importstatement",
   "{@linkcode MimeType}": "/api/types#mimetype",
   "{@linkcode ModuleSpecifierType}": "/api/types#modulespecifiertype",

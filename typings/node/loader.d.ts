@@ -1,4 +1,4 @@
-import type { Format } from '#src/types'
+import type { Format } from '#src/enums'
 import type { Nullable, TypedArray } from '@flex-development/tutils'
 
 declare global {
@@ -29,7 +29,7 @@ declare global {
     /**
      * Module format.
      */
-    format: Format
+    format: Format | Lowercase<keyof typeof Format>
 
     /**
      * Signal that the current {@linkcode ResolveHook} intends to terminate the
@@ -95,7 +95,7 @@ declare global {
      *
      * **Note**: Hint may be ignored.
      */
-    format?: Nullable<Format> | undefined
+    format?: Nullable<Format | Lowercase<keyof typeof Format>> | undefined
 
     /**
      * Signal that the current {@linkcode ResolveHook} intends to terminate the

@@ -4,7 +4,6 @@
  */
 
 export type { default as Declaration } from './declaration'
-export type { default as Format } from './format'
 export type { default as MimeType } from './mime-type'
 export type { default as ModuleSpecifierType } from './module-specifier-type'
 export type { default as Protocol } from './protocol'
