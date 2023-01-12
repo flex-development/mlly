@@ -6,6 +6,7 @@
 export { default as compareSubpaths } from './compare-subpaths'
 export { default as CONDITIONS } from './conditions'
 export { default as detectSyntax } from './detect-syntax'
+export { default as EXTENSION_FORMAT_MAP } from './extension-format-map'
 export { default as extractStatements } from './extract-statements'
 export { default as findDynamicImports } from './find-dynamic-imports'
 export { default as findExports } from './find-exports'

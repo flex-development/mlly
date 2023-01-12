@@ -5,6 +5,7 @@
   "{@linkcode CONDITIONS}": "/api/#conditions",
   "{@linkcode Declaration}": "/api/types#declaration",
   "{@linkcode DynamicImport}": "/api/interfaces#dynamicimport",
+  "{@linkcode EXTENSION_FORMAT_MAP}": "/api/#extension-format-map",
   "{@linkcode ErrnoException}": "https://github.com/wooorm/import-meta-resolve/blob/2.1.0/lib/errors.js#L1-L10",
   "{@linkcode ExportStatement}": "/api/interfaces#exportstatement",
   "{@linkcode Ext}": "https://github.com/flex-development/pathe/blob/main/src/types/ext.ts",
