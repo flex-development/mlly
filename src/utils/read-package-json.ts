@@ -6,6 +6,7 @@
 import isFile from '#src/internal/is-file'
 import validateString from '#src/internal/validate-string'
 import validateURLString from '#src/internal/validate-url-string'
+import type { ModuleId } from '#src/types'
 import {
   ERR_INVALID_PACKAGE_CONFIG,
   type NodeError
@@ -21,10 +22,10 @@ import { URL, fileURLToPath } from 'node:url'
  *
  * Returns `null` if a file is not found.
  *
- * @see {@linkcode NodeError}
+ * @see {@linkcode ModuleId}
  * @see {@linkcode PackageJson}
  *
- * @param {URL | string} [dir='.'] - Id of directory containing `package.json`
+ * @param {ModuleId} [dir='.'] - Id of directory containing `package.json`
  * @param {string?} [specifier] - Module specifier passed by user to initiate
  * reading of `package.json` file
  * @param {string?} [parent] - Id of module `specifier` is relative to
@@ -34,7 +35,7 @@ import { URL, fileURLToPath } from 'node:url'
  * string, or if a `package.json` is file found and does not contain valid JSON
  */
 const readPackageJson = (
-  dir: URL | string = '.',
+  dir: ModuleId = '.',
   specifier?: string,
   parent?: string
 ): Nullable<PackageJson> => {

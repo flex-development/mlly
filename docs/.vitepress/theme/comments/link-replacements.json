@@ -13,6 +13,7 @@
   "{@linkcode GetFormatOptions}": "/api/interfaces#getformatoptions",
   "{@linkcode ImportStatement}": "/api/interfaces#importstatement",
   "{@linkcode MimeType}": "/api/types#mimetype",
+  "{@linkcode ModuleId}": "/api/types#moduleid",
   "{@linkcode ModuleSpecifierType}": "/api/types#modulespecifiertype",
   "{@linkcode NodeError}": "https://github.com/flex-development/errnode/blob/1.2.0/src/types/node-error.ts",
   "{@linkcode PackageJson}": "https://github.com/flex-development/pkg-types/blob/2.0.0/src/interfaces/package-json.ts",

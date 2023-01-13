@@ -3,8 +3,9 @@
  * @module mlly/utils/toRelativeSpecifier
  */
 
+import type { ModuleId } from '#src/types'
 import pathe from '@flex-development/pathe'
-import { fileURLToPath, URL } from 'node:url'
+import { URL, fileURLToPath } from 'node:url'
 
 /**
  * Converts `specifier` into a relative specifier.
@@ -14,17 +15,14 @@ import { fileURLToPath, URL } from 'node:url'
  * includes a file extension.
  * :::
  *
- * @see {@linkcode URL}
+ * @see {@linkcode ModuleId}
  * @see https://nodejs.org/api/esm.html#terminology
  *
- * @param {URL | string} specifier - Module specifier to convert
- * @param {URL | string} parent - Parent module URL or path to resolve from
+ * @param {ModuleId} specifier - Module specifier to convert
+ * @param {ModuleId} parent - Parent module URL or path to resolve from
  * @return {string} `specifier` as relative specifier
  */
-const toRelativeSpecifier = (
-  specifier: URL | string,
-  parent: URL | string
-): string => {
+const toRelativeSpecifier = (specifier: ModuleId, parent: ModuleId): string => {
   // convert file url objects to file url strings
   if (parent instanceof URL) parent = parent.href
   if (specifier instanceof URL) specifier = specifier.href

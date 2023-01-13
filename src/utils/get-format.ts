@@ -5,6 +5,7 @@
 
 import { Format } from '#src/enums'
 import type { GetFormatOptions, PackageScope } from '#src/interfaces'
+import type { ModuleId } from '#src/types'
 import {
   ERR_UNKNOWN_FILE_EXTENSION,
   type NodeError
@@ -22,16 +23,17 @@ import toURL from './to-url'
  * Retrieves a module format for the given module `id`.
  *
  * @see {@linkcode GetFormatOptions}
+ * @see {@linkcode ModuleId}
  *
  * @async
  *
- * @param {URL | string} id - Module id to evaluate
+ * @param {ModuleId} id - Module id to evaluate
  * @param {GetFormatOptions?} [options={}] - Format retrieval options
  * @return {Promise<Nilable<Format>>} Module format, `null`, or `undefined`
  * @throws {NodeError<TypeError>}
  */
 const getFormat = async (
-  id: URL | string,
+  id: ModuleId,
   options: GetFormatOptions = {}
 ): Promise<Nilable<Format>> => {
   const {

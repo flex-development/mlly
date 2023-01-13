@@ -3,13 +3,14 @@
  * @module mlly/interfaces/ResolveOptions
  */
 
-import type { ModuleSpecifierType } from '#src/types'
+import type { ModuleId, ModuleSpecifierType } from '#src/types'
 import type { Ext } from '@flex-development/pathe'
 import type { EmptyString } from '@flex-development/tutils'
-import type { URL } from 'node:url'
 
 /**
  * Module resolution options.
+ *
+ * @see {@linkcode ModuleId}
  */
 interface ResolveOptions {
   /**
@@ -53,7 +54,7 @@ interface ResolveOptions {
    *
    * @default import.meta.url
    */
-  parent?: URL | string | undefined
+  parent?: ModuleId | undefined
 
   /**
    * Keep symlinks instead of resolving them.

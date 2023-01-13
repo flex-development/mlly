@@ -4,10 +4,10 @@
  */
 
 import type { Format } from '#src/enums'
+import type { ModuleId } from '#src/types'
 import type { Ext } from '@flex-development/pathe'
 import type { EmptyString, KeysRequired } from '@flex-development/tutils'
 import type { RequestInit } from 'node-fetch'
-import type { URL } from 'node:url'
 import type TestSubject from '../options-get-format'
 
 describe('unit-d:interfaces/GetFormatOptions', () => {
@@ -15,10 +15,10 @@ describe('unit-d:interfaces/GetFormatOptions', () => {
     expectTypeOf<KeysRequired<TestSubject>>().toBeNever()
   })
 
-  it('should match [base?: URL | string]', () => {
+  it('should match [base?: ModuleId]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('base')
-      .toEqualTypeOf<URL | string | undefined>()
+      .toEqualTypeOf<ModuleId | undefined>()
   })
 
   it('should match [experimental_json_modules?: boolean]', () => {

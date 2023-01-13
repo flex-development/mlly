@@ -4,26 +4,28 @@
  */
 
 import type { Format } from '#src/enums'
+import type { ModuleId } from '#src/types'
 import type { Ext } from '@flex-development/pathe'
 import type { EmptyString } from '@flex-development/tutils'
 import type { RequestInit } from 'node-fetch'
-import type { URL } from 'node:url'
 
 /**
  * Module format retrieval options.
  *
  * @see {@linkcode Ext}
  * @see {@linkcode Format}
+ * @see {@linkcode ModuleId}
  * @see {@linkcode RequestInit}
- * @see {@linkcode URL}
  */
 interface GetFormatOptions {
   /**
    * Base URL to resolve module id against if module id is not absolute.
    *
+   * @see {@linkcode ModuleId}
+   *
    * @default undefined
    */
-  base?: URL | string | undefined
+  base?: ModuleId | undefined
 
   /**
    * Enable support for JSON modules.

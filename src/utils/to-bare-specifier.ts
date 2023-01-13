@@ -4,6 +4,7 @@
  */
 
 import type { ResolveOptions } from '#src/interfaces'
+import type { ModuleId } from '#src/types'
 import isBuiltin from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
 import { isNIL, type Nullable } from '@flex-development/tutils'
@@ -27,19 +28,19 @@ import CONDITIONS from './conditions'
  * :::
  *
  * @see {@linkcode CONDITIONS}
- * @see {@linkcode URL}
  * @see {@linkcode ErrnoException}
+ * @see {@linkcode ModuleId}
  * @see https://nodejs.org/api/esm.html#terminology
  *
  * @async
  *
- * @param {URL | string} specifier - File url or path to convert
+ * @param {ModuleId} specifier - File url or path to convert
  * @param {ResolveOptions['conditions']} [conditions=CONDITIONS] - Conditions
  * @return {string} `specifier` as bare specifier
  * @throws {ErrnoException}
  */
 const toBareSpecifier = async (
-  specifier: URL | string,
+  specifier: ModuleId,
   conditions: ResolveOptions['conditions'] = CONDITIONS
 ): Promise<string> => {
   // convert file url object to file url string

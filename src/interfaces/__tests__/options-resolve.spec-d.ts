@@ -3,7 +3,7 @@
  * @module mlly/interfaces/tests/unit-d/ResolveOptions
  */
 
-import type { ModuleSpecifierType } from '#src/types'
+import type { ModuleId, ModuleSpecifierType } from '#src/types'
 import type { Ext } from '@flex-development/pathe'
 import type { EmptyString } from '@flex-development/tutils'
 import type TestSubject from '../options-resolve'
@@ -35,10 +35,10 @@ describe('unit-d:interfaces/ResolveOptions', () => {
       .toEqualTypeOf<string[] | readonly string[] | undefined>()
   })
 
-  it('should match [parent?: URL | string]', () => {
+  it('should match [parent?: ModuleId]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('parent')
-      .toEqualTypeOf<URL | string | undefined>()
+      .toEqualTypeOf<ModuleId | undefined>()
   })
 
   it('should match [preserveSymlinks?: boolean]', () => {

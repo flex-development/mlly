@@ -3,8 +3,9 @@
  * @module mlly/utils/toAbsoluteSpecifier
  */
 
+import type { ModuleId } from '#src/types'
 import pathe from '@flex-development/pathe'
-import { fileURLToPath, pathToFileURL, URL } from 'node:url'
+import { URL, fileURLToPath, pathToFileURL } from 'node:url'
 
 /**
  * Converts `specifier` into an absolute specifier.
@@ -14,16 +15,16 @@ import { fileURLToPath, pathToFileURL, URL } from 'node:url'
  * includes a file extension.
  * :::
  *
- * @see {@linkcode URL}
+ * @see {@linkcode ModuleId}
  * @see https://nodejs.org/api/esm.html#terminology
  *
- * @param {URL | string} specifier - Module specifier to convert
- * @param {URL | string} [cwd=process.cwd()] - Current working directory
+ * @param {ModuleId} specifier - Module specifier to convert
+ * @param {ModuleId} [cwd=process.cwd()] - Current working directory
  * @return {string} `specifier` as absolute specifier (file url)
  */
 const toAbsoluteSpecifier = (
-  specifier: URL | string,
-  cwd: URL | string = process.cwd()
+  specifier: ModuleId,
+  cwd: ModuleId = process.cwd()
 ): string => {
   // convert file url objects to file url strings
   if (cwd instanceof URL) cwd = cwd.href
