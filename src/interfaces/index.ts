@@ -3,6 +3,7 @@
  * @module mlly/interfaces
  */
 
+export type { default as ImportAssertions } from './import-assertions'
 export type { default as DynamicImport } from './import-dynamic'
 export type { default as StaticImport } from './import-static'
 export type { default as GetFormatOptions } from './options-get-format'
