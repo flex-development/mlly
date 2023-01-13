@@ -181,7 +181,13 @@
     "yaml-eslint-parser": "1.1.0"
   },
   "peerDependencies": {
+    "@types/node": ">=14.17.0",
     "node-fetch": ">=3.3.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/node": {
+      "optional": true
+    }
   },
   "resolutions": {
     "@ardatan/sync-fetch": "larsgw/sync-fetch#head=worker_threads",

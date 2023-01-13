@@ -1456,7 +1456,11 @@ __metadata:
     vue-tsc: "npm:1.0.19"
     yaml-eslint-parser: "npm:1.1.0"
   peerDependencies:
+    "@types/node": ">=14.17.0"
     node-fetch: ">=3.3.0"
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
   languageName: unknown
   linkType: soft
 
