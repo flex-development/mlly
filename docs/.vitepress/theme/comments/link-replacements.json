@@ -55,5 +55,6 @@
   "{@linkcode toBareSpecifier}": "/api/#tobarespecifier",
   "{@linkcode toDataURL}": "/api/#todataurl",
   "{@linkcode toRelativeSpecifier}": "/api/#torelativespecifier",
-  "{@linkcode toURL}": "/api/#tourl"
+  "{@linkcode toURL}": "/api/#tourl",
+  "{@linkcode validateAssertions}": "/api/#validateassertions"
 }
