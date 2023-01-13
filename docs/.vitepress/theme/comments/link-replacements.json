@@ -11,6 +11,7 @@
   "{@linkcode Ext}": "https://github.com/flex-development/pathe/blob/main/src/types/ext.ts",
   "{@linkcode Format}": "/api/enums#format",
   "{@linkcode GetFormatOptions}": "/api/interfaces#getformatoptions",
+  "{@linkcode GetSourceOptions}": "/api/interfaces#getsourceoptions",
   "{@linkcode ImportStatement}": "/api/interfaces#importstatement",
   "{@linkcode MimeType}": "/api/types#mimetype",
   "{@linkcode ModuleId}": "/api/types#moduleid",
