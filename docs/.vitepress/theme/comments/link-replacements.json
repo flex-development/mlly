@@ -41,6 +41,7 @@
   "{@linkcode findRequires}": "/api/#findrequires",
   "{@linkcode findStaticImports}": "/api/#findstaticimports",
   "{@linkcode getFormat}": "/api/#getformat",
+  "{@linkcode getSource}": "/api/#getsource",
   "{@linkcode hasCJSSyntax}": "/api/#hascjssyntax",
   "{@linkcode hasESMSyntax}": "/api/#hasesmsyntax",
   "{@linkcode parseDataURL}": "/api/#parsedataurl",

@@ -31,6 +31,7 @@ const config = {
     'plugin:prettier/recommended'
   ],
   globals: {
+    BufferEncoding: 'readonly',
     Chai: 'readonly',
     Console: 'readonly',
     JSX: jsx ? 'readonly' : false,

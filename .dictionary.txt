@@ -45,4 +45,5 @@ vercelignore
 vitepress
 vitest
 vuedx
+wabt
 yarnrc
