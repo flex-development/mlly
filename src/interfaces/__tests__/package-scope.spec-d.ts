@@ -11,9 +11,13 @@ describe('unit-d:interfaces/PackageScope', () => {
     expectTypeOf<TestSubject>().toHaveProperty('dir').toBeString()
   })
 
-  it('should match [pkg: PackageJson]', () => {
+  it('should match [pkg: string]', () => {
+    expectTypeOf<TestSubject>().toHaveProperty('pkg').toBeString()
+  })
+
+  it('should match [pkgjson: PackageJson]', () => {
     expectTypeOf<TestSubject>()
-      .toHaveProperty('pkg')
+      .toHaveProperty('pkgjson')
       .toEqualTypeOf<PackageJson>()
   })
 })

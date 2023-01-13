@@ -22,5 +22,7 @@ describe('unit:utils/lookupPackageScope', () => {
     // Expect
     expect(result).to.not.be.null
     expect(result).to.have.property('dir').equal(dir)
+    expect(result).to.have.property('pkg').startWith(result!.dir)
+    expect(result).to.have.property('pkg').endWith('/package.json')
   })
 })

@@ -10,6 +10,10 @@ describe('unit-d:types/MimeType', () => {
     expectTypeOf<TestSubject>().extract<'application/json'>().toBeString()
   })
 
+  it('should extract "application/typescript"', () => {
+    expectTypeOf<TestSubject>().extract<'application/typescript'>().toBeString()
+  })
+
   it('should extract "application/wasm"', () => {
     expectTypeOf<TestSubject>().extract<'application/wasm'>().toBeString()
   })

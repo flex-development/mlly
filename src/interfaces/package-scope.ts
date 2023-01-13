@@ -18,9 +18,14 @@ interface PackageScope {
   dir: string
 
   /**
+   * Absolute path to `package.json` file.
+   */
+  pkg: string
+
+  /**
    * `package.json` object.
    */
-  pkg: PackageJson
+  pkgjson: PackageJson
 }
 
 export type { PackageScope as default }

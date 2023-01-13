@@ -10,6 +10,10 @@
  *
  * @see https://nodejs.org/api/esm.html#esm_data_imports
  */
-type MimeType = 'application/json' | 'application/wasm' | 'text/javascript'
+type MimeType =
+  | 'application/json'
+  | 'application/typescript'
+  | 'application/wasm'
+  | 'text/javascript'
 
 export type { MimeType as default }

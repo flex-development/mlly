@@ -38,11 +38,15 @@ const lookupPackageScope = (
     /**
      * Possible `package.json` object.
      *
-     * @const {Nullable<PackageJson>} pkg
+     * @const {Nullable<PackageJson>} pkgjson
      */
-    const pkg: Nullable<PackageJson> = readPackageJson(dir)
+    const pkgjson: Nullable<PackageJson> = readPackageJson(dir)
 
-    if (pkg) return { dir: pathe.resolve(process.cwd(), dir), pkg }
+    if (pkgjson) {
+      dir = pathe.resolve(process.cwd(), dir)
+      return { dir, pkg: pathe.join(dir, 'package.json'), pkgjson }
+    }
+
     dir = pathe.dirname(dir)
   }
 
