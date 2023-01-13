@@ -152,6 +152,7 @@
     "is-ci": "3.0.1",
     "jsonc-eslint-parser": "2.1.0",
     "lint-staged": "13.1.0",
+    "node-fetch": "3.3.0",
     "node-notifier": "10.0.1",
     "prettier": "2.8.1",
     "prettier-plugin-sh": "0.12.8",
@@ -178,6 +179,9 @@
     "vue-eslint-parser": "9.1.0",
     "vue-tsc": "1.0.19",
     "yaml-eslint-parser": "1.1.0"
+  },
+  "peerDependencies": {
+    "node-fetch": ">=3.3.0"
   },
   "resolutions": {
     "@ardatan/sync-fetch": "larsgw/sync-fetch#head=worker_threads",
