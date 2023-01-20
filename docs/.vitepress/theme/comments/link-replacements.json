@@ -9,6 +9,7 @@
   "{@linkcode EXTENSION_FORMAT_MAP}": "/api/#extension-format-map",
   "{@linkcode ErrnoException}": "https://github.com/wooorm/import-meta-resolve/blob/2.1.0/lib/errors.js#L1-L10",
   "{@linkcode ExportStatement}": "/api/interfaces#exportstatement",
+  "{@linkcode Exports}": "https://github.com/flex-development/pkg-types/blob/2.0.0/src/types/exports.ts",
   "{@linkcode Ext}": "https://github.com/flex-development/pathe/blob/main/src/types/ext.ts",
   "{@linkcode Format}": "/api/enums#format",
   "{@linkcode GetFormatOptions}": "/api/interfaces#getformatoptions",
@@ -62,5 +63,6 @@
   "{@linkcode toDataURL}": "/api/#todataurl",
   "{@linkcode toRelativeSpecifier}": "/api/#torelativespecifier",
   "{@linkcode toURL}": "/api/#tourl",
-  "{@linkcode validateAssertions}": "/api/#validateassertions"
+  "{@linkcode validateAssertions}": "/api/#validateassertions",
+  "{@linkcode validateExports}": "/api/#validateexports"
 }
