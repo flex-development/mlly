@@ -38,7 +38,7 @@ const config = {
       }
     },
     {
-      files: ['src/utils/parse-data-url.ts'],
+      files: ['src/utils/parse-data-url.ts', 'src/utils/parse-module-id.ts'],
       rules: {
         'unicorn/no-unreadable-array-destructuring': 0
       }

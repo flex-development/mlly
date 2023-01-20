@@ -11,6 +11,7 @@
  *
  * @const {RegExp} INTERNAL_SPECIFIER_REGEX
  */
-const INTERNAL_SPECIFIER_REGEX: RegExp = /^#[^\s/].+[^/]$/
+const INTERNAL_SPECIFIER_REGEX: RegExp =
+  /^(?!.*(?:%2[Ff]|%5[Cc]))(?<root>#[^\s/]+?(?=\s|$|\/))(?<path>\/.+[^/](?=\s|$))?(?!\/)/
 
 export default INTERNAL_SPECIFIER_REGEX
