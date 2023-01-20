@@ -52,6 +52,7 @@
   "{@linkcode getSource}": "/api/#getsource",
   "{@linkcode hasCJSSyntax}": "/api/#hascjssyntax",
   "{@linkcode hasESMSyntax}": "/api/#hasesmsyntax",
+  "{@linkcode isExportsSugar}": "/api/#isexportssugar",
   "{@linkcode parseDataURL}": "/api/#parsedataurl",
   "{@linkcode parseModuleId}": "/api/#parsemoduleid",
   "{@linkcode resolveAliases}": "/api/#resolvealiases",
