@@ -22,6 +22,7 @@
   "{@linkcode PackageJson}": "https://github.com/flex-development/pkg-types/blob/2.0.0/src/interfaces/package-json.ts",
   "{@linkcode PackageScope}": "/api/interfaces/#packagescope",
   "{@linkcode ParseModuleIdOptions}": "/api/interfaces/#parsemoduleidoptions",
+  "{@linkcode ParseSubpathOptions}": "/api/interfaces/#parsesubpathoptions",
   "{@linkcode ParsedModuleId}": "/api/interfaces/#parsedmoduleid",
   "{@linkcode Protocol}": "/api/types#protocol",
   "{@linkcode RESOLVE_EXTENSIONS}": "/api/#resolve-extensions",
