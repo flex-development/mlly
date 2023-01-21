@@ -29,6 +29,10 @@
     ".": "./dist/index.mjs",
     "./package.json": "./package.json"
   },
+  "imports": {
+    "#src": "./src/index.ts",
+    "#src/*": "./src/*.ts"
+  },
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "scripts": {
