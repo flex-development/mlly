@@ -11,6 +11,7 @@
   "{@linkcode ExportStatement}": "/api/interfaces#exportstatement",
   "{@linkcode Exports}": "https://github.com/flex-development/pkg-types/blob/2.0.0/src/types/exports.ts",
   "{@linkcode Ext}": "https://github.com/flex-development/pathe/blob/main/src/types/ext.ts",
+  "{@linkcode FindSubpathOptions}": "/api/interfaces#findsubpathoptions",
   "{@linkcode Format}": "/api/enums#format",
   "{@linkcode GetFormatOptions}": "/api/interfaces#getformatoptions",
   "{@linkcode GetSourceOptions}": "/api/interfaces#getsourceoptions",
