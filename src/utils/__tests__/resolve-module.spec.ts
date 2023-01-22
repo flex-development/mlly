@@ -97,7 +97,7 @@ describe('unit:utils/resolveModule', () => {
 
       // Act
       try {
-        await testSubject('#src/interfaces')
+        await testSubject('#app/interfaces')
       } catch (e: unknown) {
         error = e as ErrnoException
       }
