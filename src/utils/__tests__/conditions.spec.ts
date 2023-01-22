@@ -6,8 +6,8 @@
 import TEST_SUBJECT from '../conditions'
 
 describe('unit:utils/CONDITIONS', () => {
-  it('should be readonly set', () => {
-    expect(TEST_SUBJECT).to.be.frozen.instanceof(Set)
+  it('should be instance of Set', () => {
+    expect(TEST_SUBJECT).to.be.instanceof(Set)
   })
 
   it('should be sorted by priority', () => {

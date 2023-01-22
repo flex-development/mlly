@@ -8,10 +8,8 @@
  *
  * @see https://nodejs.org/api/packages.html#conditional-exports
  *
- * @const {Readonly<Set<string>>} CONDITIONS
+ * @const {Set<string>} CONDITIONS
  */
-const CONDITIONS: Readonly<Set<string>> = Object.freeze(
-  new Set(['node', 'import'])
-)
+const CONDITIONS: Set<string> = new Set(['node', 'import'])
 
 export default CONDITIONS

@@ -51,6 +51,7 @@
   "{@linkcode findExports}": "/api/#findexports",
   "{@linkcode findRequires}": "/api/#findrequires",
   "{@linkcode findStaticImports}": "/api/#findstaticimports",
+  "{@linkcode findSubpath}": "/api/#findsubpath",
   "{@linkcode getFormat}": "/api/#getformat",
   "{@linkcode getSource}": "/api/#getsource",
   "{@linkcode hasCJSSyntax}": "/api/#hascjssyntax",
