@@ -154,5 +154,17 @@ exports[`unit:utils/findStaticImports > should return StaticImport object array 
     "syntax": "named",
     "type": false,
   },
+  {
+    "assertion": "",
+    "code": "import './side-effect.mjs'",
+    "end": 574,
+    "imports": [],
+    "kind": "import",
+    "specifier": "./side-effect.mjs",
+    "specifier_kind": "static",
+    "start": 548,
+    "syntax": "side-effect",
+    "type": false,
+  },
 ]
 `;

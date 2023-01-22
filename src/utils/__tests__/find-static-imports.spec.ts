@@ -25,6 +25,7 @@ describe('unit:utils/findStaticImports', () => {
       import defaultExport, { export1 } from "module-name";
       import defaultExport, * as name from "module-name";
       import { "h-i" as hi } from './hi.js'
+      import './side-effect.mjs'
     `
 
     // Act
