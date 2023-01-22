@@ -6,6 +6,7 @@
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
 import { CompareResult } from '@flex-development/tutils'
+import assert from 'node:assert'
 
 /**
  * Returns a number indicating if a subpath pattern is equal to, greater than,
@@ -15,15 +16,15 @@ import { CompareResult } from '@flex-development/tutils'
  * - `0`: `subpath2` is equal to `subpath1`
  * - `1`: `subpath2` is greater than `subpath1`
  *
- * Implements the `PATTERN_KEY_COMPARE` algorithm. Does not ensure either
- * subpath ends with `"/"` or contains only a single `"*"`, however.
+ * Implements the `PATTERN_KEY_COMPARE` algorithm.
  *
  * @see https://nodejs.org/api/esm.html#resolution-algorithm
  *
  * @param {string} subpath1 - Subpath to be compared
  * @param {string} subpath2 - Subpath to compare `subpath1` to
  * @return {CompareResult} Comparsion result
- * @throws {NodeError<TypeError>} If `subpath1` or `subpath2` is not a string
+ * @throws {NodeError<Error | TypeError>} If either either subpath contains more
+ * than pattern character (`'*'`) or is not a string
  */
 const compareSubpaths = (subpath1: string, subpath2: string): CompareResult => {
   validateString(subpath1, 'subpath1')
@@ -41,14 +42,37 @@ const compareSubpaths = (subpath1: string, subpath2: string): CompareResult => {
    *
    * @const {number} pattern1
    */
-  const pattern1: number = subpath1.indexOf(pattern_char)
+  let pattern1: number = -1
 
   /**
    * Index of {@linkcode pattern_char} in {@linkcode subpath2}.
    *
    * @const {number} pattern2
    */
-  const pattern2: number = subpath2.indexOf(pattern_char)
+  let pattern2: number = -1
+
+  // ensure subpaths contain a single '*'
+  for (const [index, subpath] of [subpath1, subpath2].entries()) {
+    /**
+     * Error message thrown if {@linkcode subpath} contains more than one `'*'`.
+     *
+     * @const {string} message
+     */
+    const message: string = `'${subpath}' is expected to contain a single '*'`
+
+    /**
+     * Index of {@linkcode pattern_char} in {@linkcode subpath}.
+     *
+     * @const {number} pattern
+     */
+    const pattern_index: number = subpath.indexOf(pattern_char)
+
+    // ensure respective subpath contains no more than one '*'
+    assert(pattern_index === subpath.lastIndexOf(pattern_char), message)
+
+    // set index of pattern character in respective subpath
+    index === 0 ? (pattern1 = pattern_index) : (pattern2 = pattern_index)
+  }
 
   /**
    * Base length of {@linkcode subpath1}.

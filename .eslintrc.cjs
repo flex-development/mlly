@@ -26,6 +26,12 @@ const config = {
       }
     },
     {
+      files: ['src/utils/__tests__/find-subpath.spec.ts'],
+      rules: {
+        'sort-keys': 0
+      }
+    },
+    {
       files: ['src/internal/__tests__/get-compiler-options.spec.ts'],
       rules: {
         'unicorn/no-keyword-prefix': 0
