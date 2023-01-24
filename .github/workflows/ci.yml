@@ -49,6 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.result }}
+      version-typescript: ${{ steps.version-typescript.outputs.result }}
     steps:
       - id: debug
         name: Print environment variables and event payload
@@ -77,6 +78,9 @@ jobs:
       - id: version
         name: Get package version
         run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
+      - id: version-typescript
+        name: Get TypeScript version
+        run: echo "result=$(jq .devDependencies.typescript package.json -r)" >> $GITHUB_OUTPUT
   format:
     needs: metadata
     runs-on: ubuntu-latest
@@ -159,6 +163,7 @@ jobs:
       fail-fast: false
       matrix:
         typescript-version:
+          - ${{ needs.metadata.outputs.version-typescript }}
           - latest
           - ~4.9.0
           - ~4.8.0
