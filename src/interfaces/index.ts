@@ -6,6 +6,7 @@
 export type { default as ImportAssertions } from './import-assertions'
 export type { default as DynamicImport } from './import-dynamic'
 export type { default as StaticImport } from './import-static'
+export type { default as FillModuleOptions } from './options-fill-module'
 export type { default as FindSubpathOptions } from './options-find-subpath'
 export type { default as GetFormatOptions } from './options-get-format'
 export type { default as GetSourceOptions } from './options-get-source'
