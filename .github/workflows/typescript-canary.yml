@@ -18,7 +18,7 @@ on:
   schedule:
     # every day, 3 hours after typescript@next release
     # https://github.com/microsoft/TypeScript/blob/v4.9.4/.github/workflows/nightly.yaml
-    - cron: '0 10 * * *'
+    - cron: 0 10 * * *
   workflow_dispatch:
 permissions:
   packages: read
@@ -60,6 +60,20 @@ jobs:
       - id: typescript-version
         name: Print TypeScript version
         run: jq .devDependencies.typescript package.json -r
+      - id: tsconfig
+        name: Prepare tsconfig.json
+        if: matrix.typescript-version == 'next'
+        run: echo $(jq '.compilerOptions += {"ignoreDeprecations":"5.0"}' -S $TSCONFIG) > $TSCONFIG
+        env:
+          TSCONFIG: tsconfig.json
+      - id: build
+        name: Build project
+        run: yarn build
+        env:
+          NODE_ENV: production
       - id: typecheck
         name: Run typecheck
         run: yarn typecheck
+      - id: typecheck-build
+        name: Run typecheck-build
+        run: yarn check:types:build
