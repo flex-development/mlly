@@ -49,6 +49,7 @@
   "{@linkcode compareSubpaths}": "/api/#comparesubpaths",
   "{@linkcode detectSyntax}": "/api/#detectsyntax",
   "{@linkcode extractStatements}": "/api/#extractstatements",
+  "{@linkcode fillModules}": "/api/#fillmodules",
   "{@linkcode findDynamicImports}": "/api/#finddynamicimports",
   "{@linkcode findExports}": "/api/#findexports",
   "{@linkcode findRequires}": "/api/#findrequires",
