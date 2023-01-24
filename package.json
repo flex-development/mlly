@@ -87,9 +87,6 @@
     "@flex-development/pkg-types": "2.0.0",
     "@flex-development/tsconfig-types": "2.0.1",
     "@flex-development/tutils": "6.0.0-alpha.9",
-    "import-meta-resolve": "2.2.0",
-    "node-package-exports": "1.0.2",
-    "read-pkg-up": "9.1.0",
     "tsconfig-paths": "4.1.1"
   },
   "devDependencies": {

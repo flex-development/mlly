@@ -16,9 +16,7 @@ describe('unit:utils/hasESMSyntax', () => {
       it('should detect declaration export async function', () => {
         // Arrange
         const code = dedent`
-          export async function run(): Promise<void> {
-            console.log((await import('read-pkg-up')).readPackageUp())
-          }
+          export async function run(): Promise<void> {}
         `
 
         // Act + Expect
@@ -118,7 +116,7 @@ describe('unit:utils/hasESMSyntax', () => {
 
     describe('default', () => {
       it('should detect default export', () => {
-        expect(testSubject('export default ')).to.be.true
+        expect(testSubject('export default foo')).to.be.true
       })
 
       it('should ignore default export in multi-line comment', () => {
@@ -126,7 +124,7 @@ describe('unit:utils/hasESMSyntax', () => {
         const code = dedent`
           /**
            * @example
-           *  import fs from "node:fs/promises"
+           *  export default foo
            */
         `
 
@@ -135,13 +133,19 @@ describe('unit:utils/hasESMSyntax', () => {
       })
 
       it('should ignore default export in single-line comment', () => {
-        expect(testSubject('// import fs from "node:fs/promises"')).to.be.false
+        expect(testSubject('// export default foo')).to.be.false
       })
     })
 
     describe('named', () => {
+      let specifier: string
+
+      beforeAll(() => {
+        specifier = 'fs-extra'
+      })
+
       it('should detect named export', () => {
-        expect(testSubject('export { mkdirp } from "fs-extra"')).to.be.true
+        expect(testSubject(`export { mkdirp } from "${specifier}"`)).to.be.true
       })
 
       it('should detect named exports spanning multiple lines', () => {
@@ -152,7 +156,7 @@ describe('unit:utils/hasESMSyntax', () => {
             readFile,
             unlink,
             writeFile
-          } from 'fs-extra'
+          } from '${specifier}'
         `
 
         // Act + Expect
@@ -164,7 +168,7 @@ describe('unit:utils/hasESMSyntax', () => {
         const code = dedent`
           /**
            * @example
-           *  export { mkdirp } from "fs-extra"
+           *  export { mkdirp } from "${specifier}"
            */
         `
 
@@ -173,13 +177,23 @@ describe('unit:utils/hasESMSyntax', () => {
       })
 
       it('should ignore named export in single-line comment', () => {
-        expect(testSubject('// export { mkdirp } from "fs-extra"')).to.be.false
+        // Arrange
+        const code: string = `// export { mkdirp } from "${specifier}"`
+
+        // Act + Expect
+        expect(testSubject(code)).to.be.false
       })
     })
 
     describe('star', () => {
+      let specifier: string
+
+      beforeAll(() => {
+        specifier = '@flex-development/tsconfig-types'
+      })
+
       it('should detect star export', () => {
-        expect(testSubject('export * as fs from "fs-extra"')).to.be.true
+        expect(testSubject(`export * as tsc from "${specifier}"`)).to.be.true
       })
 
       it('should ignore star export in multi-line comment', () => {
@@ -187,7 +201,7 @@ describe('unit:utils/hasESMSyntax', () => {
         const code = dedent`
           /**
            * @example
-           *  export * as fs from "fs-extra"
+           *  export * as tsc from "${specifier}"
            */
         `
 
@@ -196,15 +210,25 @@ describe('unit:utils/hasESMSyntax', () => {
       })
 
       it('should ignore star export in single-line comment', () => {
-        expect(testSubject('//  export * as fs from "fs-extra"')).to.be.false
+        // Arrange
+        const code: string = `// export * as tsc from '${specifier}'`
+
+        // Act + Expect
+        expect(testSubject(code)).to.be.false
       })
     })
   })
 
   describe('import', () => {
     describe('default', () => {
+      let specifier: string
+
+      beforeAll(() => {
+        specifier = '@flex-development/pkg-types'
+      })
+
       it('should detect default import', () => {
-        expect(testSubject('import fs from "node:fs/promises"')).to.be.true
+        expect(testSubject(`import pkg from "${specifier}"`)).to.be.true
       })
 
       it('should ignore default import in multi-line comment', () => {
@@ -212,7 +236,7 @@ describe('unit:utils/hasESMSyntax', () => {
         const code = dedent`
           /**
            * @example
-           *  import fs from "node:fs/promises"
+           *  import pkg from "${specifier}"
            */
         `
 
@@ -221,13 +245,19 @@ describe('unit:utils/hasESMSyntax', () => {
       })
 
       it('should ignore default import in single-line comment', () => {
-        expect(testSubject('// import fs from "node:fs/promises"')).to.be.false
+        expect(testSubject(`// import pkg from "${specifier}"`)).to.be.false
       })
     })
 
     describe('dynamic', () => {
+      let specifier: string
+
+      beforeAll(() => {
+        specifier = '@flex-development/errnode'
+      })
+
       it('should detect dynamic import', () => {
-        expect(testSubject('await import("read-pkg-up")')).to.be.true
+        expect(testSubject(`await import("${specifier}")`)).to.be.true
       })
 
       it('should ignore dynamic import in multi-line comment', () => {
@@ -235,7 +265,16 @@ describe('unit:utils/hasESMSyntax', () => {
         const code = dedent`
           /**
            * @example
-           *  const { readPackageUp } = await import("read-pkg-up")
+           *  const {
+           *    ERR_INVALID_MODULE_SPECIFIER,
+           *    ERR_INVALID_PACKAGE_CONFIG,
+           *    ERR_INVALID_PACKAGE_TARGET,
+           *    ERR_MODULE_NOT_FOUND,
+           *    ERR_PACKAGE_IMPORT_NOT_DEFINED,
+           *    ERR_PACKAGE_PATH_NOT_EXPORTED,
+           *    ERR_UNSUPPORTED_DIR_IMPORT,
+           *    ErrorCode
+           *  } = await import("${specifier}")
            */
         `
 
@@ -244,17 +283,19 @@ describe('unit:utils/hasESMSyntax', () => {
       })
 
       it('should ignore dynamic import in single-line comment', () => {
-        expect(testSubject('// await import("read-pkg-up")')).to.be.false
+        expect(testSubject(`// await import("${specifier}")`)).to.be.false
       })
     })
 
     describe('named', () => {
-      it('should detect named import', () => {
-        // Arrange
-        const code = 'import { resolve } from "@flex-development/pathe"'
+      let specifier: string
 
-        // Act + Expect
-        expect(testSubject(code)).to.be.true
+      beforeAll(() => {
+        specifier = '@flex-development/pathe'
+      })
+
+      it('should detect named import', () => {
+        expect(testSubject(`import { resolve } from "${specifier}"`)).to.be.true
       })
 
       it('should detect named imports spanning multiple lines', () => {
@@ -265,7 +306,7 @@ describe('unit:utils/hasESMSyntax', () => {
             dirname,
             extname,
             resolve
-          } from '@flex-development/pathe'
+          } from '${specifier}'
         `
 
         // Act + Expect
@@ -277,7 +318,7 @@ describe('unit:utils/hasESMSyntax', () => {
         const code = dedent`
           /**
            * @example
-           *  import { resolve } from '@flex-development/pathe'
+           *  import { resolve } from '${specifier}'
            */
         `
 
@@ -287,7 +328,7 @@ describe('unit:utils/hasESMSyntax', () => {
 
       it('should ignore named import in single-line comment', () => {
         // Arrange
-        const code = '// import { resolve } from "@flex-development/pathe"'
+        const code = `// import { resolve } from "${specifier}"`
 
         // Act + Expect
         expect(testSubject(code)).to.be.false
@@ -295,8 +336,14 @@ describe('unit:utils/hasESMSyntax', () => {
     })
 
     describe('star', () => {
+      let specifier: string
+
+      beforeAll(() => {
+        specifier = '@flex-development/tutils'
+      })
+
       it('should detect star import', () => {
-        expect(testSubject('import * as foo from "foo-pkg"')).to.be.true
+        expect(testSubject(`import * as t from "${specifier}"`)).to.be.true
       })
 
       it('should ignore star import in multi-line comment', () => {
@@ -304,7 +351,7 @@ describe('unit:utils/hasESMSyntax', () => {
         const code = dedent`
           /**
            * @example
-           *  import * as foo from "foo-pkg"
+           *  import * as t from "${specifier}"
            */
         `
 
@@ -313,7 +360,7 @@ describe('unit:utils/hasESMSyntax', () => {
       })
 
       it('should ignore star import in single-line comment', () => {
-        expect(testSubject('// import * as foo from "foo-pkg"')).to.be.false
+        expect(testSubject(`// import * as t from "${specifier}"`)).to.be.false
       })
     })
   })
