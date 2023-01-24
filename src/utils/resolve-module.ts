@@ -19,10 +19,20 @@ import RESOLVE_EXTENSIONS from './resolve-extensions'
  *
  * Adds support for:
  *
- * - Resolving without file extensions and explicit `/index` usage
+ * - Extensionless file and directory index resolution
  * - Replacing file extensions
  *
+ * Other differences between Node.js:
+ *
+ * - [Subpath import][2] targets (that are strings) must be relative to the
+ *   current working directory (e.g. `'./src/index.ts'`, `'./src/*.ts'`) or
+ *   start with a [NPM valid package name][3]. See [`nodejs/node#40579`][4] for
+ *   details.
+ *
  * [1]: https://nodejs.org/api/esm.html#esm_resolver_algorithm
+ * [2]: https://nodejs.org/api/packages.html#subpath-imports
+ * [3]: https://regex101.com/r/BHcJfc
+ * [4]: https://github.com/nodejs/node/issues/40579
  *
  * @see {@linkcode NodeError}
  * @see {@linkcode ResolveModuleOptions}
