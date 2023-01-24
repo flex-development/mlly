@@ -6,4 +6,4 @@
 #
 # - https://github.com/okonet/lint-staged#command-line-flags
 
-lint-staged --config=.lintstagedrc.json --relative --verbose
+cross-env LINT_STAGED=1 lint-staged --config=.lintstagedrc.json --relative --verbose
