@@ -6,8 +6,10 @@
 /**
  * `import` assertion types.
  *
- * **Note**:  It's unclear whether or not the HTML spec will require assertion
- * types for WebAssembly modules.
+ * ::: info
+ * It's unclear whether or not the HTML spec will require assertion types for
+ * WebAssembly modules.
+ * :::
  *
  * @see https://github.com/WebAssembly/esm-integration/issues/42
  *

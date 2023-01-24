@@ -109,6 +109,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
           doc += this.throws(node)
           break
         case this.isConstant(node):
+        case this.isEnum(node):
         case this.isInterface(node):
         case this.isType(node):
           doc += this.snippet(node.context!.position) + '\n\n'
@@ -308,6 +309,20 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
     visit(node, Type.BLOCK_TAG, visitor)
 
     return constant
+  }
+
+  /**
+   * Checks if `node` represents an enum.
+   *
+   * @protected
+   *
+   * @param {Comment} node - Comment node to check
+   * @return {boolean} `true` if `node` represents enum
+   */
+  protected isEnum(node: Comment): boolean {
+    return (
+      node.context?.kind === Kind.ENUM || node.context?.kind === Kind.ENUM_CONST
+    )
   }
 
   /**
@@ -598,7 +613,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
       section = this.customContainer(
         'danger',
         description,
-        md.render(this.subheading(identifier, `Throws \`${type}\``, 3))
+        md.render(this.subheading(identifier, `THROWS \`${type}\``, 3))
       )
 
       return EXIT

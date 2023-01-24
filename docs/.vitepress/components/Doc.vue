@@ -60,6 +60,5 @@ defineProps<{ doc: Documentation['doc'] }>()
 .Doc h3[id*='-throws'] {
   line-height: 24px;
   margin: 8px 0;
-  text-transform: uppercase;
 }
 </style>

@@ -22,6 +22,7 @@ import toURL from './to-url'
 /**
  * Retrieves a module format for the given module `id`.
  *
+ * @see {@linkcode Format}
  * @see {@linkcode GetFormatOptions}
  * @see {@linkcode ModuleId}
  *
@@ -133,7 +134,7 @@ const getFormat = async (
        *
        * @const {Nullable<PackageScope>} scope
        */
-      const scope: Nullable<PackageScope> = lookupPackageScope(url, base)
+      const scope: Nullable<PackageScope> = lookupPackageScope(url)
 
       switch (true) {
         // get format based on package type

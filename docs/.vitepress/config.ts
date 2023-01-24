@@ -471,12 +471,13 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
     outline: [2, 3],
     sidebar: [
       {
-        items: [{ link: '/#install', text: 'Install' }],
-        text: 'Getting Started'
+        items: [{ link: '/', text: 'Getting Started' }],
+        text: 'Guide'
       },
       {
         items: [
           { link: '/api/', text: 'API Reference' },
+          { link: '/api/enums', text: 'Enums' },
           { link: '/api/interfaces', text: 'Interfaces' },
           { link: '/api/types', text: 'Types' }
         ],

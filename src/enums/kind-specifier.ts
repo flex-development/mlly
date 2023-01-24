@@ -4,7 +4,7 @@
  */
 
 /**
- * Specifier kinds.
+ * Module specifier kinds.
  *
  * @enum {Lowercase<string>}
  */
