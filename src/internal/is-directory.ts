@@ -8,7 +8,7 @@ import fs from 'node:fs'
 import validateURLString from './validate-url-string'
 
 /**
- * Checks if a directory exists at `id`.
+ * Checks if a directory exists at the given module `id`.
  *
  * @param {ModuleId} id - Module id to evaluate
  * @return {boolean} `true` if directory exists at `id`

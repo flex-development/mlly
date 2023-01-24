@@ -5,6 +5,7 @@
 
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
+import pathe from '@flex-development/pathe'
 
 /**
  * Checks if the given `specifier` is a relative specifier.
@@ -23,9 +24,10 @@ import type { NodeError } from '@flex-development/errnode'
 const isRelativeSpecifier = (specifier: string): boolean => {
   validateString(specifier, 'specifier')
   return specifier.startsWith('.')
-    ? specifier.length === 1 || specifier[1] === '/'
+    ? specifier.length === 1 || specifier[1] === pathe.sep
       ? true
-      : specifier[1] === '.' && (specifier.length === 2 || specifier[2] === '/')
+      : specifier[1] === '.' &&
+        (specifier.length === 2 || specifier[2] === pathe.sep)
     : false
 }
 

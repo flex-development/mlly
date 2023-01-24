@@ -13,9 +13,10 @@ import {
 } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import type { PackageJson } from '@flex-development/pkg-types'
-import type { Nullable } from '@flex-development/tutils'
+import { isNIL, type Nullable } from '@flex-development/tutils'
 import fs from 'node:fs'
-import { URL, fileURLToPath } from 'node:url'
+import { fileURLToPath } from 'node:url'
+import toURL from './to-url'
 
 /**
  * Reads a `package.json` file from the given directory.
@@ -25,10 +26,10 @@ import { URL, fileURLToPath } from 'node:url'
  * @see {@linkcode ModuleId}
  * @see {@linkcode PackageJson}
  *
- * @param {ModuleId} [dir='.'] - Id of directory containing `package.json`
+ * @param {ModuleId} [dir='.'] - Id of directory containing `package.json` file
  * @param {string?} [specifier] - Module specifier passed by user to initiate
  * reading of `package.json` file
- * @param {string?} [parent] - Id of module `specifier` is relative to
+ * @param {ModuleId?} [parent] - Id of module to resolve from
  * @return {?PackageJson} `package.json` object or `null` if file is not found
  * @throws {NodeError<Error | TypeError>} If `dir` is not a string or instance
  * of {@linkcode URL}, if `specifier` is not a string, if `parent` is not a
@@ -37,7 +38,7 @@ import { URL, fileURLToPath } from 'node:url'
 const readPackageJson = (
   dir: ModuleId = '.',
   specifier?: string,
-  parent?: string
+  parent?: ModuleId
 ): Nullable<PackageJson> => {
   // ensure dir is an instance of URL or a string
   validateURLString(dir, 'dir')
@@ -45,14 +46,14 @@ const readPackageJson = (
   // ensure specifier is a string
   if (specifier !== undefined) validateString(specifier, 'specifier')
 
-  // ensure parent is a string
-  if (parent !== undefined) validateString(parent, 'parent')
+  // ensure parent is an instance of URL or a string
+  if (parent !== undefined) validateURLString(parent, 'parent')
 
   // ensure dir is a path
-  if (dir instanceof URL || dir.startsWith('file:')) dir = fileURLToPath(dir)
+  dir = fileURLToPath(toURL(dir))
 
   /**
-   * Full path to `package.json` file.
+   * Absolute path to `package.json` file.
    *
    * @const {string} path
    */
@@ -79,10 +80,17 @@ const readPackageJson = (
      *
      * @var {string | undefined} base
      */
-    let base: string | undefined = specifier ? `'${specifier}'` : undefined
+    let base: string | undefined
 
-    // add specifier import location
-    if (base && parent) base += ` from ${parent}`
+    // get base
+    switch (true) {
+      case specifier && !isNIL(parent):
+        base = `'${specifier}' from ${fileURLToPath(toURL(parent!))}`
+        break
+      case specifier?.startsWith('file:'):
+        base = fileURLToPath(specifier!)
+        break
+    }
 
     throw new ERR_INVALID_PACKAGE_CONFIG(path, base, (e as SyntaxError).message)
   }

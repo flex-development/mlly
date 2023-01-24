@@ -1,6 +1,6 @@
 /**
  * @file Functional Tests - resolveAlias
- * @module mlly/utils/tests/resolveAlias/functional
+ * @module mlly/utils/tests/functional/resolveAlias
  */
 
 import getCompilerOptions from '#src/internal/get-compiler-options'

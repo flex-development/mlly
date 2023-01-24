@@ -11,6 +11,7 @@ coverage/
 docs/.vitepress/.temp/
 docs/.vitepress/config.*.timestamp*
 tsconfig.temp.json
+vitest.config.*.timestamp-*.mjs
 yarn.lock
 
 # NEGATED PATTERNS

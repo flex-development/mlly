@@ -3,16 +3,16 @@
  * @module mlly/utils/resolveModule
  */
 
-import type { ResolveOptions } from '#src/interfaces'
-import type { ModuleSpecifierType } from '#src/types'
+import type { ResolveModuleOptions } from '#src/interfaces'
+import isFunction from '#src/internal/is-function'
+import Resolver from '#src/internal/resolver'
+import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import isBuiltin from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
-import { moduleResolve, type ErrnoException } from 'import-meta-resolve'
-import { URL, pathToFileURL } from 'node:url'
+import type { Nullable } from '@flex-development/tutils'
+import { URL, fileURLToPath } from 'node:url'
 import CONDITIONS from './conditions'
 import RESOLVE_EXTENSIONS from './resolve-extensions'
-import toBareSpecifier from './to-bare-specifier'
-import toRelativeSpecifier from './to-relative-specifier'
 
 /**
  * Resolves `specifier` according to the [ESM Resolver algorithm][1], mostly 😉.
@@ -20,151 +20,124 @@ import toRelativeSpecifier from './to-relative-specifier'
  * Adds support for:
  *
  * - Resolving without file extensions and explicit `/index` usage
- * - Resolving `@types/*` with **and** without explicit `@types/*` usage
- * - Converting resolved modules into [bare][2] and [relative][3] specifiers
- * - Removing and replacing file extensions
+ * - Replacing file extensions
  *
  * [1]: https://nodejs.org/api/esm.html#esm_resolver_algorithm
- * [2]: {@link ./to-bare-specifier.ts}
- * [3]: {@link ./to-relative-specifier.ts}
  *
- * @see {@linkcode ResolveOptions}
- * @see {@linkcode ErrnoException}
+ * @see {@linkcode NodeError}
+ * @see {@linkcode ResolveModuleOptions}
+ * @see {@linkcode URL}
  *
  * @async
  *
  * @param {string} specifier - Module specifier to resolve
- * @param {ResolveOptions} [options={}] - Resolve options
- * @return {Promise<string>} Resolved module
- * @throws {ErrnoException}
+ * @param {ResolveModuleOptions} [options={}] - Module resolution options
+ * @return {Promise<URL>} Resolved module URL
+ * @throws {NodeError}
  */
 const resolveModule = async (
   specifier: string,
-  options: ResolveOptions = {}
-): Promise<string> => {
+  options: ResolveModuleOptions = {}
+): Promise<URL> => {
   const {
+    condition = 'default',
     conditions = CONDITIONS,
-    ext,
     extensions = RESOLVE_EXTENSIONS,
     parent = import.meta.url,
-    preserveSymlinks = false,
-    ...opts
+    preserveSymlinks = false
   } = options
 
   /**
-   * Parent module URL to resolve {@linkcode specifier} from.
+   * Module resolver.
    *
-   * @const {URL} base
+   * @const {Resolver} resolver
    */
-  const base: URL =
-    typeof parent === 'string'
-      ? parent.startsWith('file:')
-        ? new URL(parent)
-        : pathToFileURL(parent)
-      : parent
+  const resolver: Resolver = new Resolver()
 
   /**
-   * Module specifiers to try resolving.
+   * Module ids to try resolving.
    *
    * @const {string[]} tries
    */
   const tries: string[] =
-    isBuiltin(specifier) || /^(?:data|https?):/.test(specifier)
+    isBuiltin(specifier) ||
+    (/^\S+:/.test(specifier) && !specifier.startsWith('file:'))
       ? []
-      : extensions.flatMap(ext => {
-          return [specifier + ext, specifier + '/index' + ext].flatMap($try => {
-            return [$try, '@types/' + $try]
-          })
-        })
+      : [...extensions]
+          .flatMap(ext => [
+            specifier + ext,
+            specifier.startsWith('#') ? specifier + '/index' : '',
+            specifier + '/index' + ext
+          ])
+          .filter(id => id.length > 0)
 
   // ensure attempt to resolve original specifier is first
   tries.unshift(specifier)
 
   /**
-   * {@linkcode moduleResolve} error codes to ignore when attempting to resolve
-   * module ids without URL schemes.
+   * Error codes to ignore when attempting to resolve {@linkcode specifier}.
    *
    * **Note**: If an error is thrown, it'll be reported **_after_** all module
    * ids in {@linkcode tries} have been evaluated.
    *
-   * @const {Set<NonNullable<ErrnoException['code']>>} ignore
+   * @const {Set<ErrorCode>} ignore
    */
-  const ignore: Set<NonNullable<ErrnoException['code']>> = new Set([
-    'ERR_MODULE_NOT_FOUND',
-    'ERR_PACKAGE_PATH_NOT_EXPORTED',
-    'ERR_UNSUPPORTED_DIR_IMPORT'
+  const ignore: Set<ErrorCode> = new Set<ErrorCode>([
+    ErrorCode.ERR_MODULE_NOT_FOUND,
+    ErrorCode.ERR_PACKAGE_PATH_NOT_EXPORTED,
+    ErrorCode.ERR_UNSUPPORTED_DIR_IMPORT
   ])
 
   /**
-   * Resolution error.
+   * Module resolution error.
    *
-   * @var {ErrnoException | undefined} error
+   * @var {NodeError} error
    */
-  let error: ErrnoException | undefined
+  let error: NodeError
 
   /**
-   * Resolved module specifier.
+   * Resolved module URL.
    *
-   * @var {string | undefined} resolved
+   * @var {Nullable<URL>} url
    */
-  let resolved: string | undefined
+  let url: Nullable<URL> = null
 
   // try module resolution
   for (const id of tries) {
     try {
-      resolved = moduleResolve(
+      url = resolver.resolveModule(
         id,
-        base,
-        new Set(conditions),
+        parent,
+        condition,
+        conditions,
         preserveSymlinks
-      ).href
-    } catch (e: unknown) {
-      if (id === specifier) error = e as ErrnoException
-      if (ignore.has((e as ErrnoException).code!)) continue
-
-      throw e
-    }
-
-    if (resolved) break
-  }
-
-  // throw error if specifier could not be resolved
-  if (!resolved) throw error!
-
-  // return resolved early if extension or type logic should be skipped
-  if (isBuiltin(resolved) || /^(?:data|https?):/.test(resolved)) return resolved
-
-  /**
-   * Module specifier type.
-   *
-   * @const {ModuleSpecifierType} type
-   */
-  const type: ModuleSpecifierType =
-    typeof opts.type === 'function'
-      ? await opts.type(resolved)
-      : opts.type ?? 'absolute'
-
-  // convert resolved into bare specifier
-  if (type === 'bare') resolved = await toBareSpecifier(resolved, conditions)
-
-  // convert resolved into relative specifier
-  if (type === 'relative') resolved = toRelativeSpecifier(resolved, parent)
-
-  // remove or replace file extension
-  if (ext !== undefined) {
-    if (ext === false) {
-      resolved = pathe.removeExt(resolved, pathe.extname(resolved))
-    } else if (type === 'relative') {
-      resolved = pathe.changeExt(
-        resolved,
-        typeof ext === 'function' ? await ext(specifier, resolved) : ext
       )
+    } catch (e: unknown) {
+      url = null
+      if (id === specifier) error = e as NodeError
+      if (!ignore.has((e as NodeError).code)) throw e
     }
 
-    resolved = resolved.replace(/\/index$/, '')
+    // stop resolution attempts if module was resolved
+    if (url) break
   }
 
-  return resolved
+  // throw if module was not resolved
+  if (!url) throw error!
+
+  // replace file extension
+  if (url.protocol === 'file:') {
+    let { ext } = options
+
+    // get replacement extension
+    ext = isFunction(ext) ? await ext(specifier, url) : ext
+
+    // replace file extension in url href and pathname
+    url.href = pathe.changeExt(url.href, ext).replace(/\/index$/, '')
+    url.pathname = fileURLToPath(url.href)
+  }
+
+  return url
 }
 
 export default resolveModule

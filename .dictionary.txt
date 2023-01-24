@@ -19,6 +19,8 @@ hascjssyntax
 hasesmsyntax
 hmarr
 iife
+isbarespecifier
+isrelativespecifier
 keyid
 larsgw
 lcov

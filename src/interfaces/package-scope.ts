@@ -6,19 +6,18 @@
 import type { PackageJson } from '@flex-development/pkg-types'
 
 /**
- * Object containing a `package.json` object and an absolute path to a directory
- * containing a `package.json` file.
+ * Object representing a package scope.
  *
  * @see {@linkcode PackageJson}
  */
 interface PackageScope {
   /**
-   * Absolute path to directory containing `package.json` file.
+   * URL of directory containing `package.json` file.
    */
   dir: string
 
   /**
-   * Absolute path to `package.json` file.
+   * URL of `package.json` file.
    */
   pkg: string
 

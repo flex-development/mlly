@@ -3,17 +3,25 @@
  * @module mlly/utils/tests/unit/lookupPackageScope
  */
 
-import pathe from '@flex-development/pathe'
+import { pathToFileURL, type URL } from 'node:url'
 import testSubject from '../lookup-package-scope'
 
 describe('unit:utils/lookupPackageScope', () => {
   it('should return null if package.json file is not found', () => {
-    expect(testSubject('node_modules')).to.be.null
+    // Arrange
+    const cases: Parameters<typeof testSubject>[] = [
+      ['../index.mjs', pathToFileURL('.')],
+      ['__fixtures__', pathToFileURL('__fixtures__')],
+      ['node_modules', undefined]
+    ]
+
+    // Act + Expect
+    cases.forEach(([id, stop]) => expect(testSubject(id, stop)).to.be.null)
   })
 
   it('should return PackageScope object if package.json file is found', () => {
     // Arrange
-    const dir: string = pathe.resolve('node_modules/@flex-development/mkbuild')
+    const dir: URL = pathToFileURL('node_modules/@flex-development/mkbuild')
     const id: string = 'node_modules/@flex-development/mkbuild/dist/index.mjs'
 
     // Act
@@ -21,8 +29,7 @@ describe('unit:utils/lookupPackageScope', () => {
 
     // Expect
     expect(result).to.not.be.null
-    expect(result).to.have.property('dir').equal(dir)
-    expect(result).to.have.property('pkg').startWith(result!.dir)
-    expect(result).to.have.property('pkg').endWith('/package.json')
+    expect(result).to.have.property('dir').startWith(dir.href)
+    expect(result).to.have.property('pkg').equal(`${result!.dir}/package.json`)
   })
 })

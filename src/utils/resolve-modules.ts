@@ -4,27 +4,32 @@
  */
 
 import { SpecifierKind } from '#src/enums'
-import type { ResolveOptions } from '#src/interfaces'
-import type { ModuleSpecifierType } from '#src/types'
-import pathe from '@flex-development/pathe'
+import type { ResolveModuleOptions } from '#src/interfaces'
+import type { URL } from 'node:url'
 import extractStatements from './extract-statements'
 import resolveModule from './resolve-module'
 
 /**
- * Resolves all modules in `code`.
+ * Converts all module specifiers in `code` to absolute specifiers.
  *
- * @see {@linkcode ResolveOptions}
- * @see {@linkcode resolveModule}
+ * ::: info
+ * Useful for converting code to [`data:` URLs][1].
+ * :::
+ *
+ * [1]: https://nodejs.org/api/esm.html#data-imports
+ *
+ * @see {@linkcode ResolveModuleOptions}
+ * @see https://nodejs.org/api/esm.html#terminology
  *
  * @async
  *
- * @param {string} code - Code containing module specifiers
- * @param {ResolveOptions} [options={}] - Resolve options
- * @return {Promise<string>} `code` with modules resolved
+ * @param {string} code - Code to evaluate
+ * @param {ResolveModuleOptions} [options={}] - Module resolution options
+ * @return {Promise<string>} `code` with module specifiers fully resolved
  */
 const resolveModules = async (
   code: string,
-  options: ResolveOptions = {}
+  options: ResolveModuleOptions = {}
 ): Promise<string> => {
   for (const statement of extractStatements(code)) {
     // do nothing if statement does not have specifier
@@ -34,29 +39,16 @@ const resolveModules = async (
     if (statement.specifier_kind === SpecifierKind.DYNAMIC) continue
 
     /**
-     * Determines a module specifier type for `resolved`.
+     * Resolved module URL.
      *
-     * @param {string} resolved - Resolved module
-     * @return {ModuleSpecifierType} Module specifier type for `resolved`
+     * @const {URL} url
      */
-    const type = (resolved: string): ModuleSpecifierType => {
-      return pathe.isAbsolute(statement.specifier!) ||
-        statement.specifier!.startsWith('file:')
-        ? 'absolute'
-        : /\/node_modules\//.test(resolved)
-        ? 'bare'
-        : 'relative'
-    }
+    const url: URL = await resolveModule(statement.specifier, options)
 
+    // replace original specifier
     code = code.replace(
       statement.code,
-      statement.code.replace(
-        statement.specifier,
-        await resolveModule(statement.specifier, {
-          ...options,
-          type: options.type ?? type
-        })
-      )
+      statement.code.replace(statement.specifier, url.href)
     )
   }
 

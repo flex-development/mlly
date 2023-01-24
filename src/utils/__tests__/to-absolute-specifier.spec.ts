@@ -3,33 +3,31 @@
  * @module mlly/utils/tests/unit/toAbsoluteSpecifier
  */
 
-import { URL, pathToFileURL } from 'node:url'
+import pathe from '@flex-development/pathe'
+import { pathToFileURL } from 'node:url'
 import testSubject from '../to-absolute-specifier'
 
 describe('unit:utils/toAbsoluteSpecifier', () => {
-  let cwd: URL
   let specifier: string
-  let specifier_url: URL
+  let expected: string
 
   beforeEach(() => {
-    cwd = pathToFileURL(process.cwd())
-    specifier = 'src/utils/to-absolute-specifier.ts'
-    specifier_url = new URL(specifier, cwd.href + '/')
+    specifier = './src/utils/to-absolute-specifier.ts'
+    expected = pathToFileURL(specifier).href
   })
 
-  it('should return absolute specifier if cwd is file url', () => {
-    expect(testSubject(specifier, cwd)).to.equal(specifier_url.href)
-  })
+  it('should return specifier as absolute specifier', () => {
+    // Arrange
+    const cases: Parameters<typeof testSubject>[] = [
+      [specifier],
+      [specifier.slice(2)],
+      [pathe.resolve(specifier)],
+      [pathToFileURL(specifier)]
+    ]
 
-  it('should return absolute specifier if cwd is string', () => {
-    expect(testSubject(specifier)).to.equal(specifier_url.href)
-  })
-
-  it('should return absolute specifier if specifier is file url', () => {
-    expect(testSubject(specifier_url)).to.equal(specifier_url.href)
-  })
-
-  it('should return absolute specifier if specifier is string', () => {
-    expect(testSubject(specifier)).to.equal(specifier_url.href)
+    // Act + Expect
+    cases.forEach(([specifier, cwd]) => {
+      expect(testSubject(specifier, cwd)).to.equal(expected)
+    })
   })
 })

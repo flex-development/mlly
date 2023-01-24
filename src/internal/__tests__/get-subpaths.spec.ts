@@ -4,8 +4,8 @@
  */
 
 import type { ModuleId } from '#src/types'
+import getPackageJson from '#tests/utils/get-package-json'
 import type { Exports, Imports, PackageJson } from '@flex-development/pkg-types'
-import fs from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
 import testSubject from '../get-subpaths'
 
@@ -14,10 +14,10 @@ describe('unit:internal/getSubpaths', () => {
   let pkg: ModuleId
   let pkgjson: PackageJson & { name: string }
 
-  beforeEach(async () => {
+  beforeEach(() => {
     pkg = pathToFileURL('package.json')
     parent = import.meta.url
-    pkgjson = JSON.parse(await fs.readFile('package.json', 'utf8'))
+    pkgjson = getPackageJson(pkg) as typeof pkgjson
   })
 
   it('should return array containing defined subpaths', () => {

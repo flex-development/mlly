@@ -3,6 +3,7 @@
  * @module mlly/utils/tests/unit/isAbsoluteSpecifier
  */
 
+import { pathToFileURL } from 'node:url'
 import testSubject from '../is-absolute-specifier'
 
 describe('unit:utils/isAbsoluteSpecifier', () => {
@@ -20,7 +21,7 @@ describe('unit:utils/isAbsoluteSpecifier', () => {
   it('should return true if specifier is absolute specifier', () => {
     // Arrange
     const cases: Parameters<typeof testSubject>[0][] = [
-      'file://' + process.cwd(),
+      pathToFileURL('.').href,
       process.cwd()
     ]
 

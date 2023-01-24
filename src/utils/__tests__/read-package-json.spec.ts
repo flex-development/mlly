@@ -3,17 +3,25 @@
  * @module mlly/utils/tests/unit/readPackageJson
  */
 
-import { ErrorCode, NodeError } from '@flex-development/errnode'
+import regexp from '#src/internal/escape-reg-exp'
+import type { ModuleId } from '#src/types'
+import getPackageJson from '#tests/utils/get-package-json'
+import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import type { PackageJson } from '@flex-development/pkg-types'
-import fs from 'node:fs'
-import { pathToFileURL } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import testSubject from '../read-package-json'
 
 describe('unit:utils/readPackageJson', () => {
+  let parent: ModuleId
+
+  beforeEach(() => {
+    parent = import.meta.url
+  })
+
   it('should return PackageJson object', () => {
     // Arrange
-    const pkg: PackageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'))
+    const pkg: PackageJson = getPackageJson('package.json')
     const cases: Parameters<typeof testSubject>[0][] = [
       pathToFileURL(process.cwd()),
       pathToFileURL(process.cwd()).href,
@@ -49,23 +57,28 @@ describe('unit:utils/readPackageJson', () => {
   it('should throw if package.json file is not valid json', () => {
     // Arrange
     const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_CONFIG
-    const dir: string = '__fixtures__/node_modules/package-invalid-json'
-    const err: string = `Invalid package config ${dir}/package.json`
-    const parent: string = import.meta.url
-    const specifier: string = 'package-invalid-json'
-    const cases: [...Parameters<typeof testSubject>, string][] = [
-      [dir, undefined, undefined, err],
-      [dir, specifier, undefined, `${err} while importing '${specifier}'`],
+    const dir: string = '__fixtures__/node_modules/invalid-json'
+    const specifier: string = 'invalid-json'
+    const cases: [string | undefined, ModuleId | undefined, RegExp][] = [
       [
-        dir,
+        undefined,
+        undefined,
+        new RegExp(`${regexp(pathe.resolve(dir))}\\/package.json\\.`)
+      ],
+      [
         specifier,
         parent,
-        `${err} while importing '${specifier}' from ${parent}`
+        new RegExp(`'${specifier}' from ${regexp(fileURLToPath(parent))}`)
+      ],
+      [
+        pathToFileURL('node_modules/' + specifier).href,
+        undefined,
+        new RegExp(regexp(pathe.resolve('node_modules/' + specifier)))
       ]
     ]
 
     // Act + Expect
-    cases.forEach(([dir, specifier, parent, expected]) => {
+    cases.forEach(([specifier, parent, message_regex]) => {
       let error: NodeError
 
       try {
@@ -76,7 +89,7 @@ describe('unit:utils/readPackageJson', () => {
 
       expect(error!).to.not.be.undefined
       expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').startWith(expected)
+      expect(error!).to.have.property('message').match(message_regex)
     })
   })
 })

@@ -1,6 +1,6 @@
 /**
  * @file Functional Tests - extractStatements
- * @module mlly/utils/tests/extractStatements/functional
+ * @module mlly/utils/tests/functional/extractStatements
  */
 
 import fs from 'node:fs'

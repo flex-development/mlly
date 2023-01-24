@@ -1,6 +1,6 @@
 /**
  * @file Functional Tests - resolveAliases
- * @module mlly/utils/tests/resolveAlias/functional
+ * @module mlly/utils/tests/functional/resolveAlias
  */
 
 import type { ResolveAliasOptions as Options } from '#src/interfaces'

@@ -6,9 +6,9 @@
 import { ERR_INVALID_ARG_TYPE, type NodeError } from '@flex-development/errnode'
 
 /**
- * Checks if `value` is a string.
+ * Checks if given `value` is a string.
  *
- * Throws [`ERR_INVALID_ARG_TYPE`][1] if `value` is not a string.
+ * Throws [`ERR_INVALID_ARG_TYPE`][1] if the `value` is not a string.
  *
  * [1]: https://nodejs.org/api/errors.html#err_invalid_arg_value
  *

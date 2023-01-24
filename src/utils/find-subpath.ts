@@ -152,7 +152,7 @@ const findSubpath = (
           // find subpath
           switch (true) {
             case Array.isArray(tar):
-              tar = tar as (Record<string, Exports> | string)[]
+              tar = tar as string[]
 
               // try matching target based first match in target array
               for (const item of tar) {

@@ -3,6 +3,7 @@
  * @module mlly/utils/tests/unit/isRelativeSpecifier
  */
 
+import pathe from '@flex-development/pathe'
 import testSubject from '../is-relative-specifier'
 
 describe('unit:utils/isRelativeSpecifier', () => {
@@ -23,7 +24,7 @@ describe('unit:utils/isRelativeSpecifier', () => {
     // Arrange
     const cases: Parameters<typeof testSubject>[0][] = [
       '.',
-      './',
+      '.' + pathe.sep,
       '../../utils/index.mjs'
     ]
 

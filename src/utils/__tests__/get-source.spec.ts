@@ -11,7 +11,7 @@ import testSubject from '../get-source'
 describe('unit:utils/getSource', () => {
   it('should return source code as Uint8Array', async () => {
     // Arrange
-    const id: string = '__fixtures__/add.wasm'
+    const id: string = '__fixtures__/node_modules/wasm/add.wasm'
     const options: GetSourceOptions = { format: Format.WASM }
 
     // Act + Expect

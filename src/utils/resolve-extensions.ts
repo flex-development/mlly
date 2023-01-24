@@ -10,9 +10,9 @@ import type { Ext } from '@flex-development/pathe'
  *
  * @see {@linkcode Ext}
  *
- * @const {ReadonlyArray<Ext>} RESOLVE_EXTENSIONS
+ * @const {Set<Ext>} RESOLVE_EXTENSIONS
  */
-const RESOLVE_EXTENSIONS: readonly Ext[] = Object.freeze([
+const RESOLVE_EXTENSIONS: Set<Ext> = new Set([
   '.mjs',
   '.mts',
   '.cjs',

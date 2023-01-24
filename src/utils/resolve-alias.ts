@@ -66,12 +66,9 @@ const resolveAlias = (
    *
    * @var {string | undefined} match
    */
-  let match: string | undefined = matcher(
-    specifier,
-    readFile,
-    fileExists,
-    extensions
-  )
+  let match: string | undefined = matcher(specifier, readFile, fileExists, [
+    ...extensions
+  ])
 
   // return specifier if path match was not found
   if (!match) return specifier

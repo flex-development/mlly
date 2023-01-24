@@ -4,6 +4,7 @@
  */
 
 import type { ModuleId } from '#src/types'
+import pathe from '@flex-development/pathe'
 import type { Exports } from '@flex-development/pkg-types'
 import { URL, pathToFileURL } from 'node:url'
 import testSubject from '../is-exports-sugar'
@@ -14,7 +15,7 @@ describe('unit:utils/isExportsSugar', () => {
 
   beforeEach(() => {
     parent = import.meta.url
-    pkg = new URL('package.json', pathToFileURL('./'))
+    pkg = new URL('package.json', pathToFileURL('.' + pathe.sep))
   })
 
   it('should return false if exports does not use exports sugar', () => {

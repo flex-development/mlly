@@ -6,6 +6,7 @@
 import type { ParsedModuleId } from '#src/interfaces'
 import type { ModuleId } from '#src/types'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
+import pathe from '@flex-development/pathe'
 import { URL, pathToFileURL } from 'node:url'
 import testSubject from '../parse-module-id'
 
@@ -308,7 +309,7 @@ describe('unit:utils/parseModuleId', () => {
         }
       ],
       [
-        new URL('package.json', pathToFileURL(process.cwd() + '/')),
+        new URL('package.json', pathToFileURL('.' + pathe.sep)),
         undefined,
         {
           internal: false,

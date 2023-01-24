@@ -4,9 +4,10 @@
  */
 
 import type { ParseSubpathOptions, ParsedSubpath } from '#src/interfaces'
+import getPackageJson from '#tests/utils/get-package-json'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
+import pathe from '@flex-development/pathe'
 import type { Exports, Imports, PackageJson } from '@flex-development/pkg-types'
-import fs from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
 import testSubject from '../parse-subpath'
 
@@ -16,9 +17,9 @@ describe('unit:utils/parseSubpath', () => {
   let options: ParseSubpathOptions
   let pkgjson: PackageJson & { name: string }
 
-  beforeEach(async () => {
-    options = { dir: pathToFileURL('./'), parent: import.meta.url }
-    pkgjson = JSON.parse(await fs.readFile('package.json', 'utf8'))
+  beforeEach(() => {
+    options = { dir: pathToFileURL('.' + pathe.sep), parent: import.meta.url }
+    pkgjson = getPackageJson('package.json') as typeof pkgjson
   })
 
   it('should return package import as ParsedSubpath object', () => {

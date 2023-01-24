@@ -5,6 +5,7 @@
 
 import type { ModuleId } from '#src/types'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
+import pathe from '@flex-development/pathe'
 import type { Exports } from '@flex-development/pkg-types'
 import { URL, pathToFileURL } from 'node:url'
 import testSubject from '../validate-exports'
@@ -19,7 +20,7 @@ describe('unit:utils/validateExports', () => {
     code = ErrorCode.ERR_INVALID_PACKAGE_CONFIG
     message_base = /^Invalid package config \/\S+ while importing \/\S+/
     parent = import.meta.url
-    pkg = new URL('package.json', pathToFileURL('./'))
+    pkg = new URL('package.json', pathToFileURL('.' + pathe.sep))
   })
 
   it('should return true if exports is valid', () => {

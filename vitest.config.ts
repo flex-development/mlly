@@ -34,6 +34,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
       coverage: {
         all: true,
         clean: true,
+        cleanOnRerun: true,
         exclude: [
           '**/__mocks__/**',
           '**/__tests__/**',
@@ -53,7 +54,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
       ],
       globals: true,
       hookTimeout: 10 * 1000,
-      include: ['**/__tests__/*.spec.ts', '**/__tests__/*.spec-d.ts'],
+      include: ['**/__tests__/*.spec.ts'],
       isolate: true,
       mockReset: true,
       outputFile: { json: './__tests__/report.json' },

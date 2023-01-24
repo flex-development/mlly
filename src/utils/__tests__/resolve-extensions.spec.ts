@@ -6,12 +6,12 @@
 import TEST_SUBJECT from '../resolve-extensions'
 
 describe('unit:utils/RESOLVE_EXTENSIONS', () => {
-  it('should be readonly array', () => {
-    expect(TEST_SUBJECT).to.be.an('array').that.is.frozen
+  it('should be instance of Set', () => {
+    expect(TEST_SUBJECT).to.be.instanceof(Set)
   })
 
   it('should be sorted by priority', () => {
-    expect(TEST_SUBJECT).to.deep.equal([
+    expect([...TEST_SUBJECT.values()]).to.deep.equal([
       '.mjs',
       '.mts',
       '.cjs',
