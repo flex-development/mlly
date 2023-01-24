@@ -4,6 +4,7 @@
  */
 
 export type { default as Declaration } from './declaration'
+export type { default as ChangeExtFn } from './fn-change-ext'
 export type { default as MimeType } from './mime-type'
 export type { default as ModuleId } from './module-id'
 export type { default as ModuleSpecifierType } from './module-specifier-type'

@@ -4,6 +4,7 @@
   "{@link ./to-relative-specifier.ts}": "/api/#torelativespecifier",
   "{@linkcode AssertType}": "/api/enums#asserttype",
   "{@linkcode CONDITIONS}": "/api/#conditions",
+  "{@linkcode ChangeExtFn}": "/api/types#changeextfn",
   "{@linkcode Declaration}": "/api/types#declaration",
   "{@linkcode DynamicImport}": "/api/interfaces#dynamicimport",
   "{@linkcode EXTENSION_FORMAT_MAP}": "/api/#extension-format-map",
