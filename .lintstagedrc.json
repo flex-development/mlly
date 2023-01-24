@@ -4,5 +4,6 @@
     "eslint --exit-on-fatal-error"
   ],
   "**/*.{cjs,cts,mjs,ts,vue}": "vitest typecheck --changed --run",
-  "**/yarn.lock": "yarn dedupe --check"
+  "**/yarn.lock": "yarn dedupe --check",
+  "src/**/*.ts": "vitest --changed --coverage --run"
 }
