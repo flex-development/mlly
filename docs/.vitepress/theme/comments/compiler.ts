@@ -594,11 +594,10 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
       /**
        * Possible match for `@throws` tag description and type parameter.
        *
-       * @const {RegExpMatchArray | undefined} match
+       * @const {RegExpExecArray | null} match
        */
-      const match: RegExpMatchArray | undefined = visited.value
-        .matchAll(/^@throws {(?<type>.+)}(?: (?<description>.+))?/g)
-        .next().value
+      const match: RegExpExecArray | null =
+        /^@throws {(?<type>.+?)} (?<description>.+)$/s.exec(visited.value)
 
       // do nothing if no match for @throws
       if (!match) return CONTINUE
