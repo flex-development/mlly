@@ -629,7 +629,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
        * @const {RegExpExecArray | null} match
        */
       const match: RegExpExecArray | null =
-        /^@throws {(?<type>.+?)} (?<description>.+)$/s.exec(visited.value)
+        /^@throws {(?<type>.+?)}(?: (?<description>.+))?$/s.exec(visited.value)
 
       // do nothing if no match for @throws
       if (!match) return CONTINUE
