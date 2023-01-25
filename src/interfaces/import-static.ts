@@ -3,7 +3,7 @@
  * @module mlly/interfaces/StaticImport
  */
 
-import type { SyntaxKind } from '#src/enums'
+import type { StatementSyntaxKind } from '#src/enums'
 import type { SyntaxKindImport } from '#src/types'
 import type { EmptyString, LiteralUnion } from '@flex-development/tutils'
 import type ImportStatement from './statement-import'
@@ -12,6 +12,8 @@ import type ImportStatement from './statement-import'
  * Static import statement object.
  *
  * @see {@linkcode ImportStatement}
+ * @see {@linkcode StatementSyntaxKind}
+ * @see {@linkcode SyntaxKindImport}
  *
  * @extends {ImportStatement}
  */
@@ -31,12 +33,12 @@ interface StaticImport extends ImportStatement {
    */
   syntax: Extract<
     SyntaxKindImport,
-    | SyntaxKind.DEFAULT
-    | SyntaxKind.DEFAULT_WITH_NAMED
-    | SyntaxKind.DEFAULT_WITH_NAMESPACE
-    | SyntaxKind.NAMED
-    | SyntaxKind.NAMESPACE
-    | SyntaxKind.SIDE_EFFECT
+    | StatementSyntaxKind.DEFAULT
+    | StatementSyntaxKind.DEFAULT_WITH_NAMED
+    | StatementSyntaxKind.DEFAULT_WITH_NAMESPACE
+    | StatementSyntaxKind.NAMED
+    | StatementSyntaxKind.NAMESPACE
+    | StatementSyntaxKind.SIDE_EFFECT
   >
 
   /**

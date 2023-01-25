@@ -3,7 +3,7 @@
  * @module mlly/utils/findStaticImports
  */
 
-import { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
+import { SpecifierKind, StatementKind, StatementSyntaxKind } from '#src/enums'
 import type { StaticImport } from '#src/interfaces'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
@@ -34,37 +34,37 @@ const findStaticImports = (code: string = ''): StaticImport[] => {
      */
     const syntax: StaticImport['syntax'] =
       imports === ''
-        ? SyntaxKind.SIDE_EFFECT
+        ? StatementSyntaxKind.SIDE_EFFECT
         : imports.startsWith('* as')
-        ? SyntaxKind.NAMESPACE
+        ? StatementSyntaxKind.NAMESPACE
         : imports.startsWith('{')
-        ? SyntaxKind.NAMED
+        ? StatementSyntaxKind.NAMED
         : /^\w+$/.test(imports)
-        ? SyntaxKind.DEFAULT
+        ? StatementSyntaxKind.DEFAULT
         : /^\w+,\s*{/.test(imports)
-        ? SyntaxKind.DEFAULT_WITH_NAMED
-        : SyntaxKind.DEFAULT_WITH_NAMESPACE
+        ? StatementSyntaxKind.DEFAULT_WITH_NAMED
+        : StatementSyntaxKind.DEFAULT_WITH_NAMESPACE
 
     return {
       assertion,
       code,
       end: start + code.length,
       imports:
-        syntax === SyntaxKind.SIDE_EFFECT
+        syntax === StatementSyntaxKind.SIDE_EFFECT
           ? []
-          : syntax === SyntaxKind.NAMED
+          : syntax === StatementSyntaxKind.NAMED
           ? imports
               .replace(/^{|}$/g, '')
               .split(',')
               .map(e => e.trim())
               .filter(e => e.length > 0)
-          : syntax === SyntaxKind.DEFAULT_WITH_NAMED
+          : syntax === StatementSyntaxKind.DEFAULT_WITH_NAMED
           ? imports
               .split(',')
               .map(i => i.trim().replace(/^{|}$/g, ''))
               .map(i => i.trim())
               .filter(i => i.length > 0)
-          : syntax === SyntaxKind.DEFAULT_WITH_NAMESPACE
+          : syntax === StatementSyntaxKind.DEFAULT_WITH_NAMESPACE
           ? imports
               .split(',')
               .map(i => i.trim())

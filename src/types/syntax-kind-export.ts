@@ -3,18 +3,18 @@
  * @module mlly/types/SyntaxKindExport
  */
 
-import type { SyntaxKind } from '#src/enums'
+import type { StatementSyntaxKind } from '#src/enums'
 
 /**
  * `export` statement syntax kinds.
  *
- * @see {@linkcode SyntaxKind}
+ * @see {@linkcode StatementSyntaxKind}
  */
 type SyntaxKindExport =
-  | SyntaxKind.DECLARATION
-  | SyntaxKind.DEFAULT
-  | SyntaxKind.LIST
-  | SyntaxKind.NAMED
-  | SyntaxKind.NAMESPACE
+  | StatementSyntaxKind.DECLARATION
+  | StatementSyntaxKind.DEFAULT
+  | StatementSyntaxKind.LIST
+  | StatementSyntaxKind.NAMED
+  | StatementSyntaxKind.NAMESPACE
 
 export type { SyntaxKindExport as default }

@@ -3,13 +3,13 @@
  * @module mlly/types/SyntaxKindRequire
  */
 
-import type { SyntaxKind } from '#src/enums'
+import type { StatementSyntaxKind } from '#src/enums'
 
 /**
  * `require` statement syntax kinds.
  *
- * @see {@linkcode SyntaxKind}
+ * @see {@linkcode StatementSyntaxKind}
  */
-type SyntaxKindRequire = SyntaxKind.REQUIRE
+type SyntaxKindRequire = StatementSyntaxKind.REQUIRE
 
 export type { SyntaxKindRequire as default }

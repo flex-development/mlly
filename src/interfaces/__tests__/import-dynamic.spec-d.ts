@@ -3,7 +3,7 @@
  * @module mlly/interfaces/tests/unit-d/DynamicImport
  */
 
-import type { SyntaxKind } from '#src/enums'
+import type { StatementSyntaxKind } from '#src/enums'
 import type { SyntaxKindImport } from '#src/types'
 import type { EmptyString, LiteralUnion } from '@flex-development/tutils'
 import type TestSubject from '../import-dynamic'
@@ -26,9 +26,9 @@ describe('unit-d:interfaces/DynamicImport', () => {
       .toEqualTypeOf<LiteralUnion<EmptyString, string>>()
   })
 
-  it('should match [syntax: Extract<SyntaxKindImport, SyntaxKind.DYNAMIC>]', () => {
+  it('should match [syntax: Extract<SyntaxKindImport, StatementSyntaxKind.DYNAMIC>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('syntax')
-      .toEqualTypeOf<Extract<SyntaxKindImport, SyntaxKind.DYNAMIC>>()
+      .toEqualTypeOf<Extract<SyntaxKindImport, StatementSyntaxKind.DYNAMIC>>()
   })
 })

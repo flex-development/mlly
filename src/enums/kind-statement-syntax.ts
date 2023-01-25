@@ -1,6 +1,6 @@
 /**
- * @file Enums - SyntaxKind
- * @module mlly/enums/SyntaxKind
+ * @file Enums - StatementSyntaxKind
+ * @module mlly/enums/StatementSyntaxKind
  */
 
 /**
@@ -8,7 +8,7 @@
  *
  * @enum {Lowercase<string>}
  */
-enum SyntaxKind {
+enum StatementSyntaxKind {
   DECLARATION = 'declaration',
   DEFAULT = 'default',
   DEFAULT_WITH_NAMED = 'default-with-named',
@@ -21,4 +21,4 @@ enum SyntaxKind {
   SIDE_EFFECT = 'side-effect'
 }
 
-export default SyntaxKind
+export default StatementSyntaxKind

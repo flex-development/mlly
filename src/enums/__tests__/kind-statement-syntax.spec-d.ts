@@ -1,11 +1,11 @@
 /**
- * @file Type Tests - SyntaxKind
- * @module mlly/enums/tests/unit-d/SyntaxKind
+ * @file Type Tests - StatementSyntaxKind
+ * @module mlly/enums/tests/unit-d/StatementSyntaxKind
  */
 
-import type TestSubject from '../kind-syntax'
+import type TestSubject from '../kind-statement-syntax'
 
-describe('unit-d:enums/SyntaxKind', () => {
+describe('unit-d:enums/StatementSyntaxKind', () => {
   it('should match [DECLARATION = "declaration"]', () => {
     expectTypeOf<typeof TestSubject>()
       .toHaveProperty('DECLARATION')

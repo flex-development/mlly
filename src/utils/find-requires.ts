@@ -3,7 +3,7 @@
  * @module mlly/utils/findRequires
  */
 
-import { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
+import { SpecifierKind, StatementKind, StatementSyntaxKind } from '#src/enums'
 import type { RequireStatement } from '#src/interfaces'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
@@ -51,7 +51,7 @@ const findRequires = (code: string = ''): RequireStatement[] => {
         ? SpecifierKind.STATIC
         : SpecifierKind.DYNAMIC,
       start,
-      syntax: SyntaxKind.REQUIRE
+      syntax: StatementSyntaxKind.REQUIRE
     }
   })
 }

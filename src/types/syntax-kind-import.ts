@@ -3,20 +3,20 @@
  * @module mlly/types/SyntaxKindImport
  */
 
-import type { SyntaxKind } from '#src/enums'
+import type { StatementSyntaxKind } from '#src/enums'
 
 /**
  * `import` statement syntax kinds.
  *
- * @see {@linkcode SyntaxKind}
+ * @see {@linkcode StatementSyntaxKind}
  */
 type SyntaxKindImport =
-  | SyntaxKind.DEFAULT
-  | SyntaxKind.DEFAULT_WITH_NAMED
-  | SyntaxKind.DEFAULT_WITH_NAMESPACE
-  | SyntaxKind.DYNAMIC
-  | SyntaxKind.NAMED
-  | SyntaxKind.NAMESPACE
-  | SyntaxKind.SIDE_EFFECT
+  | StatementSyntaxKind.DEFAULT
+  | StatementSyntaxKind.DEFAULT_WITH_NAMED
+  | StatementSyntaxKind.DEFAULT_WITH_NAMESPACE
+  | StatementSyntaxKind.DYNAMIC
+  | StatementSyntaxKind.NAMED
+  | StatementSyntaxKind.NAMESPACE
+  | StatementSyntaxKind.SIDE_EFFECT
 
 export type { SyntaxKindImport as default }

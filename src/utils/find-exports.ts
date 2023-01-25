@@ -3,7 +3,7 @@
  * @module mlly/utils/findExports
  */
 
-import { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
+import { SpecifierKind, StatementKind, StatementSyntaxKind } from '#src/enums'
 import type { ExportStatement } from '#src/interfaces'
 import validateString from '#src/internal/validate-string'
 import type { Declaration } from '#src/types'
@@ -60,7 +60,9 @@ const findExports = (code: string = ''): ExportStatement[] => {
       specifier,
       specifier_kind: SpecifierKind.STATIC,
       start,
-      syntax: exports.startsWith('{') ? SyntaxKind.NAMED : SyntaxKind.NAMESPACE,
+      syntax: exports.startsWith('{')
+        ? StatementSyntaxKind.NAMED
+        : StatementSyntaxKind.NAMESPACE,
       type: !!type
     })
   }
@@ -92,7 +94,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
       specifier: null,
       specifier_kind: null,
       start,
-      syntax: SyntaxKind.DECLARATION,
+      syntax: StatementSyntaxKind.DECLARATION,
       type: false
     })
   }
@@ -118,7 +120,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
       specifier: null,
       specifier_kind: null,
       start,
-      syntax: SyntaxKind.DEFAULT,
+      syntax: StatementSyntaxKind.DEFAULT,
       type: false
     })
   }
@@ -142,7 +144,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
       specifier: null,
       specifier_kind: null,
       start,
-      syntax: SyntaxKind.LIST,
+      syntax: StatementSyntaxKind.LIST,
       type: !!type
     })
   }

@@ -3,7 +3,11 @@
  * @module mlly/interfaces/Statement
  */
 
-import type { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
+import type {
+  SpecifierKind,
+  StatementKind,
+  StatementSyntaxKind
+} from '#src/enums'
 import type { Nullable } from '@flex-development/tutils'
 
 /**
@@ -11,7 +15,7 @@ import type { Nullable } from '@flex-development/tutils'
  *
  * @see {@linkcode SpecifierKind}
  * @see {@linkcode StatementKind}
- * @see {@linkcode SyntaxKind}
+ * @see {@linkcode StatementSyntaxKind}
  */
 interface Statement {
   /**
@@ -40,14 +44,14 @@ interface Statement {
   specifier_kind: Nullable<SpecifierKind>
 
   /**
-   * Statement syntax kind.
-   */
-  syntax: SyntaxKind
-
-  /**
    * Start index of {@linkcode code} in source content.
    */
   start: number
+
+  /**
+   * Statement syntax kind.
+   */
+  syntax: StatementSyntaxKind
 }
 
 export type { Statement as default }

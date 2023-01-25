@@ -3,7 +3,11 @@
  * @module mlly/interfaces/tests/unit-d/Statement
  */
 
-import type { SpecifierKind, StatementKind, SyntaxKind } from '#src/enums'
+import type {
+  SpecifierKind,
+  StatementKind,
+  StatementSyntaxKind
+} from '#src/enums'
 import type { JsonValue, Nullable } from '@flex-development/tutils'
 import type TestSubject from '../statement'
 
@@ -38,13 +42,13 @@ describe('unit-d:interfaces/Statement', () => {
       .toEqualTypeOf<Nullable<SpecifierKind>>()
   })
 
-  it('should match [syntax: StatementSyntax]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('syntax')
-      .toEqualTypeOf<SyntaxKind>()
-  })
-
   it('should match [start: number]', () => {
     expectTypeOf<TestSubject>().toHaveProperty('end').toBeNumber()
+  })
+
+  it('should match [syntax: StatementSyntaxKind]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('syntax')
+      .toEqualTypeOf<StatementSyntaxKind>()
   })
 })
