@@ -76,7 +76,7 @@ const findStaticImports = (code: string = ''): StaticImport[] => {
           : [imports],
       kind: StatementKind.IMPORT,
       specifier,
-      specifier_kind: SpecifierSyntaxKind.STATIC,
+      specifier_syntax: SpecifierSyntaxKind.STATIC,
       start,
       syntax,
       type: !!type

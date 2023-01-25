@@ -29,9 +29,9 @@ describe('unit-d:interfaces/RequireStatement', () => {
     expectTypeOf<TestSubject>().toHaveProperty('specifier').toBeString()
   })
 
-  it('should match [specifier_kind: SpecifierSyntaxKind]', () => {
+  it('should match [specifier_syntax: SpecifierSyntaxKind]', () => {
     expectTypeOf<TestSubject>()
-      .toHaveProperty('specifier_kind')
+      .toHaveProperty('specifier_syntax')
       .toEqualTypeOf<SpecifierSyntaxKind>()
   })
 

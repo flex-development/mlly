@@ -62,7 +62,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
       kind: StatementKind.EXPORT,
       modifiers: [],
       specifier,
-      specifier_kind: SpecifierSyntaxKind.STATIC,
+      specifier_syntax: SpecifierSyntaxKind.STATIC,
       start,
       syntax: exports.startsWith('{')
         ? StatementSyntaxKind.NAMED
@@ -96,7 +96,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
               .map(e => e.trim())
               .filter(e => e.length > 0),
       specifier: null,
-      specifier_kind: null,
+      specifier_syntax: null,
       start,
       syntax: StatementSyntaxKind.DECLARATION,
       type: false
@@ -122,7 +122,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
               .map(e => e.trim())
               .filter(e => e.length > 0),
       specifier: null,
-      specifier_kind: null,
+      specifier_syntax: null,
       start,
       syntax: StatementSyntaxKind.DEFAULT,
       type: false
@@ -146,7 +146,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
       kind: StatementKind.EXPORT,
       modifiers: [],
       specifier: null,
-      specifier_kind: null,
+      specifier_syntax: null,
       start,
       syntax: StatementSyntaxKind.LIST,
       type: !!type

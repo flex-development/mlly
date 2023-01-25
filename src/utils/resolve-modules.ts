@@ -36,7 +36,7 @@ const resolveModules = async (
     if (!statement.specifier) continue
 
     // ignore statements with dynamic specifiers
-    if (statement.specifier_kind === SpecifierSyntaxKind.DYNAMIC) continue
+    if (statement.specifier_syntax === SpecifierSyntaxKind.DYNAMIC) continue
 
     /**
      * Resolved module URL.

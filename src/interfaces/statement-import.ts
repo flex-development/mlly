@@ -32,9 +32,9 @@ interface ImportStatement extends Statement {
   specifier: NonNullable<Statement['specifier']>
 
   /**
-   * Module specifier kind.
+   * Module specifier syntax type.
    */
-  specifier_kind: NonNullable<Statement['specifier_kind']>
+  specifier_syntax: NonNullable<Statement['specifier_syntax']>
 
   /**
    * Statement syntax kind.

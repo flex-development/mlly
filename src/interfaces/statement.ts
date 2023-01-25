@@ -39,9 +39,9 @@ interface Statement {
   specifier: Nullable<string>
 
   /**
-   * Module specifier kind.
+   * Module specifier syntax type.
    */
-  specifier_kind: Nullable<SpecifierSyntaxKind>
+  specifier_syntax: Nullable<SpecifierSyntaxKind>
 
   /**
    * Start index of {@linkcode code} in source content.

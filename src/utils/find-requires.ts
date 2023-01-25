@@ -51,7 +51,7 @@ const findRequires = (code: string = ''): RequireStatement[] => {
               .filter(e => e.length > 0),
       kind: StatementKind.REQUIRE,
       specifier: specifier.replace(/^["']|["']$/g, ''),
-      specifier_kind: /^["']/g.test(specifier)
+      specifier_syntax: /^["']/g.test(specifier)
         ? SpecifierSyntaxKind.STATIC
         : SpecifierSyntaxKind.DYNAMIC,
       start,

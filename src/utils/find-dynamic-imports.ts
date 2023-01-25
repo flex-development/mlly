@@ -51,7 +51,7 @@ const findDynamicImports = (code: string = ''): DynamicImport[] => {
       kind: StatementKind.IMPORT,
       options,
       specifier: specifier.replace(/^["']|["']$/g, ''),
-      specifier_kind: /^["']/g.test(specifier)
+      specifier_syntax: /^["']/g.test(specifier)
         ? SpecifierSyntaxKind.STATIC
         : SpecifierSyntaxKind.DYNAMIC,
       start,

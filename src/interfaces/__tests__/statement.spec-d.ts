@@ -36,9 +36,9 @@ describe('unit-d:interfaces/Statement', () => {
       .toEqualTypeOf<Nullable<string>>()
   })
 
-  it('should match [specifier_kind: Nullable<SpecifierSyntaxKind>]', () => {
+  it('should match [specifier_syntax: Nullable<SpecifierSyntaxKind>]', () => {
     expectTypeOf<TestSubject>()
-      .toHaveProperty('specifier_kind')
+      .toHaveProperty('specifier_syntax')
       .toEqualTypeOf<Nullable<SpecifierSyntaxKind>>()
   })
 
