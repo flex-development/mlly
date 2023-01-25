@@ -4,7 +4,9 @@
  */
 
 /**
- * Types of module specifiers.
+ * Module specifier types.
+ *
+ * @see https://nodejs.org/api/esm.html#terminology
  *
  * @enum {Lowercase<string>}
  */

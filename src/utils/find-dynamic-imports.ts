@@ -9,6 +9,7 @@ import {
   StatementSyntaxKind
 } from '#src/enums'
 import type { DynamicImport } from '#src/interfaces'
+import getSpecifierKind from '#src/internal/get-specifier-kind'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
 import { DYNAMIC_IMPORT_REGEX } from '@flex-development/import-regex'
@@ -36,6 +37,15 @@ const findDynamicImports = (code: string = ''): DynamicImport[] => {
       specifier = ''
     } = groups
 
+    /**
+     * Module specifier syntax.
+     *
+     * @const {SpecifierSyntaxKind} specifier_syntax
+     */
+    const specifier_syntax: SpecifierSyntaxKind = /^["']/.test(specifier)
+      ? SpecifierSyntaxKind.STATIC
+      : SpecifierSyntaxKind.DYNAMIC
+
     return {
       code,
       end: start + code.length,
@@ -51,9 +61,11 @@ const findDynamicImports = (code: string = ''): DynamicImport[] => {
       kind: StatementKind.IMPORT,
       options,
       specifier: specifier.replace(/^["']|["']$/g, ''),
-      specifier_syntax: /^["']/g.test(specifier)
-        ? SpecifierSyntaxKind.STATIC
-        : SpecifierSyntaxKind.DYNAMIC,
+      specifier_kind:
+        specifier_syntax === SpecifierSyntaxKind.DYNAMIC
+          ? null
+          : getSpecifierKind(specifier),
+      specifier_syntax,
       start,
       syntax: StatementSyntaxKind.DYNAMIC
     }

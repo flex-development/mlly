@@ -10,9 +10,9 @@ describe('unit:utils/findDynamicImports', () => {
   it('should return DynamicImport object array', () => {
     // Arrange
     const code: string = dedent`
-      await import('foo')
+      await import('foo-package')
       await import("/modules/my-module.js")
-      await import('foo.json', { assert: { type: 'json' } })
+      await import('./foo.json', { assert: { type: 'json' } })
 
       const foo = await import(bar)
 

@@ -4,6 +4,7 @@
  */
 
 import type {
+  SpecifierKind,
   SpecifierSyntaxKind,
   StatementKind,
   StatementSyntaxKind
@@ -13,6 +14,7 @@ import type { Nullable } from '@flex-development/tutils'
 /**
  * CommonJS or ESM statement object.
  *
+ * @see {@linkcode SpecifierKind}
  * @see {@linkcode SpecifierSyntaxKind}
  * @see {@linkcode StatementKind}
  * @see {@linkcode StatementSyntaxKind}
@@ -37,6 +39,11 @@ interface Statement {
    * Module specifier.
    */
   specifier: Nullable<string>
+
+  /**
+   * Module specifier type.
+   */
+  specifier_kind: Nullable<SpecifierKind>
 
   /**
    * Module specifier syntax type.

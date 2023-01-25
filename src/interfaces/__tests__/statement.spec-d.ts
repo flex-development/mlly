@@ -4,6 +4,7 @@
  */
 
 import type {
+  SpecifierKind,
   SpecifierSyntaxKind,
   StatementKind,
   StatementSyntaxKind
@@ -34,6 +35,12 @@ describe('unit-d:interfaces/Statement', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('specifier')
       .toEqualTypeOf<Nullable<string>>()
+  })
+
+  it('should match [specifier_kind: Nullable<SpecifierKind>]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('specifier_kind')
+      .toEqualTypeOf<Nullable<SpecifierKind>>()
   })
 
   it('should match [specifier_syntax: Nullable<SpecifierSyntaxKind>]', () => {

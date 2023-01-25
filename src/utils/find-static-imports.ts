@@ -9,6 +9,7 @@ import {
   StatementSyntaxKind
 } from '#src/enums'
 import type { StaticImport } from '#src/interfaces'
+import getSpecifierKind from '#src/internal/get-specifier-kind'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
 import { STATIC_IMPORT_REGEX } from '@flex-development/import-regex'
@@ -76,6 +77,7 @@ const findStaticImports = (code: string = ''): StaticImport[] => {
           : [imports],
       kind: StatementKind.IMPORT,
       specifier,
+      specifier_kind: getSpecifierKind(specifier),
       specifier_syntax: SpecifierSyntaxKind.STATIC,
       start,
       syntax,

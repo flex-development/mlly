@@ -4,7 +4,7 @@
  */
 
 /**
- * Module specifier syntax kinds.
+ * Module specifier syntax types.
  *
  * @enum {Lowercase<string>}
  */

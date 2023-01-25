@@ -9,6 +9,7 @@ import {
   StatementSyntaxKind
 } from '#src/enums'
 import type { RequireStatement } from '#src/interfaces'
+import getSpecifierKind from '#src/internal/get-specifier-kind'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
 
@@ -38,6 +39,15 @@ const findRequires = (code: string = ''): RequireStatement[] => {
     const { 0: code = '', index: start = 0, groups = {} } = match
     const { imports = '', specifier = '' } = groups
 
+    /**
+     * Module specifier syntax.
+     *
+     * @const {SpecifierSyntaxKind} specifier_syntax
+     */
+    const specifier_syntax: SpecifierSyntaxKind = /^["']/.test(specifier)
+      ? SpecifierSyntaxKind.STATIC
+      : SpecifierSyntaxKind.DYNAMIC
+
     return {
       code,
       end: start + code.length,
@@ -51,9 +61,11 @@ const findRequires = (code: string = ''): RequireStatement[] => {
               .filter(e => e.length > 0),
       kind: StatementKind.REQUIRE,
       specifier: specifier.replace(/^["']|["']$/g, ''),
-      specifier_syntax: /^["']/g.test(specifier)
-        ? SpecifierSyntaxKind.STATIC
-        : SpecifierSyntaxKind.DYNAMIC,
+      specifier_kind:
+        specifier_syntax === SpecifierSyntaxKind.DYNAMIC
+          ? null
+          : getSpecifierKind(specifier),
+      specifier_syntax,
       start,
       syntax: StatementSyntaxKind.REQUIRE
     }

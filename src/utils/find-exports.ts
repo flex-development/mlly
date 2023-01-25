@@ -9,6 +9,7 @@ import {
   StatementSyntaxKind
 } from '#src/enums'
 import type { ExportStatement } from '#src/interfaces'
+import getSpecifierKind from '#src/internal/get-specifier-kind'
 import validateString from '#src/internal/validate-string'
 import type { Declaration } from '#src/types'
 import type { NodeError } from '@flex-development/errnode'
@@ -62,6 +63,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
       kind: StatementKind.EXPORT,
       modifiers: [],
       specifier,
+      specifier_kind: getSpecifierKind(specifier),
       specifier_syntax: SpecifierSyntaxKind.STATIC,
       start,
       syntax: exports.startsWith('{')
@@ -96,6 +98,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
               .map(e => e.trim())
               .filter(e => e.length > 0),
       specifier: null,
+      specifier_kind: null,
       specifier_syntax: null,
       start,
       syntax: StatementSyntaxKind.DECLARATION,
@@ -122,6 +125,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
               .map(e => e.trim())
               .filter(e => e.length > 0),
       specifier: null,
+      specifier_kind: null,
       specifier_syntax: null,
       start,
       syntax: StatementSyntaxKind.DEFAULT,
@@ -146,6 +150,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
       kind: StatementKind.EXPORT,
       modifiers: [],
       specifier: null,
+      specifier_kind: null,
       specifier_syntax: null,
       start,
       syntax: StatementSyntaxKind.LIST,
