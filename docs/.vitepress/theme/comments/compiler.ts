@@ -117,12 +117,29 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
           break
       }
 
-      // apply @link replacements
-      for (const [key, replacement] of Object.entries(replacements)) {
-        doc = doc.replace(
-          new RegExp(`(?<!(?:\\/\\/|\\*|\`\`\`.*\n).*)${key}`, 'g'),
-          replacement
-        )
+      // apply {@link .*} and {@linkcode .*} replacements
+      for (const [key, url] of Object.entries(replacements)) {
+        const [text] = /(?<={@link(?:code)? )(\S+?)(?=})/.exec(key)!
+
+        /**
+         * Regex patterns used to replace `{@link .*}` and `{@linkcode .*}` in
+         * {@linkcode doc}.
+         *
+         * @const {RegExp[]} expressions
+         */
+        const expressions: RegExp[] = [
+          new RegExp(`(?<=\\[\`.+\`\\]\\()${key}(?=\\))`, 'g'),
+          new RegExp(`(?<=\\[\\d+\\]\\: )${this.escapeRegExp(key)}`, 'g'),
+          new RegExp(this.escapeRegExp(key), 'g')
+        ]
+
+        // do replacements
+        for (const [i, regex] of expressions.entries()) {
+          doc = doc.replace(
+            regex,
+            i === expressions.length - 1 ? `[\`${text}\`](${url})` : url
+          )
+        }
       }
 
       // add markdown documentation snippet
@@ -189,6 +206,21 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
     visit(node, Type.IMPLICIT_DESCRIPTION, visitor)
 
     return description
+  }
+
+  /**
+   * Escapes special characters in the given regex `pattern`.
+   *
+   * A backslash escape (`\\`) is used when valid. A `\x2d` escape is used when
+   * the former would be disallowed by stricter Unicode pattern grammar.
+   *
+   * @protected
+   *
+   * @param {string} pattern - Regex pattern to escape
+   * @return {string} `pattern` with special characters escaped
+   */
+  protected escapeRegExp(pattern: string): string {
+    return pattern.replace(/[$()*+.?[\\\]^{|}]/g, '\\$&').replace(/-/g, '\\x2d')
   }
 
   /**
