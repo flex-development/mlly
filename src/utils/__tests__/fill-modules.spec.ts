@@ -20,7 +20,7 @@ describe('unit:utils/fillModules', () => {
 
   beforeAll(() => {
     code = dedent`
-      import { SpecifierKind } from '#src/enums'
+      import { SpecifierSyntaxKind } from '#src/enums'
       import type { FillModuleOptions } from '#src/interfaces'
       import isFunction from '#src/internal/is-function'
       import { ERR_UNKNOWN_FILE_EXTENSION } from '@flex-development/errnode'

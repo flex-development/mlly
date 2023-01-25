@@ -3,7 +3,11 @@
  * @module mlly/utils/findExports
  */
 
-import { SpecifierKind, StatementKind, StatementSyntaxKind } from '#src/enums'
+import {
+  SpecifierSyntaxKind,
+  StatementKind,
+  StatementSyntaxKind
+} from '#src/enums'
 import type { ExportStatement } from '#src/interfaces'
 import validateString from '#src/internal/validate-string'
 import type { Declaration } from '#src/types'
@@ -58,7 +62,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
       kind: StatementKind.EXPORT,
       modifiers: [],
       specifier,
-      specifier_kind: SpecifierKind.STATIC,
+      specifier_kind: SpecifierSyntaxKind.STATIC,
       start,
       syntax: exports.startsWith('{')
         ? StatementSyntaxKind.NAMED

@@ -38,7 +38,7 @@
   "{@linkcode ResolveModuleOptions}": "/api/interfaces#resolvemoduleoptions",
   "{@linkcode ResolveOptions}": "/api/interfaces#resolveoptions",
   "{@linkcode SemanticVersion}": "https://github.com/flex-development/pkg-types/blob/2.0.0/src/types/semantic-version.ts",
-  "{@linkcode SpecifierKind}": "/api/enums/#specifierkind",
+  "{@linkcode SpecifierSyntaxKind}": "/api/enums/#specifiersyntaxkind",
   "{@linkcode StatementKind}": "/api/enums/#statementkind",
   "{@linkcode StatementSyntaxKind}": "/api/enums/#statementsyntaxkind",
   "{@linkcode Statement}": "/api/interfaces#statement",

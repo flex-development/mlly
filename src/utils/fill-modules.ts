@@ -3,7 +3,7 @@
  * @module mlly/utils/fillModules
  */
 
-import { SpecifierKind } from '#src/enums'
+import { SpecifierSyntaxKind } from '#src/enums'
 import type { FillModuleOptions } from '#src/interfaces'
 import isFunction from '#src/internal/is-function'
 import { ERR_UNKNOWN_FILE_EXTENSION } from '@flex-development/errnode'
@@ -46,7 +46,7 @@ const fillModules = async (
     if (!statement.specifier) continue
 
     // ignore statements with dynamic specifiers
-    if (statement.specifier_kind === SpecifierKind.DYNAMIC) continue
+    if (statement.specifier_kind === SpecifierSyntaxKind.DYNAMIC) continue
 
     /**
      * Resolved module URL.

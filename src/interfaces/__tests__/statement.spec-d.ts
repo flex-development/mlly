@@ -4,7 +4,7 @@
  */
 
 import type {
-  SpecifierKind,
+  SpecifierSyntaxKind,
   StatementKind,
   StatementSyntaxKind
 } from '#src/enums'
@@ -36,10 +36,10 @@ describe('unit-d:interfaces/Statement', () => {
       .toEqualTypeOf<Nullable<string>>()
   })
 
-  it('should match [specifier_kind: Nullable<SpecifierKind>]', () => {
+  it('should match [specifier_kind: Nullable<SpecifierSyntaxKind>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('specifier_kind')
-      .toEqualTypeOf<Nullable<SpecifierKind>>()
+      .toEqualTypeOf<Nullable<SpecifierSyntaxKind>>()
   })
 
   it('should match [start: number]', () => {

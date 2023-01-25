@@ -1,11 +1,11 @@
 /**
- * @file Type Tests - SpecifierKind
- * @module mlly/enums/tests/unit-d/SpecifierKind
+ * @file Type Tests - SpecifierSyntaxKind
+ * @module mlly/enums/tests/unit-d/SpecifierSyntaxKind
  */
 
-import type TestSubject from '../kind-specifier'
+import type TestSubject from '../kind-specifier-syntax'
 
-describe('unit-d:enums/SpecifierKind', () => {
+describe('unit-d:enums/SpecifierSyntaxKind', () => {
   it('should match [DYNAMIC = "dynamic"]', () => {
     expectTypeOf<typeof TestSubject>()
       .toHaveProperty('DYNAMIC')

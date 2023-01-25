@@ -3,7 +3,11 @@
  * @module mlly/utils/findStaticImports
  */
 
-import { SpecifierKind, StatementKind, StatementSyntaxKind } from '#src/enums'
+import {
+  SpecifierSyntaxKind,
+  StatementKind,
+  StatementSyntaxKind
+} from '#src/enums'
 import type { StaticImport } from '#src/interfaces'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
@@ -72,7 +76,7 @@ const findStaticImports = (code: string = ''): StaticImport[] => {
           : [imports],
       kind: StatementKind.IMPORT,
       specifier,
-      specifier_kind: SpecifierKind.STATIC,
+      specifier_kind: SpecifierSyntaxKind.STATIC,
       start,
       syntax,
       type: !!type

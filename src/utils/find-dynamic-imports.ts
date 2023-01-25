@@ -3,7 +3,11 @@
  * @module mlly/utils/findDynamicImports
  */
 
-import { SpecifierKind, StatementKind, StatementSyntaxKind } from '#src/enums'
+import {
+  SpecifierSyntaxKind,
+  StatementKind,
+  StatementSyntaxKind
+} from '#src/enums'
 import type { DynamicImport } from '#src/interfaces'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
@@ -48,8 +52,8 @@ const findDynamicImports = (code: string = ''): DynamicImport[] => {
       options,
       specifier: specifier.replace(/^["']|["']$/g, ''),
       specifier_kind: /^["']/g.test(specifier)
-        ? SpecifierKind.STATIC
-        : SpecifierKind.DYNAMIC,
+        ? SpecifierSyntaxKind.STATIC
+        : SpecifierSyntaxKind.DYNAMIC,
       start,
       syntax: StatementSyntaxKind.DYNAMIC
     }

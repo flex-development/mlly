@@ -4,7 +4,7 @@
  */
 
 import type {
-  SpecifierKind,
+  SpecifierSyntaxKind,
   StatementKind,
   StatementSyntaxKind
 } from '#src/enums'
@@ -13,7 +13,7 @@ import type { Nullable } from '@flex-development/tutils'
 /**
  * CommonJS or ESM statement object.
  *
- * @see {@linkcode SpecifierKind}
+ * @see {@linkcode SpecifierSyntaxKind}
  * @see {@linkcode StatementKind}
  * @see {@linkcode StatementSyntaxKind}
  */
@@ -41,7 +41,7 @@ interface Statement {
   /**
    * Module specifier kind.
    */
-  specifier_kind: Nullable<SpecifierKind>
+  specifier_kind: Nullable<SpecifierSyntaxKind>
 
   /**
    * Start index of {@linkcode code} in source content.

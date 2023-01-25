@@ -3,7 +3,7 @@
  * @module mlly/interfaces/tests/unit-d/ImportStatement
  */
 
-import type { SpecifierKind, StatementKind } from '#src/enums'
+import type { SpecifierSyntaxKind, StatementKind } from '#src/enums'
 import type { SyntaxKindImport } from '#src/types'
 import type Statement from '../statement'
 import type TestSubject from '../statement-import'
@@ -29,10 +29,10 @@ describe('unit-d:interfaces/ImportStatement', () => {
     expectTypeOf<TestSubject>().toHaveProperty('specifier').toBeString()
   })
 
-  it('should match [specifier_kind: SpecifierKind]', () => {
+  it('should match [specifier_kind: SpecifierSyntaxKind]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('specifier_kind')
-      .toEqualTypeOf<SpecifierKind>()
+      .toEqualTypeOf<SpecifierSyntaxKind>()
   })
 
   it('should match [syntax: SyntaxKindImport]', () => {

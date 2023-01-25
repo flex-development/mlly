@@ -3,7 +3,7 @@
  * @module mlly/utils/resolveModules
  */
 
-import { SpecifierKind } from '#src/enums'
+import { SpecifierSyntaxKind } from '#src/enums'
 import type { ResolveModuleOptions } from '#src/interfaces'
 import type { URL } from 'node:url'
 import extractStatements from './extract-statements'
@@ -36,7 +36,7 @@ const resolveModules = async (
     if (!statement.specifier) continue
 
     // ignore statements with dynamic specifiers
-    if (statement.specifier_kind === SpecifierKind.DYNAMIC) continue
+    if (statement.specifier_kind === SpecifierSyntaxKind.DYNAMIC) continue
 
     /**
      * Resolved module URL.
