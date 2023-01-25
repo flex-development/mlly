@@ -393,7 +393,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
         .next().value
 
       // add parameter type, name, and description
-      params += `| \`${groups!.type!.replace('|', '\\|')}\` `
+      params += `| \`${groups!.type!.replace(/(\|)/g, '\\$1')}\` `
       params += `| \`${groups!.name}\` `
       params += `| ${groups!.description} |\n`
 
