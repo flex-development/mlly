@@ -23,6 +23,7 @@
   "{@linkcode ModuleId}": "/api/types#moduleid",
   "{@linkcode ModuleSpecifierType}": "/api/types#modulespecifiertype",
   "{@linkcode NodeError}": "https://github.com/flex-development/errnode/blob/1.2.0/src/types/node-error.ts",
+  "{@linkcode PATTERN_CHARACTER}": "/api/#pattern-character",
   "{@linkcode PackageJson}": "https://github.com/flex-development/pkg-types/blob/2.0.0/src/interfaces/package-json.ts",
   "{@linkcode PackageScope}": "/api/interfaces/#packagescope",
   "{@linkcode ParseModuleIdOptions}": "/api/interfaces/#parsemoduleidoptions",

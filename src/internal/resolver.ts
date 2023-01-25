@@ -15,6 +15,7 @@ import isRelativeSpecifier from '#src/utils/is-relative-specifier'
 import lookupPackageScope from '#src/utils/lookup-package-scope'
 import parseModuleId from '#src/utils/parse-module-id'
 import parseSubpath from '#src/utils/parse-subpath'
+import PATTERN_CHARACTER from '#src/utils/pattern-character'
 import readPackageJson from '#src/utils/read-package-json'
 import toNodeURL from '#src/utils/to-node-url'
 import toURL from '#src/utils/to-url'
@@ -40,6 +41,7 @@ import type {
 import { isNIL, type Nullable } from '@flex-development/tutils'
 import fs from 'node:fs'
 import { URL, fileURLToPath, pathToFileURL } from 'node:url'
+import regexp from './escape-reg-exp'
 import isArrayIndex from './is-array-index'
 import isDirectory from './is-directory'
 import isFile from './is-file'
@@ -657,7 +659,7 @@ class Resolver {
          *
          * @const {boolean} pattern
          */
-        const pattern: boolean = key.includes('*')
+        const pattern: boolean = key.includes(PATTERN_CHARACTER)
 
         switch (true) {
           case subpath && !pattern && !target.endsWith(pathe.sep):
@@ -715,7 +717,7 @@ class Resolver {
               if (invalidSegmentRegex().test(subpath)) {
                 if (invalidSegmentRegex('deprecated').test(subpath)) {
                   throw new ERR_INVALID_MODULE_SPECIFIER(
-                    key.replace('*', subpath),
+                    key.replace(PATTERN_CHARACTER, subpath),
                     [
                       `request is not a valid match in pattern "${key}" for`,
                       `the "${internal ? 'imports' : 'exports'}" resolution`,
@@ -727,7 +729,12 @@ class Resolver {
               }
 
               // set resolved package target url using subpath
-              url = new URL(url.href.replace(/\*/g, subpath))
+              url = new URL(
+                url.href.replace(
+                  new RegExp(regexp(PATTERN_CHARACTER), 'g'),
+                  subpath
+                )
+              )
             }
 
             break

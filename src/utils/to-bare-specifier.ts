@@ -23,6 +23,7 @@ import isRelativeSpecifier from './is-relative-specifier'
 import lookupPackageScope from './lookup-package-scope'
 import parseModuleId from './parse-module-id'
 import parseSubpath from './parse-subpath'
+import PATTERN_CHARACTER from './pattern-character'
 import toAbsoluteSpecifier from './to-absolute-specifier'
 import toNodeURL from './to-node-url'
 import toURL from './to-url'
@@ -175,8 +176,8 @@ const toBareSpecifier = (
         )
       }
 
-      if (subpath.includes('*')) {
-        subpath = subpath.slice(0, subpath.indexOf('*')).slice(1)
+      if (subpath.includes(PATTERN_CHARACTER)) {
+        subpath = subpath.slice(0, subpath.indexOf(PATTERN_CHARACTER)).slice(1)
         subpath = '.' + target.slice(target.indexOf(subpath))
       }
 

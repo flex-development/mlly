@@ -15,6 +15,7 @@ import { URL } from 'node:url'
 import compareSubpaths from './compare-subpaths'
 import CONDITIONS from './conditions'
 import isExportsSugar from './is-exports-sugar'
+import PATTERN_CHARACTER from './pattern-character'
 import toURL from './to-url'
 
 /**
@@ -184,11 +185,11 @@ const findSubpath = (
               const tar_ne: string = pathe.changeExt(tar, '')
 
               /**
-               * Index of pattern character (`'*'`) in {@linkcode tar}.
+               * Index of {@linkcode PATTERN_CHARACTER} in {@linkcode tar}.
                *
                * @const {number} pattern
                */
-              const pattern: number = tar.indexOf('*')
+              const pattern: number = tar.indexOf(PATTERN_CHARACTER)
 
               switch (true) {
                 // target is an exactish match
@@ -208,7 +209,7 @@ const findSubpath = (
                    */
                   const match: boolean =
                     target.length >= tar.length &&
-                    tar.lastIndexOf('*') === pattern &&
+                    tar.lastIndexOf(PATTERN_CHARACTER) === pattern &&
                     (target.endsWith(tar.slice(pattern + 1)) ||
                       target.endsWith(tar_ne.slice(pattern + 1)))
 

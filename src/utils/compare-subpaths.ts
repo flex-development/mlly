@@ -7,6 +7,7 @@ import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
 import { CompareResult } from '@flex-development/tutils'
 import assert from 'node:assert'
+import PATTERN_CHARACTER from './pattern-character'
 
 /**
  * Returns a number indicating if a subpath pattern is equal to, greater than,
@@ -29,13 +30,6 @@ import assert from 'node:assert'
 const compareSubpaths = (subpath1: string, subpath2: string): CompareResult => {
   validateString(subpath1, 'subpath1')
   validateString(subpath2, 'subpath2')
-
-  /**
-   * Character representing a pattern.
-   *
-   * @const {string} pattern_char
-   */
-  const pattern_char: string = '*'
 
   /**
    * Index of {@linkcode pattern_char} in {@linkcode subpath1}.
@@ -61,14 +55,14 @@ const compareSubpaths = (subpath1: string, subpath2: string): CompareResult => {
     const message: string = `'${subpath}' is expected to contain a single '*'`
 
     /**
-     * Index of {@linkcode pattern_char} in {@linkcode subpath}.
+     * Index of {@linkcode PATTERN_CHARACTER} in {@linkcode subpath}.
      *
      * @const {number} pattern
      */
-    const pattern_index: number = subpath.indexOf(pattern_char)
+    const pattern_index: number = subpath.indexOf(PATTERN_CHARACTER)
 
     // ensure respective subpath contains no more than one '*'
-    assert(pattern_index === subpath.lastIndexOf(pattern_char), message)
+    assert(pattern_index === subpath.lastIndexOf(PATTERN_CHARACTER), message)
 
     // set index of pattern character in respective subpath
     index === 0 ? (pattern1 = pattern_index) : (pattern2 = pattern_index)

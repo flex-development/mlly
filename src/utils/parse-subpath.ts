@@ -22,6 +22,7 @@ import { CompareResult, type Nullable } from '@flex-development/tutils'
 import { URL, fileURLToPath, pathToFileURL } from 'node:url'
 import compareSubpaths from './compare-subpaths'
 import parseModuleId from './parse-module-id'
+import PATTERN_CHARACTER from './pattern-character'
 
 /**
  * Creates an object representation of a subpath export or import from the given
@@ -117,11 +118,11 @@ const parseSubpath = (
   // match specifier to subpath defined in context
   for (const pkgsubpath of keys) {
     /**
-     * Index of pattern character (`'*'`) in {@linkcode pkgsubpath}.
+     * Index of {@linkcode PATTERN_CHARACTER} in {@linkcode pkgsubpath}.
      *
      * @const {number} pattern
      */
-    const pattern: number = pkgsubpath.indexOf('*')
+    const pattern: number = pkgsubpath.indexOf(PATTERN_CHARACTER)
 
     // no pattern character => subpath must be exact match
     if (pattern === -1 && pkgsubpath === id.path) {
@@ -143,7 +144,7 @@ const parseSubpath = (
         id.path.length >= pkgsubpath.length &&
         id.path.endsWith(trailer) &&
         compareSubpaths(key ?? '', pkgsubpath) === CompareResult.GREATER_THAN &&
-        pkgsubpath.lastIndexOf('*') === pattern
+        pkgsubpath.lastIndexOf(PATTERN_CHARACTER) === pattern
       ) {
         key = pkgsubpath
         base = id.path.slice(pattern, id.path.length - trailer.length)
