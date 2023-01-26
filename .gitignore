@@ -46,7 +46,7 @@ yarn-error.log*
 __tests__/report.json
 codecov
 coverage/
-tsconfig.temp.json
+tsconfig*temp.json
 vitest.config.*.timestamp-*.mjs
 !__fixtures__/node_modules/
 
