@@ -1435,7 +1435,7 @@ __metadata:
     trash-cli: "npm:5.0.0"
     ts-dedent: "npm:2.2.0"
     ts-node: "npm:10.9.1"
-    tsconfig-paths: "npm:4.1.1"
+    tsconfig-paths: "npm:4.1.2"
     typescript: "npm:5.0.0-dev.20221215"
     unified: "npm:10.1.2"
     unist-util-remove: "npm:3.1.0"
@@ -7254,6 +7254,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"json5@npm:^2.2.2":
+  version: 2.2.3
+  resolution: "json5@npm:2.2.3"
+  bin:
+    json5: lib/cli.js
+  checksum: e298f92c92197e956eb7a93304f74b5b80b4c3fe412f44a1f3d4c966e5ddf2e8ef2ac7ce0b0c40c78735bf2901c29257a653e1da684dae8e7835932e4904d6a0
+  languageName: node
+  linkType: hard
+
 "jsonc-eslint-parser@npm:2.1.0, jsonc-eslint-parser@npm:^2.0.4":
   version: 2.1.0
   resolution: "jsonc-eslint-parser@npm:2.1.0"
@@ -10461,14 +10470,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths@npm:4.1.1":
-  version: 4.1.1
-  resolution: "tsconfig-paths@npm:4.1.1"
+"tsconfig-paths@npm:4.1.2":
+  version: 4.1.2
+  resolution: "tsconfig-paths@npm:4.1.2"
   dependencies:
-    json5: "npm:^2.2.1"
+    json5: "npm:^2.2.2"
     minimist: "npm:^1.2.6"
     strip-bom: "npm:^3.0.0"
-  checksum: fc9d7c1de44e386d033b5dd515df4b57b5fd687df7172fb3c5ab04e3f95b197f444a9608c515385ebbe8b73a503067a58d4b4231d126b8a720b9a5c47545fae5
+  checksum: c58c616293f334f6c4eff227e22279c3ee87ab3f6f2aa62a618172927e5af742f10b2daebae36ab715fced0c328da638600cf4b66c4ecc7ed5f76b6cd154ec2e
   languageName: node
   linkType: hard
 
