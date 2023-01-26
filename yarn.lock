@@ -1384,7 +1384,7 @@ __metadata:
     "@types/node-notifier": "npm:8.0.2"
     "@types/prettier": "npm:2.7.2"
     "@types/unist": "npm:2.0.6"
-    "@typescript-eslint/eslint-plugin": "npm:5.47.1"
+    "@typescript-eslint/eslint-plugin": "npm:5.49.0"
     "@typescript-eslint/parser": "npm:5.47.1"
     "@vates/toggle-scripts": "npm:1.0.0"
     "@vitest/coverage-c8": "npm:0.26.3"
@@ -2559,13 +2559,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:5.47.1":
-  version: 5.47.1
-  resolution: "@typescript-eslint/eslint-plugin@npm:5.47.1"
+"@typescript-eslint/eslint-plugin@npm:5.49.0":
+  version: 5.49.0
+  resolution: "@typescript-eslint/eslint-plugin@npm:5.49.0"
   dependencies:
-    "@typescript-eslint/scope-manager": "npm:5.47.1"
-    "@typescript-eslint/type-utils": "npm:5.47.1"
-    "@typescript-eslint/utils": "npm:5.47.1"
+    "@typescript-eslint/scope-manager": "npm:5.49.0"
+    "@typescript-eslint/type-utils": "npm:5.49.0"
+    "@typescript-eslint/utils": "npm:5.49.0"
     debug: "npm:^4.3.4"
     ignore: "npm:^5.2.0"
     natural-compare-lite: "npm:^1.4.0"
@@ -2578,7 +2578,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: e65ff2f1188f60f3b981ba3e25e3ffe30e773d45a3ad469c8f3f23e1fab0bb92f4a469bb9e6be839e064738e7cfe08ffbdc57e5a131222333aad90b2736ba11d
+  checksum: e8b75c8521daf23bd7623857addcb7540e5d6dca9399b414d7f0b2925332b1607942258eb74d8da6c4acb05e31317c51c5e621d624533eefcaaf60d3397fe82a
   languageName: node
   linkType: hard
 
@@ -2609,12 +2609,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:5.47.1":
-  version: 5.47.1
-  resolution: "@typescript-eslint/type-utils@npm:5.47.1"
+"@typescript-eslint/scope-manager@npm:5.49.0":
+  version: 5.49.0
+  resolution: "@typescript-eslint/scope-manager@npm:5.49.0"
   dependencies:
-    "@typescript-eslint/typescript-estree": "npm:5.47.1"
-    "@typescript-eslint/utils": "npm:5.47.1"
+    "@typescript-eslint/types": "npm:5.49.0"
+    "@typescript-eslint/visitor-keys": "npm:5.49.0"
+  checksum: fbf8146bd84def3029df9f9e4ca255f1067762e0faf5bf94aa83894fea64cdfe864647f9c7ba5c6d4c6ed2ce444a107ff9ab2cc0095c4537dbab42c7fdd6d848
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/type-utils@npm:5.49.0":
+  version: 5.49.0
+  resolution: "@typescript-eslint/type-utils@npm:5.49.0"
+  dependencies:
+    "@typescript-eslint/typescript-estree": "npm:5.49.0"
+    "@typescript-eslint/utils": "npm:5.49.0"
     debug: "npm:^4.3.4"
     tsutils: "npm:^3.21.0"
   peerDependencies:
@@ -2622,7 +2632,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 3bebc3b2bb05cb33326f316554d61a2fa8b8e72de572e11c0b5c7041751642161de1cfbe0b13f16f428694d624b1bc58df09eddcaf304b4e9be49703927b42e7
+  checksum: e4094104980c254a04ed3724b26ec3c8b193460f23774e5d836526614450dd59c19cb45a80f8a63d7b5129f4f4a05546396a792e9bdb431c260b30caf5957b39
   languageName: node
   linkType: hard
 
@@ -2630,6 +2640,13 @@ __metadata:
   version: 5.47.1
   resolution: "@typescript-eslint/types@npm:5.47.1"
   checksum: 2e3e665c720166d54678b1bc68460c5ffec49e6af26412fe7e1f70d112c3aa5f2d8ba3abd9567a230fe3a8edd0a2e9dc70cdb78166c97e335478521c9d98202d
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/types@npm:5.49.0":
+  version: 5.49.0
+  resolution: "@typescript-eslint/types@npm:5.49.0"
+  checksum: ca8ccb9a9312c1f2a420d8b8ed87ccbc420844d40fbe07473188556fd0359e00bd4703c56e369f93756a57be2121b6b51c40a189a270b292c3411f0a93c378bf
   languageName: node
   linkType: hard
 
@@ -2651,21 +2668,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:5.47.1":
-  version: 5.47.1
-  resolution: "@typescript-eslint/utils@npm:5.47.1"
+"@typescript-eslint/typescript-estree@npm:5.49.0":
+  version: 5.49.0
+  resolution: "@typescript-eslint/typescript-estree@npm:5.49.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:5.49.0"
+    "@typescript-eslint/visitor-keys": "npm:5.49.0"
+    debug: "npm:^4.3.4"
+    globby: "npm:^11.1.0"
+    is-glob: "npm:^4.0.3"
+    semver: "npm:^7.3.7"
+    tsutils: "npm:^3.21.0"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: f2a2837fa7e2a697a9e537144a9510aa5f8ee45c3c8327b98da0a69c888325874a41123428a14f6bb475556bbcc2c49f479850cf385da2c025261063be0ecc78
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/utils@npm:5.49.0":
+  version: 5.49.0
+  resolution: "@typescript-eslint/utils@npm:5.49.0"
   dependencies:
     "@types/json-schema": "npm:^7.0.9"
     "@types/semver": "npm:^7.3.12"
-    "@typescript-eslint/scope-manager": "npm:5.47.1"
-    "@typescript-eslint/types": "npm:5.47.1"
-    "@typescript-eslint/typescript-estree": "npm:5.47.1"
+    "@typescript-eslint/scope-manager": "npm:5.49.0"
+    "@typescript-eslint/types": "npm:5.49.0"
+    "@typescript-eslint/typescript-estree": "npm:5.49.0"
     eslint-scope: "npm:^5.1.1"
     eslint-utils: "npm:^3.0.0"
     semver: "npm:^7.3.7"
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
-  checksum: 886f6a3c6f0f50e4943ab632cade16837c5a18f3ce4eb6b6febed1a4b713081f0ba5b5d414636eb6e3ca3f7a1d63153779b4d080dadff363de174ed6d44938c7
+  checksum: a11c16851bb4cfebbf4c3e9949dc80c4a9d690180d6621f6d6f2650e11c9e8d63604abe299384d12c88f10f8e92751a11d48deff0587a77c97098bb9f98e2f53
   languageName: node
   linkType: hard
 
@@ -2676,6 +2711,16 @@ __metadata:
     "@typescript-eslint/types": "npm:5.47.1"
     eslint-visitor-keys: "npm:^3.3.0"
   checksum: 278b6d14864f03a59377462581c4bbad03160b8f134535e1adc28d7534aa64157c9d045b1d4a7dc1381fd7aec0db2cbcc949d8ba9f4a046ed6ea95c08368ef02
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/visitor-keys@npm:5.49.0":
+  version: 5.49.0
+  resolution: "@typescript-eslint/visitor-keys@npm:5.49.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:5.49.0"
+    eslint-visitor-keys: "npm:^3.3.0"
+  checksum: 327c45b6cff17996801300107e17a2429631af05423b0215980305e0320815ef466135c4d1f9f6918309abd0ee5d7b666290bd31147456b1cc8655dc6cca7fad
   languageName: node
   linkType: hard
 
