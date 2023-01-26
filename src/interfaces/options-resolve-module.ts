@@ -31,7 +31,7 @@ interface ResolveModuleOptions {
    *
    * @default CONDITIONS
    */
-  conditions?: Set<string> | undefined
+  conditions?: Set<string> | string[] | undefined
 
   /**
    * Replacement file extension or function that returns a file extension.
@@ -50,7 +50,7 @@ interface ResolveModuleOptions {
    *
    * @default RESOLVE_EXTENSIONS
    */
-  extensions?: Set<string> | undefined
+  extensions?: Set<string> | string[] | undefined
 
   /**
    * URL of module to resolve from.

@@ -18,10 +18,10 @@ describe('unit-d:interfaces/ResolveModuleOptions', () => {
       .toEqualTypeOf<string | undefined>()
   })
 
-  it('should match [conditions?: Set<string>]', () => {
+  it('should match [conditions?: Set<string> | string[]]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('conditions')
-      .toEqualTypeOf<Set<string> | undefined>()
+      .toEqualTypeOf<Set<string> | string[] | undefined>()
   })
 
   it('should match [ext?: ChangeExtFn | Nilable<string>]', () => {
@@ -30,10 +30,10 @@ describe('unit-d:interfaces/ResolveModuleOptions', () => {
       .toEqualTypeOf<ChangeExtFn | Nilable<string>>()
   })
 
-  it('should match [extensions?: Set<string>]', () => {
+  it('should match [extensions?: Set<string> | string[]]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('extensions')
-      .toEqualTypeOf<Set<string> | undefined>()
+      .toEqualTypeOf<Set<string> | string[] | undefined>()
   })
 
   it('should match [parent?: ModuleId]', () => {

@@ -108,7 +108,7 @@ const fillModules = async (
           : isAbsoluteSpecifier(statement.specifier)
           ? url.href
           : isBareSpecifier(statement.specifier)
-          ? toBareSpecifier(url, parent, conditions)
+          ? toBareSpecifier(url, parent, new Set(conditions))
           : toRelativeSpecifier(url, parent)
       )
     )

@@ -60,7 +60,6 @@ const resolveAlias = async (
   validateBoolean(absolute, 'options.absolute')
   validateObject(aliases, 'options.aliases')
   validateString(condition, 'options.condition')
-  validateSet(conditions, 'options.conditions')
   validateURLString(cwd, 'options.cwd')
   validateSet(extensions, 'options.extensions')
   validateURLString(parent, 'options.parent')
@@ -212,7 +211,7 @@ const resolveAlias = async (
     ? absolute
       ? url.href
       : /\/node_modules\//.test(url.href)
-      ? toBareSpecifier(url, toURL(parent), conditions)
+      ? toBareSpecifier(url, toURL(parent), new Set(conditions))
       : toRelativeSpecifier(url, toURL(parent))
     : specifier
 }

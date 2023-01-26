@@ -37,6 +37,19 @@ describe('unit:utils/getSource', () => {
     }
   })
 
+  it('should return source code as undefined', async () => {
+    // Arrange
+    const cases: Parameters<typeof testSubject>[] = [
+      ['fs', { format: Format.BUILTIN }],
+      ['node:fs']
+    ]
+
+    // Act + Expect
+    for (const [id, options] of cases) {
+      expect(await testSubject(id, options)).to.be.undefined
+    }
+  })
+
   describe('unknown protocol', () => {
     let id: string
 

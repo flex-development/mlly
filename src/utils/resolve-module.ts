@@ -119,7 +119,7 @@ const resolveModule = async (
         id,
         parent,
         condition,
-        conditions,
+        new Set(conditions),
         preserveSymlinks
       )
     } catch (e: unknown) {

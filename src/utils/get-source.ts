@@ -28,13 +28,13 @@ import toURL from './to-url'
  *
  * @param {ModuleId} id - Module id to evaluate
  * @param {GetSourceOptions?} [options={}] - Source code retrieval options
- * @return {Promise<Uint8Array | string>} Source code for `id`
+ * @return {Promise<Uint8Array | string | undefined>} Source code for `id`
  * @throws {NodeError} If unsupported URL scheme is encountered
  */
 const getSource = async (
   id: ModuleId,
   options: GetSourceOptions = {}
-): Promise<Uint8Array | string> => {
+): Promise<Uint8Array | string | undefined> => {
   const {
     base,
     experimental_network_imports = false,
@@ -42,6 +42,9 @@ const getSource = async (
     ignore_errors = false,
     req
   } = options
+
+  // exit early if format is Format.BUILTIN
+  if (format === Format.BUILTIN) return undefined
 
   /**
    * Module {@linkcode id} as {@linkcode URL}.
@@ -62,9 +65,9 @@ const getSource = async (
   /**
    * Source code for {@linkcode id}.
    *
-   * @var {Uint8Array | string} source
+   * @var {Uint8Array | string | undefined} source
    */
-  let source: Uint8Array | string = ''
+  let source: Uint8Array | string | undefined = ''
 
   // get source code based on url protocol
   switch (url.protocol) {
@@ -93,6 +96,9 @@ const getSource = async (
         err = true
       }
 
+      break
+    case 'node:':
+      source = undefined
       break
     default:
       err = true
