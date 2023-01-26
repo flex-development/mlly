@@ -62,14 +62,5 @@
     "**/.*.cjs",
     "./docs/.vitepress/**/*.ts",
     "./docs/.vitepress/**/*.vue"
-  ],
-  "ts-node": {
-    "compilerOptions": {},
-    "esm": true,
-    "experimentalResolver": true,
-    "experimentalSpecifierResolution": "node",
-    "moduleTypes": {},
-    "require": [],
-    "transpileOnly": true
-  }
+  ]
 }
