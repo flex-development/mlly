@@ -35,6 +35,10 @@ describe('unit:utils/toBareSpecifier', () => {
         '@flex-development/mkbuild/plugins/dts/plugin'
       ],
       [
+        'node_modules/@flex-development/mkbuild/dist/plugins/dts/plugin.mjs',
+        '@flex-development/mkbuild/plugins/dts/plugin'
+      ],
+      [
         '@flex-development/mkbuild/node_modules/cosmiconfig/dist/Explorer.js',
         'cosmiconfig/dist/Explorer.js'
       ],

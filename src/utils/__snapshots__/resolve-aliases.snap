@@ -1,0 +1,32 @@
+// Vitest Snapshot v1
+
+exports[`unit:utils/resolveAliases > should return code with path aliases resolved 1`] = `
+"import type { ParsedModuleId, ResolveAliasOptions } from '../interfaces'
+import regexp from '../internal/escape-reg-exp'
+import validateBoolean from '../internal/validate-boolean'
+import validateObject from '../internal/validate-object'
+import validateSet from '../internal/validate-set'
+import validateString from '../internal/validate-string'
+import validateURLString from '../internal/validate-url-string'
+import type { NodeError } from '@flex-development/errnode'
+import pathe from '@flex-development/pathe'
+import {
+  CompareResult,
+  isNIL,
+  type Nullable
+} from '@flex-development/tutils'
+import { URL, pathToFileURL } from 'node:url'
+import compareSubpaths from './compare-subpaths'
+import CONDITIONS from './conditions'
+import parseModuleId from './parse-module-id'
+import PATTERN_CHARACTER from './pattern-character'
+import RESOLVE_EXTENSIONS from './resolve-extensions'
+import resolveModule from './resolve-module'
+import toBareSpecifier from './to-bare-specifier'
+import toRelativeSpecifier from './to-relative-specifier'
+import toURL from './to-url'
+
+await import(foo)
+
+export default {}"
+`;

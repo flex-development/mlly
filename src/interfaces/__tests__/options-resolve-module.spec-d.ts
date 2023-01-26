@@ -4,7 +4,6 @@
  */
 
 import type { ChangeExtFn, ModuleId } from '#src/types'
-import type { Ext } from '@flex-development/pathe'
 import type { KeysRequired, Nilable } from '@flex-development/tutils'
 import type TestSubject from '../options-resolve-module'
 
@@ -31,10 +30,10 @@ describe('unit-d:interfaces/ResolveModuleOptions', () => {
       .toEqualTypeOf<ChangeExtFn | Nilable<string>>()
   })
 
-  it('should match [extensions?: Set<Ext>]', () => {
+  it('should match [extensions?: Set<string>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('extensions')
-      .toEqualTypeOf<Set<Ext> | undefined>()
+      .toEqualTypeOf<Set<string> | undefined>()
   })
 
   it('should match [parent?: ModuleId]', () => {

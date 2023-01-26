@@ -75,7 +75,7 @@ const resolveModule = async (
       ? []
       : [...extensions]
           .flatMap(ext => [
-            specifier + ext,
+            specifier + (ext = pathe.formatExt(ext)),
             specifier.startsWith('#') ? specifier + '/index' : '',
             specifier + '/index' + ext
           ])

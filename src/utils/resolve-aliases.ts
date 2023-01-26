@@ -3,56 +3,42 @@
  * @module mlly/utils/resolveAliases
  */
 
+import { SpecifierSyntaxKind } from '#src/enums'
 import type { ResolveAliasOptions } from '#src/interfaces'
-import getCompilerOptions from '#src/internal/get-compiler-options'
-import pathe from '@flex-development/pathe'
 import extractStatements from './extract-statements'
 import resolveAlias from './resolve-alias'
 
 /**
- * Resolves path aliases in `code`.
+ * Resolves path aliases in the given piece of source `code`.
  *
  * @see {@linkcode ResolveAliasOptions}
  * @see {@linkcode resolveAlias}
  *
- * @param {string} code - Code containing path aliases
+ * @async
+ *
+ * @param {string} code - Code to evaluate
  * @param {ResolveAliasOptions} [options={}] - Resolve alias options
- * @return {string} `code` unmodified or with path aliases resolved
+ * @return {Promise<string>} `code` unmodified or with path aliases resolved
  */
-const resolveAliases = (
+const resolveAliases = async (
   code: string,
   options: ResolveAliasOptions = {}
-): string => {
-  const { tsconfig } = options
-  let { baseUrl = process.cwd(), paths = {} } = options
-
-  // use baseUrl and paths from tsconfig
-  if (tsconfig) {
-    const { baseUrl: b = '.', paths: p = paths } = getCompilerOptions(tsconfig)
-
-    // reset baseUrl and paths
-    baseUrl = pathe.resolve(pathe.dirname(tsconfig), b)
-    paths = p
-  }
-
-  // resolve path aliases
+): Promise<string> => {
   for (const statement of extractStatements(code)) {
-    // do nothing if missing module specifier
+    // do nothing if statement does not have specifier
     if (!statement.specifier) continue
+
+    // ignore statements with dynamic specifiers
+    if (statement.specifier_syntax === SpecifierSyntaxKind.DYNAMIC) continue
 
     /**
      * Resolved module specifier.
      *
      * @const {string} specifier
      */
-    const specifier: string = resolveAlias(statement.specifier, {
-      ...options,
-      baseUrl,
-      paths,
-      tsconfig: undefined
-    })
+    const specifier: string = await resolveAlias(statement.specifier, options)
 
-    // do nothing if specifier did not contain path alias
+    // do nothing if original specifier did not contain path alias
     if (specifier === statement.specifier) continue
 
     // replace path alias

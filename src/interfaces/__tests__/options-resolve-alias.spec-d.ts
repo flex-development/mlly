@@ -3,55 +3,31 @@
  * @module mlly/interfaces/tests/unit-d/ResolveAliasOptions
  */
 
-import type { OneOrMany } from '@flex-development/tutils'
+import type { ModuleId } from '#src/types'
+import type { MapLike, OneOrMany } from '@flex-development/tutils'
 import type TestSubject from '../options-resolve-alias'
+import type ResolveModuleOptions from '../options-resolve-module'
 
 describe('unit-d:interfaces/ResolveAliasOptions', () => {
-  it('should match [baseUrl?: string]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('baseUrl')
-      .toEqualTypeOf<string | undefined>()
+  it('should extend ResolveModuleOptions', () => {
+    expectTypeOf<TestSubject>().toMatchTypeOf<ResolveModuleOptions>()
   })
 
-  it('should match [extensions?: string[] | readonly string[]]', () => {
+  it('should match [absolute?: boolean]', () => {
     expectTypeOf<TestSubject>()
-      .toHaveProperty('extensions')
-      .toEqualTypeOf<string[] | readonly string[] | undefined>()
+      .toHaveProperty('absolute')
+      .toEqualTypeOf<boolean | undefined>()
   })
 
-  it('should match [fileExists?(this: void, path: string): boolean]', () => {
+  it('should match [aliases?: MapLike<OneOrMany<string>>', () => {
     expectTypeOf<TestSubject>()
-      .toHaveProperty('fileExists')
-      .toEqualTypeOf<((this: void, path: string) => boolean) | undefined>()
+      .toHaveProperty('aliases')
+      .toEqualTypeOf<MapLike<OneOrMany<string>> | undefined>()
   })
 
-  it('should match [mainFields?: OneOrMany<string>[]]', () => {
+  it('should match [cwd?: ModuleId]', () => {
     expectTypeOf<TestSubject>()
-      .toHaveProperty('mainFields')
-      .toEqualTypeOf<OneOrMany<string>[] | undefined>()
-  })
-
-  it('should match [parent?: string]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('parent')
-      .toEqualTypeOf<string | undefined>()
-  })
-
-  it('should match [paths?: Record<string, string[]>]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('paths')
-      .toEqualTypeOf<Record<string, string[]> | undefined>()
-  })
-
-  it('should match [readFile?(this: void, filename: string): string]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('readFile')
-      .toEqualTypeOf<((this: void, filename: string) => string) | undefined>()
-  })
-
-  it('should match [tsconfig?: string]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('tsconfig')
-      .toEqualTypeOf<string | undefined>()
+      .toHaveProperty('cwd')
+      .toEqualTypeOf<ModuleId | undefined>()
   })
 })

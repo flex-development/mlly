@@ -13,7 +13,7 @@ import {
 } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import type { PackageJson } from '@flex-development/pkg-types'
-import { isNIL, type Nullable } from '@flex-development/tutils'
+import { isEmptyString, isNIL, type Nullable } from '@flex-development/tutils'
 import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import toURL from './to-url'
@@ -84,7 +84,7 @@ const readPackageJson = (
 
     // get base
     switch (true) {
-      case specifier && !isNIL(parent):
+      case specifier && !isNIL(parent) && !isEmptyString(parent):
         base = `'${specifier}' from ${fileURLToPath(toURL(parent!))}`
         break
       case specifier?.startsWith('file:'):

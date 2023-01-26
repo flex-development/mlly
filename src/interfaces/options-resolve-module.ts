@@ -4,14 +4,12 @@
  */
 
 import type { ChangeExtFn, ModuleId } from '#src/types'
-import type { Ext } from '@flex-development/pathe'
 import type { Nilable } from '@flex-development/tutils'
 
 /**
  * Module resolution options.
  *
  * @see {@linkcode ChangeExtFn}
- * @see {@linkcode Ext}
  * @see {@linkcode ModuleId}
  */
 interface ResolveModuleOptions {
@@ -52,7 +50,7 @@ interface ResolveModuleOptions {
    *
    * @default RESOLVE_EXTENSIONS
    */
-  extensions?: Set<Ext> | undefined
+  extensions?: Set<string> | undefined
 
   /**
    * URL of module to resolve from.

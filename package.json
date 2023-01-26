@@ -85,9 +85,7 @@
     "@flex-development/is-builtin": "1.0.1",
     "@flex-development/pathe": "1.0.3",
     "@flex-development/pkg-types": "2.0.0",
-    "@flex-development/tsconfig-types": "2.0.1",
-    "@flex-development/tutils": "6.0.0-alpha.9",
-    "tsconfig-paths": "4.1.1"
+    "@flex-development/tutils": "6.0.0-alpha.9"
   },
   "devDependencies": {
     "@commitlint/cli": "17.3.0",
@@ -166,6 +164,7 @@
     "trash-cli": "5.0.0",
     "ts-dedent": "2.2.0",
     "ts-node": "10.9.1",
+    "tsconfig-paths": "4.1.1",
     "typescript": "5.0.0-dev.20221215",
     "unified": "10.1.2",
     "unist-util-remove": "3.1.0",

@@ -1365,7 +1365,6 @@ __metadata:
     "@flex-development/mkbuild": "npm:1.0.0-alpha.9"
     "@flex-development/pathe": "npm:1.0.3"
     "@flex-development/pkg-types": "npm:2.0.0"
-    "@flex-development/tsconfig-types": "npm:2.0.1"
     "@flex-development/tutils": "npm:6.0.0-alpha.9"
     "@graphql-eslint/eslint-plugin": "npm:3.14.3"
     "@sindresorhus/slugify": "npm:2.1.1"
@@ -1478,15 +1477,6 @@ __metadata:
   peerDependencies:
     "@flex-development/tutils": ">=6.0.0-alpha.7"
   checksum: 7a7ce8a3289f30e0d6aa0b5e5028c308a36956f779b9baf6f2d209842b01acc2bc645f85a541125f83f461d41b15262b3af65ff6cd3b3f727679216acf0520cb
-  languageName: node
-  linkType: hard
-
-"@flex-development/tsconfig-types@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@flex-development/tsconfig-types@npm:2.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftsconfig-types%2F2.0.1%2F8e8d4ca7bdb91b10b634d4d02044f15f72c46ede"
-  peerDependencies:
-    "@flex-development/tutils": ">=6.0.0-alpha.7"
-  checksum: d5b77634012f07e835b5cc46a8ce4efb412c5e01a8c73734f36956a7aae41836e062cdc4ec7bd634cf3cf5be9ca67f69842166c1d24b5a8bb74ceb3a7f8b5efc
   languageName: node
   linkType: hard
 

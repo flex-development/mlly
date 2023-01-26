@@ -32,12 +32,6 @@ const config = {
       }
     },
     {
-      files: ['src/internal/__tests__/get-compiler-options.spec.ts'],
-      rules: {
-        'unicorn/no-keyword-prefix': 0
-      }
-    },
-    {
       files: ['src/utils/find-exports.ts'],
       rules: {
         'unicorn/prefer-module': 0

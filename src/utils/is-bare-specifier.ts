@@ -20,7 +20,11 @@ import isRelativeSpecifier from './is-relative-specifier'
  * @return {boolean} `true` if `specifier` is bare specifier
  */
 const isBareSpecifier = (specifier: string): boolean => {
-  return !isAbsoluteSpecifier(specifier) && !isRelativeSpecifier(specifier)
+  return (
+    specifier.trim().length > 0 &&
+    !isAbsoluteSpecifier(specifier) &&
+    !isRelativeSpecifier(specifier)
+  )
 }
 
 export default isBareSpecifier

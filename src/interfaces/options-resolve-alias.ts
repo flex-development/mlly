@@ -3,77 +3,57 @@
  * @module mlly/interfaces/ResolveAliasOptions
  */
 
-import type { OneOrMany } from '@flex-development/tutils'
+import type { ModuleId } from '#src/types'
+import type { MapLike, OneOrMany } from '@flex-development/tutils'
+import type ResolveModuleOptions from './options-resolve-module'
 
 /**
  * Path alias resolution options.
  *
- * @see https://github.com/dividab/tsconfig-paths
+ * @see {@linkcode ModuleId}
+ *
+ * @extends {ResolveModuleOptions}
  */
-interface ResolveAliasOptions {
+interface ResolveAliasOptions extends ResolveModuleOptions {
   /**
-   * Base directory to resolve non-absolute module names.
+   * Return resolved module URL as absolute specifier (a [`file:` URL][1]).
    *
-   * @see https://www.typescriptlang.org/tsconfig#baseUrl
+   * If `false`, return resolved module URL as bare or relative specifier.
    *
-   * @default process.cwd()
+   * [1]: https://nodejs.org/api/esm.html#file-urls
+   *
+   * @see https://nodejs.org/api/esm.html#terminology
+   *
+   * @default true
    */
-  baseUrl?: string | undefined
-
-  /**
-   * Module extensions to probe for.
-   *
-   * **Note**: Should be sorted by priority.
-   *
-   * @default RESOLVE_EXTENSIONS
-   */
-  extensions?: string[] | readonly string[] | undefined
-
-  /**
-   * Checks for the existence of a file at `path`.
-   *
-   * @param {string} path - Path to check
-   * @return {boolean} `true` if file exists, `false` otherwise
-   */
-  fileExists?(this: void, path: string): boolean
-
-  /**
-   * `package.json` fields to check when resolving modules.
-   *
-   * A nested field can be selected by passing an array of field names.
-   *
-   * @default ['main', 'module']
-   */
-  mainFields?: OneOrMany<string>[] | undefined
-
-  /**
-   * Absolute path to file containing path alias.
-   */
-  parent?: string | undefined
+  absolute?: boolean | undefined
 
   /**
    * Path mappings.
    *
-   * **Note**: Should be relative to {@linkcode baseUrl}.
-   *
-   * @see https://www.typescriptlang.org/tsconfig#paths
+   * **Note**: Paths should be relative to {@linkcode cwd}.
    *
    * @default {}
    */
-  paths?: Record<string, string[]> | undefined
+  aliases?: MapLike<OneOrMany<string>> | undefined
 
   /**
-   * Synchronously returns the contents of `filename`.
+   * Directory to resolve non-absolute modules from.
    *
-   * @param {string} filename - Filename
-   * @return {string} Contents of `filename`
+   * @default pathToFileURL('.')
    */
-  readFile?(this: void, filename: string): string
+  cwd?: ModuleId | undefined
 
   /**
-   * Absolute path to tsconfig file.
+   * Id of module to resolve from.
+   *
+   * **Note**: Should be an absolute path or [`file:` URL][1].
+   *
+   * [1]: https://nodejs.org/api/esm.html#file-urls
+   *
+   * @default import.meta.url
    */
-  tsconfig?: string | undefined
+  parent?: ModuleId | undefined
 }
 
 export type { ResolveAliasOptions as default }

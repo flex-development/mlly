@@ -14,6 +14,7 @@ import {
   type NodeError
 } from '@flex-development/errnode'
 import isBuiltin from '@flex-development/is-builtin'
+import pathe from '@flex-development/pathe'
 import { isNIL, type Nullable } from '@flex-development/tutils'
 import { URL, fileURLToPath, pathToFileURL } from 'node:url'
 import CONDITIONS from './conditions'
@@ -176,9 +177,16 @@ const toBareSpecifier = (
         )
       }
 
+      // replace pattern character in subpath
       if (subpath.includes(PATTERN_CHARACTER)) {
         subpath = subpath.slice(0, subpath.indexOf(PATTERN_CHARACTER)).slice(1)
         subpath = '.' + target.slice(target.indexOf(subpath))
+      }
+
+      // subpath should not include extension if extension is already ncluded
+      // via package target
+      if (pathe.extname(target) === pathe.extname(subpath)) {
+        subpath = pathe.changeExt(subpath, '')
       }
 
       return name + subpath.slice(1)

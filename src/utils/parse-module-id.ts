@@ -16,6 +16,7 @@ import {
 import isBuiltin from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
 import { URL, fileURLToPath } from 'node:url'
+import isBareSpecifier from './is-bare-specifier'
 import isRelativeSpecifier from './is-relative-specifier'
 import toNodeURL from './to-node-url'
 
@@ -45,8 +46,8 @@ const parseModuleId = (
   // ensure id is an instance of URL or a string
   validateURLString(id, 'id')
 
-  // ensure id a string
-  if (id instanceof URL) id = id.href
+  // ensure id a string without leading and trailing spaces
+  id = id instanceof URL ? id.href : id.trim()
 
   /**
    * Reason for [`ERR_INVALID_MODULE_SPECIFIER`][1], if any.
@@ -149,17 +150,12 @@ const parseModuleId = (
       }
 
       break
+    case isBareSpecifier(id as string):
+    case isRelativeSpecifier(id as string):
+    case pathe.isAbsolute(id):
+      break
     default:
-      switch (true) {
-        case id.startsWith('node_modules'):
-        case isRelativeSpecifier(id):
-        case pathe.isAbsolute(id):
-          break
-        default:
-          error = ''
-          break
-      }
-
+      error = ''
       break
   }
 

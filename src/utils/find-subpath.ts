@@ -5,6 +5,8 @@
 
 import type { FindSubpathOptions } from '#src/interfaces'
 import getSubpaths from '#src/internal/get-subpaths'
+import validateBoolean from '#src/internal/validate-boolean'
+import validateSet from '#src/internal/validate-set'
 import validateString from '#src/internal/validate-string'
 import validateURLString from '#src/internal/validate-url-string'
 import type { NodeError } from '@flex-development/errnode'
@@ -37,9 +39,7 @@ import toURL from './to-url'
  * @param {Exports | Imports | undefined} context - Package context
  * @param {FindSubpathOptions} options - Search options
  * @return {Nullable<string>} Subpath defined in `context` or `null`
- * @throws {NodeError<Error | TypeError>} If `target` is not a string, or if
- * either `options.dir` or `options.parent` is not a {@linkcode URL} instance or
- * a string
+ * @throws {NodeError<Error | TypeError>}
  */
 const findSubpath = (
   target: string,
@@ -57,7 +57,7 @@ const findSubpath = (
   // exit early if context is nil
   if (isNIL(context)) return null
 
-  // ensure specifier is a string
+  // ensure target is a string
   validateString(target, 'target')
 
   // exit early if target is an exactish match
@@ -67,10 +67,11 @@ const findSubpath = (
     }
   }
 
-  // ensure dir is an instance of URL or a string
+  // ensure option schemas
+  validateString(condition, 'options.condition')
+  validateSet(conditions, 'options.conditions')
   validateURLString(dir, 'options.dir')
-
-  // ensure dir is an instance of URL or a string
+  validateBoolean(internal, 'options.internal')
   validateURLString(parent, 'options.parent')
 
   /**
