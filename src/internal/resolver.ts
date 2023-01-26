@@ -343,7 +343,7 @@ class Resolver {
 
     // convert exports to object if using exports main sugar
     if (!subpath.internal && isExportsSugar(exports, pkg, parent)) {
-      exports = { '.': exports }
+      exports = { '.': exports } as Record<string, Exports>
     }
 
     /**
