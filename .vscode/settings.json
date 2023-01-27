@@ -233,7 +233,8 @@
     "!**/node_modules",
     "!**/.git",
     "!**/CHANGELOG.md",
-    "!**/LICENSE.md"
+    "!**/LICENSE.md",
+    "!**/RELEASE_NOTES.md"
   ],
   "npm-intellisense.scanDevDependencies": true,
   "prettier.configPath": ".prettierrc.json",

@@ -61,6 +61,10 @@ docs/.vitepress/.temp/
 docs/.vitepress/config.*.timestamp*
 !typings/**/dist/
 
+# Releases
+# ------------------------------------------------------------------------------
+RELEASE_NOTES.md
+
 # Vercel
 # ------------------------------------------------------------------------------
 .vercel

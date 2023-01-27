@@ -116,7 +116,7 @@ jobs:
           NODE_ENV: production
       - id: release-notes
         name: Generate release notes
-        run: yarn conventional-changelog -o $NOTES_FILE
+        run: yarn changelog -w -o $NOTES_FILE
         env:
           NODE_NO_WARNINGS: 1
       - id: tag

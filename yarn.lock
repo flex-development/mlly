@@ -1525,11 +1525,9 @@ __metadata:
     "@types/chai": "npm:4.3.4"
     "@types/chai-string": "npm:1.4.2"
     "@types/conventional-changelog": "npm:3.1.1"
-    "@types/conventional-changelog-config-spec": "npm:2.1.2"
     "@types/conventional-changelog-writer": "npm:4.0.2"
     "@types/conventional-commits-parser": "npm:3.0.3"
     "@types/dateformat": "npm:5.0.0"
-    "@types/dotenv-defaults": "npm:2.0.1"
     "@types/eslint": "npm:8.4.10"
     "@types/git-raw-commits": "npm:2.0.1"
     "@types/is-ci": "npm:3.0.0"
@@ -1537,6 +1535,7 @@ __metadata:
     "@types/node": "npm:16.18.11"
     "@types/node-notifier": "npm:8.0.2"
     "@types/prettier": "npm:2.7.2"
+    "@types/semver": "npm:7.3.13"
     "@types/unist": "npm:2.0.6"
     "@typescript-eslint/eslint-plugin": "npm:5.49.0"
     "@typescript-eslint/parser": "npm:5.49.0"
@@ -1544,6 +1543,7 @@ __metadata:
     "@vitest/coverage-c8": "npm:0.28.2"
     "@vitest/ui": "npm:0.28.2"
     "@vuedx/typescript-plugin-vue": "npm:0.7.7-next-1667939290.0"
+    add-stream: "npm:1.0.0"
     chai: "npm:4.3.7"
     chai-each: "npm:0.0.1"
     chai-quantifiers: "npm:1.0.17"
@@ -1584,12 +1584,13 @@ __metadata:
     prettier-plugin-sh: "npm:0.12.8"
     pretty-format: "npm:29.4.1"
     pupa: "npm:3.1.0"
+    sade: "npm:1.8.1"
+    semver: "npm:7.3.8"
     serve: "npm:14.2.0"
     sitemap: "npm:7.1.1"
+    tempfile: "npm:4.0.0"
     trash-cli: "npm:5.0.0"
     ts-dedent: "npm:2.2.0"
-    ts-node: "npm:10.9.1"
-    tsconfig-paths: "npm:4.1.2"
     typescript: "npm:5.0.0-dev.20221215"
     unified: "npm:10.1.2"
     unist-util-remove: "npm:3.1.0"
@@ -2415,15 +2416,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/conventional-changelog-config-spec@npm:2.1.2":
-  version: 2.1.2
-  resolution: "@types/conventional-changelog-config-spec@npm:2.1.2"
-  dependencies:
-    "@types/json-schema": "npm:*"
-  checksum: ba4690a60783c4dece7f80483b88e6e86d6d8e73fc58dea0cfadde92092c7e1611f2a62e6baeb40e49b624ba625094e1041a9db19cefbccaf6ad77b7c3411c5c
-  languageName: node
-  linkType: hard
-
 "@types/conventional-changelog-core@npm:*":
   version: 4.2.1
   resolution: "@types/conventional-changelog-core@npm:4.2.1"
@@ -2484,15 +2476,6 @@ __metadata:
   version: 5.0.0
   resolution: "@types/dateformat@npm:5.0.0"
   checksum: b425535210c5f0aa373164c851b0e03c4d9ae4b57d29ce9eebd7a7fbf6464ea8ebebb00434ea11e770228506a7058e3cce74371c336f8eb47d5e4a99e94bb4ac
-  languageName: node
-  linkType: hard
-
-"@types/dotenv-defaults@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@types/dotenv-defaults@npm:2.0.1"
-  dependencies:
-    dotenv: "npm:^8.2.0"
-  checksum: 1b655a44a149ce7cc072f55d3b7b9b5301bcd0386bd6859c8a19d061f5c1078b860a2a4147c281309cb0cffe5d31c99137306bb334185b741875b8cbe5585fc7
   languageName: node
   linkType: hard
 
@@ -2652,7 +2635,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/semver@npm:^7.3.12":
+"@types/semver@npm:7.3.13, @types/semver@npm:^7.3.12":
   version: 7.3.13
   resolution: "@types/semver@npm:7.3.13"
   checksum: a76156ff60ddbd17bf2120c09dca3cd8ac7db4f8d8c69614a9ebc5202f05d1044def7fd8cf77415f7284ea8edfa1092b6e04dac07dc17c94762904c69dd2c85b
@@ -3418,7 +3401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"add-stream@npm:^1.0.0":
+"add-stream@npm:1.0.0, add-stream@npm:^1.0.0":
   version: 1.0.0
   resolution: "add-stream@npm:1.0.0"
   checksum: 983603ebd5b25ee35ac37f25f1caa6bd4e6feb90bba6d05e0c3cd0d599f252498e75d76f9d8203892a7a44c80ba8b72aade570749c9925f45b9b25d53a687aeb
@@ -5191,13 +5174,6 @@ __metadata:
   version: 16.0.3
   resolution: "dotenv@npm:16.0.3"
   checksum: abce82d99b45e2ebbd42625a78cadbfafe03072c15e6538b6a3a7ed204b6e091c0de929dd09231edc61f78afbdcd5b8a2f21b9e933e8ab27d75bee865a0e58c9
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^8.2.0":
-  version: 8.6.0
-  resolution: "dotenv@npm:8.6.0"
-  checksum: a58180cbaa6b7edec539461e4fd72fc9f2b7a181187a2e10942f047da15316f90f04eeeb18b7137049c6e5035a3451af103ddd7a8c691eac339d4e48e1bb1a08
   languageName: node
   linkType: hard
 
@@ -7520,7 +7496,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:^2.2.0, json5@npm:^2.2.1, json5@npm:^2.2.2":
+"json5@npm:^2.2.0, json5@npm:^2.2.1":
   version: 2.2.3
   resolution: "json5@npm:2.2.3"
   bin:
@@ -8298,7 +8274,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mri@npm:1.2.0":
+"mri@npm:1.2.0, mri@npm:^1.1.0":
   version: 1.2.0
   resolution: "mri@npm:1.2.0"
   checksum: f459cd82edbe77b6296cc59a5005c351cd52f6a6d733539ae91f6dbc61a23c6e558bf9dea2703212b2caf1b0803852f357325612ba848795686577432740bd49
@@ -9736,6 +9712,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sade@npm:1.8.1":
+  version: 1.8.1
+  resolution: "sade@npm:1.8.1"
+  dependencies:
+    mri: "npm:^1.1.0"
+  checksum: da67f42ec984b58d0eac48d160e4da6d966416bafb88c37556f41f8a52c1ff897ca065984da3d62557ed8622c9999493f133ed6af63e4ea5191342029f37455c
+  languageName: node
+  linkType: hard
+
 "safe-buffer@npm:5.1.2, safe-buffer@npm:~5.1.0, safe-buffer@npm:~5.1.1":
   version: 5.1.2
   resolution: "safe-buffer@npm:5.1.2"
@@ -10342,6 +10327,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tempfile@npm:4.0.0":
+  version: 4.0.0
+  resolution: "tempfile@npm:4.0.0"
+  dependencies:
+    temp-dir: "npm:^2.0.0"
+    uuid: "npm:^8.3.2"
+  checksum: 0064ea87faebb10950adb130b043ccf6306d3f10afc041674b67f1b14fbcb799e8962be588ad1eb225781af1427351195f2835181e22f9631766dd71615d971b
+  languageName: node
+  linkType: hard
+
 "tempfile@npm:^3.0.0":
   version: 3.0.0
   resolution: "tempfile@npm:3.0.0"
@@ -10615,17 +10610,6 @@ __metadata:
     minimist: "npm:^1.2.6"
     strip-bom: "npm:^3.0.0"
   checksum: fa7c821f554e54340861ed8ca0e1f319e96ed8b9e63bf7571a19f6ffc0aceab5cff49a84245c1584a7ead10362f8ab04f81162088ea0fc26cace8fe7550287d9
-  languageName: node
-  linkType: hard
-
-"tsconfig-paths@npm:4.1.2":
-  version: 4.1.2
-  resolution: "tsconfig-paths@npm:4.1.2"
-  dependencies:
-    json5: "npm:^2.2.2"
-    minimist: "npm:^1.2.6"
-    strip-bom: "npm:^3.0.0"
-  checksum: c58c616293f334f6c4eff227e22279c3ee87ab3f6f2aa62a618172927e5af742f10b2daebae36ab715fced0c328da638600cf4b66c4ecc7ed5f76b6cd154ec2e
   languageName: node
   linkType: hard
 
