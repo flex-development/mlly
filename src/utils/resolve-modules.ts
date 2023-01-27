@@ -5,6 +5,7 @@
 
 import { SpecifierSyntaxKind } from '#src/enums'
 import type { ResolveModuleOptions } from '#src/interfaces'
+import regexp from '#src/internal/escape-reg-exp'
 import type { URL } from 'node:url'
 import extractStatements from './extract-statements'
 import resolveModule from './resolve-module'
@@ -48,7 +49,10 @@ const resolveModules = async (
     // replace original specifier
     code = code.replace(
       statement.code,
-      statement.code.replace(statement.specifier, url.href)
+      statement.code.replace(
+        new RegExp(`(?<=["'])${regexp(statement.specifier)}(?=["'])`),
+        url.href
+      )
     )
   }
 

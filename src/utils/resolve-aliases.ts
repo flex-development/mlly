@@ -5,6 +5,7 @@
 
 import { SpecifierSyntaxKind } from '#src/enums'
 import type { ResolveAliasOptions } from '#src/interfaces'
+import regexp from '#src/internal/escape-reg-exp'
 import extractStatements from './extract-statements'
 import resolveAlias from './resolve-alias'
 
@@ -44,7 +45,10 @@ const resolveAliases = async (
     // replace path alias
     code = code.replace(
       statement.code,
-      statement.code.replace(statement.specifier, specifier)
+      statement.code.replace(
+        new RegExp(`(?<=["'])${regexp(statement.specifier)}(?=["'])`),
+        specifier
+      )
     )
   }
 
