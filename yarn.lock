@@ -1593,7 +1593,7 @@ __metadata:
     ts-dedent: "npm:2.2.0"
     typescript: "npm:5.0.0-dev.20221215"
     unified: "npm:10.1.2"
-    unist-util-remove: "npm:3.1.0"
+    unist-util-remove: "npm:3.1.1"
     unist-util-source: "npm:4.0.2"
     unist-util-visit: "npm:4.1.2"
     vercel: "npm:28.13.2"
@@ -10883,14 +10883,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unist-util-remove@npm:3.1.0":
-  version: 3.1.0
-  resolution: "unist-util-remove@npm:3.1.0"
+"unist-util-remove@npm:3.1.1":
+  version: 3.1.1
+  resolution: "unist-util-remove@npm:3.1.1"
   dependencies:
     "@types/unist": "npm:^2.0.0"
     unist-util-is: "npm:^5.0.0"
     unist-util-visit-parents: "npm:^5.0.0"
-  checksum: 947582750430decc878c0bd0c51c46047c68ea4e22ab2d1f586878d430f7e3cacb784e520327f7663c92f7b442764454eafb724182db263d1a432e615c0e5b39
+  checksum: 6453720d66e06278668f36d142a796cb71d80fa125aa106c201f2650fe8b09971abc70e25c3b0ee2cc1bdbb01686f1b9414e19d8f677d4658e46584497b3efe6
   languageName: node
   linkType: hard
 
