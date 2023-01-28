@@ -7,6 +7,7 @@
 # References:
 #
 # - https://cli.github.com/manual/gh_pr_review
+# - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://github.com/actions/checkout
 # - https://github.com/dependabot/fetch-metadata
@@ -42,7 +43,8 @@ jobs:
       - id: approve
         name: Approve pull request
         if: |
-          github.event.requested_reviewer.login == 'flexdevelopment'
-          && (github.actor == 'unicornware'
-          || steps.dependabot-metadata.outputs.update-type != 'version-update:semver-major')
+          (github.event.requested_reviewer.login == 'flexdevelopment'
+          || contains(join(github.event.requested_reviewers.*.login, ','), 'flexdevelopment'))
+          && (github.actor == 'dependabot[bot]' || github.actor == 'unicornware')
+          && steps.dependabot-metadata.outputs.update-type != 'version-update:semver-major'
         run: gh pr review ${{ github.event.number }} --approve --body 'lgtm 👍🏾'
