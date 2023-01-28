@@ -34,7 +34,7 @@ jobs:
         uses: hmarr/debug-action@v2.1.0
       - id: metadata
         name: Fetch metadata
-        uses: dependabot/fetch-metadata@v1.3.5
+        uses: dependabot/fetch-metadata@v1.3.6
         with:
           skip-commit-verification: true
       - id: checkout
