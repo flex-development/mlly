@@ -278,7 +278,7 @@ jobs:
         run: yarn check:types:build
       - id: archive
         name: Archive production artifacts
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: |
             ${{ format('@{0}-{1}-{2}', github.repository_owner, github.event.repository.name, needs.metadata.outputs.version) }}
@@ -331,7 +331,7 @@ jobs:
         run: vc deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
       - id: archive
         name: Archive production artifacts
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: |
             ${{ format('@{0}-{1}-{2}-docs', github.repository_owner, github.event.repository.name, needs.metadata.outputs.version) }}
