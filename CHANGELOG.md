@@ -1,3 +1,178 @@
+## [1.0.0-alpha.7](https://github.com/flex-development/mlly/compare/1.0.0-alpha.6...1.0.0-alpha.7) (2023-01-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **utils:** `resolveAlias` ([b4ed0b1](https://github.com/flex-development/mlly/commit/b4ed0b1c0860954c29f3224dde52803cb0198438))
+* **interfaces:** [`Statement`] `specifier_kind` -> `specifier_syntax` ([734edd2](https://github.com/flex-development/mlly/commit/734edd2b87377be49906eecf5d38d5001093872d))
+* **enums:** `SpecifierKind` -> `SpecifierSyntaxKind` ([1a24b13](https://github.com/flex-development/mlly/commit/1a24b13ac020d53de90abf72d427ea9f15b9eeb5))
+* **enums:** `SyntaxKind` -> `StatementSyntaxKind` ([02c1456](https://github.com/flex-development/mlly/commit/02c14566eba3e7f23c260c1b9101ea39ee4b34c7))
+* **utils:** `toBareSpecifier` ([b0caca0](https://github.com/flex-development/mlly/commit/b0caca069ca004f7dc9dfb443fbba43bbcf9fba1))
+* **types:** `MIMEType` -> `MimeType`
+* **exports:** remove subpath `"./lib/*"`
+
+### :package: Build
+
+* output `.d.mts` and `.mjs` files separately ([8e05a0d](https://github.com/flex-development/mlly/commit/8e05a0d70ba6bc972947a04bcceb3dd7304bd768))
+* **deps-dev:** bump deps according to `yarn upgrade-interactive` ([9f70d1a](https://github.com/flex-development/mlly/commit/9f70d1aa397ec52738584c08d209472340d8f628))
+* **deps-dev:** Bump esbuild from 0.17.4 to 0.17.5 ([#73](https://github.com/flex-development/mlly/issues/73)) ([e7add8d](https://github.com/flex-development/mlly/commit/e7add8d458d2ba4b04959c6c769d0bdb8e5635bf))
+* **deps-dev:** Bump eslint-plugin-jsdoc from 39.6.8 to 39.6.9 ([#72](https://github.com/flex-development/mlly/issues/72)) ([63d710f](https://github.com/flex-development/mlly/commit/63d710fd2ced0c1003724ab19bc1a08de5137f98))
+* **deps-dev:** bump typescript from 4.9.4 to 5.0.0-dev.20230102 ([f8b753b](https://github.com/flex-development/mlly/commit/f8b753b086be2bbb3506e21e7ecd86d5c94fdc85))
+* **deps-dev:** Bump vercel from 28.13.2 to 28.14.0 ([#71](https://github.com/flex-development/mlly/issues/71)) ([d31fa67](https://github.com/flex-development/mlly/commit/d31fa67cc0df03b42087a698ac2b14c5f05ba682))
+* **deps-dev:** remove vitest patch ([5ccce0b](https://github.com/flex-development/mlly/commit/5ccce0bc4f06871594ede77238db38c11917b0fd))
+* **deps-peer:** add `@types/node>=14.17.0` ([67899e3](https://github.com/flex-development/mlly/commit/67899e3a632bd048f5ec90ce2732bf87b57f873b))
+* **deps:** bump @flex-development/errnode from 1.2.0 to 1.3.0 ([c95b3c8](https://github.com/flex-development/mlly/commit/c95b3c8a8343474840eab1afefb1c0e57a2a3d90))
+* **deps:** bump @flex-development/import-regex from 2.0.0 to 2.0.1 ([e868cae](https://github.com/flex-development/mlly/commit/e868cae9130d68105b35d45e7c750bbf26f824ed))
+* **deps:** bump @flex-development/pathe from 1.0.1 to 1.0.2 ([8954b4a](https://github.com/flex-development/mlly/commit/8954b4aed63e0523964faf1b85b9d9ac07c338bd))
+* **deps:** bump @flex-development/pathe from 1.0.2 to 1.0.3 ([3910fcf](https://github.com/flex-development/mlly/commit/3910fcfb8e778cd5dd0af5a3b355a93378d5e2b8))
+* **deps:** bump @flex-development/tutils from 6.0.0-alpha.7 to 6.0.0-alpha.9 ([3692fbd](https://github.com/flex-development/mlly/commit/3692fbd760e701245b99da401fcb9fd4fda8e7f6))
+* **exports:** remove subpath `"./lib/*"` ([d748039](https://github.com/flex-development/mlly/commit/d74803951eaf1b71d1d3ff3680b52adf63861b8f))
+
+
+### :robot: Continuous Integration
+
+* [[@dependabot](https://github.com/dependabot)] update ignore list for npm ecosystem ([d500b0a](https://github.com/flex-development/mlly/commit/d500b0ac3764fe27c7e9fe2218edc723f562021f))
+* **deps:** bump actions/cache from 3.2.2 to 3.2.3 ([7781b0f](https://github.com/flex-development/mlly/commit/7781b0f5203e7f625947d78fb85f511a4dc8fa05)), closes [#48](https://github.com/flex-development/mlly/issues/48)
+* **deps:** bump actions/checkout from 3.2.0 to 3.3.0 ([e8719e2](https://github.com/flex-development/mlly/commit/e8719e2b8c3e4631193614b46f99c0fe0f918f67)), closes [#44](https://github.com/flex-development/mlly/issues/44)
+* **deps:** bump actions/setup-node from 3.5.1 to 3.6.0 ([b36ee40](https://github.com/flex-development/mlly/commit/b36ee40e2ef3cd7050fe712a7cdb89ac0701d063)), closes [#43](https://github.com/flex-development/mlly/issues/43)
+* **deps:** bump actions/upload-artifact from 3.1.1 to 3.1.2 ([51db5a6](https://github.com/flex-development/mlly/commit/51db5a694c9d1aadc17b9eda4cd06f3f5e93077a)), closes [#46](https://github.com/flex-development/mlly/issues/46)
+* **deps:** bump dependabot/fetch-metadata from 1.3.5 to 1.3.6 ([47f3668](https://github.com/flex-development/mlly/commit/47f3668649292627bb50d82412789ab3bf036f92)), closes [#67](https://github.com/flex-development/mlly/issues/67)
+* **workflows:** [`add-to-project`] run workflow when pr is synchronized ([06d8846](https://github.com/flex-development/mlly/commit/06d8846efdb681da4b2a2ce6c83df663f266b027))
+* **workflows:** [`approve-pr`] add debug step ([e130bed](https://github.com/flex-development/mlly/commit/e130bedeab8dd640b1a8cf6debdb8e6e1f92cbfb))
+* **workflows:** [`approve-pr`] refactor approval step conditional ([8afe058](https://github.com/flex-development/mlly/commit/8afe0581fb8d61bf21faa1b03b638aad84c8ff27))
+* **workflows:** [`ci`] add `docs` job ([8e9f672](https://github.com/flex-development/mlly/commit/8e9f67249c1e704c3e7aa8f31297170b0b8a3346))
+* **workflows:** [`ci`] add typescript matrix ([659629c](https://github.com/flex-development/mlly/commit/659629cc3b477ecb454914bc82e67080ad171515))
+* **workflows:** [`ci`] make typescript matrix dynamic ([825142e](https://github.com/flex-development/mlly/commit/825142ecd92688ce01ea0d0ee0b6a662dfa29f18))
+* **workflows:** [`ci`] skip workflow run for [@dependabot](https://github.com/dependabot) on `push` ([4e9c1ca](https://github.com/flex-development/mlly/commit/4e9c1cab80c2e7a8909742891eba5cd22b564be4))
+* **workflows:** [`ci`] split ci job into multiple jobs ([70e6ee2](https://github.com/flex-development/mlly/commit/70e6ee20ffd7be96f4c98344d35b627f3a4fc2ec))
+* **workflows:** [`ci`] update codecov config ([635adcd](https://github.com/flex-development/mlly/commit/635adcd3269b2e9ae48b3eb801376ffe5c5458f6))
+* **workflows:** [`dependabot-auto`] sign lockfile fix commit ([a520d77](https://github.com/flex-development/mlly/commit/a520d778317f94800e2b08d622f045b12aa71d38))
+* **workflows:** [`integrity`] update `pull_request` event activity types ([9d5569d](https://github.com/flex-development/mlly/commit/9d5569d2dabdb1c0d9f8aa652743fe7e7888a4c3))
+* **workflows:** [`typescript-canary`] print typescript version ([8bcc613](https://github.com/flex-development/mlly/commit/8bcc613c2b207efffa9964b07c15ffc76a786a5a))
+* **workflows:** [`typescript-canary`] run workflow daily ([22feb88](https://github.com/flex-development/mlly/commit/22feb88b8d1784a3acea5be91f814c8d7ece9b50))
+* **workflows:** add `typescript-canary` ([87d8a0d](https://github.com/flex-development/mlly/commit/87d8a0d46632b95ae0bfecd08659f91a78a8407f))
+* **yarn:** fix typescript matrix testing ([c021970](https://github.com/flex-development/mlly/commit/c021970fa53907c419897aa79f8028bd64d29fd5))
+
+
+### :pencil: Documentation
+
+* [site] add `/api/enums` ([11682d3](https://github.com/flex-development/mlly/commit/11682d3aa348e5d2cfc674e2ca8f17e4d7929ae5))
+* [site] fix "params" table rendering ([0915c3f](https://github.com/flex-development/mlly/commit/0915c3f6367e263fee2212ac83b4daa57d1b49c0))
+* [site] fix "throws" description rendering ([1bc5801](https://github.com/flex-development/mlly/commit/1bc5801df3a0d8e19186d99219b5cd550ad4f989))
+* [site] fix `@link` and `@linkcode` tag replacements ([e0e2b2f](https://github.com/flex-development/mlly/commit/e0e2b2f6e90a6ebd277b9ad4d1cddf5da57fc0b0))
+* [site] show title-only "throws" sections ([2dcb01b](https://github.com/flex-development/mlly/commit/2dcb01bd3309363b28587da5e752d55d019da6b1))
+* [site] update homepage ([c799a80](https://github.com/flex-development/mlly/commit/c799a809a88d1c82dd6b24c3bb925db4ad81e89f))
+* [site] update vercel install command ([89f407c](https://github.com/flex-development/mlly/commit/89f407cb81b32969bf87b9f18da635438bab7943))
+* **tests:** organize file overviews ([7479aa8](https://github.com/flex-development/mlly/commit/7479aa8df76d17d91d082e55bedbabdaf189be10))
+* **utils:** [`resolveModule`] other differences between node.js ([ae357e8](https://github.com/flex-development/mlly/commit/ae357e8cd949db0ffbb228b34c29446be277e043))
+
+
+### :sparkles: Features
+
+* **enums:** `AssertType` ([f4ab669](https://github.com/flex-development/mlly/commit/f4ab6691df8f102d5dadba755ccd1dc2f66df16b))
+* **enums:** `Format` ([bd79b6a](https://github.com/flex-development/mlly/commit/bd79b6a059918f83b88a2ebe6789e0d68fbcb7ca))
+* **enums:** `SpecifierKind` ([077a6ab](https://github.com/flex-development/mlly/commit/077a6abd2676fed01e3aa46bafeefd22d2b43ce2))
+* **interfaces:** `FillModuleOptions` ([ffb0481](https://github.com/flex-development/mlly/commit/ffb04816e0788b5802a1880ace3b53fa9d90c10a))
+* **interfaces:** `FindSubpathOptions` ([b5fd706](https://github.com/flex-development/mlly/commit/b5fd7067575007c00f85e17fbe9c4404d21ab941))
+* **interfaces:** `GetFormatOptions` ([0e7e861](https://github.com/flex-development/mlly/commit/0e7e861770b93520967801951bdea5654f4d9922))
+* **interfaces:** `GetSourceOptions` ([dae9081](https://github.com/flex-development/mlly/commit/dae9081166c2af8710faef2b737d45420dd05ce4))
+* **interfaces:** `ImportAssertions` ([7a51c62](https://github.com/flex-development/mlly/commit/7a51c62d68240025402a490b94ab44f14deb2259))
+* **interfaces:** `PackageScope` ([52c16ad](https://github.com/flex-development/mlly/commit/52c16ad141d1956f53d93f057254d2438ce08492))
+* **interfaces:** `ParsedDataUrl` ([529b3c5](https://github.com/flex-development/mlly/commit/529b3c5093f85b03351dbdb95dbe3f9277a884fb))
+* **interfaces:** `ParsedModuleId` ([194b14e](https://github.com/flex-development/mlly/commit/194b14ef0fc047190980c3b92f48b9e5c53832fb))
+* **interfaces:** `ParsedSubpath` ([7bc8031](https://github.com/flex-development/mlly/commit/7bc803152d8b57116d5fa2fdaa67096e09a13f64))
+* **interfaces:** `ParseModuleIdOptions` ([97ee265](https://github.com/flex-development/mlly/commit/97ee26526c89e5a42d7a64431a4a3d49127414df))
+* **interfaces:** `ParseSubpathOptions` ([f5150fd](https://github.com/flex-development/mlly/commit/f5150fd322b3b96e919756d4e0a4aa0143a0ef58))
+* **interfaces:** `Statement#specifier_kind` ([db39187](https://github.com/flex-development/mlly/commit/db39187d5883890fafcf1b3a9827c2ca6811e477))
+* **internal:** `ENCODED_SEP_REGEX` ([22ff22f](https://github.com/flex-development/mlly/commit/22ff22f48113b9c3570ad5b982a300fe3b079734))
+* **internal:** `escapeRegExp` ([f00836b](https://github.com/flex-development/mlly/commit/f00836b8a1d6ef94917ea0b39884585b1a29de31))
+* **internal:** `FORMAT_TYPE_MAP` ([a442b8d](https://github.com/flex-development/mlly/commit/a442b8d3a4fccde4814a6437f9cfaf1a3e9797e4))
+* **internal:** `getSpecifierKind` ([be30ba7](https://github.com/flex-development/mlly/commit/be30ba71f28f1bd677ffc251d3c578e2ffa37c62))
+* **internal:** `getSubpaths` ([f9f5f37](https://github.com/flex-development/mlly/commit/f9f5f37d2703e6b2dd1d7469a5ffa92a01cba308))
+* **internal:** `INTERNAL_SPECIFIER_REGEX` ([6f1b8be](https://github.com/flex-development/mlly/commit/6f1b8be5ea341c279c57176d1af8eb9effca0c7a))
+* **internal:** `isArrayIndex` ([c4793a0](https://github.com/flex-development/mlly/commit/c4793a0f815aefd13f0f0fc20cab32d8dfd42dcc))
+* **internal:** `isDirectory` ([ec91d08](https://github.com/flex-development/mlly/commit/ec91d08a8c4418a3c510dbc55e07d59293670bc0))
+* **internal:** `isFile` ([d06b9ac](https://github.com/flex-development/mlly/commit/d06b9acae46eada86fd866b09c316d61d04ca69d))
+* **internal:** `isFunction` ([e01911a](https://github.com/flex-development/mlly/commit/e01911af8417177b24bd9d42a2c05d1eb70ea3cc))
+* **internal:** `PACKAGE_NAME_REGEX` ([3f43f95](https://github.com/flex-development/mlly/commit/3f43f950321006997853231a5054e878d375fdd1))
+* **internal:** `PACKAGE_PATH_REGEX` ([375f356](https://github.com/flex-development/mlly/commit/375f356811b2f3537436000d23b0414aa59164d4))
+* **internal:** `Resolver` ([4c4f900](https://github.com/flex-development/mlly/commit/4c4f900d918c01f05ff69f9d998c0d8510530d41))
+* **internal:** `validateBoolean` ([76166af](https://github.com/flex-development/mlly/commit/76166af9edb580d7271f2a60c3b052767c4b5e54))
+* **internal:** `validateObject` ([c961376](https://github.com/flex-development/mlly/commit/c961376bd3ec592adea916e49d186021859e1f12))
+* **internal:** `validateSet` ([d9b6595](https://github.com/flex-development/mlly/commit/d9b6595a45ba7e2644914b2d63b0b8e149d63165))
+* **internal:** `validateString` ([c66025d](https://github.com/flex-development/mlly/commit/c66025d576c4f37f44944517ff9787d9946696d0))
+* **internal:** `validateURLString` ([ba49e9b](https://github.com/flex-development/mlly/commit/ba49e9b03af440d5d07393c8d1b19dacaafba3fa))
+* **types:** `ChangeExtFn` ([b906e6b](https://github.com/flex-development/mlly/commit/b906e6b30c47cde9628788c9280582d693c00c6a))
+* **types:** `Format` ([5cb0b1b](https://github.com/flex-development/mlly/commit/5cb0b1b074fdee44ea03e32b4128780afbe86667))
+* **types:** `ModuleId` ([1f3a500](https://github.com/flex-development/mlly/commit/1f3a500b96f43ea055bccdcb6815bc8e697dc140))
+* **types:** `Protocol` ([6380ea8](https://github.com/flex-development/mlly/commit/6380ea8869a9ac540a517ff6cedb8be36d6f73d4))
+* **utils:** `compareSubpaths` ([66f2137](https://github.com/flex-development/mlly/commit/66f2137ef8b938a84c7d273bdc45299de14073b0))
+* **utils:** `EXTENSION_FORMAT_MAP` ([d4720d7](https://github.com/flex-development/mlly/commit/d4720d703b64fe623f95cb811a006c390806e8c6))
+* **utils:** `fillModules` ([7b9d1e7](https://github.com/flex-development/mlly/commit/7b9d1e7874e2f43b91f90963c26c83c7bc651e25))
+* **utils:** `findSubpath` ([4fd48f6](https://github.com/flex-development/mlly/commit/4fd48f6ab8415d50214de5d10ff608152bc8c6b8))
+* **utils:** `getFormat` ([a1cae6f](https://github.com/flex-development/mlly/commit/a1cae6f80c88c007d7ac4736de54454d17192d84))
+* **utils:** `getSource` ([017eadb](https://github.com/flex-development/mlly/commit/017eadb7b2d58eac080dfe4865dc597671ede992))
+* **utils:** `isAbsoluteSpecifier` ([4bd443c](https://github.com/flex-development/mlly/commit/4bd443ce9391fc6dcf1889edb9c3a7c6ef7768b7))
+* **utils:** `isBareSpecifier` ([feda82b](https://github.com/flex-development/mlly/commit/feda82b8a088bf9b889e20f92c614d810acbe14f))
+* **utils:** `isExportsSugar` ([0c9f954](https://github.com/flex-development/mlly/commit/0c9f954cf69b6dfbf821fdee8966f2b0a31de759))
+* **utils:** `isRelativeSpecifier` ([92b8846](https://github.com/flex-development/mlly/commit/92b8846acefed82187afef8503bf5e7c4cbb953f))
+* **utils:** `lookupPackageScope` ([46cb852](https://github.com/flex-development/mlly/commit/46cb8524c01528cf8310caab7944e6704d66ea97))
+* **utils:** `parseDataURL` ([93fd382](https://github.com/flex-development/mlly/commit/93fd38292d07961425f6b394018578fb9933320e))
+* **utils:** `parseModuleId` ([a315dd0](https://github.com/flex-development/mlly/commit/a315dd0aef9238fb107ea07ad27214838e144451))
+* **utils:** `parseSubpath` ([8479781](https://github.com/flex-development/mlly/commit/84797816490736fc2078ff34f42b2cf1f43e31a2))
+* **utils:** `PATTERN_CHARACTER` ([7a8f04b](https://github.com/flex-development/mlly/commit/7a8f04bc06a281c6357dc14f3e8af9f63678ca60))
+* **utils:** `readPackageJson` ([b2f9a18](https://github.com/flex-development/mlly/commit/b2f9a180f0bce61215ac2d23d4be83a91b657f81))
+* **utils:** `toNodeURL` ([a536567](https://github.com/flex-development/mlly/commit/a536567dbd177a033b5e40069009dadbfc06ab30))
+* **utils:** `toURL` ([165d8b0](https://github.com/flex-development/mlly/commit/165d8b0695c85b956e06ddf8a8d0c08f7d58a9a0))
+* **utils:** `validateAssertions` ([61e9769](https://github.com/flex-development/mlly/commit/61e9769ef7d9471e7c7732faa955a8c21a23b877))
+* **utils:** `validateExports` ([a2b14ea](https://github.com/flex-development/mlly/commit/a2b14ea2341ea1044be71e11fffd36619e6fdb83))
+
+
+### :bug: Fixes
+
+* **ts:** `Type '{ '.' Exports | undefined; }' is not assignable to type 'Exports | undefined'` ([de20179](https://github.com/flex-development/mlly/commit/de20179e1b9d9ec68a426814999a9304f9fa2e73))
+* **ts:** missing types in build output ([a5d2226](https://github.com/flex-development/mlly/commit/a5d2226c352269795399bc14742e49c845c955f6))
+* **utils:** specifier replacement ([e29520b](https://github.com/flex-development/mlly/commit/e29520bf74cbba11c567cc13257a84252777403a))
+
+
+### :house_with_garden: Housekeeping
+
+* fix lint-staged config ([bda813d](https://github.com/flex-development/mlly/commit/bda813db0922faa93d0543e34d11e290bbd52967))
+* project qa ([d3a571d](https://github.com/flex-development/mlly/commit/d3a571d38626b0cfd2affb3987bd583813bd9b35))
+* update eslint config ([b1d716c](https://github.com/flex-development/mlly/commit/b1d716cb29c95734f974e703fe88f4d150827abf))
+* update project architecture ([60b2c77](https://github.com/flex-development/mlly/commit/60b2c771614cc13e892a8814ad644d6095112ba4))
+* update project architecture ([7d0571b](https://github.com/flex-development/mlly/commit/7d0571bb660770640963d7ec550d91b7aa6c7a0d))
+* **esm:** use package in custom loader ([a6e07d0](https://github.com/flex-development/mlly/commit/a6e07d0487b2734bc1dac6bcd22c6ff2b3e09380))
+* **github:** add "typescript version" input to bug report template ([d6de153](https://github.com/flex-development/mlly/commit/d6de15302d1355a7ffbb680b4059fb42a0b6a0af))
+* **github:** add commit scope `utils` ([4af0c3d](https://github.com/flex-development/mlly/commit/4af0c3d3c0ca38594683586948524faa316ddaf8))
+* **github:** add label `scope:utils` ([169ec14](https://github.com/flex-development/mlly/commit/169ec14abcd9735a8c00e1ce76b5c33f3e0f01cf))
+* **github:** configure sponsor button ([b9e4bf5](https://github.com/flex-development/mlly/commit/b9e4bf5d5a73ce467ed1047737ff8fe9b9de9248))
+* **github:** set `LINT_STAGED` before running `lint-staged` ([4c49124](https://github.com/flex-development/mlly/commit/4c49124b454e7776d7dc11b34482756bca7ef35e))
+* **pkg:** update keywords ([8ddf224](https://github.com/flex-development/mlly/commit/8ddf224485aa19b8ad706f0b3b8c0bdbba3151ed))
+* **tests:** update codecov config ([226b49c](https://github.com/flex-development/mlly/commit/226b49c712ae56dc3f09bd0016df0edc34608900))
+* **tests:** update lint-staged integration ([9b6b530](https://github.com/flex-development/mlly/commit/9b6b53076be0e2240cf8dec3fcb08cef45527cc9))
+* **vscode:** update settings ([aac433c](https://github.com/flex-development/mlly/commit/aac433c9d42d9794b2fd9303df331f8ee70b0786))
+
+
+### :zap: Refactors
+
+* move constants to `utils` dir ([e6db385](https://github.com/flex-development/mlly/commit/e6db385058fc810e7be6bb79acac9c7e92bc7aaa))
+* rename `lib` directory to `utils` ([c84a231](https://github.com/flex-development/mlly/commit/c84a23160738d322e8db7bd1b2a0927efefc1c2f))
+* **enums:** `SpecifierKind` -> `SpecifierSyntaxKind` ([1a24b13](https://github.com/flex-development/mlly/commit/1a24b13ac020d53de90abf72d427ea9f15b9eeb5))
+* **enums:** `SyntaxKind` -> `StatementSyntaxKind` ([02c1456](https://github.com/flex-development/mlly/commit/02c14566eba3e7f23c260c1b9101ea39ee4b34c7))
+* **esm:** improve loaders compatibility ([505e211](https://github.com/flex-development/mlly/commit/505e211531ed6b216567d2b156b42637d292579f))
+* **interfaces:** [`Statement`] `specifier_kind` -> `specifier_syntax` ([734edd2](https://github.com/flex-development/mlly/commit/734edd2b87377be49906eecf5d38d5001093872d))
+* **internal:** [`validateString`] convert to type guard ([789f2cf](https://github.com/flex-development/mlly/commit/789f2cf7c2ecf27fed86f64640c6c7806ef257f9))
+* **ts:** catch build output errors early ([7cb4c38](https://github.com/flex-development/mlly/commit/7cb4c3899387b67f9d7c9b160e091da9e9613403))
+* **types:** `MIMEType` -> `MimeType` ([1df5622](https://github.com/flex-development/mlly/commit/1df56226dfdc6534b40c64d1b33e6ab57b13c901))
+* **utils:** `resolveAlias` ([b4ed0b1](https://github.com/flex-development/mlly/commit/b4ed0b1c0860954c29f3224dde52803cb0198438))
+* **utils:** `toBareSpecifier` ([b0caca0](https://github.com/flex-development/mlly/commit/b0caca069ca004f7dc9dfb443fbba43bbcf9fba1))
+
+
+### :white_check_mark: Testing
+
+* **utils:** [`findStaticImports`] 100% isolated coverage ([aca9212](https://github.com/flex-development/mlly/commit/aca9212bf77bfc58b5a050d136cafd622866526f))
+
 ## [1.0.0-alpha.6](https://github.com/flex-development/mlly/compare/1.0.0-alpha.5...1.0.0-alpha.6) (2022-12-26)
 
 
