@@ -2,10 +2,6 @@
 
 <!-- A clear and concise description of your changes. -->
 
-## Tests
-
-<!-- What did you test? List tests, include snippet from test suites, or write "N/A" if tests were not needed. -->
-
 ## Linked issues
 
 <!--
@@ -25,7 +21,9 @@ A list of linked issues and/or pull requests.
 
 ## Additional context
 
-<!-- Include additional details here. Be sure to note if any tolerable vulnerabilities or warnings have been introduced. -->
+<!--
+Include additional details here. Be sure to note if any tolerable vulnerabilities or warnings have been introduced.
+-->
 
 ## Submission checklist
 
@@ -35,5 +33,4 @@ A list of linked issues and/or pull requests.
 - [ ] new, **tolerable** vulnerabilities and/or warnings documented, if any
 - [ ] [pr naming conventions][1]
 
-[1]:
-    https://github.com/flex-development/mlly/blob/main/CONTRIBUTING.md#pull-request-titles
+[1]: https://github.com/flex-development/mlly/blob/main/CONTRIBUTING.md#pull-request-titles
