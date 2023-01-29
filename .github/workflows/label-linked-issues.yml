@@ -66,7 +66,7 @@ jobs:
           repo: ${{ github.event.repository.name }}
       - id: label
         name: Label linked issues
-        uses: actions/github-script@v6.3.3
+        uses: actions/github-script@v6.4.0
         env:
           DATA: ${{ steps.query.outputs.data }}
           PRERELEASE: ${{ contains(steps.version.outputs.result, '-') }}
