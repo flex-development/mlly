@@ -4,9 +4,9 @@
  * @see https://vitest.dev/config/
  */
 
+import pathe from '@flex-development/pathe'
 import { NodeEnv } from '@flex-development/tutils'
 import ci from 'is-ci'
-import path from 'node:path'
 import tsconfigpaths from 'vite-tsconfig-paths'
 import GithubActionsReporter from 'vitest-github-actions-reporter'
 import {
@@ -36,7 +36,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
       'import.meta.env.NODE_ENV': JSON.stringify(NodeEnv.TEST)
     },
     mode: NodeEnv.TEST,
-    plugins: [tsconfigpaths({ projects: [path.resolve('tsconfig.json')] })],
+    plugins: [tsconfigpaths({ projects: [pathe.resolve('tsconfig.json')] })],
     test: {
       allowOnly: !ci,
       clearMocks: true,
@@ -84,9 +84,9 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
        * @return {string} Custom snapshot path
        */
       resolveSnapshotPath(file: string, extension: string): string {
-        return path.resolve(
-          path.resolve(path.dirname(path.dirname(file)), '__snapshots__'),
-          path.basename(file).replace(/\.spec.tsx?/, '') + extension
+        return pathe.resolve(
+          pathe.resolve(pathe.dirname(pathe.dirname(file)), '__snapshots__'),
+          pathe.basename(file).replace(/\.spec.tsx?/, '') + extension
         )
       },
       restoreMocks: true,
@@ -121,7 +121,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
         checker: 'vue-tsc',
         ignoreSourceErrors: false,
         include: ['**/__tests__/*.spec-d.ts'],
-        tsconfig: path.resolve('tsconfig.typecheck.json')
+        tsconfig: pathe.resolve('tsconfig.typecheck.json')
       }
     }
   }

@@ -8,7 +8,7 @@ import docastParse, { type Options } from '@flex-development/docast-parse'
 import { CompareResult } from '@flex-development/tutils'
 import { globby } from 'globby'
 import fs from 'node:fs/promises'
-import path, { type ParsedPath } from 'node:path'
+import pathe, { type ParsedPath } from '@flex-development/pathe'
 import { unified } from 'unified'
 import { VFile } from 'vfile'
 import attacher from '../theme/comments/plugin'
@@ -51,18 +51,18 @@ async function useComments(): Promise<Documentation[]> {
 
   // get comments
   for (let p of await globby(patterns, {
-    cwd: path.resolve(process.cwd(), 'src'),
+    cwd: pathe.resolve(process.cwd(), 'src'),
     ignore: ['**/index.ts']
   })) {
     /**
-     * Source code associated with {@link p}.
+     * Source code associated with {@linkcode p}.
      *
      * @const {Buffer} buffer
      */
-    const buffer: Buffer = await fs.readFile((p = path.resolve('src', p)))
+    const buffer: Buffer = await fs.readFile((p = pathe.resolve('src', p)))
 
     /**
-     * Virtual file representation of {@link buffer}.
+     * Virtual file representation of {@linkcode buffer}.
      *
      * @const {VFile} file
      */
@@ -74,7 +74,7 @@ async function useComments(): Promise<Documentation[]> {
       dir: dirname,
       ext: extname,
       name: stem
-    }: ParsedPath = path.parse(p)
+    }: ParsedPath = pathe.parse(p)
 
     // set virtual file properties
     file.path = p
@@ -84,7 +84,7 @@ async function useComments(): Promise<Documentation[]> {
     file.stem = stem
 
     /**
-     * Docblock abstract syntax tree for {@link file}.
+     * Docblock abstract syntax tree for {@linkcode file}.
      *
      * @see https://github.com/flex-development/docast
      *
@@ -95,7 +95,7 @@ async function useComments(): Promise<Documentation[]> {
       .parse(file)
 
     /**
-     * API documentation extracted from {@link file}.
+     * API documentation extracted from {@linkcode file}.
      *
      * @const {string[]} compilation
      */

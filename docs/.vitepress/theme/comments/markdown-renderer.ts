@@ -3,8 +3,8 @@
  * @module docs/vitepress/theme/comments/md
  */
 
+import pathe from '@flex-development/pathe'
 import type MarkdownIt from 'markdown-it'
-import path from 'node:path'
 import { createMarkdownRenderer } from 'vitepress'
 import MARKDOWN_OPTIONS from '../markdown-options'
 
@@ -14,7 +14,7 @@ import MARKDOWN_OPTIONS from '../markdown-options'
  * @const {MarkdownIt} md
  */
 const md: MarkdownIt = await createMarkdownRenderer(
-  path.resolve('docs'),
+  pathe.resolve('docs'),
   MARKDOWN_OPTIONS
 )
 

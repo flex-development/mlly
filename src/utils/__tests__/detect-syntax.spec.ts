@@ -27,7 +27,7 @@ describe('unit:utils/detectSyntax', () => {
   it('should return mixed syntax result', () => {
     // Arrange
     const code = dedent`
-      import { dirname } from 'node:path'
+      import { dirname } from '@flex-development/pathe'
       import { fileURLToPath } from 'node:url'
 
       const __filename = fileURLToPath(import.meta.url)

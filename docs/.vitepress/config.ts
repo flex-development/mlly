@@ -5,6 +5,7 @@
  * @see https://vitepress.vuejs.org/config/theme-configs
  */
 
+import pathe from '@flex-development/pathe'
 import search, { type SearchClient, type SearchIndex } from 'algoliasearch'
 import {
   load as cheerio,
@@ -15,7 +16,6 @@ import {
 import { config as dotenv } from 'dotenv'
 import { globby } from 'globby'
 import fs from 'node:fs/promises'
-import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import pupa from 'pupa'
 import { SitemapStream, streamToPromise } from 'sitemap'
@@ -40,10 +40,10 @@ import MARKDOWN_OPTIONS from './theme/markdown-options'
  *
  * @const {string} ENV_DIR
  */
-const ENV_DIR: string = path.dirname(fileURLToPath(import.meta.url))
+const ENV_DIR: string = pathe.dirname(fileURLToPath(import.meta.url))
 
 // load environment variables
-dotenv({ path: path.resolve(ENV_DIR, '.env') })
+dotenv({ path: pathe.resolve(ENV_DIR, '.env') })
 
 // environment variables
 const {
@@ -192,7 +192,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
        *
        * @const {string} outfile
        */
-      const outfile: string = path.resolve(outDir, route)
+      const outfile: string = pathe.resolve(outDir, route)
 
       /**
        * Output HTML.
@@ -399,7 +399,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
 
     // write sitemap.xml
     await fs.writeFile(
-      path.resolve(outDir, 'sitemap.xml'),
+      pathe.resolve(outDir, 'sitemap.xml'),
       await streamToPromise(stream.end())
     )
 
@@ -408,11 +408,14 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
      *
      * @const {string} robots
      */
-    const robots: string = path.resolve(root, '.vitepress/templates/robots.txt')
+    const robots: string = pathe.resolve(
+      root,
+      '.vitepress/templates/robots.txt'
+    )
 
     // write robots.txt
     await fs.writeFile(
-      path.resolve(outDir, 'robots.txt'),
+      pathe.resolve(outDir, 'robots.txt'),
       pupa(await fs.readFile(robots, 'utf8'), { HOSTNAME })
     )
 
@@ -580,9 +583,9 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
     return $.html()
   },
   vite: {
-    cacheDir: path.resolve('node_modules/.vitepress'),
+    cacheDir: pathe.resolve('node_modules/.vitepress'),
     envDir: ENV_DIR,
-    plugins: [tsconfigpaths({ projects: [path.resolve('tsconfig.json')] })],
+    plugins: [tsconfigpaths({ projects: [pathe.resolve('tsconfig.json')] })],
     server: { hmr: { overlay: false } }
   },
   vue: { isProduction: [NODE_ENV, VERCEL_ENV].includes('production') }
