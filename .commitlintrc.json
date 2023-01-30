@@ -25,6 +25,7 @@
         "interfaces",
         "internal",
         "lib",
+        "loader",
         "nvm",
         "patches",
         "pkg",
