@@ -10,7 +10,7 @@ import {
   ERR_UNKNOWN_FILE_EXTENSION,
   type NodeError
 } from '@flex-development/errnode'
-import isBuiltin from '@flex-development/is-builtin'
+import { isBuiltin } from '@flex-development/is-builtin'
 import pathe, { type Ext } from '@flex-development/pathe'
 import type { EmptyString, Nilable, Nullable } from '@flex-development/tutils'
 import type { URL } from 'node:url'
@@ -210,7 +210,7 @@ const getFormat = async (
 
       break
     case 'node:':
-      if (isBuiltin(url.pathname)) format = Format.BUILTIN
+      if (isBuiltin(url)) format = Format.BUILTIN
       break
     default:
       break

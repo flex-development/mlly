@@ -1396,6 +1396,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/builtin-modules@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@flex-development/builtin-modules@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fbuiltin-modules%2F1.0.0%2F7f6d30784550e9e03c3e93e9f846d958d016f1c9"
+  checksum: 9fc7155ef77d78b35f5e2d1cf401bb3806fa9ebeb5f0b75b4459bf531e2eb3e9cee28ecce3f7e8afad5add176a74ae1ab02dee50c37a9a7755be1a230c24e529
+  languageName: node
+  linkType: hard
+
 "@flex-development/docast-parse@npm:1.0.0-alpha.4":
   version: 1.0.0-alpha.4
   resolution: "@flex-development/docast-parse@npm:1.0.0-alpha.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fdocast-parse%2F1.0.0-alpha.4%2F94186339fb85b5e85ec5df37150067bf05805f33"
@@ -1468,6 +1475,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/is-builtin@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@flex-development/is-builtin@npm:2.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fis-builtin%2F2.0.0%2F898339bf7e2f10df74d1472e651f43fca8b746bf"
+  dependencies:
+    "@flex-development/builtin-modules": "npm:1.0.0"
+  peerDependencies:
+    "@types/node": ">=14.18.36"
+  checksum: cd331f46528c0ccbd3f2a52fa5660b41a0109b28b9ad54e960de1401904f6a22eb0f472a82dc4aca4391c5b4b3f9f38344c3a415bbb655d591d121db79281f7a
+  languageName: node
+  linkType: hard
+
 "@flex-development/mkbuild@npm:1.0.0-alpha.9":
   version: 1.0.0-alpha.9
   resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.9%2F3a3a13859b4938ebf8959061f10b7b0d7e44c597"
@@ -1524,7 +1542,7 @@ __metadata:
     "@flex-development/errnode": "npm:1.4.0"
     "@flex-development/export-regex": "npm:1.0.0"
     "@flex-development/import-regex": "npm:2.0.1"
-    "@flex-development/is-builtin": "npm:1.0.1"
+    "@flex-development/is-builtin": "npm:2.0.0"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.9"
     "@flex-development/pathe": "npm:1.0.3"
     "@flex-development/pkg-types": "npm:2.0.0"

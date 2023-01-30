@@ -15,7 +15,7 @@ describe('unit:utils/resolveModules', () => {
       import type { ResolveModuleOptions } from '#src/interfaces'
       import Resolver from '#src/internal/resolver'
       import { ErrorCode, type NodeError } from '@flex-development/errnode'
-      import isBuiltin from '@flex-development/is-builtin'
+      import { isBuiltin } from '@flex-development/is-builtin'
       import pathe from '@flex-development/pathe'
       import type { Nullable } from '@flex-development/tutils'
       import { URL, fileURLToPath } from 'node:url'

@@ -30,7 +30,7 @@ import {
   ErrorCode,
   type NodeError
 } from '@flex-development/errnode'
-import isBuiltin from '@flex-development/is-builtin'
+import { isBuiltin } from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
 import type {
   Exports,

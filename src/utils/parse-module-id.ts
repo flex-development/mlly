@@ -13,7 +13,7 @@ import {
   ERR_INVALID_MODULE_SPECIFIER,
   type NodeError
 } from '@flex-development/errnode'
-import isBuiltin from '@flex-development/is-builtin'
+import { isBuiltin } from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
 import { URL, fileURLToPath } from 'node:url'
 import isBareSpecifier from './is-bare-specifier'

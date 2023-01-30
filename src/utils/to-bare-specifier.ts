@@ -13,7 +13,7 @@ import {
   ErrorCode,
   type NodeError
 } from '@flex-development/errnode'
-import isBuiltin from '@flex-development/is-builtin'
+import { isBuiltin } from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
 import { isNIL, type Nullable } from '@flex-development/tutils'
 import { URL, fileURLToPath, pathToFileURL } from 'node:url'
@@ -75,11 +75,11 @@ const toBareSpecifier = (
   // ensure specifier is a string
   if (specifier instanceof URL) specifier = specifier.href
 
+  // exit early if specifier is builtin module
+  if (isBuiltin(specifier)) return toNodeURL(specifier)
+
   // ensure specifier is a path
   if (specifier.startsWith('file:')) specifier = fileURLToPath(specifier)
-
-  // exit early if specifier begins with builtin module name
-  if (isBuiltin(specifier)) return toNodeURL(specifier)
 
   // convert relative specifiers to absolute paths
   if (isRelativeSpecifier(specifier)) {
