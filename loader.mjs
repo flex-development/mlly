@@ -15,6 +15,13 @@ import tsconfig from './tsconfig.json' assert { type: 'json' }
 mlly.EXTENSION_FORMAT_MAP.set('', mlly.Format.COMMONJS)
 
 /**
+ * URL of current working directory.
+ *
+ * @const {URL} cwd
+ */
+const cwd = pathToFileURL(tsconfig.compilerOptions.baseUrl)
+
+/**
  * Determines how `url` should be interpreted, retrieved, and parsed.
  *
  * @see {@linkcode LoadHookContext}
@@ -53,7 +60,7 @@ export const load = async (url, context) => {
     source = await mlly.resolveAliases(source, {
       aliases: tsconfig.compilerOptions.paths,
       conditions: context.conditions,
-      cwd: pathToFileURL(tsconfig.compilerOptions.baseUrl),
+      cwd,
       parent: url
     })
 
@@ -105,7 +112,7 @@ export const resolve = async (specifier, context) => {
   specifier = await mlly.resolveAlias(specifier, {
     aliases: tsconfig.compilerOptions.paths,
     conditions,
-    cwd: pathToFileURL(tsconfig.compilerOptions.baseUrl),
+    cwd,
     parent
   })
 
