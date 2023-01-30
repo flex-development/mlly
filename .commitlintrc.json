@@ -25,6 +25,7 @@
         "interfaces",
         "internal",
         "lib",
+        "nvm",
         "patches",
         "pkg",
         "release",
