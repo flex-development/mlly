@@ -1548,7 +1548,7 @@ __metadata:
     "@flex-development/pkg-types": "npm:2.0.0"
     "@flex-development/tutils": "npm:6.0.0-alpha.9"
     "@graphql-eslint/eslint-plugin": "npm:3.15.0"
-    "@sindresorhus/slugify": "npm:2.1.1"
+    "@sindresorhus/slugify": "npm:2.2.0"
     "@types/chai": "npm:4.3.4"
     "@types/chai-string": "npm:1.4.2"
     "@types/conventional-changelog": "npm:3.1.1"
@@ -2352,13 +2352,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sindresorhus/slugify@npm:2.1.1":
-  version: 2.1.1
-  resolution: "@sindresorhus/slugify@npm:2.1.1"
+"@sindresorhus/slugify@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@sindresorhus/slugify@npm:2.2.0"
   dependencies:
     "@sindresorhus/transliterate": "npm:^1.0.0"
     escape-string-regexp: "npm:^5.0.0"
-  checksum: 976207a73abeefc607e4a5582afbc15458616e536a82f158cdda0546d82e60f865f63febba7c6785517c2ab44f642f1433dc86e0a615108740d85a0efe4ea7a9
+  checksum: f6f18b5d7d2664540b6c26c34daa253c2de371b3c408ffb963b626fcc6173b6f6e1235cc563a1326f62df022b8500f7f9d2d94bc4655e76cda9dddcd85a65a65
   languageName: node
   linkType: hard
 
