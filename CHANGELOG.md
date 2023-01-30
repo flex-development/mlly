@@ -1,3 +1,33 @@
+## [1.0.0-alpha.8](https://github.com/flex-development/mlly/compare/1.0.0-alpha.7...1.0.0-alpha.8) (2023-01-29)
+
+
+### :package: Build
+
+* **deps-dev:** bump eslint from 8.32.0 to 8.33.0 ([9464965](https://github.com/flex-development/mlly/commit/9464965223415264301b2370e56f103f7202399a)), closes [#79](https://github.com/flex-development/mlly/issues/79)
+* **deps-dev:** Bump eslint-plugin-jsdoc from 39.6.9 to 39.7.4 ([#76](https://github.com/flex-development/mlly/issues/76)) ([fd89590](https://github.com/flex-development/mlly/commit/fd89590a90d2d133a84efbeb8153e80aee0f44ce))
+* **deps-dev:** cleanup changelog deps ([e899dd5](https://github.com/flex-development/mlly/commit/e899dd5ff58dbc7ec19749d1ad48cec5bb4a5ac8))
+* **deps:** bump @flex-development/is-builtin from 1.0.1 to 2.0.0 ([c39f63c](https://github.com/flex-development/mlly/commit/c39f63cb529a3eae091dded1a5f73c9277904fbd))
+* **nvm:** bump node from 16 to 19 ([4442dbb](https://github.com/flex-development/mlly/commit/4442dbb65e8161d608877a2c5c9346a17036c308))
+* **ts:** update file exclusion list ([f0a512f](https://github.com/flex-development/mlly/commit/f0a512f591994562cafa8cbebd550930352974dc))
+
+
+### :robot: Continuous Integration
+
+* **deps:** Bump actions/github-script from 6.3.3 to 6.4.0 ([#77](https://github.com/flex-development/mlly/issues/77)) ([9873dc9](https://github.com/flex-development/mlly/commit/9873dc992caecc55f325191be461041fba8fd199))
+* **workflows:** [`ci`] refactor `metadata` job conditional ([c909436](https://github.com/flex-development/mlly/commit/c90943621eb8f13d81b79f0b3acb78a997b89a8c))
+
+
+### :house_with_garden: Housekeeping
+
+* **github:** add commit scope `loader` ([8b57984](https://github.com/flex-development/mlly/commit/8b57984ea60d4f66fbbd65d4c069ddb9e3620c46))
+* **github:** add commit scope `nvm` ([905e7d1](https://github.com/flex-development/mlly/commit/905e7d1a093b017f3364e7f832989c0333c674bf))
+* **github:** add commit scope `spelling` ([7a111d0](https://github.com/flex-development/mlly/commit/7a111d01ed1770f49cb0610e3d5ef05f172fe359))
+* **spelling:** add "infile" to dictionary ([3ade2df](https://github.com/flex-development/mlly/commit/3ade2df3c3226eb8f69c9d20766f0a743f0b1e20))
+* **tests:** [mocks] remove `@flex-development/pathe` ([ccd9bbe](https://github.com/flex-development/mlly/commit/ccd9bbe2ebf8f3f5b62f88ae3171ceb4c3d68888))
+* **vscode:** add todo tree settings to `settings.json` ([41a9097](https://github.com/flex-development/mlly/commit/41a9097a3166a6211fd3407c08d050d6d8c95827))
+* **vscode:** remove stale `volar` settings ([6998a8c](https://github.com/flex-development/mlly/commit/6998a8c77f755ebd43f47ce700d31e22961780e1))
+* **yarn:** disable transparent workspaces ([8e519fd](https://github.com/flex-development/mlly/commit/8e519fd40b11b52b6a19fdd742e405ce10245c8b))
+
 ## [1.0.0-alpha.7](https://github.com/flex-development/mlly/compare/1.0.0-alpha.6...1.0.0-alpha.7) (2023-01-27)
 
 
