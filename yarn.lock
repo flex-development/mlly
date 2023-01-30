@@ -1552,8 +1552,10 @@ __metadata:
     "@types/chai": "npm:4.3.4"
     "@types/chai-string": "npm:1.4.2"
     "@types/conventional-changelog": "npm:3.1.1"
+    "@types/conventional-changelog-core": "npm:4.2.1"
     "@types/conventional-changelog-writer": "npm:4.0.2"
     "@types/conventional-commits-parser": "npm:3.0.3"
+    "@types/conventional-recommended-bump": "npm:6.1.0"
     "@types/dateformat": "npm:5.0.0"
     "@types/eslint": "npm:8.4.10"
     "@types/git-raw-commits": "npm:2.0.1"
@@ -1576,7 +1578,11 @@ __metadata:
     chai-quantifiers: "npm:1.0.17"
     chai-string: "npm:1.5.0"
     cheerio: "npm:1.0.0-rc.12"
-    conventional-changelog-cli: "npm:2.2.2"
+    conventional-changelog: "npm:3.1.25"
+    conventional-changelog-conventionalcommits: "npm:5.0.0"
+    conventional-changelog-core: "npm:4.2.4"
+    conventional-changelog-writer: "npm:5.0.1"
+    conventional-commits-parser: "npm:3.2.4"
     conventional-recommended-bump: "npm:6.1.0"
     cross-env: "npm:7.0.3"
     cspell: "npm:6.19.2"
@@ -1605,6 +1611,7 @@ __metadata:
     is-ci: "npm:3.0.1"
     jsonc-eslint-parser: "npm:2.1.0"
     lint-staged: "npm:13.1.0"
+    mri: "npm:1.2.0"
     node-fetch: "npm:3.3.0"
     node-notifier: "npm:10.0.1"
     prettier: "npm:2.8.3"
@@ -2443,7 +2450,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/conventional-changelog-core@npm:*":
+"@types/conventional-changelog-core@npm:*, @types/conventional-changelog-core@npm:4.2.1":
   version: 4.2.1
   resolution: "@types/conventional-changelog-core@npm:4.2.1"
   dependencies:
@@ -2488,7 +2495,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/conventional-recommended-bump@npm:*":
+"@types/conventional-recommended-bump@npm:*, @types/conventional-recommended-bump@npm:6.1.0":
   version: 6.1.0
   resolution: "@types/conventional-recommended-bump@npm:6.1.0"
   dependencies:
@@ -4498,27 +4505,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-cli@npm:2.2.2":
-  version: 2.2.2
-  resolution: "conventional-changelog-cli@npm:2.2.2"
-  dependencies:
-    add-stream: "npm:^1.0.0"
-    conventional-changelog: "npm:^3.1.24"
-    lodash: "npm:^4.17.15"
-    meow: "npm:^8.0.0"
-    tempfile: "npm:^3.0.0"
-  bin:
-    conventional-changelog: cli.js
-  checksum: 3991c646573e2463418927c9a7825ab71399d13ff4cc649822b1d2e86100192eafabdf52474032411f7d9a9f991f1c8f367a20f90bbe0109973101e0cbe27147
-  languageName: node
-  linkType: hard
-
 "conventional-changelog-codemirror@npm:^2.0.8":
   version: 2.0.8
   resolution: "conventional-changelog-codemirror@npm:2.0.8"
   dependencies:
     q: "npm:^1.5.1"
   checksum: b80a5dacb30e3eee7dafb60c980f79d1a1a02b59c966be98723f5b43b4368921fbc664768e8724f74b57455719f2439b6b6458faf13700c56a22bcb36999182d
+  languageName: node
+  linkType: hard
+
+"conventional-changelog-conventionalcommits@npm:5.0.0, conventional-changelog-conventionalcommits@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "conventional-changelog-conventionalcommits@npm:5.0.0"
+  dependencies:
+    compare-func: "npm:^2.0.0"
+    lodash: "npm:^4.17.15"
+    q: "npm:^1.5.1"
+  checksum: cd39e90a9637925b99c425197436f6cec1257f3ae82b437edeb93390d4cea90702cff31c06ab4d9dde71ea243cf64f7665eafa019bbfd7735ce2e4d30b9362bf
   languageName: node
   linkType: hard
 
@@ -4533,18 +4536,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-conventionalcommits@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "conventional-changelog-conventionalcommits@npm:5.0.0"
-  dependencies:
-    compare-func: "npm:^2.0.0"
-    lodash: "npm:^4.17.15"
-    q: "npm:^1.5.1"
-  checksum: cd39e90a9637925b99c425197436f6cec1257f3ae82b437edeb93390d4cea90702cff31c06ab4d9dde71ea243cf64f7665eafa019bbfd7735ce2e4d30b9362bf
-  languageName: node
-  linkType: hard
-
-"conventional-changelog-core@npm:^4.2.1":
+"conventional-changelog-core@npm:4.2.4, conventional-changelog-core@npm:^4.2.1":
   version: 4.2.4
   resolution: "conventional-changelog-core@npm:4.2.4"
   dependencies:
@@ -4619,7 +4611,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-writer@npm:^5.0.0":
+"conventional-changelog-writer@npm:5.0.1, conventional-changelog-writer@npm:^5.0.0":
   version: 5.0.1
   resolution: "conventional-changelog-writer@npm:5.0.1"
   dependencies:
@@ -4638,7 +4630,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog@npm:^3.1.24":
+"conventional-changelog@npm:3.1.25":
   version: 3.1.25
   resolution: "conventional-changelog@npm:3.1.25"
   dependencies:
@@ -4667,7 +4659,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-commits-parser@npm:^3.2.0, conventional-commits-parser@npm:^3.2.2":
+"conventional-commits-parser@npm:3.2.4, conventional-commits-parser@npm:^3.2.0, conventional-commits-parser@npm:^3.2.2":
   version: 3.2.4
   resolution: "conventional-commits-parser@npm:3.2.4"
   dependencies:
@@ -10407,16 +10399,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tempfile@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "tempfile@npm:3.0.0"
-  dependencies:
-    temp-dir: "npm:^2.0.0"
-    uuid: "npm:^3.3.2"
-  checksum: ccfdbffe6b8eb169c2eaafad1ea1dea6ed536c7b44aa8526a0e7c0d256f3ef870673429b3c51499f5633f01d98884ff154f4bf4eaac6c23197dd4adad5d216f9
-  languageName: node
-  linkType: hard
-
 "test-exclude@npm:^6.0.0":
   version: 6.0.0
   resolution: "test-exclude@npm:6.0.0"
@@ -11096,15 +11078,6 @@ __metadata:
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
   checksum: 6a88ed8344d07f2324b304ee36def365d967953b5a9c15baa3213eb3909e86a7da1ee70a4c2133e80c23d6c1987590e9c3c57d874e20a124f9e41620b462fa57
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^3.3.2":
-  version: 3.4.0
-  resolution: "uuid@npm:3.4.0"
-  bin:
-    uuid: ./bin/uuid
-  checksum: c84dbfcb94389fea5a09020802df2a1227d183ceabaa5256658194dfad045c83fe72366b64b165b6445a480fac8a75d0e982033f3cb393713674b3cd938063fa
   languageName: node
   linkType: hard
 
