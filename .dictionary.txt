@@ -19,6 +19,7 @@ hascjssyntax
 hasesmsyntax
 hmarr
 iife
+infile
 isbarespecifier
 isrelativespecifier
 keyid
