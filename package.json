@@ -133,7 +133,7 @@
     "conventional-commits-parser": "3.2.4",
     "conventional-recommended-bump": "6.1.0",
     "cross-env": "7.0.3",
-    "cspell": "6.19.2",
+    "cspell": "6.20.1",
     "dotenv": "16.0.3",
     "esbuild": "0.17.5",
     "escape-string-regexp": "5.0.0",
