@@ -8498,21 +8498,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
-  version: 2.6.8
-  resolution: "node-fetch@npm:2.6.8"
-  dependencies:
-    whatwg-url: "npm:^5.0.0"
-  peerDependencies:
-    encoding: ^0.1.0
-  peerDependenciesMeta:
-    encoding:
-      optional: true
-  checksum: 9b8bac9f953253468a76adf139ad52514ee03ee35d610c6472201415f2913d9437e8f5e15ca2bb9aaf8dae054a55aeff8cec37a6ca5317c223ab6ea9a9a16b6b
-  languageName: node
-  linkType: hard
-
-"node-fetch@npm:^2.6.9":
+"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7, node-fetch@npm:^2.6.9":
   version: 2.6.9
   resolution: "node-fetch@npm:2.6.9"
   dependencies:
