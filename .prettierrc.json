@@ -13,6 +13,7 @@
         ".editorconfig",
         ".env*",
         ".github/.gitconfig",
+        ".gitignore",
         ".husky/commit-msg",
         ".husky/pre-commit",
         ".husky/pre-push"
