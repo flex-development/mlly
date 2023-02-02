@@ -105,7 +105,7 @@
     "@types/conventional-commits-parser": "3.0.3",
     "@types/conventional-recommended-bump": "6.1.0",
     "@types/dateformat": "5.0.0",
-    "@types/eslint": "8.4.10",
+    "@types/eslint": "8.21.0",
     "@types/git-raw-commits": "2.0.1",
     "@types/is-ci": "3.0.0",
     "@types/markdown-it": "12.2.3",
