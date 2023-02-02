@@ -119,18 +119,18 @@ describe('unit:internal/Resolver', () => {
   describe('#resolvePackage', () => {
     it('should return package path URL', () => {
       // Arrange
-      const cases: [string, URL][] = [
-        ['exports-sugar', url('exports-sugar/index.mjs')],
-        ['exports-sugar-a', url('exports-sugar-a/index.mjs')],
-        ['exports-sugar-c', url('exports-sugar-c/index.mjs')],
-        ['fs', new URL('node:fs')],
-        ['legacy-main-1', url('legacy-main-1/index.js')],
-        ['legacy-main-1/utils', url('legacy-main-1/utils')],
-        [pkgjson.name!, pathToFileURL('dist/index.mjs')]
+      const cases: [string, ModuleId, URL][] = [
+        ['exports-sugar', parent, url('exports-sugar/index.mjs')],
+        ['exports-sugar-a', parent, url('exports-sugar-a/index.mjs')],
+        ['exports-sugar-c', parent, url('exports-sugar-c/index.mjs')],
+        ['fs', parent, new URL('node:fs')],
+        ['legacy-main-1', parent, url('legacy-main-1/index.js')],
+        ['legacy-main-1/utils', parent, url('legacy-main-1/utils')],
+        [pkgjson.name!, import.meta.url, pathToFileURL('dist/index.mjs')]
       ]
 
       // Act + Expect
-      cases.forEach(([specifier, expected]) => {
+      cases.forEach(([specifier, parent, expected]) => {
         const result = subject.resolvePackage(specifier, parent)
 
         expect(result).to.deep.equal(expected)

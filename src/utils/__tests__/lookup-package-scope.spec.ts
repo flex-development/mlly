@@ -11,7 +11,7 @@ describe('unit:utils/lookupPackageScope', () => {
     // Arrange
     const cases: Parameters<typeof testSubject>[] = [
       ['../index.mjs', pathToFileURL('.')],
-      ['__fixtures__', pathToFileURL('__fixtures__')],
+      ['__mocks__', pathToFileURL('__mocks__')],
       ['node_modules', undefined]
     ]
 

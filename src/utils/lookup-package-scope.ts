@@ -24,17 +24,24 @@ import toURL from './to-url'
  * @see {@linkcode PackageScope}
  *
  * @param {ModuleId} id - Id of module to get package scope for
- * @param {ModuleId} [stopdir=pathe.sep] - Directory to end search
+ * @param {ModuleId?} [stopdir=pathe.sep] - Directory to end search
+ * @param {string?} [specifier] - Module specifier passed by user
+ * @param {ModuleId?} [parent] - Id of module to resolve from
  * @return {?PackageScope} Package scope result or `null`
  * @throws {NodeError<TypeError>} If either `id` or `stopdir` is not an instance
  * of {@linkcode URL} or a string
  */
 const lookupPackageScope = (
   id: ModuleId,
-  stopdir: ModuleId = pathe.sep
+  stopdir: ModuleId = pathe.sep,
+  specifier?: string,
+  parent?: ModuleId
 ): Nullable<PackageScope> => {
   validateURLString(id, 'id')
   validateURLString(stopdir, 'stopdir')
+
+  // ensure search endpoint is a path
+  stopdir = toURL(stopdir).pathname
 
   /**
    * Path to directory containing `package.json` file.
@@ -42,9 +49,6 @@ const lookupPackageScope = (
    * @var {string} dir
    */
   let dir: string = toURL(id).pathname
-
-  // ensure stop point is pathname
-  stopdir = toURL(stopdir).pathname
 
   /**
    * Package scope result.
@@ -55,7 +59,7 @@ const lookupPackageScope = (
 
   // search for package.json
   while (dir && !dir.endsWith('node_modules')) {
-    // stop search if outside of stop directory
+    // stop search if outside of endpoint
     if (pathe.relative(stopdir, dir).startsWith('../')) break
 
     /**
@@ -63,7 +67,11 @@ const lookupPackageScope = (
      *
      * @const {Nullable<PackageJson>} pkgjson
      */
-    const pkgjson: Nullable<PackageJson> = readPackageJson(dir)
+    const pkgjson: Nullable<PackageJson> = readPackageJson(
+      dir,
+      specifier,
+      parent
+    )
 
     // stop search if package.json has been found
     if (pkgjson) {
@@ -76,7 +84,7 @@ const lookupPackageScope = (
       break
     }
 
-    // stop search if stop directory has been reached
+    // stop search if endpoint has been reached
     if (dir === stopdir.replace(/\/$/, '')) break
 
     // continue searching for package.json

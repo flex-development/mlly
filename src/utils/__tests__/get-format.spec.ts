@@ -63,7 +63,11 @@ describe('unit:utils/getFormat', () => {
     it('should return Nilable<Format> based on package type', async () => {
       // Arrange
       const cases: [...Parameters<typeof testSubject>, Nilable<Format>?][] = [
-        ['node_modules/yaml/index.js', undefined, Format.COMMONJS],
+        [
+          'node_modules/yaml-eslint-parser/node_modules/yaml/dist/index.js',
+          undefined,
+          Format.COMMONJS
+        ],
         [
           'node_modules/@flex-development/mkbuild/node_modules/pretty-bytes/index.js',
           undefined,

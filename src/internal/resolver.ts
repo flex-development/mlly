@@ -215,13 +215,22 @@ class Resolver {
     if (isBuiltin(id.raw)) return new URL(toNodeURL(id.raw))
 
     /**
+     * Directory to end package scope search.
+     *
+     * @const {URL} stopdir
+     */
+    const stopdir: URL = pathToFileURL('.' + pathe.sep)
+
+    /**
      * Package scope lookup result.
      *
      * @var {Nullable<PackageScope>} scope
      */
     let scope: Nullable<PackageScope> = lookupPackageScope(
       parent,
-      pathToFileURL('.')
+      stopdir,
+      specifier,
+      parent
     )
 
     // try self resolve
@@ -236,13 +245,6 @@ class Resolver {
     }
 
     /**
-     * URL input used to try resolving external package.
-     *
-     * @const {string} input
-     */
-    const input: string = `node_modules/${id.raw}`
-
-    /**
      * Resolved package path URL.
      *
      * @var {Nullable<URL>} url
@@ -250,12 +252,25 @@ class Resolver {
     let url: Nullable<URL> = null
 
     // reset scope to try resolving external package
-    scope =
-      lookupPackageScope(new URL(input, parent), pathToFileURL('.')) ??
-      lookupPackageScope(
-        new URL(input, pathToFileURL('.' + pathe.sep)),
-        pathToFileURL('.')
-      )
+    if (scope) {
+      let { dir: pkgdir } = scope
+
+      // lookup package scope for external package
+      while (pkgdir !== '.') {
+        scope = lookupPackageScope(
+          new URL(`node_modules/${id.raw}`, pkgdir + pathe.sep),
+          stopdir,
+          specifier,
+          parent
+        )
+
+        // stop search if package scope was found for external package
+        if (scope) break
+
+        // continue package scope search
+        pkgdir = pathe.dirname(pkgdir)
+      }
+    }
 
     // try resolving external package
     switch (true) {
@@ -321,7 +336,7 @@ class Resolver {
     const pkgjson: Nullable<PackageJson> = readPackageJson(
       dir,
       specifier,
-      fileURLToPath(parent)
+      parent
     )
 
     /**
@@ -415,7 +430,9 @@ class Resolver {
      */
     const scope: Nullable<PackageScope> = lookupPackageScope(
       parent,
-      pathToFileURL('.')
+      pathToFileURL('.'),
+      specifier,
+      parent
     )
 
     /**

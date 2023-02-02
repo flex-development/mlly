@@ -26,7 +26,6 @@ describe('unit:utils/toBareSpecifier', () => {
       ['fs', 'node:fs'],
       ['node:fs', 'node:fs'],
       ['node_modules/@types/chai', '@types/chai'],
-      ['node_modules/colorette/index.js', 'colorette'],
       [pathToFileURL('dist/index.mjs'), '@flex-development/mlly'],
       [pathToFileURL('dist/index.mjs').href, '@flex-development/mlly'],
       [pathe.resolve('dist/index.mjs'), '@flex-development/mlly'],
