@@ -32,7 +32,6 @@ updates:
       include: scope
     directory: /
     ignore:
-      - dependency-name: '@types/node'
       - dependency-name: '@vitest/*'
       - dependency-name: '@vuedx/typescript-plugin-vue'
       - dependency-name: vitepress
