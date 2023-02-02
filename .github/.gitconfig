@@ -109,9 +109,6 @@ rebase = true
 [rebase]
 autoStash = true
 
-[url "git@bitbucket.org:"]
-insteadOf = bb:
-
 [url "git@github.com:"]
 insteadOf = gh:
 

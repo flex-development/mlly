@@ -12,6 +12,7 @@
         "*.txt",
         ".editorconfig",
         ".env*",
+        ".github/.gitconfig",
         ".husky/commit-msg",
         ".husky/pre-commit",
         ".husky/pre-push"
