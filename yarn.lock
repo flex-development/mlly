@@ -5621,7 +5621,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.16.14, esbuild@npm:^0.16.3":
+"esbuild@npm:^0.16.14":
   version: 0.16.17
   resolution: "esbuild@npm:0.16.17"
   dependencies:
@@ -9166,7 +9166,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.1.10, postcss@npm:^8.4.20, postcss@npm:^8.4.21":
+"postcss@npm:^8.1.10, postcss@npm:^8.4.21":
   version: 8.4.21
   resolution: "postcss@npm:8.4.21"
   dependencies:
@@ -9741,20 +9741,6 @@ __metadata:
   bin:
     rollup: dist/bin/rollup
   checksum: 9bf000f17910c383cbc3121dcb9e4c3814ea97939cfe817ef41dd19265a1214df2d77a0d612069ca6ad81d1df131c4910417dc892863bc6e3ff2b82ad15f37f9
-  languageName: node
-  linkType: hard
-
-"rollup@npm:^3.7.0":
-  version: 3.12.0
-  resolution: "rollup@npm:3.12.0"
-  dependencies:
-    fsevents: "npm:~2.3.2"
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    rollup: dist/bin/rollup
-  checksum: 41dfcd8fd28232ba3d6fa58e5694ec3eb47edb94073dab37dacd33c76adf1e53a6008c184e03b7f98a432805aef2487711261e42b8b88e56ebfe1b3bf8f89cd1
   languageName: node
   linkType: hard
 
@@ -11243,7 +11229,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:4.1.1":
+"vite@npm:4.1.1, vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.0.3":
   version: 4.1.1
   resolution: "vite@npm:4.1.1"
   dependencies:
@@ -11278,44 +11264,6 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 1214e901a0836cfad0b20abe3ba03684c5c6d1a5d486e7ddd55e56e2c786677cecd7c1822b97540a001867164a9e38e52aa5c14480cdc50afd2561ed4bc2f89b
-  languageName: node
-  linkType: hard
-
-"vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.0.3":
-  version: 4.0.4
-  resolution: "vite@npm:4.0.4"
-  dependencies:
-    esbuild: "npm:^0.16.3"
-    fsevents: "npm:~2.3.2"
-    postcss: "npm:^8.4.20"
-    resolve: "npm:^1.22.1"
-    rollup: "npm:^3.7.0"
-  peerDependencies:
-    "@types/node": ">= 14"
-    less: "*"
-    sass: "*"
-    stylus: "*"
-    sugarss: "*"
-    terser: ^5.4.0
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-    less:
-      optional: true
-    sass:
-      optional: true
-    stylus:
-      optional: true
-    sugarss:
-      optional: true
-    terser:
-      optional: true
-  bin:
-    vite: bin/vite.js
-  checksum: f4f9d9d5b910b8cc8130ef235b3f0eaf1eb7ab690e744760de1326c5db1ca6a3def2c17b053dea3123a1dee991b782c0d2b5a5a8df3705c0d23db86e6039c552
   languageName: node
   linkType: hard
 
