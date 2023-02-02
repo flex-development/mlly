@@ -1035,6 +1035,8 @@ const config = {
       },
       plugins: ['chai-expect', 'jest-formatting'],
       rules: {
+        '@typescript-eslint/ban-types': 0,
+        '@typescript-eslint/consistent-indexed-object-style': 0,
         '@typescript-eslint/no-base-to-string': 0,
         '@typescript-eslint/no-empty-function': 0,
         '@typescript-eslint/no-unused-expressions': 0,
@@ -1057,6 +1059,7 @@ const config = {
         'unicorn/error-message': 0,
         'unicorn/explicit-length-check': 0,
         'unicorn/no-array-for-each': 0,
+        'unicorn/no-hex-escape': 0,
         'unicorn/no-useless-undefined': 0,
         'unicorn/prefer-at': 0,
         'unicorn/prefer-dom-node-append': 0,
