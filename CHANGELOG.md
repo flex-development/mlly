@@ -1,3 +1,39 @@
+## [1.0.0-alpha.9](https://github.com/flex-development/mlly/compare/1.0.0-alpha.8...1.0.0-alpha.9) (2023-02-02)
+
+
+### :package: Build
+
+* **deps-dev:** Bump @sindresorhus/slugify from 2.1.1 to 2.2.0 ([#82](https://github.com/flex-development/mlly/issues/82)) ([e831388](https://github.com/flex-development/mlly/commit/e831388143982244eaeba3b548d74c899182f69d))
+* **deps-dev:** Bump @types/eslint from 8.4.10 to 8.21.0 ([#93](https://github.com/flex-development/mlly/issues/93)) ([ae0b99a](https://github.com/flex-development/mlly/commit/ae0b99ac582fc3f06df23a1deab5c40bd2393c9d))
+* **deps-dev:** bump @types/node from 16.18.11 to 18.11.18 ([64c4452](https://github.com/flex-development/mlly/commit/64c44523dd60f804d0e60f7f6cf4668084891575))
+* **deps-dev:** Bump @typescript-eslint/eslint-plugin from 5.49.0 to 5.50.0 ([#84](https://github.com/flex-development/mlly/issues/84)) ([88ee8f8](https://github.com/flex-development/mlly/commit/88ee8f8a232110de7f1abaee7726b435a14065d3))
+* **deps-dev:** Bump @typescript-eslint/parser from 5.49.0 to 5.50.0 ([#85](https://github.com/flex-development/mlly/issues/85)) ([dec5dcc](https://github.com/flex-development/mlly/commit/dec5dccb76b4fa16e027ffc4388cea2e753d0939))
+* **deps-dev:** Bump @vue/runtime-core from 3.2.45 to 3.2.47 ([#97](https://github.com/flex-development/mlly/issues/97)) ([20491e2](https://github.com/flex-development/mlly/commit/20491e2d470e427d0377c8e0f8b158ea1d83bd7e))
+* **deps-dev:** Bump cspell from 6.19.2 to 6.20.1 ([#90](https://github.com/flex-development/mlly/issues/90)) ([247e9d1](https://github.com/flex-development/mlly/commit/247e9d1eac59770e1c0f1f920faf86123a9eeb37))
+* **deps-dev:** Bump eslint-plugin-jsdoc from 39.7.4 to 39.7.5 ([#87](https://github.com/flex-development/mlly/issues/87)) ([0821270](https://github.com/flex-development/mlly/commit/082127092ff643d70929e6ea29167f71f990e628))
+* **deps-dev:** Bump graphql-config from 4.4.0 to 4.4.1 ([#91](https://github.com/flex-development/mlly/issues/91)) ([c0c8368](https://github.com/flex-development/mlly/commit/c0c8368582dcfa1f0a208f10eacd27e9d318e034))
+* **deps-dev:** Bump vercel from 28.14.0 to 28.15.0 ([#92](https://github.com/flex-development/mlly/issues/92)) ([82c9698](https://github.com/flex-development/mlly/commit/82c9698bf5fa72a87958a3763d827764f4ca2bf0))
+* **deps-dev:** Bump vue from 3.2.45 to 3.2.47 ([#96](https://github.com/flex-development/mlly/issues/96)) ([88a26c9](https://github.com/flex-development/mlly/commit/88a26c90637412900751d26e0a83cee13e15ba95))
+
+
+### :robot: Continuous Integration
+
+* **deps:** Bump actions/cache from 3.2.3 to 3.2.4 ([#81](https://github.com/flex-development/mlly/issues/81)) ([422fb8c](https://github.com/flex-development/mlly/commit/422fb8cc64cd4a9738bad3d001885aa50cf4f9eb))
+* **workflows:** [`ci`] add `gitguardian` job ([d74b1f7](https://github.com/flex-development/mlly/commit/d74b1f7851c46e763a6e70a790f7b0f6ec5425d8))
+
+
+### :bug: Fixes
+
+* **resolve:** unhoisted package resolution ([26523ef](https://github.com/flex-development/mlly/commit/26523ef7e8a2398978badc6f4fffccfeec806575))
+
+
+### :house_with_garden: Housekeeping
+
+* [eslint] update rules for test files ([143a34a](https://github.com/flex-development/mlly/commit/143a34ad2141ddec495bd45bc92501be7642a949))
+* **github:** cleanup reference link in `.github/funding.yml` ([5c75139](https://github.com/flex-development/mlly/commit/5c7513977985c0e4422e895d65512f37af451f64))
+* **github:** remove `git@bitbucket.org` alias from sample `.gitconfig` ([155f6d8](https://github.com/flex-development/mlly/commit/155f6d87f5f623121b40398e87913d89ce4266f9))
+* **github:** update `.env` rule in `.gitignore` ([e54635a](https://github.com/flex-development/mlly/commit/e54635afdbaf846364d28cca86162bcc3c17e7a0))
+
 ## [1.0.0-alpha.8](https://github.com/flex-development/mlly/compare/1.0.0-alpha.7...1.0.0-alpha.8) (2023-01-29)
 
 
