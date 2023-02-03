@@ -10,6 +10,7 @@
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 # - https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions
+# - https://github.com/GitGuardian/ggshield-action
 # - https://github.com/actions/cache
 # - https://github.com/actions/cache/discussions/650
 # - https://github.com/actions/checkout
@@ -82,6 +83,27 @@ jobs:
       - id: version-typescript
         name: Get TypeScript version
         run: echo "result=$(jq .devDependencies.typescript package.json -r)" >> $GITHUB_OUTPUT
+  gitguardian:
+    needs: metadata
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.3.0
+        with:
+          fetch-depth: 0
+          ref: ${{ env.REF }}
+      - id: scan
+        name: Scan commits for secrets and policy breaches
+        uses: GitGuardian/ggshield-action@v1.1.0
+        with:
+          args: --all-policies --show-secrets --verbose
+        env:
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
+          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
   format:
     needs: metadata
     runs-on: ubuntu-latest
@@ -288,6 +310,7 @@ jobs:
     needs:
       - build
       - format
+      - gitguardian
       - lint
       - metadata
       - spelling
