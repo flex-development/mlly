@@ -95,7 +95,7 @@ jobs:
           ref: ${{ env.REF }}
       - id: scan
         name: Scan commits for secrets and policy breaches
-        uses: GitGuardian/ggshield-action@v1.1.0
+        uses: GitGuardian/ggshield-action@master
         with:
           args: --all-policies --show-secrets --verbose
         env:
