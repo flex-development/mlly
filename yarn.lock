@@ -995,6 +995,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@docsearch/css@npm:3.3.3":
+  version: 3.3.3
+  resolution: "@docsearch/css@npm:3.3.3"
+  checksum: 41cdf9289a574115dd1085c1e95e8571085a4b6415990a03b3089645a9ac53416b1b8e851db0b826c1d9952efdb1683f1a0d129ffac6f4b91d2b702ea3d1f1bb
+  languageName: node
+  linkType: hard
+
 "@docsearch/js@npm:^3.3.1":
   version: 3.3.2
   resolution: "@docsearch/js@npm:3.3.2"
@@ -1025,6 +1032,29 @@ __metadata:
     react-dom:
       optional: true
   checksum: 2b5ee005eea7fddef77f0f449e9bb3a2b8603ee77e46eb5ac9fe7661e0a5359e6fbc2c52f9f21ee0b7c2e89b24cb48a4a2864765b6c7a0c8afb260fcfff6536c
+  languageName: node
+  linkType: hard
+
+"@docsearch/react@npm:3.3.3":
+  version: 3.3.3
+  resolution: "@docsearch/react@npm:3.3.3"
+  dependencies:
+    "@algolia/autocomplete-core": "npm:1.7.4"
+    "@algolia/autocomplete-preset-algolia": "npm:1.7.4"
+    "@docsearch/css": "npm:3.3.3"
+    algoliasearch: "npm:^4.0.0"
+  peerDependencies:
+    "@types/react": ">= 16.8.0 < 19.0.0"
+    react: ">= 16.8.0 < 19.0.0"
+    react-dom: ">= 16.8.0 < 19.0.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 03ee0188df68d7bd126d320f6d64ca1373f0eca7bff5b9f060c566b2f3a5137a2159bb5cc200adb86aa5a9cccee90ed1d04864b3bd3db9e6b22c87a151475adf
   languageName: node
   linkType: hard
 
@@ -1545,7 +1575,7 @@ __metadata:
     "@commitlint/cli": "npm:17.4.2"
     "@commitlint/config-conventional": "npm:17.4.2"
     "@commitlint/types": "npm:17.4.0"
-    "@docsearch/react": "npm:3.3.2"
+    "@docsearch/react": "npm:3.3.3"
     "@faker-js/faker": "npm:7.6.0"
     "@flex-development/docast": "npm:1.0.0-alpha.9"
     "@flex-development/docast-parse": "npm:1.0.0-alpha.4"
