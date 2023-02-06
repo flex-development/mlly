@@ -988,14 +988,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docsearch/css@npm:3.3.2, @docsearch/css@npm:^3.3.1":
+"@docsearch/css@npm:3.3.2":
   version: 3.3.2
   resolution: "@docsearch/css@npm:3.3.2"
   checksum: 7df411e6d3af8f6169532a10d5539433f5047bb437e19b6e9a869b4859ac16bd5b614fb1c24c92e3cf03bd4a679aa9aec62a37b47559121f3446fd77fe83414e
   languageName: node
   linkType: hard
 
-"@docsearch/css@npm:3.3.3":
+"@docsearch/css@npm:3.3.3, @docsearch/css@npm:^3.3.1":
   version: 3.3.3
   resolution: "@docsearch/css@npm:3.3.3"
   checksum: 41cdf9289a574115dd1085c1e95e8571085a4b6415990a03b3089645a9ac53416b1b8e851db0b826c1d9952efdb1683f1a0d129ffac6f4b91d2b702ea3d1f1bb
