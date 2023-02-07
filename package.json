@@ -167,7 +167,7 @@
     "node-notifier": "10.0.1",
     "prettier": "2.8.3",
     "prettier-plugin-sh": "0.12.8",
-    "pretty-format": "29.4.1",
+    "pretty-format": "29.4.2",
     "pupa": "3.1.0",
     "sade": "1.8.1",
     "semver": "7.3.8",
