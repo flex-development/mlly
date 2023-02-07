@@ -1658,7 +1658,7 @@ __metadata:
     node-notifier: "npm:10.0.1"
     prettier: "npm:2.8.3"
     prettier-plugin-sh: "npm:0.12.8"
-    pretty-format: "npm:29.4.1"
+    pretty-format: "npm:29.4.2"
     pupa: "npm:3.1.0"
     sade: "npm:1.8.1"
     semver: "npm:7.3.8"
@@ -2056,12 +2056,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/schemas@npm:^29.4.0":
-  version: 29.4.0
-  resolution: "@jest/schemas@npm:29.4.0"
+"@jest/schemas@npm:^29.4.2":
+  version: 29.4.2
+  resolution: "@jest/schemas@npm:29.4.2"
   dependencies:
     "@sinclair/typebox": "npm:^0.25.16"
-  checksum: 310b1a37600a5ba54b510666954d1ea15babbaefcb0d0e0e65245d52bafd796a9f9665220066fe6694487a9b4cbf97552bfb998873f7cfeba74813cc86d35d86
+  checksum: b23564f461bf1414bec2051994a48e6096c630155fba532ffef01996a4dbdaee7b4710afebcf73bd53422601c3833315898e535e5b3f286a3d6cdf85a4a194d0
   languageName: node
   linkType: hard
 
@@ -9351,14 +9351,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:29.4.1":
-  version: 29.4.1
-  resolution: "pretty-format@npm:29.4.1"
+"pretty-format@npm:29.4.2":
+  version: 29.4.2
+  resolution: "pretty-format@npm:29.4.2"
   dependencies:
-    "@jest/schemas": "npm:^29.4.0"
+    "@jest/schemas": "npm:^29.4.2"
     ansi-styles: "npm:^5.0.0"
     react-is: "npm:^18.0.0"
-  checksum: c3c35ad3d306f55124ae9cd81cc5eddd4dbffe05057c855a0b4e056958d6f70130f7365b6831826144044dba87cef992a7de4eddc643a507f91d7ed95e5bb7ee
+  checksum: 4989cfc1992d21cf430113fc76534c6eb3a176aa23747ec87ac0191e17eff590f90d082752cc907263cd5bed1e17007554f05fd4bd795d24d4cbb059a6426328
   languageName: node
   linkType: hard
 
