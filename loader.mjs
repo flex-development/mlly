@@ -5,7 +5,8 @@
  */
 
 import * as mlly from '@flex-development/mlly'
-import pathe from '@flex-development/pathe'
+import * as pathe from '@flex-development/pathe'
+import * as tutils from '@flex-development/tutils'
 import * as esbuild from 'esbuild'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import tsconfig from './tsconfig.json' assert { type: 'json' }
@@ -17,7 +18,8 @@ mlly.EXTENSION_FORMAT_MAP.set('', mlly.Format.COMMONJS)
 /**
  * URL of current working directory.
  *
- * @const {URL} cwd
+ * @type {import('node:url').URL}
+ * @const cwd
  */
 const cwd = pathToFileURL(tsconfig.compilerOptions.baseUrl)
 
@@ -43,14 +45,16 @@ export const load = async (url, context) => {
   /**
    * File extension of {@linkcode url}.
    *
-   * @const {ReturnType<typeof pathe['extname']>} ext
+   * @type {pathe.Ext | tutils.EmptyString}
+   * @const ext
    */
   const ext = pathe.extname(url)
 
   /**
    * Source code.
    *
-   * @var {Uint8Array | string | undefined} source
+   * @type {Uint8Array | string | undefined}
+   * @var source
    */
   let source = await mlly.getSource(url, { format: context.format })
 
@@ -119,7 +123,8 @@ export const resolve = async (specifier, context) => {
   /**
    * Resolved module URL.
    *
-   * @const {URL} url
+   * @type {import('node:url').URL}
+   * @const url
    */
   const url = await mlly.resolveModule(specifier, { conditions, parent })
 
