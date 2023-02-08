@@ -1674,7 +1674,7 @@ __metadata:
     unist-util-visit: "npm:4.1.2"
     vercel: "npm:28.15.2"
     version-bump-prompt: "npm:6.1.0"
-    vfile: "npm:5.3.6"
+    vfile: "npm:5.3.7"
     vite: "npm:4.1.1"
     vite-tsconfig-paths: "npm:4.0.5"
     vitepress: "npm:1.0.0-alpha.34"
@@ -11303,6 +11303,18 @@ __metadata:
     unist-util-stringify-position: "npm:^3.0.0"
     vfile-message: "npm:^3.0.0"
   checksum: a31b69ea7dd0aa23da7c99b0b96fa6e3f9cfd57f2a1010dad4493762b5e3a38688638ca8ca9fb0f93602f67f47208fedbee189d81fd949ef42b8bb335c1a824f
+  languageName: node
+  linkType: hard
+
+"vfile@npm:5.3.7":
+  version: 5.3.7
+  resolution: "vfile@npm:5.3.7"
+  dependencies:
+    "@types/unist": "npm:^2.0.0"
+    is-buffer: "npm:^2.0.0"
+    unist-util-stringify-position: "npm:^3.0.0"
+    vfile-message: "npm:^3.0.0"
+  checksum: 54ad13e2ace60db147f0b0d288ccf79b883d80b5e3f7c1e76698ed81d1ad1cdbe02d37bb7a0dc8d1eef560160b2c1fa4780c49f0b5df29e257a1b70a31b5ffde
   languageName: node
   linkType: hard
 
