@@ -1,7 +1,7 @@
 /**
- * @file Custom Loader
+ * @file Custom Loader Hooks
  * @module loader
- * @see https://nodejs.org/docs/latest-v16.x/api/esm.html#loaders
+ * @see https://nodejs.org/api/esm.html#loaders
  */
 
 import * as mlly from '@flex-development/mlly'
@@ -24,10 +24,11 @@ mlly.EXTENSION_FORMAT_MAP.set('', mlly.Format.COMMONJS)
 const cwd = pathToFileURL(tsconfig.compilerOptions.baseUrl)
 
 /**
- * Determines how `url` should be interpreted, retrieved, and parsed.
+ * Determines how the module at the given `url` should be interpreted,
+ * retrieved, and parsed.
  *
  * @see {@linkcode LoadHookContext}
- * @see https://nodejs.org/docs/latest-v16.x/api/esm.html#loadurl-context-nextload
+ * @see https://nodejs.org/api/esm.html#loadurl-context-nextload
  *
  * @async
  *
@@ -100,7 +101,7 @@ export const load = async (url, context) => {
  * - Extensionless file and directory index resolution
  *
  * @see {@linkcode ResolveHookContext}
- * @see https://nodejs.org/docs/latest-v16.x/api/esm.html#resolvespecifier-context-nextresolve
+ * @see https://nodejs.org/api/esm.html#resolvespecifier-context-nextresolve
  *
  * @async
  *
