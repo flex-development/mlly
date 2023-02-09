@@ -183,7 +183,7 @@ const toBareSpecifier = (
         subpath = '.' + target.slice(target.indexOf(subpath))
       }
 
-      // subpath should not include extension if extension is already ncluded
+      // subpath should not include extension if extension is already included
       // via package target
       if (pathe.extname(target) === pathe.extname(subpath)) {
         subpath = pathe.changeExt(subpath, '')
