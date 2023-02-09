@@ -1,3 +1,43 @@
+## [1.0.0-alpha.10](https://github.com/flex-development/mlly/compare/1.0.0-alpha.9...1.0.0-alpha.10) (2023-02-09)
+
+
+### :package: Build
+
+* **deps-dev:** Bump @docsearch/react from 3.3.2 to 3.3.3 ([#111](https://github.com/flex-development/mlly/issues/111)) ([c7b1286](https://github.com/flex-development/mlly/commit/c7b1286aab74d5cf0e48996eda8efb2cc66450b5))
+* **deps-dev:** Bump @types/node from 18.11.18 to 18.13.0 ([#116](https://github.com/flex-development/mlly/issues/116)) ([41a5620](https://github.com/flex-development/mlly/commit/41a56209cb282a0338112efd46194f969453fa5d))
+* **deps-dev:** Bump @typescript-eslint/eslint-plugin from 5.50.0 to 5.51.0 ([#107](https://github.com/flex-development/mlly/issues/107)) ([f3d88bc](https://github.com/flex-development/mlly/commit/f3d88bc6eeba9cba650705f40836cb39f19e6155))
+* **deps-dev:** Bump @typescript-eslint/parser from 5.50.0 to 5.51.0 ([#112](https://github.com/flex-development/mlly/issues/112)) ([177d989](https://github.com/flex-development/mlly/commit/177d98937accfc4dad648f672e55849ea0b49968))
+* **deps-dev:** Bump @vitest/ui from 0.28.3 to 0.28.4 ([#100](https://github.com/flex-development/mlly/issues/100)) ([48cb9b6](https://github.com/flex-development/mlly/commit/48cb9b62930e0f2b6d0080696781539d55585abb))
+* **deps-dev:** Bump cspell from 6.20.1 to 6.21.0 ([#103](https://github.com/flex-development/mlly/issues/103)) ([2048d88](https://github.com/flex-development/mlly/commit/2048d883332910b2bdd8639d80b16d50eed6a560))
+* **deps-dev:** Bump cspell from 6.21.0 to 6.22.0 ([#109](https://github.com/flex-development/mlly/issues/109)) ([81ea472](https://github.com/flex-development/mlly/commit/81ea472ddc49d149284755d53843a15abf87991a))
+* **deps-dev:** Bump esbuild from 0.17.5 to 0.17.6 ([#106](https://github.com/flex-development/mlly/issues/106)) ([2dda0cc](https://github.com/flex-development/mlly/commit/2dda0cc6667f812f3a88d8a9cfd499fc2e35baff))
+* **deps-dev:** Bump eslint-plugin-jsdoc from 39.7.5 to 39.8.0 ([#102](https://github.com/flex-development/mlly/issues/102)) ([d2666ec](https://github.com/flex-development/mlly/commit/d2666ec36a1aab43beb74322944c70ee121e1bf6))
+* **deps-dev:** Bump lint-staged from 13.1.0 to 13.1.1 ([#115](https://github.com/flex-development/mlly/issues/115)) ([a63fa71](https://github.com/flex-development/mlly/commit/a63fa71f6cc5c756d3e515bb65cdbf759719767e))
+* **deps-dev:** Bump prettier from 2.8.3 to 2.8.4 ([#119](https://github.com/flex-development/mlly/issues/119)) ([98263e6](https://github.com/flex-development/mlly/commit/98263e6b9be03a36a0697fd391f0647bb94764bf))
+* **deps-dev:** Bump pretty-format from 29.4.1 to 29.4.2 ([#113](https://github.com/flex-development/mlly/issues/113)) ([4ec7d50](https://github.com/flex-development/mlly/commit/4ec7d5051a45e1b8c89a94db08a4d521ccbe5e30))
+* **deps-dev:** Bump vercel from 28.15.0 to 28.15.1 ([#110](https://github.com/flex-development/mlly/issues/110)) ([56acc58](https://github.com/flex-development/mlly/commit/56acc58f04adc13afd9b73cd3c8afd134e9f25c4))
+* **deps-dev:** Bump vercel from 28.15.1 to 28.15.2 ([#117](https://github.com/flex-development/mlly/issues/117)) ([560b8d5](https://github.com/flex-development/mlly/commit/560b8d50f102059b0d684a80e8834cb2f69b114c))
+* **deps-dev:** Bump vfile from 5.3.6 to 5.3.7 ([#118](https://github.com/flex-development/mlly/issues/118)) ([82af6a7](https://github.com/flex-development/mlly/commit/82af6a742c70e7b78dfdda2f014ba8b393aeba81))
+* **deps-dev:** Bump vitest from 0.28.3 to 0.28.4 ([#99](https://github.com/flex-development/mlly/issues/99)) ([a4a4dab](https://github.com/flex-development/mlly/commit/a4a4dab13f5f929c0e86699d5feda560a215df19))
+* **pkg:** include `src` files in distribution ([ada4cfb](https://github.com/flex-development/mlly/commit/ada4cfbc4ef52fec3038dbd9c98ead0f37afa565))
+
+
+### :robot: Continuous Integration
+
+* **deps:** bump GitGuardian/ggshield-action from 1.1.0 to master ([e4d44f1](https://github.com/flex-development/mlly/commit/e4d44f1b4d728f2511b1a68936045a4fc700ddca))
+
+
+### :pencil: Documentation
+
+* **loader:** fix jsdoc annotations ([49b83b8](https://github.com/flex-development/mlly/commit/49b83b8922738abdbcd3bff3e4500de0b996eb9d))
+* **loader:** update descriptions and reference links ([9e82d4e](https://github.com/flex-development/mlly/commit/9e82d4e76afeb29ac9b9187628296698a26b361d))
+
+
+### :bug: Fixes
+
+* **utils:** [`fillModules`] specifier replacement ([a9221ff](https://github.com/flex-development/mlly/commit/a9221ffb22bbcac90b22180a9c9b9147464029b8))
+* **utils:** [`toBareSpecifier`] package directory regex ([e60a9f8](https://github.com/flex-development/mlly/commit/e60a9f82ab0cbe5e1c40be01cc7b47719823b7af))
+
 ## [1.0.0-alpha.9](https://github.com/flex-development/mlly/compare/1.0.0-alpha.8...1.0.0-alpha.9) (2023-02-02)
 
 
