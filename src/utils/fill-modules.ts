@@ -5,6 +5,7 @@
 
 import { SpecifierSyntaxKind } from '#src/enums'
 import type { FillModuleOptions } from '#src/interfaces'
+import regexp from '#src/internal/escape-reg-exp'
 import isFunction from '#src/internal/is-function'
 import { ERR_UNKNOWN_FILE_EXTENSION } from '@flex-development/errnode'
 import pathe, { type Ext } from '@flex-development/pathe'
@@ -101,7 +102,7 @@ const fillModules = async (
     code = code.replace(
       statement.code,
       statement.code.replace(
-        statement.specifier,
+        new RegExp(`(?<=["'])${regexp(statement.specifier)}(?=["'])`),
         // convert module url back to absolute, bare, or relative specifier
         statement.specifier.startsWith('#')
           ? statement.specifier
