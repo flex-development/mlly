@@ -120,7 +120,7 @@ const toBareSpecifier = (
 
   // convert specifier to bare specifier
   specifier = url.pathname.includes(name)
-    ? name + url.pathname.replace(new RegExp(`.*${regexp(name)}`), '')
+    ? name + url.pathname.replace(new RegExp(`.*?${regexp(name)}`), '')
     : name + specifier.replace(fileURLToPath(pkgdir.replace(/\/$/, '')), '')
 
   /**
