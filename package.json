@@ -111,7 +111,7 @@
     "@types/git-raw-commits": "2.0.1",
     "@types/is-ci": "3.0.0",
     "@types/markdown-it": "12.2.3",
-    "@types/node": "18.11.18",
+    "@types/node": "18.13.0",
     "@types/node-notifier": "8.0.2",
     "@types/prettier": "2.7.2",
     "@types/semver": "7.3.13",
