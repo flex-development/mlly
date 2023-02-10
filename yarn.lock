@@ -1667,7 +1667,7 @@ __metadata:
     tempfile: "npm:4.0.0"
     trash-cli: "npm:5.0.0"
     ts-dedent: "npm:2.2.0"
-    typescript: "npm:5.0.0-dev.20221215"
+    typescript: "npm:5.0.0-dev.20230210"
     unified: "npm:10.1.2"
     unist-util-remove: "npm:3.1.0"
     unist-util-source: "npm:4.0.2"
@@ -10818,13 +10818,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.0.0-dev.20221215":
-  version: 5.0.0-dev.20221215
-  resolution: "typescript@npm:5.0.0-dev.20221215"
+"typescript@npm:5.0.0-dev.20230210":
+  version: 5.0.0-dev.20230210
+  resolution: "typescript@npm:5.0.0-dev.20230210"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 55a65a8798fab4996ee5783b59ef6871c0d803dc2d6eff18336bd953a8dba825bd39fad3004fbcd94df532dae72d6319ce344ebfe6004a0d517d2c5fcd3cc44e
+  checksum: 55b97ed55fd7b54aca728b0b9bd6b6144275f679a82e9b69cda39f0c41e8e39e1e76e4c58d443e518f45c46538a792908b979e79afbd2c84862daddc799372eb
   languageName: node
   linkType: hard
 
@@ -10848,13 +10848,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.0.0-dev.20221215#optional!builtin<compat/typescript>":
-  version: 5.0.0-dev.20221215
-  resolution: "typescript@patch:typescript@npm%3A5.0.0-dev.20221215#optional!builtin<compat/typescript>::version=5.0.0-dev.20221215&hash=ad5954"
+"typescript@patch:typescript@npm%3A5.0.0-dev.20230210#optional!builtin<compat/typescript>":
+  version: 5.0.0-dev.20230210
+  resolution: "typescript@patch:typescript@npm%3A5.0.0-dev.20230210#optional!builtin<compat/typescript>::version=5.0.0-dev.20230210&hash=ad5954"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 27579cfcf9530503aa085c5f615fae194e126bb3c2008d164f24689d6a9295ab0d07b369be28a8ed6a4648b8190ec11edf919935209263347b3b61707ddd13f1
+  checksum: 1913caed413ed65dfb7d3f6586e7e3f6d7185cc2ed33821fca28d8914ebe1e6f263e1f34fadf9058a4d72f1c6c6ebe3eaf7e2ae139222276e0aaebc41f065924
   languageName: node
   linkType: hard
 
