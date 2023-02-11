@@ -1,3 +1,22 @@
+## [1.0.0-alpha.11](https://github.com/flex-development/mlly/compare/1.0.0-alpha.10...1.0.0-alpha.11) (2023-02-11)
+
+
+### :package: Build
+
+* **deps-dev:** Bump @vitest/coverage-c8 from 0.28.3 to 0.28.4 ([#122](https://github.com/flex-development/mlly/issues/122)) ([667754f](https://github.com/flex-development/mlly/commit/667754fce9774037dbc2ec60532b5b83f2c36aa9))
+* **deps-dev:** Bump esbuild from 0.17.6 to 0.17.7 ([#124](https://github.com/flex-development/mlly/issues/124)) ([719a8b6](https://github.com/flex-development/mlly/commit/719a8b6bd1595852a2fd1c4e541180532a6004dd))
+* **deps-dev:** Bump vercel from 28.15.2 to 28.15.3 ([#123](https://github.com/flex-development/mlly/issues/123)) ([82d85d1](https://github.com/flex-development/mlly/commit/82d85d1a1ec46207d113923af3e4dd1c3591b65d))
+
+
+### :robot: Continuous Integration
+
+* **deps:** Bump actions/cache from 3.2.4 to 3.2.5 ([#126](https://github.com/flex-development/mlly/issues/126)) ([f9e1371](https://github.com/flex-development/mlly/commit/f9e1371aa88af80f38cc50cd3f6d757c896f8e6e))
+
+
+### :bug: Fixes
+
+* **utils:** [`fillModules`] `dot.case` specifier support ([2be2adb](https://github.com/flex-development/mlly/commit/2be2adbfb1bde578898cd4fa4707e29c90b43254))
+
 ## [1.0.0-alpha.10](https://github.com/flex-development/mlly/compare/1.0.0-alpha.9...1.0.0-alpha.10) (2023-02-09)
 
 
