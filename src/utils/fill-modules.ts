@@ -8,8 +8,7 @@ import type { FillModuleOptions } from '#src/interfaces'
 import regexp from '#src/internal/escape-reg-exp'
 import isFunction from '#src/internal/is-function'
 import { ERR_UNKNOWN_FILE_EXTENSION } from '@flex-development/errnode'
-import pathe, { type Ext } from '@flex-development/pathe'
-import type { EmptyString } from '@flex-development/tutils'
+import pathe from '@flex-development/pathe'
 import type { URL } from 'node:url'
 import CONDITIONS from './conditions'
 import extractStatements from './extract-statements'
@@ -72,15 +71,11 @@ const fillModules = async (
        * @return {Promise<string | undefined>} New file extension or `undefined`
        */
       async ext(specifier: string, url: URL): Promise<string | undefined> {
-        /**
-         * Current file extension of {@linkcode specifier}.
-         *
-         * @const {EmptyString | Ext} extname
-         */
-        const extname: EmptyString | Ext = pathe.extname(specifier)
+        // skip replacement for bare specifiers
+        if (isBareSpecifier(specifier)) return void 0
 
-        // skip replacement for bare and already fully specified specifiers
-        if (isBareSpecifier(specifier) || extname.length > 1) return undefined
+        // skip replacement for specifiers that are already fully specified
+        if (pathe.extname(specifier) === pathe.extname(url.href)) return void 0
 
         /**
          * Replacement file extension.
