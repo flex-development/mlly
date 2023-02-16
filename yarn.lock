@@ -1586,7 +1586,7 @@ __metadata:
     "@flex-development/mkbuild": "npm:1.0.0-alpha.9"
     "@flex-development/pathe": "npm:1.0.3"
     "@flex-development/pkg-types": "npm:2.0.0"
-    "@flex-development/tutils": "npm:6.0.0-alpha.9"
+    "@flex-development/tutils": "npm:6.0.0-alpha.10"
     "@graphql-eslint/eslint-plugin": "npm:3.15.0"
     "@sindresorhus/slugify": "npm:2.2.0"
     "@types/chai": "npm:4.3.4"
@@ -1712,12 +1712,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/tutils@npm:6.0.0-alpha.9":
-  version: 6.0.0-alpha.9
-  resolution: "@flex-development/tutils@npm:6.0.0-alpha.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftutils%2F6.0.0-alpha.9%2F596608be55ad251320e2ee22335f688e41fa49e3"
+"@flex-development/tutils@npm:6.0.0-alpha.10":
+  version: 6.0.0-alpha.10
+  resolution: "@flex-development/tutils@npm:6.0.0-alpha.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftutils%2F6.0.0-alpha.10%2Fb2085f42d62aedfabfae2ed016c0cc5c47192f81"
   peerDependencies:
     typescript: ">=4.7"
-  checksum: 0e206ba29c79f484bf0be338a66ceeeaf525c8ed49974b5784ba139b47fb433a888d3cc698b24abd0a049c36162af15ea638b008baa1d3e04883b111a33a727b
+  checksum: 372d2fd3e36f75cf7f9ea80e3e95cbd99f673dd114301f610a29e7acf12f589342c1e84c0139c8aa7cac1bcae2c7c1db2cb1302bae55da9d2fb33ae32b5c2a1b
   languageName: node
   linkType: hard
 
