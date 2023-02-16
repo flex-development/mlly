@@ -45,6 +45,7 @@ import regexp from './escape-reg-exp'
 import isArrayIndex from './is-array-index'
 import isDirectory from './is-directory'
 import isFile from './is-file'
+import invalidSegmentRegex from './regex-invalid-segment'
 import PACKAGE_NAME_REGEX from './regex-package-name'
 import PACKAGE_PATH_REGEX from './regex-package-path'
 
@@ -691,25 +692,6 @@ class Resolver {
             url = this.resolvePackage(target, parent, condition, conditions)
             break
           case target.startsWith('.' + pathe.sep):
-            /**
-             * Returns a regex pattern matching invalid path segments.
-             *
-             * Invalid segments include:
-             *
-             * - `'node_modules/'` (decoded and encoded)
-             *
-             * @param {'deprecated'?} type - Pattern type
-             * @return {RegExp} Regex pattern matching invalid path segments
-             */
-            const invalidSegmentRegex = (type?: 'deprecated'): RegExp => {
-              return new RegExp(
-                `(^|\\\\|\\/)((\\.|%2e)(\\.|%2e)?|(n|%6e|%4e)(o|%6f|%4f)(d|%64|%44)(e|%65|%45)(_|%5f)(m|%6d|%4d)(o|%6f|%4f)(d|%64|%44)(u|%75|%55)(l|%6c|%4c)(e|%65|%45)(s|%73|%53))${
-                  type === 'deprecated' ? '' : '?'
-                }(\\\\|\\/|$)`,
-                'i'
-              )
-            }
-
             // check target for invalid segments
             if (invalidSegmentRegex().test(target.slice(2))) {
               if (invalidSegmentRegex('deprecated').test(target.slice(2))) {
