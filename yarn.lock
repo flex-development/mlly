@@ -1481,15 +1481,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/errnode@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@flex-development/errnode@npm:1.4.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ferrnode%2F1.4.0%2Fae3b431e24ba20ed6d79cdb19e616af182c38bc3"
+"@flex-development/errnode@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@flex-development/errnode@npm:1.5.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ferrnode%2F1.5.0%2F33dedbfaeb3139375e41d4382a8de53f9415a261"
   dependencies:
-    "@flex-development/tutils": "npm:6.0.0-alpha.9"
+    "@flex-development/tutils": "npm:6.0.0-alpha.10"
     node-inspect-extracted: "npm:2.0.0"
   peerDependencies:
     "@types/node": ">=14"
-  checksum: d61e9b7ad82c94124748955ebaeedfb32bfcc216a1852b2994a548cf448fa1a31415f92d32d27039d92168355d8ba994f1fb2318e6f4c7120e0879d29d8aa87a
+  checksum: 884d5339afb245fdb3e635ba599e373ba1dd9f68e789c796817fe4fbe15317fb0192f49684b524c3baba1d4b70934799a5b353439543f29ee36b513d63e53bfa
   languageName: node
   linkType: hard
 
@@ -1579,7 +1579,7 @@ __metadata:
     "@faker-js/faker": "npm:7.6.0"
     "@flex-development/docast": "npm:1.0.0-alpha.9"
     "@flex-development/docast-parse": "npm:1.0.0-alpha.4"
-    "@flex-development/errnode": "npm:1.4.0"
+    "@flex-development/errnode": "npm:1.5.0"
     "@flex-development/export-regex": "npm:1.0.0"
     "@flex-development/import-regex": "npm:2.0.1"
     "@flex-development/is-builtin": "npm:2.0.0"
