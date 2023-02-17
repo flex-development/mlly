@@ -22,6 +22,13 @@ import toURL from './to-url'
 /**
  * Retrieves a module format for the given module `id`.
  *
+ * ::: tip
+ * The given module `id` should be absolute (i.e. a [`file:` URL][1] or absolute
+ * specifier).
+ * :::
+ *
+ * [1]: https://nodejs.org/api/esm.html#file-urls
+ *
  * @see {@linkcode Format}
  * @see {@linkcode GetFormatOptions}
  * @see {@linkcode ModuleId}
@@ -38,7 +45,6 @@ const getFormat = async (
   options: GetFormatOptions = {}
 ): Promise<Nilable<Format>> => {
   const {
-    base,
     experimental_json_modules = true,
     experimental_network_imports = false,
     experimental_wasm_modules = false,
@@ -52,7 +58,7 @@ const getFormat = async (
    *
    * @const {URL} url
    */
-  const url: URL = toURL(id, base)
+  const url: URL = toURL(id)
 
   /**
    * Extracts a [MIME type][1] from a {@linkcode URL} href, {@linkcode URL}

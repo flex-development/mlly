@@ -4,7 +4,6 @@
  */
 
 import type { Format } from '#src/enums'
-import type { ModuleId } from '#src/types'
 import type { Ext } from '@flex-development/pathe'
 import type { EmptyString, KeysRequired } from '@flex-development/tutils'
 import type { RequestInit } from 'node-fetch'
@@ -13,12 +12,6 @@ import type TestSubject from '../options-get-format'
 describe('unit-d:interfaces/GetFormatOptions', () => {
   it('should allow empty object', () => {
     expectTypeOf<KeysRequired<TestSubject>>().toBeNever()
-  })
-
-  it('should match [base?: ModuleId]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('base')
-      .toEqualTypeOf<ModuleId | undefined>()
   })
 
   it('should match [experimental_json_modules?: boolean]', () => {
