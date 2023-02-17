@@ -647,7 +647,7 @@ class Resolver {
           // ensure prop is not an array index
           if (isArrayIndex(prop)) {
             throw new ERR_INVALID_PACKAGE_CONFIG(
-              fileURLToPath(dir),
+              fileURLToPath(dir).replace(/\/$/, '') + '/package.json',
               fileURLToPath(parent),
               '"exports" cannot contain numeric property keys'
             )
