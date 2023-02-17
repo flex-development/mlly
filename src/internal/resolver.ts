@@ -630,11 +630,14 @@ class Resolver {
           }
 
           // stop resolution attempts if target was resolved
-          if (url) break
+          if (url) {
+            error = undefined
+            break
+          }
         }
 
         // throw if error was encountered and package target was not resolved
-        if (error && !url) throw error
+        if (error) throw error
 
         break
       case typeof target === 'object':
