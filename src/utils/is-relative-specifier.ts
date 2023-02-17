@@ -23,6 +23,7 @@ import pathe from '@flex-development/pathe'
  */
 const isRelativeSpecifier = (specifier: string): boolean => {
   validateString(specifier, 'specifier')
+
   return specifier.startsWith('.')
     ? specifier.length === 1 || specifier[1] === pathe.sep
       ? true

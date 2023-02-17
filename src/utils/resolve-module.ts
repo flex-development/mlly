@@ -6,6 +6,10 @@
 import type { ResolveModuleOptions } from '#src/interfaces'
 import isFunction from '#src/internal/is-function'
 import Resolver from '#src/internal/resolver'
+import validateArraySet from '#src/internal/validate-array-set'
+import validateBoolean from '#src/internal/validate-boolean'
+import validateString from '#src/internal/validate-string'
+import validateURLString from '#src/internal/validate-url-string'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import { isBuiltin } from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
@@ -56,6 +60,16 @@ const resolveModule = async (
     parent = import.meta.url,
     preserveSymlinks = false
   } = options
+
+  // ensure specifier is a string
+  validateString(specifier, 'specifier')
+
+  // ensure option schemas
+  validateString(condition, 'options.condition')
+  validateArraySet(conditions, 'options.conditions')
+  validateArraySet(extensions, 'options.extensions')
+  validateURLString(parent, 'options.parent')
+  validateBoolean(preserveSymlinks, 'options.preserveSymlinks')
 
   /**
    * Module resolver.

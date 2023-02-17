@@ -5,11 +5,15 @@
 
 import { Format } from '#src/enums'
 import type { GetSourceOptions } from '#src/interfaces'
+import validateBoolean from '#src/internal/validate-boolean'
+import validateObject from '#src/internal/validate-object'
+import validateString from '#src/internal/validate-string'
 import type { ModuleId } from '#src/types'
 import {
   ERR_UNSUPPORTED_ESM_URL_SCHEME,
   type NodeError
 } from '@flex-development/errnode'
+import { isUndefined } from '@flex-development/tutils'
 import fs from 'node:fs/promises'
 import os from 'node:os'
 import type { URL } from 'node:url'
@@ -43,11 +47,16 @@ const getSource = async (
   options: GetSourceOptions = {}
 ): Promise<Uint8Array | string | undefined> => {
   const {
-    experimental_network_imports = false,
+    experimental_network_imports: network_imports = false,
     format,
     ignore_errors = false,
-    req
+    req = {}
   } = options
+
+  validateBoolean(network_imports, 'options.experimental_network_imports')
+  !isUndefined(format) && validateString(format, 'options.format')
+  validateBoolean(ignore_errors, 'options.ignore_errors')
+  !isUndefined(req) && validateObject(req, 'options.req')
 
   // exit early if format is Format.BUILTIN
   if (format === Format.BUILTIN) return undefined
@@ -95,7 +104,7 @@ const getSource = async (
       break
     case 'http:':
     case 'https:':
-      if (experimental_network_imports) {
+      if (network_imports) {
         const { default: fetch } = await import('node-fetch')
         source = await (await fetch(url.href, req)).text()
       } else {
@@ -120,7 +129,7 @@ const getSource = async (
     const schemes: string[] = ['data', 'file']
 
     // update supported schemes if support for network based modules is enabled
-    if (experimental_network_imports) schemes.push('http', 'https')
+    if (network_imports) schemes.push('http', 'https')
 
     throw new ERR_UNSUPPORTED_ESM_URL_SCHEME(
       url,

@@ -60,6 +60,7 @@ const resolveAlias = async (
   validateBoolean(absolute, 'options.absolute')
   validateObject(aliases, 'options.aliases')
   validateString(condition, 'options.condition')
+  validateArraySet(conditions, 'options.conditions')
   validateURLString(cwd, 'options.cwd')
   validateArraySet(extensions, 'options.extensions')
   validateURLString(parent, 'options.parent')

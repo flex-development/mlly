@@ -3,6 +3,8 @@
  * @module mlly/utils/isAbsoluteSpecifier
  */
 
+import validateString from '#src/internal/validate-string'
+import type { NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import { URL } from 'node:url'
 
@@ -18,8 +20,11 @@ import { URL } from 'node:url'
  *
  * @param {string} specifier - Specifier to evaluate
  * @return {boolean} `true` if `specifier` is absolute specifier
+ * @throws {NodeError<TypeError>} If `specifier` is not a string
  */
 const isAbsoluteSpecifier = (specifier: string): boolean => {
+  validateString(specifier, 'specifier')
+
   /**
    * Absolute specifier check.
    *

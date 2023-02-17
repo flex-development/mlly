@@ -7,7 +7,12 @@ import { SpecifierSyntaxKind } from '#src/enums'
 import type { FillModuleOptions } from '#src/interfaces'
 import regexp from '#src/internal/escape-reg-exp'
 import isFunction from '#src/internal/is-function'
-import { ERR_UNKNOWN_FILE_EXTENSION } from '@flex-development/errnode'
+import validateArraySet from '#src/internal/validate-array-set'
+import validateURLString from '#src/internal/validate-url-string'
+import {
+  ERR_UNKNOWN_FILE_EXTENSION,
+  NodeError
+} from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import type { URL } from 'node:url'
 import CONDITIONS from './conditions'
@@ -33,12 +38,16 @@ import toRelativeSpecifier from './to-relative-specifier'
  * @param {string} code - Code to evaluate
  * @param {FillModuleOptions} options - Module fill options
  * @return {Promise<string>} `code` with fully specified module specifiers
+ * @throws {NodeError<TypeError>}
  */
 const fillModules = async (
   code: string,
   options: FillModuleOptions
 ): Promise<string> => {
   const { conditions = CONDITIONS, ext, parent = import.meta.url } = options
+
+  validateArraySet(conditions, 'options.conditions')
+  validateURLString(parent, 'options.parent')
 
   // ensure specifiers have file extensions
   for (const statement of extractStatements(code)) {

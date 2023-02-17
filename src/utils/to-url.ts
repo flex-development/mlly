@@ -17,10 +17,9 @@ import { URL, pathToFileURL } from 'node:url'
  *
  * @param {ModuleId} id - Module id to evaluate
  * @param {ModuleId?} [base=pathToFileURL('./')] - Base URL to resolve against
- * if `id` is not absolute
- * @return {URL} `id` as instance of `URL`
+ * @return {URL} `id` as instance of {@linkcode URL}
  * @throws {NodeError<TypeError>} If either `id` or `base` is not a string or an
- * instance of `URL`
+ * instance of {@linkcode URL}
  */
 const toURL = (id: ModuleId, base: ModuleId = pathToFileURL('./')): URL => {
   validateURLString(id, 'id')

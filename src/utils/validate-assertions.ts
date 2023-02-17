@@ -7,6 +7,7 @@ import type { Format } from '#src/enums'
 import { AssertType } from '#src/enums'
 import type { ImportAssertions } from '#src/interfaces'
 import FORMAT_TYPE_MAP from '#src/internal/format-type-map'
+import validateObject from '#src/internal/validate-object'
 import validateString from '#src/internal/validate-string'
 import validateURLString from '#src/internal/validate-url-string'
 import type { ModuleId } from '#src/types'
@@ -39,6 +40,7 @@ const validateAssertions = (
 ): true => {
   validateURLString(url, 'url')
   validateString(format, 'format')
+  validateObject(assertions, 'assertions')
 
   // ensure url is a string
   if (url instanceof URL) url = url.href

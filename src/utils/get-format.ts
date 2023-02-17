@@ -5,6 +5,9 @@
 
 import { Format } from '#src/enums'
 import type { GetFormatOptions, PackageScope } from '#src/interfaces'
+import validateBoolean from '#src/internal/validate-boolean'
+import validateMap from '#src/internal/validate-map'
+import validateObject from '#src/internal/validate-object'
 import type { ModuleId } from '#src/types'
 import {
   ERR_UNKNOWN_FILE_EXTENSION,
@@ -12,7 +15,12 @@ import {
 } from '@flex-development/errnode'
 import { isBuiltin } from '@flex-development/is-builtin'
 import pathe, { type Ext } from '@flex-development/pathe'
-import type { EmptyString, Nilable, Nullable } from '@flex-development/tutils'
+import {
+  isUndefined,
+  type EmptyString,
+  type Nilable,
+  type Nullable
+} from '@flex-development/tutils'
 import type { URL } from 'node:url'
 import EXTENSION_FORMAT_MAP from './extension-format-map'
 import lookupPackageScope from './lookup-package-scope'
@@ -45,13 +53,20 @@ const getFormat = async (
   options: GetFormatOptions = {}
 ): Promise<Nilable<Format>> => {
   const {
-    experimental_json_modules = true,
-    experimental_network_imports = false,
-    experimental_wasm_modules = false,
+    experimental_json_modules: json_modules = true,
+    experimental_network_imports: network_imports = false,
+    experimental_wasm_modules: wasm_modules = false,
     extension_format_map = EXTENSION_FORMAT_MAP,
     ignore_errors = false,
-    req
+    req = {}
   } = options
+
+  validateBoolean(json_modules, 'options.experimental_json_modules')
+  validateBoolean(network_imports, 'options.experimental_network_imports')
+  validateBoolean(wasm_modules, 'options.experimental_wasm_modules')
+  validateBoolean(ignore_errors, 'options.ignore_errors')
+  validateMap(extension_format_map, 'options.extension_format_map')
+  !isUndefined(req) && validateObject(req, 'options.req')
 
   /**
    * Module {@linkcode id} as {@linkcode URL}.
@@ -100,10 +115,10 @@ const getFormat = async (
           format = Format.MODULE
           break
         case 'application/json':
-          format = experimental_json_modules ? Format.JSON : null
+          format = json_modules ? Format.JSON : null
           break
         case 'application/wasm':
-          format = experimental_wasm_modules ? Format.WASM : null
+          format = wasm_modules ? Format.WASM : null
           break
         default:
           break
@@ -155,8 +170,8 @@ const getFormat = async (
           format = extension_format_map.get(ext)!
 
           switch (true) {
-            case format === Format.JSON && !experimental_json_modules:
-            case format === Format.WASM && !experimental_wasm_modules:
+            case format === Format.JSON && !json_modules:
+            case format === Format.WASM && !wasm_modules:
               format = ignore_errors ? undefined : null
               break
             default:
@@ -206,7 +221,7 @@ const getFormat = async (
       break
     case 'http:':
     case 'https:':
-      if (experimental_network_imports) {
+      if (network_imports) {
         const { default: fetch } = await import('node-fetch')
         const { headers } = await fetch(url.href, req)
         format = mimeToFormat(headers.get('content-type'), true)

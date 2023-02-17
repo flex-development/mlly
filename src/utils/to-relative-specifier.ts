@@ -3,7 +3,9 @@
  * @module mlly/utils/toRelativeSpecifier
  */
 
+import validateURLString from '#src/internal/validate-url-string'
 import type { ModuleId } from '#src/types'
+import type { NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import { URL, fileURLToPath } from 'node:url'
 
@@ -21,8 +23,13 @@ import { URL, fileURLToPath } from 'node:url'
  * @param {ModuleId} specifier - Module specifier to convert
  * @param {ModuleId} parent - Parent module URL or path to resolve from
  * @return {string} `specifier` as relative specifier
+ * @throws {NodeError<TypeError>} If either `specifier` or `parent` is not a
+ * string or an instance of {@linkcode URL}
  */
 const toRelativeSpecifier = (specifier: ModuleId, parent: ModuleId): string => {
+  validateURLString(specifier, 'specifier')
+  validateURLString(parent, 'parent')
+
   // convert file url objects to file url strings
   if (parent instanceof URL) parent = parent.href
   if (specifier instanceof URL) specifier = specifier.href

@@ -5,6 +5,7 @@
 
 import type { PackageScope, ParsedModuleId } from '#src/interfaces'
 import regexp from '#src/internal/escape-reg-exp'
+import validateSet from '#src/internal/validate-set'
 import validateURLString from '#src/internal/validate-url-string'
 import type { ModuleId } from '#src/types'
 import {
@@ -71,6 +72,7 @@ const toBareSpecifier = (
 ): string => {
   validateURLString(specifier, 'specifier')
   validateURLString(parent, 'parent')
+  validateSet(conditions, 'conditions')
 
   // ensure specifier is a string
   if (specifier instanceof URL) specifier = specifier.href

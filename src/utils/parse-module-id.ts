@@ -31,9 +31,7 @@ import toNodeURL from './to-node-url'
  * @param {ModuleId} id - Module id to parse
  * @param {ParseModuleIdOptions?} [options={}] - Parsing options
  * @return {ParsedModuleId} Object representing `id`
- * @throws {NodeError<TypeError>} If `id` is not an instance of {@linkcode URL}
- * or a string, if `id` includes encoded path separators, or if `id` is invalid
- * according to `options.internal` or `options.pkgname`
+ * @throws {NodeError<TypeError>}
  */
 const parseModuleId = (
   id: ModuleId,

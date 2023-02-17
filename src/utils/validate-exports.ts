@@ -26,8 +26,8 @@ import { URL, fileURLToPath } from 'node:url'
  * @param {ModuleId} pkg - URL of relevant `package.json` file
  * @param {ModuleId} parent - URL of module to resolve from
  * @return {true} `true` if `exports` configuration and schema are valid
- * @throws {NodeError<Error | TypeError>} If either `pkg` or `parent` is not an
- * instance of {@linkcode URL} or a string, or if `exports` configuration or
+ * @throws {NodeError<Error | TypeError>} If either `pkg` or `parent` is not a
+ * string or an instance of {@linkcode URL}, or if `exports` configuration or
  * schema is invalid
  */
 const validateExports = (
@@ -35,6 +35,9 @@ const validateExports = (
   pkg: ModuleId,
   parent: ModuleId
 ): true => {
+  validateURLString(pkg, 'pkg')
+  validateURLString(parent, 'parent')
+
   switch (true) {
     case Array.isArray(exports):
       for (const item of exports as unknown[]) {
@@ -69,9 +72,6 @@ const validateExports = (
       )
     default:
       exports = exports as Record<string, Exports>
-
-      validateURLString(pkg, 'pkg')
-      validateURLString(parent, 'parent')
 
       /**
        * Keys defined in {@linkcode exports}.

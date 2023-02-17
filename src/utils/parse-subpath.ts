@@ -58,8 +58,7 @@ import PATTERN_CHARACTER from './pattern-character'
  * @param {Exports | Imports | undefined} context - Package context
  * @param {ParseSubpathOptions} options - Parsing options
  * @return {ParsedSubpath} Object representing package subpath
- * @throws {NodeError<Error | TypeError>} If `specifier` is not a string or the
- * subpath defined in `specifier` is not defined in `context`
+ * @throws {NodeError<Error | TypeError>}
  */
 const parseSubpath = (
   specifier: string,

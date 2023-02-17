@@ -13,7 +13,12 @@ import {
 } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import type { PackageJson } from '@flex-development/pkg-types'
-import { isEmptyString, isNIL, type Nullable } from '@flex-development/tutils'
+import {
+  isEmptyString,
+  isNIL,
+  isUndefined,
+  type Nullable
+} from '@flex-development/tutils'
 import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import toURL from './to-url'
@@ -44,10 +49,10 @@ const readPackageJson = (
   validateURLString(dir, 'dir')
 
   // ensure specifier is a string
-  if (specifier !== undefined) validateString(specifier, 'specifier')
+  !isUndefined(specifier) && validateString(specifier, 'specifier')
 
   // ensure parent is an instance of URL or a string
-  if (parent !== undefined) validateURLString(parent, 'parent')
+  !isUndefined(parent) && validateURLString(parent, 'parent')
 
   // ensure dir is a path
   dir = fileURLToPath(toURL(dir))
