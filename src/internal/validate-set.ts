@@ -6,10 +6,9 @@
 import { ERR_INVALID_ARG_TYPE, type NodeError } from '@flex-development/errnode'
 
 /**
- * Checks if given `value` is an instance of {@linkcode Set}.
+ * Checks if given `value` is a {@linkcode Set}.
  *
- * Throws [`ERR_INVALID_ARG_TYPE`][1] if the `value` is not a {@linkcode Set}
- * instance.
+ * Throws [`ERR_INVALID_ARG_TYPE`][1] if the `value` is not a {@linkcode Set}.
  *
  * [1]: https://nodejs.org/api/errors.html#err_invalid_arg_value
  *
@@ -19,8 +18,8 @@ import { ERR_INVALID_ARG_TYPE, type NodeError } from '@flex-development/errnode'
  *
  * @param {unknown} value - Value supplied by user
  * @param {string} name - Name of invalid argument or property
- * @return {value is Set} `true` if `value` is instance of {@linkcode Set}
- * @throws {NodeError<TypeError>} If `value` is an instance of {@linkcode Set}
+ * @return {value is Set<T>} `true` if `value` is a {@linkcode Set}
+ * @throws {NodeError<TypeError>} If `value` is not a {@linkcode Set}
  */
 function validateSet<T = unknown>(
   value: unknown,

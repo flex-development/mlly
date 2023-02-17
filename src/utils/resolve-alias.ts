@@ -5,9 +5,9 @@
 
 import type { ParsedModuleId, ResolveAliasOptions } from '#src/interfaces'
 import regexp from '#src/internal/escape-reg-exp'
+import validateArraySet from '#src/internal/validate-array-set'
 import validateBoolean from '#src/internal/validate-boolean'
 import validateObject from '#src/internal/validate-object'
-import validateSet from '#src/internal/validate-set'
 import validateString from '#src/internal/validate-string'
 import validateURLString from '#src/internal/validate-url-string'
 import type { NodeError } from '@flex-development/errnode'
@@ -61,7 +61,7 @@ const resolveAlias = async (
   validateObject(aliases, 'options.aliases')
   validateString(condition, 'options.condition')
   validateURLString(cwd, 'options.cwd')
-  validateSet(extensions, 'options.extensions')
+  validateArraySet(extensions, 'options.extensions')
   validateURLString(parent, 'options.parent')
   validateBoolean(preserveSymlinks, 'options.preserveSymlinks')
 
