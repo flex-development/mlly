@@ -47,7 +47,7 @@ describe('unit:utils/validateExports', () => {
 
     // Act
     try {
-      testSubject(faker.datatype.number() as unknown as Exports, pkg, parent)
+      testSubject(faker.number.int() as unknown as Exports, pkg, parent)
     } catch (e: unknown) {
       error = e as typeof error
     }
@@ -61,7 +61,7 @@ describe('unit:utils/validateExports', () => {
 
   it('should throw if exports array contains invalid type', () => {
     // Arrange
-    const cases: unknown[] = [[], faker.datatype.number(), null]
+    const cases: unknown[] = [[], faker.number.int(), null]
     const message: RegExp =
       /The "exports" array must contain either objects of package subpath keys, objects of condition name keys, or strings$/
 
@@ -109,7 +109,7 @@ describe('unit:utils/validateExports', () => {
 
     // Act
     try {
-      testSubject({ [faker.datatype.number()]: {} }, pkg, parent)
+      testSubject({ [faker.number.int({ max: 13 })]: {} }, pkg, parent)
     } catch (e: unknown) {
       error = e as typeof error
     }

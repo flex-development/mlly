@@ -7,7 +7,7 @@ import testSubject from '../is-function'
 
 describe('unit:internal/isFunction', () => {
   it('should return false if value is not a function', () => {
-    expect(testSubject(faker.datatype.bigInt())).to.be.false
+    expect(testSubject(faker.number.bigInt())).to.be.false
   })
 
   it('should return true if value is a function', () => {

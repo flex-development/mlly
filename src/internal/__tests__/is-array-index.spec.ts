@@ -11,6 +11,6 @@ describe('unit:internal/isArrayIndex', () => {
   })
 
   it('should return true if key is numeric property key', () => {
-    expect(testSubject(`${faker.datatype.number()}`)).to.be.true
+    expect(testSubject(`${faker.number.int({ max: 13, min: 0 })}`)).to.be.true
   })
 })

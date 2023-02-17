@@ -24,7 +24,7 @@ describe('unit:internal/validateBoolean', () => {
 
     // Act
     try {
-      testSubject(faker.datatype.number(), name)
+      testSubject(faker.number.int(), name)
     } catch (e: unknown) {
       error = e as typeof error
     }

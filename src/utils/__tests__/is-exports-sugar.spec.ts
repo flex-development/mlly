@@ -21,9 +21,9 @@ describe('unit:utils/isExportsSugar', () => {
   it('should return false if exports does not use exports sugar', () => {
     // Arrange
     const cases: Parameters<typeof testSubject>[0][] = [
+      faker.number.int() as unknown as Exports,
       null,
       undefined,
-      faker.datatype.number() as unknown as Exports,
       { '.': './dist/index.mjs', './package.json': './package.json' }
     ]
 

@@ -24,10 +24,10 @@ describe('unit:internal/validateObject', () => {
     const code: ErrorCode = ErrorCode.ERR_INVALID_ARG_TYPE
     const cases: Parameters<typeof testSubject>[0][] = [
       faker.datatype.array(),
-      faker.datatype.bigInt(),
       faker.datatype.boolean(),
-      faker.datatype.number(),
-      faker.datatype.string()
+      faker.number.bigInt(),
+      faker.number.int(),
+      faker.string.sample()
     ]
 
     // Act + Expect

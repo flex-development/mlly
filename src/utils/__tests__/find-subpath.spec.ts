@@ -24,7 +24,7 @@ describe('unit:utils/findSubpath', () => {
     const cases: Parameters<typeof testSubject>[1][] = [
       null,
       undefined,
-      faker.datatype.number() as unknown as Exports,
+      faker.number.int() as unknown as Exports,
       pkgjson.exports
     ]
 

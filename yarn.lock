@@ -1428,10 +1428,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@faker-js/faker@npm:7.6.0":
-  version: 7.6.0
-  resolution: "@faker-js/faker@npm:7.6.0"
-  checksum: 8dfdb631c3c420d8352d5ff5bc97d97d8d6890c8c74d7385ae9838cb47bef5e56ce611f4052ce414a55320426ffff4135fe927f46417c44b1b3301b7fd93851a
+"@faker-js/faker@npm:8.0.0-alpha.0":
+  version: 8.0.0-alpha.0
+  resolution: "@faker-js/faker@npm:8.0.0-alpha.0"
+  checksum: d803c4ac78d57e39c689271ad001d3136d502e5fc71fb7b517c5fd8b706194a96d3fbc0a08f6a5d5ed6ce474e644b6bff05a0df7e760d144510dcae839e6e252
   languageName: node
   linkType: hard
 
@@ -1576,7 +1576,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:17.4.2"
     "@commitlint/types": "npm:17.4.0"
     "@docsearch/react": "npm:3.3.3"
-    "@faker-js/faker": "npm:7.6.0"
+    "@faker-js/faker": "npm:8.0.0-alpha.0"
     "@flex-development/docast": "npm:1.0.0-alpha.9"
     "@flex-development/docast-parse": "npm:1.0.0-alpha.4"
     "@flex-development/errnode": "npm:1.5.0"

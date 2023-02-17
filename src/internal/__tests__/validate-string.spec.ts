@@ -14,7 +14,7 @@ describe('unit:internal/validateString', () => {
   })
 
   it('should return true if value is typeof string', () => {
-    expect(testSubject(faker.datatype.string(13), name)).to.be.true
+    expect(testSubject(faker.string.sample(13), name)).to.be.true
   })
 
   it('should throw if value is not typeof string', () => {

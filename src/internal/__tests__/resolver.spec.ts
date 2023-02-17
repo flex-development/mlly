@@ -415,7 +415,7 @@ describe('unit:internal/Resolver', () => {
     it('should throw if target schema is invalid', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_TARGET
-      const target: number = faker.datatype.number()
+      const target: number = faker.number.int()
       const target_re: RegExp = new RegExp(regexp(JSON.stringify(target)))
       let error: NodeError
 

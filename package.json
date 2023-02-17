@@ -93,7 +93,7 @@
     "@commitlint/config-conventional": "17.4.2",
     "@commitlint/types": "17.4.0",
     "@docsearch/react": "3.3.3",
-    "@faker-js/faker": "7.6.0",
+    "@faker-js/faker": "8.0.0-alpha.0",
     "@flex-development/docast": "1.0.0-alpha.9",
     "@flex-development/docast-parse": "1.0.0-alpha.4",
     "@flex-development/mkbuild": "1.0.0-alpha.9",
