@@ -7,6 +7,7 @@ import type { ParseModuleIdOptions, ParsedModuleId } from '#src/interfaces'
 import ENCODED_SEP_REGEX from '#src/internal/regex-encoded-sep'
 import INTERNAL_SPECIFIER_REGEX from '#src/internal/regex-internal-specifier'
 import PACKAGE_PATH_REGEX from '#src/internal/regex-package-path'
+import validateBoolean from '#src/internal/validate-boolean'
 import validateURLString from '#src/internal/validate-url-string'
 import type { ModuleId } from '#src/types'
 import {
@@ -45,6 +46,10 @@ const parseModuleId = (
 
   // ensure id is an instance of URL or a string
   validateURLString(id, 'id')
+
+  // ensure option schemas
+  validateBoolean(internal, 'options.internal')
+  validateBoolean(pkgname, 'options.pkgname')
 
   // ensure id a string without leading and trailing spaces
   id = id instanceof URL ? id.href : id.trim()

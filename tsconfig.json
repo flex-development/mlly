@@ -34,7 +34,8 @@
       "#fixtures/*": ["__fixtures__/*"],
       "#src": ["src/index"],
       "#src/*": ["src/*"],
-      "#tests/*": ["__tests__/*"]
+      "#tests/*": ["__tests__/*"],
+      "@flex-development/mlly": ["src/index"]
     },
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "preserveConstEnums": true,
@@ -57,7 +58,6 @@
     "**/**.cts",
     "**/**.js",
     "**/**.mjs",
-    "**/**.mts",
     "**/**.ts",
     "**/.*.cjs",
     "./docs/.vitepress/**/*.ts",

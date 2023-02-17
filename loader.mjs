@@ -78,10 +78,11 @@ export const load = async (url, context) => {
     // transpile source code
     const { code } = await esbuild.transform(source, {
       format: ext === '.cts' ? 'cjs' : 'esm',
-      loader: /^[cm]/.test(ext) ? 'ts' : ext.slice(1),
+      loader: ext.slice(/^\.[cm]/.test(ext) ? 2 : 1),
       minify: false,
       sourcefile: fileURLToPath(url),
       sourcemap: 'inline',
+      target: `node${process.versions.node}`,
       tsconfigRaw: { compilerOptions: tsconfig.compilerOptions }
     })
 
@@ -108,7 +109,6 @@ export const load = async (url, context) => {
  * @param {string} specifier - Module specifier
  * @param {ResolveHookContext} context - Hook context
  * @return {Promise<ResolveHookResult>} Hook result
- * @throws {Error}
  */
 export const resolve = async (specifier, context) => {
   const { conditions, parentURL: parent } = context
@@ -127,7 +127,10 @@ export const resolve = async (specifier, context) => {
    * @type {import('node:url').URL}
    * @const url
    */
-  const url = await mlly.resolveModule(specifier, { conditions, parent })
+  const url = await mlly.resolveModule(specifier, {
+    conditions,
+    parent: parent?.startsWith('file:') ? parent : specifier
+  })
 
   return {
     format: await mlly.getFormat(url),

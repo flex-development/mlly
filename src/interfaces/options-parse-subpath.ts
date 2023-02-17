@@ -12,6 +12,26 @@ import type { ModuleId } from '#src/types'
  */
 interface ParseSubpathOptions {
   /**
+   * Export condition to apply.
+   *
+   * @see https://nodejs.org/api/packages.html#conditional-exports
+   *
+   * @default 'default'
+   */
+  condition?: string | undefined
+
+  /**
+   * Export conditions.
+   *
+   * **Note**: Should be sorted by priority.
+   *
+   * @see https://nodejs.org/api/packages.html#conditional-exports
+   *
+   * @default CONDITIONS
+   */
+  conditions?: Set<string> | string[] | undefined
+
+  /**
    * URL of directory containing relevant `package.json` file.
    */
   dir: ModuleId

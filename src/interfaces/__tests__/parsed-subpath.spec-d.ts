@@ -3,7 +3,11 @@
  * @module mlly/interfaces/tests/unit-d/ParsedSubpath
  */
 
-import type { EmptyString, LiteralUnion } from '@flex-development/tutils'
+import type {
+  EmptyString,
+  LiteralUnion,
+  Nullable
+} from '@flex-development/tutils'
 import type TestSubject from '../parsed-subpath'
 
 describe('unit-d:interfaces/ParsedSubpath', () => {
@@ -27,5 +31,11 @@ describe('unit-d:interfaces/ParsedSubpath', () => {
 
   it('should match [specifier: string]', () => {
     expectTypeOf<TestSubject>().toHaveProperty('specifier').toBeString()
+  })
+
+  it('should match [target: Nullable<string>]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('target')
+      .toEqualTypeOf<Nullable<string>>()
   })
 })

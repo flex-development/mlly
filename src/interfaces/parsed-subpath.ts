@@ -3,7 +3,11 @@
  * @module mlly/interfaces/ParsedSubpath
  */
 
-import type { EmptyString, LiteralUnion } from '@flex-development/tutils'
+import type {
+  EmptyString,
+  LiteralUnion,
+  Nullable
+} from '@flex-development/tutils'
 
 /**
  * Object representing a package subpath.
@@ -42,6 +46,11 @@ interface ParsedSubpath {
    * Module specifier passed by user.
    */
   specifier: string
+
+  /**
+   * Package target as documented in `package.json` file.
+   */
+  target: Nullable<string>
 }
 
 export type { ParsedSubpath as default }

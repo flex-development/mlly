@@ -65,7 +65,7 @@ const isExportsSugar = (
       validateExports(exports, pkg, parent)
 
       // check for exports sugar
-      sugar = !Object.getOwnPropertyNames(exports)[0]?.startsWith('.')
+      sugar = !(Object.getOwnPropertyNames(exports)[0]?.startsWith('.') ?? true)
   }
 
   return sugar
