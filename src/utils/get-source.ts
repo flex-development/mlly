@@ -20,6 +20,13 @@ import toURL from './to-url'
 /**
  * Retrieves source code for the given module `id`.
  *
+ * ::: tip
+ * The given module `id` should be absolute (i.e. a [`file:` URL][1] or absolute
+ * specifier).
+ * :::
+ *
+ * [1]: https://nodejs.org/api/esm.html#file-urls
+ *
  * @see {@linkcode GetSourceOptions}
  * @see {@linkcode ModuleId}
  * @see https://nodejs.org/docs/latest-v19.x/api/esm.html#loadurl-context-nextload
@@ -36,7 +43,6 @@ const getSource = async (
   options: GetSourceOptions = {}
 ): Promise<Uint8Array | string | undefined> => {
   const {
-    base,
     experimental_network_imports = false,
     format,
     ignore_errors = false,
@@ -51,7 +57,7 @@ const getSource = async (
    *
    * @const {URL} url
    */
-  const url: URL = toURL(id, base)
+  const url: URL = toURL(id)
 
   /**
    * [`ERR_UNSUPPORTED_ESM_URL_SCHEME`][1] check.

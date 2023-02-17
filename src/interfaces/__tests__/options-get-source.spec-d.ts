@@ -4,7 +4,6 @@
  */
 
 import type { Format } from '#src/enums'
-import type { ModuleId } from '#src/types'
 import type { KeysRequired } from '@flex-development/tutils'
 import type { RequestInit } from 'node-fetch'
 import type TestSubject from '../options-get-source'
@@ -12,12 +11,6 @@ import type TestSubject from '../options-get-source'
 describe('unit-d:interfaces/GetSourceOptions', () => {
   it('should allow empty object', () => {
     expectTypeOf<KeysRequired<TestSubject>>().toBeNever()
-  })
-
-  it('should match [base?: ModuleId]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('base')
-      .toEqualTypeOf<ModuleId | undefined>()
   })
 
   it('should match [experimental_network_imports?: boolean]', () => {

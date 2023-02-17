@@ -4,26 +4,15 @@
  */
 
 import type { Format } from '#src/enums'
-import type { ModuleId } from '#src/types'
 import type { RequestInit } from 'node-fetch'
 
 /**
  * Source code retrieval options.
  *
  * @see {@linkcode Format}
- * @see {@linkcode ModuleId}
  * @see {@linkcode RequestInit}
  */
 interface GetSourceOptions {
-  /**
-   * Base URL to resolve module id against if module id is not absolute.
-   *
-   * @see {@linkcode ModuleId}
-   *
-   * @default undefined
-   */
-  base?: ModuleId | undefined
-
   /**
    * Enable support for network based modules.
    *
@@ -62,7 +51,7 @@ interface GetSourceOptions {
    *
    * @see {@linkcode RequestInit}
    *
-   * @default undefined
+   * @default {}
    */
   req?: RequestInit | undefined
 }
