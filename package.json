@@ -96,7 +96,7 @@
     "@faker-js/faker": "8.0.0-alpha.0",
     "@flex-development/docast": "1.0.0-alpha.9",
     "@flex-development/docast-parse": "1.0.0-alpha.4",
-    "@flex-development/mkbuild": "1.0.0-alpha.9",
+    "@flex-development/mkbuild": "1.0.0-alpha.13",
     "@graphql-eslint/eslint-plugin": "3.15.0",
     "@sindresorhus/slugify": "2.2.0",
     "@types/chai": "4.3.4",

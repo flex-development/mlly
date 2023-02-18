@@ -29,16 +29,6 @@ describe('unit:utils/resolveAlias', () => {
     // Arrange
     const cases: [...Parameters<typeof testSubject>, string][] = [
       ['#mkbuild', { absolute: false }, '@flex-development/mkbuild'],
-      [
-        '#mkbuild/plugins/create-require/plugin',
-        { absolute: false },
-        '@flex-development/mkbuild/plugins/create-require/plugin'
-      ],
-      [
-        '#mkbuild/dist/plugins/create-require/plugin',
-        { absolute: false },
-        '@flex-development/mkbuild/plugins/create-require/plugin'
-      ],
       ['#src', undefined, pathToFileURL('src/index.ts').href],
       ['#src', { absolute: false }, '../../index.ts'],
       ['#src/index', undefined, pathToFileURL('src/index.ts').href],

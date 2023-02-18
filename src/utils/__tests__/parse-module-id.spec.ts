@@ -57,11 +57,11 @@ describe('unit:utils/parseModuleId', () => {
     // Arrange
     const cases: [...Parameters<typeof testSubject>, Expected][] = [
       [
-        '@flex-development/mkbuild/plugins',
+        '@flex-development/mkbuild/package.json',
         { pkgname: true },
         {
           internal: false,
-          path: './plugins',
+          path: './package.json',
           pkg: '@flex-development/mkbuild',
           protocol: '',
           scope: '@flex-development',
