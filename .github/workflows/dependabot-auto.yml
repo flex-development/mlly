@@ -46,9 +46,6 @@ jobs:
           token: ${{ env.GITHUB_TOKEN }}
       - id: enable-auto-merge
         name: Enable auto-merge
-        if: |
-          steps.metadata.outputs.package-ecosystem == 'github_actions' ||
-          steps.metadata.outputs.update-type != 'version-update:semver-major'
         run: gh pr merge ${{ github.event.number }} --auto --squash
       - id: gpg-import
         name: Import GPG key
