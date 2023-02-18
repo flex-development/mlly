@@ -266,7 +266,7 @@ jobs:
           flags: ${{ format('node{0}', matrix.node-version) }}
           override_branch: ${{ env.REF }}
           override_build: ${{ github.run_id }}
-          override_commit: ${{ github.sha }}
+          override_commit: ${{ github.event.pull_request.head.sha || github.sha }}
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
         env:
