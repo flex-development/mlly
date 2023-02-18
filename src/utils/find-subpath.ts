@@ -24,7 +24,8 @@ import toURL from './to-url'
  * Finds the subpath defined in `context`, a `package.json` [`exports`][1] or
  * [`imports`][2] field, that maps to the given package `target`.
  *
- * Supports extensionless targets. Returns `null` if a subpath is not found.
+ * Supports extensionless targets and targets without explicit `'/index'` usage.
+ * Returns `null` if a subpath is not found.
  *
  * [1]: https://nodejs.org/api/packages.html#exports
  * [2]: https://nodejs.org/api/packages.html#imports
@@ -181,9 +182,16 @@ const findSubpath = (
               /**
                * {@linkcode tar} without file extension.
                *
-               * @const {string} tar_no_ext
+               * @const {string} tar_ne
                */
               const tar_ne: string = pathe.changeExt(tar, '')
+
+              /**
+               * {@linkcode tar_ne} without `'/index'`.
+               *
+               * @const {string} tar_ni
+               */
+              const tar_ni: string = tar_ne.replace(/\/index$/, '')
 
               /**
                * Index of {@linkcode PATTERN_CHARACTER} in {@linkcode tar}.
@@ -196,6 +204,7 @@ const findSubpath = (
                 // target is an exactish match
                 case target === tar:
                 case target === tar_ne:
+                case target === tar_ni && tar_ne.endsWith('/index'):
                 case pattern === -1 && (target === tar || target === tar_ne):
                   subpath = pkgsubpath
                   break

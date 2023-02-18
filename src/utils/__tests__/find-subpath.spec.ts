@@ -4,28 +4,32 @@
  */
 
 import type { FindSubpathOptions } from '#src/interfaces'
-import getPackageJson from '#tests/utils/get-package-json'
 import pathe from '@flex-development/pathe'
-import type { Exports, Imports, PackageJson } from '@flex-development/pkg-types'
+import type { Exports, Imports } from '@flex-development/pkg-types'
 import { pathToFileURL } from 'node:url'
 import testSubject from '../find-subpath'
 
 describe('unit:utils/findSubpath', () => {
+  let exports: Exports
   let options: FindSubpathOptions
-  let pkgjson: PackageJson & { name: string }
 
-  beforeEach(() => {
+  beforeAll(() => {
     options = { dir: pathToFileURL('.' + pathe.sep), parent: import.meta.url }
-    pkgjson = getPackageJson('package.json') as typeof pkgjson
+    exports = {
+      '.': './dist/index.mjs',
+      './package.json': './package.json',
+      './utils': './dist/utils/index.mjs',
+      './utils/*': './dist/utils/*.mjs'
+    }
   })
 
   it('should return null if target is not found in context', () => {
     // Arrange
     const cases: Parameters<typeof testSubject>[1][] = [
-      null,
-      undefined,
+      exports,
       faker.number.int() as unknown as Exports,
-      pkgjson.exports
+      null,
+      undefined
     ]
 
     // Act + Expect
@@ -40,9 +44,14 @@ describe('unit:utils/findSubpath', () => {
       ['./dist/index', './dist/index.mjs', '.'],
       ['./dist/index.mjs', './dist/index.mjs', '.'],
       ['./dist/index.mjs', ['./dist/index.mjs'], '.'],
-      ['./dist/index', pkgjson.exports, '.'],
-      ['./dist/index.mjs', pkgjson.exports, '.'],
-      ['./package.json', pkgjson.exports, './package.json'],
+      ['./dist/index', exports, '.'],
+      ['./dist/index.mjs', exports, '.'],
+      ['./package.json', exports, './package.json'],
+      ['./dist/utils', exports, './utils'],
+      ['./dist/utils/index', exports, './utils'],
+      ['./dist/utils/index.mjs', exports, './utils'],
+      ['./dist/utils/find-subpath', exports, './utils/*'],
+      ['./dist/utils/find-subpath.mjs', exports, './utils/*'],
       [
         './dist/index.mjs',
         {
@@ -62,22 +71,6 @@ describe('unit:utils/findSubpath', () => {
             default: './dist/utils/*.mjs',
             require: './dist/utils/*.cjs'
           }
-        },
-        './utils/*'
-      ],
-      [
-        './utils/find-subpath.mjs',
-        {
-          './utils': './utils/index.mjs',
-          './utils/*': './utils/*.mjs'
-        },
-        './utils/*'
-      ],
-      [
-        './utils/find-subpath',
-        {
-          './utils/*': './utils/*.mjs',
-          './utils': './utils/index.mjs'
         },
         './utils/*'
       ]
