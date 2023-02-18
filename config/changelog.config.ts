@@ -31,7 +31,7 @@ import type { Readable } from 'node:stream'
 import sade from 'sade'
 import semver from 'semver'
 import tempfile from 'tempfile'
-import pkg from './package.json' assert { type: 'json' }
+import pkg from '../package.json' assert { type: 'json' }
 
 /**
  * CLI flags.
@@ -333,7 +333,10 @@ sade('changelog', true)
             repoUrl: pkg.repository.slice(0, -4)
           }
         },
-        headerPartial: readFileSync('templates/changelog/header.hbs', 'utf8'),
+        headerPartial: readFileSync(
+          'config/templates/changelog/header.hbs',
+          'utf8'
+        ),
         ignoreReverted: false
       }
     ).on('error', err => console.error(err.stack))
