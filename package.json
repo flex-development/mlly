@@ -120,7 +120,7 @@
     "@typescript-eslint/parser": "5.51.0",
     "@vates/toggle-scripts": "1.0.0",
     "@vitest/coverage-c8": "0.28.4",
-    "@vitest/ui": "0.28.4",
+    "@vitest/ui": "0.28.5",
     "@vue/runtime-core": "3.2.47",
     "@vuedx/typescript-plugin-vue": "0.7.7-next-1667939290.0",
     "add-stream": "1.0.0",
