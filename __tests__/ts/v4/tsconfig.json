@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
     "allowJs": true,
     "allowUnreachableCode": false,
     "alwaysStrict": false,
-    "baseUrl": ".",
+    "baseUrl": "../../..",
     "checkJs": false,
     "declaration": true,
     "declarationMap": true,
@@ -13,10 +12,12 @@
     "exactOptionalPropertyTypes": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "es2020"],
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "newLine": "lf",
     "noEmit": true,
     "noErrorTruncation": true,
@@ -27,7 +28,7 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "outDir": "dist",
+    "outDir": "../../../dist",
     "paths": {
       "#fixtures/*": ["__fixtures__/*"],
       "#src": ["src/index"],
@@ -40,10 +41,7 @@
     "preserveSymlinks": false,
     "pretty": true,
     "resolveJsonModule": true,
-    "resolvePackageJsonExports": true,
-    "resolvePackageJsonImports": true,
-    "rootDir": ".",
-    "skipDefaultLibCheck": false,
+    "rootDir": "../../..",
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
@@ -51,8 +49,7 @@
     "strictPropertyInitialization": true,
     "target": "esnext",
     "useDefineForClassFields": true,
-    "useUnknownInCatchVariables": true,
-    "verbatimModuleSyntax": true
+    "useUnknownInCatchVariables": true
   },
   "exclude": ["**/coverage", "**/dist", "**/node_modules"],
   "include": [
@@ -60,8 +57,8 @@
     "**/**.mjs",
     "**/**.ts",
     "**/.*.cjs",
-    "__fixtures__/**.js",
-    "docs/.vitepress/**/*.ts",
-    "docs/.vitepress/**/*.vue"
+    "**/__fixtures__/**.js",
+    "**/docs/.vitepress/**/*.ts",
+    "**/docs/.vitepress/**/*.vue"
   ]
 }

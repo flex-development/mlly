@@ -5,7 +5,7 @@
 # 1. run typecheck
 # 2. run tests
 # 3. pack project
-# 4. run check:types:build
+# 4. run postbuild typecheck
 # 5. build docs
 # 6. get new package version
 # 7. get release branch name

@@ -213,6 +213,13 @@ jobs:
       - id: typescript
         name: Install typescript@${{ matrix.typescript-version }}
         run: yarn add -D typescript@${{ matrix.typescript-version }}
+      - id: set-typescript-version
+        name: Set env.TYPESCRIPT_VERSION
+        run: |
+          echo "TYPESCRIPT_VERSION=$(jq .devDependencies.typescript package.json -r)" >> $GITHUB_ENV
+      - id: print-typescript-version
+        name: Print TypeScript version
+        run: echo $TYPESCRIPT_VERSION
       - id: typecheck
         name: Run typecheck
         run: yarn typecheck

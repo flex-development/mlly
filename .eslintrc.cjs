@@ -26,12 +26,6 @@ const config = {
       }
     },
     {
-      files: ['src/utils/__tests__/find-subpath.spec.ts'],
-      rules: {
-        'sort-keys': 0
-      }
-    },
-    {
       files: ['src/utils/find-exports.ts'],
       rules: {
         'unicorn/prefer-module': 0

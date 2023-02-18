@@ -6,5 +6,5 @@
   },
   "exclude": ["**/__mocks__", "**/__tests__"],
   "extends": "./tsconfig.json",
-  "include": ["./dist/*", "./src/*"]
+  "include": ["../../../dist/*", "../../../src/*"]
 }

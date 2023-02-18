@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly PWD: string
   readonly SSR: '1' | import('@flex-development/tutils').EmptyString
   readonly TEST: 'true'
+  readonly TYPESCRIPT_VERSION?: string
   readonly USER: string
   readonly VITEST: 'true'
   readonly VITEST_CLI_WRAPPER: 'true'

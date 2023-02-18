@@ -31,14 +31,23 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
    */
   const LINT_STAGED: boolean = !!Number.parseInt(process.env.LINT_STAGED ?? '0')
 
+  /**
+   * Boolean indicating if the current running version of [`typescript`][1] is
+   * at least `5`.
+   *
+   * @const {boolean} TYPESCRIPT_V5
+   */
+  const TYPESCRIPT_V5: boolean =
+    process.env.TYPESCRIPT_VERSION?.startsWith('5') ?? true
+
   return {
     define: {
       'import.meta.env.NODE_ENV': JSON.stringify(NodeEnv.TEST)
     },
-    mode: NodeEnv.TEST,
     plugins: [tsconfigpaths({ projects: [pathe.resolve('tsconfig.json')] })],
     test: {
       allowOnly: !ci,
+      benchmark: {},
       clearMocks: true,
       coverage: {
         all: !LINT_STAGED,
@@ -52,11 +61,14 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
           'src/types/'
         ],
         extension: ['.ts'],
+        ignoreClassMethods: [],
         include: ['src'],
         reporter: [ci ? 'lcovonly' : 'lcov', 'text'],
         reportsDirectory: './coverage',
         skipFull: false
       },
+      environment: 'node',
+      environmentOptions: {},
       globalSetup: [
         './__tests__/setup/setup.ts',
         './__tests__/setup/teardown.ts'
@@ -110,6 +122,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
       },
       setupFiles: ['./__tests__/setup/index.ts'],
       silent: false,
+      slowTestThreshold: 300,
       snapshotFormat: {
         callToJSON: true,
         min: false,
@@ -121,8 +134,13 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
         checker: 'vue-tsc',
         ignoreSourceErrors: false,
         include: ['**/__tests__/*.spec-d.ts'],
-        tsconfig: pathe.resolve('tsconfig.typecheck.json')
-      }
+        tsconfig: pathe.resolve(
+          TYPESCRIPT_V5 ? '' : '__tests__/ts/v4/',
+          'tsconfig.typecheck.json'
+        )
+      },
+      unstubEnvs: true,
+      unstubGlobals: true
     }
   }
 })

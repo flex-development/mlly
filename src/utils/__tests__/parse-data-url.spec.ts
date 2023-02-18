@@ -4,7 +4,7 @@
  */
 
 import type { ParsedDataUrl } from '#src/interfaces'
-import { ErrInvalidUrl, ErrorCode } from '@flex-development/errnode'
+import { ErrorCode, type ErrInvalidUrl } from '@flex-development/errnode'
 import testSubject from '../parse-data-url'
 
 describe('unit:utils/parseDataURL', () => {

@@ -11,7 +11,7 @@ import validateArraySet from '#src/internal/validate-array-set'
 import validateURLString from '#src/internal/validate-url-string'
 import {
   ERR_UNKNOWN_FILE_EXTENSION,
-  NodeError
+  type NodeError
 } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import type { URL } from 'node:url'
