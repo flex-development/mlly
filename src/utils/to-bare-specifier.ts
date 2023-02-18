@@ -104,26 +104,22 @@ const toBareSpecifier = (
    *
    * @const {Nullable<PackageScope>} scope
    */
-  const scope: Nullable<PackageScope> = lookupPackageScope(
-    url,
-    pathToFileURL('.')
-  )
+  const scope: Nullable<PackageScope> =
+    lookupPackageScope(url, pathToFileURL('.')) ??
+    lookupPackageScope(specifier, pathToFileURL('.'))
 
   // throw if package scope was not found
   if (!scope) {
     throw new ERR_OPERATION_FAILED(`Package scope for '${specifier}' not found`)
   }
 
-  // get directory containing package.json file and package.json object
-  const { dir: pkgdir, pkgjson } = scope
-
   // get package exports and name
-  const { exports, main, name = '', types } = pkgjson
+  const { exports, main, name = '', types } = scope.pkgjson
 
   // convert specifier to bare specifier
   specifier = url.pathname.includes(name)
     ? name + url.pathname.replace(new RegExp(`.*?${regexp(name)}`), '')
-    : name + specifier.replace(fileURLToPath(pkgdir.replace(/\/$/, '')), '')
+    : name + specifier.replace(fileURLToPath(scope.dir.replace(/\/$/, '')), '')
 
   /**
    * Parsed module specifier.
@@ -147,7 +143,7 @@ const toBareSpecifier = (
 
   // check if specifier contains valid subpath export
   try {
-    parseSubpath(specifier, exports, { dir: pkgdir, parent })
+    parseSubpath(specifier, exports, { dir: scope.dir, parent })
   } catch (e: unknown) {
     // try finding defined subpath if specifier is invalid package path
     if ((e as NodeError).code === ErrorCode.ERR_PACKAGE_PATH_NOT_EXPORTED) {
@@ -166,14 +162,14 @@ const toBareSpecifier = (
        */
       let subpath: Nullable<string> = findSubpath(target, exports, {
         conditions,
-        dir: pkgdir,
+        dir: scope.dir,
         parent
       })
 
       // throw if target was not matched to a subpath
       if (subpath === null) {
         throw new ERR_PACKAGE_PATH_NOT_EXPORTED(
-          fileURLToPath(pkgdir),
+          fileURLToPath(scope.dir),
           id.path,
           fileURLToPath(parent)
         )

@@ -6,19 +6,26 @@
 import type { ModuleId } from '#src/types'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
-import { pathToFileURL } from 'node:url'
+import { URL, pathToFileURL } from 'node:url'
 import testSubject from '../to-bare-specifier'
 
 describe('unit:utils/toBareSpecifier', () => {
+  let getParent: (specifier: ModuleId) => ModuleId
   let parent: ModuleId
 
-  beforeEach(() => {
+  beforeAll(() => {
     parent = import.meta.url
+
+    getParent = (specifier: ModuleId): ModuleId => {
+      if (specifier instanceof URL) specifier = specifier.href
+      if (!specifier.startsWith('__fixtures__')) return parent
+      return pathToFileURL('__fixtures__/parent.ts')
+    }
   })
 
   it('should return specifier as bare specifier', () => {
     // Arrange
-    const cases: [Parameters<typeof testSubject>[0], string][] = [
+    const cases: [ModuleId, string][] = [
       ['./dist/index.mjs', '@flex-development/mlly'],
       ['./package.json', '@flex-development/mlly/package.json'],
       ['@flex-development/tutils', '@flex-development/tutils'],
@@ -27,33 +34,27 @@ describe('unit:utils/toBareSpecifier', () => {
       ['node:fs', 'node:fs'],
       ['node_modules/@types/chai', '@types/chai'],
       [pathToFileURL('dist/index.mjs'), '@flex-development/mlly'],
-      [pathToFileURL('dist/index.mjs').href, '@flex-development/mlly'],
       [pathe.resolve('dist/index.mjs'), '@flex-development/mlly'],
+      ['__fixtures__/node_modules/exports-map-2/dist/index', 'exports-map-2'],
+      ['__fixtures__/node_modules/exports-map-2/dist/lib', 'exports-map-2/lib'],
+      ['__fixtures__/node_modules/exports-map-2/lib', 'exports-map-2/lib'],
       [
-        'node_modules/@flex-development/mkbuild/dist/plugins/dts/plugin',
-        '@flex-development/mkbuild/plugins/dts/plugin'
+        '__fixtures__/node_modules/exports-map-2/dist/lib/utils',
+        'exports-map-2/lib/utils'
       ],
       [
-        'node_modules/@flex-development/mkbuild/dist/plugins/dts/plugin.mjs',
-        '@flex-development/mkbuild/plugins/dts/plugin'
+        '__fixtures__/node_modules/exports-map-2/lib/utils',
+        'exports-map-2/lib/utils'
       ],
       [
-        '@flex-development/mkbuild/node_modules/cosmiconfig/dist/Explorer.js',
-        'cosmiconfig/dist/Explorer.js'
-      ],
-      [
-        'node_modules/@flex-development/mkbuild/node_modules/p-limit/index.js',
-        'p-limit'
-      ],
-      [
-        'node_modules/@flex-development/pathe/node_modules/@flex-development/errnode/dist/index.mjs',
-        '@flex-development/errnode'
+        '__fixtures__/node_modules/legacy-main-1/utils.js',
+        'legacy-main-1/utils.js'
       ]
     ]
 
     // Act + Expect
     cases.forEach(([specifier, expected]) => {
-      expect(testSubject(specifier, parent)).to.equal(expected)
+      expect(testSubject(specifier, getParent(specifier))).to.equal(expected)
     })
   })
 

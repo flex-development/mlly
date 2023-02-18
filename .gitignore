@@ -59,6 +59,7 @@ vitest.config.*.timestamp-*.mjs
 docs/.vitepress/.env
 docs/.vitepress/.temp/
 docs/.vitepress/config.*.timestamp*
+!__fixtures__/node_modules/**/dist/
 !typings/**/dist/
 
 # Releases
