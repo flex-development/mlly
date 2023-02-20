@@ -8,10 +8,9 @@
 version: 2
 registries:
   github:
-    replaces-base: true
     token: ${{ secrets.PAT_BOT }}
     type: npm-registry
-    url: https://npm.pkg.github.com/flex-development
+    url: https://npm.pkg.github.com
 updates:
   - package-ecosystem: github-actions
     commit-message:
