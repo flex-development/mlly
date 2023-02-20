@@ -1,5 +1,5 @@
 /**
- * @file Build Config
+ * @file Configuration - Build
  * @module config/build
  */
 

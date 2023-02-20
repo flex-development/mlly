@@ -109,6 +109,9 @@ rebase = true
 [rebase]
 autoStash = true
 
+[tag]
+forceSignAnnotated = true
+
 [url "git@github.com:"]
 insteadOf = gh:
 

@@ -1,9 +1,9 @@
-import type { Format } from '#src/enums'
+import type { Format } from '@flex-development/mlly'
 import type { Nullable, TypedArray } from '@flex-development/tutils'
 
 declare global {
   /**
-   * {@link LoadHook} context.
+   * {@linkcode LoadHook} context.
    */
   declare interface LoadHookContext {
     /**
@@ -23,7 +23,7 @@ declare global {
   }
 
   /**
-   * {@link LoadHook} result.
+   * {@linkcode LoadHook} result.
    */
   declare interface LoadHookResult {
     /**
@@ -66,7 +66,7 @@ declare global {
   ) => Promise<LoadHookResult>
 
   /**
-   * {@link ResolveHook} context.
+   * {@linkcode ResolveHook} context.
    */
   declare interface ResolveHookContext {
     /**
@@ -87,7 +87,7 @@ declare global {
   }
 
   /**
-   * {@link ResolveHook} result.
+   * {@linkcode ResolveHook} result.
    */
   declare interface ResolveHookResult {
     /**

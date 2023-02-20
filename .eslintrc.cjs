@@ -9,10 +9,29 @@
  * @const config - ESLint configuration object
  */
 const config = {
-  root: true,
   extends: ['./.eslintrc.base.cjs'],
   overrides: [
     ...require('./.eslintrc.base.cjs').overrides,
+    {
+      extends: ['plugin:vue/vue3-recommended'],
+      files: '**/*.vue',
+      parser: 'vue-eslint-parser',
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        sourceType: require('./package.json').type
+      },
+      rules: {
+        'unicorn/filename-case': [
+          2,
+          {
+            cases: { pascalCase: true },
+            ignore: []
+          }
+        ],
+        'vue/max-attributes-per-line': 0,
+        'vue/multi-word-component-names': 0
+      }
+    },
     {
       files: ['docs/.vitepress/components/Doc.vue'],
       rules: {
@@ -37,7 +56,8 @@ const config = {
         'unicorn/no-unreadable-array-destructuring': 0
       }
     }
-  ]
+  ],
+  root: true
 }
 
 module.exports = config

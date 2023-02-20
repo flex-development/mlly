@@ -2,6 +2,9 @@
 #
 # References:
 #
+# - https://docs.github.com/actions/learn-github-actions/expressions
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#create
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://github.com/actions/checkout
 # - https://yarnpkg.com/cli/dedupe
 

@@ -69,10 +69,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
       },
       environment: 'node',
       environmentOptions: {},
-      globalSetup: [
-        './__tests__/setup/setup.ts',
-        './__tests__/setup/teardown.ts'
-      ],
+      globalSetup: [],
       globals: true,
       hookTimeout: 10 * 1000,
       include: [

@@ -3,23 +3,24 @@
 
 # DIRECTORIES & FILES
 **/*.snap
+**/*config.*.timestamp*
 **/.DS_Store
+**/__tests__/report.json
+**/coverage/
+**/.temp/
 **/dist/
 **/node_modules/
-__tests__/report.json
-coverage/
-docs/.vitepress/.temp/
-docs/.vitepress/config.*.timestamp*
-tsconfig*temp.json
-vitest.config.*.timestamp-*.mjs
+**/tsconfig*temp.json
 yarn.lock
 
 # NEGATED PATTERNS
+!**/.eslintrc*
+!**/__fixtures__/**/dist/
+!**/__fixtures__/**/node_modules/
+!**/typings/**/dist/
 !.codecov.yml
 !.commitlintrc.json
 !.cspell.json
-!.eslintrc.base.cjs
-!.eslintrc.cjs
 !.github/
 !.graphqlrc.yml
 !.lintstagedrc.json

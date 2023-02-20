@@ -10,11 +10,10 @@
     "emitDecoratorMetadata": false,
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": false,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
-    "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "es2020"],
     "module": "esnext",
     "moduleResolution": "node",
@@ -42,6 +41,7 @@
     "pretty": true,
     "resolveJsonModule": true,
     "rootDir": "../../..",
+    "skipDefaultLibCheck": false,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
@@ -55,9 +55,10 @@
   "include": [
     "**/**.cjs",
     "**/**.mjs",
+    "**/**.mts",
     "**/**.ts",
     "**/.*.cjs",
-    "**/__fixtures__/**.js",
+    "**/__fixtures__/**/*.js",
     "**/docs/.vitepress/**/*.ts",
     "**/docs/.vitepress/**/*.vue"
   ]

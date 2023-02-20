@@ -4,7 +4,7 @@
  * @see https://chaijs.com
  */
 
-import chai from 'chai'
+import { chai } from 'vitest'
 import chaiEach from 'chai-each'
 import chaiQuantifiers from 'chai-quantifiers'
 import chaiString from 'chai-string'

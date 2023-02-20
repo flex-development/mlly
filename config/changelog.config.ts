@@ -1,5 +1,5 @@
 /**
- * @file Changelog Configuration
+ * @file Configuration - Changelog
  * @module config/changelog
  * @see https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-conventionalcommits
  * @see https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-core
@@ -317,7 +317,8 @@ sade('changelog', true)
 
           // set release date
           context.date =
-            key?.committerDate ?? dateformat(new Date(), 'yyyy-mm-dd', true)
+            key?.committerDate ??
+            dateformat(new Date().toLocaleDateString(), 'yyyy-mm-dd', true)
 
           // determine patch release state
           if (version && semver.valid(version)) {

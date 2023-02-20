@@ -8,15 +8,18 @@
   "overrides": [
     {
       "files": [
-        "*.sh",
-        "*.txt",
+        "**/*.sh",
+        "**/*.txt",
+        "**/.*ignore",
+        "**/.*rc",
+        "**/.env*",
+        "**/.eslintcache",
+        "**/.git*",
         ".editorconfig",
-        ".env*",
-        ".github/.gitconfig",
-        ".gitignore",
         ".husky/commit-msg",
         ".husky/pre-commit",
-        ".husky/pre-push"
+        ".husky/pre-push",
+        "Brewfile"
       ],
       "options": {
         "functionNextLine": true,

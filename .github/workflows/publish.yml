@@ -56,7 +56,6 @@ jobs:
   gpr:
     needs: metadata
     permissions:
-      contents: write
       packages: write
     runs-on: ubuntu-latest
     environment:
@@ -91,8 +90,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   npm:
     needs: [metadata, gpr]
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     environment:
       name: npm

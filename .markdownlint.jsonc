@@ -52,8 +52,7 @@
   },
   "MD023": true,
   "MD024": {
-    "allow_different_nesting": false,
-    "siblings_only": false
+    "siblings_only": true
   },
   "MD025": {
     "front_matter_title": "^\\s*title\\s*[:=]",
@@ -79,8 +78,6 @@
   "MD032": true,
   "MD033": {
     "allowed_elements": [
-      "Doc",
-      "ThemeConfig",
       "a",
       "blockquote",
       "br",
