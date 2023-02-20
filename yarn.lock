@@ -1703,21 +1703,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/types@npm:17.4.4":
+"@commitlint/types@npm:17.4.4, @commitlint/types@npm:^17.4.0":
   version: 17.4.4
   resolution: "@commitlint/types@npm:17.4.4"
   dependencies:
     chalk: "npm:^4.1.0"
   checksum: 7131cb9fc1b10a4a49a80445d693414474f3dd22a6c2ae13690274167c24b9c3435e6e5685cf9dc68ee2567ef3ef92e755121da4bd2ec565146a34310ef1dd9b
-  languageName: node
-  linkType: hard
-
-"@commitlint/types@npm:^17.4.0":
-  version: 17.4.0
-  resolution: "@commitlint/types@npm:17.4.0"
-  dependencies:
-    chalk: "npm:^4.1.0"
-  checksum: e9b57f73e13f8506fb5f81c3a7c374e8f5f12c69e2d67b560334e57994220844f85ccc75044247653b21faef0b258f1661ed48bcbe0c7de92cfc26e312e2ded8
   languageName: node
   linkType: hard
 
