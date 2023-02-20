@@ -1703,7 +1703,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/types@npm:17.4.0, @commitlint/types@npm:^17.4.0":
+"@commitlint/types@npm:17.4.4":
+  version: 17.4.4
+  resolution: "@commitlint/types@npm:17.4.4"
+  dependencies:
+    chalk: "npm:^4.1.0"
+  checksum: 7131cb9fc1b10a4a49a80445d693414474f3dd22a6c2ae13690274167c24b9c3435e6e5685cf9dc68ee2567ef3ef92e755121da4bd2ec565146a34310ef1dd9b
+  languageName: node
+  linkType: hard
+
+"@commitlint/types@npm:^17.4.0":
   version: 17.4.0
   resolution: "@commitlint/types@npm:17.4.0"
   dependencies:
@@ -2938,7 +2947,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:17.4.2"
     "@commitlint/config-conventional": "npm:17.4.2"
-    "@commitlint/types": "npm:17.4.0"
+    "@commitlint/types": "npm:17.4.4"
     "@docsearch/react": "npm:3.3.3"
     "@faker-js/faker": "npm:8.0.0-alpha.0"
     "@flex-development/docast": "npm:1.0.0-alpha.9"
