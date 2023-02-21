@@ -79,21 +79,35 @@ const resolveModule = async (
   const resolver: Resolver = new Resolver()
 
   /**
+   * Boolean indicating only module id should be tried for resolution.
+   *
+   * @const {boolean} onetry
+   */
+  const onetry: boolean =
+    isBuiltin(specifier) ||
+    (/^\S+:/.test(specifier) && !specifier.startsWith('file:'))
+
+  /**
    * Module ids to try resolving.
    *
    * @const {string[]} tries
    */
-  const tries: string[] =
-    isBuiltin(specifier) ||
-    (/^\S+:/.test(specifier) && !specifier.startsWith('file:'))
-      ? []
-      : [...extensions]
-          .flatMap(ext => [
-            specifier + (ext = pathe.formatExt(ext)),
-            specifier.startsWith('#') ? specifier + '/index' : '',
-            specifier + '/index' + ext
-          ])
-          .filter(id => id.length > 0)
+  const tries: string[] = onetry
+    ? []
+    : [...extensions]
+        .flatMap(ext => [
+          specifier + (ext = pathe.formatExt(ext)),
+          specifier.startsWith('#') ? specifier + '/index' : '',
+          specifier + '/index' + ext
+        ])
+        .filter(id => id.length > 0)
+
+  // try @types resolution
+  if (!onetry) {
+    specifier.startsWith('@types')
+      ? tries.unshift(specifier + '/index.d.ts')
+      : tries.unshift('@types/' + specifier + '/index.d.ts')
+  }
 
   // ensure attempt to resolve original specifier is first
   tries.unshift(specifier)
@@ -107,6 +121,7 @@ const resolveModule = async (
    * @const {Set<ErrorCode>} ignore
    */
   const ignore: Set<ErrorCode> = new Set<ErrorCode>([
+    ErrorCode.ERR_INVALID_MODULE_SPECIFIER,
     ErrorCode.ERR_MODULE_NOT_FOUND,
     ErrorCode.ERR_PACKAGE_PATH_NOT_EXPORTED,
     ErrorCode.ERR_UNSUPPORTED_DIR_IMPORT

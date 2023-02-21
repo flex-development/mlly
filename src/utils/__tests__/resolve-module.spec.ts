@@ -24,6 +24,16 @@ describe('unit:utils/resolveModule', () => {
       ['../../types', undefined, pathToFileURL('src/types/index.ts')],
       ['../conditions', undefined, pathToFileURL('src/utils/conditions.ts')],
       [
+        '@types/unist',
+        undefined,
+        pathToFileURL('node_modules/@types/unist/index.d.ts')
+      ],
+      [
+        'unist',
+        undefined,
+        pathToFileURL('node_modules/@types/unist/index.d.ts')
+      ],
+      [
         '../lookup-package-scope',
         { ext: () => 'd.mts' },
         pathToFileURL('src/utils/lookup-package-scope.d.mts')
