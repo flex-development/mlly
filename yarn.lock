@@ -3034,7 +3034,7 @@ __metadata:
     unist-util-remove: "npm:3.1.0"
     unist-util-source: "npm:4.0.2"
     unist-util-visit: "npm:4.1.2"
-    vercel: "npm:28.16.2"
+    vercel: "npm:28.16.3"
     version-bump-prompt: "npm:6.1.0"
     vfile: "npm:5.3.7"
     vite: "npm:4.1.4"
@@ -4585,10 +4585,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/next@npm:3.5.0":
-  version: 3.5.0
-  resolution: "@vercel/next@npm:3.5.0"
-  checksum: ae50bcd2b94858e58350c50e23f61c7ffc8f50c0280b71a91025465686135c76a2130ce7e82e26a8c9a29ca983a2363823dbaa57ffbabb39b650d2e475041b10
+"@vercel/next@npm:3.5.1":
+  version: 3.5.1
+  resolution: "@vercel/next@npm:3.5.1"
+  checksum: 11b9c0eac462f16587bd18e442c5c57a947f1cbe6f5d412101656ff72504dca893615d9309ecb80df73794762cd4a1a7edcb0b95d570e11b93ad8ff5b4627561
   languageName: node
   linkType: hard
 
@@ -4657,16 +4657,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/remix@npm:1.3.4":
-  version: 1.3.4
-  resolution: "@vercel/remix@npm:1.3.4"
+"@vercel/remix@npm:1.3.5":
+  version: 1.3.5
+  resolution: "@vercel/remix@npm:1.3.5"
   dependencies:
     "@remix-run/dev": "npm:1.12.0"
     "@vercel/nft": "npm:0.22.5"
     "@vercel/static-config": "npm:2.0.13"
     path-to-regexp: "npm:6.2.1"
     ts-morph: "npm:12.0.0"
-  checksum: 99ad85d478a8214ff27eecf65cae0dfacd2522fddf0598e14a0a20f79b9f564b9713df4190a51c4e435a0f59313eea0e39acafe8aff889411264a248fde69dd7
+  checksum: 5163307fc8b89d5f7b5537e4146e52c93d09f776b4ed267a0d1429c8a57800e7412093fb2dca8b0cd627ed617fe9fb425c64e4a47ec451f71610f70fea14de9a
   languageName: node
   linkType: hard
 
@@ -15183,24 +15183,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vercel@npm:28.16.2":
-  version: 28.16.2
-  resolution: "vercel@npm:28.16.2"
+"vercel@npm:28.16.3":
+  version: 28.16.3
+  resolution: "vercel@npm:28.16.3"
   dependencies:
     "@vercel/build-utils": "npm:6.3.0"
     "@vercel/go": "npm:2.3.7"
     "@vercel/hydrogen": "npm:0.0.53"
-    "@vercel/next": "npm:3.5.0"
+    "@vercel/next": "npm:3.5.1"
     "@vercel/node": "npm:2.9.6"
     "@vercel/python": "npm:3.1.49"
     "@vercel/redwood": "npm:1.1.5"
-    "@vercel/remix": "npm:1.3.4"
+    "@vercel/remix": "npm:1.3.5"
     "@vercel/ruby": "npm:1.3.66"
     "@vercel/static-build": "npm:1.3.10"
   bin:
     vc: dist/index.js
     vercel: dist/index.js
-  checksum: 443e4668e9847d13e97a99872ddd6618422981b552602acd06f57fd96e13fec1bcba98c45b324a4823ac302fc9d5a41add1a5d96d9382537a3729edc907f2fcd
+  checksum: a2b9c329b975c60b458dcbac6d52466edf75e79ad82f0a007c56d17768dd82bb42d36d848e6192af60ace68d0033ff81c84b7b9d4be69606b0848dc3812a73b1
   languageName: node
   linkType: hard
 
