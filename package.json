@@ -185,7 +185,7 @@
     "vitest-github-actions-reporter": "0.9.0",
     "vue": "3.2.47",
     "vue-eslint-parser": "9.1.0",
-    "vue-tsc": "1.1.4",
+    "vue-tsc": "1.1.5",
     "yaml-eslint-parser": "1.1.0"
   },
   "peerDependencies": {
