@@ -3,24 +3,19 @@
  * @module mlly/utils/tests/unit/findSubpath
  */
 
+import exports from '#fixtures/package-exports'
 import type { FindSubpathOptions } from '#src/interfaces'
 import pathe from '@flex-development/pathe'
 import type { Exports, Imports } from '@flex-development/pkg-types'
+import type { Nilable } from '@flex-development/tutils'
 import { pathToFileURL } from 'node:url'
 import testSubject from '../find-subpath'
 
 describe('unit:utils/findSubpath', () => {
-  let exports: Exports
   let options: FindSubpathOptions
 
   beforeAll(() => {
     options = { dir: pathToFileURL('.' + pathe.sep), parent: import.meta.url }
-    exports = {
-      '.': './dist/index.mjs',
-      './package.json': './package.json',
-      './utils': './dist/utils/index.mjs',
-      './utils/*': './dist/utils/*.mjs'
-    }
   })
 
   it('should return null if target is not found in context', () => {
@@ -40,7 +35,7 @@ describe('unit:utils/findSubpath', () => {
 
   it('should return defined subpath if target is found in context', () => {
     // Arrange
-    const cases: [string, Exports | Imports | undefined, string][] = [
+    const cases: [string, Nilable<Exports | Imports>, string][] = [
       ['./dist/index', './dist/index.mjs', '.'],
       ['./dist/index.mjs', './dist/index.mjs', '.'],
       ['./dist/index.mjs', ['./dist/index.mjs'], '.'],

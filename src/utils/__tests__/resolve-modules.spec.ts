@@ -8,6 +8,8 @@ import { dedent } from 'ts-dedent'
 import extractStatements from '../extract-statements'
 import testSubject from '../resolve-modules'
 
+vi.mock('#src/utils/lookup-package-scope')
+
 describe('unit:utils/resolveModules', () => {
   it('should return code with module specifiers fully resolved', async () => {
     // Arrange

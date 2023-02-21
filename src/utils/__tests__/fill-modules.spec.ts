@@ -14,6 +14,8 @@ import extractStatements from '../extract-statements'
 import testSubject from '../fill-modules'
 import isRelativeSpecifier from '../is-relative-specifier'
 
+vi.mock('#src/utils/lookup-package-scope')
+
 describe('unit:utils/fillModules', () => {
   let code: string
   let parent: ModuleId

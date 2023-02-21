@@ -8,13 +8,14 @@ import type { ModuleId } from '#src/types'
 import getPackageJson from '#tests/utils/get-package-json'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
-import type { Exports, PackageJson } from '@flex-development/pkg-types'
+import type { Exports } from '@flex-development/pkg-types'
 import { URL, pathToFileURL } from 'node:url'
 import TestSubject from '../resolver'
 
+vi.mock('#src/utils/lookup-package-scope')
+
 describe('unit:internal/Resolver', () => {
   let parent: ModuleId
-  let pkgjson: PackageJson
   let subject: TestSubject
   let url: (input: string) => URL
 
@@ -25,7 +26,6 @@ describe('unit:internal/Resolver', () => {
     }
 
     parent = pathToFileURL('__fixtures__/parent.ts').href
-    pkgjson = getPackageJson('package.json')
     subject = new TestSubject()
   })
 
@@ -126,7 +126,11 @@ describe('unit:internal/Resolver', () => {
         ['fs', parent, new URL('node:fs')],
         ['legacy-main-1', parent, url('legacy-main-1/index.js')],
         ['legacy-main-1/utils', parent, url('legacy-main-1/utils')],
-        [pkgjson.name!, import.meta.url, pathToFileURL('dist/index.mjs')]
+        [
+          '@flex-development/mlly',
+          import.meta.url,
+          pathToFileURL('dist/index.mjs')
+        ]
       ]
 
       // Act + Expect

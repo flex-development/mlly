@@ -7,6 +7,8 @@ import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import { URL, pathToFileURL } from 'node:url'
 import testSubject from '../resolve-module'
 
+vi.mock('#src/utils/lookup-package-scope')
+
 describe('unit:utils/resolveModule', () => {
   it('should return module URL', async () => {
     // Arrange

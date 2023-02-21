@@ -3,11 +3,13 @@
  * @module mlly/utils/tests/unit/parseSubpath
  */
 
+import exports from '#fixtures/package-exports'
+import imports from '#fixtures/package-imports'
 import type { ParseSubpathOptions, ParsedSubpath } from '#src/interfaces'
 import getPackageJson from '#tests/utils/get-package-json'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
-import type { Exports, Imports, PackageJson } from '@flex-development/pkg-types'
+import type { Exports, Imports } from '@flex-development/pkg-types'
 import type { Nullable } from '@flex-development/tutils'
 import { pathToFileURL } from 'node:url'
 import testSubject from '../parse-subpath'
@@ -15,33 +17,15 @@ import testSubject from '../parse-subpath'
 describe('unit:utils/parseSubpath', () => {
   type Expected = Omit<ParsedSubpath, 'internal' | 'specifier'>
 
-  let exports: Record<string, Nullable<string>>
-  let imports: Imports
+  let pkgname: string
   let options: ParseSubpathOptions
-  let pkgjson: PackageJson & { name: string }
 
   beforeAll(() => {
-    exports = {
-      '.': './dist/index.mjs',
-      './internal': null,
-      './internal/*': null,
-      './package.json': './package.json',
-      './utils': './dist/utils/index.mjs',
-      './utils/*': './dist/utils/*.mjs'
-    }
+    const dir = pathToFileURL('.' + pathe.sep)
+    const parent = pathToFileURL('scratch.ts')
 
-    imports = {
-      '#mkbuild': '@flex-development/mkbuild',
-      '#src': './src/index.ts',
-      '#src/*': './src/*.ts'
-    }
-
-    options = {
-      dir: pathToFileURL('.' + pathe.sep),
-      parent: pathToFileURL('scratch.ts')
-    }
-
-    pkgjson = getPackageJson('package.json') as typeof pkgjson
+    options = { dir, parent }
+    pkgname = getPackageJson('package.json')!.name!
   })
 
   it('should return package import as ParsedSubpath object', () => {
@@ -117,7 +101,7 @@ describe('unit:utils/parseSubpath', () => {
       Expected
     ][] = [
       [
-        pkgjson.name,
+        pkgname,
         exports,
         options,
         {
@@ -128,7 +112,7 @@ describe('unit:utils/parseSubpath', () => {
         }
       ],
       [
-        pkgjson.name + '/internal',
+        pkgname + '/internal',
         exports,
         options,
         {
@@ -139,7 +123,7 @@ describe('unit:utils/parseSubpath', () => {
         }
       ],
       [
-        pkgjson.name + '/internal/resolver',
+        pkgname + '/internal/resolver',
         exports,
         options,
         {
@@ -150,7 +134,7 @@ describe('unit:utils/parseSubpath', () => {
         }
       ],
       [
-        pkgjson.name + '/package.json',
+        pkgname + '/package.json',
         exports,
         options,
         {
@@ -161,7 +145,7 @@ describe('unit:utils/parseSubpath', () => {
         }
       ],
       [
-        pkgjson.name + '/utils',
+        pkgname + '/utils',
         exports,
         options,
         {
@@ -172,7 +156,7 @@ describe('unit:utils/parseSubpath', () => {
         }
       ],
       [
-        pkgjson.name + '/utils/parse-subpath',
+        pkgname + '/utils/parse-subpath',
         exports,
         options,
         {
@@ -246,7 +230,7 @@ describe('unit:utils/parseSubpath', () => {
 
       // Act
       try {
-        testSubject(pkgjson.name, { '.': target as unknown as string }, options)
+        testSubject(pkgname, { '.': target as unknown as string }, options)
       } catch (e: unknown) {
         error = e as typeof error
       }
@@ -265,7 +249,7 @@ describe('unit:utils/parseSubpath', () => {
 
       // Act
       try {
-        testSubject(pkgjson.name, exports, {
+        testSubject(pkgname, exports, {
           dir: pathToFileURL('__fixtures__/node_modules/exports-sugar-c'),
           parent: pathToFileURL('__fixtures__/parent.ts')
         })
@@ -302,7 +286,7 @@ describe('unit:utils/parseSubpath', () => {
 
       // Act
       try {
-        testSubject(pkgjson.name, {}, options)
+        testSubject(pkgname, {}, options)
       } catch (e: unknown) {
         error = e as typeof error
       }
@@ -320,7 +304,7 @@ describe('unit:utils/parseSubpath', () => {
 
       // Act
       try {
-        testSubject(pkgjson.name, { '.': [target] }, options)
+        testSubject(pkgname, { '.': [target] }, options)
       } catch (e: unknown) {
         error = e as typeof error
       }
@@ -339,7 +323,7 @@ describe('unit:utils/parseSubpath', () => {
 
       // Act
       try {
-        testSubject(pkgjson.name, { '.': target }, options)
+        testSubject(pkgname, { '.': target }, options)
       } catch (e: unknown) {
         error = e as typeof error
       }
