@@ -1535,12 +1535,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:17.4.2":
-  version: 17.4.2
-  resolution: "@commitlint/config-conventional@npm:17.4.2"
+"@commitlint/config-conventional@npm:17.4.4":
+  version: 17.4.4
+  resolution: "@commitlint/config-conventional@npm:17.4.4"
   dependencies:
     conventional-changelog-conventionalcommits: "npm:^5.0.0"
-  checksum: fcf5ac70b2a8149b56f0088469988eea5631998492fa814c2a87f73baccecad46e102f1c01de2f250504c892fa888aef51b67e7183c0906162bfff80f7ca6c41
+  checksum: 1dce765072a61354a1e17078441c2422b0166bc0c974d082835e76b0117e787b426063e5c978c68a59c8ebf46de9f499157902de18122538432a12efcc7dcce2
   languageName: node
   linkType: hard
 
@@ -2937,7 +2937,7 @@ __metadata:
   resolution: "@flex-development/mlly@workspace:."
   dependencies:
     "@commitlint/cli": "npm:17.4.2"
-    "@commitlint/config-conventional": "npm:17.4.2"
+    "@commitlint/config-conventional": "npm:17.4.4"
     "@docsearch/react": "npm:3.3.3"
     "@faker-js/faker": "npm:8.0.0-alpha.0"
     "@flex-development/docast": "npm:1.0.0-alpha.9"
