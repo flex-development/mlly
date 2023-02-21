@@ -35,7 +35,7 @@ const config = {
   overrides: [
     {
       extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
-      files: '**/*.+(cjs|cts|js|jsx|mjs|mts|ts|tsx)',
+      files: '**/*.+(cjs|cts|js|jsx|mjs|mts|ts|tsx|vue)',
       globals: {
         BufferEncoding: 'readonly',
         Chai: 'readonly',
