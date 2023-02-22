@@ -15,6 +15,7 @@ describe('unit:utils/findRequires', () => {
       const mod = require('lib');
       require(id)
       require('#src/utils/resolve-aliases')
+      const arr = [require("./arr")]
       const {
         default: myDefault,
         addFive,
@@ -32,7 +33,7 @@ describe('unit:utils/findRequires', () => {
     const results = testSubject(code)
 
     // Expect
-    expect(results).to.be.an('array').of.length(7)
+    expect(results).to.be.an('array').of.length(8)
     expect(results).toMatchSnapshot()
   })
 

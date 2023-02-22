@@ -33,7 +33,7 @@ const findRequires = (code: string = ''): RequireStatement[] => {
    * @const {RegExp} REQUIRE_REGEX
    */
   const REQUIRE_REGEX: RegExp =
-    /(?<=^|[\s;])\b(?:(?:const\s*|let\s*|var\s*)?(?<imports>(?:[$_\p{ID_Start}][$\u200C\u200D\p{ID_Continue}]*)|(?:[\w\t\n\r "$'*,./:{}-]+?))?\s*=?\s*(?<kind>require)\((?<specifier>["']?[\S\t\n\r]+?["']?)\)(?=;?\n?))(?<!(?:\/\/|\*).*)/gu
+    /(?<=^|[\s;[])\b(?:(?:const\s*|let\s*|var\s*)?(?<imports>(?:[$_\p{ID_Start}][$\u200C\u200D\p{ID_Continue}]*)|(?:[\w\t\n\r "$'*,./:{}-]+?))?\s*=?\s*(?<kind>require)\((?<specifier>["']?[\S\t\n\r]+?["']?)\)(?=;?\n?))(?<!(?:\/\/|\*).*)/gu
 
   return [...code.matchAll(REQUIRE_REGEX)].map(match => {
     const { 0: code = '', index: start = 0, groups = {} } = match
