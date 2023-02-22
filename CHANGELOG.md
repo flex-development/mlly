@@ -1,3 +1,15 @@
+## [1.0.0-alpha.13](https://github.com/flex-development/mlly/compare/1.0.0-alpha.12...1.0.0-alpha.13) (2023-02-22)
+
+
+### :package: Build
+
+* **deps-dev:** Bump typescript from 5.0.0-dev.20230219 to 5.0.0-dev.20230222 ([#158](https://github.com/flex-development/mlly/issues/158)) ([1ca8a5f](https://github.com/flex-development/mlly/commit/1ca8a5f6998541fe470a9b7b0372c0d39381948d))
+
+
+### :bug: Fixes
+
+* **ts:** ensure typechecks pass without peer deps installed ([81b55ca](https://github.com/flex-development/mlly/commit/81b55caa8533ad174ec009535e5a030be21e6cc1))
+
 ## [1.0.0-alpha.12](https://github.com/flex-development/mlly/compare/1.0.0-alpha.11...1.0.0-alpha.12) (2023-02-22)
 
 
