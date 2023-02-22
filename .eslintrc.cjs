@@ -45,6 +45,15 @@ const config = {
       }
     },
     {
+      files: [
+        'src/interfaces/options-get-format.ts',
+        'src/interfaces/options-get-source.ts'
+      ],
+      rules: {
+        '@typescript-eslint/prefer-ts-expect-error': 0
+      }
+    },
+    {
       files: ['src/utils/find-exports.ts'],
       rules: {
         'unicorn/prefer-module': 0

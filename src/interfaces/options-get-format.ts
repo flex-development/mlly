@@ -6,7 +6,6 @@
 import type { Format } from '#src/enums'
 import type { Ext } from '@flex-development/pathe'
 import type { EmptyString } from '@flex-development/tutils'
-import type { RequestInit } from 'node-fetch'
 
 /**
  * Module format retrieval options.
@@ -75,7 +74,8 @@ interface GetFormatOptions {
    *
    * @default {}
    */
-  req?: RequestInit | undefined
+  // @ts-ignore peer dependency
+  req?: import('node-fetch').RequestInit | undefined
 }
 
 export type { GetFormatOptions as default }

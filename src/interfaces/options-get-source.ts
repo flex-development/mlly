@@ -4,7 +4,6 @@
  */
 
 import type { Format } from '#src/enums'
-import type { RequestInit } from 'node-fetch'
 
 /**
  * Source code retrieval options.
@@ -53,7 +52,8 @@ interface GetSourceOptions {
    *
    * @default {}
    */
-  req?: RequestInit | undefined
+  // @ts-ignore peer dependency
+  req?: import('node-fetch').RequestInit | undefined
 }
 
 export type { GetSourceOptions as default }
