@@ -74,7 +74,6 @@ interface GetFormatOptions {
    *
    * @default {}
    */
-  // @ts-ignore peer dependency
   req?: import('node-fetch').RequestInit | undefined
 }
 
