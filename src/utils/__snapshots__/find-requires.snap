@@ -86,6 +86,28 @@ exports[`unit:utils/findRequires > should return RequireStatement object array 1
     "syntax": "require",
   },
   {
+    "code": "require(\\"./data\\")",
+    "end": 256,
+    "imports": [],
+    "kind": "require",
+    "specifier": "./data",
+    "specifier_kind": "relative",
+    "specifier_syntax": "static",
+    "start": 239,
+    "syntax": "require",
+  },
+  {
+    "code": "require(\\"./parser-options\\")",
+    "end": 310,
+    "imports": [],
+    "kind": "require",
+    "specifier": "./parser-options",
+    "specifier_kind": "relative",
+    "specifier_syntax": "static",
+    "start": 283,
+    "syntax": "require",
+  },
+  {
     "code": "const {
   default: myDefault,
   addFive,
@@ -97,7 +119,7 @@ exports[`unit:utils/findRequires > should return RequireStatement object array 1
 	squareThree,
 	squareTwo
 } = require('./lib')",
-    "end": 358,
+    "end": 454,
     "imports": [
       "default: myDefault",
       "addFive",
@@ -113,7 +135,7 @@ exports[`unit:utils/findRequires > should return RequireStatement object array 1
     "specifier": "./lib",
     "specifier_kind": "relative",
     "specifier_syntax": "static",
-    "start": 216,
+    "start": 312,
     "syntax": "require",
   },
 ]
