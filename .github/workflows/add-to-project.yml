@@ -24,7 +24,7 @@ jobs:
     steps:
       - id: add
         name: Add ${{ format('#{0}', github.event.number || github.event.issue.number) }} to project
-        uses: actions/add-to-project@v0.4.0
+        uses: actions/add-to-project@v0.4.1
         with:
           github-token: ${{ secrets.PAT_REPO }}
           project-url: |
