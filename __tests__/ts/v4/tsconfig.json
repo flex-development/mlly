@@ -32,8 +32,7 @@
       "#fixtures/*": ["__fixtures__/*"],
       "#src": ["src/index"],
       "#src/*": ["src/*"],
-      "#tests/*": ["__tests__/*"],
-      "@flex-development/mlly": ["src/index"]
+      "#tests/*": ["__tests__/*"]
     },
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "preserveConstEnums": true,
@@ -53,12 +52,10 @@
   },
   "exclude": ["**/coverage", "**/dist", "**/node_modules"],
   "include": [
-    "**/**.cjs",
+    "**/**.js",
     "**/**.mjs",
     "**/**.mts",
     "**/**.ts",
-    "**/.*.cjs",
-    "**/__fixtures__/**/*.js",
     "**/docs/.vitepress/**/*.ts",
     "**/docs/.vitepress/**/*.vue"
   ]

@@ -3,13 +3,13 @@
  * @module mlly/utils/tests/unit/detectSyntax
  */
 
-import aggregate_error_ponyfill from '#fixtures/aggregate-error-ponyfill.cjs'
+import AGGREGATE_ERROR_PONYFILL from '#fixtures/aggregate-error-ponyfill'
 import { dedent } from 'ts-dedent'
 import testSubject from '../detect-syntax'
 
 describe('unit:utils/detectSyntax', () => {
   it('should return cjs-only syntax result', () => {
-    expect(testSubject(aggregate_error_ponyfill)).deep.equal({
+    expect(testSubject(AGGREGATE_ERROR_PONYFILL)).deep.equal({
       cjs: true,
       esm: false,
       mixed: false

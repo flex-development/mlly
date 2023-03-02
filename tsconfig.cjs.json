@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "customConditions": ["require", "node"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "module": "commonjs",
+    "moduleResolution": "nodenext",
+    "outDir": ".",
+    "verbatimModuleSyntax": false
+  },
+  "exclude": ["**/node_modules"],
+  "extends": "./tsconfig.json",
+  "include": ["**/**.cjs", "**/**.cts", "**/**.json", "**/.*.cjs", "**/.*.cts"]
+}

@@ -1,6 +1,7 @@
 /**
  * @file Configuration - Build
  * @module config/build
+ * @see https://github.com/flex-development/mkbuild
  */
 
 import { defineBuildConfig, type Config } from '@flex-development/mkbuild'

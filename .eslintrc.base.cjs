@@ -53,7 +53,7 @@ const config = {
       parser: '@typescript-eslint/parser',
       parserOptions: {
         extraFileExtensions: ['.vue'],
-        project: './tsconfig.json',
+        project: ['./tsconfig.json', './tsconfig.cjs.json'],
         sourceType: require('./package.json').type,
         tsconfigRootDir: process.cwd(),
         warnOnUnsupportedTypeScriptVersion: true
@@ -717,7 +717,7 @@ const config = {
         'unicorn/no-static-only-class': 0,
         'unicorn/no-thenable': 2,
         'unicorn/no-this-assignment': 2,
-        'unicorn/no-unreadable-array-destructuring': 2,
+        'unicorn/no-unreadable-array-destructuring': 0,
         'unicorn/no-unsafe-regex': 0,
         'unicorn/no-unused-properties': 2,
         'unicorn/no-useless-fallback-in-spread': 2,
@@ -905,7 +905,7 @@ const config = {
       }
     },
     {
-      files: '**/*.+(json|jsonc)',
+      files: '**/*.+(json|json5|jsonc)',
       parser: 'jsonc-eslint-parser',
       plugins: ['jsonc'],
       rules: {
@@ -980,7 +980,7 @@ const config = {
       }
     },
     {
-      files: ['**/*.jsonc', 'tsconfig*.json'],
+      files: ['**/*.+(json5|jsonc)', 'tsconfig*.json'],
       rules: {
         'jsonc/no-comments': 0
       }
@@ -990,6 +990,57 @@ const config = {
       parser: 'eslint-plugin-markdownlint/parser',
       plugins: ['markdown', 'markdownlint'],
       processor: 'markdown/markdown'
+    },
+    {
+      files: '**/*.md/*.+(cjs|cts|js|jsx|mjs|mts|ts|tsx)',
+      parserOptions: { project: false },
+      rules: {
+        '@typescript-eslint/await-thenable': 0,
+        '@typescript-eslint/consistent-type-exports': 0,
+        '@typescript-eslint/dot-notation': 0,
+        '@typescript-eslint/naming-convention': 0,
+        '@typescript-eslint/no-base-to-string': 0,
+        '@typescript-eslint/no-confusing-void-expression': 0,
+        '@typescript-eslint/no-floating-promises': 0,
+        '@typescript-eslint/no-for-in-array': 0,
+        '@typescript-eslint/no-implied-eval': 0,
+        '@typescript-eslint/no-meaningless-void-operator': 0,
+        '@typescript-eslint/no-misused-promises': 0,
+        '@typescript-eslint/no-mixed-enums': 0,
+        '@typescript-eslint/no-redundant-type-constituents': 0,
+        '@typescript-eslint/no-throw-literal': 0,
+        '@typescript-eslint/no-unnecessary-boolean-literal-compare': 0,
+        '@typescript-eslint/no-unnecessary-condition': 0,
+        '@typescript-eslint/no-unnecessary-qualifier': 0,
+        '@typescript-eslint/no-unnecessary-type-arguments': 0,
+        '@typescript-eslint/no-unnecessary-type-assertion': 0,
+        '@typescript-eslint/no-unsafe-argument': 0,
+        '@typescript-eslint/no-unsafe-assignment': 0,
+        '@typescript-eslint/no-unsafe-call': 0,
+        '@typescript-eslint/no-unsafe-member-access': 0,
+        '@typescript-eslint/no-unsafe-return': 0,
+        '@typescript-eslint/no-unused-expressions': 0,
+        '@typescript-eslint/non-nullable-type-assertion-style': 0,
+        '@typescript-eslint/prefer-includes': 0,
+        '@typescript-eslint/prefer-nullish-coalescing': 0,
+        '@typescript-eslint/prefer-readonly': 0,
+        '@typescript-eslint/prefer-readonly-parameter-types': 0,
+        '@typescript-eslint/prefer-reduce-type-parameter': 0,
+        '@typescript-eslint/prefer-regexp-exec': 0,
+        '@typescript-eslint/prefer-return-this-type': 0,
+        '@typescript-eslint/prefer-string-starts-ends-with': 0,
+        '@typescript-eslint/promise-function-async': 0,
+        '@typescript-eslint/require-array-sort-compare': 0,
+        '@typescript-eslint/require-await': 0,
+        '@typescript-eslint/restrict-plus-operands': 0,
+        '@typescript-eslint/restrict-template-expressions': 0,
+        '@typescript-eslint/return-await': 0,
+        '@typescript-eslint/strict-boolean-expressions': 0,
+        '@typescript-eslint/switch-exhaustiveness-check': 0,
+        '@typescript-eslint/unbound-method': 0,
+        'jsdoc/require-file-overview': 0,
+        'unicorn/filename-case': 0
+      }
     },
     {
       files: '**/*.yml',

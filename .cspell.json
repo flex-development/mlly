@@ -13,6 +13,7 @@
   "failFast": false,
   "flagWords": [],
   "ignorePaths": [
+    "**/*.log",
     "**/*.snap",
     "**/.*ignore",
     "**/.gitconfig",

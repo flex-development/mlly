@@ -1,4 +1,4 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`unit:utils/findExports > should return ExportStatement object array 1`] = `
 [

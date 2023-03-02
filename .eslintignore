@@ -19,7 +19,7 @@ yarn.lock
 !**/__fixtures__/**/node_modules/
 !**/typings/**/dist/
 !.codecov.yml
-!.commitlintrc.json
+!.commitlintrc.*
 !.cspell.json
 !.github/
 !.graphqlrc.yml

@@ -2,5 +2,15 @@
   "compilerOptions": {
     "target": "es2020"
   },
-  "extends": "./tsconfig.json"
+  "extends": "./tsconfig.json",
+  "include": [
+    "**/**.cts",
+    "**/**.mts",
+    "**/**.ts",
+    "**/.*.cts",
+    "**/.*.mts",
+    "**/.*.ts",
+    "**/docs/.vitepress/**/*.ts",
+    "**/docs/.vitepress/**/*.vue"
+  ]
 }

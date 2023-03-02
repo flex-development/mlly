@@ -31,8 +31,7 @@
       "#fixtures/*": ["__fixtures__/*"],
       "#src": ["src/index"],
       "#src/*": ["src/*"],
-      "#tests/*": ["__tests__/*"],
-      "@flex-development/mlly": ["src/index"]
+      "#tests/*": ["__tests__/*"]
     },
     "preserveConstEnums": true,
     "preserveSymlinks": false,
@@ -54,13 +53,12 @@
   },
   "exclude": ["**/coverage", "**/dist", "**/node_modules"],
   "include": [
-    "**/**.cjs",
+    "**/**.js",
     "**/**.mjs",
     "**/**.mts",
     "**/**.ts",
-    "**/.*.cjs",
-    "__fixtures__/**/*.js",
     "docs/.vitepress/**/*.ts",
     "docs/.vitepress/**/*.vue"
-  ]
+  ],
+  "references": [{ "path": "./tsconfig.cjs.json" }]
 }

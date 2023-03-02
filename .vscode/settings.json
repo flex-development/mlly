@@ -196,6 +196,7 @@
     "yaml"
   ],
   "files.associations": {
+    "*.log": "log",
     "*.snap": "jest-snapshot",
     ".env.zsh": "shellscript",
     ".markdownlintignore": "ignore",
@@ -317,6 +318,11 @@
   "volar.vueserver.vitePress.processMdFile": true,
   "vsicons.associations.files": [
     {
+      "extensions": [".commitlintrc.cts"],
+      "format": "svg",
+      "icon": "commitlint"
+    },
+    {
       "extensions": [".eslintrc.base.cjs"],
       "format": "svg",
       "icon": "eslint"
@@ -327,7 +333,7 @@
       "icon": "graphql"
     },
     {
-      "extensions": ["build.json", "typecheck.json"],
+      "extensions": ["build.json", "cjs.json", "typecheck.json"],
       "format": "svg",
       "icon": "tsconfig"
     },

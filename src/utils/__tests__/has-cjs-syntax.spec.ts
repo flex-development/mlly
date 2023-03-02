@@ -3,7 +3,7 @@
  * @module mlly/utils/tests/unit/hasCJSSyntax
  */
 
-import aggregate_error_ponyfill from '#fixtures/aggregate-error-ponyfill.cjs'
+import AGGREGATE_ERROR_PONYFILL from '#fixtures/aggregate-error-ponyfill'
 import { dedent } from 'ts-dedent'
 import testSubject from '../has-cjs-syntax'
 
@@ -185,7 +185,7 @@ describe('unit:utils/hasCJSSyntax', () => {
 
   describe('require', () => {
     it('should detect require statement', () => {
-      expect(testSubject(aggregate_error_ponyfill)).to.be.true
+      expect(testSubject(AGGREGATE_ERROR_PONYFILL)).to.be.true
     })
 
     it('should detect require.resolve statement', () => {

@@ -9,7 +9,7 @@ declare global {
     /**
      * Export conditions of relevant `package.json`.
      */
-    conditions: string[]
+    conditions?: string[]
 
     /**
      * Module format.
@@ -49,11 +49,11 @@ declare global {
    * Determines how `url` should be interpreted, retrieved, and parsed.
    *
    * @see {@linkcode LoadHookContext}
-   * @see https://nodejs.org/docs/latest-v16.x/api/esm.html#loadurl-context-nextload
+   * @see https://nodejs.org/api/esm.html#loadurl-context-nextload
    *
    * @async
    *
-   * @param {string} url - Module URL
+   * @param {string} url - Resolved module URL
    * @param {LoadHookContext} context - Hook context
    * @param {LoadHook} nextLoad - Subsequent `load` hook in the chain or default
    * Node.js `load` hook after last user-supplied `load` hook
@@ -116,7 +116,7 @@ declare global {
    * optionally its format (such as `'module'`) as a hint to the `load` hook.
    *
    * @see {@linkcode ResolveHookContext}
-   * @see https://nodejs.org/docs/latest-v16.x/api/esm.html#resolvespecifier-context-nextresolve
+   * @see https://nodejs.org/api/esm.html#resolvespecifier-context-nextresolve
    *
    * @async
    *

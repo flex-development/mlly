@@ -61,6 +61,13 @@ export const load = async (url, context) => {
 
   // transform typescript files
   if (/^\.(?:cts|mts|tsx?)$/.test(ext) && !/\.d\.(?:cts|mts|ts)$/.test(url)) {
+    // push require condition for .cts files and update format
+    if (ext === '.cts') {
+      context.conditions = context.conditions ?? []
+      context.conditions.unshift('require', 'node')
+      context.format = mlly.Format.MODULE
+    }
+
     // resolve path aliases
     source = await mlly.resolveAliases(source, {
       aliases: tsconfig.compilerOptions.paths,
@@ -77,7 +84,7 @@ export const load = async (url, context) => {
 
     // transpile source code
     const { code } = await esbuild.transform(source, {
-      format: ext === '.cts' ? 'cjs' : 'esm',
+      format: 'esm',
       loader: ext.slice(/^\.[cm]/.test(ext) ? 2 : 1),
       minify: false,
       sourcefile: fileURLToPath(url),

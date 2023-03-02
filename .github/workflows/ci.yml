@@ -151,6 +151,9 @@ jobs:
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
+      - id: build
+        name: Build project
+        run: yarn build
       - id: lint
         name: Check lint status
         run: yarn check:lint

@@ -1,9 +1,9 @@
 {
   "*": ["prettier --check", "cspell lint --color --no-progress --relative $@"],
-  "**/*.{cjs,gql,js,json,jsonc,md,mjs,mts,ts,vue,yml}": [
+  "**/*.{cjs,cts,gql,js,json,json5,jsonc,md,mjs,mts,ts,vue,yml}": [
     "eslint --exit-on-fatal-error"
   ],
-  "**/*.{cjs,js,mjs,mts,ts,vue}": "vitest typecheck --changed --run",
+  "**/*.{cts,mts,ts,vue}": "vitest typecheck --changed --run",
   "**/yarn.lock": "yarn dedupe --check",
   "src/**/*.ts": "vitest --changed --coverage --run"
 }
