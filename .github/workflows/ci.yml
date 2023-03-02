@@ -39,6 +39,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   HUSKY: 0
   REF: ${{ github.head_ref || github.ref_name }}
+  SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -83,8 +84,34 @@ jobs:
       - id: version-typescript
         name: Get TypeScript version
         run: echo "result=$(jq .devDependencies.typescript package.json -r)" >> $GITHUB_OUTPUT
-  gitguardian:
+  commitlint:
     needs: metadata
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF }}
+        uses: actions/checkout@v3.3.0
+        with:
+          fetch-depth: 0
+          ref: ${{ env.REF }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.6.0
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: cache
+        name: Restore dependencies cache
+        uses: actions/cache@v3.2.6
+        with:
+          key: ${{ runner.os }}-${{ github.run_id }}
+          path: ${{ env.CACHE_PATH }}
+      - id: lint
+        name: Check commitlint status
+        run: yarn commitlint --from $SHA~${{ github.event.pull_request.commits || 1 }} --to $SHA
+  gitguardian:
+    needs: commitlint
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -105,7 +132,9 @@ jobs:
           GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
           GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
   format:
-    needs: gitguardian
+    needs:
+      - commitlint
+      - gitguardian
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -130,7 +159,9 @@ jobs:
         name: Check code formatting
         run: yarn check:format
   lint:
-    needs: gitguardian
+    needs:
+      - commitlint
+      - gitguardian
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -158,7 +189,9 @@ jobs:
         name: Check lint status
         run: yarn check:lint
   spelling:
-    needs: gitguardian
+    needs:
+      - commitlint
+      - gitguardian
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -184,6 +217,7 @@ jobs:
         run: yarn check:spelling
   typescript:
     needs:
+      - commitlint
       - gitguardian
       - metadata
     runs-on: ubuntu-latest
@@ -229,7 +263,9 @@ jobs:
         name: Run typecheck
         run: yarn typecheck
   test:
-    needs: gitguardian
+    needs:
+      - commitlint
+      - gitguardian
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -271,7 +307,7 @@ jobs:
           flags: ${{ format('node{0}', matrix.node-version) }}
           override_branch: ${{ env.REF }}
           override_build: ${{ github.run_id }}
-          override_commit: ${{ env.GITHUB_SHA }}
+          override_commit: ${{ env.SHA }}
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
         env:
@@ -279,10 +315,11 @@ jobs:
           GITHUB_REF: ${{ github.ref }}
           GITHUB_REF_TYPE: ${{ github.ref_type }}
           GITHUB_RUN_ID: ${{ github.run_id }}
-          GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          GITHUB_SHA: ${{ env.SHA }}
           GITHUB_WORKSPACE: ${{ github.workspace }}
   build:
     needs:
+      - commitlint
       - gitguardian
       - metadata
     runs-on: ubuntu-latest
@@ -323,6 +360,7 @@ jobs:
   docs:
     needs:
       - build
+      - commitlint
       - format
       - gitguardian
       - lint
