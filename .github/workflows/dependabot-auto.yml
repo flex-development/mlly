@@ -44,9 +44,6 @@ jobs:
           persist-credentials: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
           ref: ${{ github.head_ref }}
           token: ${{ env.GITHUB_TOKEN }}
-      - id: enable-auto-merge
-        name: Enable auto-merge
-        run: gh pr merge ${{ github.event.number }} --auto --squash
       - id: gpg-import
         name: Import GPG key
         if: steps.metadata.outputs.package-ecosystem == 'npm_and_yarn'

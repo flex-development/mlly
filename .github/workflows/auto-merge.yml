@@ -1,0 +1,38 @@
+# Pull request auto-merge
+#
+# Automatically merge pull requests after requirements are met.
+#
+# References:
+#
+# - https://cli.github.com/manual/gh_pr_merge
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-auto-merge-for-pull-requests-in-your-repository
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
+# - https://github.com/actions/checkout
+# - https://github.com/hmarr/debug-action
+
+---
+name: auto-merge
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+jobs:
+  auto-merge:
+    if: github.event.pull_request.auto_merge == null && github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.1.0
+      - id: checkout
+        name: Checkout ${{ github.head_ref }}
+        uses: actions/checkout@v3.3.0
+        with:
+          ref: ${{ github.head_ref }}
+      - id: auto-merge
+        name: Enable auto-merge
+        run: gh pr merge ${{ github.event.pull_request.number }} --auto --squash
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_REPO }}
