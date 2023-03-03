@@ -34,7 +34,6 @@
       "#src/*": ["src/*"],
       "#tests/*": ["__tests__/*"]
     },
-    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "preserveConstEnums": true,
     "preserveSymlinks": false,
     "pretty": true,
