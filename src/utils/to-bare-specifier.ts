@@ -136,9 +136,16 @@ const toBareSpecifier = (
 
   // exit early if subpath does not need to be validated
   if (isNIL(exports)) {
-    return [main, types].some(ep => ep === id.path || ep === id.path.slice(2))
-      ? id.pkg
-      : specifier
+    // set specifier to package name if specifier is main or types entry point
+    if ([main, types].some(ep => ep === id.path || ep === id.path.slice(2))) {
+      specifier = id.pkg
+    }
+
+    // remove '@types/' prefix to avoid 'Cannot import type declaration files.
+    // Consider importing "*" instead of "@types/*"' (TS6137) error
+    specifier = specifier.replace(/^@types\//, '')
+
+    return specifier
   }
 
   // check if specifier contains valid subpath export

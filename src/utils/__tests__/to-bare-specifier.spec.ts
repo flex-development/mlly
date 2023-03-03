@@ -32,7 +32,7 @@ describe('unit:utils/toBareSpecifier', () => {
       ['esbuild/lib/main.js', 'esbuild'],
       ['fs', 'node:fs'],
       ['node:fs', 'node:fs'],
-      ['node_modules/@types/chai', '@types/chai'],
+      ['node_modules/@types/chai', 'chai'],
       [pathToFileURL('dist/index.mjs'), '@flex-development/mlly'],
       [pathe.resolve('dist/index.mjs'), '@flex-development/mlly'],
       ['__fixtures__/node_modules/exports-map-2/dist/index', 'exports-map-2'],
