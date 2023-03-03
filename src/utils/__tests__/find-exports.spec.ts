@@ -10,6 +10,11 @@ describe('unit:utils/findExports', () => {
   it('should return ExportStatement object array', () => {
     // Arrange
     const code: string = dedent`
+      export {
+        DEFAULTS,
+        plugin as default,
+        type Options
+      }
       export { defineBuildConfig, type BuildConfig } from "#src"
       export type {
         JsonObject,
@@ -27,6 +32,7 @@ describe('unit:utils/findExports', () => {
         squareTwo
       } from './lib'
       export * as constants from "./constants"
+      export type { default as Options }
       export type { default as Options } from "./options"
       export * from './utils'
       export interface User {}

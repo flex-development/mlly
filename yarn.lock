@@ -2837,6 +2837,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/export-regex@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@flex-development/export-regex@npm:1.0.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fexport-regex%2F1.0.2%2F9f8b8a1ca3fd1f2e259f9da14d4750f79622ee43"
+  checksum: ddc4f5d62604d45c8bfaa703c5453980f16fac17b31b4f383f2cb385003cfcefef3f847952302209d54272fc366332e6d4cbb063689b60ff3cc09b8055c47867
+  languageName: node
+  linkType: hard
+
 "@flex-development/ext-regex@npm:1.0.0":
   version: 1.0.0
   resolution: "@flex-development/ext-regex@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fext-regex%2F1.0.0%2Fe1729f6d8dfd8e62423acbdf6a7c341e5436568b"
@@ -2933,7 +2940,7 @@ __metadata:
     "@flex-development/docast": "npm:1.0.0-alpha.9"
     "@flex-development/docast-parse": "npm:1.0.0-alpha.4"
     "@flex-development/errnode": "npm:1.5.0"
-    "@flex-development/export-regex": "npm:1.0.0"
+    "@flex-development/export-regex": "npm:1.0.2"
     "@flex-development/import-regex": "npm:2.0.3"
     "@flex-development/is-builtin": "npm:2.0.0"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.14"
