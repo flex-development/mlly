@@ -118,7 +118,7 @@
     "@vitest/ui": "0.29.2",
     "@vue/runtime-core": "3.2.47",
     "add-stream": "1.0.0",
-    "algoliasearch": "4.14.3",
+    "algoliasearch": "4.15.0",
     "chai": "4.3.7",
     "chai-each": "0.0.1",
     "chai-quantifiers": "1.0.17",
