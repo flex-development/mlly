@@ -2880,13 +2880,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/mkbuild@npm:1.0.0-alpha.14":
-  version: 1.0.0-alpha.14
-  resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.14::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.14%2F82a5e35754d04d0aaf656b24ae6540acca873a29"
+"@flex-development/mkbuild@npm:1.0.0-alpha.15":
+  version: 1.0.0-alpha.15
+  resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.15::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.15%2Fd98b9d963b12eea6b15e4936e48c3173ccfe88ba"
   dependencies:
     "@flex-development/decorator-regex": "npm:1.0.0"
     "@flex-development/ext-regex": "npm:1.0.0"
-    "@flex-development/mlly": "npm:1.0.0-alpha.13"
+    "@flex-development/mlly": "npm:1.0.0-alpha.14"
     "@flex-development/pathe": "npm:1.0.3"
     "@flex-development/pkg-types": "npm:2.0.0"
     "@flex-development/toggle-pkg-type": "npm:1.1.1"
@@ -2894,7 +2894,7 @@ __metadata:
     "@flex-development/tutils": "npm:6.0.0-alpha.10"
     colorette: "npm:2.0.19"
     consola: "npm:2.15.3"
-    cosmiconfig: "npm:8.0.0"
+    cosmiconfig: "npm:8.1.0"
     escape-string-regexp: "npm:5.0.0"
     fast-glob: "npm:3.2.12"
     merge-anything: "npm:5.1.4"
@@ -2906,7 +2906,7 @@ __metadata:
     typescript: ">=4.8"
   bin:
     mkbuild: dist/cli.mjs
-  checksum: 0b42036ca0c05f557fcdb1a7e5d0b7aaac22aa8c0ea338da58f43a08d8751c476be53eb9339c4c79316e6f14d36b4c03462669e351abe49b4b99ca03c20f1569
+  checksum: 433da674c8415b2e927dd5f832e45c41352104419c8596ef99e975bbe42df555b9d590edfca933860d8bfc4538d7619e7ee15ae3ee68e927e861be8f579d93fd
   languageName: node
   linkType: hard
 
@@ -2928,6 +2928,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/mlly@npm:1.0.0-alpha.14":
+  version: 1.0.0-alpha.14
+  resolution: "@flex-development/mlly@npm:1.0.0-alpha.14::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmlly%2F1.0.0-alpha.14%2Fa81ae31949fa38c46b73534391be6da5d4daf68e"
+  dependencies:
+    "@flex-development/errnode": "npm:1.5.0"
+    "@flex-development/export-regex": "npm:1.0.2"
+    "@flex-development/import-regex": "npm:2.0.3"
+    "@flex-development/is-builtin": "npm:2.0.0"
+    "@flex-development/pathe": "npm:1.0.3"
+    "@flex-development/pkg-types": "npm:2.0.0"
+    "@flex-development/tutils": "npm:6.0.0-alpha.10"
+  peerDependencies:
+    "@types/node": ">=14.17.0"
+    node-fetch: ">=3.3.0"
+  checksum: 1399b788b58f44e215b8df539c96e174b22fde2938f279790a487ee04e2936f185514c9644b2f4b36d52716554ef10ee94352d85a004f6772e99c6d0f152cb12
+  languageName: node
+  linkType: hard
+
 "@flex-development/mlly@workspace:.":
   version: 0.0.0-use.local
   resolution: "@flex-development/mlly@workspace:."
@@ -2943,7 +2961,7 @@ __metadata:
     "@flex-development/export-regex": "npm:1.0.2"
     "@flex-development/import-regex": "npm:2.0.3"
     "@flex-development/is-builtin": "npm:2.0.0"
-    "@flex-development/mkbuild": "npm:1.0.0-alpha.14"
+    "@flex-development/mkbuild": "npm:1.0.0-alpha.15"
     "@flex-development/pathe": "npm:1.0.3"
     "@flex-development/pkg-types": "npm:2.0.0"
     "@flex-development/tutils": "npm:6.0.0-alpha.10"
@@ -6676,7 +6694,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cosmiconfig@npm:8.0.0, cosmiconfig@npm:^8.0.0":
+"cosmiconfig@npm:8.0.0":
   version: 8.0.0
   resolution: "cosmiconfig@npm:8.0.0"
   dependencies:
@@ -6685,6 +6703,18 @@ __metadata:
     parse-json: "npm:^5.0.0"
     path-type: "npm:^4.0.0"
   checksum: 436a849ca0a434b4a7344e9213db6314512c6af23c0b187728d21b0292736eec8c2df046a95b8c796a9304afbd9d154bf5e9aeeae535e6303d835d44835cad6d
+  languageName: node
+  linkType: hard
+
+"cosmiconfig@npm:8.1.0, cosmiconfig@npm:^8.0.0":
+  version: 8.1.0
+  resolution: "cosmiconfig@npm:8.1.0"
+  dependencies:
+    import-fresh: "npm:^3.2.1"
+    js-yaml: "npm:^4.1.0"
+    parse-json: "npm:^5.0.0"
+    path-type: "npm:^4.0.0"
+  checksum: afc737bbfdd6e963183336d016f37dbdae4ba41b412187e3be35eaf2d095b5a6fb0bb08f9d9a0f0f7cc893ab363aaff4ebe9f28fd99064adb0a754667b170026
   languageName: node
   linkType: hard
 
