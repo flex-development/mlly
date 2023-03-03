@@ -87,7 +87,7 @@ jobs:
           GIT_AUTHOR_NAME: ${{ steps.gpg-import.outputs.name }}
           GIT_COMMITTER_EMAIL: ${{ steps.gpg-import.outputs.email }}
           GIT_COMMITTER_NAME: ${{ steps.gpg-import.outputs.name }}
-          COMMIT_MESSAGE: '[dependabot skip] fix lockfile for @dependabot'
+          COMMIT_MESSAGE: 'build(yarn): [dependabot skip] fix lockfile for @dependabot'
       - id: approve-pr
         name: Approve pull request containing minor or patch updates
         if: steps.metadata.outputs.update-type != 'version-update:semver-major'
