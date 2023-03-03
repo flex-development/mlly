@@ -1,3 +1,25 @@
+## [1.0.0-alpha.15](https://github.com/flex-development/mlly/compare/1.0.0-alpha.14...1.0.0-alpha.15) (2023-03-03)
+
+
+### :package: Build
+
+* **deps-dev:** Bump @flex-development/mkbuild from 1.0.0-alpha.14 to 1.0.0-alpha.15 ([#179](https://github.com/flex-development/mlly/issues/179)) ([b3ae5a9](https://github.com/flex-development/mlly/commit/b3ae5a987ace837faa9a5a9bdee4971ac4631056))
+
+
+### :robot: Continuous Integration
+
+* **workflows:** add `auto-merge` ([5c93310](https://github.com/flex-development/mlly/commit/5c933108f98316c1092e7c90824ddccef798c685))
+
+
+### :bug: Fixes
+
+* **utils:** [`toBareSpecifier`] remove `@types/` prefix ([29120fa](https://github.com/flex-development/mlly/commit/29120faadeb97e3c2a711ede8b8dcbc35951279a))
+
+
+### :white_check_mark: Testing
+
+* **ts:** cleanup base tsconfig file ([7b665ee](https://github.com/flex-development/mlly/commit/7b665eed3d02fae2109095e047c74092b30ef55a))
+
 ## [1.0.0-alpha.14](https://github.com/flex-development/mlly/compare/1.0.0-alpha.13...1.0.0-alpha.14) (2023-03-03)
 
 
