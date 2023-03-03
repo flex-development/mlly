@@ -158,7 +158,9 @@ const findExports = (code: string = ''): ExportStatement[] => {
     })
   }
 
-  return statements
+  return statements.sort((s1: ExportStatement, s2: ExportStatement): number => {
+    return s1.start - s2.start
+  })
 }
 
 export default findExports

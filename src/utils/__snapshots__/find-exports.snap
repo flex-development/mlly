@@ -3,6 +3,28 @@
 exports[`unit:utils/findExports > should return ExportStatement object array 1`] = `
 [
   {
+    "code": "export {
+  DEFAULTS,
+  plugin as default,
+  type Options
+}",
+    "declaration": null,
+    "end": 58,
+    "exports": [
+      "DEFAULTS",
+      "plugin as default",
+      "type Options",
+    ],
+    "kind": "export",
+    "modifiers": [],
+    "specifier": null,
+    "specifier_kind": null,
+    "specifier_syntax": null,
+    "start": 0,
+    "syntax": "list",
+    "type": false,
+  },
+  {
     "code": "export { defineBuildConfig, type BuildConfig } from \\"#src\\"",
     "declaration": null,
     "end": 117,
@@ -88,6 +110,22 @@ exports[`unit:utils/findExports > should return ExportStatement object array 1`]
     "start": 330,
     "syntax": "namespace",
     "type": false,
+  },
+  {
+    "code": "export type { default as Options }",
+    "declaration": null,
+    "end": 405,
+    "exports": [
+      "default as Options",
+    ],
+    "kind": "export",
+    "modifiers": [],
+    "specifier": null,
+    "specifier_kind": null,
+    "specifier_syntax": null,
+    "start": 371,
+    "syntax": "list",
+    "type": true,
   },
   {
     "code": "export type { default as Options } from \\"./options\\"",
@@ -236,44 +274,6 @@ exports[`unit:utils/findExports > should return ExportStatement object array 1`]
     "start": 675,
     "syntax": "default",
     "type": false,
-  },
-  {
-    "code": "export {
-  DEFAULTS,
-  plugin as default,
-  type Options
-}",
-    "declaration": null,
-    "end": 58,
-    "exports": [
-      "DEFAULTS",
-      "plugin as default",
-      "type Options",
-    ],
-    "kind": "export",
-    "modifiers": [],
-    "specifier": null,
-    "specifier_kind": null,
-    "specifier_syntax": null,
-    "start": 0,
-    "syntax": "list",
-    "type": false,
-  },
-  {
-    "code": "export type { default as Options }",
-    "declaration": null,
-    "end": 405,
-    "exports": [
-      "default as Options",
-    ],
-    "kind": "export",
-    "modifiers": [],
-    "specifier": null,
-    "specifier_kind": null,
-    "specifier_syntax": null,
-    "start": 371,
-    "syntax": "list",
-    "type": true,
   },
   {
     "code": "export type { Config, Result }",
