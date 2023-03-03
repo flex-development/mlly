@@ -2796,6 +2796,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/docast@npm:1.0.0-alpha.10":
+  version: 1.0.0-alpha.10
+  resolution: "@flex-development/docast@npm:1.0.0-alpha.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fdocast%2F1.0.0-alpha.10%2F25a3860e10bd8dda324a89efc8d734aa21d4dd04"
+  dependencies:
+    "@flex-development/tutils": "npm:6.0.0-alpha.10"
+  peerDependencies:
+    "@types/unist": ">=2.0.6"
+  checksum: 4dcc8b484f99565189f8a7dee5d1b57a3cf88c43514286d8cdca72410073defe3a74c0afb278bfb7bda503c290b2db27afa2387df72c0ef24c6dc4014c266dde
+  languageName: node
+  linkType: hard
+
 "@flex-development/docast@npm:1.0.0-alpha.9":
   version: 1.0.0-alpha.9
   resolution: "@flex-development/docast@npm:1.0.0-alpha.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fdocast%2F1.0.0-alpha.9%2F66ff339ebec32a579949cdadfca879963472ff4b"
@@ -2955,7 +2966,7 @@ __metadata:
     "@docsearch/react": "npm:3.3.3"
     "@faker-js/faker": "npm:8.0.0-alpha.0"
     "@flex-development/commitlint-config": "npm:1.0.1"
-    "@flex-development/docast": "npm:1.0.0-alpha.9"
+    "@flex-development/docast": "npm:1.0.0-alpha.10"
     "@flex-development/docast-parse": "npm:1.0.0-alpha.4"
     "@flex-development/errnode": "npm:1.5.0"
     "@flex-development/export-regex": "npm:1.0.2"
