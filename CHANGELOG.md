@@ -1,3 +1,35 @@
+## [1.0.0-alpha.14](https://github.com/flex-development/mlly/compare/1.0.0-alpha.13...1.0.0-alpha.14) (2023-03-03)
+
+
+### :package: Build
+
+* **deps-dev:** Bump @flex-development/mkbuild from 1.0.0-alpha.13 to 1.0.0-alpha.14 ([#164](https://github.com/flex-development/mlly/issues/164)) ([04890e0](https://github.com/flex-development/mlly/commit/04890e015c468df660f40e9cec488a35f462960b))
+* **deps-dev:** Bump algoliasearch from 4.14.3 to 4.15.0 ([#176](https://github.com/flex-development/mlly/issues/176)) ([ffa130c](https://github.com/flex-development/mlly/commit/ffa130c31de02f2e6d64e533076033325225971c))
+* **deps-dev:** Bump cspell from 6.26.3 to 6.27.0 ([#175](https://github.com/flex-development/mlly/issues/175)) ([ab25d07](https://github.com/flex-development/mlly/commit/ab25d079bda696062019cfa1f1befe9ee23e3831))
+* **deps-dev:** Bump vercel from 28.16.4 to 28.16.5 ([#162](https://github.com/flex-development/mlly/issues/162)) ([3caff5a](https://github.com/flex-development/mlly/commit/3caff5a9fadd7b6ef969a15c794c7c9bc0bb72f5))
+* **deps-dev:** Bump vercel from 28.16.5 to 28.16.7 ([#166](https://github.com/flex-development/mlly/issues/166)) ([5eda8cb](https://github.com/flex-development/mlly/commit/5eda8cb5d4be21a0df51f3db2a8a6aa86ee43dcb))
+* **deps-dev:** Bump vercel from 28.16.7 to 28.16.12 ([#174](https://github.com/flex-development/mlly/issues/174)) ([d4ecb51](https://github.com/flex-development/mlly/commit/d4ecb51beb699d086a183bf172c301f61148012d))
+* **deps:** bump @flex-development/export-regex from 1.0.0 to 1.0.2 ([cd84623](https://github.com/flex-development/mlly/commit/cd84623cc613636b06d6e9351842fd8d1d699466))
+* **deps:** bump @flex-development/import-regex from 2.0.1 to 2.0.3 ([69f65f9](https://github.com/flex-development/mlly/commit/69f65f975beaf093fed8fee88d1b753ee3df7d86))
+
+
+### :robot: Continuous Integration
+
+* **deps:** Bump actions/add-to-project from 0.4.0 to 0.4.1 ([#167](https://github.com/flex-development/mlly/issues/167)) ([a0450f9](https://github.com/flex-development/mlly/commit/a0450f92f34c51cb7f9582676b973bcb184ba298))
+* **workflows:** [`ci`] add `commitlint` job ([7d0326a](https://github.com/flex-development/mlly/commit/7d0326a72044474e1adbc0980bc1098157263770))
+* **workflows:** [`ci`] make jobs dependant on `gitguardian` ([ff5905b](https://github.com/flex-development/mlly/commit/ff5905baba1bf379a8a9093a9ec4d66470e61005))
+* **workflows:** [`dependabot-auto`] ensure lockfile fix commit meets commit standards ([5faf6bd](https://github.com/flex-development/mlly/commit/5faf6bd14189cc293de4bad3f76fda1b63666918))
+
+
+### :house_with_garden: Housekeeping
+
+* sync config files ([5bbf830](https://github.com/flex-development/mlly/commit/5bbf83084f8c4c0d1e7c7c133dad96201b59e953))
+
+
+### :mechanical_arm: Refactors
+
+* **utils:** [`findExports`] sort statements by `start` location ([7926a01](https://github.com/flex-development/mlly/commit/7926a010729d99d109df475068703b22e7073920))
+
 ## [1.0.0-alpha.13](https://github.com/flex-development/mlly/compare/1.0.0-alpha.12...1.0.0-alpha.13) (2023-02-22)
 
 
