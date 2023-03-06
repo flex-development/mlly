@@ -62,7 +62,7 @@ jobs:
           build-command: false
           comment-report: true
           display-size: uncompressed
-          mode: regression
+          mode: head-only
           sort-by: path
           sort-order: desc
           unchanged-files: show
