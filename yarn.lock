@@ -3034,7 +3034,7 @@ __metadata:
     eslint-plugin-yml: "npm:1.5.0"
     globby: "npm:13.1.3"
     graphql: "npm:16.6.0"
-    graphql-config: "npm:4.4.1"
+    graphql-config: "npm:4.5.0"
     growl: "npm:1.10.5"
     husky: "npm:8.0.3"
     is-ci: "npm:3.0.1"
@@ -9218,7 +9218,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-config@npm:4.4.1, graphql-config@npm:^4.4.0":
+"graphql-config@npm:4.5.0":
+  version: 4.5.0
+  resolution: "graphql-config@npm:4.5.0"
+  dependencies:
+    "@graphql-tools/graphql-file-loader": "npm:^7.3.7"
+    "@graphql-tools/json-file-loader": "npm:^7.3.7"
+    "@graphql-tools/load": "npm:^7.5.5"
+    "@graphql-tools/merge": "npm:^8.2.6"
+    "@graphql-tools/url-loader": "npm:^7.9.7"
+    "@graphql-tools/utils": "npm:^9.0.0"
+    cosmiconfig: "npm:8.0.0"
+    jiti: "npm:1.17.1"
+    minimatch: "npm:4.2.3"
+    string-env-interpolation: "npm:1.0.1"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    cosmiconfig-toml-loader: ^1.0.0
+    graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  peerDependenciesMeta:
+    cosmiconfig-toml-loader:
+      optional: true
+  checksum: 49ef498d80fdc4691c54e79562e74f38dfc0fbdbd5caa12708f9e16930e0fe2a6593708fb8d20907de87fc6dae877419b7c9e36a380b97d0903f3fb07267b43e
+  languageName: node
+  linkType: hard
+
+"graphql-config@npm:^4.4.0":
   version: 4.4.1
   resolution: "graphql-config@npm:4.4.1"
   dependencies:
@@ -10103,6 +10128,15 @@ __metadata:
   version: 2.1.0
   resolution: "javascript-stringify@npm:2.1.0"
   checksum: 35fbfe405711ba4c0b1bdb9d34e76c8580e5c0be2f845b032d93cff115d624aa16073b794c26e137ae60f879243a961d21ee6d13d17c831f5e606b1425c47780
+  languageName: node
+  linkType: hard
+
+"jiti@npm:1.17.1":
+  version: 1.17.1
+  resolution: "jiti@npm:1.17.1"
+  bin:
+    jiti: bin/jiti.js
+  checksum: 24863e6f7e69e0759eae4932abb05110684b9cd40bb296ef1ba28eabfabafc7c4c58b7a5deeb82ef8d42180e97da9ac1cbcc26216dab7816e66e57dc585275d0
   languageName: node
   linkType: hard
 
@@ -11462,6 +11496,15 @@ __metadata:
   dependencies:
     brace-expansion: "npm:^1.1.7"
   checksum: 01f92798da29be3cd0a4d6c3a35bcca61bcb59c31cf6562b45220efa0742b98f5740469c3db8b58a7e128aa216bf746781196ed69517263155e24b45e4d72952
+  languageName: node
+  linkType: hard
+
+"minimatch@npm:4.2.3":
+  version: 4.2.3
+  resolution: "minimatch@npm:4.2.3"
+  dependencies:
+    brace-expansion: "npm:^1.1.7"
+  checksum: 4cf31df2851da806f16a69624cc1ab83e5e85b2c2ad38341a2bd2b5500ac163a3f2fef4532bae70c59e51adaa413deb770da14c271692faf6c92abb0a7eb7dff
   languageName: node
   linkType: hard
 
