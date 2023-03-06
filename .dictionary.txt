@@ -7,6 +7,7 @@ keyid
 lintstagedrc
 micnncim
 mlly
+nvmrc
 syncer
 vitepress
 vuedx

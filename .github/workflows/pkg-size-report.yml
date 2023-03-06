@@ -1,0 +1,63 @@
+# Package Size Report
+#
+# Automate package size reports on pull request creation and synchronization.
+#
+# References:
+#
+# - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/learn-github-actions/expressions
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
+# - https://github.com/actions/checkout
+# - https://github.com/actions/setup-node
+# - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
+# - https://github.com/hmarr/debug-action
+# - https://github.com/pkg-size/action
+
+---
+name: pkg-size-report
+on:
+  pull_request:
+    branches:
+      - main
+permissions:
+  issues: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+jobs:
+  pkg-size-report:
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.1.0
+      - id: checkout
+        name: Checkout ${{ github.head_ref }}
+        uses: actions/checkout@v3.3.0
+        with:
+          ref: ${{ github.head_ref }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.6.0
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: build
+        name: Build project
+        run: yarn build
+        env:
+          NODE_ENV: production
+      - id: report
+        name: Package size report
+        uses: pkg-size/action@v1.1.1
+        with:
+          build-command: false
+          comment-report: true
+          display-size: uncompressed
+          mode: regression
+          sort-by: path
+          sort-order: desc
+          unchanged-files: show
