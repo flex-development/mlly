@@ -10,6 +10,9 @@
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 # - https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # - https://github.com/GitGuardian/ggshield-action
 # - https://github.com/actions/cache
 # - https://github.com/actions/cache/discussions/650
@@ -350,6 +353,9 @@ jobs:
       - id: typecheck
         name: Run typecheck
         run: yarn check:types:build
+      - id: pkg-size-report
+        name: Package size report
+        run: yarn pkg-size
       - id: archive
         name: Archive production artifacts
         uses: actions/upload-artifact@v3.1.2

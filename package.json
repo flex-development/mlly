@@ -23,6 +23,7 @@
   },
   "type": "module",
   "files": [
+    "CHANGELOG.md",
     "dist",
     "src"
   ],
@@ -35,7 +36,7 @@
   "scripts": {
     "build": "mkbuild",
     "changelog": "node --loader=./loader.mjs ./config/changelog.config",
-    "check:ci": "yarn dedupe --check && yarn check:format && yarn check:lint && yarn check:spelling && yarn typecheck && yarn test:cov && NODE_ENV=production yarn pack -o %s-%v.tgz && yarn clean:pack && yarn check:types:build && yarn docs:build",
+    "check:ci": "yarn dedupe --check && yarn check:format && yarn check:lint && yarn check:spelling && yarn typecheck && yarn test:cov && NODE_ENV=production yarn build && yarn check:types:build && yarn pkg-size && yarn docs:build",
     "check:format": "prettier --check .",
     "check:lint": "eslint --exit-on-fatal-error --max-warnings 0 .",
     "check:spelling": "cspell lint --color --no-progress --relative $@ \"**\"",
@@ -60,6 +61,7 @@
     "fix:dedupe": "yarn dedupe --strategy=highest",
     "fix:format": "prettier --cache --write .",
     "fix:lint": "yarn check:lint --cache --fix",
+    "pkg-size": "pkg-size --sizes size --sort-by name",
     "postinstall": "[ -f ./node_modules/.bin/husky ] && chmod +x .husky/* && husky install || exit 0",
     "postpack": "toggle-scripts +postinstall",
     "postpublish": "toggle-scripts +prepack",
@@ -160,6 +162,7 @@
     "mri": "1.2.0",
     "node-fetch": "3.3.0",
     "node-notifier": "10.0.1",
+    "pkg-size": "2.4.0",
     "prettier": "2.8.4",
     "prettier-plugin-sh": "0.12.8",
     "pupa": "3.1.0",

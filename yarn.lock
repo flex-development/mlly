@@ -3043,6 +3043,7 @@ __metadata:
     mri: "npm:1.2.0"
     node-fetch: "npm:3.3.0"
     node-notifier: "npm:10.0.1"
+    pkg-size: "npm:2.4.0"
     prettier: "npm:2.8.4"
     prettier-plugin-sh: "npm:0.12.8"
     pupa: "npm:3.1.0"
@@ -12549,6 +12550,15 @@ __metadata:
   version: 2.0.4
   resolution: "pinkie@npm:2.0.4"
   checksum: 1bc1eb7aab96ec9674e0614146ad0b7ad9856d840140de3268d7900cc0259640ca17353708261659584e3f954b8ad8b39a4245dc5def50fcf7f4ddb09d3d7d20
+  languageName: node
+  linkType: hard
+
+"pkg-size@npm:2.4.0":
+  version: 2.4.0
+  resolution: "pkg-size@npm:2.4.0"
+  bin:
+    pkg-size: bin/cli.js
+  checksum: 808b43d08eb99ce4006fb63446bd15c3bde3a1fdb5d367caf304f46fc19f23a69af7f623419fd1d863d8b9c4b687d4beac5c385b7c1a9ea7edc3ec999c2ce2e1
   languageName: node
   linkType: hard
 
