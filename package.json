@@ -10,7 +10,7 @@
     "typescript"
   ],
   "license": "BSD-3-Clause",
-  "homepage": "https://github.com/flex-development/mlly",
+  "homepage": "https://mlly.vercel.app",
   "repository": "https://github.com/flex-development/mlly.git",
   "bugs": "https://github.com/flex-development/mlly/issues",
   "author": {
