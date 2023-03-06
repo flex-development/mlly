@@ -59,7 +59,7 @@ jobs:
         name: Package size report
         uses: pkg-size/action@v1.1.1
         with:
-          build-command: false
+          build-command: 'false'
           comment-report: true
           display-size: uncompressed
           mode: head-only
