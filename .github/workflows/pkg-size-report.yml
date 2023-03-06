@@ -27,7 +27,6 @@ concurrency:
   cancel-in-progress: true
 jobs:
   pkg-size-report:
-    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - id: debug
