@@ -9218,7 +9218,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-config@npm:4.5.0":
+"graphql-config@npm:4.5.0, graphql-config@npm:^4.4.0":
   version: 4.5.0
   resolution: "graphql-config@npm:4.5.0"
   dependencies:
@@ -9240,33 +9240,6 @@ __metadata:
     cosmiconfig-toml-loader:
       optional: true
   checksum: 49ef498d80fdc4691c54e79562e74f38dfc0fbdbd5caa12708f9e16930e0fe2a6593708fb8d20907de87fc6dae877419b7c9e36a380b97d0903f3fb07267b43e
-  languageName: node
-  linkType: hard
-
-"graphql-config@npm:^4.4.0":
-  version: 4.4.1
-  resolution: "graphql-config@npm:4.4.1"
-  dependencies:
-    "@graphql-tools/graphql-file-loader": "npm:^7.3.7"
-    "@graphql-tools/json-file-loader": "npm:^7.3.7"
-    "@graphql-tools/load": "npm:^7.5.5"
-    "@graphql-tools/merge": "npm:^8.2.6"
-    "@graphql-tools/url-loader": "npm:^7.9.7"
-    "@graphql-tools/utils": "npm:^9.0.0"
-    cosmiconfig: "npm:8.0.0"
-    minimatch: "npm:4.2.1"
-    string-env-interpolation: "npm:1.0.1"
-    tslib: "npm:^2.4.0"
-  peerDependencies:
-    cosmiconfig-toml-loader: ^1.0.0
-    cosmiconfig-typescript-loader: ^4.0.0
-    graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  peerDependenciesMeta:
-    cosmiconfig-toml-loader:
-      optional: true
-    cosmiconfig-typescript-loader:
-      optional: true
-  checksum: 9972999eee154a772c4cb0bad5bd1a65dd14ca1d858c8ce32af1e0fee83b01506cb5b22868455831f9c5540072d58dfd996c3c1152e8ddb26134c5d2bcfd7f05
   languageName: node
   linkType: hard
 
@@ -11487,15 +11460,6 @@ __metadata:
   dependencies:
     brace-expansion: "npm:^1.1.7"
   checksum: 97f5615ee8f7c0019277dadef7b2b81e5c60d369cb3155cbfb9da72688aef2edb652b105353ff08a6575ae95a6189d1c09a0829b9c254f60849148457c4d8a66
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:4.2.1":
-  version: 4.2.1
-  resolution: "minimatch@npm:4.2.1"
-  dependencies:
-    brace-expansion: "npm:^1.1.7"
-  checksum: 01f92798da29be3cd0a4d6c3a35bcca61bcb59c31cf6562b45220efa0742b98f5740469c3db8b58a7e128aa216bf746781196ed69517263155e24b45e4d72952
   languageName: node
   linkType: hard
 
