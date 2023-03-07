@@ -3025,7 +3025,7 @@ __metadata:
     eslint-plugin-jsdoc: "npm:40.0.1"
     eslint-plugin-jsonc: "npm:2.6.0"
     eslint-plugin-markdown: "npm:3.0.0"
-    eslint-plugin-markdownlint: "npm:0.4.0"
+    eslint-plugin-markdownlint: "npm:0.4.1"
     eslint-plugin-node: "npm:11.1.0"
     eslint-plugin-prettier: "npm:4.2.1"
     eslint-plugin-promise: "npm:6.1.1"
@@ -8019,14 +8019,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-markdownlint@npm:0.4.0":
-  version: 0.4.0
-  resolution: "eslint-plugin-markdownlint@npm:0.4.0"
+"eslint-plugin-markdownlint@npm:0.4.1":
+  version: 0.4.1
+  resolution: "eslint-plugin-markdownlint@npm:0.4.1"
   dependencies:
-    markdownlint: "npm:0.26.0"
+    markdownlint: "npm:0.27.0"
   peerDependencies:
     eslint: ">=7.5.0"
-  checksum: 5900b56b9f15019e395a1410ba3436bbcd7f6cd4ed0920ae6eaaf0c042395be0bc6a59a4d52f4fa619a2c4f31ca3dab5c4c10fdce12495dff77433fecc3a246e
+  checksum: ecaf8a2d1bb2f4d88841484b3035e0b93a9a8e4a0100f2c9aac9ec85c80b1040318828f06e59924df9775f280fe73ec856fa777aa1aa46d89b12d6029334fe45
   languageName: node
   linkType: hard
 
@@ -10720,12 +10720,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdownlint@npm:0.26.0":
-  version: 0.26.0
-  resolution: "markdownlint@npm:0.26.0"
+"markdownlint@npm:0.27.0":
+  version: 0.27.0
+  resolution: "markdownlint@npm:0.27.0"
   dependencies:
     markdown-it: "npm:13.0.1"
-  checksum: 9eaa2a0cfa92e7e483c219f14b94a30e3dc178b4df550afdffb180e3acf4928ba0fd93a3e842f7f806f99cf061d7c7a2a28a654324e5c68db3a7745b523eeb67
+  checksum: d8a102db393742cf2990dcfc8ed88fb31c3f33198b7942d0e53deac45c9ae95845f66a9c4e13f2c6cef6ee9ff53c5ab1da5769b3c7df5946a378368389770c34
   languageName: node
   linkType: hard
 
