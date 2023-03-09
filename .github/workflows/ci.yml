@@ -77,7 +77,7 @@ jobs:
         run: yarn ${{ github.actor == 'dependabot[bot]' && '--no-immutable' || '--immutable' }}
       - id: cache
         name: Cache dependencies
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v3.3.0
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
@@ -106,7 +106,7 @@ jobs:
           node-version-file: .nvmrc
       - id: cache
         name: Restore dependencies cache
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v3.3.0
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
@@ -154,7 +154,7 @@ jobs:
           node-version-file: .nvmrc
       - id: cache
         name: Restore dependencies cache
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v3.3.0
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
@@ -181,7 +181,7 @@ jobs:
           node-version-file: .nvmrc
       - id: cache
         name: Restore dependencies cache
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v3.3.0
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
@@ -211,7 +211,7 @@ jobs:
           node-version-file: .nvmrc
       - id: cache
         name: Restore dependencies cache
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v3.3.0
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
@@ -248,7 +248,7 @@ jobs:
           node-version-file: .nvmrc
       - id: cache
         name: Restore dependencies cache
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v3.3.0
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
@@ -293,7 +293,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - id: cache
         name: Restore dependencies cache
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v3.3.0
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
@@ -341,7 +341,7 @@ jobs:
           node-version-file: .nvmrc
       - id: cache
         name: Restore dependencies cache
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v3.3.0
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
@@ -395,7 +395,7 @@ jobs:
           node-version-file: .nvmrc
       - id: cache
         name: Restore dependencies cache
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v3.3.0
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
