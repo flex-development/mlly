@@ -3045,7 +3045,7 @@ __metadata:
     growl: "npm:1.10.5"
     husky: "npm:8.0.3"
     is-ci: "npm:3.0.1"
-    jsonc-eslint-parser: "npm:2.1.0"
+    jsonc-eslint-parser: "npm:2.2.0"
     lint-staged: "npm:13.2.0"
     mri: "npm:1.2.0"
     node-fetch: "npm:3.3.0"
@@ -10248,7 +10248,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonc-eslint-parser@npm:2.1.0, jsonc-eslint-parser@npm:^2.0.4":
+"jsonc-eslint-parser@npm:2.2.0":
+  version: 2.2.0
+  resolution: "jsonc-eslint-parser@npm:2.2.0"
+  dependencies:
+    acorn: "npm:^8.5.0"
+    eslint-visitor-keys: "npm:^3.0.0"
+    espree: "npm:^9.0.0"
+    semver: "npm:^7.3.5"
+  checksum: cb666a3eae83cb20e17509f4ee2f09ff10cb2f4683dae7ef192e74c775b8a11d25d432ecfabf3b39370e00a760e0569aed0f26bf2afa5773c14aa77437bd80d0
+  languageName: node
+  linkType: hard
+
+"jsonc-eslint-parser@npm:^2.0.4":
   version: 2.1.0
   resolution: "jsonc-eslint-parser@npm:2.1.0"
   dependencies:
