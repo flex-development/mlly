@@ -3077,7 +3077,7 @@ __metadata:
     vue: "npm:3.2.47"
     vue-eslint-parser: "npm:9.1.0"
     vue-tsc: "npm:1.2.0"
-    yaml-eslint-parser: "npm:1.1.0"
+    yaml-eslint-parser: "npm:1.2.0"
   peerDependencies:
     "@types/node": ">=14.17.0"
     node-fetch: ">=3.3.0"
@@ -15866,7 +15866,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml-eslint-parser@npm:1.1.0, yaml-eslint-parser@npm:^1.1.0":
+"yaml-eslint-parser@npm:1.2.0":
+  version: 1.2.0
+  resolution: "yaml-eslint-parser@npm:1.2.0"
+  dependencies:
+    eslint-visitor-keys: "npm:^3.0.0"
+    lodash: "npm:^4.17.21"
+    yaml: "npm:^2.0.0"
+  checksum: 9892830884874c4c03d57369e6bd93f4fe6855ad06d590a94dac5a954f137af70f1411a428290bbb34a1ff1ce1074569c497fccd783bca5b274c70f988383f0e
+  languageName: node
+  linkType: hard
+
+"yaml-eslint-parser@npm:^1.1.0":
   version: 1.1.0
   resolution: "yaml-eslint-parser@npm:1.1.0"
   dependencies:
