@@ -20,6 +20,7 @@
 # - https://github.com/actions/setup-node
 # - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
 # - https://github.com/actions/upload-artifact
+# - https://github.com/andstor/file-existence-action
 # - https://github.com/codecov/codecov-action
 # - https://github.com/hmarr/debug-action
 # - https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
@@ -39,6 +40,7 @@ permissions:
   packages: read
 env:
   CACHE_PATH: node_modules
+  COVERAGE_REPORT: ./coverage/lcov.info
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   HUSKY: 0
   REF: ${{ github.head_ref || github.ref_name }}
@@ -301,13 +303,19 @@ jobs:
       - id: test
         name: Run tests
         run: yarn test:cov --segfault-retry=3
+      - id: coverage-report-check
+        name: Check coverage report existence
+        uses: andstor/file-existence-action@v2.0.0
+        with:
+          files: ${{ env.COVERAGE_REPORT }}
       - id: codecov
         name: Upload coverage report to Codecov
+        if: steps.coverage-report-check.outputs.files_exists == 'true'
         uses: codecov/codecov-action@v3.1.1
         with:
           env_vars: GITHUB_JOB,GITHUB_REF,GITHUB_REF_TYPE,GITHUB_RUN_ID,GITHUB_SHA,GITHUB_WORKSPACE
           fail_ci_if_error: true
-          file: ./coverage/lcov.info
+          file: ${{ env.COVERAGE_REPORT }}
           flags: ${{ format('node{0}', matrix.node-version) }}
           override_branch: ${{ env.REF }}
           override_build: ${{ github.run_id }}
