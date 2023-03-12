@@ -3,6 +3,7 @@
 # References:
 #
 # - https://github.com/dessant/lock-threads
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#schedule
 
 ---
 name: lock-inactive-threads

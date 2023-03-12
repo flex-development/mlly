@@ -5,7 +5,13 @@
 #
 # References:
 #
+# - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/learn-github-actions/expressions
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 # - https://docs.github.com/graphql/reference/objects#pullrequest
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # - https://github.com/actions/github-script
 # - https://github.com/octokit/graphql-action
 

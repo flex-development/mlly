@@ -7,8 +7,10 @@
 # References:
 #
 # - https://cli.github.com/manual/gh_pr_review
+# - https://docs.github.com/actions/learn-github-actions/contexts
 # - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
 # - https://github.com/actions/checkout
 # - https://github.com/dependabot/fetch-metadata
 # - https://github.com/hmarr/debug-action
@@ -47,4 +49,4 @@ jobs:
           || contains(join(github.event.requested_reviewers.*.login, ','), 'flexdevelopment'))
           && (github.actor == 'dependabot[bot]' || github.actor == 'unicornware')
           && steps.dependabot-metadata.outputs.update-type != 'version-update:semver-major'
-        run: gh pr review ${{ github.event.number }} --approve --body 'lgtm 👍🏾'
+        run: gh pr review ${{ github.event.pull_request.number }} --approve --body 'lgtm 👍🏾'

@@ -7,6 +7,8 @@
 #
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#release
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#release
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # - https://github.com/actions/checkout
 # - https://github.com/actions/setup-node
 # - https://github.com/hmarr/debug-action

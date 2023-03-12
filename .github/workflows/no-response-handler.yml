@@ -4,6 +4,9 @@
 #
 # References:
 #
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#issue_comment
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#schedule
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
 # - https://github.com/lee-dohm/no-response
 
 ---

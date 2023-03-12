@@ -5,9 +5,13 @@
 # References:
 #
 # - https://cli.github.com/manual/gh_release_create
+# - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 # - https://docs.github.com/actions/using-workflows/using-github-cli-in-workflows
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # - https://github.com/actions/checkout
 # - https://github.com/bdougie/close-issues-based-on-label
 # - https://github.com/crazy-max/ghaction-import-gpg

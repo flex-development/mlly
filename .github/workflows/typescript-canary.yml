@@ -8,6 +8,7 @@
 # - https://docs.github.com/actions/using-jobs/using-a-matrix-for-your-jobs
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#schedule
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # - https://github.com/actions/checkout
 # - https://github.com/actions/setup-node
 # - https://vitest.dev/guide/testing-types.html#run-typechecking

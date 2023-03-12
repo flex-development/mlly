@@ -5,6 +5,8 @@
 # References:
 #
 # - https://cli.github.com/manual/gh_pr_merge
+# - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-auto-merge-for-pull-requests-in-your-repository
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
