@@ -1,0 +1,237 @@
+# REPOSITORY INFRASTRUCTURE SETTINGS
+---
+# https://docs.github.com/rest/branches/branch-protection#update-branch-protection
+branches:
+  - name: main
+    protection:
+      allow_deletions: false
+      allow_force_pushes: true
+      allow_fork_syncing: false
+      block_creations: false
+      enforce_admins: false
+      lock_branch: false
+      required_conversation_resolution: true
+      required_linear_history: true
+      required_pull_request_reviews:
+        bypass_pull_request_allowances: {}
+        dismiss_stale_reviews: true
+        dismissal_restrictions: {}
+        require_code_owner_reviews: false
+        require_last_push_approval: false
+        required_approving_review_count: 1
+      required_status_checks:
+        checks:
+          - context: DCO
+            app_id: 1861
+          - context: add-to-project
+          - context: auto-merge
+          - context: build
+          - context: codecov/changes
+            app_id: 254
+          - context: codecov/patch
+            app_id: 254
+          - context: codecov/project
+            app_id: 254
+          - context: codecov/project/internal
+            app_id: 254
+          - context: codecov/project/utils
+            app_id: 254
+          - context: commitlint
+          - context: dependabot-auto
+          - context: docs
+          - context: format
+          - context: gitguardian
+          - context: lint
+          - context: spelling
+          - context: test (14)
+          - context: test (16)
+          - context: test (18)
+          - context: test (19)
+          - context: typescript (5.1.0-dev.20230301)
+          - context: typescript (latest)
+          - context: typescript (~4.7.0)
+          - context: typescript (~4.8.0)
+          - context: typescript (~4.9.0)
+        strict: true
+      restrictions: null
+# https://docs.github.com/rest/deployments/environments#create-or-update-an-environment
+environments:
+  - environment_name: docs
+  - environment_name: gpr
+  - environment_name: npm
+  - environment_name: preview
+  - environment_name: production
+# https://docs.github.com/rest/issues/labels#create-a-label
+labels:
+  - name: flag:breaking-change
+    description: contains changes that require major version bump
+    color: fbca04
+  - name: flag:duplicate
+    description: issue, pull request, or discussion already exists
+    color: fbca04
+  - name: flag:needs-discussion
+    description: discussion required before implementation
+    color: fbca04
+  - name: flag:needs-docs
+    description: missing documentation or needs existing documentation update
+    color: fbca04
+  - name: flag:needs-refactor
+    description: code improvements required before being merged
+    color: fbca04
+  - name: scope:analyze
+    description: import/export analysis
+    color: 74cefc
+  - name: scope:dependencies
+    description: dependency updates
+    color: 74cefc
+  - name: scope:docs
+    description: docs site
+    color: 74cefc
+  - name: scope:esm
+    description: es modules
+    color: 74cefc
+  - name: scope:install
+    description: package install
+    color: 74cefc
+  - name: scope:internal
+    description: internal-only api
+    color: 74cefc
+  - name: scope:lib
+    description: public api
+    color: 74cefc
+  - name: scope:patches
+    description: patches
+    color: 74cefc
+  - name: scope:release
+    description: package release
+    color: 74cefc
+  - name: scope:resolve
+    description: resolving modules
+    color: 74cefc
+  - name: scope:specifiers
+    description: module specifiers
+    color: 74cefc
+  - name: scope:syntax
+    description: syntax detection
+    color: 74cefc
+  - name: scope:tests
+    description: testing
+    color: 74cefc
+  - name: scope:ts
+    description: typescript support
+    color: 74cefc
+  - name: scope:utils
+    description: utilities
+    color: 74cefc
+  - name: status:awaiting-answers
+    description: needs clarification or more information from author
+    color: e7034b
+  - name: status:blocked
+    description: blocked by other work tracked in different issue
+    color: e7034b
+  - name: status:cannot-reproduce
+    description: bug report cannot be reproduced
+    color: e7034b
+  - name: status:fixed
+    description: fixed, but not released
+    color: e7034b
+  - name: status:help-wanted
+    description: extra attention is needed
+    color: e7034b
+  - name: status:icebox
+    description: changes that won't be implemented
+    color: e7034b
+  - name: status:invalid
+    description: no action to be taken or missing information
+    color: e7034b
+  - name: status:merged
+    description: merged, but not released
+    color: e7034b
+  - name: status:needs-triage
+    description: needs further assessment
+    color: e7034b
+  - name: status:prereleased
+    description: merged and prereleased
+    color: e7034b
+  - name: status:released
+    description: merged and released
+    color: e7034b
+  - name: status:stale
+    description: superseded by different issue, pull request, or discussion
+    color: e7034b
+  - name: status:triaged
+    description: bug confirmed
+    color: e7034b
+  - name: status:wip
+    description: work in progress
+    color: e7034b
+  - name: type:build
+    description: changes to the build system or external dependencies
+    color: 0052cc
+  - name: type:chore
+    description: housekeeping / changes that don't impact external users
+    color: 0052cc
+  - name: type:ci
+    description: ci/cd configuration
+    color: 0052cc
+  - name: type:docs
+    description: documentation improvements
+    color: 0052cc
+  - name: type:feat
+    description: new features and improvements
+    color: 0052cc
+  - name: type:fix
+    description: bug reports and fixes
+    color: 0052cc
+  - name: type:perf
+    description: performance updates
+    color: 0052cc
+  - name: type:question
+    description: questions
+    color: 0052cc
+  - name: type:refactor
+    description: code improvements
+    color: 0052cc
+  - name: type:task
+    description: project tasks
+    color: 0052cc
+# https://docs.github.com/rest/repos/repos#update-a-repository
+repository:
+  allow_auto_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: true
+  allow_squash_merge: true
+  allow_update_branch: true
+  archived: false
+  automated_security_fixes: true
+  default_branch: main
+  delete_branch_on_merge: false
+  description: ECMAScript module utilities
+  has_issues: true
+  has_projects: true
+  has_wiki: false
+  homepage: https://github.com/flex-development/mlly
+  is_template: false
+  private: false
+  security_and_analysis:
+    advanced_security:
+      status: disabled
+    secret_scanning:
+      status: enabled
+    secret_scanning_push_protection:
+      status: disabled
+  squash_merge_commit_message: BLANK
+  squash_merge_commit_title: PR_TITLE
+  topics:
+    - ecmascript
+    - esm
+    - esmodules
+    - module
+    - typescript
+  visibility: public
+  vulnerability_alerts: true
+  web_commit_signoff_required: true
+# https://docs.github.com/rest/teams/teams#add-or-update-team-repository-permissions
+teams:
+  - team_slug: dependabot-review
+    permission: triage

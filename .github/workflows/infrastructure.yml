@@ -1,0 +1,67 @@
+# Repository Infrastructure Management
+#
+# Update repository infrastructure on `push` or `workflow_dispatch` when the infrastructure config
+# file (or this workflow) is updated. The user triggering the workflow run (`github.actor`) must be
+# a repository admin.
+#
+# Note: The permissions of `github.actor` is checked because workflow re-runs will reuse the
+# privileges of `github.actor` even if the actor initiating the re-run (`github.triggering_actor`)
+# has different privileges.
+#
+# References:
+#
+# - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/learn-github-actions/expressions
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#create
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#create
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
+# - https://github.com/actions-cool/check-user-permission
+# - https://github.com/actions/checkout
+# - https://github.com/flex-development/rice-action
+# - https://github.com/hmarr/debug-action
+
+---
+name: infrastructure
+on:
+  create:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+      - release/**
+    paths:
+      - .github/infrastructure.yml
+      - .github/workflows/infrastructure.yml
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  infrastructure:
+    runs-on: ubuntu-latest
+    steps:
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.1.0
+      - id: check-actor-permission
+        name: Check @${{ github.actor }} permission level
+        uses: actions-cool/check-user-permission@v2.2.0
+        with:
+          require: admin
+          username: ${{ github.actor }}
+      - id: checkout
+        name: Checkout ${{ github.ref_name }}
+        uses: actions/checkout@v3.3.0
+        with:
+          persist-credentials: false
+          ref: ${{ github.ref_name }}
+      - id: update
+        if: steps.check-actor-permission.outputs.require-result == 'true'
+        name: Update repository infrastructure
+        uses: flex-development/rice-action@1.0.0
+        with:
+          token: ${{ secrets.PAT_REPO }}
