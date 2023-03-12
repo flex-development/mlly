@@ -112,6 +112,7 @@ jobs:
           path: ${{ env.CACHE_PATH }}
       - id: lint
         name: Check commitlint status
+        if: github.run_number != '1'
         run: yarn commitlint --from $SHA~${{ github.event.pull_request.commits || 1 }} --to $SHA
   gitguardian:
     needs: commitlint
