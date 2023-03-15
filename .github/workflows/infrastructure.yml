@@ -55,7 +55,7 @@ jobs:
           username: ${{ github.actor }}
       - id: checkout
         name: Checkout ${{ github.ref_name }}
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3.4.0
         with:
           persist-credentials: false
           ref: ${{ github.ref_name }}
