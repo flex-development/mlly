@@ -3005,7 +3005,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:5.54.1"
     "@vates/toggle-scripts": "npm:1.0.0"
     "@vitest/coverage-c8": "npm:0.29.2"
-    "@vitest/ui": "npm:0.29.2"
+    "@vitest/ui": "npm:0.29.3"
     "@vue/runtime-core": "npm:3.2.47"
     add-stream: "npm:1.0.0"
     algoliasearch: "npm:4.15.0"
@@ -4774,16 +4774,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/ui@npm:0.29.2":
-  version: 0.29.2
-  resolution: "@vitest/ui@npm:0.29.2"
+"@vitest/ui@npm:0.29.3":
+  version: 0.29.3
+  resolution: "@vitest/ui@npm:0.29.3"
   dependencies:
     fast-glob: "npm:^3.2.12"
     flatted: "npm:^3.2.7"
     pathe: "npm:^1.1.0"
     picocolors: "npm:^1.0.0"
     sirv: "npm:^2.0.2"
-  checksum: 403db772a4f0e5c35c0002c7c0a2512832da895b9942a4d37ea06cfbc500ff2db533383e09ab1cadb63fc455655991426cab6e4ad24eda6a30a44eb937caa08a
+  checksum: 196096b51ca2079ce0e11eb5a0ba3663c923a92fa8db36e026319ede3317039ba8e4226a55dbedb39ba272658f1811470ff3b923b3b3fd5bb55f7211049cdbe7
   languageName: node
   linkType: hard
 
