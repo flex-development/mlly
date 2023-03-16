@@ -3069,7 +3069,7 @@ __metadata:
     vercel: "npm:28.16.15"
     version-bump-prompt: "npm:6.1.0"
     vfile: "npm:5.3.7"
-    vite: "npm:4.1.4"
+    vite: "npm:4.2.0"
     vite-tsconfig-paths: "npm:4.0.7"
     vitepress: "npm:1.0.0-alpha.34"
     vitest: "npm:0.29.2"
@@ -7730,7 +7730,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:0.17.11":
+"esbuild@npm:0.17.11, esbuild@npm:^0.17.5":
   version: 0.17.11
   resolution: "esbuild@npm:0.17.11"
   dependencies:
@@ -13510,6 +13510,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup@npm:^3.18.0":
+  version: 3.19.1
+  resolution: "rollup@npm:3.19.1"
+  dependencies:
+    fsevents: "npm:~2.3.2"
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: b99434f7e24be4a03b30d0be375c93d05c32ae352fe1d95d09b94548977e12571788c86af2e0bec31de263aeeb994559556af587342fe4a9823e277d1246ad0d
+  languageName: node
+  linkType: hard
+
 "run-async@npm:^2.4.0":
   version: 2.4.1
   resolution: "run-async@npm:2.4.1"
@@ -15340,7 +15354,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:4.1.4, vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.0.3":
+"vite@npm:4.2.0":
+  version: 4.2.0
+  resolution: "vite@npm:4.2.0"
+  dependencies:
+    esbuild: "npm:^0.17.5"
+    fsevents: "npm:~2.3.2"
+    postcss: "npm:^8.4.21"
+    resolve: "npm:^1.22.1"
+    rollup: "npm:^3.18.0"
+  peerDependencies:
+    "@types/node": ">= 14"
+    less: "*"
+    sass: "*"
+    stylus: "*"
+    sugarss: "*"
+    terser: ^5.4.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    less:
+      optional: true
+    sass:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: d8796cd12d19d5f69398a67a20dca2b3e279d1a307f2099e1571805fa269f306af882fd53ecb7d697b101ddc6318490608994c8102bb817054a40e4721ac71d1
+  languageName: node
+  linkType: hard
+
+"vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.0.3":
   version: 4.1.4
   resolution: "vite@npm:4.1.4"
   dependencies:
