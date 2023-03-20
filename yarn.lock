@@ -3069,7 +3069,7 @@ __metadata:
     vercel: "npm:28.17.0"
     version-bump-prompt: "npm:6.1.0"
     vfile: "npm:5.3.7"
-    vite: "npm:4.2.0"
+    vite: "npm:4.2.1"
     vite-tsconfig-paths: "npm:4.0.7"
     vitepress: "npm:1.0.0-alpha.34"
     vitest: "npm:0.29.7"
@@ -15385,7 +15385,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:4.2.0, vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.0.3":
+"vite@npm:4.2.1":
+  version: 4.2.1
+  resolution: "vite@npm:4.2.1"
+  dependencies:
+    esbuild: "npm:^0.17.5"
+    fsevents: "npm:~2.3.2"
+    postcss: "npm:^8.4.21"
+    resolve: "npm:^1.22.1"
+    rollup: "npm:^3.18.0"
+  peerDependencies:
+    "@types/node": ">= 14"
+    less: "*"
+    sass: "*"
+    stylus: "*"
+    sugarss: "*"
+    terser: ^5.4.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    less:
+      optional: true
+    sass:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 9b784639d35a074b12b72f60764ba6d6eedcaa112ac4b5df00a706e2d5a01d7d4b9ce19ddc5ce8b65260770e56e084fcf2ae7b7c763a0880a2d9f3bfb5fa3450
+  languageName: node
+  linkType: hard
+
+"vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.0.3":
   version: 4.2.0
   resolution: "vite@npm:4.2.0"
   dependencies:
