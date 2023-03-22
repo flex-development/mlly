@@ -1515,13 +1515,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:17.4.4":
-  version: 17.4.4
-  resolution: "@commitlint/cli@npm:17.4.4"
+"@commitlint/cli@npm:17.5.0":
+  version: 17.5.0
+  resolution: "@commitlint/cli@npm:17.5.0"
   dependencies:
     "@commitlint/format": "npm:^17.4.4"
     "@commitlint/lint": "npm:^17.4.4"
-    "@commitlint/load": "npm:^17.4.4"
+    "@commitlint/load": "npm:^17.5.0"
     "@commitlint/read": "npm:^17.4.4"
     "@commitlint/types": "npm:^17.4.4"
     execa: "npm:^5.0.0"
@@ -1531,7 +1531,7 @@ __metadata:
     yargs: "npm:^17.0.0"
   bin:
     commitlint: cli.js
-  checksum: 6f2c7541c7e2e64ffb65a3674f8bc91b3b73fd98f88db77d8973d7072769b14f3adbb19ee65c95d3ea32d22e57dc5de59de9f7285840ce65e89d12aa3cf97b70
+  checksum: eb37ffb42c53e702617458809426a8bd029daf832116125d6be7cc537aa86f27772abad9ee13d36de6fa4d4c5a82a92d8fe8eb525948b30ae7c214b3225e54d7
   languageName: node
   linkType: hard
 
@@ -1598,9 +1598,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/load@npm:^17.4.4":
-  version: 17.4.4
-  resolution: "@commitlint/load@npm:17.4.4"
+"@commitlint/load@npm:^17.5.0":
+  version: 17.5.0
+  resolution: "@commitlint/load@npm:17.5.0"
   dependencies:
     "@commitlint/config-validator": "npm:^17.4.4"
     "@commitlint/execute-rule": "npm:^17.4.0"
@@ -1615,8 +1615,8 @@ __metadata:
     lodash.uniq: "npm:^4.5.0"
     resolve-from: "npm:^5.0.0"
     ts-node: "npm:^10.8.1"
-    typescript: "npm:^4.6.4"
-  checksum: 5997a45c9c6e98155a02d219d77062a6cf10e454d20a19d22be668822ec4316a34adce973900b2707c1c0d04fa6433e3700d8e66581650d24c42353b975f3a5d
+    typescript: "npm:^4.6.4 || ^5.0.0"
+  checksum: 05028f84740bb5d06cd5f377319ada6767d727c1c4f0d374b46a42097c98bfef5ead3fffd406a3b437bcf943cc7725e504651c38fa64f1381f62322b44875957
   languageName: node
   linkType: hard
 
@@ -2968,7 +2968,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flex-development/mlly@workspace:."
   dependencies:
-    "@commitlint/cli": "npm:17.4.4"
+    "@commitlint/cli": "npm:17.5.0"
     "@commitlint/types": "npm:17.4.4"
     "@docsearch/react": "npm:3.3.3"
     "@faker-js/faker": "npm:8.0.0-alpha.1"
@@ -14824,13 +14824,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.6.4":
-  version: 4.9.5
-  resolution: "typescript@npm:4.9.5"
+"typescript@npm:^4.6.4 || ^5.0.0":
+  version: 5.0.2
+  resolution: "typescript@npm:5.0.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 550217a465c00b1d7ef0e0ddc3a6a0b2ae1fd7c1b9f53cde5a1cfe56aa457c7a43fa83792c1b98b2185d2156d0467c9ad6f6600515ad4f4fc2acee54c4bd320e
+  checksum: a305d149166e376acb51bcd1bab9f2ab55c5bd52d0b43f0e49b58ea5cf085cd7c0a3d38ea58f3991aa7b04c97907b6c17c8611334d7f0e54db3d31d7897d9661
   languageName: node
   linkType: hard
 
@@ -14854,13 +14854,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^4.6.4#optional!builtin<compat/typescript>":
-  version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=23ec76"
+"typescript@patch:typescript@npm%3A^4.6.4 || ^5.0.0#optional!builtin<compat/typescript>":
+  version: 5.0.2
+  resolution: "typescript@patch:typescript@npm%3A5.0.2#optional!builtin<compat/typescript>::version=5.0.2&hash=1f5320"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 09f82f25664c79d5cccc389502175093becf51d691b443c79294303681544a399fb42f8384b535ddeba48cadb64e7d14b42de40d8ade4418bb43174989dd8685
+  checksum: 31dbad12f89374659895753700df361b121b35a789a956fc7d9a2f4f8fa0bf897bd289133a6989829d106d58a5f044b201b7fce0a26cf652e95299228e4268d7
   languageName: node
   linkType: hard
 
