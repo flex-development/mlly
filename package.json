@@ -135,7 +135,7 @@
     "cspell": "6.30.2",
     "dateformat": "5.0.3",
     "dotenv": "16.0.3",
-    "esbuild": "0.17.12",
+    "esbuild": "0.17.13",
     "escape-string-regexp": "5.0.0",
     "eslint": "8.36.0",
     "eslint-config-prettier": "8.8.0",
