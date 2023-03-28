@@ -116,7 +116,7 @@
     "@typescript-eslint/eslint-plugin": "5.56.0",
     "@typescript-eslint/parser": "5.56.0",
     "@vates/toggle-scripts": "1.0.0",
-    "@vitest/coverage-c8": "0.29.7",
+    "@vitest/coverage-c8": "0.29.8",
     "@vitest/ui": "0.29.8",
     "@vue/runtime-core": "3.2.47",
     "add-stream": "1.0.0",
