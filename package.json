@@ -87,7 +87,7 @@
     "@flex-development/tutils": "6.0.0-alpha.10"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.5.0",
+    "@commitlint/cli": "17.5.1",
     "@commitlint/types": "17.4.4",
     "@docsearch/react": "3.3.3",
     "@faker-js/faker": "8.0.0-alpha.2",
