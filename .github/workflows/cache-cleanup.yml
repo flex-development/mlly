@@ -1,0 +1,67 @@
+# Cache Cleanup
+#
+# Delete caches when a pull request is closed or on workflow dispatch.
+#
+# References:
+#
+# - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/learn-github-actions/expressions
+# - https://docs.github.com/actions/using-workflows/caching-dependencies-to-speed-up-workflows#force-deleting-cache-entries
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://docs.github.com/actions/using-workflows/using-github-cli-in-workflows
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
+# - https://github.com/actions/checkout
+# - https://github.com/actions/gh-actions-cache
+# - https://github.com/hmarr/debug-action
+
+---
+name: cache-cleanup
+on:
+  pull_request:
+    types:
+      - closed
+  workflow_dispatch:
+    inputs:
+      all:
+        default: false
+        description: delete caches without filtering by branch
+        type: boolean
+permissions:
+  actions: write
+env:
+  BRANCH: |
+    ${{ github.event.number && format('refs/pull/{0}/merge', github.event.number) || github.ref }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ format('refs/heads/{0}', github.head_ref || github.ref_name) }}
+jobs:
+  cache-cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.1.0
+      - id: checkout
+        name: Checkout main
+        uses: actions/checkout@v3.5.0
+        with:
+          persist-credentials: false
+          ref: main
+      - id: gh-actions-cache
+        name: Install actions/gh-actions-cache
+        run: gh extension install actions/gh-actions-cache
+      - id: cleanup
+        name: Delete caches${{ !inputs.all && format(' created by {0}', env.BRANCH) || '' }}
+        env:
+          BRANCH_FILTER: ${{ !inputs.all && format('--branch {0}', env.BRANCH) || '' }}
+        run: |
+          # prevent workflow failure while deleting cache keys
+          set +e
+
+          # delete all caches or caches created by ${{ env.BRANCH }}
+          for key in $(gh actions-cache list $BRANCH_FILTER --limit 100 | cut -f 1); do
+            gh actions-cache delete $key $BRANCH_FILTER --confirm
+          done
