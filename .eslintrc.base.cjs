@@ -41,14 +41,7 @@ const config = {
         Chai: 'readonly',
         Console: 'readonly',
         JSX: jsx ? 'readonly' : false,
-        LoadHook: 'readonly',
-        LoadHookContext: 'readonly',
-        LoadHookResult: 'readonly',
-        LoaderHookFormat: 'readonly',
-        NodeJS: 'readonly',
-        ResolveHook: 'readonly',
-        ResolveHookContext: 'readonly',
-        ResolveHookResult: 'readonly'
+        NodeJS: 'readonly'
       },
       parser: '@typescript-eslint/parser',
       parserOptions: {
@@ -147,23 +140,15 @@ const config = {
             default: {
               memberTypes: [
                 'static-field',
-                'decorated-field',
                 'instance-field',
-                'abstract-field',
                 'constructor',
                 'signature',
                 'static-get',
                 'static-set',
                 'static-method',
-                'decorated-get',
-                'decorated-set',
-                'decorated-method',
                 'instance-get',
                 'instance-set',
-                'instance-method',
-                'abstract-get',
-                'abstract-set',
-                'abstract-method'
+                'instance-method'
               ],
               order: 'alphabetically'
             }
@@ -431,7 +416,14 @@ const config = {
         'jsdoc/check-tag-names': [
           1,
           {
-            definedTags: ['experimental', 'next', 'visibleName'],
+            definedTags: [
+              'experimental',
+              'maximum',
+              'minimum',
+              'next',
+              'packageManager',
+              'visibleName'
+            ],
             jsxTags: false
           }
         ],
@@ -579,6 +571,7 @@ const config = {
         'no-empty': [2, { allowEmptyCatch: true }],
         'no-empty-function': 0,
         'no-ex-assign': 0,
+        'no-extra-parens': 0,
         'no-implied-eval': 0,
         'no-invalid-this': 0,
         'no-loop-func': 0,
@@ -688,7 +681,7 @@ const config = {
         ],
         'unicorn/new-for-builtins': 2,
         'unicorn/no-abusive-eslint-disable': 2,
-        'unicorn/no-array-callback-reference': 2,
+        'unicorn/no-array-callback-reference': 0,
         'unicorn/no-array-for-each': 2,
         'unicorn/no-array-method-this-argument': 2,
         'unicorn/no-array-push-push': 2,
@@ -766,14 +759,7 @@ const config = {
         'unicorn/relative-url-style': [2, 'never'],
         'unicorn/require-array-join-separator': 2,
         'unicorn/require-number-to-fixed-digits-argument': 2,
-        'unicorn/string-content': [
-          2,
-          {
-            patterns: {
-              '^http:\\/\\/': '^https:\\/\\/'
-            }
-          }
-        ],
+        'unicorn/string-content': [2, { patterns: {} }],
         'unicorn/template-indent': [2, { indent: 2 }],
         'unicorn/text-encoding-identifier-case': 2,
         'unicorn/throw-new-error': 2
@@ -822,8 +808,9 @@ const config = {
       }
     },
     {
-      files: '**/__mocks__/*.ts',
+      files: '**/__mocks__/**/*.ts',
       rules: {
+        '@typescript-eslint/no-unused-vars': 0,
         '@typescript-eslint/require-await': 0
       }
     },
@@ -853,6 +840,7 @@ const config = {
         '@typescript-eslint/no-empty-function': 0,
         '@typescript-eslint/no-unused-expressions': 0,
         '@typescript-eslint/prefer-ts-expect-error': 0,
+        '@typescript-eslint/require-await': 0,
         '@typescript-eslint/restrict-template-expressions': 0,
         '@typescript-eslint/unbound-method': 0,
         'chai-expect/missing-assertion': 2,
@@ -886,7 +874,8 @@ const config = {
         expectTypeOf: true
       },
       rules: {
-        '@typescript-eslint/ban-types': 0
+        '@typescript-eslint/ban-types': 0,
+        '@typescript-eslint/no-redundant-type-constituents': 0
       }
     },
     {
@@ -1140,13 +1129,17 @@ const config = {
       }
     },
     {
-      files: ['.github/dependabot.yml', '.github/workflows/*.yml'],
+      files: [
+        '.github/dependabot.yml',
+        '.github/workflows/*.yml',
+        'action.yml'
+      ],
       rules: {
         'yml/sort-keys': 0
       }
     },
     {
-      files: ['.github/workflows/no-response-handler.yml', '.yarnrc.yml'],
+      files: ['.github/workflows/*.yml', '.yarnrc.yml'],
       rules: {
         'yml/key-name-casing': 0
       }
@@ -1160,9 +1153,13 @@ const config = {
   settings: {
     jsdoc: {
       augmentsExtendsReplacesDocs: true,
+      ignoreInternal: false,
       ignorePrivate: false,
       implementsReplacesDocs: true,
       overrideReplacesDocs: true,
+      preferredTypes: {
+        '*': false
+      },
       structuredTags: {
         const: {
           name: 'namepath-defining',
@@ -1183,13 +1180,25 @@ const config = {
           name: 'namepath-defining',
           required: ['type']
         },
+        maximum: {
+          name: 'text',
+          required: ['name']
+        },
         member: {
           name: 'namepath-defining',
           required: ['name', 'type']
         },
+        minimum: {
+          name: 'text',
+          required: ['name']
+        },
         next: {
           name: 'namepath-defining',
           required: ['type']
+        },
+        packageManager: {
+          name: 'text',
+          required: ['name']
         },
         param: {
           name: 'namepath-defining',

@@ -5,10 +5,7 @@ gpgsign
 hmarr
 keyid
 lintstagedrc
-micnncim
 mlly
-nvmrc
 vitepress
-vuedx
 wabt
 yarnrc

@@ -4,14 +4,10 @@
  * @see https://chaijs.com
  */
 
-import { chai } from 'vitest'
 import chaiEach from 'chai-each'
 import chaiQuantifiers from 'chai-quantifiers'
 import chaiString from 'chai-string'
-
-// configure chai
-chai.config.includeStack = true
-chai.config.truncateThreshold = 0
+import { chai } from 'vitest'
 
 /**
  * initialize chai plugins.

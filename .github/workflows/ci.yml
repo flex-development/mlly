@@ -2,7 +2,6 @@
 #
 # References:
 #
-# - https://docs.github.com/actions/automating-builds-and-tests/building-and-testing-nodejs
 # - https://docs.github.com/actions/learn-github-actions/contexts
 # - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-jobs/using-a-matrix-for-your-jobs
@@ -24,6 +23,7 @@
 # - https://github.com/codecov/codecov-action
 # - https://github.com/hmarr/debug-action
 # - https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
+# - https://yarnpkg.com/cli/pack
 
 ---
 name: ci
@@ -37,19 +37,20 @@ on:
       - release/**
   workflow_dispatch:
 permissions:
+  contents: read
   packages: read
 env:
   CACHE_PATH: node_modules
-  COVERAGE_REPORT: ./coverage/lcov.info
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   HUSKY: 0
-  REF: ${{ github.head_ref || github.ref_name }}
+  REF: ${{ github.head_ref || github.ref }}
+  REF_NAME: ${{ github.head_ref || github.ref_name }}
   SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
-  metadata:
+  preflight:
     if: |
       github.event.head_commit.author.name != 'dependabot[bot]'
       && github.event.head_commit.author.username != 'flexdevelopment'
@@ -63,9 +64,10 @@ jobs:
         name: Print environment variables and event payload
         uses: hmarr/debug-action@v2.1.0
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v3.5.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF }}
       - id: node
         name: Setup Node.js
@@ -85,19 +87,20 @@ jobs:
           path: ${{ env.CACHE_PATH }}
       - id: version
         name: Get package version
-        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
+        run: echo "result=$(jq .version package.json -r)" >>$GITHUB_OUTPUT
       - id: version-typescript
         name: Get TypeScript version
-        run: echo "result=$(jq .devDependencies.typescript package.json -r)" >> $GITHUB_OUTPUT
+        run: echo "result=$(jq .devDependencies.typescript package.json -r)" >>$GITHUB_OUTPUT
   commitlint:
-    needs: metadata
+    needs: preflight
     runs-on: ubuntu-latest
     steps:
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v3.5.0
         with:
           fetch-depth: 0
+          persist-credentials: false
           ref: ${{ env.REF }}
       - id: node
         name: Setup Node.js
@@ -121,10 +124,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v3.5.0
         with:
           fetch-depth: 0
+          persist-credentials: false
           ref: ${{ env.REF }}
       - id: scan
         name: Scan commits for secrets and policy breaches
@@ -144,9 +148,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v3.5.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF }}
       - id: node
         name: Setup Node.js
@@ -171,9 +176,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v3.5.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF }}
       - id: node
         name: Setup Node.js
@@ -201,9 +207,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v3.5.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF }}
       - id: node
         name: Setup Node.js
@@ -225,24 +232,31 @@ jobs:
     needs:
       - commitlint
       - gitguardian
-      - metadata
+      - preflight
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         typescript-version:
-          - ${{ needs.metadata.outputs.version-typescript }}
+          - ${{ needs.preflight.outputs.version-typescript }}
           - latest
           - ~4.9.0
           - ~4.8.0
           - ~4.7.0
     steps:
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v3.5.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF }}
+      - id: test-files-check
+        name: Check for typecheck files
+        uses: andstor/file-existence-action@v2.0.0
+        with:
+          files: '**/__tests__/*.spec-d.ts'
       - id: node
+        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Setup Node.js
         uses: actions/setup-node@v3.6.0
         with:
@@ -250,22 +264,26 @@ jobs:
           cache-dependency-path: yarn.lock
           node-version-file: .nvmrc
       - id: cache
+        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Restore dependencies cache
         uses: actions/cache@v3.3.1
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
       - id: typescript
+        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Install typescript@${{ matrix.typescript-version }}
         run: yarn add -D typescript@${{ matrix.typescript-version }}
       - id: set-typescript-version
         name: Set env.TYPESCRIPT_VERSION
         run: |
-          echo "TYPESCRIPT_VERSION=$(jq .devDependencies.typescript package.json -r)" >> $GITHUB_ENV
+          echo "TYPESCRIPT_VERSION=$(jq .devDependencies.typescript package.json -r)" >>$GITHUB_ENV
       - id: print-typescript-version
+        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Print TypeScript version
         run: echo $TYPESCRIPT_VERSION
       - id: typecheck
+        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Run typecheck
         run: yarn typecheck
   test:
@@ -282,11 +300,18 @@ jobs:
           - 16
     steps:
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v3.5.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF }}
+      - id: test-files-check
+        name: Check for test files
+        uses: andstor/file-existence-action@v2.0.0
+        with:
+          files: '**/__tests__/*.spec.+(ts|tsx)'
       - id: node
+        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Setup Node.js v${{ matrix.node-version }}
         uses: actions/setup-node@v3.6.0
         with:
@@ -294,27 +319,24 @@ jobs:
           cache-dependency-path: yarn.lock
           node-version: ${{ matrix.node-version }}
       - id: cache
+        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Restore dependencies cache
         uses: actions/cache@v3.3.1
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
       - id: test
+        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Run tests
         run: yarn test:cov --segfault-retry=3
-      - id: coverage-report-check
-        name: Check coverage report existence
-        uses: andstor/file-existence-action@v2.0.0
-        with:
-          files: ${{ env.COVERAGE_REPORT }}
       - id: codecov
         name: Upload coverage report to Codecov
-        if: steps.coverage-report-check.outputs.files_exists == 'true'
+        if: steps.test-files-check.outputs.files_exists == 'true'
         uses: codecov/codecov-action@v3.1.1
         with:
           env_vars: GITHUB_JOB,GITHUB_REF,GITHUB_REF_TYPE,GITHUB_RUN_ID,GITHUB_SHA,GITHUB_WORKSPACE
           fail_ci_if_error: true
-          file: ${{ env.COVERAGE_REPORT }}
+          file: ./coverage/lcov.info
           flags: ${{ format('node{0}', matrix.node-version) }}
           override_branch: ${{ env.REF }}
           override_build: ${{ github.run_id }}
@@ -332,13 +354,14 @@ jobs:
     needs:
       - commitlint
       - gitguardian
-      - metadata
+      - preflight
     runs-on: ubuntu-latest
     steps:
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v3.5.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF }}
       - id: node
         name: Setup Node.js
@@ -356,8 +379,6 @@ jobs:
       - id: pack
         name: Pack project
         run: yarn pack -o %s-%v.tgz
-        env:
-          NODE_ENV: production
       - id: typecheck
         name: Run typecheck
         run: yarn check:types:build
@@ -369,7 +390,7 @@ jobs:
         uses: actions/upload-artifact@v3.1.2
         with:
           name: |
-            ${{ format('@{0}-{1}-{2}', github.repository_owner, github.event.repository.name, needs.metadata.outputs.version) }}
+            ${{ format('@{0}-{1}-{2}', github.repository_owner, github.event.repository.name, needs.preflight.outputs.version) }}
           path: '*.tgz'
   docs:
     needs:
@@ -378,7 +399,7 @@ jobs:
       - format
       - gitguardian
       - lint
-      - metadata
+      - preflight
       - spelling
       - test
       - typescript
@@ -424,7 +445,7 @@ jobs:
         uses: actions/upload-artifact@v3.1.2
         with:
           name: |
-            ${{ format('@{0}-{1}-{2}-docs', github.repository_owner, github.event.repository.name, needs.metadata.outputs.version) }}
+            ${{ format('@{0}-{1}-{2}-docs', github.repository_owner, github.event.repository.name, needs.preflight.outputs.version) }}
           path: |
             .vercel/output/
             docs/.vitepress/dist/

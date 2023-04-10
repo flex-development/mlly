@@ -3,12 +3,9 @@
 # References:
 #
 # - https://docs.github.com/actions/learn-github-actions/contexts
-# - https://docs.github.com/actions/learn-github-actions/expressions
-# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#create
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
-# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#create
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#push
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
@@ -18,9 +15,6 @@
 ---
 name: integrity
 on:
-  create:
-    branches:
-      - main
   pull_request:
     paths:
       - .github/workflows/integrity.yml
@@ -41,23 +35,21 @@ on:
 permissions:
   packages: read
 env:
-  REF: ${{ github.head_ref || github.ref_name }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   integrity:
     if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ github.head_ref || github.ref_name }}
         uses: actions/checkout@v3.5.0
         with:
           persist-credentials: false
-          ref: ${{ env.REF }}
+          ref: ${{ github.head_ref || github.ref }}
       - id: dedupe-check
         name: Check for duplicate dependencies in lockfile
         run: yarn dedupe --check
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

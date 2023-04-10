@@ -21,8 +21,6 @@ branches:
         required_approving_review_count: 1
       required_status_checks:
         checks:
-          - context: DCO
-            app_id: 1861
           - context: add-to-project
           - context: auto-merge
           - context: build
@@ -46,7 +44,7 @@ branches:
           - context: test (16)
           - context: test (18)
           - context: test (19)
-          - context: typescript (5.1.0-dev.20230301)
+          - context: typescript (5.0.4)
           - context: typescript (latest)
           - context: typescript (~4.7.0)
           - context: typescript (~4.8.0)
@@ -59,7 +57,7 @@ environments:
   - environment_name: gpr
   - environment_name: npm
   - environment_name: preview
-  - environment_name: production
+  - environment_name: release
 # https://docs.github.com/rest/issues/labels#create-a-label
 labels:
   - name: flag:breaking-change
@@ -204,7 +202,7 @@ repository:
   archived: false
   automated_security_fixes: true
   default_branch: main
-  delete_branch_on_merge: false
+  delete_branch_on_merge: true
   description: ECMAScript module utilities
   has_issues: true
   has_projects: true

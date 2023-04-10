@@ -65,18 +65,26 @@ Follow the steps below to setup your local development environment:
    [ -d $PWD/node_modules/.bin ] && export PATH=$PWD/node_modules/.bin:$PATH
 
    # DOTENV ZSH PLUGIN
-   # - https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv
+   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv
    export ZSH_DOTENV_FILE=.env.zsh
 
+   # GIT
+   # https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
+   export GIT_EMAIL=$(git config user.email)
+   export GIT_NAME=$(git config user.name)
+   export GIT_USERNAME=$(git config user.username)
+   export GPG_TTY=$(tty)
+
+   # HOMEBREW
+   # https://brew.sh
+   export HOMEBREW_PREFIX=$(brew --prefix)
+
    # NVM
-   # - https://github.com/nvm-sh/nvm
+   # https://github.com/nvm-sh/nvm
    export NVM_DIR=$HOME/.nvm
 
-   # ---------------------------------------------------------------------------
-
-   # LOAD ENVIRONMENT VARIABLES IN CURRENT WORKING DIRECTORY
-   # 1. $GITHUB_WORKSPACE
-   [ -d $PWD/.git ] && export GITHUB_WORKSPACE=$(git rev-parse --show-toplevel)
+   # YARN
+   export YARN_RC_FILENAME=.yarnrc.yml
    ```
 
 9. Load `dotenv` plugin via `$ZDOTDIR/.zshrc`:
@@ -93,13 +101,12 @@ Follow the steps below to setup your local development environment:
 
 ### Environment Variables
 
-#### Development
-
 | name                    |
 | ----------------------- |
 | `ALGOLIA_API_KEY`       |
 | `CODECOV_TOKEN`         |
 | `GITHUB_TOKEN`          |
+| `HOMEBREW_BREWFILE`     |
 | `HOSTNAME`              |
 | `NODE_ENV`              |
 | `NODE_NO_WARNINGS`      |
@@ -166,7 +173,7 @@ This means every commit must conform to the following format:
  │     │      │
  │     │      └─⫸ optional breaking change flag
  │     │
- │     └─⫸ see commitlintrc.json
+ │     └─⫸ see .commitlintrc.cts
  │
  └─⫸ build|ci|chore|docs|feat|fix|perf|refactor|revert|style|test|wip
 
@@ -197,7 +204,7 @@ e.g:
 - `build(deps-dev): bump cspell from 6.7.0 to 6.8.0`
 - `perf: lighten initial load`
 
-See [`.commitlintrc.json`](.commitlintrc.json) to view all commit guidelines.
+See [`.commitlintrc.cts`](.commitlintrc.cts) to view all commit guidelines.
 
 ### Code Style
 
@@ -236,7 +243,6 @@ Be sure to use [`it.skip`][15] or [`it.todo`][16] where appropriate.
 
 - `yarn test`
 - `yarn test:cov`
-  - See terminal for coverage output
 
 #### Code Coverage
 
@@ -246,7 +252,7 @@ To manually upload coverage reports:
 
 1. Retrieve `CODECOV_TOKEN` from a maintainer
 
-2. Add `CODECOV_TOKEN` to `.env.local`
+2. Add `CODECOV_TOKEN` to `.env.repo`
 
 3. Reload shell
 
@@ -254,7 +260,7 @@ To manually upload coverage reports:
    exec $SHELL
    ```
 
-4. Install the [Codecov Uploader][18]
+4. Install [Codecov Uploader][18]
 
 5. Run `yarn codecov`
 
@@ -269,7 +275,7 @@ Q&A category][19].
 This project uses a well-defined list of labels to organize issues and pull requests. Most labels are scoped (i.e:
 `status:`).
 
-A list of labels can be found in [`.github/labels.yml`](.github/labels.yml).
+A list of labels can be found in [`.github/infrastructure.yml`](.github/infrastructure.yml).
 
 ## Opening Issues
 
@@ -335,7 +341,7 @@ When squashing, be sure to follow [commit message standards](#commit-messages):
  │     │      │
  │     │      └─⫸ optional breaking change flag
  │     │
- │     └─⫸ see .commitlintrc.json
+ │     └─⫸ see .commitlintrc.cts
  │
  └─⫸ build|ci|chore|docs|feat|fix|perf|refactor|release|revert|style|test
 ```

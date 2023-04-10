@@ -1,5 +1,6 @@
 # mlly
 
+[![github release](https://img.shields.io/github/v/release/flex-development/mlly.svg?include_prereleases&sort=semver)](https://github.com/flex-development/mlly/releases/latest)
 [![npm](https://img.shields.io/npm/v/@flex-development/mlly.svg)](https://npmjs.com/package/@flex-development/mlly)
 [![codecov](https://codecov.io/gh/flex-development/mlly/branch/main/graph/badge.svg?token=36NUNRH6FW)](https://codecov.io/gh/flex-development/mlly)
 [![module type: esm](https://img.shields.io/badge/module%20type-esm-brightgreen)](https://github.com/voxpelli/badges-cjs-esm)

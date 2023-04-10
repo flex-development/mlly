@@ -21,10 +21,12 @@
     "**/LICENSE.md",
     "**/RELEASE_NOTES.md",
     ".cspell.json",
+    ".dictionary.txt",
     ".git/",
     ".husky/_/",
     ".vscode/settings.json",
     ".yarn/",
+    "dist/",
     "patches/",
     "yarn.lock"
   ],

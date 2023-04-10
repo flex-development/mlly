@@ -1,4 +1,4 @@
-# No Response Handler
+# No Response
 #
 # Closes issues that don't have enough information to be actionable.
 #
@@ -10,22 +10,22 @@
 # - https://github.com/lee-dohm/no-response
 
 ---
-name: no-response-handler
+name: no-response
 on:
   issue_comment:
     types:
       - created
   schedule:
-    # schedule for five minutes after the hour, every hour
-    - cron: '5 * * * *'
+    # five minutes after the hour, every hour
+    - cron: 5 * * * *
 permissions:
   issues: write
 jobs:
-  no-response-handler:
+  no-response:
     runs-on: ubuntu-latest
     steps:
-      - id: close
-        name: Close issues after 14 days
+      - id: close-issues
+        name: Closes issues missing actionable info
         uses: lee-dohm/no-response@v0.5.0
         with:
           closeComment: |

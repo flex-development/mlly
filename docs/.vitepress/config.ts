@@ -17,7 +17,7 @@ import { config as dotenv } from 'dotenv'
 import { globby } from 'globby'
 import fs from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
-import pupa from 'pupa'
+import { template } from 'radash'
 import { SitemapStream, streamToPromise } from 'sitemap'
 import tsconfigpaths from 'vite-tsconfig-paths'
 import {
@@ -63,7 +63,9 @@ const {
 const HOSTNAME: string =
   VERCEL_ENV === 'production' || JSON.parse(CI) === true
     ? process.env.HOSTNAME!
-    : pupa('http://localhost:{0}', [VERCEL_ENV === 'development' ? 5173 : 8080])
+    : template('http://localhost:{{0}}', {
+        0: VERCEL_ENV === 'development' ? 5173 : 8080
+      })
 
 /**
  * Project version as GitHub branch name or release tag.
@@ -416,7 +418,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
     // write robots.txt
     await fs.writeFile(
       pathe.resolve(outDir, 'robots.txt'),
-      pupa(await fs.readFile(robots, 'utf8'), { HOSTNAME })
+      template(await fs.readFile(robots, 'utf8'), { HOSTNAME })
     )
 
     return void 0
@@ -429,7 +431,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       'link',
       {
         crossorigin: '',
-        href: 'https://' + pupa('{0}-dsn.algolia.net', [algolia.appId]),
+        href: template('https://{{0}}-dsn.algolia.net', { 0: algolia.appId }),
         rel: 'preconnect'
       }
     ]

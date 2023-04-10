@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "composite": true,
-    "customConditions": ["require", "node"],
+    "customConditions": ["require", "node", "default"],
     "declaration": true,
     "emitDeclarationOnly": true,
     "noEmit": false,

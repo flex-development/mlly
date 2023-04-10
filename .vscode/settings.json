@@ -2,6 +2,16 @@
   "[dotenv]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
+  "[github-actions-workflow]": {
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 100
+      }
+    ],
+    "editor.wordWrapColumn": 100,
+    "rewrap.wrappingColumn": 100
+  },
   "[handlebars]": {
     "editor.defaultFormatter": "Greenbyte.handlebars-preview",
     "editor.rulers": [
@@ -127,6 +137,7 @@
   "debug.showBreakpointsInOverviewRuler": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.renderSideBySide": false,
+  "dotenv.enableAutocloaking": false,
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.autoClosingBrackets": "always",
   "editor.bracketPairColorization.enabled": true,
@@ -306,7 +317,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.tsserver.enableTracing": true,
   "typescript.tsserver.log": "verbose",
-  "typescript.tsserver.trace": "verbose",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.validate.enable": true,
   "versionlens.npm.dependencyProperties": [

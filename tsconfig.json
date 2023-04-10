@@ -6,6 +6,7 @@
     "alwaysStrict": false,
     "baseUrl": ".",
     "checkJs": false,
+    "customConditions": ["import", "node", "default"],
     "declaration": false,
     "declarationMap": false,
     "emitDecoratorMetadata": false,

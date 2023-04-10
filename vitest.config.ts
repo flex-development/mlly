@@ -7,6 +7,7 @@
 import pathe from '@flex-development/pathe'
 import { NodeEnv } from '@flex-development/tutils'
 import ci from 'is-ci'
+import { template } from 'radash'
 import tsconfigpaths from 'vite-tsconfig-paths'
 import GithubActionsReporter from 'vitest-github-actions-reporter'
 import {
@@ -14,7 +15,7 @@ import {
   type UserConfig,
   type UserConfigExport
 } from 'vitest/config'
-import { BaseSequencer } from 'vitest/node'
+import { BaseSequencer, type WorkspaceSpec } from 'vitest/node'
 
 /**
  * Vitest configuration export.
@@ -48,6 +49,11 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
     test: {
       allowOnly: !ci,
       benchmark: {},
+      chaiConfig: {
+        includeStack: true,
+        showDiff: true,
+        truncateThreshold: 0
+      },
       clearMocks: true,
       coverage: {
         all: !LINT_STAGED,
@@ -61,8 +67,8 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
           'src/types/'
         ],
         extension: ['.ts'],
-        ignoreClassMethods: [],
         include: ['src'],
+        provider: 'c8',
         reporter: [ci ? 'lcovonly' : 'lcov', 'text'],
         reportsDirectory: './coverage',
         skipFull: false
@@ -72,10 +78,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
       globalSetup: [],
       globals: true,
       hookTimeout: 10 * 1000,
-      include: [
-        '**/__tests__/*.spec.ts',
-        LINT_STAGED ? '**/__tests__/*.spec-d.ts' : ''
-      ].filter(pattern => pattern.length > 0),
+      include: [`**/__tests__/*.spec${LINT_STAGED ? ',spec-d' : ''}.{ts,tsx}`],
       isolate: true,
       mockReset: true,
       outputFile: { json: './__tests__/report.json' },
@@ -109,17 +112,22 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
            * @override
            * @async
            *
-           * @param {string[]} files - Paths to test files
-           * @return {Promise<string[]>} `files` sorted
+           * @param {WorkspaceSpec[]} specs - Workspace spec objects
+           * @return {Promise<WorkspaceSpec[]>} `files` sorted
            */
-          public override async sort(files: string[]): Promise<string[]> {
-            return (await super.sort(files)).sort((a, b) => a.localeCompare(b))
+          public override async sort(
+            specs: WorkspaceSpec[]
+          ): Promise<WorkspaceSpec[]> {
+            return (await super.sort(specs)).sort(([, file1], [, file2]) => {
+              return file1.localeCompare(file2)
+            })
           }
         }
       },
       setupFiles: ['./__tests__/setup/index.ts'],
       silent: false,
-      slowTestThreshold: 300,
+      singleThread: true,
+      slowTestThreshold: 3000,
       snapshotFormat: {
         callToJSON: true,
         min: false,
@@ -132,10 +140,9 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
         checker: 'vue-tsc',
         ignoreSourceErrors: false,
         include: ['**/__tests__/*.spec-d.ts'],
-        tsconfig: pathe.resolve(
-          TYPESCRIPT_V5 ? '' : '__tests__/ts/v4/',
-          'tsconfig.typecheck.json'
-        )
+        tsconfig: template('{{0}}/tsconfig.typecheck.json', {
+          0: pathe.resolve(TYPESCRIPT_V5 ? '' : '__tests__/ts/v4')
+        })
       },
       unstubEnvs: true,
       unstubGlobals: true

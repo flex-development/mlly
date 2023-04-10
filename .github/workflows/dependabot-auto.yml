@@ -11,7 +11,9 @@
 #
 # - https://cli.github.com/manual/gh_pr_merge
 # - https://cli.github.com/manual/gh_pr_review
+# - https://docs.github.com/actions/learn-github-actions/contexts
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/actions/using-workflows/using-github-cli-in-workflows
 # - https://docs.github.com/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
 # - https://github.com/actions/checkout
@@ -76,17 +78,15 @@ jobs:
       - id: lockfile-push
         name: Push yarn.lock
         if: steps.metadata.outputs.package-ecosystem == 'npm_and_yarn'
+        env:
+          GIT_AUTHOR_EMAIL: ${{ steps.gpg-import.outputs.email }}
+          GIT_COMMITTER_EMAIL: ${{ steps.gpg-import.outputs.email }}
+          COMMIT_MESSAGE: 'build(yarn): [dependabot skip] fix lockfile for @dependabot'
         run: |
           git add yarn.lock
           git status
           git diff-index --quiet HEAD || git commit -s -m "$COMMIT_MESSAGE" && git push -f
-        env:
-          GIT_AUTHOR_EMAIL: ${{ steps.gpg-import.outputs.email }}
-          GIT_AUTHOR_NAME: ${{ steps.gpg-import.outputs.name }}
-          GIT_COMMITTER_EMAIL: ${{ steps.gpg-import.outputs.email }}
-          GIT_COMMITTER_NAME: ${{ steps.gpg-import.outputs.name }}
-          COMMIT_MESSAGE: 'build(yarn): [dependabot skip] fix lockfile for @dependabot'
       - id: approve-pr
         name: Approve pull request containing minor or patch updates
         if: steps.metadata.outputs.update-type != 'version-update:semver-major'
-        run: gh pr review ${{ github.event.pull_request.number }} --approve
+        run: gh pr review ${{ github.event.number }} --approve

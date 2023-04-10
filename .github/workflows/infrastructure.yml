@@ -11,11 +11,8 @@
 # References:
 #
 # - https://docs.github.com/actions/learn-github-actions/contexts
-# - https://docs.github.com/actions/learn-github-actions/expressions
-# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#create
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
-# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#create
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#push
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # - https://github.com/actions-cool/check-user-permission
@@ -26,9 +23,6 @@
 ---
 name: infrastructure
 on:
-  create:
-    branches:
-      - main
   push:
     branches:
       - main
@@ -38,8 +32,8 @@ on:
       - .github/workflows/infrastructure.yml
   workflow_dispatch:
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   infrastructure:
     runs-on: ubuntu-latest
@@ -58,7 +52,7 @@ jobs:
         uses: actions/checkout@v3.5.0
         with:
           persist-credentials: false
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.ref }}
       - id: update
         if: steps.check-actor-permission.outputs.require-result == 'true'
         name: Update repository infrastructure

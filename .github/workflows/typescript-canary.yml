@@ -8,9 +8,12 @@
 # - https://docs.github.com/actions/using-jobs/using-a-matrix-for-your-jobs
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#schedule
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # - https://github.com/actions/checkout
 # - https://github.com/actions/setup-node
+# - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
+# - https://github.com/hmarr/debug-action
 # - https://vitest.dev/guide/testing-types.html#run-typechecking
 
 ---
@@ -22,11 +25,14 @@ on:
     - cron: 0 10 * * *
   workflow_dispatch:
 permissions:
+  contents: read
   packages: read
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   HUSKY: 0
-  REF: ${{ github.head_ref || github.ref_name }}
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   typescript-canary:
     runs-on: ubuntu-latest
@@ -41,10 +47,11 @@ jobs:
         name: Print environment variables and event payload
         uses: hmarr/debug-action@v2.1.0
       - id: checkout
-        name: Checkout ${{ env.REF }}
+        name: Checkout ${{ github.ref_name }}
         uses: actions/checkout@v3.5.0
         with:
-          ref: ${{ env.REF }}
+          persist-credentials: false
+          ref: ${{ github.ref }}
       - id: node
         name: Setup Node.js
         uses: actions/setup-node@v3.6.0
@@ -61,15 +68,13 @@ jobs:
       - id: set-typescript-version
         name: Set env.TYPESCRIPT_VERSION
         run: |
-          echo "TYPESCRIPT_VERSION=$(jq .devDependencies.typescript package.json -r)" >> $GITHUB_ENV
+          echo "TYPESCRIPT_VERSION=$(jq .devDependencies.typescript package.json -r)" >>$GITHUB_ENV
       - id: print-typescript-version
         name: Print TypeScript version
         run: echo $TYPESCRIPT_VERSION
       - id: build
         name: Build project
         run: yarn build
-        env:
-          NODE_ENV: production
       - id: typecheck
         name: Run typecheck
         run: yarn typecheck

@@ -6,5 +6,4 @@
 #
 # - https://typicode.github.io/husky/?id=husky_git_params-ie-commitlint-#/?id=husky_git_params-ie-commitlint-
 
-yarn build
 yarn commitlint --edit $1

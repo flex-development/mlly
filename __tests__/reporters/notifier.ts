@@ -132,7 +132,7 @@ class Notifier implements Reporter {
   }
 
   /**
-   * Returns an array of {@link Test} objects.
+   * Returns an array of {@linkcode Test} objects.
    *
    * @protected
    *

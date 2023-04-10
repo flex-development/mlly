@@ -6,8 +6,8 @@
 #
 # - https://cli.github.com/manual/gh_pr_merge
 # - https://docs.github.com/actions/learn-github-actions/contexts
-# - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/actions/using-workflows/using-github-cli-in-workflows
 # - https://docs.github.com/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-auto-merge-for-pull-requests-in-your-repository
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
 # - https://github.com/actions/checkout
@@ -20,6 +20,8 @@ on:
     types:
       - opened
       - synchronize
+env:
+  GITHUB_TOKEN: ${{ secrets.PAT_REPO }}
 jobs:
   auto-merge:
     if: github.event.pull_request.auto_merge == null && github.event.pull_request.draft == false
@@ -32,9 +34,8 @@ jobs:
         name: Checkout ${{ github.head_ref }}
         uses: actions/checkout@v3.5.0
         with:
+          persist-credentials: false
           ref: ${{ github.head_ref }}
-      - id: auto-merge
+      - id: enable
         name: Enable auto-merge
-        run: gh pr merge ${{ github.event.pull_request.number }} --auto --squash
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_REPO }}
+        run: gh pr merge ${{ github.event.number }} --auto --squash

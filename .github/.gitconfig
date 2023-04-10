@@ -34,7 +34,7 @@ pou = "!f() { git push origin --no-verify -u $@; }; f"
 restart = "!f() { rm -rf .git; echo \"removed .git directory.\"; }; f"
 
 # create new local repo and perform initial commit
-setup = "!f() { git init && git config branch.autosetuprebase always && git config core.ignorecase false && git config pull.rebase true && git config rebase.autoStash true && git ac \"initial commit\"; }; f"
+setup = "!f() { git init && git config branch.autosetuprebase always && git config core.ignorecase false && git config pull.rebase true && git config rebase.autoStash true && git ac \"chore: initial commit\"; }; f"
 
 # undo last commit
 ulc = "!f() { git reset head~1 --soft; }; f"

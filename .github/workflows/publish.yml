@@ -5,12 +5,17 @@
 #
 # References:
 #
+# - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#release
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#release
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # - https://github.com/actions/checkout
+# - https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
 # - https://github.com/actions/setup-node
+# - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
 # - https://github.com/hmarr/debug-action
 # - https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 
@@ -22,21 +27,23 @@ on:
       - published
   workflow_dispatch:
     inputs:
-      artifact:
-        description: release artifact download url
-        required: true
       tag:
         description: release tag
         required: true
+        type: string
 env:
-  ARTIFACT: |
-    ${{ github.event.inputs.artifact || github.event.release.assets[0].browser_download_url }}
-  TAG: ${{ github.event.inputs.tag || github.event.release.tag_name }}
+  REF: ${{ format('refs/tags/{0}', inputs.tag || github.event.release.tag_name) }}
+  TAG: ${{ inputs.tag || github.event.release.tag_name }}
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ inputs.tag || github.event.release.tag_name }}
 jobs:
-  metadata:
+  preflight:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     outputs:
-      dist-tag: ${{ steps.dist-tag.outputs.flag }}
+      publish-command: ${{ steps.publish-command.outputs.result }}
       version: ${{ steps.version.outputs.result }}
     steps:
       - id: debug
@@ -46,17 +53,28 @@ jobs:
         name: Checkout ${{ env.TAG }}
         uses: actions/checkout@v3.5.0
         with:
-          ref: ${{ format('refs/tags/{0}', env.TAG) }}
+          persist-credentials: false
+          ref: ${{ env.REF }}
       - id: version
         name: Get package version
-        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
+        run: echo "result=$(jq .version package.json -r)" >>$GITHUB_OUTPUT
+      - id: artifact
+        name: Get release artifact download URL
+        run: |
+          echo "result=${{ github.event_name == 'release' && github.event.release.assets[0].browser_download_url || format('{0}/{1}/releases/download/{2}/%40{3}-{4}-{5}.tgz', github.server_url, github.repository, env.TAG, github.repository_owner, github.event.repository.name, steps.version.outputs.result) }}" >>$GITHUB_OUTPUT
       - id: dist-tag
         name: Get dist tag
         uses: flex-development/dist-tag-action@1.1.2
         with:
           target: ${{ steps.version.outputs.result }}
+      - id: publish-command
+        name: Get publish command
+        env:
+          ARTIFACT: ${{ steps.artifact.outputs.result }}
+          FLAGS: ${{ steps.dist-tag.outputs.flag }}
+        run: echo "result=npm publish $ARTIFACT $FLAGS" >>$GITHUB_OUTPUT
   gpr:
-    needs: metadata
+    needs: preflight
     permissions:
       packages: write
     runs-on: ubuntu-latest
@@ -70,7 +88,8 @@ jobs:
         name: Checkout ${{ env.TAG }}
         uses: actions/checkout@v3.5.0
         with:
-          ref: ${{ format('refs/tags/{0}', env.TAG) }}
+          persist-credentials: false
+          ref: ${{ env.REF }}
       - id: npmrc-cleanup
         name: Remove stale .npmrc file
         run: rm .npmrc
@@ -87,23 +106,28 @@ jobs:
         run: cat $NPM_CONFIG_USERCONFIG
       - id: publish
         name: Publish package
-        run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
+        run: ${{ needs.preflight.outputs.publish-command }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   npm:
-    needs: [metadata, gpr]
+    needs:
+      - gpr
+      - preflight
+    permissions:
+      packages: write
     runs-on: ubuntu-latest
     environment:
       name: npm
       url: |
         ${{ format('https://npmjs.com/package/@{0}/v/{1}', github.repository,
-        needs.metadata.outputs.version) }}
+        needs.preflight.outputs.version) }}
     steps:
       - id: checkout
         name: Checkout ${{ env.TAG }}
         uses: actions/checkout@v3.5.0
         with:
-          ref: ${{ format('refs/tags/{0}', env.TAG) }}
+          persist-credentials: false
+          ref: ${{ env.REF }}
       - id: npmrc-cleanup
         name: Remove stale .npmrc file
         run: rm .npmrc
@@ -120,11 +144,13 @@ jobs:
         run: cat $NPM_CONFIG_USERCONFIG
       - id: publish
         name: Publish package
-        run: npm publish $ARTIFACT ${{ needs.metadata.outputs.dist-tag }}
+        run: ${{ needs.preflight.outputs.publish-command }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   docs:
-    needs: [metadata, gpr, npm]
+    needs:
+      - gpr
+      - npm
     permissions:
       packages: read
     runs-on: ubuntu-latest
@@ -134,6 +160,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       HUSKY: 0
+      NODE_ENV: production
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
@@ -142,9 +169,6 @@ jobs:
         uses: actions/checkout@v3.5.0
         with:
           ref: ${{ format('refs/tags/{0}', env.TAG) }}
-      - id: install
-        name: Install Vercel CLI
-        run: npm install --global vercel@latest
       - id: env
         name: Pull environment
         run: vc pull --environment=production --yes --token=${{ secrets.VERCEL_TOKEN }}

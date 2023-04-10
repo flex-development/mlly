@@ -9,10 +9,12 @@
 # - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+# - https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions
 # - https://docs.github.com/graphql/reference/objects#pullrequest
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # - https://github.com/actions/github-script
+# - https://github.com/hmarr/debug-action
 # - https://github.com/octokit/graphql-action
 
 ---
@@ -28,15 +30,17 @@ on:
       pr:
         description: pull request number
         required: true
+        type: number
 permissions:
   issues: write
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   label-linked-issues:
     if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged
     runs-on: ubuntu-latest
     steps:
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.1.0
       - id: checkout
         name: Checkout main
         uses: actions/checkout@v3.5.0
@@ -45,10 +49,12 @@ jobs:
           ref: main
       - id: version
         name: Get project version
-        run: echo "result=$(jq .version package.json -r)" >> $GITHUB_OUTPUT
+        run: echo "result=$(jq .version package.json -r)" >>$GITHUB_OUTPUT
       - id: query
         name: Query linked issues
         uses: octokit/graphql-action@v2.2.23
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           query: |
             query ($limit: Int = 20, $owner: String!, $pr: Int!, $repo: String!) {
@@ -68,7 +74,7 @@ jobs:
               }
             }
           owner: ${{ github.repository_owner }}
-          pr: ${{ github.event.inputs.pr || github.event.number }}
+          pr: ${{ inputs.pr || github.event.number }}
           repo: ${{ github.event.repository.name }}
       - id: label
         name: Label linked issues
