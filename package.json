@@ -192,7 +192,7 @@
     "yaml-eslint-parser": "1.2.0"
   },
   "peerDependencies": {
-    "@types/node": ">=14.17.0",
+    "@types/node": ">=16.18.23",
     "node-fetch": ">=3.3.0"
   },
   "peerDependenciesMeta": {
@@ -206,7 +206,7 @@
     "vitepress@npm:1.0.0-alpha.34": "patch:vitepress@npm%3A1.0.0-alpha.34#patches/vitepress+1.0.0-alpha.34.dev.patch"
   },
   "engines": {
-    "node": ">=14.17.0",
+    "node": ">=16.20.0",
     "yarn": "4.0.0-rc.39"
   },
   "packageManager": "yarn@4.0.0-rc.39",

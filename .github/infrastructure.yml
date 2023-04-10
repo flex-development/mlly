@@ -43,7 +43,6 @@ branches:
           - context: gitguardian
           - context: lint
           - context: spelling
-          - context: test (14)
           - context: test (16)
           - context: test (18)
           - context: test (19)

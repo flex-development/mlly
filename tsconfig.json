@@ -13,7 +13,7 @@
     "exactOptionalPropertyTypes": true,
     "experimentalDecorators": false,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["dom", "dom.iterable", "es2020"],
+    "lib": ["dom", "dom.iterable", "es2022"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "newLine": "lf",

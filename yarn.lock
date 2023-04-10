@@ -3079,7 +3079,7 @@ __metadata:
     vue-tsc: "npm:1.2.0"
     yaml-eslint-parser: "npm:1.2.0"
   peerDependencies:
-    "@types/node": ">=14.17.0"
+    "@types/node": ">=16.18.23"
     node-fetch: ">=3.3.0"
   peerDependenciesMeta:
     "@types/node":
