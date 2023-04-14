@@ -13,7 +13,6 @@
 # - https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
 # - https://github.com/actions/checkout
-# - https://github.com/dependabot/fetch-metadata
 # - https://github.com/hmarr/debug-action
 
 ---
@@ -31,12 +30,6 @@ jobs:
       - id: debug
         name: Print environment variables and event payload
         uses: hmarr/debug-action@v2.1.0
-      - id: dependabot-metadata
-        name: Fetch dependabot metadata
-        if: github.actor == 'dependabot[bot]'
-        uses: dependabot/fetch-metadata@v1.3.6
-        with:
-          skip-commit-verification: true
       - id: checkout
         name: Checkout ${{ github.head_ref }}
         uses: actions/checkout@v3.5.2
@@ -52,5 +45,4 @@ jobs:
         if: |
           contains(steps.requested-reviewers.outputs.result, 'flexdevelopment')
           && (github.actor == 'dependabot[bot]' || github.actor == 'unicornware')
-          && steps.dependabot-metadata.outputs.update-type != 'version-update:semver-major'
         run: gh pr review ${{ github.event.number }} --approve --body 'lgtm 👍🏾'
