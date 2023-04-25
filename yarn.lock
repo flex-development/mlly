@@ -3018,7 +3018,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:5.59.1"
     "@typescript-eslint/parser": "npm:5.59.1"
     "@vates/toggle-scripts": "npm:1.0.0"
-    "@vitest/coverage-c8": "npm:0.30.0"
+    "@vitest/coverage-c8": "npm:0.30.1"
     "@vitest/ui": "npm:0.30.0"
     "@vue/runtime-core": "npm:3.2.47"
     add-stream: "npm:1.0.0"
@@ -4756,16 +4756,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-c8@npm:0.30.0":
-  version: 0.30.0
-  resolution: "@vitest/coverage-c8@npm:0.30.0"
+"@vitest/coverage-c8@npm:0.30.1":
+  version: 0.30.1
+  resolution: "@vitest/coverage-c8@npm:0.30.1"
   dependencies:
     c8: "npm:^7.13.0"
     picocolors: "npm:^1.0.0"
     std-env: "npm:^3.3.2"
   peerDependencies:
     vitest: ">=0.30.0 <1"
-  checksum: 2da6aa296d1c3485ab9a171a686bba134fd2488ac26a7fbdd684d0a26f099d08ab5a9e7a2944ea65685845ec2671e541c47e47a2014f68afa2e8fe174d4aae0e
+  checksum: 1d1a3848942d16393cecb4c9034398895637c6f2051524aed605cb430df65159743b3f9fe1251bb9a79bd42c095b56200e09eb2c59058394f6537c04a203209b
   languageName: node
   linkType: hard
 
