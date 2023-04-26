@@ -3019,7 +3019,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:5.59.1"
     "@vates/toggle-scripts": "npm:1.0.0"
     "@vitest/coverage-c8": "npm:0.30.1"
-    "@vitest/ui": "npm:0.30.0"
+    "@vitest/ui": "npm:0.30.1"
     "@vue/runtime-core": "npm:3.2.47"
     add-stream: "npm:1.0.0"
     algoliasearch: "npm:4.17.0"
@@ -4812,29 +4812,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/ui@npm:0.30.0":
-  version: 0.30.0
-  resolution: "@vitest/ui@npm:0.30.0"
+"@vitest/ui@npm:0.30.1":
+  version: 0.30.1
+  resolution: "@vitest/ui@npm:0.30.1"
   dependencies:
-    "@vitest/utils": "npm:0.30.0"
+    "@vitest/utils": "npm:0.30.1"
     fast-glob: "npm:^3.2.12"
     fflate: "npm:^0.7.4"
     flatted: "npm:^3.2.7"
     pathe: "npm:^1.1.0"
     picocolors: "npm:^1.0.0"
     sirv: "npm:^2.0.2"
-  checksum: 49c0cc3b022f716326995404b72ffb77ea2faf76951e4ed46095d4ac76845411f5817c82a9098684a1c6a08553a3bec24873555a2c37e52c77f3c92e1095a80f
-  languageName: node
-  linkType: hard
-
-"@vitest/utils@npm:0.30.0":
-  version: 0.30.0
-  resolution: "@vitest/utils@npm:0.30.0"
-  dependencies:
-    concordance: "npm:^5.0.4"
-    loupe: "npm:^2.3.6"
-    pretty-format: "npm:^27.5.1"
-  checksum: cfd94e5b03c899efd73c7388d3532537df456d4a9bf8ff7a0ada9c893840e9256f56224395729c1b5514b53e15315027e018ef2a47a39c5bfee746a9d6dd77c0
+  checksum: 5c0e734d8e4407b36bddb2b58250c07ec8a4e36118dd77b48466c6290060d530d55e3d6d7bad872311748472a5282e64700d144a6c3f50cbbb96c3ee406961bd
   languageName: node
   linkType: hard
 
