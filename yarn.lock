@@ -2160,17 +2160,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docsearch/css@npm:3.3.4":
+"@docsearch/css@npm:3.3.4, @docsearch/css@npm:^3.3.1":
   version: 3.3.4
   resolution: "@docsearch/css@npm:3.3.4"
   checksum: c7f11532a5a250a683d3796d07488a6dc0424d3c845b3a6728837fdc41ddc175a05b3736fec1a98870e5d68392aee805d2bec495cd70f936ba1e7732efe14e42
-  languageName: node
-  linkType: hard
-
-"@docsearch/css@npm:^3.3.1":
-  version: 3.3.3
-  resolution: "@docsearch/css@npm:3.3.3"
-  checksum: 41cdf9289a574115dd1085c1e95e8571085a4b6415990a03b3089645a9ac53416b1b8e851db0b826c1d9952efdb1683f1a0d129ffac6f4b91d2b702ea3d1f1bb
   languageName: node
   linkType: hard
 
