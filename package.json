@@ -160,7 +160,7 @@
     "husky": "8.0.3",
     "is-ci": "3.0.1",
     "jsonc-eslint-parser": "2.2.0",
-    "lint-staged": "13.2.1",
+    "lint-staged": "13.2.2",
     "mri": "1.2.0",
     "node-fetch": "3.3.1",
     "node-notifier": "10.0.1",
