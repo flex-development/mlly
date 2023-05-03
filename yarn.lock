@@ -222,6 +222,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ampproject/remapping@npm:^2.2.0":
+  version: 2.2.1
+  resolution: "@ampproject/remapping@npm:2.2.1"
+  dependencies:
+    "@jridgewell/gen-mapping": "npm:^0.3.0"
+    "@jridgewell/trace-mapping": "npm:^0.3.9"
+  checksum: a6e71b1b6bcffc909f5527899d9598f30cd7dc8c82845fba07c237232d4404795681dc9a2ff7e24e620415b8b8b60466ebd517f7c00bef53adf3a6a37d5a8f1b
+  languageName: node
+  linkType: hard
+
 "@ardatan/sync-fetch@larsgw/sync-fetch#head=worker_threads":
   version: 0.3.1
   resolution: "@ardatan/sync-fetch@https://github.com/larsgw/sync-fetch.git#commit=3fb71aeed5ff6655421064c4e4b234f524896cd2"
@@ -2896,7 +2906,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:5.59.2"
     "@typescript-eslint/parser": "npm:5.59.2"
     "@vates/toggle-scripts": "npm:1.0.0"
-    "@vitest/coverage-c8": "npm:0.30.1"
+    "@vitest/coverage-c8": "npm:0.31.0"
     "@vitest/ui": "npm:0.31.0"
     "@vue/runtime-core": "npm:3.2.47"
     add-stream: "npm:1.0.0"
@@ -3392,6 +3402,17 @@ __metadata:
     "@jridgewell/set-array": "npm:^1.0.0"
     "@jridgewell/sourcemap-codec": "npm:^1.4.10"
   checksum: 5e4c9ef71682a0d827050cc53f10308825f8a0930ab2b54094381de293f92a53b290091fbe910c17048eae31c1b99c5ef8474ae8267192f83b40023619367331
+  languageName: node
+  linkType: hard
+
+"@jridgewell/gen-mapping@npm:^0.3.0":
+  version: 0.3.3
+  resolution: "@jridgewell/gen-mapping@npm:0.3.3"
+  dependencies:
+    "@jridgewell/set-array": "npm:^1.0.1"
+    "@jridgewell/sourcemap-codec": "npm:^1.4.10"
+    "@jridgewell/trace-mapping": "npm:^0.3.9"
+  checksum: b90bc3ab62856ed90cd1e224ec2a7644b1247821931de118e59da1c3cf0b66438160e43e493ed267709983e738918ae10aa008928814c3e7a4bc26df8383a8a3
   languageName: node
   linkType: hard
 
@@ -4621,16 +4642,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/coverage-c8@npm:0.30.1":
-  version: 0.30.1
-  resolution: "@vitest/coverage-c8@npm:0.30.1"
+"@vitest/coverage-c8@npm:0.31.0":
+  version: 0.31.0
+  resolution: "@vitest/coverage-c8@npm:0.31.0"
   dependencies:
+    "@ampproject/remapping": "npm:^2.2.0"
     c8: "npm:^7.13.0"
+    magic-string: "npm:^0.30.0"
     picocolors: "npm:^1.0.0"
     std-env: "npm:^3.3.2"
   peerDependencies:
     vitest: ">=0.30.0 <1"
-  checksum: 1d1a3848942d16393cecb4c9034398895637c6f2051524aed605cb430df65159743b3f9fe1251bb9a79bd42c095b56200e09eb2c59058394f6537c04a203209b
+  checksum: 49abc0e4fc7576ca934d08901862b2426abcddbf18d4d7f75bddd2ae98fde22db43181a483021c8f1ffb808d3cd3edc50badb297ef3493c827a93cd0c2412081
   languageName: node
   linkType: hard
 
