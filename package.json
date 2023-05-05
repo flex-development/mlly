@@ -143,7 +143,7 @@
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-chai-expect": "3.0.0",
     "eslint-plugin-jest-formatting": "3.1.0",
-    "eslint-plugin-jsdoc": "40.1.2",
+    "eslint-plugin-jsdoc": "43.2.0",
     "eslint-plugin-jsonc": "2.7.0",
     "eslint-plugin-markdown": "3.0.0",
     "eslint-plugin-markdownlint": "0.4.1",
