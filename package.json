@@ -120,7 +120,7 @@
     "@vates/toggle-scripts": "1.0.0",
     "@vitest/coverage-c8": "0.31.0",
     "@vitest/ui": "0.31.0",
-    "@vue/runtime-core": "3.2.47",
+    "@vue/runtime-core": "3.3.2",
     "add-stream": "1.0.0",
     "algoliasearch": "4.17.0",
     "chai": "4.3.7",

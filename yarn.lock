@@ -2898,7 +2898,7 @@ __metadata:
     "@vates/toggle-scripts": "npm:1.0.0"
     "@vitest/coverage-c8": "npm:0.31.0"
     "@vitest/ui": "npm:0.31.0"
-    "@vue/runtime-core": "npm:3.2.47"
+    "@vue/runtime-core": "npm:3.3.2"
     add-stream: "npm:1.0.0"
     algoliasearch: "npm:4.17.0"
     chai: "npm:4.3.7"
@@ -4908,6 +4908,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/reactivity@npm:3.3.2":
+  version: 3.3.2
+  resolution: "@vue/reactivity@npm:3.3.2"
+  dependencies:
+    "@vue/shared": "npm:3.3.2"
+  checksum: 4e275407384de7476af5b90b7635e13a7bb01d4cec04ebaded90ab87576ebb32bc7cb7cabd3df3e100f385453f6eeb207a2d4d4a58a42fd2c81c63fee5d7730e
+  languageName: node
+  linkType: hard
+
 "@vue/reactivity@npm:^3.3.0-beta.3":
   version: 3.3.0-beta.3
   resolution: "@vue/reactivity@npm:3.3.0-beta.3"
@@ -4924,6 +4933,16 @@ __metadata:
     "@vue/reactivity": "npm:3.2.47"
     "@vue/shared": "npm:3.2.47"
   checksum: 1d1233d64205910bd27b7e660bb43327d135a9c02514e05b2d6382264dc3e0cac4172aa12ef9dfd5afbd2ff46e2c66327407f2229e0e325bb83897c988db5584
+  languageName: node
+  linkType: hard
+
+"@vue/runtime-core@npm:3.3.2":
+  version: 3.3.2
+  resolution: "@vue/runtime-core@npm:3.3.2"
+  dependencies:
+    "@vue/reactivity": "npm:3.3.2"
+    "@vue/shared": "npm:3.3.2"
+  checksum: 3dbdf1cfea1c61f61f57922c6947e4e1a7e01b60b20f13038845d4c569bac2158eb2d9ab5c14d55fd60d65dd736bf089a6a8aa3bc4569e30447a78c5d0ec1874
   languageName: node
   linkType: hard
 
@@ -4961,6 +4980,13 @@ __metadata:
   version: 3.3.0-beta.3
   resolution: "@vue/shared@npm:3.3.0-beta.3"
   checksum: b11aed45556399212c0f60b8f343b2a385cf6f42f561db44d58a60ca42ab9db29db30bf9cc008466ba4c8c33b68602bcc2350576886724d2ddd4770b980e43f1
+  languageName: node
+  linkType: hard
+
+"@vue/shared@npm:3.3.2":
+  version: 3.3.2
+  resolution: "@vue/shared@npm:3.3.2"
+  checksum: ed743801419b4e5135c453fb181d9b3c184c49c820913842b1805ec0077197dd3a70f3917b942b7c100e1036554bcd1b9dd5670f930fc7ba0c79373d21e5f730
   languageName: node
   linkType: hard
 
