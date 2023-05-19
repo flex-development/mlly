@@ -2644,6 +2644,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/builtin-modules@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@flex-development/builtin-modules@npm:2.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fbuiltin-modules%2F2.1.0%2F7bc59fc780205af7e3e44aafc7a0510414e19faf"
+  checksum: 6ba4fd31cb62ce5d72dfe9d8ca54b458077f2e53734cbea5352b3f3591c365550776e7fa6feeb165e154c8a107c0a1c4feb6f14e1eed9171e447a1a96a95fd9c
+  languageName: node
+  linkType: hard
+
 "@flex-development/commitlint-config@npm:1.0.1":
   version: 1.0.1
   resolution: "@flex-development/commitlint-config@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fcommitlint-config%2F1.0.1%2F802e285802fe8188c2f02f68114ca31a20b6eb6d"
@@ -2787,6 +2794,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/is-builtin@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@flex-development/is-builtin@npm:3.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fis-builtin%2F3.0.0%2F1b1bd1186ce7ec8768fb1ac8544ba7d4220e261f"
+  dependencies:
+    "@flex-development/builtin-modules": "npm:2.1.0"
+  peerDependencies:
+    "@types/node": ">=16.18.23"
+  checksum: 2e89d24d2eee7da80e3f237b29723c1056523272b7d41e750e1f2202a975ac89802b91c54fe6b66b3f09ac6abb20e0b04e4144251f0e8ef5fbbe2994f90012f7
+  languageName: node
+  linkType: hard
+
 "@flex-development/mkbuild@npm:1.0.0-alpha.20":
   version: 1.0.0-alpha.20
   resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.20::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.20%2Fd76a588f7436df11522a53f514b29069a90c5cb6"
@@ -2870,7 +2888,7 @@ __metadata:
     "@flex-development/esm-types": "npm:1.0.0"
     "@flex-development/export-regex": "npm:1.0.2"
     "@flex-development/import-regex": "npm:2.0.3"
-    "@flex-development/is-builtin": "npm:2.0.0"
+    "@flex-development/is-builtin": "npm:3.0.0"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.20"
     "@flex-development/pathe": "npm:1.0.3"
     "@flex-development/pkg-types": "npm:2.0.0"
