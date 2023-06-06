@@ -2961,7 +2961,7 @@ __metadata:
     vercel: "npm:29.1.1"
     version-bump-prompt: "npm:6.1.0"
     vfile: "npm:5.3.7"
-    vite: "npm:4.3.5"
+    vite: "npm:4.3.9"
     vite-tsconfig-paths: "npm:4.2.0"
     vitepress: "npm:1.0.0-alpha.34"
     vitest: "npm:0.31.1"
@@ -15396,9 +15396,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:4.3.5, vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.0.3, vite@npm:^4.1.4":
-  version: 4.3.5
-  resolution: "vite@npm:4.3.5"
+"vite@npm:4.3.9, vite@npm:^3.0.0 || ^4.0.0, vite@npm:^4.0.3, vite@npm:^4.1.4":
+  version: 4.3.9
+  resolution: "vite@npm:4.3.9"
   dependencies:
     esbuild: "npm:^0.17.5"
     fsevents: "npm:~2.3.2"
@@ -15429,7 +15429,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: d86faa0cad8365d71ec053b8d7229f3963ac5a059d42f5ba139cd300fe1101649533d0dc750c94511a5b25a01711a60f6dcde580ff44cf64f354e0bf05ad9b13
+  checksum: 3bdd4d860e646a5abdf9b0af1828d74e7e20f9124cc4081cc7d8a09df1b054286add51051c1127cc3c1ea522e3c756da21a1dc424dabd121fa5b82dd5c6911b1
   languageName: node
   linkType: hard
 
