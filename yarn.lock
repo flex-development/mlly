@@ -2924,7 +2924,7 @@ __metadata:
     conventional-changelog: "npm:3.1.25"
     conventional-changelog-conventionalcommits: "npm:5.0.0"
     conventional-changelog-core: "npm:4.2.4"
-    conventional-changelog-writer: "npm:5.0.1"
+    conventional-changelog-writer: "npm:6.0.0"
     conventional-recommended-bump: "npm:7.0.1"
     cross-env: "npm:7.0.3"
     cspell: "npm:6.31.1"
@@ -6711,7 +6711,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-changelog-writer@npm:5.0.1, conventional-changelog-writer@npm:^5.0.0":
+"conventional-changelog-writer@npm:6.0.0":
+  version: 6.0.0
+  resolution: "conventional-changelog-writer@npm:6.0.0"
+  dependencies:
+    conventional-commits-filter: "npm:^3.0.0"
+    dateformat: "npm:^3.0.3"
+    handlebars: "npm:^4.7.7"
+    json-stringify-safe: "npm:^5.0.1"
+    meow: "npm:^8.1.2"
+    semver: "npm:^6.3.0"
+    split: "npm:^1.0.1"
+  bin:
+    conventional-changelog-writer: cli.js
+  checksum: 09757a7136f0fe4708cbec1e0ab2c2e713b60aba21e023f2d1c0d51cfc5e8cb085ddcc1885c9cd51004f156df305bf377783aa9a82045e8fb13a3afe77c412fb
+  languageName: node
+  linkType: hard
+
+"conventional-changelog-writer@npm:^5.0.0":
   version: 5.0.1
   resolution: "conventional-changelog-writer@npm:5.0.1"
   dependencies:
@@ -7157,7 +7174,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dateformat@npm:^3.0.0":
+"dateformat@npm:^3.0.0, dateformat@npm:^3.0.3":
   version: 3.0.3
   resolution: "dateformat@npm:3.0.3"
   checksum: b88a9e539929e5ef5ac6b0b6d1907fbdaf899868cdd555abbd0204d6b9e4a41533d9190915d860222b25f8714c7d58150b462da7e747904ad10a4a4ceed7a9a5
@@ -14146,7 +14163,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"split@npm:^1.0.0":
+"split@npm:^1.0.0, split@npm:^1.0.1":
   version: 1.0.1
   resolution: "split@npm:1.0.1"
   dependencies:
