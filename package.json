@@ -131,7 +131,7 @@
     "conventional-changelog": "3.1.25",
     "conventional-changelog-conventionalcommits": "5.0.0",
     "conventional-changelog-core": "4.2.4",
-    "conventional-changelog-writer": "5.0.1",
+    "conventional-changelog-writer": "6.0.0",
     "conventional-recommended-bump": "7.0.1",
     "cross-env": "7.0.3",
     "cspell": "6.31.1",
