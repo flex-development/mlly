@@ -2944,7 +2944,7 @@ __metadata:
     eslint-plugin-prettier: "npm:4.2.1"
     eslint-plugin-promise: "npm:6.1.1"
     eslint-plugin-unicorn: "npm:46.0.0"
-    eslint-plugin-vue: "npm:9.11.0"
+    eslint-plugin-vue: "npm:9.15.1"
     eslint-plugin-yml: "npm:1.6.0"
     globby: "npm:13.1.4"
     graphql: "npm:16.6.0"
@@ -8230,20 +8230,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vue@npm:9.11.0":
-  version: 9.11.0
-  resolution: "eslint-plugin-vue@npm:9.11.0"
+"eslint-plugin-vue@npm:9.15.1":
+  version: 9.15.1
+  resolution: "eslint-plugin-vue@npm:9.15.1"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.3.0"
     natural-compare: "npm:^1.4.0"
     nth-check: "npm:^2.0.1"
     postcss-selector-parser: "npm:^6.0.9"
     semver: "npm:^7.3.5"
-    vue-eslint-parser: "npm:^9.0.1"
+    vue-eslint-parser: "npm:^9.3.0"
     xml-name-validator: "npm:^4.0.0"
   peerDependencies:
     eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
-  checksum: df030e159a15921a66ffa6fe80248e2a851bb4e821fb220d0ccf18623f0e5cf034f41160238e801be33c680771107dbcea44ec7676160121737eb4affce57806
+  checksum: 9f30508391a65887c90f618a80705512a57f92a6985010a0a1dcbc78d22218494d7924340d51f19b6fd7ac4ec26c06a0068d24d6c967de28ab08e05d2ccaca1e
   languageName: node
   linkType: hard
 
@@ -15697,7 +15697,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-eslint-parser@npm:9.2.0, vue-eslint-parser@npm:^9.0.1":
+"vue-eslint-parser@npm:9.2.0":
   version: 9.2.0
   resolution: "vue-eslint-parser@npm:9.2.0"
   dependencies:
@@ -15711,6 +15711,23 @@ __metadata:
   peerDependencies:
     eslint: ">=6.0.0"
   checksum: bb9687f635554fffcf596d4ee7a30bbeb533f0859f70e2687264d7eb076e8abbcc38eaeaceaeb7fc1c6f7b13927ecdca3b671067215d59a1dc9df069234f654b
+  languageName: node
+  linkType: hard
+
+"vue-eslint-parser@npm:^9.3.0":
+  version: 9.3.1
+  resolution: "vue-eslint-parser@npm:9.3.1"
+  dependencies:
+    debug: "npm:^4.3.4"
+    eslint-scope: "npm:^7.1.1"
+    eslint-visitor-keys: "npm:^3.3.0"
+    espree: "npm:^9.3.1"
+    esquery: "npm:^1.4.0"
+    lodash: "npm:^4.17.21"
+    semver: "npm:^7.3.6"
+  peerDependencies:
+    eslint: ">=6.0.0"
+  checksum: 0a0ac4b9ef44e22db11352a534dd07ce0e12ed29e2befc49cac7ad6fb711269075047680102e84fdb288474989b8bcf8ab7c84a4c22e8f98afe2f175b74b0bf7
   languageName: node
   linkType: hard
 
