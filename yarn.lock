@@ -2922,7 +2922,7 @@ __metadata:
     chai-string: "npm:1.5.0"
     cheerio: "npm:1.0.0-rc.12"
     conventional-changelog: "npm:3.1.25"
-    conventional-changelog-conventionalcommits: "npm:5.0.0"
+    conventional-changelog-conventionalcommits: "npm:6.1.0"
     conventional-changelog-core: "npm:4.2.4"
     conventional-changelog-writer: "npm:6.0.0"
     conventional-recommended-bump: "npm:7.0.1"
@@ -6615,6 +6615,15 @@ __metadata:
     lodash: "npm:^4.17.15"
     q: "npm:^1.5.1"
   checksum: cd39e90a9637925b99c425197436f6cec1257f3ae82b437edeb93390d4cea90702cff31c06ab4d9dde71ea243cf64f7665eafa019bbfd7735ce2e4d30b9362bf
+  languageName: node
+  linkType: hard
+
+"conventional-changelog-conventionalcommits@npm:6.1.0":
+  version: 6.1.0
+  resolution: "conventional-changelog-conventionalcommits@npm:6.1.0"
+  dependencies:
+    compare-func: "npm:^2.0.0"
+  checksum: 75f983f548b0769d2a1f486d6a3cf97426b694bdb13974861ab491fcb03e87c9cf0af031206e7a29c6ec22afb476a97e3ec2f64b3a4cc0b07f6fc257eef3ea9d
   languageName: node
   linkType: hard
 
