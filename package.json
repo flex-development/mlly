@@ -150,7 +150,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-promise": "6.1.1",
-    "eslint-plugin-unicorn": "46.0.0",
+    "eslint-plugin-unicorn": "48.0.1",
     "eslint-plugin-vue": "9.15.1",
     "eslint-plugin-yml": "1.6.0",
     "globby": "13.1.4",
