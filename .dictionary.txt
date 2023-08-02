@@ -7,5 +7,6 @@ keyid
 lintstagedrc
 mlly
 vitepress
+vitest
 wabt
 yarnrc

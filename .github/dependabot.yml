@@ -30,6 +30,26 @@ updates:
       prefix: build
       include: scope
     directory: /
+    groups:
+      conventional-changelog:
+        patterns:
+          - '@types/conventional-changelog'
+          - '@types/conventional-changelog-core'
+          - '@types/conventional-changelog-writer'
+          - '@types/conventional-recommended-bump'
+          - '@types/git-raw-commits'
+          - conventional-changelog
+          - conventional-changelog-conventionalcommits
+          - conventional-changelog-core
+          - conventional-changelog-writer
+          - conventional-recommended-bump
+      typescript-eslint:
+        patterns:
+          - '@typescript-eslint/*'
+      vitest:
+        patterns:
+          - '@vitest/*'
+          - vitest
     ignore:
       - dependency-name: vitepress
     labels:
