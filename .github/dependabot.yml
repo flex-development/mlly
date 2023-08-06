@@ -50,8 +50,6 @@ updates:
         patterns:
           - '@vitest/*'
           - vitest
-    ignore:
-      - dependency-name: vitepress
     labels:
       - scope:dependencies
       - type:build

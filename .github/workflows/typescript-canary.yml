@@ -21,7 +21,7 @@ name: typescript-canary
 on:
   schedule:
     # every day, 3 hours after typescript@next release
-    # https://github.com/microsoft/TypeScript/blob/v4.9.5/.github/workflows/nightly.yaml
+    # https://github.com/microsoft/TypeScript/blob/v5.0.4/.github/workflows/nightly.yaml
     - cron: 0 10 * * *
   workflow_dispatch:
 permissions:
@@ -65,13 +65,9 @@ jobs:
       - id: typescript
         name: Install typescript@${{ matrix.typescript-version }}
         run: yarn add -D typescript@${{ matrix.typescript-version }}
-      - id: set-typescript-version
-        name: Set env.TYPESCRIPT_VERSION
-        run: |
-          echo "TYPESCRIPT_VERSION=$(jq .devDependencies.typescript package.json -r)" >>$GITHUB_ENV
       - id: print-typescript-version
         name: Print TypeScript version
-        run: echo $TYPESCRIPT_VERSION
+        run: jq .devDependencies.typescript package.json -r
       - id: build
         name: Build project
         run: yarn build

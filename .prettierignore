@@ -4,6 +4,7 @@
 # DIRECTORIES & FILES
 **/*.hbs
 **/*.md
+**/*.patch
 **/*.snap
 **/*config.*.timestamp*
 **/.temp/

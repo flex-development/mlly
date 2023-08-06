@@ -15,6 +15,7 @@
   "ignorePaths": [
     "**/*.log",
     "**/*.snap",
+    "**/*.wasm",
     "**/.*ignore",
     "**/.gitconfig",
     "**/CHANGELOG.md",
@@ -31,10 +32,10 @@
     "yarn.lock"
   ],
   "ignoreRegExpList": [
-    "/0x*/",
+    "/(%2f|%5c).+/i",
+    "/(;base64,).+/",
     "/@flex-development\\/.*/",
     "/from\\s+(['\"]).*\\1/",
-    "^[^/]+\\/[^,;]+[^,]*?(?:;base64)?,(?:[\\S\\s]*)$",
     "import\\(.*\\)"
   ],
   "ignoreWords": [],

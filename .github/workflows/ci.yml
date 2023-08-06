@@ -240,9 +240,7 @@ jobs:
         typescript-version:
           - ${{ needs.preflight.outputs.version-typescript }}
           - latest
-          - ~4.9.0
-          - ~4.8.0
-          - ~4.7.0
+          - 5.0.4
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -274,14 +272,10 @@ jobs:
         if: steps.test-files-check.outputs.files_exists == 'true'
         name: Install typescript@${{ matrix.typescript-version }}
         run: yarn add -D typescript@${{ matrix.typescript-version }}
-      - id: set-typescript-version
-        name: Set env.TYPESCRIPT_VERSION
-        run: |
-          echo "TYPESCRIPT_VERSION=$(jq .devDependencies.typescript package.json -r)" >>$GITHUB_ENV
       - id: print-typescript-version
         if: steps.test-files-check.outputs.files_exists == 'true'
         name: Print TypeScript version
-        run: echo $TYPESCRIPT_VERSION
+        run: jq .devDependencies.typescript package.json -r
       - id: typecheck
         if: steps.test-files-check.outputs.files_exists == 'true'
         name: Run typecheck
@@ -295,6 +289,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
+          - 20
           - 19
           - 18
           - 16
@@ -403,7 +398,7 @@ jobs:
       - spelling
       - test
       - typescript
-    if: github.actor != 'dependabot[bot]' && github.actor != 'flexdevelopment'
+    if: github.actor != 'flexdevelopment'
     runs-on: ubuntu-latest
     environment: preview
     env:

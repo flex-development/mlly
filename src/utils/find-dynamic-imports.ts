@@ -9,6 +9,7 @@ import {
   StatementSyntaxKind
 } from '#src/enums'
 import type { DynamicImport } from '#src/interfaces'
+import dequote from '#src/internal/dequote'
 import getSpecifierKind from '#src/internal/get-specifier-kind'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
@@ -59,7 +60,7 @@ const findDynamicImports = (code: string = ''): DynamicImport[] => {
               .filter(e => !!e.length),
       kind: StatementKind.IMPORT,
       options,
-      specifier: specifier.replace(/^["']|["']$/g, ''),
+      specifier: dequote(specifier),
       specifier_kind:
         specifier_syntax === SpecifierSyntaxKind.DYNAMIC
           ? null

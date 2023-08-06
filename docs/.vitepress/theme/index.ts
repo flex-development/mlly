@@ -16,7 +16,6 @@ import Doc from '../components/Doc.vue'
  */
 const theme: Theme = {
   Layout: DefaultTheme.Layout,
-  NotFound: DefaultTheme.NotFound,
   /**
    * Performs app enhancement tasks.
    *

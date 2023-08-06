@@ -194,7 +194,6 @@
     ],
     "overrideConfigFile": ".eslintrc.cjs"
   },
-  "eslint.packageManager": "yarn",
   "eslint.validate": [
     "graphql",
     "javascript",
@@ -264,6 +263,7 @@
   "shellformat.flag": "-ci -fn -i=2 -sr",
   "shellformat.useEditorConfig": true,
   "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.scrollback": 10000,
   "todo-tree.filtering.ignoreGitSubmodules": true,
   "todo-tree.filtering.includeHiddenFiles": false,
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
@@ -401,7 +401,7 @@
   "xml.format.closingBracketNewLine": true,
   "xml.format.maxLineWidth": 100,
   "xml.format.spaceBeforeEmptyCloseTag": false,
-  "xml.format.splitAttributes": true,
+  "xml.format.splitAttributes": "splitNewLine",
   "xml.format.splitAttributesIndentSize": 0,
   "yaml.schemas": {
     "https://json.schemastore.org/github-issue-config": ".github/ISSUE_TEMPLATE/config.yml",

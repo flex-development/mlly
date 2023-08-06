@@ -53,6 +53,7 @@ const config = {
       },
       plugins: [
         '@typescript-eslint',
+        'import',
         'jsdoc',
         'node',
         'prettier',
@@ -171,7 +172,6 @@ const config = {
           }
         ],
         '@typescript-eslint/no-dupe-class-members': 2,
-        '@typescript-eslint/no-duplicate-imports': 2,
         '@typescript-eslint/no-dynamic-delete': 2,
         '@typescript-eslint/no-empty-function': [
           2,
@@ -246,7 +246,7 @@ const config = {
             allowedNames: ['self']
           }
         ],
-        '@typescript-eslint/no-throw-literal': 0,
+        '@typescript-eslint/no-throw-literal': 2,
         '@typescript-eslint/no-type-alias': 0,
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': [
           2,
@@ -352,7 +352,11 @@ const config = {
           2,
           {
             allowAny: false,
-            checkCompoundAssignments: false
+            allowBoolean: false,
+            allowNullish: false,
+            allowNumberAndString: true,
+            allowRegExp: false,
+            skipCompoundAssignments: true
           }
         ],
         '@typescript-eslint/restrict-template-expressions': [
@@ -366,7 +370,7 @@ const config = {
           }
         ],
         '@typescript-eslint/return-await': [2, 'in-try-catch'],
-        '@typescript-eslint/sort-type-union-intersection-members': 2,
+        '@typescript-eslint/sort-type-constituents': 2,
         '@typescript-eslint/strict-boolean-expressions': [
           2,
           {
@@ -394,6 +398,13 @@ const config = {
         '@typescript-eslint/unified-signatures': 2,
         'default-param-last': 0,
         eqeqeq: 1,
+        'import/no-duplicates': [
+          2,
+          {
+            considerQueryString: true,
+            'prefer-inline': true
+          }
+        ],
         'init-declarations': 0,
         'jsdoc/check-access': 1,
         'jsdoc/check-alignment': 1,
@@ -417,6 +428,7 @@ const config = {
           1,
           {
             definedTags: [
+              'decorator',
               'experimental',
               'maximum',
               'minimum',
@@ -434,7 +446,6 @@ const config = {
         'jsdoc/match-description': 0,
         'jsdoc/match-name': 0,
         'jsdoc/multiline-blocks': 1,
-        'jsdoc/newline-after-description': [1, 'always'],
         'jsdoc/no-bad-blocks': [1, { preventAllMultiAsteriskBlocks: true }],
         'jsdoc/no-defaults': 0,
         'jsdoc/no-missing-syntax': 0,
@@ -557,9 +568,10 @@ const config = {
           1,
           'any',
           {
+            applyToEndTag: true,
             count: 1,
-            dropEndLines: true,
-            noEndLines: false,
+            endLines: 0,
+            startLines: 1,
             tags: {}
           }
         ],
@@ -572,6 +584,7 @@ const config = {
         'no-empty-function': 0,
         'no-ex-assign': 0,
         'no-extra-parens': 0,
+        'no-extra-semi': 0,
         'no-implied-eval': 0,
         'no-invalid-this': 0,
         'no-loop-func': 0,
@@ -774,15 +787,8 @@ const config = {
             allowArgumentsExplicitlyTypedAsAny: true,
             allowDirectConstAssertionInArrowFunctions: true,
             allowHigherOrderFunctions: false,
-            allowTypedFunctionExpressions: true,
-            allowedNames: [],
-            shouldTrackReferences: true
-          }
-        ],
-        '@typescript-eslint/no-implicit-any-catch': [
-          2,
-          {
-            allowExplicitAny: false
+            allowTypedFunctionExpressions: false,
+            allowedNames: []
           }
         ],
         'no-undef': 0
@@ -835,6 +841,7 @@ const config = {
       },
       plugins: ['chai-expect', 'jest-formatting'],
       rules: {
+        '@typescript-eslint/class-literal-property-style': 0,
         '@typescript-eslint/consistent-indexed-object-style': 0,
         '@typescript-eslint/no-base-to-string': 0,
         '@typescript-eslint/no-empty-function': 0,
@@ -875,6 +882,12 @@ const config = {
       rules: {
         '@typescript-eslint/ban-types': 0,
         '@typescript-eslint/no-redundant-type-constituents': 0
+      }
+    },
+    {
+      files: ['**/decorators/*.constraint.ts', '**/*.decorator.ts'],
+      rules: {
+        '@typescript-eslint/ban-types': 0
       }
     },
     {
@@ -989,6 +1002,7 @@ const config = {
         '@typescript-eslint/naming-convention': 0,
         '@typescript-eslint/no-base-to-string': 0,
         '@typescript-eslint/no-confusing-void-expression': 0,
+        '@typescript-eslint/no-duplicate-type-constituents': 0,
         '@typescript-eslint/no-floating-promises': 0,
         '@typescript-eslint/no-for-in-array': 0,
         '@typescript-eslint/no-implied-eval': 0,
@@ -996,6 +1010,7 @@ const config = {
         '@typescript-eslint/no-misused-promises': 0,
         '@typescript-eslint/no-mixed-enums': 0,
         '@typescript-eslint/no-redundant-type-constituents': 0,
+        '@typescript-eslint/no-throw-literal': 0,
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 0,
         '@typescript-eslint/no-unnecessary-condition': 0,
         '@typescript-eslint/no-unnecessary-qualifier': 0,
@@ -1004,12 +1019,14 @@ const config = {
         '@typescript-eslint/no-unsafe-argument': 0,
         '@typescript-eslint/no-unsafe-assignment': 0,
         '@typescript-eslint/no-unsafe-call': 0,
+        '@typescript-eslint/no-unsafe-enum-comparison': 0,
         '@typescript-eslint/no-unsafe-member-access': 0,
         '@typescript-eslint/no-unsafe-return': 0,
         '@typescript-eslint/no-unused-expressions': 0,
         '@typescript-eslint/non-nullable-type-assertion-style': 0,
         '@typescript-eslint/prefer-includes': 0,
         '@typescript-eslint/prefer-nullish-coalescing': 0,
+        '@typescript-eslint/prefer-optional-chain': 0,
         '@typescript-eslint/prefer-readonly': 0,
         '@typescript-eslint/prefer-readonly-parameter-types': 0,
         '@typescript-eslint/prefer-reduce-type-parameter': 0,
@@ -1030,7 +1047,7 @@ const config = {
       }
     },
     {
-      files: '**/*.yml',
+      files: '**/*.+(yaml|yml)',
       parser: 'yaml-eslint-parser',
       plugins: ['yml'],
       rules: {
@@ -1149,6 +1166,13 @@ const config = {
     'prettier/prettier': [2, {}, { usePrettierrc: true }]
   },
   settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.cts', '.mts', '.ts', '.tsx']
+    },
+    'import/resolver': {
+      node: true,
+      typescript: true
+    },
     jsdoc: {
       augmentsExtendsReplacesDocs: true,
       ignoreInternal: false,
@@ -1156,12 +1180,20 @@ const config = {
       implementsReplacesDocs: true,
       overrideReplacesDocs: true,
       preferredTypes: {
-        '*': false
+        '*': false,
+        '.<>': false,
+        'Array<>': { replacement: '[]' },
+        Object: { replacement: 'object' },
+        'Object<>': { replacement: 'Record<>' },
+        object: 'object'
       },
       structuredTags: {
         const: {
           name: 'namepath-defining',
           required: ['name']
+        },
+        decorator: {
+          name: 'none'
         },
         enum: {
           name: 'namepath-defining',

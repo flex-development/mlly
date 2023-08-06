@@ -9,6 +9,7 @@ import {
   StatementSyntaxKind
 } from '#src/enums'
 import type { RequireStatement } from '#src/interfaces'
+import dequote from '#src/internal/dequote'
 import getSpecifierKind from '#src/internal/get-specifier-kind'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
@@ -59,7 +60,7 @@ const findRequires = (code: string = ''): RequireStatement[] => {
               .map(trim)
               .filter(e => !!e.length),
       kind: StatementKind.REQUIRE,
-      specifier: specifier.replace(/^["']|["']$/g, ''),
+      specifier: dequote(specifier),
       specifier_kind:
         specifier_syntax === SpecifierSyntaxKind.DYNAMIC
           ? null

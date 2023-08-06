@@ -37,10 +37,10 @@ interface ThemeConfig extends DefaultTheme.Config {
    *
    * @see https://vitepress.vuejs.org/config/theme-configs#sidebar
    */
-  sidebar: (DefaultTheme.SidebarGroup & {
+  sidebar: {
     items: { link: string; text: string }[]
     text: string
-  })[]
+  }[]
 }
 
 export type { ThemeConfig as default }

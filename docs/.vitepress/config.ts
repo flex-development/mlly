@@ -36,6 +36,7 @@ import {
   type UserConfig
 } from 'vitepress'
 import pkg from '../../package.json' assert { type: 'json' }
+import vercel from '../../vercel.json' assert { type: 'json' }
 import useComments from './composables/use-comments'
 import usePageUrl from './composables/use-page-url'
 import type ThemeConfig from './theme/config'
@@ -425,7 +426,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
 
     return void 0
   },
-  cleanUrls: 'without-subfolders',
+  cleanUrls: vercel.cleanUrls,
   description: pkg.description,
   head: [
     // improve speed of first search query

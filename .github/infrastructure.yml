@@ -44,11 +44,10 @@ branches:
           - context: test (16)
           - context: test (18)
           - context: test (19)
+          - context: test (20)
           - context: typescript (5.0.4)
+          - context: typescript (5.1.6)
           - context: typescript (latest)
-          - context: typescript (~4.7.0)
-          - context: typescript (~4.8.0)
-          - context: typescript (~4.9.0)
         strict: true
       restrictions: null
 # https://docs.github.com/rest/deployments/environments#create-or-update-an-environment
@@ -211,8 +210,6 @@ repository:
   is_template: false
   private: false
   security_and_analysis:
-    advanced_security:
-      status: disabled
     secret_scanning:
       status: enabled
     secret_scanning_push_protection:

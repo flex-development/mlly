@@ -7,5 +7,6 @@
   },
   "exclude": ["**/__mocks__", "**/__tests__"],
   "extends": "./tsconfig.json",
+  "files": ["./typings/@types/node/http2.d.ts"],
   "include": ["./dist/*", "./src/*"]
 }

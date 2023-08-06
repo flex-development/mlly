@@ -10,15 +10,28 @@ import {
   type Comment,
   type ImplicitDescription,
   type InlineTag,
-  type Node,
   type Root
 } from '@flex-development/docast'
+import {
+  cast,
+  get,
+  isEmptyString,
+  isNull,
+  trim,
+  type LiteralUnion,
+  type Optional
+} from '@flex-development/tutils'
 import slugify from '@sindresorhus/slugify'
-import type { Position } from 'unist'
+import type unist from 'unist'
 import { remove } from 'unist-util-remove'
 import { source } from 'unist-util-source'
-import { CONTINUE, EXIT, visit, type VisitorResult } from 'unist-util-visit'
-import type { BuildVisitor } from 'unist-util-visit/complex-types'
+import {
+  CONTINUE,
+  EXIT,
+  visit,
+  type BuildVisitor,
+  type VisitorResult
+} from 'unist-util-visit'
 import type { VFile } from 'vfile'
 import UnifiedCompiler from './compiler-unified'
 import replacements from './link-replacements.json' assert { type: 'json' }
@@ -46,17 +59,15 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
     super(tree, file)
 
     // filter tree
-    Object.assign(this, {
-      tree: remove(this.tree, (node: Node): boolean => {
-        // retain non-comment nodes
-        if (node.type !== Type.COMMENT) return false
+    remove(this.tree, (node: unist.Node): boolean => {
+      // retain non-comment nodes
+      if (node.type !== Type.COMMENT) return false
 
-        // remove comments not associated with declarations
-        if ((node as Comment).context === null) return true
+      // remove comments not associated with declarations
+      if (isNull(cast<Comment>(node).context)) return true
 
-        // remove function and interface member comments
-        return node.position?.start.column !== 1
-      })
+      // remove function and interface member comments
+      return node.position?.start.column !== 1
     })
   }
 
@@ -143,14 +154,14 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
       }
 
       // add markdown documentation snippet
-      return void result.push(doc.trim() + '\n')
+      return void result.push(trim(doc) + '\n')
     }
 
     // get markdown documentation snippets
     visit(this.tree, Type.COMMENT, visitor)
 
     // return markdown documentation snippets as html
-    return result.map(res => md.render(res.trim()))
+    return result.map(res => md.render(trim(res)))
   }
 
   /**
@@ -291,7 +302,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    * @return {string} Declaration name as markdown heading
    */
   protected identifier(node: Comment, depth: 1 | 2 | 3 | 4 | 5 | 6): string {
-    return this.heading(`\`${node.context!.identifier}\``, depth)
+    return this.heading(`\`${get(node, 'context.identifier')}\``, depth)
   }
 
   /**
@@ -303,7 +314,10 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    * @return {boolean} `true` if `node` represents arrow function
    */
   protected isArrowFunction(node: Comment): boolean {
-    return node.context?.kind === Kind.CONST && this.returns(node) !== ''
+    return (
+      get(node, 'context.kind') === Kind.CONST &&
+      !isEmptyString(this.returns(node))
+    )
   }
 
   /**
@@ -352,9 +366,14 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    * @return {boolean} `true` if `node` represents enum
    */
   protected isEnum(node: Comment): boolean {
-    return (
-      node.context?.kind === Kind.ENUM || node.context?.kind === Kind.ENUM_CONST
-    )
+    /**
+     * Node kind.
+     *
+     * @const {Optional<LiteralUnion<Kind, string>>} kind
+     */
+    const kind: Optional<LiteralUnion<Kind, string>> = get(node, 'context.kind')
+
+    return kind === Kind.ENUM || kind === Kind.ENUM_CONST
   }
 
   /**
@@ -366,7 +385,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    * @return {boolean} `true` if `node` represents interface
    */
   protected isInterface(node: Comment): boolean {
-    return node.context?.kind === Kind.INTERFACE
+    return get(node, 'context.kind') === Kind.INTERFACE
   }
 
   /**
@@ -378,7 +397,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    * @return {boolean} `true` if `node` represents type definition
    */
   protected isType(node: Comment): boolean {
-    return node.context?.kind === Kind.TYPE
+    return get(node, 'context.kind') === Kind.TYPE
   }
 
   /**
@@ -469,13 +488,13 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
       if (visited.tag !== '@see') return CONTINUE
 
       // add list header
-      if (list.length === 0) {
+      if (!list.length) {
         list += this.subheading(identifier, 'See Also', 3) + '\n\n'
       }
 
       // add list item
       if (visited.text.startsWith('{@link')) {
-        const [{ text }] = visited.children as [InlineTag]
+        const [{ text }] = cast<[InlineTag]>(visited.children)
         list += `- [\`${text}\`](${visited.text})\n`
       } else {
         list += `- ${visited.text}\n`
@@ -534,7 +553,7 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
       if (!match) return CONTINUE
 
       // add section header
-      if (section.length === 0) {
+      if (!section.length) {
         section += this.subheading(identifier, 'Returns', 3) + '\n\n'
       }
 
@@ -557,11 +576,11 @@ class CommentsCompiler extends UnifiedCompiler<Root, string[]> {
    *
    * @protected
    *
-   * @param {Node | Position} value - Node or position
+   * @param {unist.Node | unist.Position} value - Node or position
    * @return {string} Source code wrapped in markdown code fence
    */
-  protected snippet(value: Node | Position): string {
-    return `\`\`\`ts\n${source(value, this.file) ?? ''}\n\`\`\``
+  protected snippet(value: unist.Node | unist.Position): string {
+    return `\`\`\`ts\n${source(this.file, value) ?? ''}\n\`\`\``
   }
 
   /**
