@@ -12,7 +12,9 @@ import type { ModuleId } from '#src/types'
 import {
   CONDITIONS,
   PATTERN_CHARACTER,
+  isDirectory,
   isExportsSugar,
+  isFile,
   isRelativeSpecifier,
   lookupPackageScope,
   parseModuleId,
@@ -59,8 +61,6 @@ import {
 } from '@flex-development/tutils'
 import fs from 'node:fs'
 import { URL, fileURLToPath, pathToFileURL } from 'node:url'
-import isDirectory from './is-directory'
-import isFile from './is-file'
 import invalidSegmentRegex from './regex-invalid-segment'
 import PACKAGE_NAME_REGEX from './regex-package-name'
 import PACKAGE_PATH_REGEX from './regex-package-path'

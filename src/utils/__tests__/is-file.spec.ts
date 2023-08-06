@@ -1,11 +1,11 @@
 /**
  * @file Unit Tests - isFile
- * @module mlly/internal/tests/unit/isFile
+ * @module mlly/utils/tests/unit/isFile
  */
 
 import testSubject from '../is-file'
 
-describe('unit:internal/isFile', () => {
+describe('unit:utils/isFile', () => {
   it('should return false if id does not exist', () => {
     // Arrange
     const cases: Parameters<typeof testSubject>[] = [

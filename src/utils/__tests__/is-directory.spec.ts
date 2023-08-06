@@ -1,11 +1,11 @@
 /**
  * @file Unit Tests - isDirectory
- * @module mlly/internal/tests/unit/isDirectory
+ * @module mlly/utils/tests/unit/isDirectory
  */
 
 import testSubject from '../is-directory'
 
-describe('unit:internal/isDirectory', () => {
+describe('unit:utils/isDirectory', () => {
   it('should return false if id does not exist', () => {
     // Arrange
     const cases: Parameters<typeof testSubject>[] = [

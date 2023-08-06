@@ -3,14 +3,12 @@
  * @module mlly/internal/isDirectory
  */
 
+import validateURLString from '#src/internal/validate-url-string'
 import type { ModuleId } from '#src/types'
 import fs from 'node:fs'
-import validateURLString from './validate-url-string'
 
 /**
  * Checks if a directory exists at the given module `id`.
- *
- * @internal
  *
  * @param {ModuleId} id - Module id to evaluate
  * @return {boolean} `true` if directory exists at `id`

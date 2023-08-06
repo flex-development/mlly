@@ -3,7 +3,6 @@
  * @module mlly/utils/readPackageJson
  */
 
-import isFile from '#src/internal/is-file'
 import validateString from '#src/internal/validate-string'
 import validateURLString from '#src/internal/validate-url-string'
 import type { ModuleId } from '#src/types'
@@ -24,6 +23,7 @@ import {
 } from '@flex-development/tutils'
 import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
+import isFile from './is-file'
 import toURL from './to-url'
 
 /**
