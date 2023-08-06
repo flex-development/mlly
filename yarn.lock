@@ -1457,14 +1457,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/esm-types@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@flex-development/esm-types@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fesm-types%2F1.0.0%2Ffde631289466ab81c4ff20b848ea26926ee9d478"
+"@flex-development/esm-types@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@flex-development/esm-types@npm:2.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fesm-types%2F2.0.0%2Fbd7aef7a92e089250bd8a17e8c73b16bf8ae248c"
   dependencies:
-    "@flex-development/tutils": "npm:6.0.0-alpha.10"
+    "@flex-development/tutils": "npm:6.0.0-alpha.11"
   peerDependencies:
-    "@types/node": ">=14"
-  checksum: d88b84bcfdba0aa42a7ebc663e63920586463ac443b568c69f200b87d3d4a8269ede15146f345cab8394b954197183d1c59ff1e467262153d7a400ca87ad5f1e
+    "@types/node": ">=16.18.23"
+  checksum: 3df6277bbede0c557f89204628459a467a760e59755f9468c5c2724ff47b9b2737428dacd2ccc8b02b004e3b3825bcdc265ff394e56d78ed958dea933d614bfd
   languageName: node
   linkType: hard
 
@@ -1612,7 +1612,7 @@ __metadata:
     "@flex-development/docast": "npm:1.0.0-alpha.13"
     "@flex-development/docast-parse": "npm:1.0.0-alpha.5"
     "@flex-development/errnode": "npm:1.5.0"
-    "@flex-development/esm-types": "npm:1.0.0"
+    "@flex-development/esm-types": "npm:2.0.0"
     "@flex-development/export-regex": "npm:1.0.2"
     "@flex-development/import-regex": "npm:2.0.3"
     "@flex-development/is-builtin": "npm:3.1.0"
@@ -1800,6 +1800,17 @@ __metadata:
   peerDependencies:
     typescript: ">=4.7"
   checksum: 372d2fd3e36f75cf7f9ea80e3e95cbd99f673dd114301f610a29e7acf12f589342c1e84c0139c8aa7cac1bcae2c7c1db2cb1302bae55da9d2fb33ae32b5c2a1b
+  languageName: node
+  linkType: hard
+
+"@flex-development/tutils@npm:6.0.0-alpha.11":
+  version: 6.0.0-alpha.11
+  resolution: "@flex-development/tutils@npm:6.0.0-alpha.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftutils%2F6.0.0-alpha.11%2Fcd1832885d050e2b6403e471bae0b7f7ffc70680"
+  dependencies:
+    dequal: "npm:2.0.3"
+  peerDependencies:
+    typescript: ">=5.0.4"
+  checksum: c0ca76f22ffe2316901f6166cc994dbe37a505a1dcad84235827531f3327ffda9e1cb9689c98380df6dfcc8d2c8c0e63b20a19ad89344c785b1db90b9f4dd7b2
   languageName: node
   linkType: hard
 
