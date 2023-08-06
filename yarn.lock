@@ -1394,6 +1394,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/decorator-regex@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@flex-development/decorator-regex@npm:2.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fdecorator-regex%2F2.0.0%2F84a213063995d5d398005f0b4bbddf451e198c0c"
+  checksum: 44e8cf1ab2c6c156c53cdf0766933489a19cbaf1b1ae5ef0f032b08b1b9e5293c5cf54ce620e8e2699fe7c3bb40b3ef8ac3e7169eef024d9a63643e4171b4833
+  languageName: node
+  linkType: hard
+
 "@flex-development/docast-parse@npm:1.0.0-alpha.5":
   version: 1.0.0-alpha.5
   resolution: "@flex-development/docast-parse@npm:1.0.0-alpha.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fdocast-parse%2F1.0.0-alpha.5%2Fa9d14b2aaad291615ce21ca51320d7eae34a2706"
@@ -1608,7 +1615,7 @@ __metadata:
     "@docsearch/react": "npm:3.5.1"
     "@faker-js/faker": "npm:8.0.2"
     "@flex-development/commitlint-config": "npm:1.0.1"
-    "@flex-development/decorator-regex": "npm:1.0.0"
+    "@flex-development/decorator-regex": "npm:2.0.0"
     "@flex-development/docast": "npm:1.0.0-alpha.13"
     "@flex-development/docast-parse": "npm:1.0.0-alpha.5"
     "@flex-development/errnode": "npm:1.5.0"

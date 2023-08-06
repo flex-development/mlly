@@ -94,7 +94,7 @@
     "@docsearch/react": "3.5.1",
     "@faker-js/faker": "8.0.2",
     "@flex-development/commitlint-config": "1.0.1",
-    "@flex-development/decorator-regex": "1.0.0",
+    "@flex-development/decorator-regex": "2.0.0",
     "@flex-development/docast": "1.0.0-alpha.13",
     "@flex-development/docast-parse": "1.0.0-alpha.5",
     "@flex-development/esm-types": "2.0.0",
