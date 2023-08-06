@@ -4,36 +4,40 @@
  */
 
 import type { Format } from '#src/enums'
-import type { KeysRequired } from '@flex-development/tutils'
+import type {
+  Optional,
+  OrLowercase,
+  RequiredKeys
+} from '@flex-development/tutils'
 import type { RequestInit } from 'node-fetch'
 import type TestSubject from '../options-get-source'
 
 describe('unit-d:interfaces/GetSourceOptions', () => {
   it('should allow empty object', () => {
-    expectTypeOf<KeysRequired<TestSubject>>().toBeNever()
+    expectTypeOf<RequiredKeys<TestSubject>>().toBeNever()
   })
 
-  it('should match [experimental_network_imports?: boolean]', () => {
+  it('should match [experimental_network_imports?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('experimental_network_imports')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 
-  it('should match [format?: Format | Lowercase<keyof typeof Format>]', () => {
+  it('should match [format?: Optional<OrLowercase<Format>>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('format')
-      .toEqualTypeOf<Format | Lowercase<keyof typeof Format> | undefined>()
+      .toEqualTypeOf<Optional<OrLowercase<Format>>>()
   })
 
-  it('should match [ignore_errors?: boolean]', () => {
+  it('should match [ignore_errors?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('ignore_errors')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 
-  it('should match [req?: RequestInit]', () => {
+  it('should match [req?: Optional<RequestInit>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('req')
-      .toEqualTypeOf<RequestInit | undefined>()
+      .toEqualTypeOf<Optional<RequestInit>>()
   })
 })

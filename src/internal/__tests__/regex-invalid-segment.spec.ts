@@ -23,8 +23,8 @@ describe('unit:internal/invalidSegmentRegex', () => {
     const result = testSubject('deprecated')
 
     // Expect
-    expect(result).to.have.property('flags').equal(flags)
-    expect(result).to.have.property('source').equal(source)
+    expect(result).to.have.property('flags', flags)
+    expect(result).to.have.property('source', source)
   })
 
   it('should return RegExp matching invalid path segment', () => {
@@ -35,7 +35,7 @@ describe('unit:internal/invalidSegmentRegex', () => {
     const result = testSubject()
 
     // Expect
-    expect(result).to.have.property('flags').equal(flags)
-    expect(result).to.have.property('source').equal(source)
+    expect(result).to.have.property('flags', flags)
+    expect(result).to.have.property('source', source)
   })
 })

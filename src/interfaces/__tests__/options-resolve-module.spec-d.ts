@@ -4,24 +4,24 @@
  */
 
 import type { ChangeExtFn, ModuleId } from '#src/types'
-import type { KeysRequired, Nilable } from '@flex-development/tutils'
+import type { Nilable, Optional, RequiredKeys } from '@flex-development/tutils'
 import type TestSubject from '../options-resolve-module'
 
 describe('unit-d:interfaces/ResolveModuleOptions', () => {
   it('should allow empty object', () => {
-    expectTypeOf<KeysRequired<TestSubject>>().toBeNever()
+    expectTypeOf<RequiredKeys<TestSubject>>().toBeNever()
   })
 
-  it('should match [condition?: string]', () => {
+  it('should match [condition?: Optional<string>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('condition')
-      .toEqualTypeOf<string | undefined>()
+      .toEqualTypeOf<Optional<string>>()
   })
 
-  it('should match [conditions?: Set<string> | string[]]', () => {
+  it('should match [conditions?: Optional<Set<string> | string[]>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('conditions')
-      .toEqualTypeOf<Set<string> | string[] | undefined>()
+      .toEqualTypeOf<Optional<Set<string> | string[]>>()
   })
 
   it('should match [ext?: ChangeExtFn | Nilable<string>]', () => {
@@ -30,21 +30,21 @@ describe('unit-d:interfaces/ResolveModuleOptions', () => {
       .toEqualTypeOf<ChangeExtFn | Nilable<string>>()
   })
 
-  it('should match [extensions?: Set<string> | string[]]', () => {
+  it('should match [extensions?: Optional<Set<string> | string[]>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('extensions')
-      .toEqualTypeOf<Set<string> | string[] | undefined>()
+      .toEqualTypeOf<Optional<Set<string> | string[]>>()
   })
 
   it('should match [parent?: ModuleId]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('parent')
-      .toEqualTypeOf<ModuleId | undefined>()
+      .toEqualTypeOf<Optional<ModuleId>>()
   })
 
-  it('should match [preserveSymlinks?: boolean]', () => {
+  it('should match [preserveSymlinks?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('preserveSymlinks')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 })

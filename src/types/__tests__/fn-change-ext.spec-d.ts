@@ -12,14 +12,12 @@ describe('unit-d:types/ChangeExtFn', () => {
     expectTypeOf<TestSubject>().parameters.toEqualTypeOf<[string, URL]>()
   })
 
-  it('should return Ext | PromiseLike<Ext>', () => {
+  it('should return PromiseLike<X> | X', () => {
     // Arrange
-    type Expected<Ext = Nilable<string>> = Ext | PromiseLike<Ext>
+    type Expect<X = Nilable<string>> = PromiseLike<X> | X
 
     // Expect
-    expectTypeOf<TestSubject>().returns.toEqualTypeOf<Expected>()
-    expectTypeOf<TestSubject<string>>().returns.toEqualTypeOf<
-      Expected<string>
-    >()
+    expectTypeOf<TestSubject>().returns.toEqualTypeOf<Expect>()
+    expectTypeOf<TestSubject<string>>().returns.toEqualTypeOf<Expect<string>>()
   })
 })

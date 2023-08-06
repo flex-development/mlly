@@ -9,7 +9,6 @@ import type {
   ParsedSubpath
 } from '#src/interfaces'
 import getSubpaths from '#src/internal/get-subpaths'
-import isArrayIndex from '#src/internal/is-array-index'
 import invalidSegmentRegex from '#src/internal/regex-invalid-segment'
 import PACKAGE_NAME_REGEX from '#src/internal/regex-package-name'
 import validateArraySet from '#src/internal/validate-array-set'
@@ -26,7 +25,21 @@ import {
 } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import type { Exports, Imports } from '@flex-development/pkg-types'
-import { CompareResult, isNIL, type Nullable } from '@flex-development/tutils'
+import {
+  CompareResult,
+  DOT,
+  cast,
+  get,
+  isArray,
+  isArrayIndex,
+  isNIL,
+  isNull,
+  isObjectCurly,
+  isString,
+  type Dot,
+  type Nullable,
+  type Optional
+} from '@flex-development/tutils'
 import { URL, fileURLToPath, pathToFileURL } from 'node:url'
 import compareSubpaths from './compare-subpaths'
 import CONDITIONS from './conditions'
@@ -55,14 +68,14 @@ import PATTERN_CHARACTER from './pattern-character'
  * @see https://nodejs.org/api/packages.html#subpath-imports
  *
  * @param {string} specifier - Module specifier to evaluate
- * @param {Exports | Imports | undefined} context - Package context
+ * @param {Optional<Exports | Imports>} context - Package context
  * @param {ParseSubpathOptions} options - Parsing options
  * @return {ParsedSubpath} Object representing package subpath
  * @throws {NodeError<Error | TypeError>}
  */
 const parseSubpath = (
   specifier: string,
-  context: Exports | Imports | undefined,
+  context: Optional<Exports | Imports>,
   options: ParseSubpathOptions
 ): ParsedSubpath => {
   const {
@@ -172,7 +185,7 @@ const parseSubpath = (
   }
 
   // throw if defined subpath was not found
-  if (key === null) {
+  if (isNull(key)) {
     let { parent } = options
 
     // ensure parent is a path
@@ -186,11 +199,11 @@ const parseSubpath = (
   /**
    * Finds the package target string specified by {@linkcode key}.
    *
-   * @param {Exports | undefined} data - Initial package target
+   * @param {Optional<Exports>} data - Initial package target
    * @return {Nullable<string>} Package target string or `null`
    * @throws {NodeError<Error | TypeError>}
    */
-  const findPackageTarget = (data: Exports | undefined): Nullable<string> => {
+  const findPackageTarget = (data: Optional<Exports>): Nullable<string> => {
     /**
      * Package target.
      *
@@ -202,20 +215,20 @@ const parseSubpath = (
       case isNIL(data):
         target = null
         break
-      case Array.isArray(data):
+      case isArray(data):
         /**
          * Possible package target search error.
          *
-         * @var {NodeError | undefined} error
+         * @var {Optional<NodeError>} error
          */
-        let error: NodeError | undefined
+        let error: Optional<NodeError>
 
         // try finding package target based on first match in search context
-        for (const item of data as string[]) {
+        for (const item of cast<string[]>(data)) {
           try {
             target = findPackageTarget(item)
           } catch (e: unknown) {
-            error = e as NodeError
+            error = cast<NodeError>(e)
 
             /* c8 ignore next */
             if (error.code !== ErrorCode.ERR_INVALID_PACKAGE_TARGET) throw error
@@ -234,8 +247,8 @@ const parseSubpath = (
         if (error) throw error
 
         break
-      case typeof data === 'object':
-        data = data as Record<string, Exports>
+      case isObjectCurly(data):
+        data = cast<Record<string, Exports>>(data)
 
         // try finding package target based on condition
         for (const property of Object.getOwnPropertyNames(data)) {
@@ -255,13 +268,13 @@ const parseSubpath = (
         }
 
         break
-      case typeof data === 'string':
-        target = data as string
+      case isString(data):
+        target = cast<string>(data)
 
         switch (true) {
           case internal && PACKAGE_NAME_REGEX.test(target):
             break
-          case target.startsWith('.' + pathe.sep):
+          case target.startsWith(DOT + pathe.sep):
             // check target for invalid segments
             if (invalidSegmentRegex().test(target.slice(2))) {
               if (invalidSegmentRegex('deprecated').test(target.slice(2))) {
@@ -302,7 +315,7 @@ const parseSubpath = (
 
   // convert exports to object if using exports main sugar
   if (!internal && isExportsSugar(context, pkg, parent)) {
-    context = { '.': context } as Record<string, Exports>
+    context = cast<Record<Dot, Exports>>({ [DOT]: context })
   }
 
   return {
@@ -311,7 +324,7 @@ const parseSubpath = (
     key,
     raw: id.path,
     specifier: id.raw,
-    target: findPackageTarget((context as Record<string, Exports>)[key])
+    target: findPackageTarget(get(context, key))
   }
 }
 

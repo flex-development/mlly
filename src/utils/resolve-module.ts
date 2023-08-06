@@ -4,7 +4,6 @@
  */
 
 import type { ResolveModuleOptions } from '#src/interfaces'
-import isFunction from '#src/internal/is-function'
 import Resolver from '#src/internal/resolver'
 import validateArraySet from '#src/internal/validate-array-set'
 import validateBoolean from '#src/internal/validate-boolean'
@@ -13,7 +12,7 @@ import validateURLString from '#src/internal/validate-url-string'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import { isBuiltin } from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
-import type { Nullable } from '@flex-development/tutils'
+import { cast, isFunction, type Nullable } from '@flex-development/tutils'
 import { URL, fileURLToPath } from 'node:url'
 import CONDITIONS from './conditions'
 import RESOLVE_EXTENSIONS from './resolve-extensions'
@@ -100,7 +99,7 @@ const resolveModule = async (
           specifier.startsWith('#') ? specifier + '/index' : '',
           specifier + '/index' + ext
         ])
-        .filter(id => id.length > 0)
+        .filter(id => !!id.length)
 
   // try @types resolution
   if (!onetry) {
@@ -153,8 +152,8 @@ const resolveModule = async (
       )
     } catch (e: unknown) {
       url = null
-      if (id === specifier) error = e as NodeError
-      if (!ignore.has((e as NodeError).code)) throw e
+      if (id === specifier) error = cast(e)
+      if (!ignore.has(cast<NodeError>(e).code)) throw e
     }
 
     // stop resolution attempts if module was resolved

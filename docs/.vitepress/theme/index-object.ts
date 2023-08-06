@@ -4,7 +4,7 @@
  */
 
 import type { StoredDocSearchHit } from '@docsearch/react/dist/esm/types'
-import type { Nullable } from '@flex-development/tutils'
+import type { Nullable, Omit } from '@flex-development/tutils'
 
 /**
  * Algolia search index object type.

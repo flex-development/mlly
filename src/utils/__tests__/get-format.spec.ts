@@ -5,7 +5,8 @@
 
 import { Format } from '#src/enums'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
-import type { Nilable } from '@flex-development/tutils'
+import pathe from '@flex-development/pathe'
+import { cast, type Nilable } from '@flex-development/tutils'
 import testSubject from '../get-format'
 
 describe('unit:utils/getFormat', () => {
@@ -86,19 +87,19 @@ describe('unit:utils/getFormat', () => {
       const code: ErrorCode = ErrorCode.ERR_UNKNOWN_FILE_EXTENSION
       const message_regex: RegExp =
         /Loading extensionless files is not supported inside of "type":"module" package.json contexts. The package.json file \S+ caused this "type":"module" context. Try changing \S+ to have a file extension. Note the "bin" field of package.json can point to a file with an extension, for example {"type":"module","bin":{"\S+":"\S+\.js"}}$/
-      let error: NodeError<TypeError>
+      let error!: NodeError<TypeError>
 
       // Act
       try {
         await testSubject('src/utils/get-format')
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(message_regex)
+      expect(error).to.be.instanceof(TypeError)
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(message_regex)
     })
   })
 
@@ -118,7 +119,7 @@ describe('unit:utils/getFormat', () => {
       const id: string = 'https://deno.land/std@0.171.0/types.d.ts'
       const cases: [...Parameters<typeof testSubject>, Nilable<Format>?][] = [
         [id, undefined, null],
-        [id.replace('s:', ':'), { ignore_errors: true }],
+        [id.replace('s:', pathe.delimiter), { ignore_errors: true }],
         [id, { experimental_network_imports: true }, Format.MODULE]
       ]
 

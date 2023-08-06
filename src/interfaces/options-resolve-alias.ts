@@ -4,7 +4,7 @@
  */
 
 import type { ModuleId } from '#src/types'
-import type { MapLike, OneOrMany } from '@flex-development/tutils'
+import type { MapLike, OneOrMany, Optional } from '@flex-development/tutils'
 import type ResolveModuleOptions from './options-resolve-module'
 
 /**
@@ -26,7 +26,7 @@ interface ResolveAliasOptions extends ResolveModuleOptions {
    *
    * @default true
    */
-  absolute?: boolean | undefined
+  absolute?: Optional<boolean>
 
   /**
    * Path mappings.
@@ -35,14 +35,14 @@ interface ResolveAliasOptions extends ResolveModuleOptions {
    *
    * @default {}
    */
-  aliases?: MapLike<OneOrMany<string>> | undefined
+  aliases?: Optional<MapLike<OneOrMany<string>>>
 
   /**
    * Directory to resolve non-absolute modules from.
    *
    * @default pathToFileURL('.')
    */
-  cwd?: ModuleId | undefined
+  cwd?: Optional<ModuleId>
 
   /**
    * Id of module to resolve from.
@@ -53,7 +53,7 @@ interface ResolveAliasOptions extends ResolveModuleOptions {
    *
    * @default import.meta.url
    */
-  parent?: ModuleId | undefined
+  parent?: Optional<ModuleId>
 }
 
 export type { ResolveAliasOptions as default }

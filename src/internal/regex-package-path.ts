@@ -10,6 +10,8 @@
  *
  * @see https://regex101.com/r/z0MPgj
  *
+ * @internal
+ *
  * @const {RegExp} PACKAGE_PATH_REGEX
  */
 const PACKAGE_PATH_REGEX: RegExp =

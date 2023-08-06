@@ -5,7 +5,7 @@
 
 import { SpecifierSyntaxKind } from '#src/enums'
 import type { ResolveModuleOptions } from '#src/interfaces'
-import regexp from '#src/internal/escape-reg-exp'
+import { regexp } from '@flex-development/tutils'
 import type { URL } from 'node:url'
 import extractStatements from './extract-statements'
 import resolveModule from './resolve-module'
@@ -33,27 +33,25 @@ const resolveModules = async (
   options: ResolveModuleOptions = {}
 ): Promise<string> => {
   for (const statement of extractStatements(code)) {
-    // do nothing if statement does not have specifier
-    if (!statement.specifier) continue
+    if (statement.specifier) {
+      if (statement.specifier_syntax !== SpecifierSyntaxKind.DYNAMIC) {
+        /**
+         * Resolved module URL.
+         *
+         * @const {URL} url
+         */
+        const url: URL = await resolveModule(statement.specifier, options)
 
-    // ignore statements with dynamic specifiers
-    if (statement.specifier_syntax === SpecifierSyntaxKind.DYNAMIC) continue
-
-    /**
-     * Resolved module URL.
-     *
-     * @const {URL} url
-     */
-    const url: URL = await resolveModule(statement.specifier, options)
-
-    // replace original specifier
-    code = code.replace(
-      statement.code,
-      statement.code.replace(
-        new RegExp(`(?<=["'])${regexp(statement.specifier)}(?=["'])`),
-        url.href
-      )
-    )
+        // replace original specifier
+        code = code.replace(
+          statement.code,
+          statement.code.replace(
+            new RegExp(`(?<=["'])${regexp(statement.specifier)}(?=["'])`),
+            url.href
+          )
+        )
+      }
+    }
   }
 
   return code

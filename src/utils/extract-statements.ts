@@ -6,6 +6,7 @@
 import type { Statement } from '#src/interfaces'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
+import { sort, trim } from '@flex-development/tutils'
 import findDynamicImports from './find-dynamic-imports'
 import findExports from './find-exports'
 import findRequires from './find-requires'
@@ -29,14 +30,17 @@ const extractStatements = (code: string = ''): Statement[] => {
   validateString(code, 'code')
 
   // code shorter than first shortest keyword => no possible matches
-  if (code.trim().length < 'export'.length) return []
+  if (trim(code).length < 'export'.length) return []
 
-  return [
-    ...findDynamicImports(code),
-    ...findExports(code),
-    ...findRequires(code),
-    ...findStaticImports(code)
-  ]
+  return sort(
+    [
+      ...findDynamicImports(code),
+      ...findExports(code),
+      ...findRequires(code),
+      ...findStaticImports(code)
+    ],
+    (s1: Statement, s2: Statement): number => s1.start - s2.start
+  )
 }
 
 export default extractStatements

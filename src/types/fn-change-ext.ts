@@ -3,7 +3,7 @@
  * @module mlly/types/ChangeExtFn
  */
 
-import type { Nilable } from '@flex-development/tutils'
+import type { Fn, Nilable } from '@flex-development/tutils'
 import type { URL } from 'node:url'
 
 /**
@@ -19,15 +19,15 @@ import type { URL } from 'node:url'
  * @see {@linkcode URL}
  * @see https://github.com/flex-development/pathe/tree/1.0.3#changeextpath-string-ext-nullablestring-string
  *
- * @template Ext - File extension type(s)
+ * @template X - File extension type
  *
  * @param {string} specifier - Original module specifier
  * @param {URL} url - Resolved module URL
- * @return {Ext | PromiseLike<Ext>} New file extension, `null`, or `undefined`
+ * @return {PromiseLike<X> | X} New file extension, `null`, or `undefined`
  */
-type ChangeExtFn<Ext extends Nilable<string> = Nilable<string>> = (
-  specifier: string,
-  url: URL
-) => Ext | PromiseLike<Ext>
+type ChangeExtFn<X extends Nilable<string> = Nilable<string>> = Fn<
+  [specifier: string, url: URL],
+  PromiseLike<X> | X
+>
 
 export type { ChangeExtFn as default }

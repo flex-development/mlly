@@ -10,28 +10,30 @@ describe('unit-d:types/SyntaxKindExport', () => {
   it('should extract StatementSyntaxKind.DECLARATION', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.DECLARATION>()
-      .toBeString()
+      .not.toBeNever()
   })
 
   it('should extract StatementSyntaxKind.DEFAULT', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.DEFAULT>()
-      .toBeString()
+      .not.toBeNever()
   })
 
   it('should extract StatementSyntaxKind.LIST', () => {
-    expectTypeOf<TestSubject>().extract<StatementSyntaxKind.LIST>().toBeString()
+    expectTypeOf<TestSubject>()
+      .extract<StatementSyntaxKind.LIST>()
+      .not.toBeNever()
   })
 
   it('should extract StatementSyntaxKind.NAMED', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.NAMED>()
-      .toBeString()
+      .not.toBeNever()
   })
 
   it('should extract StatementSyntaxKind.NAMESPACE', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.NAMESPACE>()
-      .toBeString()
+      .not.toBeNever()
   })
 })

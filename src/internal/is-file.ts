@@ -10,6 +10,8 @@ import validateURLString from './validate-url-string'
 /**
  * Checks if a file exists at the given module `id`.
  *
+ * @internal
+ *
  * @param {ModuleId} id - Module id to evaluate
  * @return {boolean} `true` if file exists at `id`
  */

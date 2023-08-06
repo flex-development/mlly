@@ -4,7 +4,6 @@
  */
 
 import type { ParsedModuleId, ResolveAliasOptions } from '#src/interfaces'
-import regexp from '#src/internal/escape-reg-exp'
 import validateArraySet from '#src/internal/validate-array-set'
 import validateBoolean from '#src/internal/validate-boolean'
 import validateObject from '#src/internal/validate-object'
@@ -12,7 +11,19 @@ import validateString from '#src/internal/validate-string'
 import validateURLString from '#src/internal/validate-url-string'
 import type { NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
-import { CompareResult, isNIL, type Nullable } from '@flex-development/tutils'
+import {
+  CompareResult,
+  DOT,
+  flat,
+  get,
+  includes,
+  isNIL,
+  isNull,
+  keys,
+  regexp,
+  sort,
+  type Nullable
+} from '@flex-development/tutils'
 import { URL, pathToFileURL } from 'node:url'
 import compareSubpaths from './compare-subpaths'
 import CONDITIONS from './conditions'
@@ -46,7 +57,7 @@ const resolveAlias = async (
     aliases = {},
     condition = 'default',
     conditions = CONDITIONS,
-    cwd = pathToFileURL('.'),
+    cwd = pathToFileURL(DOT),
     ext,
     extensions = RESOLVE_EXTENSIONS,
     parent = import.meta.url,
@@ -79,13 +90,6 @@ const resolveAlias = async (
   })
 
   /**
-   * Path aliases defined in {@linkcode aliases}.
-   *
-   * @const {string[]} keys
-   */
-  const keys: string[] = Object.keys(aliases).sort(compareSubpaths)
-
-  /**
    * Path alias in {@linkcode aliases} that maps to {@linkcode specifier}.
    *
    * @var {Nullable<string>} key
@@ -100,7 +104,7 @@ const resolveAlias = async (
   let trail: string = ''
 
   // match specifier to alias
-  for (const key of keys) {
+  for (const key of sort(keys(aliases), compareSubpaths)) {
     /**
      * Index of {@linkcode PATTERN_CHARACTER} in {@linkcode key}.
      *
@@ -137,7 +141,7 @@ const resolveAlias = async (
   }
 
   // exit early if alias was not found or alias does not map any paths
-  if (alias === null || isNIL(aliases[alias])) return specifier
+  if (isNull(alias) || isNIL(aliases[alias])) return specifier
 
   /**
    * URL of directory to resolve non-absolute modules from.
@@ -154,9 +158,9 @@ const resolveAlias = async (
   let url: Nullable<URL> = null
 
   // try resolving path alias
-  for (let segment of [aliases[alias]!].flat()) {
+  for (let segment of flat([get(aliases, alias, [])])) {
     // replace pattern character in segment with trail of specifier
-    if (segment.includes(PATTERN_CHARACTER)) {
+    if (includes(segment, PATTERN_CHARACTER)) {
       segment = segment.replace(
         new RegExp(`${regexp(PATTERN_CHARACTER)}$`),
         trail
@@ -175,7 +179,7 @@ const resolveAlias = async (
         ...[...extensions].map(ext => '/index' + pathe.formatExt(ext))
       ]
         .map((suffix: string) => segment + suffix)
-        .filter((segment: string) => segment.length > 0)
+        .filter((segment: string) => !!segment.length)
         .map((segment: string) => new URL(segment, base).pathname)
     )
 

@@ -3,7 +3,7 @@
  * @module mlly/utils/tests/unit/resolveAlias
  */
 
-import type { MapLike } from '@flex-development/tutils'
+import { isUndefined, type MapLike } from '@flex-development/tutils'
 import { pathToFileURL } from 'node:url'
 import testSubject from '../resolve-alias'
 
@@ -69,7 +69,7 @@ describe('unit:utils/resolveAlias', () => {
     // Act + Expect
     for (const [specifier, options = {}, expected] of cases) {
       options.aliases = aliases
-      if (options.parent === undefined) options.parent = import.meta.url
+      if (isUndefined(options.parent)) options.parent = import.meta.url
 
       expect(await testSubject(specifier, options)).to.equal(expected)
     }
@@ -84,7 +84,7 @@ describe('unit:utils/resolveAlias', () => {
 
     // Act + Expect
     for (const [specifier, options = {}] of cases) {
-      if (options.parent === undefined) options.parent = import.meta.url
+      if (isUndefined(options.parent)) options.parent = import.meta.url
 
       expect(await testSubject(specifier, options)).to.equal(specifier)
     }

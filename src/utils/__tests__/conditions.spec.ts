@@ -11,6 +11,6 @@ describe('unit:utils/CONDITIONS', () => {
   })
 
   it('should be sorted by priority', () => {
-    expect([...TEST_SUBJECT.values()]).to.deep.equal(['node', 'import'])
+    expect([...TEST_SUBJECT.values()]).to.eql(['node', 'import'])
   })
 })

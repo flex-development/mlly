@@ -65,8 +65,7 @@ describe('unit:internal/PACKAGE_PATH_REGEX', () => {
     cases.forEach(([specifier, groups]) => {
       const match = TEST_SUBJECT.exec(specifier)
 
-      expect(match).to.not.be.null
-      expect(match?.groups).to.deep.equal(groups)
+      expect(match).to.have.deep.property('groups', groups)
     })
   })
 

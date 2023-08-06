@@ -6,6 +6,14 @@
  */
 
 import pathe from '@flex-development/pathe'
+import {
+  flat,
+  join,
+  select,
+  sort,
+  template,
+  trim
+} from '@flex-development/tutils'
 import search, { type SearchClient, type SearchIndex } from 'algoliasearch'
 import {
   load as cheerio,
@@ -17,7 +25,6 @@ import { config as dotenv } from 'dotenv'
 import { globby } from 'globby'
 import fs from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
-import { template } from 'radash'
 import { SitemapStream, streamToPromise } from 'sitemap'
 import tsconfigpaths from 'vite-tsconfig-paths'
 import {
@@ -48,10 +55,11 @@ dotenv({ path: pathe.resolve(ENV_DIR, '.env') })
 // environment variables
 const {
   ALGOLIA_API_KEY = '',
+  ALGOLIA_APP_ID = '',
   CI = 'false',
   MEASUREMENT_ID,
   NODE_ENV,
-  VERCEL_ENV,
+  VERCEL_ENV = '',
   VERIFICATION_ID = ''
 } = process.env
 
@@ -63,7 +71,7 @@ const {
 const HOSTNAME: string =
   VERCEL_ENV === 'production' || JSON.parse(CI) === true
     ? process.env.HOSTNAME!
-    : template('http://localhost:{{0}}', {
+    : template('http://localhost:{0}', {
         0: VERCEL_ENV === 'development' ? 5173 : 8080
       })
 
@@ -86,22 +94,14 @@ const REPOSITORY: string = pkg.repository.replace(/\.git$/, '')
  *
  * @const {SearchClient} algolia
  */
-const algolia: SearchClient = search('DG3R131QAX', ALGOLIA_API_KEY)
-
-/**
- * Algolia search index name.
- *
- * @const {string} index_name
- */
-const index_name: string =
-  pkg.name.replace(/.+\//, '') + (VERCEL_ENV === 'production' ? '' : '_preview')
+const algolia: SearchClient = search(ALGOLIA_APP_ID, ALGOLIA_API_KEY)
 
 /**
  * Algolia search index.
  *
  * @const {SearchIndex} index
  */
-const index: SearchIndex = algolia.initIndex(index_name)
+const index: SearchIndex = algolia.initIndex(VERCEL_ENV)
 
 // clear search index
 if (VERCEL_ENV === 'preview' || VERCEL_ENV === 'production') {
@@ -246,15 +246,17 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
         const objects: IndexObject[] = []
 
         // index headings
-        for (const [type, heading] of [
-          [...$('.vp-doc > div h1').toArray()].map(el => ['lvl1', $(el)]),
-          [...$('.vp-doc > div h2').toArray()].map(el => ['lvl2', $(el)]),
-          [...$('.vp-doc > div h3').toArray()].map(el => ['lvl3', $(el)]),
-          [...$('.vp-doc > div h4').toArray()].map(el => ['lvl4', $(el)]),
-          [...$('.vp-doc > div h5').toArray()].map(el => ['lvl5', $(el)]),
-          [...$('.vp-doc > div h6').toArray()].map(el => ['lvl6', $(el)])
-        ].flat() as [IndexObject['type']?, Cheerio<AnyNode>?][]) {
-          if (!type || !heading) continue
+        for (const [type, heading] of flat<
+          [IndexObject['type'], Cheerio<AnyNode>?][][]
+        >([
+          select($('.vp-doc > div h1').toArray(), null, e => ['lvl1', $(e)]),
+          select($('.vp-doc > div h2').toArray(), null, e => ['lvl2', $(e)]),
+          select($('.vp-doc > div h3').toArray(), null, e => ['lvl3', $(e)]),
+          select($('.vp-doc > div h4').toArray(), null, e => ['lvl4', $(e)]),
+          select($('.vp-doc > div h5').toArray(), null, e => ['lvl5', $(e)]),
+          select($('.vp-doc > div h6').toArray(), null, e => ['lvl6', $(e)])
+        ])) {
+          if (!heading) continue
 
           /**
            * Heading level.
@@ -278,7 +280,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
            *
            * @const {string} objectID
            */
-          const objectID: string = [url, anchor].join('#')
+          const objectID: string = join([url, anchor], '#')
 
           /**
            * Retrieves heading text from `node`.
@@ -287,7 +289,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
            * @return {string} Heading text
            */
           const lvl = (node: Cheerio<AnyNode>): string => {
-            return node.text().split('#')[0]!.trim()
+            return trim(node.text().split('#')[0]!)
           }
 
           /**
@@ -330,7 +332,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
            *
            * @const {string} content
            */
-          const content: string = el.first().text().trim()
+          const content: string = trim(el.first().text())
 
           // do nothing if content is empty string
           if (!content) continue
@@ -349,7 +351,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
            *
            * @const {string} objectID
            */
-          const objectID: string = [url, anchor].join('#')
+          const objectID: string = join([url, anchor], '#')
 
           // add search index object
           objects.push({
@@ -390,7 +392,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
 
     // update sitemap stream
     // see: https://sitemaps.org/protocol.html#xmlTagDefinitions
-    for (const [url, $] of routes.sort((a, b) => a[0]!.localeCompare(b[0]!))) {
+    for (const [url, $] of sort(routes, (a, b) => a[0].localeCompare(b[0]))) {
       stream.write({
         changefreq: $('meta[name=changefreq]').attr('content'),
         lastmod: $('.VPLastUpdated > time').attr('datatime'),
@@ -431,7 +433,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       'link',
       {
         crossorigin: '',
-        href: template('https://{{0}}-dsn.algolia.net', { 0: algolia.appId }),
+        href: template('https://{0}-dsn.algolia.net', { 0: algolia.appId }),
         rel: 'preconnect'
       }
     ]

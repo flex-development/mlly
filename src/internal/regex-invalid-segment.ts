@@ -8,6 +8,8 @@
  *
  * @see https://github.com/nodejs/node/blob/v19.6.1/lib/internal/modules/esm/resolve.js#L299-L300
  *
+ * @internal
+ *
  * @param {'deprecated'?} type - Pattern type
  * @return {RegExp} Regular expression matching invalid path segments
  */

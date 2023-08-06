@@ -10,11 +10,13 @@ import type TestSubject from '../parsed-module-id'
 
 describe('unit-d:interfaces/ParsedModuleId', () => {
   it('should match [internal: boolean]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('internal').toBeBoolean()
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('internal')
+      .toEqualTypeOf<boolean>()
   })
 
   it('should match [path: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('path').toBeString()
+    expectTypeOf<TestSubject>().toHaveProperty('path').toEqualTypeOf<string>()
   })
 
   it('should match [pkg: LiteralUnion<EmptyString, string>]', () => {
@@ -30,7 +32,7 @@ describe('unit-d:interfaces/ParsedModuleId', () => {
   })
 
   it('should match [raw: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('raw').toBeString()
+    expectTypeOf<TestSubject>().toHaveProperty('raw').toEqualTypeOf<string>()
   })
 
   it('should match [scope: LiteralUnion<EmptyString, string>]', () => {

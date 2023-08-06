@@ -246,7 +246,7 @@ const config = {
             allowedNames: ['self']
           }
         ],
-        '@typescript-eslint/no-throw-literal': 2,
+        '@typescript-eslint/no-throw-literal': 0,
         '@typescript-eslint/no-type-alias': 0,
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': [
           2,
@@ -661,7 +661,7 @@ const config = {
             terms: ['@fixme', '@todo']
           }
         ],
-        'unicorn/explicit-length-check': 2,
+        'unicorn/explicit-length-check': 0,
         'unicorn/filename-case': [
           2,
           {
@@ -858,7 +858,6 @@ const config = {
         'promise/valid-params': 0,
         'unicorn/consistent-destructuring': 0,
         'unicorn/error-message': 0,
-        'unicorn/explicit-length-check': 0,
         'unicorn/no-array-for-each': 0,
         'unicorn/no-hex-escape': 0,
         'unicorn/no-useless-undefined': 0,
@@ -997,7 +996,6 @@ const config = {
         '@typescript-eslint/no-misused-promises': 0,
         '@typescript-eslint/no-mixed-enums': 0,
         '@typescript-eslint/no-redundant-type-constituents': 0,
-        '@typescript-eslint/no-throw-literal': 0,
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 0,
         '@typescript-eslint/no-unnecessary-condition': 0,
         '@typescript-eslint/no-unnecessary-qualifier': 0,

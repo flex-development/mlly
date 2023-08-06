@@ -19,10 +19,10 @@ describe('unit:utils/toAbsoluteSpecifier', () => {
   it('should return specifier as absolute specifier', () => {
     // Arrange
     const cases: Parameters<typeof testSubject>[] = [
-      [specifier],
-      [specifier.slice(2)],
+      [pathToFileURL(specifier)],
       [pathe.resolve(specifier)],
-      [pathToFileURL(specifier)]
+      [specifier.slice(2)],
+      [specifier]
     ]
 
     // Act + Expect

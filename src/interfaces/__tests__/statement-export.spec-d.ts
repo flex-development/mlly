@@ -45,6 +45,6 @@ describe('unit-d:interfaces/ExportStatement', () => {
   })
 
   it('should match [type: boolean]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('type').toBeBoolean()
+    expectTypeOf<TestSubject>().toHaveProperty('type').toEqualTypeOf<boolean>()
   })
 })

@@ -6,6 +6,7 @@
 import { Format } from '#src/enums'
 import type { GetSourceOptions } from '#src/interfaces'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
+import { cast } from '@flex-development/tutils'
 import testSubject from '../get-source'
 
 describe('unit:utils/getSource', () => {
@@ -20,7 +21,7 @@ describe('unit:utils/getSource', () => {
 
   it('should return source code as string', async () => {
     // Arrange
-    const cases: Parameters<typeof testSubject>[] = [
+    const cases: [string, GetSourceOptions?][] = [
       ['data:application/javascript;base64,SGVsbG8sIFdvcmxkIQ=='],
       ['data:text/javascript,console.log("hello!");'],
       ['https://deno.land/std@0.171.0/types.d.ts'],
@@ -29,9 +30,7 @@ describe('unit:utils/getSource', () => {
 
     // Act + Expect
     for (const [id, options = {}] of cases) {
-      if ((id as string).startsWith('http')) {
-        options.experimental_network_imports = true
-      }
+      if (id.startsWith('http')) options.experimental_network_imports = true
 
       expect(await testSubject(id, options)).to.be.a('string')
     }
@@ -71,16 +70,16 @@ describe('unit:utils/getSource', () => {
 
       // Act + Expect
       for (const [id, options] of cases) {
-        let error: NodeError
+        let error!: NodeError
 
         try {
           await testSubject(id, options)
         } catch (e: unknown) {
-          error = e as typeof error
+          error = cast(e)
         }
 
-        expect(error!).to.not.be.undefined
-        expect(error!).to.have.property('code').equal(code)
+        expect(error).to.not.be.undefined
+        expect(error).to.have.property('code', code)
       }
     })
   })

@@ -3,6 +3,8 @@
  * @module docs/vitepress/composables/usePageUrl
  */
 
+import pathe from '@flex-development/pathe'
+
 /**
  * Creates a page url from a relative path.
  *
@@ -10,8 +12,9 @@
  * @param {string} path - Relative page path
  * @return {string} Page url
  */
-function usePageUrl(hostname: string, path: string): string {
-  return `${hostname}/${path}`
+const usePageUrl = (hostname: string, path: string): string => {
+  return pathe
+    .join(hostname, path)
     .replace(/\.md$/, '.html')
     .replace(/index\.html$/, '')
 }

@@ -8,11 +8,11 @@ import type TestSubject from '../package-scope'
 
 describe('unit-d:interfaces/PackageScope', () => {
   it('should match [dir: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('dir').toBeString()
+    expectTypeOf<TestSubject>().toHaveProperty('dir').toEqualTypeOf<string>()
   })
 
   it('should match [pkg: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('pkg').toBeString()
+    expectTypeOf<TestSubject>().toHaveProperty('pkg').toEqualTypeOf<string>()
   })
 
   it('should match [pkgjson: PackageJson]', () => {

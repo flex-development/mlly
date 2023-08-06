@@ -10,18 +10,18 @@ import getPackageJson from '#tests/utils/get-package-json'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import type { Exports, Imports } from '@flex-development/pkg-types'
-import type { Nullable } from '@flex-development/tutils'
+import { DOT, cast, type Omit, type Optional } from '@flex-development/tutils'
 import { pathToFileURL } from 'node:url'
 import testSubject from '../parse-subpath'
 
 describe('unit:utils/parseSubpath', () => {
-  type Expected = Omit<ParsedSubpath, 'internal' | 'specifier'>
+  type Expect = Omit<ParsedSubpath, 'internal' | 'specifier'>
 
   let pkgname: string
   let options: ParseSubpathOptions
 
   beforeAll(() => {
-    const dir = pathToFileURL('.' + pathe.sep)
+    const dir = pathToFileURL(DOT + pathe.sep)
     const parent = pathToFileURL('scratch.ts')
 
     options = { dir, parent }
@@ -30,12 +30,7 @@ describe('unit:utils/parseSubpath', () => {
 
   it('should return package import as ParsedSubpath object', () => {
     // Arrange
-    const cases: [
-      string,
-      Imports | undefined,
-      ParseSubpathOptions,
-      Expected
-    ][] = [
+    const cases: [string, Optional<Imports>, ParseSubpathOptions, Expect][] = [
       [
         '#mkbuild',
         imports,
@@ -84,7 +79,7 @@ describe('unit:utils/parseSubpath', () => {
 
     // Act + Expect
     cases.forEach(([specifier, context, options, expected]) => {
-      expect(testSubject(specifier, context, options)).to.deep.equal({
+      expect(testSubject(specifier, context, options)).to.eql({
         ...expected,
         internal: true,
         specifier
@@ -94,20 +89,15 @@ describe('unit:utils/parseSubpath', () => {
 
   it('should return package path as ParsedSubpath object', () => {
     // Arrange
-    const cases: [
-      string,
-      Exports | undefined,
-      ParseSubpathOptions,
-      Expected
-    ][] = [
+    const cases: [string, Optional<Exports>, ParseSubpathOptions, Expect][] = [
       [
         pkgname,
         exports,
         options,
         {
           base: '',
-          key: '.',
-          raw: '.',
+          key: DOT,
+          raw: DOT,
           target: './dist/index.mjs'
         }
       ],
@@ -119,7 +109,7 @@ describe('unit:utils/parseSubpath', () => {
           base: '',
           key: './internal',
           raw: './internal',
-          target: exports['./internal'] as Nullable<string>
+          target: cast(exports['./internal'])
         }
       ],
       [
@@ -130,7 +120,7 @@ describe('unit:utils/parseSubpath', () => {
           base: 'resolver',
           key: './internal/*',
           raw: './internal/resolver',
-          target: exports['./internal/*'] as Nullable<string>
+          target: cast(exports['./internal/*'])
         }
       ],
       [
@@ -152,7 +142,7 @@ describe('unit:utils/parseSubpath', () => {
           base: '',
           key: './utils',
           raw: './utils',
-          target: exports['./utils'] as Nullable<string>
+          target: cast(exports['./utils'])
         }
       ],
       [
@@ -163,7 +153,7 @@ describe('unit:utils/parseSubpath', () => {
           base: 'parse-subpath',
           key: './utils/*',
           raw: './utils/parse-subpath',
-          target: exports['./utils/*'] as Nullable<string>
+          target: cast(exports['./utils/*'])
         }
       ],
       [
@@ -175,8 +165,8 @@ describe('unit:utils/parseSubpath', () => {
         },
         {
           base: '',
-          key: '.',
-          raw: '.',
+          key: DOT,
+          raw: DOT,
           target: './index.mjs'
         }
       ],
@@ -189,8 +179,8 @@ describe('unit:utils/parseSubpath', () => {
         },
         {
           base: '',
-          key: '.',
-          raw: '.',
+          key: DOT,
+          raw: DOT,
           target: './index.mjs'
         }
       ],
@@ -204,8 +194,8 @@ describe('unit:utils/parseSubpath', () => {
         },
         {
           base: '',
-          key: '.',
-          raw: '.',
+          key: DOT,
+          raw: DOT,
           target: './index.cjs'
         }
       ]
@@ -213,7 +203,7 @@ describe('unit:utils/parseSubpath', () => {
 
     // Act + Expect
     cases.forEach(([specifier, context, options, expected]) => {
-      expect(testSubject(specifier, context, options)).to.deep.equal({
+      expect(testSubject(specifier, context, options)).to.eql({
         ...expected,
         internal: false,
         specifier
@@ -226,26 +216,25 @@ describe('unit:utils/parseSubpath', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_TARGET
       const target: number = faker.number.int()
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
-        testSubject(pkgname, { '.': target as unknown as string }, options)
+        testSubject(pkgname, { [DOT]: cast(target) }, options)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').contain(target)
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').contain(target)
     })
 
     it('should throw if context contains numeric property keys', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_CONFIG
-      const exports: Exports = { import: { '.': './dist/index.mjs', 5: null } }
-      let error: NodeError
+      const exports: Exports = { import: { 5: null } }
+      let error!: NodeError
 
       // Act
       try {
@@ -254,85 +243,80 @@ describe('unit:utils/parseSubpath', () => {
           parent: pathToFileURL('__fixtures__/parent.ts')
         })
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
+      expect(error).to.have.property('code', code)
     })
 
     it('should throw if package import is not defined', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_PACKAGE_IMPORT_NOT_DEFINED
-      let error: NodeError<TypeError>
+      let error!: NodeError<TypeError>
 
       // Act
       try {
         testSubject('#src', undefined, options)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
+      expect(error).to.be.instanceof(TypeError).and.have.property('code', code)
     })
 
     it('should throw if package path is not exported', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_PACKAGE_PATH_NOT_EXPORTED
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         testSubject(pkgname, {}, options)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
+      expect(error).to.have.property('code', code)
     })
 
     it('should throw if target has invalid path segments', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_TARGET
       const target: string = './node_modules/foo-pkg/index.mjs'
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
-        testSubject(pkgname, { '.': [target] }, options)
+        testSubject(pkgname, { [DOT]: [target] }, options)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').contain(target)
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').contain(target)
     })
 
     it('should throw if target is not relative to package directory', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_TARGET
       const target: string = 'dist/index.mjs'
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
-        testSubject(pkgname, { '.': target }, options)
+        testSubject(pkgname, { [DOT]: target }, options)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').contain(target)
-      expect(error!).to.have.property('message').endWith('must start with "./"')
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').contain(target)
+      expect(error).to.have.property('message').endWith('must start with "./"')
     })
   })
 })

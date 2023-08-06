@@ -13,6 +13,7 @@ import getSpecifierKind from '#src/internal/get-specifier-kind'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
 import { DYNAMIC_IMPORT_REGEX } from '@flex-development/import-regex'
+import { split, trim } from '@flex-development/tutils'
 
 /**
  * Finds all dynamic import statements in `code`. Ignores matches in comments.
@@ -53,11 +54,9 @@ const findDynamicImports = (code: string = ''): DynamicImport[] => {
       imports:
         imports === ''
           ? []
-          : imports
-              .replace(/^{|}$/g, '')
-              .split(',')
-              .map(e => e.trim())
-              .filter(e => e.length > 0),
+          : split(imports.replace(/^{|}$/g, ''), ',')
+              .map(trim)
+              .filter(e => !!e.length),
       kind: StatementKind.IMPORT,
       options,
       specifier: specifier.replace(/^["']|["']$/g, ''),

@@ -10,6 +10,8 @@ import validateURLString from './validate-url-string'
 /**
  * Checks if a directory exists at the given module `id`.
  *
+ * @internal
+ *
  * @param {ModuleId} id - Module id to evaluate
  * @return {boolean} `true` if directory exists at `id`
  */

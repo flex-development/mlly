@@ -7,6 +7,6 @@ import type testSubject from '../validate-boolean'
 
 describe('unit-d:internal/validateBoolean', () => {
   it('should guard boolean', () => {
-    expectTypeOf<typeof testSubject>().guards.toBeBoolean()
+    expectTypeOf<typeof testSubject>().guards.toEqualTypeOf<boolean>()
   })
 })

@@ -16,6 +16,14 @@ import {
 } from '@flex-development/errnode'
 import { isBuiltin } from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
+import {
+  DOT,
+  cast,
+  isString,
+  isUndefined,
+  trim,
+  type Optional
+} from '@flex-development/tutils'
 import { URL, fileURLToPath } from 'node:url'
 import isBareSpecifier from './is-bare-specifier'
 import isRelativeSpecifier from './is-relative-specifier'
@@ -50,16 +58,16 @@ const parseModuleId = (
   validateBoolean(pkgname, 'options.pkgname')
 
   // ensure id a string without leading and trailing spaces
-  id = id instanceof URL ? id.href : id.trim()
+  id = id instanceof URL ? id.href : trim(id)
 
   /**
    * Reason for [`ERR_INVALID_MODULE_SPECIFIER`][1], if any.
    *
    * [1]: https://nodejs.org/api/errors.html#err_invalid_module_specifier
    *
-   * @const {string | undefined} error
+   * @const {Optional<string>} error
    */
-  let error: string | undefined
+  let error: Optional<string>
 
   /**
    * Object representing `id`.
@@ -124,7 +132,7 @@ const parseModuleId = (
 
       parsed = {
         internal: false,
-        path: '.' + subpath,
+        path: DOT + subpath,
         pkg,
         protocol: '',
         raw: id,
@@ -153,8 +161,8 @@ const parseModuleId = (
       }
 
       break
-    case isBareSpecifier(id as string):
-    case isRelativeSpecifier(id as string):
+    case isBareSpecifier(cast(id)):
+    case isRelativeSpecifier(cast(id)):
     case pathe.isAbsolute(id):
       break
     default:
@@ -172,10 +180,10 @@ const parseModuleId = (
     : error
 
   // throw if module specifier is invalid
-  if (error !== undefined) {
+  if (isString(error)) {
     let { parent } = options
 
-    if (parent !== undefined) {
+    if (!isUndefined(parent)) {
       validateURLString(parent, 'options.parent')
       parent = fileURLToPath(parent)
     }

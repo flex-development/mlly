@@ -3,11 +3,11 @@
  * @module mlly/internal/tests/unit-d/validateObject
  */
 
-import type { ObjectPlain } from '@flex-development/tutils'
+import type { ObjectCurly } from '@flex-development/tutils'
 import type testSubject from '../validate-object'
 
 describe('unit-d:internal/validateObject', () => {
-  it('should guard ObjectPlain', () => {
-    expectTypeOf<typeof testSubject>().guards.toEqualTypeOf<ObjectPlain>()
+  it('should guard ObjectCurly', () => {
+    expectTypeOf<typeof testSubject>().guards.toEqualTypeOf<ObjectCurly>()
   })
 })

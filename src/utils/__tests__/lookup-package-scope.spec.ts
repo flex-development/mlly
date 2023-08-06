@@ -3,6 +3,7 @@
  * @module mlly/utils/tests/unit/lookupPackageScope
  */
 
+import { DOT } from '@flex-development/tutils'
 import { pathToFileURL, type URL } from 'node:url'
 import testSubject from '../lookup-package-scope'
 
@@ -10,7 +11,7 @@ describe('unit:utils/lookupPackageScope', () => {
   it('should return null if package.json file is not found', () => {
     // Arrange
     const cases: Parameters<typeof testSubject>[] = [
-      ['../index.mjs', pathToFileURL('.')],
+      ['../index.mjs', pathToFileURL(DOT)],
       ['__mocks__', pathToFileURL('__mocks__')],
       ['node_modules', undefined]
     ]
@@ -28,8 +29,7 @@ describe('unit:utils/lookupPackageScope', () => {
     const result = testSubject(id)
 
     // Expect
-    expect(result).to.not.be.null
     expect(result).to.have.property('dir').startWith(dir.href)
-    expect(result).to.have.property('pkg').equal(`${result!.dir}/package.json`)
+    expect(result).to.have.property('pkg', `${result!.dir}/package.json`)
   })
 })

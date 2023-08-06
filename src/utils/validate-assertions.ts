@@ -17,7 +17,13 @@ import {
   ERR_IMPORT_ASSERTION_TYPE_UNSUPPORTED,
   type NodeError
 } from '@flex-development/errnode'
-import type { LiteralUnion } from '@flex-development/tutils'
+import {
+  cast,
+  hasOwn,
+  includes,
+  type LiteralUnion,
+  type Optional
+} from '@flex-development/tutils'
 import { URL } from 'node:url'
 
 /**
@@ -50,14 +56,14 @@ const validateAssertions = (
    *
    * @const {boolean} has_type
    */
-  const has_type: boolean = Object.hasOwnProperty.call(assertions, 'type')
+  const has_type: boolean = hasOwn(assertions, 'type')
 
   /**
    * `import` assertion type.
    *
-   * @const {AssertType | undefined} type
+   * @const {Optional<AssertType>} type
    */
-  const type: AssertType | undefined = FORMAT_TYPE_MAP.get(format as Format)
+  const type: Optional<AssertType> = FORMAT_TYPE_MAP.get(cast(format))
 
   /**
    * `import` assertion error check.
@@ -107,7 +113,7 @@ const validateAssertions = (
     }
 
     // throw if asserted type is not supported
-    if (!supported.includes(assertions.type as AssertType)) {
+    if (!includes(supported, assertions.type)) {
       throw new ERR_IMPORT_ASSERTION_TYPE_UNSUPPORTED(assertions.type!)
     }
 

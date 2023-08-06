@@ -3,7 +3,7 @@
  * @module tests/reporters/Notifier
  */
 
-import type { OneOrMany } from '@flex-development/tutils'
+import { cast, isArray, type OneOrMany } from '@flex-development/tutils'
 import notifier from 'node-notifier'
 import type NotificationCenter from 'node-notifier/notifiers/notificationcenter'
 import { performance } from 'node:perf_hooks'
@@ -20,22 +20,28 @@ import type { File, Reporter, Task, Test, Vitest } from 'vitest'
  */
 class Notifier implements Reporter {
   /**
+   * Test reporter context.
+   *
    * @public
-   * @member {Vitest} ctx - Test reporter context
+   * @member {Vitest} ctx
    */
-  public ctx: Vitest = {} as Vitest
+  public ctx!: Vitest
 
   /**
+   * Test run end time (in milliseconds).
+   *
    * @public
-   * @member {number} end - Test run end time (in milliseconds)
+   * @member {number} end
    */
-  public end: number = 0
+  public end!: number
 
   /**
+   * Test run start time (in milliseconds).
+   *
    * @public
-   * @member {number} start - Test run start time (in milliseconds)
+   * @member {number} start
    */
-  public start: number = 0
+  public start!: number
 
   /**
    * Sends a notification.
@@ -52,19 +58,39 @@ class Notifier implements Reporter {
     files: File[] = this.ctx.state.getFiles(),
     errors: unknown[] = this.ctx.state.getUnhandledErrors()
   ): Promise<void> {
-    /** @const {Test[]} tests - Tests run */
+    /**
+     * Tests that have been run.
+     *
+     * @const {Test[]} tests
+     */
     const tests: Test[] = this.tests(files)
 
-    /** @const {number} fails - Total number of failed tests */
+    /**
+     * Total number of failed tests.
+     *
+     * @const {number} fails
+     */
     const fails: number = tests.filter(t => t.result?.state === 'fail').length
 
-    /** @const {number} passes - Total number of passed tests */
+    /**
+     * Total number of passed tests.
+     *
+     * @const {number} passes
+     */
     const passes: number = tests.filter(t => t.result?.state === 'pass').length
 
-    /** @var {string} message - Notification message */
+    /**
+     * Notification message.
+     *
+     * @var {string} message
+     */
     let message: string = ''
 
-    /** @var {string} title - Notification title */
+    /**
+     * Notification title.
+     *
+     * @var {string} title
+     */
     let title: string = ''
 
     // get notification title and message based on number of failed tests
@@ -76,7 +102,11 @@ class Notifier implements Reporter {
 
       title = '\u274C Failed'
     } else {
-      /** @const {number} time - Time to run all tests (in milliseconds) */
+      /**
+       * Time to run all tests (in milliseconds).
+       *
+       * @const {number} time
+       */
       const time: number = this.end - this.start
 
       message = dedent`
@@ -128,7 +158,7 @@ class Notifier implements Reporter {
    */
   public onInit(context: Vitest): void {
     this.ctx = context
-    return void (this.start = performance.now())
+    return void ((this.start = performance.now()) && (this.end = 0))
   }
 
   /**
@@ -140,17 +170,13 @@ class Notifier implements Reporter {
    * @return {Test[]} `Test` object array
    */
   protected tests(tasks: OneOrMany<Task> = []): Test[] {
-    const { mode } = this.ctx
-
-    return (Array.isArray(tasks) ? tasks : [tasks]).flatMap(task => {
-      const { type } = task
-
-      return mode === 'typecheck' && type === 'suite' && task.tasks.length === 0
-        ? ([task] as unknown as [Test])
-        : type === 'test'
+    return (isArray<Task>(tasks) ? tasks : [tasks]).flatMap(task => {
+      return task.type === 'custom'
+        ? [cast(task)]
+        : task.type === 'test'
         ? [task]
         : 'tasks' in task
-        ? task.tasks.flatMap(t => (t.type === 'test' ? [t] : this.tests(t)))
+        ? task.tasks.flatMap(task => this.tests(task))
         : []
     })
   }

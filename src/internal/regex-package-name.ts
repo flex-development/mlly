@@ -8,6 +8,8 @@
  *
  * @see https://regex101.com/r/BHcJfc
  *
+ * @internal
+ *
  * @const {RegExp} PACKAGE_NAME_REGEX
  */
 const PACKAGE_NAME_REGEX: RegExp =

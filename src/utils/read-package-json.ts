@@ -14,10 +14,13 @@ import {
 import pathe from '@flex-development/pathe'
 import type { PackageJson } from '@flex-development/pkg-types'
 import {
+  DOT,
+  cast,
   isEmptyString,
   isNIL,
   isUndefined,
-  type Nullable
+  type Nullable,
+  type Optional
 } from '@flex-development/tutils'
 import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
@@ -41,7 +44,7 @@ import toURL from './to-url'
  * string, or if a `package.json` is file found and does not contain valid JSON
  */
 const readPackageJson = (
-  dir: ModuleId = '.',
+  dir: ModuleId = DOT,
   specifier?: string,
   parent?: ModuleId
 ): Nullable<PackageJson> => {
@@ -83,9 +86,9 @@ const readPackageJson = (
      * `package.json` file and the location the module specifier was imported
      * from.
      *
-     * @var {string | undefined} base
+     * @var {Optional<string>} base
      */
-    let base: string | undefined
+    let base: Optional<string>
 
     // get base
     switch (true) {
@@ -97,7 +100,11 @@ const readPackageJson = (
         break
     }
 
-    throw new ERR_INVALID_PACKAGE_CONFIG(path, base, (e as SyntaxError).message)
+    throw new ERR_INVALID_PACKAGE_CONFIG(
+      path,
+      base,
+      cast<SyntaxError>(e).message
+    )
   }
 
   return pkg

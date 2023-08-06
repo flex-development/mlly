@@ -4,6 +4,7 @@
  */
 
 import type { ModuleId } from '#src/types'
+import type { Optional } from '@flex-development/tutils'
 
 /**
  * Subpath search options.
@@ -18,7 +19,7 @@ interface FindSubpathOptions {
    *
    * @default 'default'
    */
-  condition?: string | undefined
+  condition?: Optional<string>
 
   /**
    * Export conditions.
@@ -29,7 +30,7 @@ interface FindSubpathOptions {
    *
    * @default CONDITIONS
    */
-  conditions?: Set<string> | undefined
+  conditions?: Optional<Set<string>>
 
   /**
    * URL of directory containing relevant `package.json` file.
@@ -43,7 +44,7 @@ interface FindSubpathOptions {
    *
    * @default false
    */
-  internal?: boolean | undefined
+  internal?: Optional<boolean>
 
   /**
    * URL of module to resolve from.

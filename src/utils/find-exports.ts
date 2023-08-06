@@ -11,7 +11,6 @@ import {
 import type { ExportStatement } from '#src/interfaces'
 import getSpecifierKind from '#src/internal/get-specifier-kind'
 import validateString from '#src/internal/validate-string'
-import type { Declaration } from '#src/types'
 import type { NodeError } from '@flex-development/errnode'
 import {
   EXPORT_AGGREGATE_REGEX,
@@ -19,6 +18,7 @@ import {
   EXPORT_DEFAULT_REGEX,
   EXPORT_LIST_REGEX
 } from '@flex-development/export-regex'
+import { cast, sort, split, trim } from '@flex-development/tutils'
 
 /**
  * Finds all export statements in `code`. Ignores matches in comments.
@@ -55,11 +55,9 @@ const findExports = (code: string = ''): ExportStatement[] => {
       end: start + code.length,
       exports: exports.startsWith('*')
         ? [exports]
-        : exports
-            .replace(/^{|}$/g, '')
-            .split(',')
-            .map(e => e.trim())
-            .filter(e => e.length > 0),
+        : split(exports.replace(/^{|}$/g, ''), ',')
+            .map(trim)
+            .filter(e => !!e.length),
       kind: StatementKind.EXPORT,
       modifiers: [],
       specifier,
@@ -80,23 +78,20 @@ const findExports = (code: string = ''): ExportStatement[] => {
 
     statements.push({
       code,
-      declaration: declaration as Declaration,
+      declaration: cast(declaration),
       end: start + code.length,
       exports: /^\w+$/.test(exports)
         ? [exports]
-        : exports
-            .replace(/^[[{]|[\]}]$/g, '')
-            .split(',')
-            .map(e => e.trim().replace(/\s*=\s*.*$/, ''))
-            .filter(e => e.length > 0),
+        : split(exports.replace(/^[[{]|[\]}]$/g, ''), ',')
+            .map(e => trim(e).replace(/\s*=\s*.*$/, ''))
+            .filter(e => !!e.length),
       kind: StatementKind.EXPORT,
       modifiers:
         modifiers === ''
           ? []
-          : modifiers
-              .split(' ')
-              .map(e => e.trim())
-              .filter(e => e.length > 0),
+          : split(modifiers, ' ')
+              .map(trim)
+              .filter(e => !!e.length),
       specifier: null,
       specifier_kind: null,
       specifier_syntax: null,
@@ -113,17 +108,16 @@ const findExports = (code: string = ''): ExportStatement[] => {
 
     statements.push({
       code,
-      declaration: declaration ? (declaration as Declaration) : null,
+      declaration: declaration ? cast(declaration) : null,
       end: start + code.length,
       exports: exports === '' ? [] : [exports],
       kind: StatementKind.EXPORT,
       modifiers:
         modifiers === ''
           ? []
-          : modifiers
-              .split(' ')
-              .map(e => e.trim())
-              .filter(e => e.length > 0),
+          : split(modifiers, ' ')
+              .map(trim)
+              .filter(e => !!e.length),
       specifier: null,
       specifier_kind: null,
       specifier_syntax: null,
@@ -142,11 +136,9 @@ const findExports = (code: string = ''): ExportStatement[] => {
       code,
       declaration: null,
       end: start + code.length,
-      exports: exports
-        .replace(/^{|}$/g, '')
-        .split(',')
-        .map(e => e.trim())
-        .filter(e => e.length > 0),
+      exports: split(exports.replace(/^{|}$/g, ''), ',')
+        .map(trim)
+        .filter(e => !!e.length),
       kind: StatementKind.EXPORT,
       modifiers: [],
       specifier: null,
@@ -158,9 +150,7 @@ const findExports = (code: string = ''): ExportStatement[] => {
     })
   }
 
-  return statements.sort((s1: ExportStatement, s2: ExportStatement): number => {
-    return s1.start - s2.start
-  })
+  return sort(statements, (s1, s2): number => s1.start - s2.start)
 }
 
 export default findExports

@@ -4,29 +4,29 @@
  */
 
 import type { ModuleId } from '#src/types'
-import type { KeysRequired } from '@flex-development/tutils'
+import type { Optional, RequiredKeys } from '@flex-development/tutils'
 import type TestSubject from '../options-parse-module-id'
 
 describe('unit-d:interfaces/ParseModuleIdOptions', () => {
   it('should allow empty object', () => {
-    expectTypeOf<KeysRequired<TestSubject>>().toBeNever()
+    expectTypeOf<RequiredKeys<TestSubject>>().toBeNever()
   })
 
-  it('should match [internal?: boolean]', () => {
+  it('should match [internal?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('internal')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 
-  it('should match [parent?: ModuleId]', () => {
+  it('should match [parent?: Optional<ModuleId>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('parent')
-      .toEqualTypeOf<ModuleId | undefined>()
+      .toEqualTypeOf<Optional<ModuleId>>()
   })
 
-  it('should match [pkgname?: boolean]', () => {
+  it('should match [pkgname?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('pkgname')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 })

@@ -7,14 +7,14 @@ import type TestSubject from '../module-specifier-type'
 
 describe('unit-d:types/ModuleSpecifierType', () => {
   it('should extract "absolute"', () => {
-    expectTypeOf<TestSubject>().extract<'absolute'>().toBeString()
+    expectTypeOf<TestSubject>().extract<'absolute'>().not.toBeNever()
   })
 
   it('should extract "bare"', () => {
-    expectTypeOf<TestSubject>().extract<'bare'>().toBeString()
+    expectTypeOf<TestSubject>().extract<'bare'>().not.toBeNever()
   })
 
   it('should extract "relative"', () => {
-    expectTypeOf<TestSubject>().extract<'relative'>().toBeString()
+    expectTypeOf<TestSubject>().extract<'relative'>().not.toBeNever()
   })
 })

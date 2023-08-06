@@ -5,6 +5,7 @@
 
 import type { ParsedDataUrl } from '#src/interfaces'
 import { ErrorCode, type ErrInvalidUrl } from '@flex-development/errnode'
+import { cast } from '@flex-development/tutils'
 import testSubject from '../parse-data-url'
 
 describe('unit:utils/parseDataURL', () => {
@@ -46,25 +47,24 @@ describe('unit:utils/parseDataURL', () => {
 
     // Act + Expect
     cases.forEach(([url, expected]) => {
-      expect(testSubject(url)).to.deep.equal({ ...expected, protocol: 'data:' })
+      expect(testSubject(url)).to.eql({ ...expected, protocol: 'data:' })
     })
   })
 
   it('should throw if url is not valid data: url', () => {
     // Arrange
     const url: string = 'data:,Hello%2C%20World%21'
-    let error: ErrInvalidUrl
+    let error!: ErrInvalidUrl
 
     // Act
     try {
       testSubject(url)
     } catch (e: unknown) {
-      error = e as typeof error
+      error = cast(e)
     }
 
     // Expect
-    expect(error!).to.not.be.undefined
-    expect(error!).to.have.property('code').equal(ErrorCode.ERR_INVALID_URL)
-    expect(error!).to.have.property('input').equal(url)
+    expect(error).to.have.property('code', ErrorCode.ERR_INVALID_URL)
+    expect(error).to.have.property('input', url)
   })
 })

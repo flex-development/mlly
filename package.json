@@ -84,7 +84,7 @@
     "@flex-development/is-builtin": "2.0.0",
     "@flex-development/pathe": "1.0.3",
     "@flex-development/pkg-types": "2.0.0",
-    "@flex-development/tutils": "6.0.0-alpha.10"
+    "@flex-development/tutils": "6.0.0-alpha.15"
   },
   "devDependencies": {
     "@commitlint/cli": "17.6.5",
@@ -167,7 +167,6 @@
     "pkg-size": "2.4.0",
     "prettier": "2.8.8",
     "prettier-plugin-sh": "0.12.8",
-    "radash": "10.8.1",
     "sade": "1.8.1",
     "semver": "7.5.2",
     "serve": "14.2.0",
@@ -204,7 +203,6 @@
   },
   "resolutions": {
     "@ardatan/sync-fetch": "larsgw/sync-fetch#head=worker_threads",
-    "@flex-development/tutils": "6.0.0-alpha.10",
     "vitepress@npm:1.0.0-alpha.34": "patch:vitepress@npm%3A1.0.0-alpha.34#patches/vitepress+1.0.0-alpha.34.dev.patch"
   },
   "engines": {

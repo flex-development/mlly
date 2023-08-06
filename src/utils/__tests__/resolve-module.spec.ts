@@ -4,6 +4,7 @@
  */
 
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
+import { cast } from '@flex-development/tutils'
 import { URL, pathToFileURL } from 'node:url'
 import testSubject from '../resolve-module'
 
@@ -58,31 +59,30 @@ describe('unit:utils/resolveModule', () => {
         parent: options.parent ?? import.meta.url
       })
 
-      expect(result).to.deep.equal(expected)
+      expect(result).to.eql(expected)
     }
   })
 
   it('should throw if intolerable error is encountered', async () => {
     // Arrange
     const code: ErrorCode = ErrorCode.ERR_PACKAGE_IMPORT_NOT_DEFINED
-    let error: NodeError
+    let error!: NodeError
 
     // Act
     try {
       await testSubject('#app')
     } catch (e: unknown) {
-      error = e as NodeError
+      error = cast(e)
     }
 
     // Expect
-    expect(error!).to.not.be.undefined
-    expect(error!).to.have.property('code').equal(code)
+    expect(error).to.have.property('code', code)
   })
 
   it('should throw if module was not resolved', async () => {
     // Arrange
     const code: ErrorCode = ErrorCode.ERR_MODULE_NOT_FOUND
-    let error: NodeError
+    let error!: NodeError
 
     // Act
     try {
@@ -91,11 +91,10 @@ describe('unit:utils/resolveModule', () => {
         parent: import.meta.url
       })
     } catch (e: unknown) {
-      error = e as NodeError
+      error = cast(e)
     }
 
     // Expect
-    expect(error!).to.not.be.undefined
-    expect(error!).to.have.property('code').equal(code)
+    expect(error).to.have.property('code', code)
   })
 })

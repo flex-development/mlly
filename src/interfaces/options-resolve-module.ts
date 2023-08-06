@@ -4,7 +4,7 @@
  */
 
 import type { ChangeExtFn, ModuleId } from '#src/types'
-import type { Nilable } from '@flex-development/tutils'
+import type { Nilable, Optional } from '@flex-development/tutils'
 
 /**
  * Module resolution options.
@@ -20,7 +20,7 @@ interface ResolveModuleOptions {
    *
    * @default 'default'
    */
-  condition?: string | undefined
+  condition?: Optional<string>
 
   /**
    * Export conditions.
@@ -31,7 +31,7 @@ interface ResolveModuleOptions {
    *
    * @default CONDITIONS
    */
-  conditions?: Set<string> | string[] | undefined
+  conditions?: Optional<Set<string> | string[]>
 
   /**
    * Replacement file extension or function that returns a file extension.
@@ -50,7 +50,7 @@ interface ResolveModuleOptions {
    *
    * @default RESOLVE_EXTENSIONS
    */
-  extensions?: Set<string> | string[] | undefined
+  extensions?: Optional<Set<string> | string[]>
 
   /**
    * URL of module to resolve from.
@@ -59,14 +59,14 @@ interface ResolveModuleOptions {
    *
    * @default import.meta.url
    */
-  parent?: ModuleId | undefined
+  parent?: Optional<ModuleId>
 
   /**
    * Keep symlinks instead of resolving them.
    *
    * @default false
    */
-  preserveSymlinks?: boolean | undefined
+  preserveSymlinks?: Optional<boolean>
 }
 
 export type { ResolveModuleOptions as default }

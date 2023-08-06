@@ -9,7 +9,7 @@ import type { ModuleId } from '#src/types'
 import type { NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 import type { PackageJson } from '@flex-development/pkg-types'
-import type { Nullable } from '@flex-development/tutils'
+import { DOT, type Nullable } from '@flex-development/tutils'
 import { pathToFileURL } from 'node:url'
 import readPackageJson from './read-package-json'
 import toURL from './to-url'
@@ -60,7 +60,7 @@ const lookupPackageScope = (
   // search for package.json
   while (dir && !dir.endsWith('node_modules')) {
     // stop search if outside of endpoint
-    if (pathe.relative(stopdir, dir).startsWith('../')) break
+    if (pathe.relative(stopdir, dir).startsWith(DOT.repeat(2) + '/')) break
 
     /**
      * Possible `package.json` object.

@@ -7,15 +7,16 @@ import type { ParsedModuleId } from '#src/interfaces'
 import type { ModuleId } from '#src/types'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
+import { cast, type Omit } from '@flex-development/tutils'
 import { URL, pathToFileURL } from 'node:url'
 import testSubject from '../parse-module-id'
 
 describe('unit:utils/parseModuleId', () => {
-  type Expected = Omit<ParsedModuleId, 'raw'> & { path?: string }
+  type Expect = Omit<ParsedModuleId, 'raw'> & { path?: string }
 
   it('should return absolute specifier as ParsedModuleId object', () => {
     // Arrange
-    const cases: [...Parameters<typeof testSubject>, Expected][] = [
+    const cases: [...Parameters<typeof testSubject>, Expect][] = [
       [
         'c:/home/dir/file.txt',
         undefined,
@@ -46,16 +47,16 @@ describe('unit:utils/parseModuleId', () => {
 
     // Act + Expect
     cases.forEach(([specifier, options = {}, expected]) => {
-      expect(testSubject(specifier, options)).to.deep.equal({
+      expect(testSubject(specifier, options)).to.eql({
         ...expected,
-        raw: specifier as string
+        raw: cast(specifier)
       })
     })
   })
 
   it('should return bare specifier as ParsedModuleId object', () => {
     // Arrange
-    const cases: [...Parameters<typeof testSubject>, Expected][] = [
+    const cases: [...Parameters<typeof testSubject>, Expect][] = [
       [
         '@flex-development/mkbuild/package.json',
         { pkgname: true },
@@ -125,16 +126,16 @@ describe('unit:utils/parseModuleId', () => {
 
     // Act + Expect
     cases.forEach(([specifier, options = {}, expected]) => {
-      expect(testSubject(specifier, options)).to.deep.equal({
+      expect(testSubject(specifier, options)).to.eql({
         ...expected,
-        raw: specifier as string
+        raw: cast(specifier)
       })
     })
   })
 
   it('should return builtin specifier as ParsedModuleId object', () => {
     // Arrange
-    const cases: [...Parameters<typeof testSubject>, Expected][] = [
+    const cases: [...Parameters<typeof testSubject>, Expect][] = [
       [
         'fs',
         undefined,
@@ -161,7 +162,6 @@ describe('unit:utils/parseModuleId', () => {
           version_prefix: ''
         }
       ],
-
       [
         'node:fs/promises',
         undefined,
@@ -179,16 +179,16 @@ describe('unit:utils/parseModuleId', () => {
 
     // Act + Expect
     cases.forEach(([specifier, options = {}, expected]) => {
-      expect(testSubject(specifier, options)).to.deep.equal({
+      expect(testSubject(specifier, options)).to.eql({
         ...expected,
-        raw: specifier as string
+        raw: cast(specifier)
       })
     })
   })
 
   it('should return internal specifier as ParsedModuleId object', () => {
     // Arrange
-    const cases: [...Parameters<typeof testSubject>, Expected][] = [
+    const cases: [...Parameters<typeof testSubject>, Expect][] = [
       [
         '#src',
         { internal: true },
@@ -219,16 +219,16 @@ describe('unit:utils/parseModuleId', () => {
 
     // Act + Expect
     cases.forEach(([specifier, options = {}, expected]) => {
-      expect(testSubject(specifier, options)).to.deep.equal({
+      expect(testSubject(specifier, options)).to.eql({
         ...expected,
-        raw: specifier as string
+        raw: cast(specifier)
       })
     })
   })
 
   it('should return relative specifier as ParsedModuleId object', () => {
     // Arrange
-    const cases: [...Parameters<typeof testSubject>, Expected][] = [
+    const cases: [...Parameters<typeof testSubject>, Expect][] = [
       [
         '../dist/index.mjs',
         undefined,
@@ -259,16 +259,16 @@ describe('unit:utils/parseModuleId', () => {
 
     // Act + Expect
     cases.forEach(([specifier, options = {}, expected]) => {
-      expect(testSubject(specifier, options)).to.deep.equal({
+      expect(testSubject(specifier, options)).to.eql({
         ...expected,
-        raw: specifier as string
+        raw: cast(specifier)
       })
     })
   })
 
   it('should return url specifier as ParsedModuleId object', () => {
     // Arrange
-    const cases: [...Parameters<typeof testSubject>, Expected][] = [
+    const cases: [...Parameters<typeof testSubject>, Expect][] = [
       [
         'data:text/javascript;base64,SGVsbG8sIFdvcmxkIQ==',
         undefined,
@@ -325,7 +325,7 @@ describe('unit:utils/parseModuleId', () => {
 
     // Act + Expect
     cases.forEach(([specifier, options = {}, expected]) => {
-      expect(testSubject(specifier, options)).to.deep.equal({
+      expect(testSubject(specifier, options)).to.eql({
         ...expected,
         raw: specifier instanceof URL ? specifier.href : specifier
       })
@@ -344,73 +344,69 @@ describe('unit:utils/parseModuleId', () => {
     it('should throw if id contains encoded separators', () => {
       // Arrange
       const message: RegExp = /must not include encoded '\/' or '\\' characters/
-      let error: NodeError<TypeError>
+      let error!: NodeError<TypeError>
 
       // Act
       try {
         testSubject('.%2Futils', { parent })
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(message)
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(message)
     })
 
     it('should throw if id does not begin with valid package name', () => {
       // Arrange
       const message: RegExp = /does not start with a valid package name/
-      let error: NodeError<TypeError>
+      let error!: NodeError<TypeError>
 
       // Act
       try {
         testSubject('@FLEX-DEVELOPMENT/MLLY', { parent, pkgname: true })
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(message)
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(message)
     })
 
     it('should throw if id is invalid for unknown reason', () => {
       // Arrange
       const message: RegExp = /^Invalid module '' imported from \S+/
-      let error: NodeError<TypeError>
+      let error!: NodeError<TypeError>
 
       // Act
       try {
         testSubject('', { parent })
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(message)
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(message)
     })
 
     it('should throw if id is invalid url', () => {
       // Arrange
       const message: RegExp = /is not a valid URL/
-      let error: NodeError<TypeError>
+      let error!: NodeError<TypeError>
 
       // Act
       try {
         testSubject('https:', { parent })
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(message)
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(message)
     })
 
     it('should throw if id is not internal specifier', () => {
@@ -420,17 +416,17 @@ describe('unit:utils/parseModuleId', () => {
 
       // Act + Expect
       cases.forEach(([id]) => {
-        let error: NodeError<TypeError>
+        let error!: NodeError<TypeError>
 
         try {
           testSubject(id, { internal: true, parent })
         } catch (e: unknown) {
-          error = e as typeof error
+          error = cast(e)
         }
 
-        expect(error!).to.not.be.undefined
-        expect(error!).to.have.property('code').equal(code)
-        expect(error!).to.have.property('message').match(message)
+        // Expect
+        expect(error).to.have.property('code', code)
+        expect(error).to.have.property('message').match(message)
       })
     })
   })

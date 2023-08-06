@@ -9,7 +9,9 @@ import type TestSubject from '../parsed-data-url'
 
 describe('unit-d:interfaces/ParsedDataUrl', () => {
   it('should match [base64: boolean]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('base64').toBeBoolean()
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('base64')
+      .toEqualTypeOf<boolean>()
   })
 
   it('should match [data: LiteralUnion<EmptyString, string>]', () => {
@@ -19,7 +21,7 @@ describe('unit-d:interfaces/ParsedDataUrl', () => {
   })
 
   it('should match [href: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('href').toBeString()
+    expectTypeOf<TestSubject>().toHaveProperty('href').toEqualTypeOf<string>()
   })
 
   it('should match [mime: LiteralUnion<MimeType, string>]', () => {
@@ -29,7 +31,9 @@ describe('unit-d:interfaces/ParsedDataUrl', () => {
   })
 
   it('should match [pathname: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('pathname').toBeString()
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('pathname')
+      .toEqualTypeOf<string>()
   })
 
   it('should match [protocol: "data:"]', () => {

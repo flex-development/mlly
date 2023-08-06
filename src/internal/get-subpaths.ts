@@ -6,7 +6,7 @@
 import type { ModuleId } from '#src/types'
 import isExportsSugar from '#src/utils/is-exports-sugar'
 import type { Exports, Imports } from '@flex-development/pkg-types'
-import { isNIL } from '@flex-development/tutils'
+import { DOT, isNIL, keys, type Nilable } from '@flex-development/tutils'
 
 /**
  * Returns an array containing subpaths defined in the given package `context`,
@@ -19,14 +19,16 @@ import { isNIL } from '@flex-development/tutils'
  * [2]: https://nodejs.org/api/packages.html#imports
  * [3]: https://nodejs.org/api/packages.html#exports-sugar
  *
- * @param {Exports | Imports | undefined} context - Package context
+ * @internal
+ *
+ * @param {Nilable<Exports | Imports>} context - Package context
  * @param {boolean} internal - Package `imports` hint
  * @param {ModuleId} pkg - URL of relevant `package.json` file
  * @param {ModuleId} parent - URL of module to resolve from
  * @return {string[]} Subpaths defined in `context`
  */
 const getSubpaths = (
-  context: Exports | Imports | undefined,
+  context: Nilable<Exports | Imports>,
   internal: boolean,
   pkg: ModuleId,
   parent: ModuleId
@@ -34,8 +36,8 @@ const getSubpaths = (
   return isNIL(context)
     ? []
     : !internal && isExportsSugar(context, pkg, parent)
-    ? ['.']
-    : Object.keys(context as Imports | Record<string, Exports>)
+    ? [DOT]
+    : keys(context)
 }
 
 export default getSubpaths

@@ -26,7 +26,9 @@ describe('unit-d:interfaces/ImportStatement', () => {
   })
 
   it('should match [specifier: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('specifier').toBeString()
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('specifier')
+      .toEqualTypeOf<string>()
   })
 
   it('should match [specifier_syntax: SpecifierSyntaxKind]', () => {

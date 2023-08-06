@@ -5,7 +5,7 @@
 
 import type { Format } from '#src/enums'
 import type { Ext } from '@flex-development/pathe'
-import type { EmptyString } from '@flex-development/tutils'
+import type { EmptyString, Optional } from '@flex-development/tutils'
 
 /**
  * Module format retrieval options.
@@ -22,7 +22,7 @@ interface GetFormatOptions {
    *
    * @default true
    */
-  experimental_json_modules?: boolean | undefined
+  experimental_json_modules?: Optional<boolean>
 
   /**
    * Enable support for network based modules.
@@ -35,7 +35,7 @@ interface GetFormatOptions {
    *
    * @default false
    */
-  experimental_network_imports?: boolean | undefined
+  experimental_network_imports?: Optional<boolean>
 
   /**
    * Enable support for WebAssembly modules.
@@ -44,14 +44,14 @@ interface GetFormatOptions {
    *
    * @default false
    */
-  experimental_wasm_modules?: boolean | undefined
+  experimental_wasm_modules?: Optional<boolean>
 
   /**
    * Map file extensions to module formats.
    *
    * @default EXTENSION_FORMAT_MAP
    */
-  extension_format_map?: Map<EmptyString | Ext, Format> | undefined
+  extension_format_map?: Optional<Map<EmptyString | Ext, Format>>
 
   /**
    * Return `undefined` when module format is not found, rather than `null`.
@@ -63,7 +63,7 @@ interface GetFormatOptions {
    *
    * @default false
    */
-  ignore_errors?: boolean | undefined
+  ignore_errors?: Optional<boolean>
 
   /**
    * Request options for network based modules.
@@ -74,7 +74,7 @@ interface GetFormatOptions {
    *
    * @default {}
    */
-  req?: import('node-fetch').RequestInit | undefined
+  req?: Optional<import('node-fetch').RequestInit>
 }
 
 export type { GetFormatOptions as default }

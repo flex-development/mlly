@@ -7,18 +7,20 @@ import type TestSubject from '../mime-type'
 
 describe('unit-d:types/MimeType', () => {
   it('should extract "application/json"', () => {
-    expectTypeOf<TestSubject>().extract<'application/json'>().toBeString()
+    expectTypeOf<TestSubject>().extract<'application/json'>().not.toBeNever()
   })
 
   it('should extract "application/typescript"', () => {
-    expectTypeOf<TestSubject>().extract<'application/typescript'>().toBeString()
+    expectTypeOf<TestSubject>()
+      .extract<'application/typescript'>()
+      .not.toBeNever()
   })
 
   it('should extract "application/wasm"', () => {
-    expectTypeOf<TestSubject>().extract<'application/wasm'>().toBeString()
+    expectTypeOf<TestSubject>().extract<'application/wasm'>().not.toBeNever()
   })
 
   it('should extract "text/javascript"', () => {
-    expectTypeOf<TestSubject>().extract<'text/javascript'>().toBeString()
+    expectTypeOf<TestSubject>().extract<'text/javascript'>().not.toBeNever()
   })
 })

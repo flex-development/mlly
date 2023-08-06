@@ -5,6 +5,7 @@
 
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
+import { trim } from '@flex-development/tutils'
 import isAbsoluteSpecifier from './is-absolute-specifier'
 import isRelativeSpecifier from './is-relative-specifier'
 
@@ -26,7 +27,7 @@ const isBareSpecifier = (specifier: string): boolean => {
   validateString(specifier, 'specifier')
 
   return (
-    specifier.trim().length > 0 &&
+    !!trim(specifier).length &&
     !isAbsoluteSpecifier(specifier) &&
     !isRelativeSpecifier(specifier)
   )

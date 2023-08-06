@@ -13,6 +13,7 @@ import getSpecifierKind from '#src/internal/get-specifier-kind'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
 import { STATIC_IMPORT_REGEX } from '@flex-development/import-regex'
+import { split, trim } from '@flex-development/tutils'
 
 /**
  * Finds all static import statements in `code`. Ignores matches in comments.
@@ -58,22 +59,18 @@ const findStaticImports = (code: string = ''): StaticImport[] => {
         syntax === StatementSyntaxKind.SIDE_EFFECT
           ? []
           : syntax === StatementSyntaxKind.NAMED
-          ? imports
-              .replace(/^{|}$/g, '')
-              .split(',')
-              .map(e => e.trim())
-              .filter(e => e.length > 0)
+          ? split(imports.replace(/^{|}$/g, ''), ',')
+              .map(trim)
+              .filter(i => !!i.length)
           : syntax === StatementSyntaxKind.DEFAULT_WITH_NAMED
-          ? imports
-              .split(',')
-              .map(i => i.trim().replace(/^{|}$/g, ''))
-              .map(i => i.trim())
-              .filter(i => i.length > 0)
+          ? split(imports, ',')
+              .map(i => trim(i).replace(/^{|}$/g, ''))
+              .map(trim)
+              .filter(i => !!i.length)
           : syntax === StatementSyntaxKind.DEFAULT_WITH_NAMESPACE
-          ? imports
-              .split(',')
-              .map(i => i.trim())
-              .filter(i => i.length > 0)
+          ? split(imports, ',')
+              .map(trim)
+              .filter(i => !!i.length)
           : [imports],
       kind: StatementKind.IMPORT,
       specifier,

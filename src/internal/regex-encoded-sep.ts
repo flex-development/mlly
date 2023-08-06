@@ -8,6 +8,8 @@
  *
  * @see https://regex101.com/r/XV7HzM
  *
+ * @internal
+ *
  * @const {RegExp} ENCODED_SEP_REGEX
  */
 const ENCODED_SEP_REGEX: RegExp = /%2f|%5c/i

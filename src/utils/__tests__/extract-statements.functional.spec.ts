@@ -18,10 +18,10 @@ vi.mock('../find-static-imports')
 describe('functional:utils/extractStatements', () => {
   it('should exit early if no code to evaluate', () => {
     // Act
-    const results = testSubject(' ')
+    const result = testSubject(' ')
 
     // Expect
-    expect(results).to.be.an('array').of.length(0)
+    expect(result).to.be.an('array').of.length(0)
     expect(findDynamicImports).toHaveBeenCalledTimes(0)
     expect(findExports).toHaveBeenCalledTimes(0)
     expect(findRequires).toHaveBeenCalledTimes(0)
@@ -33,10 +33,10 @@ describe('functional:utils/extractStatements', () => {
     const code = fs.readFileSync('src/utils/extract-statements.ts', 'utf8')
 
     // Act
-    const results = testSubject(code)
+    const result = testSubject(code)
 
     // Expect
-    expect(results).to.be.an('array').that.is.not.empty
+    expect(result).to.be.an('array').that.is.not.empty
     expect(findDynamicImports).toHaveBeenCalledOnce()
     expect(findExports).toHaveBeenCalledOnce()
     expect(findRequires).toHaveBeenCalledOnce()

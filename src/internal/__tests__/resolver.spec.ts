@@ -3,12 +3,11 @@
  * @module mlly/internal/tests/unit/Resolver
  */
 
-import regexp from '#src/internal/escape-reg-exp'
 import type { ModuleId } from '#src/types'
 import getPackageJson from '#tests/utils/get-package-json'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
-import type { Exports } from '@flex-development/pkg-types'
+import { DOT, cast, regexp } from '@flex-development/tutils'
 import { URL, pathToFileURL } from 'node:url'
 import TestSubject from '../resolver'
 
@@ -22,7 +21,7 @@ describe('unit:internal/Resolver', () => {
   beforeAll(() => {
     url = (input: string): URL => {
       input = `__fixtures__/node_modules/${input.replace(/^\.\//, '')}`
-      return new URL(input, pathToFileURL('.' + pathe.sep))
+      return new URL(input, pathToFileURL(DOT + pathe.sep))
     }
 
     parent = pathToFileURL('__fixtures__/parent.ts').href
@@ -72,7 +71,7 @@ describe('unit:internal/Resolver', () => {
 
       // Act + Expect
       cases.forEach(([specifier, parent, expected]) => {
-        expect(subject.resolveModule(specifier, parent)).to.deep.equal(expected)
+        expect(subject.resolveModule(specifier, parent)).to.eql(expected)
       })
     })
 
@@ -80,19 +79,19 @@ describe('unit:internal/Resolver', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_UNSUPPORTED_DIR_IMPORT
       const dir_re: RegExp = new RegExp(regexp(pathe.resolve('src')))
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         subject.resolveModule('./src', pathToFileURL('scratch.ts'))
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(dir_re)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(dir_re)
     })
 
     it('should throw if module URL is missing file URL', () => {
@@ -100,19 +99,19 @@ describe('unit:internal/Resolver', () => {
       const code: ErrorCode = ErrorCode.ERR_MODULE_NOT_FOUND
       const file: string = 'src/internal/resolver.mjs'
       const file_re: RegExp = new RegExp(regexp(pathe.resolve(file)))
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         subject.resolveModule('../resolver.mjs', import.meta.url)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(file_re)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(file_re)
     })
   })
 
@@ -137,25 +136,25 @@ describe('unit:internal/Resolver', () => {
       cases.forEach(([specifier, parent, expected]) => {
         const result = subject.resolvePackage(specifier, parent)
 
-        expect(result).to.deep.equal(expected)
+        expect(result).to.eql(expected)
       })
     })
 
     it('should throw if package path was not resolved', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_MODULE_NOT_FOUND
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         subject.resolvePackage('foo-package/lib', parent)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
     })
   })
 
@@ -179,7 +178,7 @@ describe('unit:internal/Resolver', () => {
       cases.forEach(([specifier, expected]) => {
         const result = subject.resolvePackageExport(specifier, pkg, parent)
 
-        expect(result).to.deep.equal(expected)
+        expect(result).to.eql(expected)
       })
     })
 
@@ -187,19 +186,19 @@ describe('unit:internal/Resolver', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_PACKAGE_PATH_NOT_EXPORTED
       const subpath_re: RegExp = /'\.\/internal'/
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         subject.resolvePackageExport('exports-map-1/internal', pkg, parent)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(subpath_re)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(subpath_re)
     })
   })
 
@@ -219,7 +218,7 @@ describe('unit:internal/Resolver', () => {
       cases.forEach(([specifier, expected]) => {
         const result = subject.resolvePackageImport(specifier, import.meta.url)
 
-        expect(result).to.deep.equal(expected)
+        expect(result).to.eql(expected)
       })
     })
 
@@ -228,19 +227,19 @@ describe('unit:internal/Resolver', () => {
       const code: ErrorCode = ErrorCode.ERR_PACKAGE_IMPORT_NOT_DEFINED
       const parent: URL = pathToFileURL(faker.system.filePath())
       const subpath_re: RegExp = /'#app'/
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         subject.resolvePackageImport('#app', parent)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(subpath_re)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(subpath_re)
     })
   })
 
@@ -260,25 +259,25 @@ describe('unit:internal/Resolver', () => {
           parent
         )
 
-        expect(result).to.deep.equal(expected)
+        expect(result).to.eql(expected)
       })
     })
 
     it('should throw if package entry point was not resolved', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_MODULE_NOT_FOUND
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         subject.resolvePackageMain(url('foo-package/package.json'), {}, parent)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
     })
   })
 
@@ -288,7 +287,7 @@ describe('unit:internal/Resolver', () => {
 
     beforeAll(() => {
       dir = pathToFileURL('__fixtures__/node_modules/foo-package/')
-      key = '.'
+      key = DOT
     })
 
     it('should throw if subpath contains invalid path segments', () => {
@@ -315,7 +314,7 @@ describe('unit:internal/Resolver', () => {
       cases.forEach(([target, subpath, key, internal, message_re]) => {
         const pkg: string = dir.pathname + 'package.json'
         const request_re: RegExp = /request is not a valid match in pattern/
-        let error: NodeError
+        let error!: NodeError
 
         try {
           subject.resolvePackageTarget(
@@ -327,14 +326,14 @@ describe('unit:internal/Resolver', () => {
             internal
           )
         } catch (e: unknown) {
-          error = e as typeof error
+          error = cast(e)
         }
 
-        expect(error!).to.not.be.undefined
-        expect(error!).to.have.property('code').equal(code)
-        expect(error!).to.have.property('message').match(request_re)
-        expect(error!).to.have.property('message').match(message_re)
-        expect(error!).to.have.property('message').include(pkg)
+        expect(error).to.not.be.undefined
+        expect(error).to.have.property('code', code)
+        expect(error).to.have.property('message').match(request_re)
+        expect(error).to.have.property('message').match(message_re)
+        expect(error).to.have.property('message').include(pkg)
       })
     })
 
@@ -343,19 +342,19 @@ describe('unit:internal/Resolver', () => {
       const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_TARGET
       const target: string = './dist/lib/*.mjs'
       const target_re: RegExp = new RegExp(`"${regexp(target)}"`)
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         subject.resolvePackageTarget(dir, target, '/index', key, parent)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(target_re)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(target_re)
     })
 
     it('should throw if target contains invalid path segments', () => {
@@ -363,57 +362,57 @@ describe('unit:internal/Resolver', () => {
       const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_TARGET
       const target: string = './node_modules/foo-package/dist/index.mjs'
       const target_re: RegExp = new RegExp(`"${target}"`)
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         subject.resolvePackageTarget(dir, target, '', key, parent)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(target_re)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(target_re)
     })
 
     it('should throw if target contains numeric property keys', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_CONFIG
       const message: RegExp = /"exports" cannot contain numeric property keys/
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         subject.resolvePackageTarget(dir, { '5': null }, '', key, parent)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(message)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(message)
     })
 
     it('should throw if target does not begin with "./"', () => {
       // Arrange
       const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_TARGET
       const target_re: RegExp = new RegExp(`"${regexp(import.meta.url)}"`)
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
         subject.resolvePackageTarget(dir, import.meta.url, '', key, parent)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(target_re)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(target_re)
     })
 
     it('should throw if target schema is invalid', () => {
@@ -421,25 +420,19 @@ describe('unit:internal/Resolver', () => {
       const code: ErrorCode = ErrorCode.ERR_INVALID_PACKAGE_TARGET
       const target: number = faker.number.int()
       const target_re: RegExp = new RegExp(regexp(JSON.stringify(target)))
-      let error: NodeError
+      let error!: NodeError
 
       // Act
       try {
-        subject.resolvePackageTarget(
-          dir,
-          [target] as unknown as Exports,
-          '',
-          key,
-          parent
-        )
+        subject.resolvePackageTarget(dir, cast([target]), '', key, parent)
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
       // Expect
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(code)
-      expect(error!).to.have.property('message').match(target_re)
+      expect(error).to.not.be.undefined
+      expect(error).to.have.property('code', code)
+      expect(error).to.have.property('message').match(target_re)
     })
   })
 })

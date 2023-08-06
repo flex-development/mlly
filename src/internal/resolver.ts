@@ -9,16 +9,18 @@ import type {
   ParsedSubpath
 } from '#src/interfaces'
 import type { ModuleId } from '#src/types'
-import CONDITIONS from '#src/utils/conditions'
-import isExportsSugar from '#src/utils/is-exports-sugar'
-import isRelativeSpecifier from '#src/utils/is-relative-specifier'
-import lookupPackageScope from '#src/utils/lookup-package-scope'
-import parseModuleId from '#src/utils/parse-module-id'
-import parseSubpath from '#src/utils/parse-subpath'
-import PATTERN_CHARACTER from '#src/utils/pattern-character'
-import readPackageJson from '#src/utils/read-package-json'
-import toNodeURL from '#src/utils/to-node-url'
-import toURL from '#src/utils/to-url'
+import {
+  CONDITIONS,
+  PATTERN_CHARACTER,
+  isExportsSugar,
+  isRelativeSpecifier,
+  lookupPackageScope,
+  parseModuleId,
+  parseSubpath,
+  readPackageJson,
+  toNodeURL,
+  toURL
+} from '#src/utils'
 import {
   ERR_INVALID_MODULE_SPECIFIER,
   ERR_INVALID_PACKAGE_CONFIG,
@@ -38,11 +40,25 @@ import type {
   ImportsKey,
   PackageJson
 } from '@flex-development/pkg-types'
-import { isNIL, type Nullable } from '@flex-development/tutils'
+import {
+  DOT,
+  cast,
+  get,
+  ifelse,
+  includes,
+  isArray,
+  isArrayIndex,
+  isNIL,
+  isNull,
+  isObjectCurly,
+  isString,
+  join,
+  regexp,
+  type Nullable,
+  type Optional
+} from '@flex-development/tutils'
 import fs from 'node:fs'
 import { URL, fileURLToPath, pathToFileURL } from 'node:url'
-import regexp from './escape-reg-exp'
-import isArrayIndex from './is-array-index'
 import isDirectory from './is-directory'
 import isFile from './is-file'
 import invalidSegmentRegex from './regex-invalid-segment'
@@ -53,6 +69,8 @@ import PACKAGE_PATH_REGEX from './regex-package-path'
  * ECMAScript (ES) module resolver.
  *
  * @see https://nodejs.org/api/esm.html#resolver-algorithm
+ *
+ * @internal
  *
  * @class
  */
@@ -169,7 +187,7 @@ class Resolver {
         }
       }
     } catch (e: unknown) {
-      error = e as NodeError
+      error = cast(e)
       url = null
     }
 
@@ -220,7 +238,7 @@ class Resolver {
      *
      * @const {URL} stopdir
      */
-    const stopdir: URL = pathToFileURL('.' + pathe.sep)
+    const stopdir: URL = pathToFileURL(DOT + pathe.sep)
 
     /**
      * Package scope lookup result.
@@ -257,7 +275,7 @@ class Resolver {
       let { dir: pkgdir } = scope
 
       // lookup package scope for external package
-      while (pkgdir !== '.') {
+      while (pkgdir !== DOT) {
         scope = lookupPackageScope(
           new URL(`node_modules/${id.raw}`, pkgdir + pathe.sep),
           stopdir,
@@ -284,7 +302,7 @@ class Resolver {
           conditions
         )
         break
-      case scope && id.path === '.':
+      case scope && id.path === DOT:
         url = this.resolvePackageMain(scope!.pkg, scope!.pkgjson, parent)
         break
       case !!scope:
@@ -327,7 +345,7 @@ class Resolver {
      *
      * @var {URL} dir
      */
-    const dir: URL = new URL('.', pkg)
+    const dir: URL = new URL(DOT, pkg)
 
     /**
      * Possible `package.json` object.
@@ -343,9 +361,9 @@ class Resolver {
     /**
      * Package `exports`.
      *
-     * @var {Exports | undefined} exports
+     * @var {Optional<Exports>} exports
      */
-    let exports: Exports | undefined = pkgjson?.exports
+    let exports: Optional<Exports> = pkgjson?.exports
 
     /**
      * Object representation of package subpath.
@@ -359,7 +377,7 @@ class Resolver {
 
     // convert exports to object if using exports main sugar
     if (!subpath.internal && isExportsSugar(exports, pkg, parent)) {
-      exports = { '.': exports } as Record<string, Exports>
+      exports = cast({ [DOT]: exports })
     }
 
     /**
@@ -369,7 +387,7 @@ class Resolver {
      */
     const url: Nullable<URL> = this.resolvePackageTarget(
       dir,
-      (exports as Nullable<Record<string, Exports>>)?.[subpath.key],
+      get(exports, subpath.key),
       subpath.base,
       subpath.key,
       parent,
@@ -431,7 +449,7 @@ class Resolver {
      */
     const scope: Nullable<PackageScope> = lookupPackageScope(
       parent,
-      pathToFileURL('.'),
+      pathToFileURL(DOT),
       specifier,
       parent
     )
@@ -448,9 +466,9 @@ class Resolver {
       /**
        * Package `imports`.
        *
-       * @var {Imports | undefined} imports
+       * @const {Optional<Imports>} imports
        */
-      const imports: Imports | undefined = scope.pkgjson.imports
+      const imports: Optional<Imports> = scope.pkgjson.imports
 
       /**
        * Object representation of package subpath.
@@ -465,7 +483,7 @@ class Resolver {
 
       url = this.resolvePackageTarget(
         scope.dir,
-        imports?.[subpath.key as ImportsKey],
+        get(imports, cast<ImportsKey>(subpath.key)),
         subpath.base,
         subpath.key,
         parent,
@@ -549,7 +567,7 @@ class Resolver {
     // throw if package entry point was not resolved
     if (!url) {
       throw new ERR_MODULE_NOT_FOUND(
-        fileURLToPath(new URL('.', pkg)),
+        fileURLToPath(new URL(DOT, pkg)),
         fileURLToPath(parent)
       )
     }
@@ -568,7 +586,7 @@ class Resolver {
    * @public
    *
    * @param {ModuleId} dir - URL of directory containing relevant `package.json`
-   * @param {Exports | undefined} target - Package `exports` or `imports` target
+   * @param {Optional<Exports>} target - Package `exports` or `imports` target
    * @param {string} subpath - Package subpath without entry prefix (`key`)
    * @param {string} key - Subpath defined in relevant `package.json` file
    * @param {ModuleId} parent - URL of module to resolve from
@@ -580,7 +598,7 @@ class Resolver {
    */
   public resolvePackageTarget(
     dir: ModuleId,
-    target: Exports | undefined,
+    target: Optional<Exports>,
     subpath: string,
     key: string,
     parent: ModuleId,
@@ -597,18 +615,18 @@ class Resolver {
 
     // try resolving package target
     switch (true) {
-      case target === null:
+      case isNull(target):
         break
-      case Array.isArray(target):
+      case isArray(target):
         /**
          * Possible package target resolution error.
          *
-         * @var {NodeError | undefined} error
+         * @var {Optional<NodeError>} error
          */
-        let error: NodeError | undefined
+        let error: Optional<NodeError>
 
         // try resolving package target based on first match in target array
-        for (const item of target as string[]) {
+        for (const item of cast<string[]>(target)) {
           try {
             url = this.resolvePackageTarget(
               dir,
@@ -621,7 +639,7 @@ class Resolver {
               conditions
             )
           } catch (e: unknown) {
-            error = e as NodeError
+            error = cast<NodeError>(e)
 
             /* c8 ignore next */
             if (error.code !== ErrorCode.ERR_INVALID_PACKAGE_TARGET) throw error
@@ -640,8 +658,8 @@ class Resolver {
         if (error) throw error
 
         break
-      case typeof target === 'object':
-        target = target as Record<string, Exports>
+      case isObjectCurly(target):
+        target = cast<Record<string, Exports>>(target)
 
         for (const prop of Object.getOwnPropertyNames(target)) {
           // ensure prop is not an array index
@@ -657,7 +675,7 @@ class Resolver {
           if (prop === condition || conditions.has(prop)) {
             url = this.resolvePackageTarget(
               dir,
-              target[prop],
+              get(target, prop),
               subpath,
               key,
               parent,
@@ -672,15 +690,15 @@ class Resolver {
         }
 
         break
-      case typeof target === 'string':
-        target = target as string
+      case isString(target):
+        target = cast<string>(target)
 
         /**
          * Subpath pattern check.
          *
          * @const {boolean} pattern
          */
-        const pattern: boolean = key.includes(PATTERN_CHARACTER)
+        const pattern: boolean = includes(key, PATTERN_CHARACTER)
 
         switch (true) {
           case subpath && !pattern && !target.endsWith(pathe.sep):
@@ -694,7 +712,7 @@ class Resolver {
           case internal && PACKAGE_NAME_REGEX.test(target):
             url = this.resolvePackage(target, parent, condition, conditions)
             break
-          case target.startsWith('.' + pathe.sep):
+          case target.startsWith(DOT + pathe.sep):
             // check target for invalid segments
             if (invalidSegmentRegex().test(target.slice(2))) {
               if (invalidSegmentRegex('deprecated').test(target.slice(2))) {
@@ -720,11 +738,15 @@ class Resolver {
                 if (invalidSegmentRegex('deprecated').test(subpath)) {
                   throw new ERR_INVALID_MODULE_SPECIFIER(
                     key.replace(PATTERN_CHARACTER, subpath),
-                    [
-                      `request is not a valid match in pattern "${key}" for`,
-                      `the "${internal ? 'imports' : 'exports'}" resolution`,
-                      `of ${fileURLToPath(dir).replace(/\/$/, '')}/package.json`
-                    ].join(' '),
+                    join(
+                      [
+                        `request is not a valid match in pattern "${key}" for`,
+                        `the "${ifelse(internal, 'imports', 'exports')}"`,
+                        'resolution of',
+                        `${fileURLToPath(dir).replace(/\/$/, '')}/package.json`
+                      ],
+                      ' '
+                    ),
                     fileURLToPath(parent)
                   )
                 }

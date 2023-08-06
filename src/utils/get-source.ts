@@ -13,7 +13,7 @@ import {
   ERR_UNSUPPORTED_ESM_URL_SCHEME,
   type NodeError
 } from '@flex-development/errnode'
-import { isUndefined } from '@flex-development/tutils'
+import { isUndefined, type Optional } from '@flex-development/tutils'
 import fs from 'node:fs/promises'
 import os from 'node:os'
 import type { URL } from 'node:url'
@@ -39,13 +39,13 @@ import toURL from './to-url'
  *
  * @param {ModuleId} id - Module id to evaluate
  * @param {GetSourceOptions?} [options={}] - Source code retrieval options
- * @return {Promise<Uint8Array | string | undefined>} Source code for `id`
+ * @return {Promise<Optional<Uint8Array | string>>} Source code for `id`
  * @throws {NodeError} If unsupported URL scheme is encountered
  */
 const getSource = async (
   id: ModuleId,
   options: GetSourceOptions = {}
-): Promise<Uint8Array | string | undefined> => {
+): Promise<Optional<Uint8Array | string>> => {
   const {
     experimental_network_imports: network_imports = false,
     format,
@@ -80,9 +80,9 @@ const getSource = async (
   /**
    * Source code for {@linkcode id}.
    *
-   * @var {Uint8Array | string | undefined} source
+   * @var {Optional<Uint8Array | string>} source
    */
-  let source: Uint8Array | string | undefined = ''
+  let source: Optional<Uint8Array | string> = ''
 
   // get source code based on url protocol
   switch (url.protocol) {

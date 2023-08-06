@@ -20,13 +20,13 @@ describe('unit-d:interfaces/StaticImport', () => {
       .toEqualTypeOf<LiteralUnion<EmptyString, string>>()
   })
 
-  it('should match [syntax: Omit<SyntaxKindImport, StatementSyntaxKind.DYNAMIC>]', () => {
+  it('should match [syntax: Exclude<SyntaxKindImport, StatementSyntaxKind.DYNAMIC>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('syntax')
-      .toMatchTypeOf<Omit<SyntaxKindImport, StatementSyntaxKind.DYNAMIC>>()
+      .toEqualTypeOf<Exclude<SyntaxKindImport, StatementSyntaxKind.DYNAMIC>>()
   })
 
   it('should match [type: boolean]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('type').toBeBoolean()
+    expectTypeOf<TestSubject>().toHaveProperty('type').toEqualTypeOf<boolean>()
   })
 })

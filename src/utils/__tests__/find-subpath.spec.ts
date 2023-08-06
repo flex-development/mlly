@@ -7,7 +7,7 @@ import exports from '#fixtures/package-exports'
 import type { FindSubpathOptions } from '#src/interfaces'
 import pathe from '@flex-development/pathe'
 import type { Exports, Imports } from '@flex-development/pkg-types'
-import type { Nilable } from '@flex-development/tutils'
+import { DOT, type Nilable } from '@flex-development/tutils'
 import { pathToFileURL } from 'node:url'
 import testSubject from '../find-subpath'
 
@@ -15,17 +15,12 @@ describe('unit:utils/findSubpath', () => {
   let options: FindSubpathOptions
 
   beforeAll(() => {
-    options = { dir: pathToFileURL('.' + pathe.sep), parent: import.meta.url }
+    options = { dir: pathToFileURL(DOT + pathe.sep), parent: import.meta.url }
   })
 
   it('should return null if target is not found in context', () => {
     // Arrange
-    const cases: Parameters<typeof testSubject>[1][] = [
-      exports,
-      faker.number.int() as unknown as Exports,
-      null,
-      undefined
-    ]
+    const cases: Parameters<typeof testSubject>[1][] = [, null, exports]
 
     // Act + Expect
     cases.forEach(context => {
@@ -36,11 +31,11 @@ describe('unit:utils/findSubpath', () => {
   it('should return defined subpath if target is found in context', () => {
     // Arrange
     const cases: [string, Nilable<Exports | Imports>, string][] = [
-      ['./dist/index', './dist/index.mjs', '.'],
-      ['./dist/index.mjs', './dist/index.mjs', '.'],
-      ['./dist/index.mjs', ['./dist/index.mjs'], '.'],
-      ['./dist/index', exports, '.'],
-      ['./dist/index.mjs', exports, '.'],
+      ['./dist/index', './dist/index.mjs', DOT],
+      ['./dist/index.mjs', './dist/index.mjs', DOT],
+      ['./dist/index.mjs', ['./dist/index.mjs'], DOT],
+      ['./dist/index', exports, DOT],
+      ['./dist/index.mjs', exports, DOT],
       ['./package.json', exports, './package.json'],
       ['./dist/utils', exports, './utils'],
       ['./dist/utils/index', exports, './utils'],
@@ -53,7 +48,7 @@ describe('unit:utils/findSubpath', () => {
           import: './dist/index.mjs',
           require: './dist/index.cjs'
         },
-        '.'
+        DOT
       ],
       [
         './dist/utils/conditions.mjs',

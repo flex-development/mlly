@@ -6,6 +6,7 @@
 import type { ModuleId } from '#src/types'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
+import { cast } from '@flex-development/tutils'
 import { URL, pathToFileURL } from 'node:url'
 import testSubject from '../to-bare-specifier'
 
@@ -63,37 +64,35 @@ describe('unit:utils/toBareSpecifier', () => {
     const code: ErrorCode = ErrorCode.ERR_PACKAGE_PATH_NOT_EXPORTED
     const specifier: string = 'node_modules/@flex-development/mkbuild/dist/cli'
     const subpath_regex: RegExp = /'\.\/dist\/cli'/
-    let error: NodeError
+    let error!: NodeError
 
     // Act
     try {
       testSubject(specifier, parent)
     } catch (e: unknown) {
-      error = e as typeof error
+      error = cast(e)
     }
 
     // Expect
-    expect(error!).to.not.be.undefined
-    expect(error!).to.have.property('code').equal(code)
-    expect(error!).to.have.property('message').match(subpath_regex)
+    expect(error).to.have.property('code', code)
+    expect(error).to.have.property('message').match(subpath_regex)
   })
 
   it('should throw if package scope is not found for specifier', () => {
     // Arrange
     const code: ErrorCode = ErrorCode.ERR_OPERATION_FAILED
     const message: RegExp = /Package scope for '\S+' not found$/
-    let error: NodeError
+    let error!: NodeError
 
     // Act
     try {
       testSubject(pathe.resolve('node_modules/foo-package/dist/utils'), parent)
     } catch (e: unknown) {
-      error = e as typeof error
+      error = cast(e)
     }
 
     // Expect
-    expect(error!).to.not.be.undefined
-    expect(error!).to.have.property('code').equal(code)
-    expect(error!).to.have.property('message').match(message)
+    expect(error).to.have.property('code', code)
+    expect(error).to.have.property('message').match(message)
   })
 })

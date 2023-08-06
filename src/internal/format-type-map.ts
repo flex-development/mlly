@@ -13,6 +13,8 @@ import { AssertType, Format } from '#src/enums'
  *
  * @see https://github.com/WebAssembly/esm-integration/issues/42
  *
+ * @internal
+ *
  * @const {Map<Format, AssertType>} FORMAT_TYPE_MAP
  */
 const FORMAT_TYPE_MAP: Map<Format, AssertType> = new Map<Format, AssertType>([

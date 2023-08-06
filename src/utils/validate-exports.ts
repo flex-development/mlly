@@ -3,7 +3,6 @@
  * @module mlly/utils/validateExports
  */
 
-import isArrayIndex from '#src/internal/is-array-index'
 import validateURLString from '#src/internal/validate-url-string'
 import type { ModuleId } from '#src/types'
 import {
@@ -11,7 +10,17 @@ import {
   type NodeError
 } from '@flex-development/errnode'
 import type { Exports } from '@flex-development/pkg-types'
-import { isNIL } from '@flex-development/tutils'
+import {
+  DOT,
+  at,
+  cast,
+  isArray,
+  isArrayIndex,
+  isNIL,
+  isObjectCurly,
+  isString,
+  type Optional
+} from '@flex-development/tutils'
 import { URL, fileURLToPath } from 'node:url'
 
 /**
@@ -22,7 +31,7 @@ import { URL, fileURLToPath } from 'node:url'
  * @see {@linkcode Exports}
  * @see {@linkcode ModuleId}
  *
- * @param {Exports | undefined} exports - Package `exports`
+ * @param {Optional<Exports>} exports - Package `exports`
  * @param {ModuleId} pkg - URL of relevant `package.json` file
  * @param {ModuleId} parent - URL of module to resolve from
  * @return {true} `true` if `exports` configuration and schema are valid
@@ -31,7 +40,7 @@ import { URL, fileURLToPath } from 'node:url'
  * schema is invalid
  */
 const validateExports = (
-  exports: Exports | undefined,
+  exports: Optional<Exports>,
   pkg: ModuleId,
   parent: ModuleId
 ): true => {
@@ -39,12 +48,10 @@ const validateExports = (
   validateURLString(parent, 'parent')
 
   switch (true) {
-    case Array.isArray(exports):
-      for (const item of exports as unknown[]) {
+    case isArray(exports):
+      for (const item of cast<unknown[]>(exports)) {
         switch (true) {
-          case Array.isArray(item):
-          case isNIL(item):
-          case typeof item !== 'object' && typeof item !== 'string':
+          case !isObjectCurly(item) && !isString(item):
             throw new ERR_INVALID_PACKAGE_CONFIG(
               fileURLToPath(pkg),
               fileURLToPath(parent),
@@ -52,7 +59,7 @@ const validateExports = (
             )
           default:
             validateExports(
-              item as Record<string, Exports> | string,
+              cast<Record<string, Exports> | string>(item),
               pkg,
               parent
             )
@@ -62,16 +69,16 @@ const validateExports = (
 
       break
     case isNIL(exports):
-    case typeof exports === 'string':
+    case isString(exports):
       break
-    case typeof exports !== 'object':
+    case !isObjectCurly(exports):
       throw new ERR_INVALID_PACKAGE_CONFIG(
         fileURLToPath(pkg),
         fileURLToPath(parent),
         '"exports" must be null, undefined, a string, an object of package subpath keys or condition name keys, or an array containing objects of package subpath keys, objects of condition name keys, or strings'
       )
     default:
-      exports = exports as Record<string, Exports>
+      exports = cast<Record<string, Exports>>(exports)
 
       /**
        * Keys defined in {@linkcode exports}.
@@ -85,7 +92,7 @@ const validateExports = (
         // ensure key is not an array index
         if (isArrayIndex(key)) {
           throw new ERR_INVALID_PACKAGE_CONFIG(
-            fileURLToPath(new URL('.', pkg)),
+            fileURLToPath(new URL(DOT, pkg)),
             fileURLToPath(parent),
             '"exports" cannot contain numeric property keys'
           )
@@ -93,18 +100,18 @@ const validateExports = (
 
         // if more than one key in keys, ensure all keys are either syntactical
         // export conditions or subpath exports
-        if (index > 0) {
+        if (index) {
           /**
            * Key before {@linkcode key} in {@linkcode keys}.
            *
            * @const {string} prev
            */
-          const prev: string = keys[index - 1]!
+          const prev: string = at(keys, index - 1)
 
           // ensure keys are syntactical export conditions or subpath exports
           if (
-            (!key.startsWith('.') && prev.startsWith('.')) ||
-            (key.startsWith('.') && !prev.startsWith('.'))
+            (!key.startsWith(DOT) && prev.startsWith(DOT)) ||
+            (key.startsWith(DOT) && !prev.startsWith(DOT))
           ) {
             throw new ERR_INVALID_PACKAGE_CONFIG(
               fileURLToPath(pkg),

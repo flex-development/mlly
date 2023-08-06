@@ -4,7 +4,6 @@
  */
 
 import type { StatementSyntaxKind } from '#src/enums'
-import type { SyntaxKindImport } from '#src/types'
 import type { EmptyString, LiteralUnion } from '@flex-development/tutils'
 import type ImportStatement from './statement-import'
 
@@ -13,7 +12,6 @@ import type ImportStatement from './statement-import'
  *
  * @see {@linkcode ImportStatement}
  * @see {@linkcode StatementSyntaxKind}
- * @see {@linkcode SyntaxKindImport}
  * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/import
  *
  * @extends {ImportStatement}
@@ -42,7 +40,7 @@ interface DynamicImport extends ImportStatement {
   /**
    * Statement syntax kind.
    */
-  syntax: Extract<SyntaxKindImport, StatementSyntaxKind.DYNAMIC>
+  syntax: StatementSyntaxKind.DYNAMIC
 }
 
 export type { DynamicImport as default }

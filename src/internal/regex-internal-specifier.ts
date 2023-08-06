@@ -9,6 +9,8 @@
  * @see https://regex101.com/r/ppVRw7
  * @see https://nodejs.org/api/packages.html#subpath-imports
  *
+ * @internal
+ *
  * @const {RegExp} INTERNAL_SPECIFIER_REGEX
  */
 const INTERNAL_SPECIFIER_REGEX: RegExp =

@@ -4,7 +4,6 @@
  */
 
 import type { StatementSyntaxKind } from '#src/enums'
-import type { SyntaxKindImport } from '#src/types'
 import type { EmptyString, LiteralUnion } from '@flex-development/tutils'
 import type ImportStatement from './statement-import'
 
@@ -13,7 +12,6 @@ import type ImportStatement from './statement-import'
  *
  * @see {@linkcode ImportStatement}
  * @see {@linkcode StatementSyntaxKind}
- * @see {@linkcode SyntaxKindImport}
  *
  * @extends {ImportStatement}
  */
@@ -31,15 +29,13 @@ interface StaticImport extends ImportStatement {
   /**
    * Statement syntax kind.
    */
-  syntax: Extract<
-    SyntaxKindImport,
+  syntax:
     | StatementSyntaxKind.DEFAULT
     | StatementSyntaxKind.DEFAULT_WITH_NAMED
     | StatementSyntaxKind.DEFAULT_WITH_NAMESPACE
     | StatementSyntaxKind.NAMED
     | StatementSyntaxKind.NAMESPACE
     | StatementSyntaxKind.SIDE_EFFECT
-  >
 
   /**
    * Type-only import statement check.

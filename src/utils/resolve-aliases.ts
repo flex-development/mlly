@@ -5,7 +5,7 @@
 
 import { SpecifierSyntaxKind } from '#src/enums'
 import type { ResolveAliasOptions } from '#src/interfaces'
-import regexp from '#src/internal/escape-reg-exp'
+import { regexp } from '@flex-development/tutils'
 import extractStatements from './extract-statements'
 import resolveAlias from './resolve-alias'
 
@@ -26,30 +26,30 @@ const resolveAliases = async (
   options: ResolveAliasOptions = {}
 ): Promise<string> => {
   for (const statement of extractStatements(code)) {
-    // do nothing if statement does not have specifier
-    if (!statement.specifier) continue
+    if (statement.specifier) {
+      if (statement.specifier_syntax !== SpecifierSyntaxKind.DYNAMIC) {
+        /**
+         * Resolved module specifier.
+         *
+         * @const {string} specifier
+         */
+        const specifier: string = await resolveAlias(
+          statement.specifier,
+          options
+        )
 
-    // ignore statements with dynamic specifiers
-    if (statement.specifier_syntax === SpecifierSyntaxKind.DYNAMIC) continue
-
-    /**
-     * Resolved module specifier.
-     *
-     * @const {string} specifier
-     */
-    const specifier: string = await resolveAlias(statement.specifier, options)
-
-    // do nothing if original specifier did not contain path alias
-    if (specifier === statement.specifier) continue
-
-    // replace path alias
-    code = code.replace(
-      statement.code,
-      statement.code.replace(
-        new RegExp(`(?<=["'])${regexp(statement.specifier)}(?=["'])`),
-        specifier
-      )
-    )
+        // replace path alias
+        if (specifier !== statement.specifier) {
+          code = code.replace(
+            statement.code,
+            statement.code.replace(
+              new RegExp(`(?<=["'])${regexp(statement.specifier)}(?=["'])`),
+              specifier
+            )
+          )
+        }
+      }
+    }
   }
 
   return code

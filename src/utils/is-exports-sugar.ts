@@ -6,7 +6,15 @@
 import type { ModuleId } from '#src/types'
 import type { NodeError } from '@flex-development/errnode'
 import type { Exports } from '@flex-development/pkg-types'
-import { isNIL } from '@flex-development/tutils'
+import {
+  at,
+  cast,
+  DOT,
+  isArray,
+  isObjectCurly,
+  isString,
+  type Nilable
+} from '@flex-development/tutils'
 import validateExports from './validate-exports'
 
 /**
@@ -18,7 +26,7 @@ import validateExports from './validate-exports'
  * @see {@linkcode Exports}
  * @see {@linkcode ModuleId}
  *
- * @param {Exports | undefined} exports - Package `exports`
+ * @param {Nilable<Exports>} exports - Package `exports`
  * @param {ModuleId} pkg - URL of relevant `package.json` file
  * @param {ModuleId} parent - URL of module to resolve from
  * @return {boolean} `true` if `exports` is using exports sugar
@@ -27,7 +35,7 @@ import validateExports from './validate-exports'
  * schema is invalid
  */
 const isExportsSugar = (
-  exports: Exports | undefined,
+  exports: Nilable<Exports>,
   pkg: ModuleId,
   parent: ModuleId
 ): boolean => {
@@ -42,16 +50,15 @@ const isExportsSugar = (
 
   // check if exports sugar is being used
   switch (true) {
-    case Array.isArray(exports):
-    case typeof exports === 'string':
+    case isArray(exports):
+    case isString(exports):
       sugar = true
       break
-    case isNIL(exports):
-    case typeof exports !== 'object':
+    case !isObjectCurly(exports):
       sugar = false
       break
     default:
-      exports = exports as Record<string, Exports>
+      exports = cast<Record<string, Exports>>(exports)
 
       /*
        * Validate exports object configuration.
@@ -65,7 +72,7 @@ const isExportsSugar = (
       validateExports(exports, pkg, parent)
 
       // check for exports sugar
-      sugar = !(Object.getOwnPropertyNames(exports)[0]?.startsWith('.') ?? true)
+      sugar = !at(Object.getOwnPropertyNames(exports), 0, DOT).startsWith(DOT)
   }
 
   return sugar

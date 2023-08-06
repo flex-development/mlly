@@ -11,7 +11,7 @@ describe('unit:utils/RESOLVE_EXTENSIONS', () => {
   })
 
   it('should be sorted by priority', () => {
-    expect([...TEST_SUBJECT.values()]).to.deep.equal([
+    expect([...TEST_SUBJECT.values()]).to.eql([
       '.mjs',
       '.mts',
       '.cjs',

@@ -4,6 +4,7 @@
  */
 
 import type { ModuleId } from '#src/types'
+import type { Optional } from '@flex-development/tutils'
 
 /**
  * Module id parsing options.
@@ -18,7 +19,7 @@ interface ParseModuleIdOptions {
    *
    * @default id instanceof URL ? false : id.startsWith('#')
    */
-  internal?: boolean | undefined
+  internal?: Optional<boolean>
 
   /**
    * URL of module to resolve from.
@@ -27,12 +28,12 @@ interface ParseModuleIdOptions {
    *
    * @default undefined
    */
-  parent?: ModuleId | undefined
+  parent?: Optional<ModuleId>
 
   /**
    * Ensure module id begins with a valid package name.
    */
-  pkgname?: boolean | undefined
+  pkgname?: Optional<boolean>
 }
 
 export type { ParseModuleIdOptions as default }

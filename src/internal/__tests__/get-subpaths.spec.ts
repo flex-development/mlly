@@ -7,7 +7,7 @@ import exports from '#fixtures/package-exports'
 import imports from '#fixtures/package-imports'
 import type { ModuleId } from '#src/types'
 import type { Exports, Imports } from '@flex-development/pkg-types'
-import type { Nilable } from '@flex-development/tutils'
+import { DOT, type Nilable } from '@flex-development/tutils'
 import { pathToFileURL } from 'node:url'
 import testSubject from '../get-subpaths'
 
@@ -23,18 +23,18 @@ describe('unit:internal/getSubpaths', () => {
   it('should return array containing defined subpaths', () => {
     // Arrange
     const cases: [Nilable<Exports | Imports>, boolean, string[]][] = [
-      ['./dist/index.mjs', false, ['.']],
-      [['./dist/index.mjs'], false, ['.']],
+      ['./dist/index.mjs', false, [DOT]],
+      [['./dist/index.mjs'], false, [DOT]],
       [exports, false, Object.keys(exports)],
       [imports, true, Object.keys(imports)],
       [null, false, []],
       [undefined, false, []],
-      [{ import: './dist/index.mjs' }, false, ['.']]
+      [{ import: './dist/index.mjs' }, false, [DOT]]
     ]
 
     // Act + Expect
     cases.forEach(([ctx, internal, expected]) => {
-      expect(testSubject(ctx, internal, pkg, parent)).to.deep.equal(expected)
+      expect(testSubject(ctx, internal, pkg, parent)).to.eql(expected)
     })
   })
 })

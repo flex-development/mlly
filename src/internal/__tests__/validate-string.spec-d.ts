@@ -7,6 +7,6 @@ import type testSubject from '../validate-string'
 
 describe('unit-d:internal/validateString', () => {
   it('should guard string', () => {
-    expectTypeOf<typeof testSubject>().guards.toBeString()
+    expectTypeOf<typeof testSubject>().guards.toEqualTypeOf<string>()
   })
 })

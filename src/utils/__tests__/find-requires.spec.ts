@@ -34,11 +34,11 @@ describe('unit:utils/findRequires', () => {
     `
 
     // Act
-    const results = testSubject(code)
+    const result = testSubject(code)
 
     // Expect
-    expect(results).to.be.an('array').of.length(13)
-    expect(results).toMatchSnapshot()
+    expect(result).to.be.an('array').of.length(13)
+    expect(result).toMatchSnapshot()
   })
 
   describe('comments', () => {
@@ -52,11 +52,11 @@ describe('unit:utils/findRequires', () => {
       `
 
       // Act + Expect
-      expect(testSubject(code)).to.be.an('array').of.length(0)
+      expect(testSubject(code)).to.be.an('array').that.is.empty
     })
 
     it('should ignore require in single-line comment', () => {
-      expect(testSubject('// require("foo")')).to.be.an('array').of.length(0)
+      expect(testSubject('// require("foo")')).to.be.an('array').that.is.empty
     })
   })
 })

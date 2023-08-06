@@ -14,7 +14,13 @@ import {
   type Commit
 } from '@flex-development/commitlint-config'
 import pathe from '@flex-development/pathe'
-import { CompareResult, isNIL } from '@flex-development/tutils'
+import {
+  CompareResult,
+  at,
+  includes,
+  isNIL,
+  select
+} from '@flex-development/tutils'
 import addStream from 'add-stream'
 import conventionalChangelog from 'conventional-changelog'
 import type { Options } from 'conventional-changelog-core'
@@ -154,7 +160,6 @@ sade('changelog', true)
     const changelog: Readable = conventionalChangelog<Commit>(
       {
         append: false,
-        debug: debug ? console.debug.bind(console) : undefined,
         outputUnreleased:
           typeof outputUnreleased === 'boolean'
             ? outputUnreleased
@@ -175,6 +180,7 @@ sade('changelog', true)
             { section: ':bug: Fixes', type: Type.FIX },
             { section: ':fire: Performance Improvements', type: Type.PERF },
             { section: ':mechanical_arm: Refactors', type: Type.REFACTOR },
+            { hidden: true, type: Type.RELEASE },
             { section: ':wastebasket: Reverts', type: Type.REVERT },
             { hidden: true, type: Type.STYLE },
             { section: ':white_check_mark: Testing', type: Type.TEST },
@@ -198,10 +204,10 @@ sade('changelog', true)
           return void apply(null, {
             ...commit,
             committerDate: dateformat(commit.committerDate, 'yyyy-mm-dd', true),
-            mentions: commit.mentions.filter(m => m !== 'flexdevelopment'),
+            mentions: select(commit.mentions, m => m !== 'flexdevelopment'),
             // @ts-expect-error ts(2322)
             raw: commit,
-            references: commit.references.filter(ref => ref.action !== null),
+            references: select(commit.references, ref => ref.action !== null),
             version: commit.gitTags ? vgx.exec(commit.gitTags)?.[1] : undefined
           })
         },
@@ -296,21 +302,21 @@ sade('changelog', true)
            *
            * @const {CommitEnhanced?} first_commit
            */
-          const first_commit: CommitEnhanced | undefined = commits.at(0)
+          const first_commit: CommitEnhanced | undefined = at(commits, 0)
 
           /**
            * Last commit in release.
            *
            * @const {CommitEnhanced?} last_commit
            */
-          const last_commit: CommitEnhanced | undefined = commits.at(-1)
+          const last_commit: CommitEnhanced | undefined = at(commits, -1)
 
           // set current and previous tags
           if (key && (!currentTag || !previousTag)) {
             currentTag = key.version ?? undefined
 
             // try setting previous tag based on current tag
-            if (gitSemverTags.includes(currentTag ?? '')) {
+            if (includes(gitSemverTags, currentTag)) {
               const { version = '' } = key
               previousTag = gitSemverTags[gitSemverTags.indexOf(version) + 1]
               if (!previousTag) previousTag = last_commit?.hash ?? undefined
@@ -324,7 +330,7 @@ sade('changelog', true)
               : !currentTag && version
               ? pkg.tagPrefix + version
               : currentTag ?? version
-            previousTag = previousTag ?? gitSemverTags[0]
+            previousTag = previousTag ?? at(gitSemverTags, 0)
           }
 
           // set release date

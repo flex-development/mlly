@@ -12,6 +12,7 @@ import type { RequireStatement } from '#src/interfaces'
 import getSpecifierKind from '#src/internal/get-specifier-kind'
 import validateString from '#src/internal/validate-string'
 import type { NodeError } from '@flex-development/errnode'
+import { split, trim } from '@flex-development/tutils'
 
 /**
  * Finds all `require` statements in `code`. Ignores matches in comments.
@@ -54,11 +55,9 @@ const findRequires = (code: string = ''): RequireStatement[] => {
       imports:
         imports === ''
           ? []
-          : imports
-              .replace(/^{|}$/g, '')
-              .split(',')
-              .map(e => e.trim())
-              .filter(e => e.length > 0),
+          : split(imports.replace(/^{|}$/g, ''), ',')
+              .map(trim)
+              .filter(e => !!e.length),
       kind: StatementKind.REQUIRE,
       specifier: specifier.replace(/^["']|["']$/g, ''),
       specifier_kind:

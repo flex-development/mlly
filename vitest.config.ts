@@ -5,9 +5,8 @@
  */
 
 import pathe from '@flex-development/pathe'
-import { NodeEnv } from '@flex-development/tutils'
+import { NodeEnv, template } from '@flex-development/tutils'
 import ci from 'is-ci'
-import { template } from 'radash'
 import tsconfigpaths from 'vite-tsconfig-paths'
 import GithubActionsReporter from 'vitest-github-actions-reporter'
 import {
@@ -140,7 +139,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
         checker: 'vue-tsc',
         ignoreSourceErrors: false,
         include: ['**/__tests__/*.spec-d.ts'],
-        tsconfig: template('{{0}}/tsconfig.typecheck.json', {
+        tsconfig: template('{0}/tsconfig.typecheck.json', {
           0: pathe.resolve(TYPESCRIPT_V5 ? '' : '__tests__/ts/v4')
         })
       },

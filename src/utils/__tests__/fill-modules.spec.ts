@@ -3,11 +3,10 @@
  * @module mlly/utils/tests/unit/fillModules
  */
 
-import isFunction from '#src/internal/is-function'
-import type { ChangeExtFn, ModuleId } from '#src/types'
+import type { ModuleId } from '#src/types'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
-import type { Nilable } from '@flex-development/tutils'
+import { cast, isFunction, select } from '@flex-development/tutils'
 import { pathToFileURL } from 'node:url'
 import { dedent } from 'ts-dedent'
 import extractStatements from '../extract-statements'
@@ -24,10 +23,20 @@ describe('unit:utils/fillModules', () => {
     code = dedent`
       import { SpecifierSyntaxKind } from '#src/enums'
       import type { FillModuleOptions } from '#src/interfaces'
-      import isFunction from '#src/internal/is-function'
-      import { ERR_UNKNOWN_FILE_EXTENSION } from '@flex-development/errnode'
-      import pathe, { type Ext } from '@flex-development/pathe'
-      import type { EmptyString } from '@flex-development/tutils'
+      import validateArraySet from '#src/internal/validate-array-set'
+      import validateURLString from '#src/internal/validate-url-string'
+      import {
+        ERR_UNKNOWN_FILE_EXTENSION,
+        type NodeError
+      } from '@flex-development/errnode'
+      import pathe from '@flex-development/pathe'
+      import {
+        DOT,
+        isFunction,
+        regexp,
+        trim,
+        type Optional
+      } from '@flex-development/tutils'
       import CONDITIONS from '${pathToFileURL('src/utils/conditions.ts').href}'
       import assert from 'node:assert'
       import type { URL } from 'node:url'
@@ -37,55 +46,49 @@ describe('unit:utils/fillModules', () => {
       import resolveModule from './resolve-module'
       import toBareSpecifier from './to-bare-specifier'
       import toRelativeSpecifier from './to-relative-specifier'
-
-      await import(foo)
-
-      export const hello = 'world'
     `
     parent = pathToFileURL('src/utils/fill-modules.ts')
   })
 
   it('should return code with module specifiers fully specified', async () => {
     for (const ext of ['.mjs', 'mjs']) {
-      const expected = extractStatements(code)
-        .map(({ specifier }) => {
-          return specifier
-            ? isRelativeSpecifier(specifier)
-              ? specifier + pathe.formatExt(ext)
-              : specifier
-            : ''
-        })
-        .filter(specifier => specifier.length > 0)
-      const result = extractStatements(await testSubject(code, { ext, parent }))
-        .map(s => s.specifier)
-        .filter(Boolean)
+      // Arrange
+      const expected = select(
+        extractStatements(code),
+        statement => isRelativeSpecifier(statement.specifier!),
+        statement => statement.specifier! + pathe.formatExt(ext)
+      )
 
-      expect(result).to.deep.equal(expected)
+      // Act
+      const result = select(
+        extractStatements(await testSubject(code, { ext, parent })),
+        statement => isRelativeSpecifier(statement.specifier!),
+        statement => statement.specifier!
+      )
+
+      // Expect
+      expect(result).to.eql(expected)
     }
   })
 
   it('should throw if new file extension is empty', async () => {
     // Arrange
-    const cases: (ChangeExtFn | Nilable<string>)[] = [, null, () => ' ', '']
     const error_code: ErrorCode = ErrorCode.ERR_UNKNOWN_FILE_EXTENSION
 
     // Act + Expect
-    for (const ext of cases) {
+    for (const ext of [, null, () => ' ', '']) {
       const ext_regex: RegExp = new RegExp(`'${isFunction(ext) ? ' ' : ext}'`)
-      let error: NodeError<TypeError>
+      let error!: NodeError<TypeError>
 
       try {
-        await testSubject(code, {
-          ext: ext as ChangeExtFn<string> | string,
-          parent
-        })
+        await testSubject(code, { ext: cast(ext), parent })
       } catch (e: unknown) {
-        error = e as typeof error
+        error = cast(e)
       }
 
-      expect(error!).to.not.be.undefined
-      expect(error!).to.have.property('code').equal(error_code)
-      expect(error!).to.have.property('message').match(ext_regex)
+      expect(error).to.be.instanceof(TypeError)
+      expect(error).to.have.property('code', error_code)
+      expect(error).to.have.property('message').match(ext_regex)
     }
   })
 })

@@ -4,7 +4,7 @@
  */
 
 import type { ModuleId } from '#src/types'
-import type { MapLike, OneOrMany } from '@flex-development/tutils'
+import type { MapLike, OneOrMany, Optional } from '@flex-development/tutils'
 import type TestSubject from '../options-resolve-alias'
 import type ResolveModuleOptions from '../options-resolve-module'
 
@@ -13,21 +13,21 @@ describe('unit-d:interfaces/ResolveAliasOptions', () => {
     expectTypeOf<TestSubject>().toMatchTypeOf<ResolveModuleOptions>()
   })
 
-  it('should match [absolute?: boolean]', () => {
+  it('should match [absolute?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('absolute')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 
-  it('should match [aliases?: MapLike<OneOrMany<string>>', () => {
+  it('should match [aliases?: Optional<MapLike<OneOrMany<string>>>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('aliases')
-      .toEqualTypeOf<MapLike<OneOrMany<string>> | undefined>()
+      .toEqualTypeOf<Optional<MapLike<OneOrMany<string>>>>()
   })
 
-  it('should match [cwd?: ModuleId]', () => {
+  it('should match [cwd?: Optional<ModuleId>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('cwd')
-      .toEqualTypeOf<ModuleId | undefined>()
+      .toEqualTypeOf<Optional<ModuleId>>()
   })
 })

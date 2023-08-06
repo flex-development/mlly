@@ -18,19 +18,23 @@ describe('unit-d:interfaces/ParsedSubpath', () => {
   })
 
   it('should match [internal: boolean]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('internal').toBeBoolean()
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('internal')
+      .toEqualTypeOf<boolean>()
   })
 
   it('should match [key: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('key').toBeString()
+    expectTypeOf<TestSubject>().toHaveProperty('key').toEqualTypeOf<string>()
   })
 
   it('should match [raw: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('raw').toBeString()
+    expectTypeOf<TestSubject>().toHaveProperty('raw').toEqualTypeOf<string>()
   })
 
   it('should match [specifier: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('specifier').toBeString()
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('specifier')
+      .toEqualTypeOf<string>()
   })
 
   it('should match [target: Nullable<string>]', () => {

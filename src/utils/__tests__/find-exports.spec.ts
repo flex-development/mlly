@@ -46,10 +46,10 @@ describe('unit:utils/findExports', () => {
     `
 
     // Act
-    const results = testSubject(code)
+    const result = testSubject(code)
 
     // Expect
-    expect(results).to.be.an('array').that.is.not.empty
-    expect(results).toMatchSnapshot()
+    expect(result).to.be.an('array').that.is.not.empty
+    expect(result).toMatchSnapshot()
   })
 })

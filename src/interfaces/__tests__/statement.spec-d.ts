@@ -18,11 +18,11 @@ describe('unit-d:interfaces/Statement', () => {
   })
 
   it('should match [code: string]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('code').toBeString()
+    expectTypeOf<TestSubject>().toHaveProperty('code').toEqualTypeOf<string>()
   })
 
   it('should match [end: number]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('end').toBeNumber()
+    expectTypeOf<TestSubject>().toHaveProperty('end').toEqualTypeOf<number>()
   })
 
   it('should match [kind: StatementKind]', () => {
@@ -50,7 +50,7 @@ describe('unit-d:interfaces/Statement', () => {
   })
 
   it('should match [start: number]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('end').toBeNumber()
+    expectTypeOf<TestSubject>().toHaveProperty('end').toEqualTypeOf<number>()
   })
 
   it('should match [syntax: StatementSyntaxKind]', () => {

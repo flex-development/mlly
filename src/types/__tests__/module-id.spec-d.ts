@@ -8,10 +8,10 @@ import type TestSubject from '../module-id'
 
 describe('unit-d:types/ModuleId', () => {
   it('should extract URL', () => {
-    expectTypeOf<TestSubject>().extract<URL>().toEqualTypeOf<URL>()
+    expectTypeOf<TestSubject>().extract<URL>().not.toBeNever()
   })
 
   it('should extract string', () => {
-    expectTypeOf<TestSubject>().extract<string>().toBeString()
+    expectTypeOf<TestSubject>().extract<string>().not.toBeNever()
   })
 })

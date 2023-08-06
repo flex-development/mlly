@@ -4,6 +4,7 @@
  */
 
 import type { Format } from '#src/enums'
+import type { Optional, OrLowercase } from '@flex-development/tutils'
 
 /**
  * Source code retrieval options.
@@ -23,7 +24,7 @@ interface GetSourceOptions {
    *
    * @default false
    */
-  experimental_network_imports?: boolean | undefined
+  experimental_network_imports?: Optional<boolean>
 
   /**
    * Module format hint.
@@ -32,7 +33,7 @@ interface GetSourceOptions {
    *
    * @default undefined
    */
-  format?: Format | Lowercase<keyof typeof Format> | undefined
+  format?: Optional<OrLowercase<Format>>
 
   /**
    * Ignore [`ERR_UNSUPPORTED_ESM_URL_SCHEME`][1] if thrown.
@@ -41,7 +42,7 @@ interface GetSourceOptions {
    *
    * @default false
    */
-  ignore_errors?: boolean | undefined
+  ignore_errors?: Optional<boolean>
 
   /**
    * Request options for network based modules.
@@ -52,7 +53,7 @@ interface GetSourceOptions {
    *
    * @default {}
    */
-  req?: import('node-fetch').RequestInit | undefined
+  req?: Optional<import('node-fetch').RequestInit>
 }
 
 export type { GetSourceOptions as default }

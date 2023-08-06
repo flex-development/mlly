@@ -16,10 +16,12 @@ import {
 import { isBuiltin } from '@flex-development/is-builtin'
 import pathe, { type Ext } from '@flex-development/pathe'
 import {
+  isEmptyString,
   isUndefined,
   type EmptyString,
   type Nilable,
-  type Nullable
+  type Nullable,
+  type Optional
 } from '@flex-development/tutils'
 import type { URL } from 'node:url'
 import EXTENSION_FORMAT_MAP from './extension-format-map'
@@ -189,30 +191,34 @@ const getFormat = async (
            *
            * [1]: https://nodejs.org/api/errors.html#err_unknown_file_extension
            *
-           * @var {string?} suggestion
+           * @var {Optional<string>} suggestion
            */
-          let suggestion: string | undefined
+          let suggestion: Optional<string>
 
           // add recommended fix for ERR_UNKNOWN_FILE_EXTENSION if package is
           // esm-only and module id does not include file extension
-          if (scope && scope.pkgjson.type === Format.MODULE && ext === '') {
-            const { pkg } = scope
+          if (scope && scope.pkgjson.type === Format.MODULE) {
+            if (isEmptyString(ext)) {
+              const { pkg } = scope
 
-            /**
-             * Basename of {@linkcode url.pathname}
-             *
-             * @const {string} basename
-             */
-            const basename: string = pathe.basename(url.pathname)
+              /**
+               * Basename of {@linkcode url.pathname}
+               *
+               * @const {string} basename
+               */
+              const basename: string = pathe.basename(url.pathname)
 
-            /**
-             * Relative path from {@linkcode pkg} to {@linkcode url.pathname}.
-             *
-             * @const {string} relative
-             */
-            const relative: string = pathe.relative(pkg, url.pathname).slice(1)
+              /**
+               * Relative path from {@linkcode pkg} to {@linkcode url.pathname}.
+               *
+               * @const {string} relative
+               */
+              const relative: string = pathe
+                .relative(pkg, url.pathname)
+                .slice(1)
 
-            suggestion = `Loading extensionless files is not supported inside of "type":"module" package.json contexts. The package.json file ${pkg} caused this "type":"module" context. Try changing ${url.pathname} to have a file extension. Note the "bin" field of package.json can point to a file with an extension, for example {"type":"module","bin":{"${basename}":"${relative}.js"}}`
+              suggestion = `Loading extensionless files is not supported inside of "type":"module" package.json contexts. The package.json file ${pkg} caused this "type":"module" context. Try changing ${url.pathname} to have a file extension. Note the "bin" field of package.json can point to a file with an extension, for example {"type":"module","bin":{"${basename}":"${relative}.js"}}`
+            }
           }
 
           throw new ERR_UNKNOWN_FILE_EXTENSION(ext, url.pathname, suggestion)

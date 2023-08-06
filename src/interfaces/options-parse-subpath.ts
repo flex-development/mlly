@@ -4,6 +4,7 @@
  */
 
 import type { ModuleId } from '#src/types'
+import type { Optional } from '@flex-development/tutils'
 
 /**
  * Subpath parsing options.
@@ -18,7 +19,7 @@ interface ParseSubpathOptions {
    *
    * @default 'default'
    */
-  condition?: string | undefined
+  condition?: Optional<string>
 
   /**
    * Export conditions.
@@ -29,7 +30,7 @@ interface ParseSubpathOptions {
    *
    * @default CONDITIONS
    */
-  conditions?: Set<string> | string[] | undefined
+  conditions?: Optional<Set<string> | string[]>
 
   /**
    * URL of directory containing relevant `package.json` file.
@@ -43,7 +44,7 @@ interface ParseSubpathOptions {
    *
    * @default specifier.startsWith('#')
    */
-  internal?: boolean | undefined
+  internal?: Optional<boolean>
 
   /**
    * URL of module to resolve from.

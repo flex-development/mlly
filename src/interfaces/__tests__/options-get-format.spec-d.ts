@@ -5,48 +5,52 @@
 
 import type { Format } from '#src/enums'
 import type { Ext } from '@flex-development/pathe'
-import type { EmptyString, KeysRequired } from '@flex-development/tutils'
+import type {
+  EmptyString,
+  Optional,
+  RequiredKeys
+} from '@flex-development/tutils'
 import type { RequestInit } from 'node-fetch'
 import type TestSubject from '../options-get-format'
 
 describe('unit-d:interfaces/GetFormatOptions', () => {
   it('should allow empty object', () => {
-    expectTypeOf<KeysRequired<TestSubject>>().toBeNever()
+    expectTypeOf<RequiredKeys<TestSubject>>().toBeNever()
   })
 
-  it('should match [experimental_json_modules?: boolean]', () => {
+  it('should match [experimental_json_modules?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('experimental_json_modules')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 
-  it('should match [experimental_network_imports?: boolean]', () => {
+  it('should match [experimental_network_imports?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('experimental_network_imports')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 
-  it('should match [experimental_wasm_modules?: boolean]', () => {
+  it('should match [experimental_wasm_modules?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('experimental_wasm_modules')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 
-  it('should match [extension_format_map?: Map<EmptyString | Ext, Format>]', () => {
+  it('should match [extension_format_map?: Optional<Map<EmptyString | Ext, Format>>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('extension_format_map')
-      .toEqualTypeOf<Map<EmptyString | Ext, Format> | undefined>()
+      .toEqualTypeOf<Optional<Map<EmptyString | Ext, Format>>>()
   })
 
-  it('should match [ignore_errors?: boolean]', () => {
+  it('should match [ignore_errors?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('ignore_errors')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 
-  it('should match [req?: RequestInit]', () => {
+  it('should match [req?: Optional<RequestInit>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('req')
-      .toEqualTypeOf<RequestInit | undefined>()
+      .toEqualTypeOf<Optional<RequestInit>>()
   })
 })

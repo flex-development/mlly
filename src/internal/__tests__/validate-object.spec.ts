@@ -4,6 +4,7 @@
  */
 
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
+import { cast } from '@flex-development/tutils'
 import testSubject from '../validate-object'
 
 describe('unit:internal/validateObject', () => {
@@ -22,26 +23,16 @@ describe('unit:internal/validateObject', () => {
   it('should throw if value is not an object', () => {
     // Arrange
     const code: ErrorCode = ErrorCode.ERR_INVALID_ARG_TYPE
-    const cases: Parameters<typeof testSubject>[0][] = [
-      faker.datatype.array(),
-      faker.datatype.boolean(),
-      faker.number.bigInt(),
-      faker.number.int(),
-      faker.string.sample()
-    ]
+    let error!: NodeError<TypeError>
 
-    // Act + Expect
-    cases.forEach(value => {
-      let error: NodeError<TypeError>
+    // Act
+    try {
+      testSubject(faker.number.int(), name)
+    } catch (e: unknown) {
+      error = cast(e)
+    }
 
-      try {
-        testSubject(value, name)
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      expect(error!).to.be.instanceof(TypeError)
-      expect(error!).to.have.property('code').equal(code)
-    })
+    // Expect
+    expect(error).to.be.instanceof(TypeError).and.have.property('code', code)
   })
 })

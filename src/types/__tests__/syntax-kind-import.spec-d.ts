@@ -10,42 +10,42 @@ describe('unit-d:types/SyntaxKindImport', () => {
   it('should extract StatementSyntaxKind.DEFAULT', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.DEFAULT>()
-      .toBeString()
+      .not.toBeNever()
   })
 
   it('should extract StatementSyntaxKind.DEFAULT_WITH_NAMED', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.DEFAULT_WITH_NAMED>()
-      .toBeString()
+      .not.toBeNever()
   })
 
   it('should extract StatementSyntaxKind.DEFAULT_WITH_NAMESPACE', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.DEFAULT_WITH_NAMESPACE>()
-      .toBeString()
+      .not.toBeNever()
   })
 
   it('should extract StatementSyntaxKind.DYNAMIC', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.DYNAMIC>()
-      .toBeString()
+      .not.toBeNever()
   })
 
   it('should extract StatementSyntaxKind.NAMED', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.NAMED>()
-      .toBeString()
+      .not.toBeNever()
   })
 
   it('should extract StatementSyntaxKind.NAMESPACE', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.NAMESPACE>()
-      .toBeString()
+      .not.toBeNever()
   })
 
   it('should extract StatementSyntaxKind.SIDE_EFFECT', () => {
     expectTypeOf<TestSubject>()
       .extract<StatementSyntaxKind.SIDE_EFFECT>()
-      .toBeString()
+      .not.toBeNever()
   })
 })

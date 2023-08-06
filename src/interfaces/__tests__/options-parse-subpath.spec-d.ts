@@ -4,29 +4,30 @@
  */
 
 import type { ModuleId } from '#src/types'
+import type { Optional } from '@flex-development/tutils'
 import type TestSubject from '../options-parse-subpath'
 
 describe('unit-d:interfaces/ParseSubpathOptions', () => {
-  it('should match [condition?: string]', () => {
+  it('should match [condition?: Optional<string>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('condition')
-      .toEqualTypeOf<string | undefined>()
+      .toEqualTypeOf<Optional<string>>()
   })
 
-  it('should match [conditions?: Set<string> | string[]]', () => {
+  it('should match [conditions?: Optional<Set<string> | string[]>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('conditions')
-      .toEqualTypeOf<Set<string> | string[] | undefined>()
+      .toEqualTypeOf<Optional<Set<string> | string[]>>()
   })
 
   it('should match [dir: ModuleId]', () => {
     expectTypeOf<TestSubject>().toHaveProperty('dir').toEqualTypeOf<ModuleId>()
   })
 
-  it('should match [internal?: boolean]', () => {
+  it('should match [internal?: Optional<boolean>]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('internal')
-      .toEqualTypeOf<boolean | undefined>()
+      .toEqualTypeOf<Optional<boolean>>()
   })
 
   it('should match [parent: ModuleId]', () => {

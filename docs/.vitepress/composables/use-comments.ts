@@ -5,10 +5,10 @@
 
 import type { Root } from '@flex-development/docast'
 import docastParse, { type Options } from '@flex-development/docast-parse'
-import { CompareResult } from '@flex-development/tutils'
+import pathe, { type ParsedPath } from '@flex-development/pathe'
+import { CompareResult, sort } from '@flex-development/tutils'
 import { globby } from 'globby'
 import fs from 'node:fs/promises'
-import pathe, { type ParsedPath } from '@flex-development/pathe'
 import { unified } from 'unified'
 import { VFile } from 'vfile'
 import attacher from '../theme/comments/plugin'
@@ -21,7 +21,7 @@ import type Documentation from '../theme/documentation'
  *
  * @return {Promise<Documentation[]>} Documentation objects
  */
-async function useComments(): Promise<Documentation[]> {
+const useComments = async (): Promise<Documentation[]> => {
   /**
    * Documentation objects.
    *
@@ -107,7 +107,7 @@ async function useComments(): Promise<Documentation[]> {
     for (const doc of compilation) objects.push({ doc, file: p })
   }
 
-  return objects.sort((obj1: Documentation, obj2: Documentation): number => {
+  return sort(objects, (obj1: Documentation, obj2: Documentation): number => {
     /**
      * Comparison result for {@linkcode obj1} and {@linkcode obj2}.
      *

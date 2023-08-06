@@ -9,7 +9,7 @@ import {
   type ErrInvalidUrl,
   type NodeError
 } from '@flex-development/errnode'
-import type { Nullable } from '@flex-development/tutils'
+import { cast, trim, type Nullable } from '@flex-development/tutils'
 import type { URL } from 'node:url'
 import toURL from './to-url'
 
@@ -60,11 +60,11 @@ const parseDataURL = (url: URL | string): ParsedDataUrl => {
 
   return {
     base64: !!base64,
-    data: data.trim(),
+    data: trim(data),
     href: url.href,
     mime,
     pathname: url.pathname,
-    protocol: url.protocol as ParsedDataUrl['protocol']
+    protocol: cast(url.protocol)
   }
 }
 

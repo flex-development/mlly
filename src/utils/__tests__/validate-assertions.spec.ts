@@ -5,6 +5,7 @@
 
 import { AssertType, Format } from '#src/enums'
 import { ErrorCode, type NodeError } from '@flex-development/errnode'
+import { cast } from '@flex-development/tutils'
 import { pathToFileURL } from 'node:url'
 import testSubject from '../validate-assertions'
 
@@ -26,7 +27,7 @@ describe('unit:utils/validateAssertions', () => {
   it('should throw if assertion type is not supported', () => {
     // Arrange
     const code: ErrorCode = ErrorCode.ERR_IMPORT_ASSERTION_TYPE_UNSUPPORTED
-    let error: NodeError<TypeError>
+    let error!: NodeError<TypeError>
 
     // Act
     try {
@@ -34,35 +35,33 @@ describe('unit:utils/validateAssertions', () => {
         type: AssertType.IMPLICIT
       })
     } catch (e: unknown) {
-      error = e as typeof error
+      error = cast(e)
     }
 
     // Expect
-    expect(error!).to.not.be.undefined
-    expect(error!).to.have.property('code').equal(code)
+    expect(error).to.be.instanceof(TypeError).and.have.property('code', code)
   })
 
   it('should throw if assertion type is required but missing', () => {
     // Arrange
     const code: ErrorCode = ErrorCode.ERR_IMPORT_ASSERTION_TYPE_MISSING
-    let error: NodeError<TypeError>
+    let error!: NodeError<TypeError>
 
     // Act
     try {
       testSubject(pathToFileURL('package.json'), Format.JSON)
     } catch (e: unknown) {
-      error = e as typeof error
+      error = cast(e)
     }
 
     // Expect
-    expect(error!).to.not.be.undefined
-    expect(error!).to.have.property('code').equal(code)
+    expect(error).to.be.instanceof(TypeError).and.have.property('code', code)
   })
 
   it('should throw if assertions are invalid', () => {
     // Arrange
     const code: ErrorCode = ErrorCode.ERR_IMPORT_ASSERTION_TYPE_FAILED
-    let error: NodeError<TypeError>
+    let error!: NodeError<TypeError>
 
     // Act
     try {
@@ -70,11 +69,10 @@ describe('unit:utils/validateAssertions', () => {
         type: AssertType.JSON
       })
     } catch (e: unknown) {
-      error = e as typeof error
+      error = cast(e)
     }
 
     // Expect
-    expect(error!).to.not.be.undefined
-    expect(error!).to.have.property('code').equal(code)
+    expect(error).to.be.instanceof(TypeError).and.have.property('code', code)
   })
 })

@@ -4,7 +4,6 @@
  */
 
 import type { PackageScope, ParsedModuleId } from '#src/interfaces'
-import regexp from '#src/internal/escape-reg-exp'
 import validateSet from '#src/internal/validate-set'
 import validateURLString from '#src/internal/validate-url-string'
 import type { ModuleId } from '#src/types'
@@ -16,7 +15,13 @@ import {
 } from '@flex-development/errnode'
 import { isBuiltin } from '@flex-development/is-builtin'
 import pathe from '@flex-development/pathe'
-import { isNIL, type Nullable } from '@flex-development/tutils'
+import {
+  DOT,
+  cast,
+  isNIL,
+  regexp,
+  type Nullable
+} from '@flex-development/tutils'
 import { URL, fileURLToPath, pathToFileURL } from 'node:url'
 import CONDITIONS from './conditions'
 import findSubpath from './find-subpath'
@@ -105,8 +110,8 @@ const toBareSpecifier = (
    * @const {Nullable<PackageScope>} scope
    */
   const scope: Nullable<PackageScope> =
-    lookupPackageScope(url, pathToFileURL('.')) ??
-    lookupPackageScope(specifier, pathToFileURL('.'))
+    lookupPackageScope(url, pathToFileURL(DOT)) ??
+    lookupPackageScope(specifier, pathToFileURL(DOT))
 
   // throw if package scope was not found
   if (!scope) {
@@ -153,13 +158,13 @@ const toBareSpecifier = (
     parseSubpath(specifier, exports, { dir: scope.dir, parent })
   } catch (e: unknown) {
     // try finding defined subpath if specifier is invalid package path
-    if ((e as NodeError).code === ErrorCode.ERR_PACKAGE_PATH_NOT_EXPORTED) {
+    if (cast<NodeError>(e).code === ErrorCode.ERR_PACKAGE_PATH_NOT_EXPORTED) {
       /**
        * Package target to find defined subpath for.
        *
        * @const {string} target
        */
-      const target: string = specifier.replace(name, '.')
+      const target: string = specifier.replace(name, DOT)
 
       /**
        * Subpath in {@linkcode exports} thats maps to {@linkcode target}, if any
@@ -185,7 +190,7 @@ const toBareSpecifier = (
       // replace pattern character in subpath
       if (subpath.includes(PATTERN_CHARACTER)) {
         subpath = subpath.slice(0, subpath.indexOf(PATTERN_CHARACTER)).slice(1)
-        subpath = '.' + target.slice(target.indexOf(subpath))
+        subpath = DOT + target.slice(target.indexOf(subpath))
       }
 
       // subpath should not include extension if extension is already included

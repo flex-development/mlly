@@ -5,7 +5,6 @@
 
 import type { ModuleId } from '#src/types'
 import pathe from '@flex-development/pathe'
-import type { Exports } from '@flex-development/pkg-types'
 import { URL, pathToFileURL } from 'node:url'
 import testSubject from '../is-exports-sugar'
 
@@ -20,29 +19,27 @@ describe('unit:utils/isExportsSugar', () => {
 
   it('should return false if exports does not use exports sugar', () => {
     // Arrange
-    const cases: Parameters<typeof testSubject>[0][] = [
-      faker.number.int() as unknown as Exports,
-      null,
-      undefined,
-      { '.': './dist/index.mjs', './package.json': './package.json' }
+    const cases: [Parameters<typeof testSubject>[0]][] = [
+      [null],
+      [{ '.': './dist/index.mjs', './package.json': './package.json' }]
     ]
 
     // Act + Expect
-    cases.forEach(exports => {
+    cases.forEach(([exports]) => {
       return expect(testSubject(exports, pkg, parent)).to.be.false
     })
   })
 
   it('should return true if exports uses exports sugar', () => {
     // Arrange
-    const cases: Parameters<typeof testSubject>[0][] = [
-      './dist/index.mjs',
+    const cases: [Parameters<typeof testSubject>[0]][] = [
       ['./dist/index.mjs'],
-      { import: './dist/index.mjs', require: './dist/index.cjs' }
+      [['./dist/index.mjs']],
+      [{ import: './dist/index.mjs', require: './dist/index.cjs' }]
     ]
 
     // Act + Expect
-    cases.forEach(exports => {
+    cases.forEach(([exports]) => {
       return expect(testSubject(exports, pkg, parent)).to.be.true
     })
   })

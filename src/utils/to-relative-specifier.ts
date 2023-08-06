@@ -7,6 +7,7 @@ import validateURLString from '#src/internal/validate-url-string'
 import type { ModuleId } from '#src/types'
 import type { NodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
+import { DOT } from '@flex-development/tutils'
 import { URL, fileURLToPath } from 'node:url'
 
 /**
@@ -46,7 +47,7 @@ const toRelativeSpecifier = (specifier: ModuleId, parent: ModuleId): string => {
 
   // set specifier to dot character if empty string
   // this occurs when specifier is a directory, but is not fully specified
-  if (!specifier) specifier = '.'
+  if (!specifier) specifier = DOT
 
   return specifier
 }

@@ -9,7 +9,7 @@ import testSubject from '../detect-syntax'
 
 describe('unit:utils/detectSyntax', () => {
   it('should return cjs-only syntax result', () => {
-    expect(testSubject(AGGREGATE_ERROR_PONYFILL)).deep.equal({
+    expect(testSubject(AGGREGATE_ERROR_PONYFILL)).to.eql({
       cjs: true,
       esm: false,
       mixed: false
@@ -17,7 +17,7 @@ describe('unit:utils/detectSyntax', () => {
   })
 
   it('should return esm-only syntax result', () => {
-    expect(testSubject('export const addTwo = num => num + 2')).deep.equal({
+    expect(testSubject('export const addTwo = num => num + 2')).to.eql({
       cjs: false,
       esm: true,
       mixed: false
@@ -35,6 +35,6 @@ describe('unit:utils/detectSyntax', () => {
     `
 
     // Act + Expect
-    expect(testSubject(code)).deep.equal({ cjs: true, esm: true, mixed: true })
+    expect(testSubject(code)).to.eql({ cjs: true, esm: true, mixed: true })
   })
 })
