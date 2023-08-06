@@ -18,6 +18,7 @@ yarn.lock
 !**/__fixtures__/**/dist/
 !**/__fixtures__/**/node_modules/
 !**/typings/**/dist/
+!.attw.json
 !.codecov.yml
 !.commitlintrc.*
 !.cspell.json

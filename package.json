@@ -36,11 +36,12 @@
   "scripts": {
     "build": "mkbuild",
     "changelog": "node --loader=./loader.mjs ./config/changelog.config",
-    "check:ci": "yarn dedupe --check && yarn check:format && yarn check:lint && yarn check:spelling && yarn typecheck && yarn test:cov && yarn build && yarn check:types:build && yarn pkg-size && yarn docs:build",
+    "check:ci": "yarn dedupe --check && yarn check:format && yarn check:lint && yarn check:spelling && yarn typecheck && yarn test:cov && yarn pack && yarn check:types:build && attw package.tgz && yarn clean:pack && yarn pkg-size && yarn docs:build",
     "check:format": "prettier --check .",
     "check:lint": "eslint --exit-on-fatal-error --max-warnings 0 .",
     "check:spelling": "cspell lint --color --no-progress --relative $@ \"**\"",
     "check:types": "vue-tsc -p tsconfig.typecheck.json",
+    "check:types:attw": "yarn pack && attw package.tgz && yarn clean:pack",
     "check:types:build": "bash ./scripts/typecheck-build.sh",
     "check:upgrades": "yarn upgrade-interactive",
     "clean:build": "trash ./{dist,*.tgz}",
@@ -87,6 +88,7 @@
     "@flex-development/tutils": "6.0.0-alpha.15"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "0.7.1",
     "@commitlint/cli": "17.6.7",
     "@commitlint/types": "17.4.4",
     "@docsearch/react": "3.5.1",

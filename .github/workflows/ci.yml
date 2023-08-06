@@ -351,6 +351,9 @@ jobs:
       - gitguardian
       - preflight
     runs-on: ubuntu-latest
+    env:
+      TARFILE: |
+        ${{ startsWith(github.head_ref || github.ref_name, 'release/') && format('@{0}-{1}-{2}.tgz', github.repository_owner, github.event.repository.name, needs.preflight.outputs.version) || format('@{0}-{1}-{2}+{3}.tgz', github.repository_owner, github.event.repository.name, needs.preflight.outputs.version, github.event.pull_request.head.sha || github.sha) }}
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -371,12 +374,18 @@ jobs:
         with:
           key: ${{ runner.os }}-${{ github.run_id }}
           path: ${{ env.CACHE_PATH }}
+      - id: local-binaries
+        name: Add local binaries to $PATH
+        run: echo "$GITHUB_WORKSPACE/$CACHE_PATH/.bin" >> $GITHUB_PATH
       - id: pack
         name: Pack project
-        run: yarn pack -o %s-%v.tgz
+        run: yarn pack -o ${{ env.TARFILE }}
       - id: typecheck
         name: Run typecheck
         run: yarn check:types:build
+      - id: attw
+        name: Analyze types distribution
+        run: attw ${{ env.TARFILE }}
       - id: pkg-size-report
         name: Package size report
         run: yarn pkg-size

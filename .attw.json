@@ -1,0 +1,7 @@
+{
+  "color": true,
+  "emoji": true,
+  "format": "ascii",
+  "ignoreRules": ["cjs-resolves-to-esm"],
+  "summary": true
+}
