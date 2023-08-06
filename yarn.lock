@@ -1367,6 +1367,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/builtin-modules@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@flex-development/builtin-modules@npm:2.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fbuiltin-modules%2F2.1.1%2F03fc38789c4465ed1f2d7973ef4c16a56016e7bd"
+  checksum: 1690c17322a463e8d506aef613a0fd121321a1358867bd2e43bd2d054f06d0c7c191624dde3c56fbf2acea5272517a542816a538a390074ec1b4e53d9e3786e4
+  languageName: node
+  linkType: hard
+
 "@flex-development/commitlint-config@npm:1.0.1":
   version: 1.0.1
   resolution: "@flex-development/commitlint-config@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fcommitlint-config%2F1.0.1%2F802e285802fe8188c2f02f68114ca31a20b6eb6d"
@@ -1438,6 +1445,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/errnode@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@flex-development/errnode@npm:2.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ferrnode%2F2.0.0%2F62f38769b2f92d753b3e526ce7e9a23369aaa1da"
+  dependencies:
+    "@flex-development/tutils": "npm:6.0.0-alpha.12"
+    node-inspect-extracted: "npm:2.0.2"
+  peerDependencies:
+    "@types/node": ">=16.18.23"
+  checksum: e358293f1cff1b0d56bb3f165981c7159a14d0a6ad6ab24e68400c8e0684f96fd3bfb2d3dd037a3c15e57d25da40c22851ae1db2b80fa2a4ce0c083b9ac01a63
+  languageName: node
+  linkType: hard
+
 "@flex-development/esm-types@npm:1.0.0":
   version: 1.0.0
   resolution: "@flex-development/esm-types@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fesm-types%2F1.0.0%2Ffde631289466ab81c4ff20b848ea26926ee9d478"
@@ -1496,6 +1515,19 @@ __metadata:
   peerDependencies:
     "@types/node": ">=14.18.36"
   checksum: cd331f46528c0ccbd3f2a52fa5660b41a0109b28b9ad54e960de1401904f6a22eb0f472a82dc4aca4391c5b4b3f9f38344c3a415bbb655d591d121db79281f7a
+  languageName: node
+  linkType: hard
+
+"@flex-development/is-builtin@npm:3.1.0":
+  version: 3.1.0
+  resolution: "@flex-development/is-builtin@npm:3.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fis-builtin%2F3.1.0%2F08c6d275b7e1569b7f25f320d4538dc0f44a9080"
+  dependencies:
+    "@flex-development/builtin-modules": "npm:2.1.1"
+    "@flex-development/pathe": "npm:2.0.0"
+    "@flex-development/tutils": "npm:6.0.0-alpha.12"
+  peerDependencies:
+    "@types/node": ">=16.18.23"
+  checksum: 06cabcd2f5c4744b7fb6a31cb2008b9d1e52fdf4f5a42eb57e1418ad0d861b6c1a1adb9ba3b6386840d8792f8f523cc7eedc310728e48f2f6d03808c93bf9828
   languageName: node
   linkType: hard
 
@@ -1583,7 +1615,7 @@ __metadata:
     "@flex-development/esm-types": "npm:1.0.0"
     "@flex-development/export-regex": "npm:1.0.2"
     "@flex-development/import-regex": "npm:2.0.3"
-    "@flex-development/is-builtin": "npm:2.0.0"
+    "@flex-development/is-builtin": "npm:3.1.0"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.20"
     "@flex-development/pathe": "npm:1.0.3"
     "@flex-development/pkg-types": "npm:2.0.0"
@@ -1697,6 +1729,16 @@ __metadata:
     "@flex-development/errnode": "npm:1.2.0"
     "@flex-development/tutils": "npm:6.0.0-alpha.7"
   checksum: 8e5d5fac78de147469dad1ca5ba24426dc7fbe022974f02e79e35a65a4dbc3682794bdba16d4560370424bbe4d54077f46df0e980efde1115507bbc4f13d9693
+  languageName: node
+  linkType: hard
+
+"@flex-development/pathe@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@flex-development/pathe@npm:2.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fpathe%2F2.0.0%2F3333862074db1a5d797c2305f7bbb17593320d2f"
+  dependencies:
+    "@flex-development/errnode": "npm:2.0.0"
+    "@flex-development/tutils": "npm:6.0.0-alpha.12"
+  checksum: 189df750c7a55ce973fbbc688f9aae239f8f37287e983e2e142fe1d538f944539c416452dd618bbf1da54f8012841579ad45dc91f55126e0a76d25b2b525b269
   languageName: node
   linkType: hard
 
@@ -9265,6 +9307,13 @@ __metadata:
   version: 2.0.0
   resolution: "node-inspect-extracted@npm:2.0.0"
   checksum: d99c560d4687695f191d27585877893428101082d8ce1b52d79e968650b03c626cd3472f98cae98f17c98859ed0aa1e1a53954d82ba04659115ebb4e6e5565b4
+  languageName: node
+  linkType: hard
+
+"node-inspect-extracted@npm:2.0.2":
+  version: 2.0.2
+  resolution: "node-inspect-extracted@npm:2.0.2"
+  checksum: 858d5d66a8de7466ad1579ea491ac6070f7f368a675d4a25561632ccbaa5f35b5bae212c0973bb374149d02320e336c65512a51266f53566da02c1a75b3b69d4
   languageName: node
   linkType: hard
 
