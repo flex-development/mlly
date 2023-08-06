@@ -83,7 +83,7 @@
     "@flex-development/export-regex": "1.0.2",
     "@flex-development/import-regex": "2.0.3",
     "@flex-development/is-builtin": "3.1.0",
-    "@flex-development/pathe": "1.0.3",
+    "@flex-development/pathe": "2.0.0",
     "@flex-development/pkg-types": "2.0.0",
     "@flex-development/tutils": "6.0.0-alpha.15"
   },
