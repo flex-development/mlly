@@ -1632,7 +1632,7 @@ __metadata:
     "@flex-development/is-builtin": "npm:3.1.0"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.20"
     "@flex-development/pathe": "npm:2.0.0"
-    "@flex-development/pkg-types": "npm:2.0.0"
+    "@flex-development/pkg-types": "npm:3.0.0"
     "@flex-development/tutils": "npm:6.0.0-alpha.15"
     "@graphql-eslint/eslint-plugin": "npm:3.20.1"
     "@sindresorhus/slugify": "npm:2.2.1"
@@ -1762,6 +1762,15 @@ __metadata:
   peerDependencies:
     "@flex-development/tutils": ">=6.0.0-alpha.7"
   checksum: 7a7ce8a3289f30e0d6aa0b5e5028c308a36956f779b9baf6f2d209842b01acc2bc645f85a541125f83f461d41b15262b3af65ff6cd3b3f727679216acf0520cb
+  languageName: node
+  linkType: hard
+
+"@flex-development/pkg-types@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@flex-development/pkg-types@npm:3.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fpkg-types%2F3.0.0%2F968008bed3a097659613707916700779e4a204f1"
+  peerDependencies:
+    "@flex-development/tutils": ">=6.0.0-alpha.7"
+  checksum: a44503bccb3e389c3645e2dd907a2ea1501eb4f585f5743554d278c542cd2fbaa500cd48ec3641d7065a6955f0c07623d6b3e5a72ab1a5b96effc35703ed5175
   languageName: node
   linkType: hard
 
