@@ -1514,6 +1514,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/import-regex@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@flex-development/import-regex@npm:3.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fimport-regex%2F3.0.0%2F7ebf5b55cd40a85b83155f8877507fc965e92fbf"
+  checksum: d05054a335093ebb68debd2485053bc80b2904bf0fe3708acaafb7a09cc5fccd3cfb1605ffe48b6f924f7339ca2015671544c78ca8070b5cbcf2b0fb90201517
+  languageName: node
+  linkType: hard
+
 "@flex-development/is-builtin@npm:2.0.0":
   version: 2.0.0
   resolution: "@flex-development/is-builtin@npm:2.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fis-builtin%2F2.0.0%2F898339bf7e2f10df74d1472e651f43fca8b746bf"
@@ -1621,7 +1628,7 @@ __metadata:
     "@flex-development/errnode": "npm:1.5.0"
     "@flex-development/esm-types": "npm:2.0.0"
     "@flex-development/export-regex": "npm:1.0.2"
-    "@flex-development/import-regex": "npm:2.0.3"
+    "@flex-development/import-regex": "npm:3.0.0"
     "@flex-development/is-builtin": "npm:3.1.0"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.20"
     "@flex-development/pathe": "npm:2.0.0"
