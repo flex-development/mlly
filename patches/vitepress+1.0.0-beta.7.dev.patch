@@ -1,0 +1,6 @@
+diff --git a/dist/node/serve-bbb8fb22.js b/dist/node/serve-bbb8fb22.js
+index v1.0.0-beta.7..v1.0.0-beta.7 100644
+--- a/dist/node/serve-bbb8fb22.js
++++ b/dist/node/serve-bbb8fb22.js
+@@ -52495,0 +52495,1 @@
++        page = path$q.resolve(siteConfig.srcDir, page);

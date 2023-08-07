@@ -158,6 +158,7 @@
     "globby": "13.2.2",
     "graphql": "16.7.1",
     "graphql-config": "5.0.2",
+    "gray-matter": "4.0.3",
     "growl": "1.10.5",
     "husky": "8.0.3",
     "is-ci": "3.0.1",
@@ -171,7 +172,6 @@
     "prettier-plugin-sh": "0.13.1",
     "sade": "1.8.1",
     "semver": "7.5.4",
-    "sitemap": "7.1.1",
     "tempfile": "5.0.0",
     "trash-cli": "5.0.0",
     "ts-dedent": "2.2.0",
@@ -206,7 +206,9 @@
     "@ardatan/sync-fetch": "larsgw/sync-fetch#head=worker_threads",
     "@types/unist": "3.0.0",
     "chai": "5.0.0-alpha.1",
-    "vfile": "6.0.1"
+    "gray-matter": "4.0.3",
+    "vfile": "6.0.1",
+    "vitepress@npm:1.0.0-beta.7": "patch:vitepress@npm%3A1.0.0-beta.7#patches/vitepress+1.0.0-beta.7.dev.patch"
   },
   "engines": {
     "node": ">=16.20.0",

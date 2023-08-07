@@ -51,6 +51,7 @@ updates:
           - '@vitest/*'
           - vitest
     ignore:
+      - dependency-name: vitepress
       - dependency-name: vue-tsc
     labels:
       - scope:dependencies
