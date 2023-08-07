@@ -84,7 +84,7 @@
     "@flex-development/import-regex": "3.0.0",
     "@flex-development/is-builtin": "3.1.0",
     "@flex-development/pathe": "2.0.0",
-    "@flex-development/pkg-types": "2.0.0",
+    "@flex-development/pkg-types": "3.0.0",
     "@flex-development/tutils": "6.0.0-alpha.15"
   },
   "devDependencies": {
