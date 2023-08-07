@@ -395,17 +395,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
   },
   cleanUrls: vercel.cleanUrls,
   description: pkg.description,
-  head: [
-    // improve speed of first search query
-    [
-      'link',
-      {
-        crossorigin: '',
-        href: template('https://{0}-dsn.algolia.net', { 0: algolia.appId }),
-        rel: 'preconnect'
-      }
-    ]
-  ],
+  head: [],
   ignoreDeadLinks: false,
   lastUpdated: true,
   markdown: MARKDOWN_OPTIONS,
