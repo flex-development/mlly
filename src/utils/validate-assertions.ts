@@ -3,8 +3,7 @@
  * @module mlly/utils/validateAssertions
  */
 
-import type { Format } from '#src/enums'
-import { AssertType } from '#src/enums'
+import { AssertType, type Format } from '#src/enums'
 import type { ImportAssertions } from '#src/interfaces'
 import FORMAT_TYPE_MAP from '#src/internal/format-type-map'
 import validateObject from '#src/internal/validate-object'
