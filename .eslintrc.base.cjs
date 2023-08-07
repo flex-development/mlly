@@ -246,7 +246,7 @@ const config = {
             allowedNames: ['self']
           }
         ],
-        '@typescript-eslint/no-throw-literal': 2,
+        '@typescript-eslint/no-throw-literal': 0,
         '@typescript-eslint/no-type-alias': 0,
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': [
           2,
@@ -1010,7 +1010,6 @@ const config = {
         '@typescript-eslint/no-misused-promises': 0,
         '@typescript-eslint/no-mixed-enums': 0,
         '@typescript-eslint/no-redundant-type-constituents': 0,
-        '@typescript-eslint/no-throw-literal': 0,
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 0,
         '@typescript-eslint/no-unnecessary-condition': 0,
         '@typescript-eslint/no-unnecessary-qualifier': 0,
