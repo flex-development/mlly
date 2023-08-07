@@ -7,12 +7,14 @@
 
 import pathe from '@flex-development/pathe'
 import {
+  cast,
   flat,
+  get,
   join,
   select,
-  sort,
   template,
-  trim
+  trim,
+  type ObjectPlain
 } from '@flex-development/tutils'
 import search, { type SearchClient, type SearchIndex } from 'algoliasearch'
 import {
@@ -23,9 +25,9 @@ import {
 } from 'cheerio'
 import { config as dotenv } from 'dotenv'
 import { globby } from 'globby'
+import matter from 'gray-matter'
 import fs from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
-import { SitemapStream, streamToPromise } from 'sitemap'
 import tsconfigpaths from 'vite-tsconfig-paths'
 import {
   defineConfigWithTheme as defineConfig,
@@ -123,8 +125,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
    *
    * 1. Applying search index settings
    * 2. Indexing page headings and content
-   * 3. Writing `sitemap.xml` to `config.outDir`
-   * 4. Writing `robots.txt` to `config.outDir`
+   * 3. Writing `robots.txt` to `config.outDir`
    *
    * @async
    *
@@ -181,14 +182,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       ]
     })
 
-    /**
-     * Sitemap routes.
-     *
-     * @const {[string, CheerioAPI][]} routes
-     */
-    const routes: [string, CheerioAPI][] = []
-
-    // update search index + get sitemap routes
+    // update search index
     for (const route of await globby('**.html', { cwd: outDir })) {
       /**
        * Absolute path to HTML output.
@@ -379,34 +373,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
         // update search index
         for (const object of objects) await index.saveObject(object)
       }
-
-      // add sitemap route
-      routes.push([route.replace(/\.html$/, '').replace(/index$/, ''), $])
     }
-
-    /**
-     * Sitemap stream.
-     *
-     * @const {SitemapStream} stream
-     */
-    const stream: SitemapStream = new SitemapStream({ hostname: HOSTNAME })
-
-    // update sitemap stream
-    // see: https://sitemaps.org/protocol.html#xmlTagDefinitions
-    for (const [url, $] of sort(routes, (a, b) => a[0].localeCompare(b[0]))) {
-      stream.write({
-        changefreq: $('meta[name=changefreq]').attr('content'),
-        lastmod: $('.VPLastUpdated > time').attr('datatime'),
-        priority: +($('meta[name=priority]').attr('content') ?? '0.5'),
-        url
-      })
-    }
-
-    // write sitemap.xml
-    await fs.writeFile(
-      pathe.resolve(outDir, 'sitemap.xml'),
-      await streamToPromise(stream.end())
-    )
 
     /**
      * `robots.txt` template file path.
@@ -442,6 +409,38 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
   ignoreDeadLinks: false,
   lastUpdated: true,
   markdown: MARKDOWN_OPTIONS,
+  sitemap: {
+    hostname: HOSTNAME,
+    transformItems(items: { priority?: number; url: string }[]): typeof items {
+      return items.map(item => {
+        const { url } = item
+
+        /**
+         * Path to markdown sourcefile.
+         *
+         * @const {string} sourcefile
+         */
+        const sourcefile: string = pathe.resolve(
+          fileURLToPath(pathe.dirname(import.meta.url)),
+          '..',
+          url + (url && !url.endsWith(pathe.sep) ? '.md' : 'index.md')
+        )
+
+        return {
+          ...item,
+          priority: get(
+            cast<[string, ObjectPlain][]>(
+              matter.read(sourcefile).data.head ?? []
+            ).find((v): v is ['meta', { content: number }] => {
+              return get(v, '1.name') === 'priority'
+            }),
+            '1.content',
+            0.5
+          )
+        }
+      })
+    }
+  },
   themeConfig: {
     documentation: await useComments(),
     editLink: {
