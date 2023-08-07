@@ -168,8 +168,7 @@
   "editor.wordWrapColumn": 80,
   "emmet.excludeLanguages": [],
   "emmet.includeLanguages": {
-    "markdown": "html",
-    "vue": "html"
+    "markdown": "html"
   },
   "emmet.showExpandedAbbreviation": "always",
   "emmet.triggerExpansionOnTab": true,
