@@ -443,11 +443,6 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
   lastUpdated: true,
   markdown: MARKDOWN_OPTIONS,
   themeConfig: {
-    algolia: {
-      apiKey: ALGOLIA_API_KEY,
-      appId: algolia.appId,
-      indexName: index.indexName
-    },
     documentation: await useComments(),
     editLink: {
       pattern: `${REPOSITORY}/edit/${GITHUB_VERSION}/docs/:path`,
@@ -477,6 +472,14 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       }
     ],
     outline: [2, 3],
+    search: {
+      options: {
+        apiKey: ALGOLIA_API_KEY,
+        appId: algolia.appId,
+        indexName: index.indexName
+      },
+      provider: 'algolia'
+    },
     sidebar: [
       {
         items: [{ link: '/', text: 'Getting Started' }],
