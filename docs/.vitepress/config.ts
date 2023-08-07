@@ -7,9 +7,11 @@
 
 import pathe from '@flex-development/pathe'
 import {
+  NodeEnv,
   cast,
   flat,
   get,
+  includes,
   join,
   select,
   template,
@@ -60,7 +62,6 @@ const {
   ALGOLIA_API_KEY = '',
   ALGOLIA_APP_ID = '',
   CI = 'false',
-  MEASUREMENT_ID,
   NODE_ENV,
   VERCEL_ENV = '',
   VERIFICATION_ID = ''
@@ -395,7 +396,19 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
   },
   cleanUrls: vercel.cleanUrls,
   description: pkg.description,
-  head: [],
+  head: [
+    // vercel web analytics
+    [
+      'script',
+      {
+        defer: '',
+        src:
+          VERCEL_ENV === 'production'
+            ? '/_vercel/insights/script.js'
+            : 'https://cdn.vercel-insights.com/v1/script.debug.js'
+      }
+    ]
+  ],
   ignoreDeadLinks: false,
   lastUpdated: true,
   markdown: MARKDOWN_OPTIONS,
@@ -535,21 +548,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       ['meta', { content: 'vitepress', property: 'generator' }],
 
       // prevent duplicate content issues
-      ['link', { href: url, rel: 'canonical' }],
-
-      // google analytics
-      [
-        'script',
-        {
-          async: '',
-          src: `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`
-        }
-      ],
-      [
-        'script',
-        {},
-        `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}\ngtag('js',new Date());gtag('config','${MEASUREMENT_ID}')`
-      ]
+      ['link', { href: url, rel: 'canonical' }]
     ]
   },
   /**
@@ -585,7 +584,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
     plugins: [tsconfigpaths({ projects: [pathe.resolve('tsconfig.json')] })],
     server: { hmr: { overlay: false } }
   },
-  vue: { isProduction: [NODE_ENV, VERCEL_ENV].includes('production') }
+  vue: { isProduction: includes([NODE_ENV, VERCEL_ENV], NodeEnv.PROD) }
 })
 
 export default config
