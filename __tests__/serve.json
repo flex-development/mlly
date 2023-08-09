@@ -1,6 +1,0 @@
-{
-  "cleanUrls": true,
-  "directoryListing": true,
-  "public": "../coverage/lcov-report",
-  "trailingSlash": true
-}
