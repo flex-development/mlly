@@ -140,7 +140,7 @@
     "esbuild": "0.19.0",
     "eslint": "8.46.0",
     "eslint-config-prettier": "9.0.0",
-    "eslint-import-resolver-typescript": "3.5.5",
+    "eslint-import-resolver-typescript": "3.6.0",
     "eslint-plugin-chai-expect": "3.0.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jest-formatting": "3.1.0",

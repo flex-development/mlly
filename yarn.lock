@@ -1837,7 +1837,7 @@ __metadata:
     esbuild: "npm:0.19.0"
     eslint: "npm:8.46.0"
     eslint-config-prettier: "npm:9.0.0"
-    eslint-import-resolver-typescript: "npm:3.5.5"
+    eslint-import-resolver-typescript: "npm:3.6.0"
     eslint-plugin-chai-expect: "npm:3.0.0"
     eslint-plugin-import: "npm:2.27.5"
     eslint-plugin-jest-formatting: "npm:3.1.0"
@@ -6401,22 +6401,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-typescript@npm:3.5.5":
-  version: 3.5.5
-  resolution: "eslint-import-resolver-typescript@npm:3.5.5"
+"eslint-import-resolver-typescript@npm:3.6.0":
+  version: 3.6.0
+  resolution: "eslint-import-resolver-typescript@npm:3.6.0"
   dependencies:
     debug: "npm:^4.3.4"
     enhanced-resolve: "npm:^5.12.0"
     eslint-module-utils: "npm:^2.7.4"
+    fast-glob: "npm:^3.3.1"
     get-tsconfig: "npm:^4.5.0"
-    globby: "npm:^13.1.3"
     is-core-module: "npm:^2.11.0"
     is-glob: "npm:^4.0.3"
-    synckit: "npm:^0.8.5"
   peerDependencies:
     eslint: "*"
     eslint-plugin-import: "*"
-  checksum: 4a398b14440ddc3aab1b300defceeea32f70798c8fbe4dfaadbc329ad0965ab85ba91beb5c100bb8e546f8aba996161ac8d73dfde3f26dc168805c02fb54b1ee
+  checksum: cd37eab1bdec48d98231776cc97fc8c8b14364dc0451c0e4ae2f84ebeac4ce2c004ebcff31509f3132a776832c037c00a3477a56d6e1c8026498dbabc75ea762
   languageName: node
   linkType: hard
 
@@ -6934,7 +6933,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.12, fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.0":
+"fast-glob@npm:^3.2.12, fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.0, fast-glob@npm:^3.3.1":
   version: 3.3.1
   resolution: "fast-glob@npm:3.3.1"
   dependencies:
@@ -7490,7 +7489,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:13.2.2, globby@npm:^13.1.3":
+"globby@npm:13.2.2":
   version: 13.2.2
   resolution: "globby@npm:13.2.2"
   dependencies:
