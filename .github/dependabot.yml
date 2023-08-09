@@ -43,6 +43,9 @@ updates:
           - conventional-changelog-core
           - conventional-changelog-writer
           - conventional-recommended-bump
+      flex-development:
+        patterns:
+          - '@flex-development/*'
       typescript-eslint:
         patterns:
           - '@typescript-eslint/*'
