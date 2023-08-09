@@ -1849,7 +1849,7 @@ __metadata:
     eslint-plugin-prettier: "npm:5.0.0"
     eslint-plugin-promise: "npm:6.1.1"
     eslint-plugin-unicorn: "npm:48.0.1"
-    eslint-plugin-vue: "npm:9.16.1"
+    eslint-plugin-vue: "npm:9.17.0"
     eslint-plugin-yml: "npm:1.8.0"
     globby: "npm:13.2.2"
     graphql: "npm:16.7.1"
@@ -6609,9 +6609,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-vue@npm:9.16.1":
-  version: 9.16.1
-  resolution: "eslint-plugin-vue@npm:9.16.1"
+"eslint-plugin-vue@npm:9.17.0":
+  version: 9.17.0
+  resolution: "eslint-plugin-vue@npm:9.17.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.4.0"
     natural-compare: "npm:^1.4.0"
@@ -6622,7 +6622,7 @@ __metadata:
     xml-name-validator: "npm:^4.0.0"
   peerDependencies:
     eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
-  checksum: 843abb661b777aa123725ba2c549c3798cac6907ea87e0d43436a241d0fcef90ed9297f73c08bcbf8be400639c7626562c1865e71fd4d9867ae8c20f9d4de57b
+  checksum: 81e25f55a7c65726a6dacb55ee101e98247a937a3e9ca7eea60e171012a3fcbe8fc152dd2dd82f2fe90e5593aa4987173ec7dfaff19e782c57fca4348692b1ff
   languageName: node
   linkType: hard
 
