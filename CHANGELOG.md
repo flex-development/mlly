@@ -1,3 +1,17 @@
+## [1.0.0-alpha.17](https://github.com/flex-development/mlly/compare/1.0.0-alpha.16...1.0.0-alpha.17) (2023-08-08)
+
+
+### :package: Build
+
+* ensure resolved source map url is absolute ([1c2f10d](https://github.com/flex-development/mlly/commit/1c2f10d50b305a6beaab9fd526da2a008dd753fc))
+* **deps-dev:** Bump esbuild from 0.18.19 to 0.19.0 ([#399](https://github.com/flex-development/mlly/issues/399)) ([ad57979](https://github.com/flex-development/mlly/commit/ad579797a21b739a88e1804a0f75ab14c1db97da))
+* **deps-dev:** Bump the typescript-eslint group with 2 updates ([#396](https://github.com/flex-development/mlly/issues/396)) ([c65b229](https://github.com/flex-development/mlly/commit/c65b229ab16df80422fcf506732e32ebe1f88a92))
+* **deps-dev:** Bump vercel from 31.2.2 to 31.2.3 ([#400](https://github.com/flex-development/mlly/issues/400)) ([2c26647](https://github.com/flex-development/mlly/commit/2c26647c3a6f9be48e03e42cf78216f4ead7a0cb))
+* **deps-dev:** Bump vite from 4.4.8 to 4.4.9 ([#398](https://github.com/flex-development/mlly/issues/398)) ([477d65e](https://github.com/flex-development/mlly/commit/477d65e745237bf804a903de75d4aa3f19ae59f3))
+* **deps:** Bump @flex-development/tutils from 6.0.0-alpha.15 to 6.0.0-alpha.16 ([#397](https://github.com/flex-development/mlly/issues/397)) ([f0f36f0](https://github.com/flex-development/mlly/commit/f0f36f0a029ae5d3553fb225f5c16fe65f53b0ea))
+* **deps:** Bump @flex-development/tutils from 6.0.0-alpha.16 to 6.0.0-alpha.17 ([#401](https://github.com/flex-development/mlly/issues/401)) ([2e621ce](https://github.com/flex-development/mlly/commit/2e621ce4941e0454174b089ba5a92cad55d3b572))
+* **deps:** bump @flex-development/tutils from 6.0.0-alpha.17 to 6.0.0-alpha.18 ([66db112](https://github.com/flex-development/mlly/commit/66db1127dbdff30a056c3d76e35c37029e1451d0))
+
 ## [1.0.0-alpha.16](https://github.com/flex-development/mlly/compare/1.0.0-alpha.15...1.0.0-alpha.16) (2023-08-07)
 
 
