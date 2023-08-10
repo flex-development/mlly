@@ -434,13 +434,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:17.7.0":
-  version: 17.7.0
-  resolution: "@commitlint/cli@npm:17.7.0"
+"@commitlint/cli@npm:17.7.1":
+  version: 17.7.1
+  resolution: "@commitlint/cli@npm:17.7.1"
   dependencies:
     "@commitlint/format": "npm:^17.4.4"
     "@commitlint/lint": "npm:^17.7.0"
-    "@commitlint/load": "npm:^17.7.0"
+    "@commitlint/load": "npm:^17.7.1"
     "@commitlint/read": "npm:^17.5.1"
     "@commitlint/types": "npm:^17.4.4"
     execa: "npm:^5.0.0"
@@ -450,7 +450,7 @@ __metadata:
     yargs: "npm:^17.0.0"
   bin:
     commitlint: cli.js
-  checksum: ada6d20ba4af64b167a102cc2c55235a03fdbe5622defae2241ae7b6940a7069b06e64741c2fd5928cc534e8dee676a81e480d7f1c5a2aa0f59286e4a8632d09
+  checksum: e855228375dea4965940aaab6550ea303d62f2a0ce3277da6e9a20d23e410c3e1b41791790dff2a943c051b4ac15b75f595481ab816af67041789900cbde82d5
   languageName: node
   linkType: hard
 
@@ -517,22 +517,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/load@npm:^17.7.0":
-  version: 17.7.0
-  resolution: "@commitlint/load@npm:17.7.0"
+"@commitlint/load@npm:^17.7.1":
+  version: 17.7.1
+  resolution: "@commitlint/load@npm:17.7.1"
   dependencies:
     "@commitlint/config-validator": "npm:^17.6.7"
     "@commitlint/execute-rule": "npm:^17.4.0"
     "@commitlint/resolve-extends": "npm:^17.6.7"
     "@commitlint/types": "npm:^17.4.4"
+    "@types/node": "npm:20.4.7"
     chalk: "npm:^4.1.0"
     cosmiconfig: "npm:^8.0.0"
-    cosmiconfig-typescript-loader: "npm:^5.0.0"
+    cosmiconfig-typescript-loader: "npm:^4.0.0"
     lodash.isplainobject: "npm:^4.0.6"
     lodash.merge: "npm:^4.6.2"
     lodash.uniq: "npm:^4.5.0"
     resolve-from: "npm:^5.0.0"
-  checksum: 9a5970c80893c5b3726a3dcfe1cd05ef729ddabd275a383a2384992006d0368d8f45163e18c4d6cfd968706426bdf643bb6bdefc74d55117ebf6a852b586717d
+    ts-node: "npm:^10.8.1"
+    typescript: "npm:^4.6.4 || ^5.0.0"
+  checksum: 47042bb5927614463aec09189ed450cb5c08dceaef311c662d36112f2cfaf32285ea25ed26774226f0532d0159ef5e8ce38707c58d2347bbe37fa8e52fe89a87
   languageName: node
   linkType: hard
 
@@ -1752,7 +1755,7 @@ __metadata:
   resolution: "@flex-development/mlly@workspace:."
   dependencies:
     "@arethetypeswrong/cli": "npm:0.7.1"
-    "@commitlint/cli": "npm:17.7.0"
+    "@commitlint/cli": "npm:17.7.1"
     "@commitlint/types": "npm:17.4.4"
     "@docsearch/react": "npm:3.5.1"
     "@faker-js/faker": "npm:8.0.2"
@@ -3144,6 +3147,13 @@ __metadata:
   version: 14.18.33
   resolution: "@types/node@npm:14.18.33"
   checksum: a8baef540b619dc4b367a9be1a0ea4892617a8f8c25436703364e8e42dae064f46679f0c225cb49826e4cd7172f72257d36a4a154f203a19e8f338ab33934141
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:20.4.7":
+  version: 20.4.7
+  resolution: "@types/node@npm:20.4.7"
+  checksum: 2b71a26e80d96ce5c7c5d8cde2227adbacc9f50bfc9a60c45f96b2604ff6e60f7ba02cb7b24efd999e0a2ba25097680237b2d16a6f37082ed4136689e7976f12
   languageName: node
   linkType: hard
 
@@ -5219,16 +5229,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cosmiconfig-typescript-loader@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "cosmiconfig-typescript-loader@npm:5.0.0"
-  dependencies:
-    jiti: "npm:^1.19.1"
+"cosmiconfig-typescript-loader@npm:^4.0.0":
+  version: 4.4.0
+  resolution: "cosmiconfig-typescript-loader@npm:4.4.0"
   peerDependencies:
     "@types/node": "*"
-    cosmiconfig: ">=8.2"
+    cosmiconfig: ">=7"
+    ts-node: ">=10"
     typescript: ">=4"
-  checksum: 2d4fa4be3d1d9d2c4b8cdd686ee5b4a77b385cc0bb3a61d9f8f635d37a24fa7b868556a51f0a9d6890263351faa56558f8e8398af66cbc3842959810267ab67b
+  checksum: cf6c6f4e79eb4c4dc9b26a93ba6acab4361989b0369e6bb9a7b70f078a901b2bfc3f75176b37da191125503c749613c2967cac12fafaeb35528fdf37efe8ac1a
   languageName: node
   linkType: hard
 
@@ -8376,7 +8385,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jiti@npm:^1.18.2, jiti@npm:^1.19.1":
+"jiti@npm:^1.18.2":
   version: 1.19.1
   resolution: "jiti@npm:1.19.1"
   bin:
@@ -11493,7 +11502,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:10.9.1":
+"ts-node@npm:10.9.1, ts-node@npm:^10.8.1":
   version: 10.9.1
   resolution: "ts-node@npm:10.9.1"
   dependencies:
@@ -11730,7 +11739,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.1.6, typescript@npm:^5.1.3":
+"typescript@npm:5.1.6, typescript@npm:^4.6.4 || ^5.0.0, typescript@npm:^5.1.3":
   version: 5.1.6
   resolution: "typescript@npm:5.1.6"
   bin:
@@ -11750,7 +11759,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.1.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^4.6.4 || ^5.0.0#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.1.3#optional!builtin<compat/typescript>":
   version: 5.1.6
   resolution: "typescript@patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=1f5320"
   bin:
