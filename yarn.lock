@@ -6647,14 +6647,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-visitor-keys@npm:^3.0.0, eslint-visitor-keys@npm:^3.3.0, eslint-visitor-keys@npm:^3.4.1":
-  version: 3.4.2
-  resolution: "eslint-visitor-keys@npm:3.4.2"
-  checksum: 668ac8cbd667e087e7703672675f29870a2e4928c941155b59679feecd662430fd879b81fa4c3db33734e468b1312e71b8f42cf6e11fb227c2a1140af3b1b5c6
-  languageName: node
-  linkType: hard
-
-"eslint-visitor-keys@npm:^3.4.3":
+"eslint-visitor-keys@npm:^3.0.0, eslint-visitor-keys@npm:^3.3.0, eslint-visitor-keys@npm:^3.4.1, eslint-visitor-keys@npm:^3.4.3":
   version: 3.4.3
   resolution: "eslint-visitor-keys@npm:3.4.3"
   checksum: 8c249464e7f9d134259b4445e34bcdf2539775fee722577936f1fafd928c409ef845a6cae6456e68db6b653e5ef12a1e17946c34d534474e71cd226cae153ecf
