@@ -393,9 +393,8 @@ jobs:
         name: Archive production artifacts
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: |
-            ${{ format('@{0}-{1}-{2}', github.repository_owner, github.event.repository.name, needs.preflight.outputs.version) }}
-          path: '*.tgz'
+          name: ${{ env.TARFILE }}
+          path: ${{ env.TARFILE }}
   docs:
     needs:
       - build

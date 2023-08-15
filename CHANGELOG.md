@@ -1,3 +1,50 @@
+## [1.0.0-alpha.18](https://github.com/flex-development/mlly/compare/1.0.0-alpha.17...1.0.0-alpha.18) (2023-08-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* **ts:** use `export type *`
+
+### :package: Build
+
+* **deps-dev:** Bump @commitlint/cli from 17.6.7 to 17.7.0 ([#405](https://github.com/flex-development/mlly/issues/405)) ([6e3e9c7](https://github.com/flex-development/mlly/commit/6e3e9c71ecd58f20a74b782c629914ecb404f5d8))
+* **deps-dev:** Bump @commitlint/cli from 17.7.0 to 17.7.1 ([#409](https://github.com/flex-development/mlly/issues/409)) ([060725c](https://github.com/flex-development/mlly/commit/060725c8d5c6c8002f197e360697a22c35bc1145))
+* **deps-dev:** Bump cspell from 7.0.1-alpha.8 to 7.0.1-alpha.9 ([#408](https://github.com/flex-development/mlly/issues/408)) ([772778a](https://github.com/flex-development/mlly/commit/772778a3df76d005e9b765275b275d8e1e91498a))
+* **deps-dev:** Bump esbuild from 0.19.0 to 0.19.1 ([#410](https://github.com/flex-development/mlly/issues/410)) ([d3804d7](https://github.com/flex-development/mlly/commit/d3804d76d76afbc5a9172a1cacce22f6c8a42a8c))
+* **deps-dev:** Bump esbuild from 0.19.1 to 0.19.2 ([#416](https://github.com/flex-development/mlly/issues/416)) ([eaf8d51](https://github.com/flex-development/mlly/commit/eaf8d5182f47c6855f80eed73e25f0e3f0dba1e4))
+* **deps-dev:** Bump eslint from 8.46.0 to 8.47.0 ([#411](https://github.com/flex-development/mlly/issues/411)) ([a3374af](https://github.com/flex-development/mlly/commit/a3374af2b18028ff56cd17ef4b145169fff1e640))
+* **deps-dev:** Bump eslint-import-resolver-typescript from 3.5.5 to 3.6.0 ([#406](https://github.com/flex-development/mlly/issues/406)) ([c2dbf48](https://github.com/flex-development/mlly/commit/c2dbf483ec9ce4581306c7c41608dd2fa9a04631))
+* **deps-dev:** Bump eslint-plugin-vue from 9.16.1 to 9.17.0 ([#404](https://github.com/flex-development/mlly/issues/404)) ([f0892eb](https://github.com/flex-development/mlly/commit/f0892eb5ec7bc66311b168bf118cb4d11b0b2185))
+* **deps-dev:** Bump graphql from 16.7.1 to 16.8.0 ([#415](https://github.com/flex-development/mlly/issues/415)) ([6f2a71d](https://github.com/flex-development/mlly/commit/6f2a71d2aedc265ac79770a77716a073a53f3407))
+* **deps-dev:** Bump lint-staged from 13.2.3 to 14.0.0 ([#417](https://github.com/flex-development/mlly/issues/417)) ([a2443bd](https://github.com/flex-development/mlly/commit/a2443bd75c4386601b8c67f106a5a0656ce1730b))
+* **deps-dev:** Bump the flex-development group with 1 update ([#403](https://github.com/flex-development/mlly/issues/403)) ([f6e4fb7](https://github.com/flex-development/mlly/commit/f6e4fb74e86c98b784b55ef8880259fd1a1cfb7f))
+* **deps-dev:** Bump the typescript-eslint group with 2 updates ([#413](https://github.com/flex-development/mlly/issues/413)) ([099b5ae](https://github.com/flex-development/mlly/commit/099b5aec18c9bb92608619d4e0c8259533ac6882))
+* **deps:** bump @flex-development/tutils from 6.0.0-alpha.20 to 6.0.0-alpha.21 ([1992970](https://github.com/flex-development/mlly/commit/199297040a08963491aef355fbfcf7c0c0120e9b))
+* **deps:** Bump the flex-development group with 1 update ([#407](https://github.com/flex-development/mlly/issues/407)) ([41be3a2](https://github.com/flex-development/mlly/commit/41be3a267ea674fec6a2e2092c350a6783f0c026))
+* **deps:** Bump the flex-development group with 1 update ([#414](https://github.com/flex-development/mlly/issues/414)) ([2d07755](https://github.com/flex-development/mlly/commit/2d07755998172d705f92c6d1669bc1b0df8fc2fc))
+* **ts:** use `export type *` ([e0a1dce](https://github.com/flex-development/mlly/commit/e0a1dce59094797a7bc0ddf7b26840a43765155c))
+
+
+### :robot: Continuous Integration
+
+* [[@dependabot](https://github.com/dependabot)] add group `flex-development` ([5a4e169](https://github.com/flex-development/mlly/commit/5a4e169100278e773d78c8e2b1c3b921fb240394))
+* **deps:** Bump actions/setup-node from 3.7.0 to 3.8.0 ([#412](https://github.com/flex-development/mlly/issues/412)) ([3465e63](https://github.com/flex-development/mlly/commit/3465e63ba2cea348833de890a71a21ff16472897))
+
+
+### :pencil: Documentation
+
+* **utils:** [`resolveModule`] fix valid npm package name note ([e869100](https://github.com/flex-development/mlly/commit/e8691007ada207792915130997917d98d5aebc19))
+
+
+### :bug: Fixes
+
+* **utils:** [`toBareSpecifier`] specifier conversion ([4d9fdaf](https://github.com/flex-development/mlly/commit/4d9fdaff221109a6fd90fc046fdcf61296bccbd0))
+
+
+### :house_with_garden: Housekeeping
+
+* **tests:** remove `serve.json` ([7e6d3b8](https://github.com/flex-development/mlly/commit/7e6d3b8cfb0915cb0ed4dfd37f4d21c3da926545))
+
 ## [1.0.0-alpha.17](https://github.com/flex-development/mlly/compare/1.0.0-alpha.16...1.0.0-alpha.17) (2023-08-08)
 
 
