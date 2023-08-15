@@ -4,6 +4,7 @@
  */
 
 import type { PackageScope, ParsedModuleId } from '#src/interfaces'
+import PACKAGE_NAME_REGEX from '#src/internal/regex-package-name'
 import validateSet from '#src/internal/validate-set'
 import validateURLString from '#src/internal/validate-url-string'
 import type { ModuleId } from '#src/types'
@@ -18,6 +19,7 @@ import pathe from '@flex-development/pathe'
 import {
   DOT,
   cast,
+  includes,
   isNIL,
   regexp,
   type Nullable
@@ -85,6 +87,9 @@ const toBareSpecifier = (
   // exit early if specifier is builtin module
   if (isBuiltin(specifier)) return toNodeURL(specifier)
 
+  // exit early if specifier is package name
+  if (PACKAGE_NAME_REGEX.test(specifier)) return specifier
+
   // ensure specifier is a path
   if (specifier.startsWith('file:')) specifier = fileURLToPath(specifier)
 
@@ -122,9 +127,12 @@ const toBareSpecifier = (
   const { exports, main, name = '', types } = scope.pkgjson
 
   // convert specifier to bare specifier
-  specifier = url.pathname.includes(name)
-    ? name + url.pathname.replace(new RegExp(`.*?${regexp(name)}`), '')
-    : name + specifier.replace(fileURLToPath(scope.dir.replace(/\/$/, '')), '')
+  specifier = !includes(url.pathname, 'node_modules' + pathe.sep + name)
+    ? name + specifier.replace(fileURLToPath(scope.dir.replace(/\/$/, '')), '')
+    : url.pathname.replace(
+        new RegExp(`.*?node_modules${regexp(pathe.sep)}(?=${regexp(name)})`),
+        ''
+      )
 
   /**
    * Parsed module specifier.
