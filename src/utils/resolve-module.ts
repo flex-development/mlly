@@ -29,7 +29,7 @@ import RESOLVE_EXTENSIONS from './resolve-extensions'
  *
  * - [Subpath import][2] targets (that are strings) must be relative to the
  *   current working directory (e.g. `'./src/index.ts'`, `'./src/*.ts'`) or
- *   start with a [NPM valid package name][3]. See [`nodejs/node#40579`][4] for
+ *   start with a [valid NPM package name][3]. See [`nodejs/node#40579`][4] for
  *   details.
  *
  * [1]: https://nodejs.org/api/esm.html#esm_resolver_algorithm
