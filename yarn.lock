@@ -1070,14 +1070,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docsearch/css@npm:3.5.1, @docsearch/css@npm:^3.5.1":
+"@docsearch/css@npm:3.5.1":
   version: 3.5.1
   resolution: "@docsearch/css@npm:3.5.1"
   checksum: 93205cdf1a86a044e463211a270d7817982b039102a2dc64e4a15939dab8c52241ab0786136b6a24928e47051c20b1a78ed7a21dcfd3da5bee6995e4b2e88938
   languageName: node
   linkType: hard
 
-"@docsearch/css@npm:3.5.2":
+"@docsearch/css@npm:3.5.2, @docsearch/css@npm:^3.5.1":
   version: 3.5.2
   resolution: "@docsearch/css@npm:3.5.2"
   checksum: 2bf0b53d38509c72dd76d3bcc72693e181d4f8f7476ddc87894955a715c6a31c8958d9d3d86fccedeb9dd5f3474149310abb0c0ed7e62e9ec78ae3b2b4cdf6a4
