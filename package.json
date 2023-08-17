@@ -179,7 +179,7 @@
     "unist-util-remove": "4.0.0",
     "unist-util-source": "5.0.0",
     "unist-util-visit": "5.0.0",
-    "vercel": "31.3.1",
+    "vercel": "31.4.0",
     "version-bump-prompt": "6.1.0",
     "vfile": "6.0.1",
     "vite": "4.4.9",
