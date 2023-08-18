@@ -175,7 +175,7 @@
     "trash-cli": "5.0.0",
     "ts-dedent": "2.2.0",
     "typescript": "5.1.6",
-    "unified": "10.1.2",
+    "unified": "11.0.1",
     "unist-util-remove": "4.0.0",
     "unist-util-source": "5.0.0",
     "unist-util-visit": "5.0.0",
