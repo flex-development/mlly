@@ -1895,7 +1895,7 @@ __metadata:
     husky: "npm:8.0.3"
     is-ci: "npm:3.0.1"
     jsonc-eslint-parser: "npm:2.3.0"
-    lint-staged: "npm:14.0.0"
+    lint-staged: "npm:14.0.1"
     mri: "npm:1.2.0"
     node-fetch: "npm:3.3.2"
     node-notifier: "npm:10.0.1"
@@ -8698,9 +8698,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:14.0.0":
-  version: 14.0.0
-  resolution: "lint-staged@npm:14.0.0"
+"lint-staged@npm:14.0.1":
+  version: 14.0.1
+  resolution: "lint-staged@npm:14.0.1"
   dependencies:
     chalk: "npm:5.3.0"
     commander: "npm:11.0.0"
@@ -8714,7 +8714,7 @@ __metadata:
     yaml: "npm:2.3.1"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: aa72e89b87cfd4b45d9a435a2feaa2ac4fb51e1f535a36913229601baf91b446f7d4f7453c0fadcdfb371072fa899c5d0431f4e3db356a514dc79ffd77280edf
+  checksum: b0ff65d150e647e806b53f8a1398e3d85dfee4d87c4b8714a97ecf2003b052d7e66cb3673c32fc32b3c08637b6ec7dbd5fa28a894da3830f8fd32fe1d7d73cf4
   languageName: node
   linkType: hard
 
