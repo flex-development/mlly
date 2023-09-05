@@ -3,6 +3,8 @@
  * @module mlly/utils/tests/unit/isDirectory
  */
 
+import { DOT } from '@flex-development/tutils'
+import { pathToFileURL } from 'node:url'
 import testSubject from '../is-directory'
 
 describe('unit:utils/isDirectory', () => {
@@ -22,6 +24,13 @@ describe('unit:utils/isDirectory', () => {
   })
 
   it('should return true if id is directory id', () => {
-    expect(testSubject('src')).to.be.true
+    // Arrange
+    const cases: Parameters<typeof testSubject>[] = [
+      ['src'],
+      [pathToFileURL(DOT).href]
+    ]
+
+    // Act + Expect
+    cases.forEach(([id]) => expect(testSubject(id)).to.be.true)
   })
 })
