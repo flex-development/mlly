@@ -3,6 +3,7 @@
  * @module mlly/utils/tests/unit/isFile
  */
 
+import { pathToFileURL } from 'node:url'
 import testSubject from '../is-file'
 
 describe('unit:utils/isFile', () => {
@@ -22,6 +23,13 @@ describe('unit:utils/isFile', () => {
   })
 
   it('should return true if id is file id', () => {
-    expect(testSubject('src/index.ts')).to.be.true
+    // Arrange
+    const cases: Parameters<typeof testSubject>[] = [
+      ['src/index.ts'],
+      [pathToFileURL('package.json').href]
+    ]
+
+    // Act + Expect
+    cases.forEach(([id]) => expect(testSubject(id)).to.be.true)
   })
 })
