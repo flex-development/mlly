@@ -84,7 +84,7 @@
     "@flex-development/is-builtin": "3.1.0",
     "@flex-development/pathe": "2.0.0",
     "@flex-development/pkg-types": "3.0.0",
-    "@flex-development/tutils": "6.0.0-alpha.21"
+    "@flex-development/tutils": "6.0.0-alpha.22"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.7.1",
@@ -97,7 +97,7 @@
     "@flex-development/docast": "1.0.0-alpha.13",
     "@flex-development/docast-parse": "1.0.0-alpha.5",
     "@flex-development/esm-types": "2.0.0",
-    "@flex-development/mkbuild": "1.0.0-alpha.21",
+    "@flex-development/mkbuild": "1.0.0-alpha.22",
     "@graphql-eslint/eslint-plugin": "3.20.1",
     "@sindresorhus/slugify": "2.2.1",
     "@types/chai": "4.3.5",
