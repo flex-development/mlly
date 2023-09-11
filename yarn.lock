@@ -1730,19 +1730,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/mkbuild@npm:1.0.0-alpha.21":
-  version: 1.0.0-alpha.21
-  resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.21::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.21%2F79032e4fd5208e0dde63d66833cbf9568c589438"
+"@flex-development/mkbuild@npm:1.0.0-alpha.23":
+  version: 1.0.0-alpha.23
+  resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.23::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.23%2F01fc88d62df2030b9fcc7a780061d20542e086a9"
   dependencies:
     "@flex-development/decorator-regex": "npm:2.0.0"
     "@flex-development/errnode": "npm:2.0.0"
     "@flex-development/ext-regex": "npm:2.0.0"
-    "@flex-development/mlly": "npm:1.0.0-alpha.17"
+    "@flex-development/mlly": "npm:1.0.0-alpha.18"
     "@flex-development/pathe": "npm:2.0.0"
     "@flex-development/pkg-types": "npm:3.0.0"
     "@flex-development/toggle-pkg-type": "npm:2.0.1"
-    "@flex-development/tsconfig-utils": "npm:2.0.1"
-    "@flex-development/tutils": "npm:6.0.0-alpha.18"
+    "@flex-development/tsconfig-utils": "npm:2.0.2"
+    "@flex-development/tutils": "npm:6.0.0-alpha.22"
     consola: "npm:3.2.3"
     cosmiconfig: "npm:8.2.0"
     exit-hook: "npm:3.2.0"
@@ -1755,7 +1755,7 @@ __metadata:
     typescript: ">=5.0.4"
   bin:
     mkbuild: dist/cli.mjs
-  checksum: 13c2358a49a8ce636eacb3b287d2772d66cc3f5f8feccfe35f094fe1ffd9e2fc15b89892e043c67ff67eb2c9d24a6662ebc3b3d4df99b6c5fcaaec7ac3f9fe4c
+  checksum: 5baf6a6652ba5dfb82e149868d856794df11a15cedc04dc682ac837deb17c6d80b807829ad1c49ccbb83b9f2a534173fa88e5657a1a226b869a58b2ca1b17411
   languageName: node
   linkType: hard
 
@@ -1777,9 +1777,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/mlly@npm:1.0.0-alpha.17":
-  version: 1.0.0-alpha.17
-  resolution: "@flex-development/mlly@npm:1.0.0-alpha.17::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmlly%2F1.0.0-alpha.17%2Fc70a88dff7afd79d6e06f8454808b4a0c11090bd"
+"@flex-development/mlly@npm:1.0.0-alpha.18":
+  version: 1.0.0-alpha.18
+  resolution: "@flex-development/mlly@npm:1.0.0-alpha.18::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmlly%2F1.0.0-alpha.18%2Fbb14e3c777770af9cdc4963ebbcce34ba251b120"
   dependencies:
     "@flex-development/errnode": "npm:2.0.0"
     "@flex-development/export-regex": "npm:2.0.0"
@@ -1787,11 +1787,11 @@ __metadata:
     "@flex-development/is-builtin": "npm:3.1.0"
     "@flex-development/pathe": "npm:2.0.0"
     "@flex-development/pkg-types": "npm:3.0.0"
-    "@flex-development/tutils": "npm:6.0.0-alpha.18"
+    "@flex-development/tutils": "npm:6.0.0-alpha.21"
   peerDependencies:
     "@types/node": ">=16.18.23"
     node-fetch: ">=3.3.0"
-  checksum: 0d0de0edf2bf7bf7ea7da991f286c86443fbeb9de30961191446a3ec07e992bc9e09b0caef3f8a74b21d757ccb9f7b8264df6b070abc8686ec1858f0cf971dbf
+  checksum: f5188f9cafaeaa74c6fe4bbfea3b48f71f2c44925cbc745e234e5c559bfc35246fa5192a8b172fd71e0ccf0dfebdba8a4a9a0cefcfdc3dd6c5e715d24aee22ad
   languageName: node
   linkType: hard
 
@@ -1813,10 +1813,10 @@ __metadata:
     "@flex-development/export-regex": "npm:2.0.0"
     "@flex-development/import-regex": "npm:3.0.0"
     "@flex-development/is-builtin": "npm:3.1.0"
-    "@flex-development/mkbuild": "npm:1.0.0-alpha.21"
+    "@flex-development/mkbuild": "npm:1.0.0-alpha.23"
     "@flex-development/pathe": "npm:2.0.0"
     "@flex-development/pkg-types": "npm:3.0.0"
-    "@flex-development/tutils": "npm:6.0.0-alpha.21"
+    "@flex-development/tutils": "npm:6.0.0-alpha.22"
     "@graphql-eslint/eslint-plugin": "npm:3.20.1"
     "@sindresorhus/slugify": "npm:2.2.1"
     "@types/chai": "npm:4.3.5"
@@ -1980,21 +1980,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/tsconfig-utils@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@flex-development/tsconfig-utils@npm:2.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftsconfig-utils%2F2.0.1%2Fc501ce712cec12d15f99b3a48671a875ddfa9255"
+"@flex-development/tsconfig-utils@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@flex-development/tsconfig-utils@npm:2.0.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftsconfig-utils%2F2.0.2%2F821c3f90dc3ba31a07a7277eb75e92a9992fbc6b"
   dependencies:
     "@flex-development/errnode": "npm:2.0.0"
-    "@flex-development/mlly": "npm:1.0.0-alpha.17"
+    "@flex-development/mlly": "npm:1.0.0-alpha.18"
     "@flex-development/pathe": "npm:2.0.0"
     "@flex-development/tsconfig-types": "npm:4.0.0"
-    "@flex-development/tutils": "npm:6.0.0-alpha.18"
+    "@flex-development/tutils": "npm:6.0.0-alpha.21"
     strip-bom: "npm:5.0.0"
     strip-json-comments: "npm:5.0.1"
   peerDependencies:
     "@types/node": ">=16.18.23"
     typescript: ">=4.7"
-  checksum: 68dd216301aa3d7eb9ad37dcaed56eb133f36ef7ede748ffc7d88ceb827346688a5a2198018a872335bcd2f73dbd3fa4852807a7787e19295193bbc330fc77ea
+  checksum: 78eb8275752aaa76e237d788118d22d1e64f9e90c4029de67ea067082b300a22dc16580f7de0cbaab2cc426170c712601b4a44637f74028c5b8ee2efd3ccaf86
   languageName: node
   linkType: hard
 
@@ -2040,23 +2040,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/tutils@npm:6.0.0-alpha.18":
-  version: 6.0.0-alpha.18
-  resolution: "@flex-development/tutils@npm:6.0.0-alpha.18::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftutils%2F6.0.0-alpha.18%2Fa8693102aab522ad1ecafda09438e513014dca6c"
-  dependencies:
-    dequal: "npm:2.0.3"
-  peerDependencies:
-    typescript: ">=5.0.4"
-  checksum: c506828a3a86998e36d8808b7313ca0c14922f5f49008c600706eec9b06678919b56f96004919b056e59392255f63002d5fe2ea98504212f44e16f6e43d7b141
-  languageName: node
-  linkType: hard
-
 "@flex-development/tutils@npm:6.0.0-alpha.21":
   version: 6.0.0-alpha.21
   resolution: "@flex-development/tutils@npm:6.0.0-alpha.21::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftutils%2F6.0.0-alpha.21%2F168361f3cb7d88a373da7f051abde0b4d512e349"
   peerDependencies:
     typescript: ">=5.0.4"
   checksum: 2d48799d53c787e2060b63082bd48d9cba8bbcbd0cfd59acd68362d57acb9324651eb44096c1551508599c1ce47f6914ae121d6203719986b36b9f6d64a99703
+  languageName: node
+  linkType: hard
+
+"@flex-development/tutils@npm:6.0.0-alpha.22":
+  version: 6.0.0-alpha.22
+  resolution: "@flex-development/tutils@npm:6.0.0-alpha.22::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Ftutils%2F6.0.0-alpha.22%2F22f766c2fbcdb4177f61acb9f10ce8abd66b9c01"
+  peerDependencies:
+    typescript: ">=5.0.4"
+  checksum: 1b835d2d5b98f62d2aa3ac58c101fb74df88013183aa4709f40dc335f8f358edcb44516420f2403d9048f0675be962c7ae68567cc8cebec03929290ad3166820
   languageName: node
   linkType: hard
 
