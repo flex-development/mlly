@@ -155,7 +155,7 @@
     "eslint-plugin-vue": "9.17.0",
     "eslint-plugin-yml": "1.8.0",
     "globby": "13.2.2",
-    "graphql": "16.8.0",
+    "graphql": "16.8.1",
     "graphql-config": "5.0.2",
     "gray-matter": "4.0.3",
     "growl": "1.10.5",
