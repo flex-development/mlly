@@ -65,7 +65,7 @@ jobs:
         uses: hmarr/debug-action@v2.1.0
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
@@ -97,7 +97,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -125,7 +125,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -149,7 +149,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
@@ -177,7 +177,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
@@ -208,7 +208,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
@@ -244,7 +244,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
@@ -296,7 +296,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
@@ -357,7 +357,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
@@ -415,7 +415,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.REF }}
-        uses: actions/checkout@v4.1.0
+        uses: actions/checkout@v4.1.1
         with:
           ref: ${{ env.REF }}
       - id: node
