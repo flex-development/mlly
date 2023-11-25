@@ -19,7 +19,7 @@ jobs:
     steps:
       - id: lock
         name: Lock inactive issues and pull requests
-        uses: dessant/lock-threads@v4.0.1
+        uses: dessant/lock-threads@v5.0.1
         with:
           issue-comment: |
             This issue has been automatically locked since there has not been any recent activity
