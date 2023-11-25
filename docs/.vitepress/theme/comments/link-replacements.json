@@ -32,7 +32,7 @@
   "{@linkcode ParsedSubpath}": "/api/interfaces/#parsedsubpath",
   "{@linkcode Protocol}": "/api/types#protocol",
   "{@linkcode RESOLVE_EXTENSIONS}": "/api/#resolve-extensions",
-  "{@linkcode RequestInit}": "https://github.com/node-fetch/node-fetch/blob/v3.3.0/@types/index.d.ts#L71-L112",
+  "{@linkcode RequestInit}": "https://developer.mozilla.org/docs/Web/API/fetch#options",
   "{@linkcode RequireStatement}": "/api/interfaces#requirestatement",
   "{@linkcode ResolveAliasOptions}": "/api/interfaces#resolvealiasoptions",
   "{@linkcode ResolveModuleOptions}": "/api/interfaces#resolvemoduleoptions",

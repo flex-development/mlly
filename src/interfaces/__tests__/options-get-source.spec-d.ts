@@ -9,7 +9,6 @@ import type {
   OrLowercase,
   RequiredKeys
 } from '@flex-development/tutils'
-import type { RequestInit } from 'node-fetch'
 import type TestSubject from '../options-get-source'
 
 describe('unit-d:interfaces/GetSourceOptions', () => {

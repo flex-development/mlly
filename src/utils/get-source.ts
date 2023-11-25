@@ -56,7 +56,7 @@ const getSource = async (
   validateBoolean(network_imports, 'options.experimental_network_imports')
   !isUndefined(format) && validateString(format, 'options.format')
   validateBoolean(ignore_errors, 'options.ignore_errors')
-  !isUndefined(req) && validateObject(req, 'options.req')
+  validateObject(req, 'options.req')
 
   // exit early if format is Format.BUILTIN
   if (format === Format.BUILTIN) return undefined
@@ -105,8 +105,7 @@ const getSource = async (
     case 'http:':
     case 'https:':
       if (network_imports) {
-        const { default: fetch } = await import('node-fetch')
-        source = await (await fetch(url.href, req)).text()
+        source = await (await fetch(url, req)).text()
       } else {
         err = true
       }

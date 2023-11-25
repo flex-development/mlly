@@ -10,7 +10,6 @@ import type {
   Optional,
   RequiredKeys
 } from '@flex-development/tutils'
-import type { RequestInit } from 'node-fetch'
 import type TestSubject from '../options-get-format'
 
 describe('unit-d:interfaces/GetFormatOptions', () => {

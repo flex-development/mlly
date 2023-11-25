@@ -17,7 +17,6 @@ import { isBuiltin } from '@flex-development/is-builtin'
 import pathe, { type Ext } from '@flex-development/pathe'
 import {
   isEmptyString,
-  isUndefined,
   type EmptyString,
   type Nilable,
   type Nullable,
@@ -68,14 +67,7 @@ const getFormat = async (
   validateBoolean(wasm_modules, 'options.experimental_wasm_modules')
   validateBoolean(ignore_errors, 'options.ignore_errors')
   validateMap(extension_format_map, 'options.extension_format_map')
-  !isUndefined(req) && validateObject(req, 'options.req')
-
-  /**
-   * Module {@linkcode id} as {@linkcode URL}.
-   *
-   * @const {URL} url
-   */
-  const url: URL = toURL(id)
+  validateObject(req, 'options.req')
 
   /**
    * Extracts a [MIME type][1] from a {@linkcode URL} href, {@linkcode URL}
@@ -85,12 +77,12 @@ const getFormat = async (
    * [2]: https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Type
    *
    * @param {Nullable<string>} value - `URL` component or `content-type` header
-   * @param {boolean} [content_type=false] - `value` is `content-type` header?
+   * @param {boolean} [header=false] - `value` is `content-type` header?
    * @return {Nilable<Format>} Module format, `null`, or `undefined`
    */
   const mimeToFormat = (
     value: Nullable<string>,
-    content_type: boolean = false
+    header: boolean = false
   ): Nilable<Format> => {
     /**
      * Module format for {@linkcode value}.
@@ -99,38 +91,44 @@ const getFormat = async (
      */
     let format: Nilable<Format> = null
 
-    // do nothing if value is empty
-    /* c8 ignore next */ if (!value) return format
+    if (value) {
+      // sanitize content-type header
+      if (header) value = value.replace(/;.*/, ',')
 
-    // sanitize content-type header
-    if (content_type) value = value.replace(/;.*/, ',')
+      // add data: protocol to value
+      if (!value.startsWith('data:')) value = `data:${value}`
 
-    // add data: protocol to value
-    if (!value.startsWith('data:')) value = `data:${value}`
-
-    // get format based on mime type
-    try {
-      switch (parseDataURL(value).mime) {
-        case 'application/javascript':
-        case 'application/typescript':
-        case 'text/javascript':
-          format = Format.MODULE
-          break
-        case 'application/json':
-          format = json_modules ? Format.JSON : null
-          break
-        case 'application/wasm':
-          format = wasm_modules ? Format.WASM : null
-          break
-        default:
-          break
+      // get format based on mime type
+      try {
+        switch (parseDataURL(value).mime) {
+          case 'application/javascript':
+          case 'application/typescript':
+          case 'text/javascript':
+            format = Format.MODULE
+            break
+          case 'application/json':
+            format = json_modules ? Format.JSON : null
+            break
+          case 'application/wasm':
+            format = wasm_modules ? Format.WASM : null
+            break
+          default:
+            break
+        }
+      } catch {
+        format = ignore_errors ? undefined : null
       }
-    } catch {
-      format = ignore_errors ? undefined : null
     }
 
     return format
   }
+
+  /**
+   * Module {@linkcode id} as {@linkcode URL}.
+   *
+   * @const {URL} url
+   */
+  const url: URL = toURL(id)
 
   /**
    * Module format for {@linkcode id}.
@@ -198,8 +196,6 @@ const getFormat = async (
           // esm-only and module id does not include file extension
           if (scope && scope.pkgjson.type === Format.MODULE) {
             if (isEmptyString(ext)) {
-              const { pkg } = scope
-
               /**
                * Basename of {@linkcode url.pathname}
                *
@@ -208,16 +204,16 @@ const getFormat = async (
               const basename: string = pathe.basename(url.pathname)
 
               /**
-               * Relative path from {@linkcode pkg} to {@linkcode url.pathname}.
+               * Relative path from `package.json` file to module id.
                *
                * @const {string} relative
                */
               const relative: string = pathe
-                .relative(pkg, url.pathname)
+                .relative(scope.pkg, url.pathname)
                 .slice(1)
 
               suggestion =
-                `Loading extensionless files is not supported inside of "type":"module" package.json contexts. The package.json file ${pkg} caused this "type":"module" context. Try changing ${url.pathname} to have a file extension. Note the "bin" field of package.json can point to a file with an extension, for example {"type":"module","bin":{"${basename}":"${relative}.js"}}`
+                `Loading extensionless files is not supported inside of "type":"module" package.json contexts. The package.json file ${scope.pkg} caused this "type":"module" context. Try changing ${url.pathname} to have a file extension. Note the "bin" field of package.json can point to a file with an extension, for example {"type":"module","bin":{"${basename}":"${relative}.js"}}`
             }
           }
 
@@ -228,8 +224,7 @@ const getFormat = async (
     case 'http:':
     case 'https:':
       if (network_imports) {
-        const { default: fetch } = await import('node-fetch')
-        const { headers } = await fetch(url.href, req)
+        const { headers } = await fetch(url, req)
         format = mimeToFormat(headers.get('content-type'), true)
       } else {
         format = ignore_errors ? undefined : null

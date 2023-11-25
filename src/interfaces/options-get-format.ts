@@ -27,10 +27,6 @@ interface GetFormatOptions {
   /**
    * Enable support for network based modules.
    *
-   * **Note**: Requires [`node-fetch`][1].
-   *
-   * [1]: https://github.com/node-fetch/node-fetch
-   *
    * @see https://nodejs.org/docs/latest-v16.x/api/esm.html#https-and-http-imports
    *
    * @default false
@@ -48,6 +44,9 @@ interface GetFormatOptions {
 
   /**
    * Map file extensions to module formats.
+   *
+   * @see {@linkcode Ext}
+   * @see {@linkcode Format}
    *
    * @default EXTENSION_FORMAT_MAP
    */
@@ -74,7 +73,7 @@ interface GetFormatOptions {
    *
    * @default {}
    */
-  req?: Optional<import('node-fetch').RequestInit>
+  req?: Optional<RequestInit>
 }
 
 export type { GetFormatOptions as default }

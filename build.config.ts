@@ -7,7 +7,6 @@
 import { defineBuildConfig, type Config } from '@flex-development/mkbuild'
 import pathe from '@flex-development/pathe'
 import { at } from '@flex-development/tutils'
-import type { BuildResult, PluginBuild } from 'esbuild'
 import pkg from './package.json' assert { type: 'json' }
 import tsconfig from './tsconfig.build.json' assert { type: 'json' }
 
@@ -31,40 +30,6 @@ const config: Config = defineBuildConfig({
   keepNames: true,
   minifySyntax: true,
   platform: 'node',
-  plugins: [
-    {
-      name: 'ts-ignore-peers',
-
-      /**
-       * Inserts `// @ts-ignore peer dependency` above property declarations
-       * using types from peer dependencies.
-       *
-       * [1]: https://esbuild.github.io/plugins
-       *
-       * @see https://regex101.com/r/6r7Cke
-       * @see https://github.com/microsoft/TypeScript/issues/38628#issuecomment-1439749496
-       *
-       * @param {PluginBuild} build - [esbuild plugin api][1]
-       * @param {PluginBuild['onEnd']} build.onEnd - Build end callback
-       * @return {void} Nothing when complete
-       */
-      setup({ onEnd }: PluginBuild): void {
-        return void onEnd((result: BuildResult<{ write: false }>): void => {
-          return void (result.outputFiles = result.outputFiles.map(output => {
-            return output.path.endsWith('.d.mts')
-              ? {
-                ...output,
-                text: output.text.replace(
-                  /\n( +)(.+?\??: )(\w+<)?(import\('node-fetch'\).+)/g,
-                  '\n$1// @ts-ignore peer dependency\n$1$2$3$4'
-                )
-              }
-              : output
-          }))
-        })
-      }
-    }
-  ],
   target: [
     'node' + at(/([\d.]+)/.exec(pkg.engines.node), 0, ''),
     tsconfig.compilerOptions.target
