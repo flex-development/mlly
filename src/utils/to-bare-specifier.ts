@@ -116,7 +116,7 @@ const toBareSpecifier = (
    */
   const scope: Nullable<PackageScope> =
     lookupPackageScope(url, pathToFileURL(DOT)) ??
-    lookupPackageScope(specifier, pathToFileURL(DOT))
+      lookupPackageScope(specifier, pathToFileURL(DOT))
 
   // throw if package scope was not found
   if (!scope) {
@@ -130,9 +130,9 @@ const toBareSpecifier = (
   specifier = !includes(url.pathname, 'node_modules' + pathe.sep + name)
     ? name + specifier.replace(fileURLToPath(scope.dir.replace(/\/$/, '')), '')
     : url.pathname.replace(
-        new RegExp(`.*?node_modules${regexp(pathe.sep)}(?=${regexp(name)})`),
-        ''
-      )
+      new RegExp(`.*?node_modules${regexp(pathe.sep)}(?=${regexp(name)})`),
+      ''
+    )
 
   /**
    * Parsed module specifier.

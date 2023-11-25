@@ -3,6 +3,7 @@
 # References:
 #
 # - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
@@ -20,10 +21,6 @@ on:
       - .github/workflows/integrity.yml
       - .yarnrc.yml
       - yarn.lock
-    types:
-      - opened
-      - reopened
-      - synchronize
   push:
     branches:
       - main

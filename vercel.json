@@ -4,8 +4,6 @@
   "cleanUrls": true,
   "devCommand": null,
   "framework": "vite",
-  "ignoreCommand": null,
-  "installCommand": "yarn --immutable",
   "github": {
     "autoJobCancelation": true,
     "enabled": false,
@@ -22,6 +20,8 @@
       ]
     }
   ],
+  "ignoreCommand": null,
+  "installCommand": "yarn --immutable",
   "outputDirectory": "docs/.vitepress/dist",
   "public": false,
   "redirects": [

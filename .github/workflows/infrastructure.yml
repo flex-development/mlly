@@ -11,13 +11,14 @@
 # References:
 #
 # - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/learn-github-actions/expressions
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#push
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#push
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
-# - https://github.com/actions-cool/check-user-permission
 # - https://github.com/actions/checkout
-# - https://github.com/flex-development/rice-action
+# - https://github.com/actions/create-github-app-token
+# - https://github.com/flex-development/repostructure-action
 # - https://github.com/hmarr/debug-action
 
 ---
@@ -36,26 +37,27 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   infrastructure:
+    if: contains(vars.MAINTAINERS, github.actor)
     runs-on: ubuntu-latest
     steps:
       - id: debug
         name: Print environment variables and event payload
         uses: hmarr/debug-action@v2.1.0
-      - id: check-actor-permission
-        name: Check @${{ github.actor }} permission level
-        uses: actions-cool/check-user-permission@v2.2.0
+      - id: bot-token
+        name: Get bot token
+        uses: actions/create-github-app-token@v1.6.0
         with:
-          require: admin
-          username: ${{ github.actor }}
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
       - id: checkout
-        name: Checkout ${{ github.ref_name }}
+        name: Checkout ${{ github.ref_name }}@${{ github.sha }}
         uses: actions/checkout@v4.1.1
         with:
           persist-credentials: false
-          ref: ${{ github.ref }}
+          ref: ${{ github.sha }}
+          token: ${{ steps.bot-token.outputs.token }}
       - id: update
-        if: steps.check-actor-permission.outputs.require-result == 'true'
         name: Update repository infrastructure
         uses: flex-development/rice-action@1.0.0
         with:
-          token: ${{ secrets.PAT_REPO }}
+          token: ${{ steps.bot-token.outputs.token }}

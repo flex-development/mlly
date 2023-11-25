@@ -52,19 +52,17 @@ const findDynamicImports = (code: string = ''): DynamicImport[] => {
       code,
       end: start + code.length,
       expression,
-      imports:
-        imports === ''
-          ? []
-          : split(imports.replace(/^{|}$/g, ''), ',')
-              .map(trim)
-              .filter(e => !!e.length),
+      imports: imports === ''
+        ? []
+        : split(imports.replace(/^{|}$/g, ''), ',')
+          .map(trim)
+          .filter(e => !!e.length),
       kind: StatementKind.IMPORT,
       options,
       specifier: dequote(specifier),
-      specifier_kind:
-        specifier_syntax === SpecifierSyntaxKind.DYNAMIC
-          ? null
-          : getSpecifierKind(specifier),
+      specifier_kind: specifier_syntax === SpecifierSyntaxKind.DYNAMIC
+        ? null
+        : getSpecifierKind(specifier),
       specifier_syntax,
       start,
       syntax: StatementSyntaxKind.DYNAMIC

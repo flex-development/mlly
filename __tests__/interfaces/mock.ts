@@ -1,5 +1,5 @@
 /**
- * @file Test Environment Interfaces - Mock
+ * @file Test Interfaces - Mock
  * @module tests/interfaces/Mock
  */
 
@@ -11,11 +11,9 @@ import type * as vitest from 'vitest'
  *
  * @template F - Function being mocked
  *
- * @extends {Fn<Parameters<F>,ReturnType<F>>}
  * @extends {vitest.Mock<Parameters<F>,ReturnType<F>>}
  */
 interface Mock<F extends Fn = Fn>
-  extends Fn<Parameters<F>, ReturnType<F>>,
-    vitest.Mock<Parameters<F>, ReturnType<F>> {}
+  extends vitest.Mock<Parameters<F>, ReturnType<F>> {}
 
 export type { Mock as default }

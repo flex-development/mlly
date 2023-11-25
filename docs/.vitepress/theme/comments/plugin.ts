@@ -4,7 +4,9 @@
  */
 
 import type { Root } from '@flex-development/docast'
+import { define, type EmptyArray } from '@flex-development/tutils'
 import type { Plugin, Processor } from 'unified'
+import type { VFile } from 'vfile'
 import Compiler from './compiler'
 
 /**
@@ -14,14 +16,17 @@ import Compiler from './compiler'
  *
  * @see https://github.com/unifiedjs/unified#function-attacheroptions
  *
- * @type {Plugin<[], Root, string[]>}
- * @this {Processor<void, Root, Root, string[]>}
+ * @type {Plugin<EmptyArray, Root, string[]>}
+ * @this {Processor}
  *
  * @return {void} Nothing when complete
  */
-function attacher(this: Processor<void, void, Root, string[]>): void {
-  this.Compiler = Compiler
-  return void 0
+function attacher(this: Processor): void {
+  return void define(this, 'compiler', {
+    value: (tree: Root, file: VFile): string[] => {
+      return new Compiler(tree, file).compile()
+    }
+  })
 }
 
-export default attacher
+export default <Plugin<EmptyArray, Root, string[]>>attacher

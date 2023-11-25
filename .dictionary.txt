@@ -1,6 +1,5 @@
 algoliasearch
 alogirthm
-ardatan
 attw
 bdougie
 cefc
@@ -13,6 +12,7 @@ dequote
 dessant
 docast
 dohm
+dprint
 esmodules
 exactish
 fbca
@@ -23,12 +23,11 @@ hascjssyntax
 hasesmsyntax
 hmarr
 iife
-infile
 isbarespecifier
 isexportssugar
 isrelativespecifier
-keyid
-larsgw
+jchen
+kaisugi
 lcov
 lintstagedrc
 mkbuild
@@ -44,6 +43,7 @@ pkgs
 preid
 rext
 segement
+shfmt
 sindresorhus
 toabsolutespecifier
 todataurl

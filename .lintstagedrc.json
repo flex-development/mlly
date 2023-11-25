@@ -1,13 +1,14 @@
 {
-  "*": ["prettier --check", "cspell lint --color --no-progress --relative $@"],
-  "**/*.{cjs,cts,gql,js,json,json5,jsonc,md,mjs,mts,ts,vue,yml}": [
-    "eslint --exit-on-fatal-error"
+  "*": [
+    "dprint check",
+    "eslint --exit-on-fatal-error",
+    "cspell lint --color --no-progress --relative $@"
   ],
-  "**/*.{cts,mts,ts,vue}": "vitest typecheck --changed --run",
+  "**/*.{cts,mts,ts,vue}": "vitest run --changed --typecheck",
   "**/yarn.lock": "yarn dedupe --check",
   "src/**/*.ts": [
-    "vitest --changed --coverage --run",
+    "vitest run --changed --coverage",
     "yarn build",
-    "yarn check:types:build"
+    "bash -c tsc -p tsconfig.build.json"
   ]
 }

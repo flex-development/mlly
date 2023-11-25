@@ -1,4 +1,4 @@
-# TypeScript Canary Check
+# TypeScript Canary
 #
 # Run type tests against the latest and next versions of TypeScript.
 #
@@ -61,7 +61,7 @@ jobs:
           node-version-file: .nvmrc
       - id: yarn
         name: Install dependencies
-        run: yarn ${{ github.actor == 'dependabot[bot]' && '--no-immutable' || '--immutable' }}
+        run: yarn
       - id: typescript
         name: Install typescript@${{ matrix.typescript-version }}
         run: yarn add -D typescript@${{ matrix.typescript-version }}

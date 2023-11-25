@@ -25,7 +25,7 @@ chb = "!f() { git checkout -b \"$@\" && git pou \"$@\"; }; f"
 chp = "!f() { git checkout $@ && git pull; }; f"
 
 # commit with message
-cm = "!f() { git commit -s -m \"$@\"; }; f"
+cm = "!f() { git commit -S -s -m \"$@\"; }; f"
 
 # tell git to start tracking branch and push to origin
 pou = "!f() { git push origin --no-verify -u $@; }; f"
@@ -62,7 +62,7 @@ fpnv = "!f() { git pnv --force ; }; f"
 pnv = "!f() { git push --no-verify $@; }; f"
 
 [branch]
-autosetuprebase = always
+autoSetupRebase = always
 
 [checkout]
 defaultRemote = origin
@@ -85,6 +85,12 @@ tool = vscode
 [difftool "vscode"]
 cmd = code-insiders --wait --diff $LOCAL $REMOTE
 
+[filter "lfs"]
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
+
 [gitflow "prefix"]
 feature = feat/
 hotfix = hotfix/
@@ -96,6 +102,10 @@ program = gpg2
 
 [init]
 defaultBranch = main
+
+[log]
+date = iso8601-strict
+decorate = short
 
 [merge]
 tool = vscode
@@ -111,6 +121,8 @@ autoStash = true
 
 [tag]
 forceSignAnnotated = true
+gpgsign = true
+sort = -creatordate
 
 [url "git@github.com:"]
 insteadOf = gh:

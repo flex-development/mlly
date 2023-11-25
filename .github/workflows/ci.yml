@@ -21,6 +21,7 @@
 # - https://github.com/actions/upload-artifact
 # - https://github.com/andstor/file-existence-action
 # - https://github.com/codecov/codecov-action
+# - https://github.com/flex-development/grease
 # - https://github.com/hmarr/debug-action
 # - https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
 # - https://yarnpkg.com/cli/pack
@@ -34,7 +35,6 @@ on:
       - feat/**
       - hotfix/**
       - main
-      - release/**
   workflow_dispatch:
 permissions:
   contents: read
@@ -53,10 +53,12 @@ jobs:
   preflight:
     if: |
       github.event.head_commit.author.name != 'dependabot[bot]'
-      && github.event.head_commit.author.username != 'flexdevelopment'
+      && github.event.head_commit.author.username != 'flexdevelopment[bot]'
       && !startsWith(github.event.head_commit.message, 'release:')
+      && !startsWith(github.event.head_commit.message, 'release(chore):')
     runs-on: ubuntu-latest
     outputs:
+      cache-key: ${{ steps.cache-key.outputs.result }}
       version: ${{ steps.version.outputs.result }}
       version-typescript: ${{ steps.version-typescript.outputs.result }}
     steps:
@@ -78,15 +80,20 @@ jobs:
           node-version-file: .nvmrc
       - id: yarn
         name: Install dependencies
-        run: yarn ${{ github.actor == 'dependabot[bot]' && '--no-immutable' || '--immutable' }}
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: ${{ github.actor != 'dependabot[bot]' }}
+        run: yarn
+      - id: cache-key
+        name: Get cache key
+        run: echo "result=${{ runner.os }}-${{ github.run_id }}" >>$GITHUB_OUTPUT
       - id: cache
         name: Cache dependencies
         uses: actions/cache@v3.3.2
         with:
-          key: ${{ runner.os }}-${{ github.run_id }}
+          key: ${{ steps.cache-key.outputs.result }}
           path: ${{ env.CACHE_PATH }}
       - id: version
-        name: Get package version
+        name: Get manifest version
         run: echo "result=$(jq .version package.json -r)" >>$GITHUB_OUTPUT
       - id: version-typescript
         name: Get TypeScript version
@@ -113,7 +120,7 @@ jobs:
         name: Restore dependencies cache
         uses: actions/cache@v3.3.2
         with:
-          key: ${{ runner.os }}-${{ github.run_id }}
+          key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
       - id: lint
         name: Check commitlint status
@@ -133,18 +140,19 @@ jobs:
       - id: scan
         name: Scan commits for secrets and policy breaches
         uses: GitGuardian/ggshield-action@master
-        with:
-          args: --all-policies --show-secrets --verbose
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
           GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
           GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
           GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
+        with:
+          args: --all-policies --show-secrets --verbose
   format:
     needs:
       - commitlint
       - gitguardian
+      - preflight
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -164,7 +172,7 @@ jobs:
         name: Restore dependencies cache
         uses: actions/cache@v3.3.2
         with:
-          key: ${{ runner.os }}-${{ github.run_id }}
+          key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
       - id: format
         name: Check code formatting
@@ -173,6 +181,7 @@ jobs:
     needs:
       - commitlint
       - gitguardian
+      - preflight
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -192,7 +201,7 @@ jobs:
         name: Restore dependencies cache
         uses: actions/cache@v3.3.2
         with:
-          key: ${{ runner.os }}-${{ github.run_id }}
+          key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
       - id: build
         name: Build project
@@ -204,6 +213,7 @@ jobs:
     needs:
       - commitlint
       - gitguardian
+      - preflight
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -223,7 +233,7 @@ jobs:
         name: Restore dependencies cache
         uses: actions/cache@v3.3.2
         with:
-          key: ${{ runner.os }}-${{ github.run_id }}
+          key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
       - id: spelling
         name: Check spelling
@@ -240,7 +250,6 @@ jobs:
         typescript-version:
           - ${{ needs.preflight.outputs.version-typescript }}
           - latest
-          - 5.0.4
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -266,7 +275,7 @@ jobs:
         name: Restore dependencies cache
         uses: actions/cache@v3.3.2
         with:
-          key: ${{ runner.os }}-${{ github.run_id }}
+          key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
       - id: typescript
         if: steps.test-files-check.outputs.files_exists == 'true'
@@ -284,6 +293,7 @@ jobs:
     needs:
       - commitlint
       - gitguardian
+      - preflight
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -292,7 +302,6 @@ jobs:
           - 20
           - 19
           - 18
-          - 16
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -312,13 +321,14 @@ jobs:
         with:
           cache: yarn
           cache-dependency-path: yarn.lock
+          check-latest: true
           node-version: ${{ matrix.node-version }}
       - id: cache
         if: steps.test-files-check.outputs.files_exists == 'true'
         name: Restore dependencies cache
         uses: actions/cache@v3.3.2
         with:
-          key: ${{ runner.os }}-${{ github.run_id }}
+          key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
       - id: test
         if: steps.test-files-check.outputs.files_exists == 'true'
@@ -328,6 +338,13 @@ jobs:
         name: Upload coverage report to Codecov
         if: steps.test-files-check.outputs.files_exists == 'true'
         uses: codecov/codecov-action@v3.1.4
+        env:
+          GITHUB_JOB: ${{ github.job }}
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_REF_TYPE: ${{ github.ref_type }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_SHA: ${{ env.SHA }}
+          GITHUB_WORKSPACE: ${{ github.workspace }}
         with:
           env_vars: GITHUB_JOB,GITHUB_REF,GITHUB_REF_TYPE,GITHUB_RUN_ID,GITHUB_SHA,GITHUB_WORKSPACE
           fail_ci_if_error: true
@@ -338,13 +355,6 @@ jobs:
           override_commit: ${{ env.SHA }}
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
-        env:
-          GITHUB_JOB: ${{ github.job }}
-          GITHUB_REF: ${{ github.ref }}
-          GITHUB_REF_TYPE: ${{ github.ref_type }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
-          GITHUB_SHA: ${{ env.SHA }}
-          GITHUB_WORKSPACE: ${{ github.workspace }}
   build:
     needs:
       - commitlint
@@ -372,7 +382,7 @@ jobs:
         name: Restore dependencies cache
         uses: actions/cache@v3.3.2
         with:
-          key: ${{ runner.os }}-${{ github.run_id }}
+          key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
       - id: local-binaries
         name: Add local binaries to $PATH
@@ -386,16 +396,13 @@ jobs:
       - id: attw
         name: Analyze types distribution
         run: attw ${{ env.TARFILE }}
-      - id: pkg-size-report
-        name: Package size report
-        run: yarn pkg-size
       - id: archive
         name: Archive production artifacts
         uses: actions/upload-artifact@v3.1.3
         with:
           name: ${{ env.TARFILE }}
           path: ${{ env.TARFILE }}
-  docs:
+  changelog:
     needs:
       - build
       - commitlint
@@ -406,7 +413,50 @@ jobs:
       - spelling
       - test
       - typescript
-    if: github.actor != 'flexdevelopment'
+    runs-on: ubuntu-latest
+    env:
+      NODE_NO_WARNINGS: 1
+    steps:
+      - id: checkout
+        name: Checkout ${{ env.REF_NAME }}
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ env.REF }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.8.1
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: cache
+        name: Restore dependencies cache
+        uses: actions/cache@v3.3.2
+        with:
+          key: ${{ needs.preflight.outputs.cache-key }}
+          path: ${{ env.CACHE_PATH }}
+      - id: local-binaries
+        name: Add local binaries to $PATH
+        run: echo "$GITHUB_WORKSPACE/$CACHE_PATH/.bin" >>$GITHUB_PATH
+      - id: summary
+        name: Get changelog preview
+        env:
+          TZ: ${{ vars.TZ }}
+        run: echo "$(grease changelog)" >>$GITHUB_STEP_SUMMARY
+  docs:
+    needs:
+      - build
+      - changelog
+      - commitlint
+      - format
+      - gitguardian
+      - lint
+      - preflight
+      - spelling
+      - test
+      - typescript
     runs-on: ubuntu-latest
     environment: preview
     env:

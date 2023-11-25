@@ -73,7 +73,7 @@ exports[`unit:utils/findStaticImports > should return StaticImport object array 
   },
   {
     "assertion": "",
-    "code": "import { export1, export2 as alias2 } from \\"module-name\\"",
+    "code": "import { export1, export2 as alias2 } from "module-name"",
     "end": 299,
     "imports": [
       "export1",
@@ -89,7 +89,7 @@ exports[`unit:utils/findStaticImports > should return StaticImport object array 
   },
   {
     "assertion": "",
-    "code": "import { 'string name' as alias } from \\"module-name\\"",
+    "code": "import { 'string name' as alias } from "module-name"",
     "end": 353,
     "imports": [
       "'string name' as alias",
@@ -104,7 +104,7 @@ exports[`unit:utils/findStaticImports > should return StaticImport object array 
   },
   {
     "assertion": "",
-    "code": "import defaultExport, { export1 } from \\"module-name\\"",
+    "code": "import defaultExport, { export1 } from "module-name"",
     "end": 407,
     "imports": [
       "defaultExport",
@@ -120,7 +120,7 @@ exports[`unit:utils/findStaticImports > should return StaticImport object array 
   },
   {
     "assertion": "",
-    "code": "import defaultExport, * as name from \\"module-name\\"",
+    "code": "import defaultExport, * as name from "module-name"",
     "end": 459,
     "imports": [
       "defaultExport",
@@ -151,10 +151,10 @@ exports[`unit:utils/findStaticImports > should return StaticImport object array 
   },
   {
     "assertion": "",
-    "code": "import { \\"h-i\\" as hi } from './hi.js'",
+    "code": "import { "h-i" as hi } from './hi.js'",
     "end": 530,
     "imports": [
-      "\\"h-i\\" as hi",
+      ""h-i" as hi",
     ],
     "kind": "import",
     "specifier": "./hi.js",

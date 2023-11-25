@@ -37,6 +37,7 @@ Follow the steps below to setup your local development environment:
 
    ```sh
    git config --global commit.gpgsign true
+   git config --global tag.gpgsign true
    git config --global user.email <email>
    git config --global user.name <name>
    git config --global user.username <username>
@@ -95,25 +96,24 @@ Follow the steps below to setup your local development environment:
 
 10. Reload shell
 
-   ```sh
-   exec $SHELL
-   ```
+    ```sh
+    exec $SHELL
+    ```
 
 ### Environment Variables
 
-| name                    |
-| ----------------------- |
-| `ALGOLIA_API_KEY`       |
-| `CODECOV_TOKEN`         |
-| `GITHUB_TOKEN`          |
-| `HOMEBREW_BREWFILE`     |
-| `HOSTNAME`              |
-| `NODE_ENV`              |
-| `NODE_NO_WARNINGS`      |
-| `PAT_BOT`               |
-| `VERCEL_ORG_ID`         |
-| `VERCEL_PROJECT_ID`     |
-| `ZSH_DOTENV_FILE`       |
+| name                |
+| ------------------- |
+| `ALGOLIA_API_KEY`   |
+| `CODECOV_TOKEN`     |
+| `GITHUB_TOKEN`      |
+| `HOMEBREW_BREWFILE` |
+| `HOSTNAME`          |
+| `NODE_ENV`          |
+| `NODE_NO_WARNINGS`  |
+| `VERCEL_ORG_ID`     |
+| `VERCEL_PROJECT_ID` |
+| `ZSH_DOTENV_FILE`   |
 
 #### GitHub Actions
 
@@ -179,7 +179,7 @@ This means every commit must conform to the following format:
 
 [body]
 
-[BREAKING CHANGE: <change>]
+[BREAKING-CHANGE: <change>]
 
 [footer(s)]
 ```
@@ -208,18 +208,12 @@ See [`.commitlintrc.cts`](.commitlintrc.cts) to view all commit guidelines.
 
 ### Code Style
 
-[Prettier][10] is used to format code and [ESLint][11] to lint files.
+[dprint][10] is used to format code and [ESLint][11] to lint files.
 
-#### ESLint Configuration
-
+- [`.dprint.jsonc`](.dprint.jsonc)
+- [`.eslintignore`](.eslintignore)
 - [`.eslintrc.base.cjs`](.eslintrc.base.cjs)
 - [`.eslintrc.cjs`](.eslintrc.cjs)
-- [`.eslintignore`](.eslintignore)
-
-#### Prettier Configuration
-
-- [`.prettierrc.json`](.prettierrc.json)
-- [`.prettierignore`](.prettierignore)
 
 ### Making Changes
 
@@ -243,6 +237,7 @@ Be sure to use [`it.skip`][15] or [`it.todo`][16] where appropriate.
 
 - `yarn test`
 - `yarn test:cov`
+- `yarn typecheck`
 
 #### Code Coverage
 
@@ -267,8 +262,8 @@ To manually upload coverage reports:
 ### Getting Help
 
 If you need help, make note of any issues in their respective files in the form of a [JSDoc comment][12]. If you need
-help with a test, don't forget to use [`it.skip`][15] and/or [`it.todo`][16]. Afterwards, [start a discussion in the
-Q&A category][19].
+help with a test, don't forget to use [`it.skip`][15] and/or [`it.todo`][16]. Afterwards, [start a discussion in the Q&A
+category][19].
 
 ## Labels
 
@@ -357,45 +352,34 @@ e.g:
 > Note: Package and release publication is executed via GitHub workflow.\
 > This is so invalid or malicious versions cannot be published without merging those changes into `main` first.
 
-Before deploying, the following steps must be completed:
-
-1. Schedule a code freeze
-2. Decide what type of version bump the package needs
-   - `yarn recommended-bump`
-3. Bump version
-   - `bump <new-version>`
-   - `bump major`
-   - `bump minor`
-   - `bump patch`
-   - `bump premajor --preid <dist-tag>`
-   - `bump preminor --preid <dist-tag>`
-   - `bump prepatch --preid <dist-tag>`
-   - `bump prerelease --preid <dist-tag>`
-4. Update `CHANGELOG.md`
-   - `yarn changelog -sw` (remove `w` to do a dry-run, i.e. `yarn changelog -s`)
-5. `yarn release`
-6. Open PR from `release/*` into `main`
-   - PR title should match `release: <release-tag>`
-     - e.g: `release: 1.1.0`
-   - link all issues being released
-   - after review, `squash and merge` PR
-     - `release: <release-tag> (#pull-request-n)`
-       - e.g: `release: 1.1.0 (#3)`
-   - on PR merge, [release workflow](.github/workflows/release.yml) will fire
-     - if successful, the workflow will:
-       - pack project
-       - create and push new tag
-       - create and publish github release
-       - make sure all prereleased or released issues are closed
-       - delete the release branch
-     - on release publish, [publish workflow](.github/workflows/publish.yml) will fire
-       - if successful, the workflow will:
-         - publish package to [github package registry][21]
-         - publish package to [npm][22]
+1. Get a version bump recommendation
+   - `grease bump --recommend`
+2. Create release chore commit
+   - `yarn release <new-version>`
+   - `yarn release major`
+   - `yarn release minor`
+   - `yarn release patch`
+   - `yarn release premajor --preid <dist-tag>`
+   - `yarn release preminor --preid <dist-tag>`
+   - `yarn release prepatch --preid <dist-tag>`
+   - `yarn release prerelease --preid <dist-tag>`
+3. Push release chore commit
+4. Monitor workflows
+   1. [`release-chore`](.github/workflows/release-chore.yml)
+      - create release branch
+      - bump manifest version
+      - add changelog entry for new release
+      - create release pr
+   2. [`release`](.github/workflows/release.yml)
+      - create and push new tag
+      - create and publish github release
+      - ensure all relevant issues are closed
+   3. [`publish`](.github/workflows/publish.yml)
+      - publish package to [github package registry][21]
+      - publish package to [npm][22]
 
 [1]: https://brew.sh
-[2]:
-  https://docs.github.com/authentication/managing-commit-signature-verification/about-commit-signature-verification#gpg-commit-signature-verification
+[2]: https://docs.github.com/authentication/managing-commit-signature-verification/about-commit-signature-verification#gpg-commit-signature-verification
 [3]: https://yarnpkg.com/getting-started
 [4]: https://github.com/ohmyzsh/ohmyzsh
 [5]: https://github.com/typicode/husky
@@ -403,7 +387,7 @@ Before deploying, the following steps must be completed:
 [7]: https://trunkbaseddevelopment.com/styles/#short-lived-feature-branches
 [8]: https://conventionalcommits.org
 [9]: https://github.com/conventional-changelog/commitlint
-[10]: https://prettier.io
+[10]: https://dprint.dev/
 [11]: https://eslint.org
 [12]: https://jsdoc.app
 [13]: https://github.com/gajus/eslint-plugin-jsdoc

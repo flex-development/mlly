@@ -296,17 +296,17 @@ class Resolver {
       case scope && !isNIL(scope.pkgjson.exports):
         url = this.resolvePackageExport(
           specifier,
-          scope!.pkg,
+          scope.pkg,
           parent,
           condition,
           conditions
         )
         break
       case scope && id.path === DOT:
-        url = this.resolvePackageMain(scope!.pkg, scope!.pkgjson, parent)
+        url = this.resolvePackageMain(scope.pkg, scope.pkgjson, parent)
         break
       case !!scope:
-        url = new URL(id.path, scope!.pkg)
+        url = new URL(id.path, scope.pkg)
         break
     }
 
@@ -537,14 +537,14 @@ class Resolver {
     const tries: string[] = [
       ...(pkgjson.main
         ? [
-            pkgjson.main,
-            `./${pkgjson.main}.js`,
-            `./${pkgjson.main}.json`,
-            `./${pkgjson.main}.node`,
-            `./${pkgjson.main}/index.js`,
-            `./${pkgjson.main}/index.json`,
-            `./${pkgjson.main}/index.node`
-          ]
+          pkgjson.main,
+          `./${pkgjson.main}.js`,
+          `./${pkgjson.main}.json`,
+          `./${pkgjson.main}.node`,
+          `./${pkgjson.main}/index.js`,
+          `./${pkgjson.main}/index.json`,
+          `./${pkgjson.main}/index.node`
+        ]
         : []),
       './index.js',
       './index.json',
@@ -560,7 +560,7 @@ class Resolver {
 
     // try resolving package entry point
     for (const input of tries) {
-      if (isFile((url = new URL(input, pkg)))) break
+      if (isFile(url = new URL(input, pkg))) break
       url = null
     }
 

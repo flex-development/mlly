@@ -2,15 +2,18 @@
 # https://eslint.org/docs/user-guide/configuring/ignoring-code#the-eslintignore-file
 
 # DIRECTORIES & FILES
+**/*.patch
+**/*.sh
 **/*.snap
 **/*config.*.timestamp*
 **/.DS_Store
-**/__tests__/report.json
-**/coverage/
 **/.temp/
+**/__tests__/report.*
+**/coverage/
 **/dist/
 **/node_modules/
 **/tsconfig*temp.json
+Brewfile
 yarn.lock
 
 # NEGATED PATTERNS
@@ -22,11 +25,12 @@ yarn.lock
 !.codecov.yml
 !.commitlintrc.*
 !.cspell.json
+!.dprint.*
 !.github/
 !.graphqlrc.yml
+!.grease*.*
 !.lintstagedrc.json
 !.markdownlint.jsonc
-!.prettierrc.json
 !.vscode/
 !.yarnrc.yml
 !docs/.vitepress/

@@ -53,18 +53,16 @@ const findRequires = (code: string = ''): RequireStatement[] => {
     return {
       code,
       end: start + code.length,
-      imports:
-        imports === ''
-          ? []
-          : split(imports.replace(/^{|}$/g, ''), ',')
-              .map(trim)
-              .filter(e => !!e.length),
+      imports: imports === ''
+        ? []
+        : split(imports.replace(/^{|}$/g, ''), ',')
+          .map(trim)
+          .filter(e => !!e.length),
       kind: StatementKind.REQUIRE,
       specifier: dequote(specifier),
-      specifier_kind:
-        specifier_syntax === SpecifierSyntaxKind.DYNAMIC
-          ? null
-          : getSpecifierKind(specifier),
+      specifier_kind: specifier_syntax === SpecifierSyntaxKind.DYNAMIC
+        ? null
+        : getSpecifierKind(specifier),
       specifier_syntax,
       start,
       syntax: StatementSyntaxKind.REQUIRE

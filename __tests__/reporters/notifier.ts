@@ -111,10 +111,10 @@ class Notifier implements Reporter {
 
       message = dedent`
         ${passes} tests passed in ${
-          time > 1000
-            ? `${(time / 1000).toFixed(2)}ms`
-            : `${Math.round(time)}ms`
-        }
+        time > 1000
+          ? `${(time / 1000).toFixed(2)}ms`
+          : `${Math.round(time)}ms`
+      }
       `
 
       title = '\u2705 Passed'

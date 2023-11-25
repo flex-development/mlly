@@ -222,8 +222,7 @@ const findSubpath = (
                  *
                  * @const {boolean} match
                  */
-                const match: boolean =
-                  target.length >= tar.length &&
+                const match: boolean = target.length >= tar.length &&
                   tar.lastIndexOf(PATTERN_CHARACTER) === pattern &&
                   (target.endsWith(tar.slice(pattern + 1)) ||
                     target.endsWith(tar_ne.slice(pattern + 1)))

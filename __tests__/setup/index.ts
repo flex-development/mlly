@@ -1,5 +1,5 @@
 /**
- * @file Entry Point - Test Setup Files
+ * @file Entry Point - Test Setup
  * @module tests/setup
  */
 

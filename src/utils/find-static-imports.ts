@@ -38,40 +38,38 @@ const findStaticImports = (code: string = ''): StaticImport[] => {
      *
      * @const {StaticImport['syntax']} syntax
      */
-    const syntax: StaticImport['syntax'] =
-      imports === ''
-        ? StatementSyntaxKind.SIDE_EFFECT
-        : imports.startsWith('* as')
-        ? StatementSyntaxKind.NAMESPACE
-        : imports.startsWith('{')
-        ? StatementSyntaxKind.NAMED
-        : /^\w+$/.test(imports)
-        ? StatementSyntaxKind.DEFAULT
-        : /^\w+,\s*{/.test(imports)
-        ? StatementSyntaxKind.DEFAULT_WITH_NAMED
-        : StatementSyntaxKind.DEFAULT_WITH_NAMESPACE
+    const syntax: StaticImport['syntax'] = imports === ''
+      ? StatementSyntaxKind.SIDE_EFFECT
+      : imports.startsWith('* as')
+      ? StatementSyntaxKind.NAMESPACE
+      : imports.startsWith('{')
+      ? StatementSyntaxKind.NAMED
+      : /^\w+$/.test(imports)
+      ? StatementSyntaxKind.DEFAULT
+      : /^\w+,\s*{/.test(imports)
+      ? StatementSyntaxKind.DEFAULT_WITH_NAMED
+      : StatementSyntaxKind.DEFAULT_WITH_NAMESPACE
 
     return {
       assertion,
       code,
       end: start + code.length,
-      imports:
-        syntax === StatementSyntaxKind.SIDE_EFFECT
-          ? []
-          : syntax === StatementSyntaxKind.NAMED
-          ? split(imports.replace(/^{|}$/g, ''), ',')
-              .map(trim)
-              .filter(i => !!i.length)
-          : syntax === StatementSyntaxKind.DEFAULT_WITH_NAMED
-          ? split(imports, ',')
-              .map(i => trim(i).replace(/^{|}$/g, ''))
-              .map(trim)
-              .filter(i => !!i.length)
-          : syntax === StatementSyntaxKind.DEFAULT_WITH_NAMESPACE
-          ? split(imports, ',')
-              .map(trim)
-              .filter(i => !!i.length)
-          : [imports],
+      imports: syntax === StatementSyntaxKind.SIDE_EFFECT
+        ? []
+        : syntax === StatementSyntaxKind.NAMED
+        ? split(imports.replace(/^{|}$/g, ''), ',')
+          .map(trim)
+          .filter(i => !!i.length)
+        : syntax === StatementSyntaxKind.DEFAULT_WITH_NAMED
+        ? split(imports, ',')
+          .map(i => trim(i).replace(/^{|}$/g, ''))
+          .map(trim)
+          .filter(i => !!i.length)
+        : syntax === StatementSyntaxKind.DEFAULT_WITH_NAMESPACE
+        ? split(imports, ',')
+          .map(trim)
+          .filter(i => !!i.length)
+        : [imports],
       kind: StatementKind.IMPORT,
       specifier,
       specifier_kind: getSpecifierKind(specifier),

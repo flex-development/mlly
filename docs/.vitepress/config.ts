@@ -8,9 +8,10 @@
 import pathe from '@flex-development/pathe'
 import {
   NodeEnv,
-  cast,
+  fallback,
   flat,
   get,
+  ifelse,
   includes,
   join,
   select,
@@ -26,7 +27,7 @@ import {
   type CheerioAPI
 } from 'cheerio'
 import { config as dotenv } from 'dotenv'
-import { globby } from 'globby'
+import fg from 'fast-glob'
 import matter from 'gray-matter'
 import fs from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
@@ -72,12 +73,11 @@ const {
  *
  * @const {string} HOSTNAME
  */
-const HOSTNAME: string =
-  VERCEL_ENV === 'production' || JSON.parse(CI) === true
-    ? process.env.HOSTNAME!
-    : template('http://localhost:{0}', {
-        0: VERCEL_ENV === 'development' ? 5173 : 8080
-      })
+const HOSTNAME: string = VERCEL_ENV === 'production' || JSON.parse(CI) === true
+  ? process.env.HOSTNAME!
+  : template('http://localhost:{0}', {
+    0: ifelse(VERCEL_ENV === 'development', 5173, 8080)
+  })
 
 /**
  * Project version as GitHub branch name or release tag.
@@ -136,7 +136,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
    * @param {SiteData} config.site - Site data
    * @return {Promise<void>} Nothing when complete
    */
-  async buildEnd({ outDir, root, site }: SiteConfig): Promise<void> {
+  buildEnd: async ({ outDir, root, site }: SiteConfig): Promise<void> => {
     // set search index settings
     // see: https://docsearch.algolia.com/docs/templates/#vitepress-template
     await index.setSettings({
@@ -184,7 +184,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
     })
 
     // update search index
-    for (const route of await globby('**.html', { cwd: outDir })) {
+    for (const route of await fg.glob('**.html', { cwd: outDir })) {
       /**
        * Absolute path to HTML output.
        *
@@ -217,8 +217,10 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
          *
          * @const {string} pageRank
          */
-        const pageRank: string =
-          $('meta[name=priority]').attr('content') ?? '0.5'
+        const pageRank: string = fallback(
+          $('meta[name=priority]').attr('content'),
+          '0.5'
+        )
 
         /**
          * Page title.
@@ -402,10 +404,9 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
       'script',
       {
         defer: '',
-        src:
-          VERCEL_ENV === 'production'
-            ? '/_vercel/insights/script.js'
-            : 'https://cdn.vercel-insights.com/v1/script.debug.js'
+        src: VERCEL_ENV === 'production'
+          ? '/_vercel/insights/script.js'
+          : 'https://cdn.vercel-insights.com/v1/script.debug.js'
       }
     ]
   ],
@@ -414,7 +415,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
   markdown: MARKDOWN_OPTIONS,
   sitemap: {
     hostname: HOSTNAME,
-    transformItems(items: { priority?: number; url: string }[]): typeof items {
+    transformItems: items => {
       return items.map(item => {
         const { url } = item
 
@@ -424,22 +425,20 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
          * @const {string} sourcefile
          */
         const sourcefile: string = pathe.resolve(
-          fileURLToPath(pathe.dirname(import.meta.url)),
-          '..',
+          pathe.join(pathe.dirname(fileURLToPath(import.meta.url)), '..'),
           url + (url && !url.endsWith(pathe.sep) ? '.md' : 'index.md')
         )
 
+        // get head metadata
+        const {
+          head
+        } = <{ head: [string, ObjectPlain][] }>matter.read(sourcefile).data
+
         return {
           ...item,
-          priority: get(
-            cast<[string, ObjectPlain][]>(
-              matter.read(sourcefile).data.head ?? []
-            ).find((v): v is ['meta', { content: number }] => {
-              return get(v, '1.name') === 'priority'
-            }),
-            '1.content',
-            0.5
-          )
+          priority: get(head.find((v): v is ['meta', { content: number }] => {
+            return get(v, '1.name') === 'priority'
+          }), '1.content', 0.5)
         }
       })
     }
@@ -466,7 +465,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
             text: 'Contributing'
           },
           {
-            link: REPOSITORY + '/releases',
+            link: `${REPOSITORY}/releases`,
             text: 'Releases'
           }
         ],
@@ -509,7 +508,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
    * @param {TransformContext} ctx - Vitepress transform context
    * @return {HeadConfig[]} Additional `<head>` entries
    */
-  transformHead(ctx: TransformContext): HeadConfig[] {
+  transformHead: (ctx: TransformContext): HeadConfig[] => {
     const { description, pageData, siteData, title } = ctx
 
     // skip pushing additional entries for 404 page
@@ -563,7 +562,7 @@ const config: UserConfig<ThemeConfig> = defineConfig<ThemeConfig>({
    * @param {string} code - HTML content to transform
    * @return {string} Transformed `code`
    */
-  transformHtml(code: string): string {
+  transformHtml: (code: string): string => {
     /**
      * API for traversing/manipulating for {@link code}.
      *

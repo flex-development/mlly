@@ -1,7 +1,4 @@
 {
-  "[dotenv]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
   "[github-actions-workflow]": {
     "editor.rulers": [
       {
@@ -11,20 +8,6 @@
     ],
     "editor.wordWrapColumn": 100,
     "rewrap.wrappingColumn": 100
-  },
-  "[handlebars]": {
-    "editor.defaultFormatter": "Greenbyte.handlebars-preview",
-    "editor.rulers": [
-      {
-        "color": "var(--vscode-editorRuler-foreground)",
-        "column": 100
-      }
-    ],
-    "editor.wordWrapColumn": 100,
-    "rewrap.wrappingColumn": 100
-  },
-  "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[jest-snapshot]": {
     "editor.rulers": [
@@ -37,7 +20,6 @@
     "rewrap.wrappingColumn": 130
   },
   "[markdown]": {
-    "editor.defaultFormatter": "vscode.markdown-language-features",
     "editor.rulers": [
       {
         "color": "var(--vscode-editorRuler-foreground)",
@@ -47,11 +29,7 @@
     "editor.wordWrapColumn": 120,
     "rewrap.wrappingColumn": 120
   },
-  "[properties]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format",
     "editor.rulers": [
       {
         "color": "var(--vscode-editorRuler-foreground)",
@@ -64,7 +42,9 @@
   },
   "[vue]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": false
+      "source.fixAll": "always",
+      "source.fixAll.sortJSON": "never",
+      "source.organizeImports": "never"
     }
   },
   "[xml]": {
@@ -138,16 +118,18 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.renderSideBySide": false,
   "dotenv.enableAutocloaking": false,
+  "dprint.path": "node_modules/.bin/dprint",
+  "dprint.verbose": true,
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.autoClosingBrackets": "always",
   "editor.bracketPairColorization.enabled": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.sortJSON": false,
-    "source.organizeImports": true
+    "source.fixAll": "always",
+    "source.fixAll.sortJSON": "never",
+    "source.organizeImports": "always"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "dprint.dprint",
   "editor.detectIndentation": false,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
@@ -155,7 +137,7 @@
   "editor.guides.indentation": true,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.overviewRulerBorder": true,
-  "editor.renderFinalNewline": "off",
+  "editor.renderFinalNewline": "on",
   "editor.rulers": [
     {
       // microsoft/vscode#166261
@@ -180,20 +162,26 @@
       "cjs",
       "cts",
       "gql",
+      "graphql",
       "js",
       "json",
       "json5",
       "jsonc",
+      "jsx",
       "md",
+      "mdx",
       "mjs",
       "mts",
       "ts",
+      "tsx",
       "vue",
+      "yaml",
       "yml"
     ],
     "overrideConfigFile": ".eslintrc.cjs"
   },
   "eslint.validate": [
+    "github-actions-workflow",
     "graphql",
     "javascript",
     "json",
@@ -250,11 +238,7 @@
     "!**/RELEASE_NOTES.md"
   ],
   "npm-intellisense.scanDevDependencies": true,
-  "prettier.configPath": ".prettierrc.json",
-  "prettier.enable": true,
-  "prettier.ignorePath": ".prettierignore",
-  "prettier.prettierPath": "node_modules/prettier",
-  "prettier.useEditorConfig": true,
+  "prettier.enable": false,
   "rewrap.autoWrap.enabled": true,
   "rewrap.doubleSentenceSpacing": true,
   "rewrap.reformat": true,
@@ -262,7 +246,7 @@
   "shellformat.flag": "-ci -fn -i=2 -sr",
   "shellformat.useEditorConfig": true,
   "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.scrollback": 20000,
   "todo-tree.filtering.ignoreGitSubmodules": true,
   "todo-tree.filtering.includeHiddenFiles": false,
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
@@ -305,6 +289,7 @@
   "typescript.format.semicolons": "remove",
   "typescript.inlayHints.enumMemberValues.enabled": true,
   "typescript.preferences.importModuleSpecifierEnding": "minimal",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
   "typescript.preferences.quoteStyle": "single",
   "typescript.preferences.useAliasesForRenames": true,
   "typescript.suggest.completeFunctionCalls": true,
@@ -314,8 +299,6 @@
   "typescript.suggest.jsdoc.generateReturns": true,
   "typescript.suggest.paths": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.tsserver.enableTracing": true,
-  "typescript.tsserver.log": "verbose",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.validate.enable": true,
   "versionlens.npm.dependencyProperties": [
@@ -323,8 +306,6 @@
     "devDependencies",
     "resolutions"
   ],
-  "volar.doctor.statusBarItem": true,
-  "volar.vueserver.vitePress.processMdFile": true,
   "vsicons.associations.files": [
     {
       "extensions": [".commitlintrc.cts"],
@@ -335,11 +316,6 @@
       "extensions": [".eslintrc.base.cjs"],
       "format": "svg",
       "icon": "eslint"
-    },
-    {
-      "extensions": [".graphqlrc.yml"],
-      "format": "svg",
-      "icon": "graphql"
     },
     {
       "extensions": ["build.json", "cjs.json", "typecheck.json"],
@@ -384,9 +360,19 @@
       "icon": "include"
     },
     {
+      "extensions": ["providers"],
+      "format": "svg",
+      "icon": "services"
+    },
+    {
       "extensions": ["setup"],
       "format": "svg",
       "icon": "config"
+    },
+    {
+      "extensions": ["testing"],
+      "format": "svg",
+      "icon": "test"
     },
     {
       "extensions": ["types"],

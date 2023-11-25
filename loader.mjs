@@ -60,10 +60,21 @@ export const load = async (url, context) => {
   /**
    * Module source code.
    *
-   * @type {esm.Source<Uint8Array | string> | undefined}
+   * @type {tutils.Optional<esm.Source<Uint8Array | string>>}
    * @var source
    */
   let source = await mlly.getSource(url, { format: context.format })
+
+  // emit decorator metadata
+  DECORATOR_REGEX.lastIndex = 0
+  if (DECORATOR_REGEX.test(source)) {
+    const { outputText } = ts.transpileModule(source, {
+      compilerOptions: { ...tsconfig.compilerOptions, inlineSourceMap: true },
+      fileName: url
+    })
+
+    source = outputText
+  }
 
   // transform typescript files
   if (/^\.(?:cts|mts|tsx?)$/.test(ext) && !/\.d\.(?:cts|mts|ts)$/.test(url)) {
@@ -79,6 +90,7 @@ export const load = async (url, context) => {
       aliases: tsconfig.compilerOptions.paths,
       conditions: context.conditions,
       cwd,
+      ext: '',
       parent: url
     })
 
@@ -88,19 +100,10 @@ export const load = async (url, context) => {
       parent: url
     })
 
-    // emit decorator metadata
-    if (DECORATOR_REGEX.test(source)) {
-      const { outputText } = ts.transpileModule(source, {
-        compilerOptions: { ...tsconfig.compilerOptions, sourceMap: false },
-        fileName: url
-      })
-
-      source = outputText
-    }
-
     // transpile source code
     const { code } = await esbuild.transform(source, {
       format: 'esm',
+      keepNames: true,
       loader: ext.slice(/^\.[cm]/.test(ext) ? 2 : 1),
       minify: false,
       sourcefile: fileURLToPath(url),
@@ -113,7 +116,11 @@ export const load = async (url, context) => {
     source = code
   }
 
-  return { format: context.format, shortCircuit: true, source }
+  return {
+    format: context.format,
+    shortCircuit: true,
+    source: tutils.ifelse(context.format === mlly.Format.COMMONJS, null, source)
+  }
 }
 
 /**

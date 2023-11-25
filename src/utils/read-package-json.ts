@@ -14,7 +14,6 @@ import pathe from '@flex-development/pathe'
 import type { PackageJson } from '@flex-development/pkg-types'
 import {
   DOT,
-  cast,
   isEmptyString,
   isNIL,
   isUndefined,
@@ -93,7 +92,7 @@ const readPackageJson = (
     // get base
     switch (true) {
       case specifier && !isNIL(parent) && !isEmptyString(parent):
-        base = `'${specifier}' from ${fileURLToPath(toURL(parent!))}`
+        base = `'${specifier}' from ${fileURLToPath(toURL(parent))}`
         break
       case specifier?.startsWith('file:'):
         base = fileURLToPath(specifier!)
@@ -103,7 +102,7 @@ const readPackageJson = (
     throw new ERR_INVALID_PACKAGE_CONFIG(
       path,
       base,
-      cast<SyntaxError>(e).message
+      (<SyntaxError>e).message
     )
   }
 

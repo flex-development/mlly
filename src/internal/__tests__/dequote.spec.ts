@@ -9,7 +9,7 @@ import testSubject from '../dequote'
 describe('unit:internal/dequote', () => {
   it('should return string with double quotes removed', () => {
     // Arrange
-    const str: string = "mlly's"
+    const str: string = 'mlly\'s'
 
     // Act + Expect
     expect(testSubject(`"${str}"`)).to.equal(str)

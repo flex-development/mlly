@@ -5,9 +5,9 @@
  */
 
 import pathe from '@flex-development/pathe'
+import { ifelse, sift } from '@flex-development/tutils'
 import ci from 'is-ci'
 import tsconfigpaths from 'vite-tsconfig-paths'
-import GithubActionsReporter from 'vitest-github-actions-reporter'
 import {
   defineConfig,
   type UserConfig,
@@ -47,16 +47,16 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
         clean: true,
         cleanOnRerun: true,
         exclude: [
-          '**/__mocks__/**',
-          '**/__tests__/**',
-          '**/index.ts',
-          'src/interfaces/',
-          'src/types/'
+          '**/__mocks__/',
+          '**/__tests__/',
+          '**/interfaces/',
+          '**/types/',
+          '**/index.ts'
         ],
         extension: ['.ts'],
         include: ['src'],
         provider: 'v8',
-        reporter: [ci ? 'lcovonly' : 'html', 'text'],
+        reporter: [...(ci ? [] : (['html'] as const)), 'lcovonly', 'text'],
         reportsDirectory: './coverage',
         skipFull: false
       },
@@ -66,17 +66,16 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
       globals: true,
       hookTimeout: 10 * 1000,
       include: [
-        `**/__tests__/*.${LINT_STAGED ? '{spec,spec-d}' : 'spec'}.{ts,tsx}`
+        `**/__tests__/*.${LINT_STAGED ? '{spec,spec-d}' : 'spec'}.ts?(x)`
       ],
-      isolate: true,
       mockReset: true,
       outputFile: { json: './__tests__/report.json' },
       passWithNoTests: true,
-      reporters: [
+      reporters: sift([
         'json',
         'verbose',
-        ci ? new GithubActionsReporter() : './__tests__/reporters/notifier.ts'
-      ],
+        ifelse(ci, '', './__tests__/reporters/notifier.ts')
+      ]),
       /**
        * Stores snapshots next to `file`'s directory.
        *
@@ -115,7 +114,6 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
       },
       setupFiles: ['./__tests__/setup/index.ts'],
       silent: false,
-      singleThread: true,
       slowTestThreshold: 3000,
       snapshotFormat: {
         callToJSON: true,
@@ -129,6 +127,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
         checker: 'vue-tsc',
         ignoreSourceErrors: false,
         include: ['**/__tests__/*.spec-d.ts'],
+        only: true,
         tsconfig: pathe.resolve('tsconfig.typecheck.json')
       },
       unstubEnvs: true,

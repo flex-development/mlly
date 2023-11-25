@@ -25,7 +25,7 @@ exports[`unit:utils/findExports > should return ExportStatement object array 1`]
     "type": false,
   },
   {
-    "code": "export { defineBuildConfig, type BuildConfig } from \\"#src\\"",
+    "code": "export { defineBuildConfig, type BuildConfig } from "#src"",
     "declaration": null,
     "end": 117,
     "exports": [
@@ -96,7 +96,7 @@ exports[`unit:utils/findExports > should return ExportStatement object array 1`]
     "type": false,
   },
   {
-    "code": "export * as constants from \\"./constants\\"",
+    "code": "export * as constants from "./constants"",
     "declaration": null,
     "end": 370,
     "exports": [
@@ -128,7 +128,7 @@ exports[`unit:utils/findExports > should return ExportStatement object array 1`]
     "type": true,
   },
   {
-    "code": "export type { default as Options } from \\"./options\\"",
+    "code": "export type { default as Options } from "./options"",
     "declaration": null,
     "end": 457,
     "exports": [

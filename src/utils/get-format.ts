@@ -162,10 +162,9 @@ const getFormat = async (
       switch (true) {
         // get format based on package type
         case scope && ext === '.js':
-          format =
-            scope!.pkgjson.type === Format.MODULE
-              ? Format.MODULE
-              : Format.COMMONJS
+          format = scope.pkgjson.type === Format.MODULE
+            ? Format.MODULE
+            : Format.COMMONJS
           break
         // get format based on file extension
         case extension_format_map.has(ext):
@@ -217,7 +216,8 @@ const getFormat = async (
                 .relative(pkg, url.pathname)
                 .slice(1)
 
-              suggestion = `Loading extensionless files is not supported inside of "type":"module" package.json contexts. The package.json file ${pkg} caused this "type":"module" context. Try changing ${url.pathname} to have a file extension. Note the "bin" field of package.json can point to a file with an extension, for example {"type":"module","bin":{"${basename}":"${relative}.js"}}`
+              suggestion =
+                `Loading extensionless files is not supported inside of "type":"module" package.json contexts. The package.json file ${pkg} caused this "type":"module" context. Try changing ${url.pathname} to have a file extension. Note the "bin" field of package.json can point to a file with an extension, for example {"type":"module","bin":{"${basename}":"${relative}.js"}}`
             }
           }
 

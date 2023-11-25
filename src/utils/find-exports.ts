@@ -56,8 +56,8 @@ const findExports = (code: string = ''): ExportStatement[] => {
       exports: exports.startsWith('*')
         ? [exports]
         : split(exports.replace(/^{|}$/g, ''), ',')
-            .map(trim)
-            .filter(e => !!e.length),
+          .map(trim)
+          .filter(e => !!e.length),
       kind: StatementKind.EXPORT,
       modifiers: [],
       specifier,
@@ -83,15 +83,14 @@ const findExports = (code: string = ''): ExportStatement[] => {
       exports: /^\w+$/.test(exports)
         ? [exports]
         : split(exports.replace(/^[[{]|[\]}]$/g, ''), ',')
-            .map(e => trim(e).replace(/\s*=\s*.*$/, ''))
-            .filter(e => !!e.length),
+          .map(e => trim(e).replace(/\s*=\s*.*$/, ''))
+          .filter(e => !!e.length),
       kind: StatementKind.EXPORT,
-      modifiers:
-        modifiers === ''
-          ? []
-          : split(modifiers, ' ')
-              .map(trim)
-              .filter(e => !!e.length),
+      modifiers: modifiers === ''
+        ? []
+        : split(modifiers, ' ')
+          .map(trim)
+          .filter(e => !!e.length),
       specifier: null,
       specifier_kind: null,
       specifier_syntax: null,
@@ -112,12 +111,11 @@ const findExports = (code: string = ''): ExportStatement[] => {
       end: start + code.length,
       exports: exports === '' ? [] : [exports],
       kind: StatementKind.EXPORT,
-      modifiers:
-        modifiers === ''
-          ? []
-          : split(modifiers, ' ')
-              .map(trim)
-              .filter(e => !!e.length),
+      modifiers: modifiers === ''
+        ? []
+        : split(modifiers, ' ')
+          .map(trim)
+          .filter(e => !!e.length),
       specifier: null,
       specifier_kind: null,
       specifier_syntax: null,

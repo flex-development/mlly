@@ -76,7 +76,7 @@ const lookupPackageScope = (
     // stop search if package.json has been found
     if (pkgjson) {
       scope = {
-        dir: pathToFileURL((dir = pathe.resolve(process.cwd(), dir))).href,
+        dir: pathToFileURL(dir = pathe.resolve(process.cwd(), dir)).href,
         pkg: pathToFileURL(pathe.join(dir, 'package.json')).href,
         pkgjson
       }

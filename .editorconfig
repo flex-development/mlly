@@ -32,7 +32,14 @@ max_line_length = 120
 
 # shellscript
 [*.sh]
+binary_next_line = true
+function_next_line = false
+keep_comments = true
+keep_padding = false
 max_line_length = 100
+shell_variant = 0
+space_redirects = false
+switch_case_indent = true
 
 # snapshots
 [*.snap]
@@ -43,5 +50,5 @@ max_line_length = 130
 max_line_length = 100
 
 # yaml
-[*.yml]
+[{*.yaml,*.yml}]
 max_line_length = 100

@@ -8,7 +8,7 @@ import type { MarkdownOptions } from 'vitepress'
 /**
  * Markdown parser options.
  *
- * @see https://vitepress.vuejs.org/config/app-configs#markdown
+ * @see https://vitepress.dev/reference/site-config#markdown
  */
 const MARKDOWN_OPTIONS: MarkdownOptions = {
   attrs: { allowedAttributes: ['id'] },

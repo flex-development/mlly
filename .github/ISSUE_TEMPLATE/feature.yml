@@ -2,8 +2,8 @@ name: Feature
 description: Suggest new feature or improvement
 title: 👀 <title>
 labels:
-  - type:feat
   - status:needs-triage
+  - type:feat
 body:
   - type: markdown
     attributes:

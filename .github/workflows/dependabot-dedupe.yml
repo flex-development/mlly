@@ -1,0 +1,80 @@
+# Dependabot Dedupe
+#
+# Deduplicate dependencies for @dependabot.
+#
+# Note: This workflow can be removed once dependabot supports some type of automatic deduplication.
+# See https://github.com/dependabot/dependabot-core/issues/5830 for details.
+#
+# References:
+#
+# - https://docs.github.com/actions/learn-github-actions/contexts
+# - https://docs.github.com/actions/learn-github-actions/expressions
+# - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#pull_request
+# - https://docs.github.com/code-security/dependabot/working-with-dependabot/automating-dependabot-with-github-actions
+# - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
+# - https://github.com/actions/checkout
+# - https://github.com/actions/create-github-app-token
+# - https://github.com/actions/setup-node
+# - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
+# - https://github.com/flex-development/gh-commit
+# - https://github.com/hmarr/debug-action
+
+---
+name: dependabot-dedupe
+on:
+  pull_request:
+    branches:
+      - main
+permissions:
+  packages: read
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+jobs:
+  dependabot-dedupe:
+    if: github.actor == 'dependabot[bot]' && startsWith(github.head_ref, 'dependabot/npm_and_yarn/')
+    permissions:
+      packages: read
+    runs-on: ubuntu-latest
+    steps:
+      - id: debug
+        name: Print environment variables and event payload
+        uses: hmarr/debug-action@v2.1.0
+      - id: bot-token
+        name: Get bot token
+        uses: actions/create-github-app-token@v1.6.0
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+      - id: checkout
+        name: Checkout ${{ github.head_ref }}
+        uses: actions/checkout@v4.1.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+          token: ${{ steps.bot-token.outputs.token }}
+      - id: node
+        name: Setup Node.js
+        uses: actions/setup-node@v3.8.1
+        with:
+          cache: yarn
+          cache-dependency-path: yarn.lock
+          node-version-file: .nvmrc
+      - id: dedupe
+        name: Deduplicate dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          YARN_ENABLE_GLOBAL_CACHE: true
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
+          YARN_ENABLE_SCRIPTS: false
+        run: yarn dedupe --mode=update-lockfile
+      - id: status
+        name: Print git status
+        run: git status --porcelain
+      - id: commit
+        name: Commit and push yarn.lock
+        uses: flex-development/gh-commit@1.0.0
+        with:
+          message: 'build(yarn): [dependabot skip] deduplicate dependencies for @dependabot'
+          token: ${{ steps.bot-token.outputs.token }}
+          trailers: 'Signed-off-by: ${{ vars.BOT_NAME }} <${{ vars.BOT_EMAIL }}>'

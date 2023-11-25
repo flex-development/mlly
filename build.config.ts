@@ -6,6 +6,7 @@
 
 import { defineBuildConfig, type Config } from '@flex-development/mkbuild'
 import pathe from '@flex-development/pathe'
+import { at } from '@flex-development/tutils'
 import type { BuildResult, PluginBuild } from 'esbuild'
 import pkg from './package.json' assert { type: 'json' }
 import tsconfig from './tsconfig.build.json' assert { type: 'json' }
@@ -27,7 +28,9 @@ const config: Config = defineBuildConfig({
       sourcemap: true
     }
   ],
+  keepNames: true,
   minifySyntax: true,
+  platform: 'node',
   plugins: [
     {
       name: 'ts-ignore-peers',
@@ -50,12 +53,12 @@ const config: Config = defineBuildConfig({
           return void (result.outputFiles = result.outputFiles.map(output => {
             return output.path.endsWith('.d.mts')
               ? {
-                  ...output,
-                  text: output.text.replace(
-                    /\n( +)(.+?\??: )(\w+<)?(import\('node-fetch'\).+)/g,
-                    '\n$1// @ts-ignore peer dependency\n$1$2$3$4'
-                  )
-                }
+                ...output,
+                text: output.text.replace(
+                  /\n( +)(.+?\??: )(\w+<)?(import\('node-fetch'\).+)/g,
+                  '\n$1// @ts-ignore peer dependency\n$1$2$3$4'
+                )
+              }
               : output
           }))
         })
@@ -63,7 +66,7 @@ const config: Config = defineBuildConfig({
     }
   ],
   target: [
-    pkg.engines.node.replace(/^\D+/, 'node'),
+    'node' + at(/([\d.]+)/.exec(pkg.engines.node), 0, ''),
     tsconfig.compilerOptions.target
   ],
   tsconfig: 'tsconfig.build.json'

@@ -21,6 +21,7 @@
     "**/CHANGELOG.md",
     "**/LICENSE.md",
     "**/RELEASE_NOTES.md",
+    "**/scratch.*",
     ".cspell.json",
     ".dictionary.txt",
     ".git/",

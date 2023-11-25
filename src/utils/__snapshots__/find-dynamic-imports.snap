@@ -16,9 +16,9 @@ exports[`unit:utils/findDynamicImports > should return DynamicImport object arra
     "syntax": "dynamic",
   },
   {
-    "code": "await import(\\"/modules/my-module.js\\")",
+    "code": "await import("/modules/my-module.js")",
     "end": 65,
-    "expression": "import(\\"/modules/my-module.js\\")",
+    "expression": "import("/modules/my-module.js")",
     "imports": [],
     "kind": "import",
     "options": "",
@@ -57,9 +57,9 @@ exports[`unit:utils/findDynamicImports > should return DynamicImport object arra
     "syntax": "dynamic",
   },
   {
-    "code": "myModule = await import(\\"module-used-on-server\\")",
+    "code": "myModule = await import("module-used-on-server")",
     "end": 257,
-    "expression": "import(\\"module-used-on-server\\")",
+    "expression": "import("module-used-on-server")",
     "imports": [
       "myModule",
     ],
@@ -72,9 +72,9 @@ exports[`unit:utils/findDynamicImports > should return DynamicImport object arra
     "syntax": "dynamic",
   },
   {
-    "code": "myModule = await import(\\"module-used-in-browser\\")",
+    "code": "myModule = await import("module-used-in-browser")",
     "end": 319,
-    "expression": "import(\\"module-used-in-browser\\")",
+    "expression": "import("module-used-in-browser")",
     "imports": [
       "myModule",
     ],
@@ -133,9 +133,9 @@ exports[`unit:utils/findDynamicImports > should return DynamicImport object arra
     "syntax": "dynamic",
   },
   {
-    "code": "import(\\"/modules/my-module.js\\")",
+    "code": "import("/modules/my-module.js")",
     "end": 804,
-    "expression": "import(\\"/modules/my-module.js\\")",
+    "expression": "import("/modules/my-module.js")",
     "imports": [],
     "kind": "import",
     "options": "",

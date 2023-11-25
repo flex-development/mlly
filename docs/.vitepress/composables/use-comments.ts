@@ -5,9 +5,9 @@
 
 import type { Root } from '@flex-development/docast'
 import docastParse, { type Options } from '@flex-development/docast-parse'
-import pathe, { type ParsedPath } from '@flex-development/pathe'
+import pathe from '@flex-development/pathe'
 import { CompareResult, sort } from '@flex-development/tutils'
-import { globby } from 'globby'
+import fg from 'fast-glob'
 import fs from 'node:fs/promises'
 import { unified } from 'unified'
 import { VFile } from 'vfile'
@@ -50,38 +50,20 @@ const useComments = async (): Promise<Documentation[]> => {
   ]
 
   // get comments
-  for (let p of await globby(patterns, {
+  for (const path of await fg.glob(patterns, {
+    absolute: true,
     cwd: pathe.resolve(process.cwd(), 'src'),
     ignore: ['**/index.ts']
   })) {
     /**
-     * Source code associated with {@linkcode p}.
-     *
-     * @const {Buffer} buffer
-     */
-    const buffer: Buffer = await fs.readFile((p = pathe.resolve('src', p)))
-
-    /**
-     * Virtual file representation of {@linkcode buffer}.
+     * Virtual file representation of source code.
      *
      * @const {VFile} file
      */
-    const file: VFile = new VFile(buffer)
-
-    // get virtual file properties
-    const {
-      base: basename,
-      dir: dirname,
-      ext: extname,
-      name: stem
-    }: ParsedPath = pathe.parse(p)
-
-    // set virtual file properties
-    file.path = p
-    file.basename = basename
-    file.dirname = dirname
-    file.extname = extname
-    file.stem = stem
+    const file: VFile = new VFile({
+      path,
+      value: await fs.readFile(path, 'utf8')
+    })
 
     /**
      * Docblock abstract syntax tree for {@linkcode file}.
@@ -91,7 +73,7 @@ const useComments = async (): Promise<Documentation[]> => {
      * @const {Root} tree
      */
     const tree: Root = unified()
-      .use<[Options?], string, Root>(docastParse)
+      .use<[Options?], string, Root>(<(this: any) => void>docastParse)
       .parse(file)
 
     /**
@@ -100,11 +82,11 @@ const useComments = async (): Promise<Documentation[]> => {
      * @const {string[]} compilation
      */
     const compilation: string[] = unified()
-      .use<[], Root, string[]>(attacher)
+      .use(attacher)
       .stringify(tree, file)
 
     // add docs
-    for (const doc of compilation) objects.push({ doc, file: p })
+    for (const doc of compilation) objects.push({ doc, file: path })
   }
 
   return sort(objects, (obj1: Documentation, obj2: Documentation): number => {

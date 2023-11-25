@@ -75,7 +75,7 @@ exports[`unit:utils/findRequires > should return RequireStatement object array 1
     "syntax": "require",
   },
   {
-    "code": "require(\\"./arr\\")",
+    "code": "require("./arr")",
     "end": 214,
     "imports": [],
     "kind": "require",
@@ -86,7 +86,7 @@ exports[`unit:utils/findRequires > should return RequireStatement object array 1
     "syntax": "require",
   },
   {
-    "code": "require(\\"./config\\")",
+    "code": "require("./config")",
     "end": 258,
     "imports": [],
     "kind": "require",
@@ -97,7 +97,7 @@ exports[`unit:utils/findRequires > should return RequireStatement object array 1
     "syntax": "require",
   },
   {
-    "code": "require(\\"./defaults\\")",
+    "code": "require("./defaults")",
     "end": 314,
     "imports": [],
     "kind": "require",
@@ -108,7 +108,7 @@ exports[`unit:utils/findRequires > should return RequireStatement object array 1
     "syntax": "require",
   },
   {
-    "code": "require(\\"./conf\\")",
+    "code": "require("./conf")",
     "end": 332,
     "imports": [],
     "kind": "require",
@@ -119,7 +119,7 @@ exports[`unit:utils/findRequires > should return RequireStatement object array 1
     "syntax": "require",
   },
   {
-    "code": "require(\\"./data\\")",
+    "code": "require("./data")",
     "end": 374,
     "imports": [],
     "kind": "require",
@@ -130,7 +130,7 @@ exports[`unit:utils/findRequires > should return RequireStatement object array 1
     "syntax": "require",
   },
   {
-    "code": "require(\\"./parser-options\\")",
+    "code": "require("./parser-options")",
     "end": 428,
     "imports": [],
     "kind": "require",

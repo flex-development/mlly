@@ -82,8 +82,7 @@ const resolveModule = async (
    *
    * @const {boolean} onetry
    */
-  const onetry: boolean =
-    isBuiltin(specifier) ||
+  const onetry: boolean = isBuiltin(specifier) ||
     (/^\S+:/.test(specifier) && !specifier.startsWith('file:'))
 
   /**
@@ -94,12 +93,12 @@ const resolveModule = async (
   const tries: string[] = onetry
     ? []
     : [...extensions]
-        .flatMap(ext => [
-          specifier + (ext = pathe.formatExt(ext)),
-          specifier.startsWith('#') ? specifier + '/index' : '',
-          specifier + '/index' + ext
-        ])
-        .filter(id => !!id.length)
+      .flatMap(ext => [
+        specifier + (ext = pathe.formatExt(ext)),
+        specifier.startsWith('#') ? specifier + '/index' : '',
+        specifier + '/index' + ext
+      ])
+      .filter(id => !!id.length)
 
   // try @types resolution
   if (!onetry) {
