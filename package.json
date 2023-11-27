@@ -123,7 +123,7 @@
     "dotenv": "16.3.1",
     "dprint": "0.43.0",
     "editorconfig": "2.0.0",
-    "esbuild": "0.19.7",
+    "esbuild": "0.19.8",
     "eslint": "8.54.0",
     "eslint-import-resolver-typescript": "3.6.1",
     "eslint-plugin-chai-expect": "3.0.0",
