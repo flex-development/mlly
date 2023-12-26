@@ -98,7 +98,7 @@ jobs:
           token: ${{ env.GITHUB_TOKEN }}
       - id: gpg-import
         name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v6.0.0
+        uses: crazy-max/ghaction-import-gpg@v6.1.0
         with:
           git_config_global: true
           git_push_gpgsign: false
