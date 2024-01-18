@@ -398,7 +398,7 @@ jobs:
         run: attw ${{ env.TARFILE }}
       - id: archive
         name: Archive production artifacts
-        uses: actions/upload-artifact@v3.1.3
+        uses: actions/upload-artifact@v4.2.0
         with:
           name: ${{ env.TARFILE }}
           path: ${{ env.TARFILE }}
@@ -495,7 +495,7 @@ jobs:
         run: vc deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
       - id: archive
         name: Archive production artifacts
-        uses: actions/upload-artifact@v3.1.3
+        uses: actions/upload-artifact@v4.2.0
         with:
           name: |
             ${{ format('@{0}-{1}-{2}-docs', github.repository_owner, github.event.repository.name, needs.preflight.outputs.version) }}
