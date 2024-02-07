@@ -54,7 +54,7 @@ jobs:
           ref: ${{ github.ref }}
       - id: node
         name: Setup Node.js
-        uses: actions/setup-node@v3.8.1
+        uses: actions/setup-node@v4.0.2
         with:
           cache: yarn
           cache-dependency-path: yarn.lock
