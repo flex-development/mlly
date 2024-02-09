@@ -103,7 +103,7 @@ jobs:
     steps:
       - id: bot-token
         name: Get bot token
-        uses: actions/create-github-app-token@v1.6.0
+        uses: actions/create-github-app-token@v1.8.0
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
@@ -130,7 +130,7 @@ jobs:
     steps:
       - id: bot-token
         name: Get bot token
-        uses: actions/create-github-app-token@v1.6.0
+        uses: actions/create-github-app-token@v1.8.0
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
@@ -190,7 +190,7 @@ jobs:
     steps:
       - id: bot-token
         name: Get bot token
-        uses: actions/create-github-app-token@v1.6.0
+        uses: actions/create-github-app-token@v1.8.0
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
