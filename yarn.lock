@@ -2515,14 +2515,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/estree@npm:*":
-  version: 1.0.0
-  resolution: "@types/estree@npm:1.0.0"
-  checksum: 9ec366ea3b94db26a45262d7161456c9ee25fd04f3a0da482f6e97dbf90c0c8603053c311391a877027cc4ee648340f988cd04f11287886cdf8bc23366291ef9
-  languageName: node
-  linkType: hard
-
-"@types/estree@npm:^1.0.5":
+"@types/estree@npm:*, @types/estree@npm:^1.0.5":
   version: 1.0.5
   resolution: "@types/estree@npm:1.0.5"
   checksum: 7de6d928dd4010b0e20c6919e1a6c27b61f8d4567befa89252055fad503d587ecb9a1e3eab1b1901f923964d7019796db810b7fd6430acb26c32866d126fd408
@@ -10021,7 +10014,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.5.4, semver@npm:^7.0.0, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.6, semver@npm:^7.5.3, semver@npm:^7.5.4":
+"semver@npm:7.5.4":
   version: 7.5.4
   resolution: "semver@npm:7.5.4"
   dependencies:
@@ -10032,7 +10025,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.6.1":
+"semver@npm:^7.0.0, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.6, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.1":
   version: 7.6.2
   resolution: "semver@npm:7.6.2"
   bin:
