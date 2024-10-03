@@ -2,6 +2,7 @@
 #
 # References:
 #
+# - https://github.com/actions/create-github-app-token
 # - https://github.com/dessant/lock-threads
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#schedule
 
@@ -10,17 +11,21 @@ name: lock-inactive-threads
 on:
   schedule:
     - cron: 0 0 * * *
-permissions:
-  issues: write
-  pull-requests: write
 jobs:
   lock-inactive-threads:
     runs-on: ubuntu-latest
     steps:
+      - id: bot-token
+        name: Get bot token
+        uses: actions/create-github-app-token@v1.11.0
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
       - id: lock
         name: Lock inactive issues and pull requests
         uses: dessant/lock-threads@v5.0.1
         with:
+          github-token: ${{ steps.bot-token.outputs.token }}
           issue-comment: |
             This issue has been automatically locked since there has not been any recent activity
             after it was closed. Please open a new issue for related bugs or features. Be sure to

@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/patternKeyCompare > should return comparison result ("*", "*") 1`] = `0`;
+
+exports[`unit:lib/patternKeyCompare > should return comparison result ("./constants", "./utils/*") 1`] = `-1`;
+
+exports[`unit:lib/patternKeyCompare > should return comparison result ("./enums", "./utils") 1`] = `1`;
+
+exports[`unit:lib/patternKeyCompare > should return comparison result ("./enums/*", "./utils/*.mjs") 1`] = `1`;
+
+exports[`unit:lib/patternKeyCompare > should return comparison result ("./lib/*", "./enums") 1`] = `-1`;
+
+exports[`unit:lib/patternKeyCompare > should return comparison result ("./package.json", "./constants") 1`] = `-1`;
+
+exports[`unit:lib/patternKeyCompare > should return comparison result ("./utils/*", "./package.json") 1`] = `1`;
+
+exports[`unit:lib/patternKeyCompare > should return comparison result ("./utils/*.mjs", "./enums/*") 1`] = `-1`;

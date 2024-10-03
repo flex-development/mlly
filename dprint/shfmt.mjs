@@ -17,8 +17,10 @@ process.stdin.pipe(new Transform({
    *
    * @async
    *
-   * @param {Buffer} buffer - Data buffer
-   * @return {Promise<string>} Formatted file content
+   * @param {Buffer} buffer
+   *  Data buffer
+   * @return {Promise<string>}
+   *  Formatted file content
    */
   async transform(buffer) {
     const [filepath] = process.argv.slice(2)

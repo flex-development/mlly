@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/defaultExtensions > should contain default extensions 1`] = `
+Set {
+  ".mjs",
+  ".mts",
+  ".cjs",
+  ".cts",
+  ".js",
+  ".ts",
+  ".jsx",
+  ".tsx",
+  ".css",
+  ".json",
+  ".node",
+  ".wasm",
+  ".d.mts",
+  ".d.cts",
+  ".d.ts",
+}
+`;

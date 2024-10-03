@@ -45,16 +45,16 @@ jobs:
     steps:
       - id: debug
         name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.1.0
+        uses: hmarr/debug-action@v3.0.0
       - id: checkout
         name: Checkout ${{ github.ref_name }}
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
         with:
           persist-credentials: false
           ref: ${{ github.ref }}
       - id: node
         name: Setup Node.js
-        uses: actions/setup-node@v3.8.1
+        uses: actions/setup-node@v4.0.4
         with:
           cache: yarn
           cache-dependency-path: yarn.lock

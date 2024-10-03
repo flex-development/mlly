@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es2022"
+    "customConditions": ["types", "mlly"]
   },
   "extends": "./tsconfig.json",
+  "files": [
+    "typings/@faker-js/faker/global.d.ts",
+    "typings/@flex-development/pkg-types/index.d.mts",
+    "typings/typescript/lib.es5.d.ts",
+    "vitest-env.d.ts"
+  ],
   "include": [
-    "**/**.cts",
-    "**/**.mts",
-    "**/**.ts",
-    "**/.*.cts",
-    "**/.*.mts",
-    "**/.*.ts",
-    "docs/.vitepress/**/*.ts",
-    "docs/.vitepress/**/*.vue"
+    "__fixtures__/**/**.ts",
+    "__tests__/**/**.ts",
+    "src/**/**.ts",
+    "src/**/.*.ts"
   ]
 }

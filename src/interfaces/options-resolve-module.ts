@@ -3,70 +3,89 @@
  * @module mlly/interfaces/ResolveModuleOptions
  */
 
-import type { ChangeExtFn, ModuleId } from '#src/types'
-import type { Nilable, Optional } from '@flex-development/tutils'
+import type {
+  Aliases,
+  ChangeExtFn,
+  FileSystem,
+  MainField,
+  ModuleId
+} from '@flex-development/mlly'
+import type { Condition } from '@flex-development/pkg-types'
 
 /**
  * Module resolution options.
- *
- * @see {@linkcode ChangeExtFn}
- * @see {@linkcode ModuleId}
  */
 interface ResolveModuleOptions {
   /**
-   * Export condition to apply.
+   * Path mappings.
    *
-   * @see https://nodejs.org/api/packages.html#conditional-exports
+   * > 👉 **Note**: Paths should be relative to {@linkcode cwd}.
    *
-   * @default 'default'
+   * @see {@linkcode Aliases}
    */
-  condition?: Optional<string>
+  aliases?: Aliases | null | undefined
 
   /**
-   * Export conditions.
+   * List of export/import conditions.
    *
-   * **Note**: Should be sorted by priority.
+   * > 👉 **Note**: Should be sorted by priority.
    *
+   * @see {@linkcode Condition}
    * @see https://nodejs.org/api/packages.html#conditional-exports
    *
-   * @default CONDITIONS
+   * @default defaultConditions
    */
-  conditions?: Optional<Set<string> | string[]>
+  conditions?: Condition[] | Set<Condition> | null | undefined
+
+  /**
+   * URL of directory to resolve path aliases from.
+   *
+   * @see {@linkcode ModuleId}
+   *
+   * @default cwd()
+   */
+  cwd?: ModuleId | null | undefined
 
   /**
    * Replacement file extension or function that returns a file extension.
    *
-   * An empty string (`''`) will remove a file extension; `null` or `undefined`
-   * will skip extension replacement.
+   * An empty string (`''`) or `null` will remove a file extension.
    *
-   * @default undefined
+   * @see {@linkcode ChangeExtFn}
    */
-  ext?: ChangeExtFn | Nilable<string>
+  ext?: ChangeExtFn | string | null | undefined
 
   /**
    * Module extensions to probe for.
    *
-   * **Note**: Should be sorted by priority.
+   * > 👉 **Note**: Should be sorted by priority.
    *
-   * @default RESOLVE_EXTENSIONS
+   * @default defaultExtensions
    */
-  extensions?: Optional<Set<string> | string[]>
+  extensions?: Set<string> | string[] | null | undefined
 
   /**
-   * URL of module to resolve from.
+   * File system API.
    *
-   * @see {@linkcode ModuleId}
-   *
-   * @default import.meta.url
+   * @see {@linkcode FileSystem}
    */
-  parent?: Optional<ModuleId>
+  fs?: FileSystem | null | undefined
+
+  /**
+   * List of legacy `main` fields.
+   *
+   * > 👉 **Note**: Should be sorted by priority.
+   *
+   * @see {@linkcode MainField}
+   *
+   * @default defaultMainFields
+   */
+  mainFields?: MainField[] | Set<MainField> | null | undefined
 
   /**
    * Keep symlinks instead of resolving them.
-   *
-   * @default false
    */
-  preserveSymlinks?: Optional<boolean>
+  preserveSymlinks?: boolean | null | undefined
 }
 
 export type { ResolveModuleOptions as default }

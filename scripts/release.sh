@@ -9,9 +9,8 @@ set -e
 # 3. pack project
 # 4. run postbuild typecheck
 # 5. analyze types
-# 6. build docs
-# 7. create release chore commit
-# 8. cleanup
+# 6. create release chore commit
+# 7. cleanup
 #
 # References:
 #
@@ -24,6 +23,5 @@ yarn test:cov
 yarn pack
 yarn check:types:build
 attw package.tgz
-yarn docs:build
 git commit --allow-empty -S -s -m "release(chore): $(jq .version -r <<<$(grease bump -j $@))"
 yarn clean:pack

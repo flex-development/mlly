@@ -3,7 +3,6 @@
  * @module mlly
  */
 
-export * from './enums'
-export type * from './interfaces'
-export type * from './types'
-export * from './utils'
+export type * from '#interfaces/index'
+export * from '#lib/index'
+export type * from '#types/index'

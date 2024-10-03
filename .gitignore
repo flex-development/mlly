@@ -20,7 +20,8 @@ pids
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 yarn-debug.log*
 yarn-error.log*
-!**/__fixtures__/**/node_modules/
+!**/__fixtures__/node_modules/
+!**/__fixtures__/**/*.log
 
 # Yarn 2 (Not using Zero-Installs)
 # https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
@@ -44,8 +45,8 @@ yarn-error.log*
 
 # Testing
 # ------------------------------------------------------------------------------
-**/*config.*.timestamp*
-**/__tests__/report.*
+**/.vitest-reports/
+**/__tests__/reports/*
 **/coverage/
 **/tsconfig*temp.json
 *.lcov
@@ -57,9 +58,8 @@ codecov
 
 # Builds
 # ------------------------------------------------------------------------------
-**/.temp/
+**/.vitepress/cache
 **/dist/
-!**/__fixtures__/**/*.log
 !**/__fixtures__/**/dist/
 !**/typings/**/dist/
 
@@ -73,4 +73,6 @@ codecov
 
 # Misc
 # ------------------------------------------------------------------------------
+**/*config.*.timestamp*
+**/.temp/
 **/scratch.*

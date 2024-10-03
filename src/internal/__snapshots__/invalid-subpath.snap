@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:internal/invalidSubpath > should return new \`ERR_INVALID_MODULE_SPECIFIER\` (0) 1`] = `Invalid module './node_modules/esbuild/lib/main.js' request is not a valid match in pattern "./*" for the "exports" resolution of \${process.cwd()}/__fixtures__/node_modules/build-exports/package.json`;
+
+exports[`unit:internal/invalidSubpath > should return new \`ERR_INVALID_MODULE_SPECIFIER\` (1) 1`] = `Invalid module '#fixtures/node_modules/subpath-imports/package.json' request is not a valid match in pattern "#fixtures/*" for the "imports" resolution of \${process.cwd()}/package.json`;

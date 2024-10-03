@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "customConditions": ["mlly", "development"]
+  },
+  "extends": "./tsconfig.json"
+}

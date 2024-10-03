@@ -1,4 +1,8 @@
+<!--lint disable-->
+
 ## Description
+
+<!--lint enable-->
 
 <!-- A clear and concise description of your changes. -->
 
@@ -31,6 +35,6 @@ Include additional details here. Be sure to note if any tolerable vulnerabilitie
 - [ ] tests added and/or updated
 - [ ] documentation added or updated
 - [ ] new, **tolerable** vulnerabilities and/or warnings documented, if any
-- [ ] [pr naming conventions][1]
+- [ ] [pr naming conventions][pr-naming]
 
-[1]: https://github.com/flex-development/mlly/blob/main/CONTRIBUTING.md#pull-request-titles
+[pr-naming]: https://github.com/flex-development/mlly/blob/main/CONTRIBUTING.md#pull-request-titles

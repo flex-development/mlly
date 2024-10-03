@@ -6,7 +6,7 @@
     "alwaysStrict": false,
     "baseUrl": ".",
     "checkJs": false,
-    "customConditions": ["import", "node", "default"],
+    "customConditions": ["mlly", "development"],
     "declaration": false,
     "declarationMap": false,
     "emitDecoratorMetadata": false,
@@ -14,7 +14,7 @@
     "exactOptionalPropertyTypes": true,
     "experimentalDecorators": false,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["dom", "dom.iterable", "es2022"],
+    "lib": ["es2023"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "newLine": "lf",
@@ -29,11 +29,7 @@
     "noUnusedParameters": false,
     "outDir": "dist",
     "paths": {
-      "#fixtures/*": ["__fixtures__/*"],
-      "#pkg": ["package.json"],
-      "#src": ["src/index"],
-      "#src/*": ["src/*"],
-      "#tests/*": ["__tests__/*"]
+      "#node_modules/*": ["__fixtures__/node_modules/*"]
     },
     "preserveConstEnums": true,
     "preserveSymlinks": false,
@@ -55,12 +51,20 @@
   },
   "exclude": ["**/coverage", "**/dist", "**/node_modules"],
   "include": [
-    "**/**.js",
-    "**/**.mjs",
-    "**/**.mts",
-    "**/**.ts",
-    "docs/.vitepress/**/*.ts",
-    "docs/.vitepress/**/*.vue"
+    "**/**/*.json",
+    "**/**/*.mjs",
+    "**/**/*.mts",
+    "**/**/*.ts",
+    "**/.*.json",
+    "**/.*.mjs",
+    "**/.*.mts",
+    "**/.*.ts"
   ],
-  "references": [{ "path": "./tsconfig.cjs.json" }]
+  "mdx": {
+    "plugins": [
+      "remark-directive",
+      "remark-frontmatter",
+      "remark-gfm"
+    ]
+  }
 }

@@ -8,3 +8,4 @@
 [ -f $PWD/.env.repo ] && source $PWD/.env.repo
 HOMEBREW_BREWFILE=./Brewfile
 NODE_NO_WARNINGS=1
+NODE_OPTIONS='--experimental-strip-types --experimental-transform-types'

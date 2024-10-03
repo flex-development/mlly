@@ -1,12 +1,10 @@
 /**
- * @file Type Definitions - ModuleId
+ * @file Type Aliases - ModuleId
  * @module mlly/types/ModuleId
  */
 
-import type { URL } from 'node:url'
-
 /**
- * ECMAScript (ES) module identifier.
+ * Union of ECMAScript (ES) module identifiers.
  *
  * @see {@linkcode URL}
  */

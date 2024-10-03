@@ -7,6 +7,7 @@
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#issue_comment
 # - https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#schedule
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
+# - https://github.com/actions/create-github-app-token
 # - https://github.com/lee-dohm/no-response
 
 ---
@@ -18,12 +19,16 @@ on:
   schedule:
     # five minutes after the hour, every hour
     - cron: 5 * * * *
-permissions:
-  issues: write
 jobs:
   no-response:
     runs-on: ubuntu-latest
     steps:
+      - id: bot-token
+        name: Get bot token
+        uses: actions/create-github-app-token@v1.11.0
+        with:
+          app-id: ${{ secrets.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
       - id: close-issues
         name: Closes issues missing actionable info
         uses: lee-dohm/no-response@v0.5.0
@@ -35,4 +40,4 @@ jobs:
             you have or find the answers needed so next steps, if any, can be determined.
           daysUntilClose: 14
           responseRequiredLabel: status:awaiting-answers
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.bot-token.outputs.token }}

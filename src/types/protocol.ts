@@ -1,40 +1,16 @@
 /**
- * @file Type Definitions - Protocol
+ * @file Type Aliases - Protocol
  * @module mlly/types/Protocol
  */
 
-import type { LiteralUnion } from '@flex-development/tutils'
+import type { ProtocolMap } from '@flex-development/mlly'
 
 /**
- * URL protocols.
+ * Union of values that can occur where a URL protocol is expected.
  *
- * @see https://nodejs.org/api/url.html#urlprotocol
- * @see https://iana.org/assignments/uri-schemes/uri-schemes.xhtml
- * @see https://url.spec.whatwg.org/#special-scheme
+ * To register new protocols, augment {@linkcode ProtocolMap}. They will be
+ * added to this union automatically.
  */
-type Protocol = LiteralUnion<
-  `${
-    | 'blob'
-    | 'content'
-    | 'cvs'
-    | 'data'
-    | 'dns'
-    | 'file'
-    | 'fish'
-    | 'ftp'
-    | 'git'
-    | 'http'
-    | 'https'
-    | 'mvn'
-    | 'redis'
-    | 'sftp'
-    | 'ssh'
-    | 'svn'
-    | 'urn'
-    | 'view-source'
-    | 'ws'
-    | 'wss'}:`,
-  `${string}:`
->
+type Protocol = Extract<keyof ProtocolMap, string>
 
 export type { Protocol as default }

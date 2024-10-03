@@ -3,48 +3,53 @@
  * @module mlly/interfaces/tests/unit-d/ResolveModuleOptions
  */
 
-import type { ChangeExtFn, ModuleId } from '#src/types'
-import type { Nilable, Optional, RequiredKeys } from '@flex-development/tutils'
-import type TestSubject from '../options-resolve-module'
+import type TestSubject from '#interfaces/options-resolve-module'
+import type {
+  ChangeExtFn,
+  FileSystem,
+  MainField
+} from '@flex-development/mlly'
+import type { Condition } from '@flex-development/pkg-types'
+import type { Nilable } from '@flex-development/tutils'
 
 describe('unit-d:interfaces/ResolveModuleOptions', () => {
   it('should allow empty object', () => {
-    expectTypeOf<RequiredKeys<TestSubject>>().toBeNever()
+    assertType<TestSubject>({})
   })
 
-  it('should match [condition?: Optional<string>]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('condition')
-      .toEqualTypeOf<Optional<string>>()
-  })
-
-  it('should match [conditions?: Optional<Set<string> | string[]>]', () => {
+  it('should match [conditions?: Condition[] | Set<Condition> | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('conditions')
-      .toEqualTypeOf<Optional<Set<string> | string[]>>()
+      .toEqualTypeOf<Nilable<Condition[] | Set<Condition>>>()
   })
 
-  it('should match [ext?: ChangeExtFn | Nilable<string>]', () => {
+  it('should match [ext?: ChangeExtFn | string | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('ext')
-      .toEqualTypeOf<ChangeExtFn | Nilable<string>>()
+      .toEqualTypeOf<Nilable<ChangeExtFn | string>>()
   })
 
-  it('should match [extensions?: Optional<Set<string> | string[]>]', () => {
+  it('should match [extensions?: Set<string> | string[] | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('extensions')
-      .toEqualTypeOf<Optional<Set<string> | string[]>>()
+      .toEqualTypeOf<Nilable<Set<string> | string[]>>()
   })
 
-  it('should match [parent?: ModuleId]', () => {
+  it('should match [fs?: FileSystem | null | undefined]', () => {
     expectTypeOf<TestSubject>()
-      .toHaveProperty('parent')
-      .toEqualTypeOf<Optional<ModuleId>>()
+      .toHaveProperty('fs')
+      .toEqualTypeOf<Nilable<FileSystem>>()
   })
 
-  it('should match [preserveSymlinks?: Optional<boolean>]', () => {
+  it('should match [mainFields?: MainField[] | Set<MainField> | null | undefined]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('mainFields')
+      .toEqualTypeOf<Nilable<MainField[] | Set<MainField>>>()
+  })
+
+  it('should match [preserveSymlinks?: boolean | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('preserveSymlinks')
-      .toEqualTypeOf<Optional<boolean>>()
+      .toEqualTypeOf<Nilable<boolean>>()
   })
 })

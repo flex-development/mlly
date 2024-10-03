@@ -26,16 +26,16 @@ jobs:
     steps:
       - id: debug
         name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.1.0
+        uses: hmarr/debug-action@v3.0.0
       - id: bot-token
         name: Get bot token
-        uses: actions/create-github-app-token@v1.6.0
+        uses: actions/create-github-app-token@v1.11.0
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
       - id: checkout
         name: Checkout ${{ github.head_ref }}
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
         with:
           persist-credentials: false
           ref: ${{ github.head_ref }}

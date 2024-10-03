@@ -16,8 +16,10 @@ process.stdin.pipe(new Transform({
    *
    * @async
    *
-   * @param {Buffer} buffer - Data buffer
-   * @return {Promise<string>} Formatted file content
+   * @param {Buffer} buffer
+   *  Data buffer
+   * @return {Promise<string>}
+   *  Formatted file content
    */
   async transform(buffer) {
     const [filepath] = process.argv.slice(2)
@@ -28,6 +30,7 @@ process.stdin.pipe(new Transform({
       indent_style = 'space',
       max_line_length = 80,
       quote_type = 'single',
+      single_attribute_per_line = false,
       spaces_around_brackets = 'inside',
       tab_width = 2
     } = await editorconfig.parse(filepath)
@@ -48,7 +51,7 @@ process.stdin.pipe(new Transform({
       proseWrap: 'always',
       quoteProps: 'as-needed',
       semi: false,
-      singleAttributePerLine: true,
+      singleAttributePerLine: single_attribute_per_line,
       singleQuote: quote_type === 'single',
       tabWidth: tab_width === 'unset' ? 2 : tab_width,
       trailingComma: 'none',

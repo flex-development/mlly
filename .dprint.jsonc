@@ -1,38 +1,32 @@
 {
   "$schema": "https://dprint.dev/schemas/v0.json",
   "excludes": [
-    "!**/__fixtures__/**/dist/",
-    "!**/__fixtures__/**/node_modules/",
-    "!**/typings/**/dist/",
+    "!scratch.*",
     "**/*.patch",
     "**/*.snap",
-    "**/*config.*.timestamp*",
-    "**/.temp/",
-    "**/.vercel/",
-    "**/__fixtures__/git/**/*.txt",
-    "**/__tests__/report.json",
-    "**/coverage/",
-    "**/dist/",
-    "**/node_modules",
-    "**/tsconfig*temp.json",
+    "**/CHANGELOG.md",
+    "**/LICENSE.md",
+    "**/RELEASE_NOTES.md",
     ".git/",
     ".husky/_/",
     ".yarn/",
-    "CHANGELOG.md",
-    "LICENSE.md",
-    "RELEASE_NOTES.md",
     "yarn.lock"
   ],
   "exec": {
     "commands": [
       {
         "command": "node ./dprint/prettier.mjs {{file_path}}",
-        "exts": ["json5", "yaml", "yml"],
+        "exts": ["css", "html", "json5", "scss", "yaml", "yml"],
+        "stdin": true
+      },
+      {
+        "command": "node ./dprint/remark.mjs {{file_path}}",
+        "exts": ["md", "mdx"],
         "stdin": true
       },
       {
         "command": "node ./dprint/shfmt.mjs {{file_path}}",
-        "exts": ["sh", "txt", "zsh"],
+        "exts": ["sh", "zsh"],
         "fileNames": [
           ".editorconfig",
           ".env",
@@ -43,7 +37,6 @@
           ".gitattributes",
           ".gitconfig",
           ".gitignore",
-          ".markdownlintignore",
           ".npmrc",
           ".nvmrc",
           "Brewfile",
@@ -53,35 +46,24 @@
         ],
         "stdin": true
       }
-    ]
+    ],
+    "cwd": "${configDir}"
   },
-  "incremental": true,
   "indentWidth": 2,
   "json": {
     "associations": ["**/*.{jsonc,json}"],
     "array.preferSingleLine": false,
     "commentLine.forceSpaceAfterSlashes": true,
     "ignoreNodeCommentText": "dprint-ignore",
-    "object.preferSingleLine": false
+    "object.preferSingleLine": false,
+    "trailingCommas": "never"
   },
   "lineWidth": 80,
-  "markdown": {
-    "associations": ["**/*.{md,mdx}"],
-    "emphasisKind": "asterisks",
-    "ignoreDirective": "dprint-ignore",
-    "ignoreEndDirective": "dprint-ignore-end",
-    "ignoreFileDirective": "dprint-ignore-file",
-    "ignoreStartDirective": "dprint-ignore-start",
-    "lineWidth": 120,
-    "strongKind": "asterisks",
-    "textWrap": "maintain"
-  },
   "newLineKind": "lf",
   "plugins": [
-    "https://plugins.dprint.dev/typescript-0.88.3.wasm",
-    "https://plugins.dprint.dev/json-0.17.4.wasm",
-    "https://plugins.dprint.dev/markdown-0.16.0.wasm",
-    "https://plugins.dprint.dev/exec-0.4.3.json@42343548b8022c99b1d750be6b894fe6b6c7ee25f72ae9f9082226dd2e515072"
+    "https://plugins.dprint.dev/typescript-0.91.6.wasm",
+    "https://plugins.dprint.dev/json-0.19.3.wasm",
+    "https://plugins.dprint.dev/exec-0.5.0.json@8d9972eee71fa1590e04873540421f3eda7674d0f1aae3d7c788615e7b7413d0"
   ],
   "typescript": {
     "arrowFunction.useParentheses": "preferNone",
@@ -89,13 +71,13 @@
     "binaryExpression.operatorPosition": "sameLine",
     "binaryExpression.spaceSurroundingBitwiseAndArithmeticOperator": true,
     "bracePosition": "sameLine",
-    "commentLine.forceSpaceAfterSlashes": true,
+    "commentLine.forceSpaceAfterSlashes": false,
     "constructSignature.spaceAfterNewKeyword": true,
     "constructor.spaceBeforeParentheses": false,
     "constructorType.spaceAfterNewKeyword": true,
     "doWhileStatement.spaceAfterWhileKeyword": true,
     "enumDeclaration.memberSpacing": "maintain",
-    "exportDeclaration.forceMultiLine": false,
+    "exportDeclaration.forceMultiLine": "never",
     "exportDeclaration.forceSingleLine": false,
     "exportDeclaration.sortNamedExports": "maintain",
     "exportDeclaration.spaceSurroundingNamedExports": true,
@@ -110,15 +92,15 @@
     "ifStatement.spaceAfterIfKeyword": true,
     "ignoreFileCommentText": "dprint-ignore-file",
     "ignoreNodeCommentText": "dprint-ignore",
-    "importDeclaration.forceMultiLine": false,
+    "importDeclaration.forceMultiLine": "never",
     "importDeclaration.forceSingleLine": false,
     "importDeclaration.sortNamedImports": "maintain",
     "importDeclaration.spaceSurroundingNamedImports": true,
     "jsx.bracketPosition": "nextLine",
     "jsx.forceNewLinesSurroundingContent": false,
-    "jsx.multiLineParens": "always",
+    "jsx.multiLineParens": "prefer",
     "jsx.quoteStyle": "preferSingle",
-    "jsxExpressionContainer.spaceSurroundingExpression": true,
+    "jsxExpressionContainer.spaceSurroundingExpression": false,
     "jsxSelfClosingElement.spaceBeforeSlash": true,
     "memberExpression.linePerExpression": false,
     "method.spaceBeforeParentheses": false,

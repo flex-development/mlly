@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`e2e:mlly > should expose public api 1`] = `
+[
+  "canParseUrl",
+  "cwd",
+  "defaultConditions",
+  "defaultExtensions",
+  "defaultMainFields",
+  "extensionFormatMap",
+  "formats",
+  "isAbsoluteSpecifier",
+  "isArrayIndex",
+  "isBareSpecifier",
+  "isDirectory",
+  "isFile",
+  "isImportsSubpath",
+  "isRelativeSpecifier",
+  "lookupPackageScope",
+  "patternKeyCompare",
+  "patternMatch",
+  "readPackageJson",
+  "resolveAlias",
+  "resolveModule",
+  "legacyMainResolve",
+  "moduleResolve",
+  "packageExportsResolve",
+  "packageImportsExportsResolve",
+  "packageImportsResolve",
+  "packageResolve",
+  "packageSelfResolve",
+  "packageTargetResolve",
+  "resolver",
+  "root",
+  "toRelativeSpecifier",
+]
+`;

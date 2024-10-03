@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/resolveAlias > should return specifier of aliased module ("#lib") 1`] = `"./src/lib/index"`;
+
+exports[`unit:lib/resolveAlias > should return specifier of aliased module ("#lib/resolve-alias") 1`] = `"../resolve-alias.ts"`;
+
+exports[`unit:lib/resolveAlias > should return specifier of aliased module ("#tests/reporters/notifier.ts") 1`] = `file://\${process.cwd()}/__tests__/reporters/notifier.ts`;
+
+exports[`unit:lib/resolveAlias > should return specifier of aliased module ("#tests/utils/to-package-url") 1`] = `"./__tests__/utils/to-package-url"`;

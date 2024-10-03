@@ -3,57 +3,45 @@
  * @module mlly/interfaces/ResolveAliasOptions
  */
 
-import type { ModuleId } from '#src/types'
-import type { MapLike, OneOrMany, Optional } from '@flex-development/tutils'
-import type ResolveModuleOptions from './options-resolve-module'
+import type { Aliases, ModuleId } from '@flex-development/mlly'
 
 /**
  * Path alias resolution options.
- *
- * @see {@linkcode ModuleId}
- *
- * @extends {ResolveModuleOptions}
  */
-interface ResolveAliasOptions extends ResolveModuleOptions {
+interface ResolveAliasOptions {
   /**
    * Return resolved module URL as absolute specifier (a [`file:` URL][1]).
-   *
-   * If `false`, return resolved module URL as bare or relative specifier.
    *
    * [1]: https://nodejs.org/api/esm.html#file-urls
    *
    * @see https://nodejs.org/api/esm.html#terminology
-   *
-   * @default true
    */
-  absolute?: Optional<boolean>
+  absolute?: boolean | null | undefined
 
   /**
    * Path mappings.
    *
-   * **Note**: Paths should be relative to {@linkcode cwd}.
+   * > 👉 **Note**: Paths should be relative to {@linkcode cwd}.
    *
-   * @default {}
+   * @see {@linkcode Aliases}
    */
-  aliases?: Optional<MapLike<OneOrMany<string>>>
+  aliases?: Aliases | null | undefined
 
   /**
-   * Directory to resolve non-absolute modules from.
+   * URL of directory to resolve non-absolute modules from.
    *
-   * @default pathToFileURL('.')
+   * @see {@linkcode ModuleId}
+   *
+   * @default cwd()
    */
-  cwd?: Optional<ModuleId>
+  cwd?: ModuleId | null | undefined
 
   /**
-   * Id of module to resolve from.
+   * URL of parent module.
    *
-   * **Note**: Should be an absolute path or [`file:` URL][1].
-   *
-   * [1]: https://nodejs.org/api/esm.html#file-urls
-   *
-   * @default import.meta.url
+   * @see {@linkcode ModuleId}
    */
-  parent?: Optional<ModuleId>
+  parent?: ModuleId | null | undefined
 }
 
 export type { ResolveAliasOptions as default }

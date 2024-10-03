@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/patternMatch > should return \`PatternMatch\` if subpath pattern match is found (0) 1`] = `
+[
+  "#lib/*",
+  "pattern-match",
+]
+`;
+
+exports[`unit:lib/patternMatch > should return \`PatternMatch\` if subpath pattern match is found (1) 1`] = `
+[
+  "./lib/*.js",
+  "a",
+]
+`;
+
+exports[`unit:lib/patternMatch > should return \`PatternMatch\` if subpath pattern match is found (2) 1`] = `
+[
+  "./package.json",
+  null,
+]
+`;

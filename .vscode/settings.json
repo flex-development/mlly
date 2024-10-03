@@ -20,6 +20,7 @@
     "rewrap.wrappingColumn": 130
   },
   "[markdown]": {
+    "editor.formatOnSave": true,
     "editor.rulers": [
       {
         "color": "var(--vscode-editorRuler-foreground)",
@@ -29,6 +30,19 @@
     "editor.wordWrapColumn": 120,
     "rewrap.wrappingColumn": 120
   },
+  "[mdx]": {
+    "editor.rulers": [
+      {
+        "color": "var(--vscode-editorRuler-foreground)",
+        "column": 120
+      }
+    ],
+    "editor.wordWrapColumn": 120,
+    "rewrap.wrappingColumn": 120
+  },
+  "[plaintext]": {
+    "files.trimTrailingWhitespace": false
+  },
   "[shellscript]": {
     "editor.rulers": [
       {
@@ -36,20 +50,6 @@
         "column": 100
       }
     ],
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 100,
-    "rewrap.wrappingColumn": 100
-  },
-  "[vue]": {
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always",
-      "source.fixAll.sortJSON": "never",
-      "source.organizeImports": "never"
-    }
-  },
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml",
-    "editor.rulers": [100],
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 100,
     "rewrap.wrappingColumn": 100
@@ -64,54 +64,6 @@
     "editor.wordWrapColumn": 100,
     "rewrap.wrappingColumn": 100
   },
-  "better-comments.highlightPlainText": true,
-  "better-comments.tags": [
-    {
-      "backgroundColor": "transparent",
-      "bold": false,
-      "color": "#ff2d00",
-      "italic": false,
-      "strikethrough": false,
-      "tag": "!",
-      "underline": false
-    },
-    {
-      "backgroundColor": "transparent",
-      "bold": false,
-      "color": "#3498db",
-      "italic": false,
-      "strikethrough": false,
-      "tag": "?",
-      "underline": false
-    },
-    {
-      "backgroundColor": "transparent",
-      "bold": false,
-      "color": "#474747",
-      "italic": false,
-      "strikethrough": true,
-      "tag": "//",
-      "underline": false
-    },
-    {
-      "backgroundColor": "transparent",
-      "bold": false,
-      "color": "#ff8c00",
-      "italic": false,
-      "strikethrough": false,
-      "tag": "todo",
-      "underline": false
-    },
-    {
-      "backgroundColor": "transparent",
-      "bold": false,
-      "color": "#98c379",
-      "italic": false,
-      "strikethrough": false,
-      "tag": "*",
-      "underline": false
-    }
-  ],
   "breadcrumbs.enabled": true,
   "cSpell.enabled": true,
   "debug.showBreakpointsInOverviewRuler": true,
@@ -156,48 +108,31 @@
   "emmet.triggerExpansionOnTab": true,
   "eslint.enable": true,
   "eslint.lintTask.enable": true,
-  "eslint.nodePath": "node_modules/.bin/eslint",
-  "eslint.options": {
-    "extensions": [
-      "cjs",
-      "cts",
-      "gql",
-      "graphql",
-      "js",
-      "json",
-      "json5",
-      "jsonc",
-      "jsx",
-      "md",
-      "mdx",
-      "mjs",
-      "mts",
-      "ts",
-      "tsx",
-      "vue",
-      "yaml",
-      "yml"
-    ],
-    "overrideConfigFile": ".eslintrc.cjs"
-  },
+  "eslint.nodePath": "node_modules",
+  "eslint.options": {},
+  "eslint.runtime": "node",
+  "eslint.trace.server": "messages",
+  "eslint.useFlatConfig": true,
   "eslint.validate": [
+    "css",
     "github-actions-workflow",
     "graphql",
+    "html",
     "javascript",
     "json",
     "json5",
     "jsonc",
     "markdown",
+    "mdx",
     "typescript",
-    "vue",
     "yaml"
   ],
   "files.associations": {
     "*.log": "log",
     "*.snap": "jest-snapshot",
     ".env.zsh": "shellscript",
-    ".markdownlintignore": "ignore",
     ".npmrc": "ini",
+    ".remarkignore": "ignore",
     "commit-msg": "shellscript",
     "pre-commit": "shellscript",
     "pre-push": "shellscript"
@@ -228,25 +163,13 @@
   "javascript.validate.enable": true,
   "markdown.extension.toc.slugifyMode": "github",
   "markdown.extension.toc.updateOnSave": false,
-  "markdownlint.ignore": ".markdownlintignore",
-  "markdownlint.lintWorkspaceGlobs": [
-    "**/*.md",
-    "!**/node_modules",
-    "!**/.git",
-    "!**/CHANGELOG.md",
-    "!**/LICENSE.md",
-    "!**/RELEASE_NOTES.md"
-  ],
-  "npm-intellisense.scanDevDependencies": true,
-  "prettier.enable": false,
+  "mdx.trace.server.verbosity": "verbose",
   "rewrap.autoWrap.enabled": true,
   "rewrap.doubleSentenceSpacing": true,
   "rewrap.reformat": true,
   "rewrap.wrappingColumn": 80,
-  "shellformat.flag": "-ci -fn -i=2 -sr",
-  "shellformat.useEditorConfig": true,
   "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.scrollback": 20000,
+  "terminal.integrated.scrollback": 10000,
   "todo-tree.filtering.ignoreGitSubmodules": true,
   "todo-tree.filtering.includeHiddenFiles": false,
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
@@ -279,7 +202,7 @@
   "todo-tree.tree.buttons.viewStyle": true,
   "todo-tree.tree.expanded": true,
   "todo-tree.tree.filterCaseSensitive": true,
-  "todo-tree.tree.scanMode": "workspace",
+  "todo-tree.tree.scanMode": "workspace only",
   "todo-tree.tree.showBadges": true,
   "todo-tree.tree.showCountsInTree": true,
   "todo-tree.tree.showCurrentScanMode": true,
@@ -288,6 +211,7 @@
   "typescript.format.insertSpaceAfterTypeAssertion": true,
   "typescript.format.semicolons": "remove",
   "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.importModuleSpecifierEnding": "minimal",
   "typescript.preferences.includePackageJsonAutoImports": "on",
   "typescript.preferences.quoteStyle": "single",
@@ -308,17 +232,12 @@
   ],
   "vsicons.associations.files": [
     {
-      "extensions": [".commitlintrc.cts"],
-      "format": "svg",
-      "icon": "commitlint"
-    },
-    {
       "extensions": [".eslintrc.base.cjs"],
       "format": "svg",
       "icon": "eslint"
     },
     {
-      "extensions": ["build.json", "cjs.json", "typecheck.json"],
+      "extensions": ["build.json", "typecheck.json"],
       "format": "svg",
       "icon": "tsconfig"
     },
@@ -355,14 +274,14 @@
       "icon": "private"
     },
     {
+      "extensions": ["namespaces"],
+      "format": "svg",
+      "icon": "module"
+    },
+    {
       "extensions": ["patches"],
       "format": "svg",
       "icon": "include"
-    },
-    {
-      "extensions": ["providers"],
-      "format": "svg",
-      "icon": "services"
     },
     {
       "extensions": ["setup"],
@@ -383,11 +302,6 @@
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
   "workbench.iconTheme": "vscode-icons",
-  "xml.format.closingBracketNewLine": true,
-  "xml.format.maxLineWidth": 100,
-  "xml.format.spaceBeforeEmptyCloseTag": false,
-  "xml.format.splitAttributes": "splitNewLine",
-  "xml.format.splitAttributesIndentSize": 0,
   "yaml.schemas": {
     "https://json.schemastore.org/github-issue-config": ".github/ISSUE_TEMPLATE/config.yml",
     "https://json.schemastore.org/github-workflow": ".github/workflows/*.yml"

@@ -4,23 +4,25 @@
  * @see https://vitest.dev/config/
  */
 
+import tsconfigPaths from '#tests/plugins/tsconfig-paths'
+import Notifier from '#tests/reporters/notifier'
 import pathe from '@flex-development/pathe'
-import { ifelse, sift } from '@flex-development/tutils'
 import ci from 'is-ci'
-import tsconfigpaths from 'vite-tsconfig-paths'
 import {
   defineConfig,
+  type ConfigEnv,
   type UserConfig,
   type UserConfigExport
 } from 'vitest/config'
 import { BaseSequencer, type WorkspaceSpec } from 'vitest/node'
+import tsconfigJson from './tsconfig.test.json'
 
 /**
  * Vitest configuration export.
  *
  * @const {UserConfigExport} config
  */
-const config: UserConfigExport = defineConfig((): UserConfig => {
+const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
   /**
    * [`lint-staged`][1] check.
    *
@@ -32,10 +34,10 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
 
   return {
     define: {},
-    plugins: [tsconfigpaths({ projects: [pathe.resolve('tsconfig.json')] })],
+    plugins: [tsconfigPaths({ tsconfig: 'tsconfig.test.json' })],
+    resolve: { conditions: tsconfigJson.compilerOptions.customConditions },
     test: {
       allowOnly: !ci,
-      benchmark: {},
       chaiConfig: {
         includeStack: true,
         showDiff: true,
@@ -47,41 +49,57 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
         clean: true,
         cleanOnRerun: true,
         exclude: [
-          '**/__mocks__/',
-          '**/__tests__/',
+          '**/__mocks__/**',
+          '**/__tests__/**',
           '**/interfaces/',
           '**/types/',
-          '**/index.ts'
+          '**/index.ts',
+          '!src/index.ts',
+          'src/internal/*.browser.ts'
         ],
         extension: ['.ts'],
         include: ['src'],
         provider: 'v8',
-        reporter: [...(ci ? [] : (['html'] as const)), 'lcovonly', 'text'],
+        reportOnFailure: !ci,
+        reporter: env.mode === 'reports'
+          ? ['text']
+          : [ci ? 'lcovonly' : 'html', 'json-summary', 'text'],
         reportsDirectory: './coverage',
-        skipFull: false
+        skipFull: false,
+        thresholds: { 100: true, perFile: true }
       },
       environment: 'node',
       environmentOptions: {},
+      exclude: [
+        '**/__tests__/*.bench.spec.ts?(x)',
+        '.cache',
+        '.git',
+        '.idea',
+        'dist',
+        'node_modules'
+      ],
       globalSetup: [],
       globals: true,
       hookTimeout: 10 * 1000,
-      include: [
-        `**/__tests__/*.${LINT_STAGED ? '{spec,spec-d}' : 'spec'}.ts?(x)`
-      ],
+      include: [`**/__tests__/*.${LINT_STAGED ? '{spec,spec-d}' : 'spec'}.ts`],
       mockReset: true,
-      outputFile: { json: './__tests__/report.json' },
+      outputFile: {
+        blob: `.vitest-reports/${env.mode}.blob.json`,
+        json: pathe.join('__tests__', 'reports', env.mode + '.json')
+      },
       passWithNoTests: true,
-      reporters: sift([
-        'json',
-        'verbose',
-        ifelse(ci, '', './__tests__/reporters/notifier.ts')
-      ]),
+      reporters: env.mode === 'reports'
+        ? ['verbose']
+        : [ci ? 'github-actions' : new Notifier(), 'blob', 'json', 'verbose'],
       /**
        * Stores snapshots next to `file`'s directory.
        *
-       * @param {string} file - Path to test file
-       * @param {string} extension - Snapshot extension
-       * @return {string} Custom snapshot path
+       * @param {string} file
+       *  Path to test file
+       * @param {string} extension
+       *  Snapshot extension
+       * @return {string}
+       *  Custom snapshot path
        */
       resolveSnapshotPath(file: string, extension: string): string {
         return pathe.resolve(
@@ -90,8 +108,14 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
         )
       },
       restoreMocks: true,
-      root: process.cwd(),
       sequence: {
+        /**
+         * Sorting and sharding algorithm provider.
+         *
+         * @see {@linkcode BaseSequencer}
+         *
+         * @extends {BaseSequencer}
+         */
         sequencer: class Sequencer extends BaseSequencer {
           /**
            * Determines test file execution order.
@@ -100,8 +124,10 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
            * @override
            * @async
            *
-           * @param {WorkspaceSpec[]} specs - Workspace spec objects
-           * @return {Promise<WorkspaceSpec[]>} `files` sorted
+           * @param {WorkspaceSpec[]} specs
+           *  Workspace spec objects
+           * @return {Promise<WorkspaceSpec[]>}
+           *  `files` sorted
            */
           public override async sort(
             specs: WorkspaceSpec[]
@@ -112,8 +138,7 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
           }
         }
       },
-      setupFiles: ['./__tests__/setup/index.ts'],
-      silent: false,
+      setupFiles: ['./__tests__/setup/chai.ts', './__tests__/setup/faker.ts'],
       slowTestThreshold: 3000,
       snapshotFormat: {
         callToJSON: true,
@@ -121,14 +146,14 @@ const config: UserConfigExport = defineConfig((): UserConfig => {
         printBasicPrototype: false,
         printFunctionName: true
       },
-      testTimeout: 15 * 1000,
+      snapshotSerializers: ['./__tests__/serializers/cwd.ts'],
       typecheck: {
         allowJs: false,
-        checker: 'vue-tsc',
+        checker: 'tsc',
         ignoreSourceErrors: false,
         include: ['**/__tests__/*.spec-d.ts'],
         only: true,
-        tsconfig: pathe.resolve('tsconfig.typecheck.json')
+        tsconfig: 'tsconfig.typecheck.json'
       },
       unstubEnvs: true,
       unstubGlobals: true

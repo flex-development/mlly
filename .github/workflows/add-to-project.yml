@@ -30,16 +30,16 @@ jobs:
     steps:
       - id: debug
         name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.1.0
+        uses: hmarr/debug-action@v3.0.0
       - id: bot-token
         name: Get bot token
-        uses: actions/create-github-app-token@v1.6.0
+        uses: actions/create-github-app-token@v1.11.0
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
       - id: add-item
         name: Add ${{ format('#{0}', github.event.number) }} to project
-        uses: actions/add-to-project@v0.5.0
+        uses: actions/add-to-project@v1.0.2
         with:
           github-token: ${{ steps.bot-token.outputs.token }}
           project-url: |

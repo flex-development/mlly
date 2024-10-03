@@ -4,10 +4,10 @@
     "eslint --exit-on-fatal-error",
     "cspell lint --color --no-progress --relative $@"
   ],
-  "**/*.{cts,mts,ts,vue}": "vitest run --changed --typecheck",
+  "**/*.{cts,mts,ts}": "yarn test --changed --typecheck --mode=typecheck",
   "**/yarn.lock": "yarn dedupe --check",
   "src/**/*.ts": [
-    "vitest run --changed --coverage",
+    "yarn test --changed --coverage",
     "yarn build",
     "bash -c tsc -p tsconfig.build.json"
   ]

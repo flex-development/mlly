@@ -3,31 +3,44 @@
  * @module mlly/interfaces/tests/unit-d/ResolveAliasOptions
  */
 
-import type { ModuleId } from '#src/types'
-import type { MapLike, OneOrMany, Optional } from '@flex-development/tutils'
-import type TestSubject from '../options-resolve-alias'
-import type ResolveModuleOptions from '../options-resolve-module'
+import type TestSubject from '#interfaces/options-resolve-alias'
+import type {
+  Aliases,
+  ModuleId,
+  ResolveModuleOptions
+} from '@flex-development/mlly'
+import type { Nilable } from '@flex-development/tutils'
 
 describe('unit-d:interfaces/ResolveAliasOptions', () => {
+  it('should allow empty object', () => {
+    assertType<TestSubject>({})
+  })
+
   it('should extend ResolveModuleOptions', () => {
     expectTypeOf<TestSubject>().toMatchTypeOf<ResolveModuleOptions>()
   })
 
-  it('should match [absolute?: Optional<boolean>]', () => {
+  it('should match [absolute?: boolean | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('absolute')
-      .toEqualTypeOf<Optional<boolean>>()
+      .toEqualTypeOf<Nilable<boolean>>()
   })
 
-  it('should match [aliases?: Optional<MapLike<OneOrMany<string>>>]', () => {
+  it('should match [aliases?: Aliases | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('aliases')
-      .toEqualTypeOf<Optional<MapLike<OneOrMany<string>>>>()
+      .toEqualTypeOf<Nilable<Aliases>>()
   })
 
-  it('should match [cwd?: Optional<ModuleId>]', () => {
+  it('should match [cwd?: ModuleId | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('cwd')
-      .toEqualTypeOf<Optional<ModuleId>>()
+      .toEqualTypeOf<Nilable<ModuleId>>()
+  })
+
+  it('should match [parent?: ModuleId | null | undefined]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('parent')
+      .toEqualTypeOf<Nilable<ModuleId>>()
   })
 })

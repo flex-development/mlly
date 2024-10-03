@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`unit:utils/resolveAliases > should return code with path aliases resolved 1`] = `
-"import { SpecifierSyntaxKind } from '../enums'
-import type { ResolveAliasOptions } from '../interfaces'
-import { regexp } from '@flex-development/tutils'
-import extractStatements from './extract-statements'
-import resolveAlias from './resolve-alias'"
-`;

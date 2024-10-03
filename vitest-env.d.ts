@@ -1,6 +1,6 @@
 /// <reference types='vitest/globals' />
 
-interface ImportMetaEnv extends NodeJS.ProcessEnv {
+interface ImportMetaEnv {
   readonly BASE_URL: string
   readonly DEV: '1' | import('@flex-development/tutils').EmptyString
   readonly GITHUB_TOKEN: string

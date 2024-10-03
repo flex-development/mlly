@@ -28,10 +28,10 @@ component_management:
       name: internal
       paths:
         - src/internal/*.ts
-    - component_id: utils
-      name: utils
+    - component_id: lib
+      name: lib
       paths:
-        - src/utils/*.ts
+        - src/lib/*.ts
 
 coverage:
   precision: 2
@@ -80,15 +80,7 @@ coverage:
         threshold: 0%
 
 flags:
-  node20:
-    carryforward: false
-    paths:
-      - src/
-  node19:
-    carryforward: false
-    paths:
-      - src/
-  node18:
+  node22:
     carryforward: false
     paths:
       - src/
@@ -100,9 +92,11 @@ ignore:
   - '**/__mocks__/**'
   - '**/__tests__/**'
   - '**/index.ts'
-  - src/interfaces/
-  - src/types/
+  - '**/interfaces/**'
+  - '**/types/**'
+  - '!src/index.ts'
+  - src/internal/*.browser.ts
 
 profiling:
   critical_files_paths:
-    - src/utils/*.ts
+    - src/lib/*.ts

@@ -1,28 +1,34 @@
 /**
  * @file Reporters - Notifier
  * @module tests/reporters/Notifier
+ * @see https://vitest.dev/advanced/reporters#exported-reporters
  */
 
-import { cast, isArray, type OneOrMany } from '@flex-development/tutils'
+import ci from 'is-ci'
 import notifier from 'node-notifier'
-import type NotificationCenter from 'node-notifier/notifiers/notificationcenter'
+import type { Notification } from 'node-notifier/notifiers/notificationcenter'
 import { performance } from 'node:perf_hooks'
 import { promisify } from 'node:util'
 import { dedent } from 'ts-dedent'
-import type { File, Reporter, Task, Test, Vitest } from 'vitest'
+import type { RunnerTask, RunnerTestCase, RunnerTestFile } from 'vitest'
+import type { Vitest } from 'vitest/node'
+import type { Reporter } from 'vitest/reporters'
 
 /**
- * Custom reporter that sends a notification when all tests have been ran.
+ * Test report summary notifier.
  *
- * @see https://vitest.dev/config/#reporters
+ * @see {@linkcode Reporter}
  *
  * @implements {Reporter}
  */
 class Notifier implements Reporter {
   /**
-   * Test reporter context.
+   * Reporter context.
+   *
+   * @see {@linkcode Vitest}
    *
    * @public
+   * @instance
    * @member {Vitest} ctx
    */
   public ctx!: Vitest
@@ -31,6 +37,7 @@ class Notifier implements Reporter {
    * Test run end time (in milliseconds).
    *
    * @public
+   * @instance
    * @member {number} end
    */
   public end!: number
@@ -39,31 +46,77 @@ class Notifier implements Reporter {
    * Test run start time (in milliseconds).
    *
    * @public
+   * @instance
    * @member {number} start
    */
   public start!: number
 
   /**
-   * Sends a notification.
+   * Send a notification after all tests have ran (in non ci/cd environments).
    *
-   * @protected
+   * @see {@linkcode RunnerTestFile}
+   *
+   * @public
+   * @instance
    *
    * @async
    *
-   * @param {File[]} [files=this.ctx.state.getFiles()] - File objects
-   * @param {unknown[]} [errors=this.ctx.state.getUnhandledErrors()] - Errors
-   * @return {Promise<void>} Nothing when complete
+   * @param {RunnerTestFile[] | undefined} [files=this.ctx.state.getFiles()]
+   *  List of test files
+   * @param {unknown[] | undefined} [errors=this.ctx.state.getUnhandledErrors()]
+   *  List of unhandled errors
+   * @return {undefined}
    */
-  protected async notify(
-    files: File[] = this.ctx.state.getFiles(),
+  public async onFinished(
+    files: RunnerTestFile[] = this.ctx.state.getFiles(),
     errors: unknown[] = this.ctx.state.getUnhandledErrors()
-  ): Promise<void> {
+  ): Promise<undefined> {
+    this.end = performance.now()
+    return void await (ci || this.reportSummary(files, errors))
+  }
+
+  /**
+   * Initialize the reporter.
+   *
+   * @see {@linkcode Vitest}
+   *
+   * @public
+   * @instance
+   *
+   * @param {Vitest} ctx
+   *  Reporter context
+   * @return {undefined}
+   */
+  public onInit(ctx: Vitest): undefined {
+    return void (this.ctx = ctx, this.start = performance.now())
+  }
+
+  /**
+   * Send a notification.
+   *
+   * @see {@linkcode RunnerTestFile}
+   *
+   * @public
+   * @instance
+   *
+   * @async
+   *
+   * @param {RunnerTestFile[] | undefined} [files=this.ctx.state.getFiles()]
+   *  List of test files
+   * @param {unknown[] | undefined} [errors=this.ctx.state.getUnhandledErrors()]
+   *  List of unhandled errors
+   * @return {Promise<undefined>}
+   */
+  public async reportSummary(
+    files: RunnerTestFile[] = this.ctx.state.getFiles(),
+    errors: unknown[] = this.ctx.state.getUnhandledErrors()
+  ): Promise<undefined> {
     /**
      * Tests that have been run.
      *
-     * @const {Test[]} tests
+     * @const {RunnerTestCase[]} tests
      */
-    const tests: Test[] = this.tests(files)
+    const tests: RunnerTestCase[] = this.tests(files)
 
     /**
      * Total number of failed tests.
@@ -120,63 +173,32 @@ class Notifier implements Reporter {
       title = '\u2705 Passed'
     }
 
-    // send notification
-    return void (await promisify<NotificationCenter.Notification>(
-      notifier.notify.bind(notifier)
-    )({
+    return void await promisify<Notification>(notifier.notify.bind(notifier))({
       message,
       sound: true,
-      timeout: 10,
+      timeout: 15,
       title
-    }))
+    })
   }
 
   /**
-   * Sends a notification after all tests have ran (in non ci/cd environments).
+   * Convert tasks to a list of test cases.
    *
-   * @public
-   *
-   * @async
-   *
-   * @param {File[]} [files=this.ctx.state.getFiles()] - File objects
-   * @param {unknown[]} [errors=this.ctx.state.getUnhandledErrors()] - Errors
-   * @return {Promise<void>} Nothing when complete
-   */
-  public async onFinished(
-    files: File[] = this.ctx.state.getFiles(),
-    errors: unknown[] = this.ctx.state.getUnhandledErrors()
-  ): Promise<void> {
-    this.end = performance.now()
-    return void (await this.notify(files, errors))
-  }
-
-  /**
-   * Initializes the reporter.
-   *
-   * @public
-   *
-   * @param {Vitest} context - Test reporter context
-   * @return {void} Nothing when complete
-   */
-  public onInit(context: Vitest): void {
-    this.ctx = context
-    return void ((this.start = performance.now()) && (this.end = 0))
-  }
-
-  /**
-   * Returns an array of {@linkcode Test} objects.
+   * @see {@linkcode RunnerTask}
+   * @see {@linkcode RunnerTestCase}
    *
    * @protected
+   * @instance
    *
-   * @param {OneOrMany<Task>} [tasks=[]] - Tasks to collect tests from
-   * @return {Test[]} `Test` object array
+   * @param {RunnerTask | RunnerTask[]} [tasks=[]]
+   *  Tasks to collect tests from
+   * @return {RunnerTestCase[]}
+   *  List of runner test cases
    */
-  protected tests(tasks: OneOrMany<Task> = []): Test[] {
-    return (isArray<Task>(tasks) ? tasks : [tasks]).flatMap(task => {
-      return task.type === 'custom'
-        ? [cast(task)]
-        : task.type === 'test'
-        ? [task]
+  protected tests(tasks: RunnerTask | RunnerTask[] = []): RunnerTestCase[] {
+    return (Array.isArray(tasks) ? tasks : [tasks]).flatMap(task => {
+      return task.type === 'custom' || task.type === 'test'
+        ? [task as unknown as RunnerTestCase]
         : 'tasks' in task
         ? task.tasks.flatMap(task => this.tests(task))
         : []

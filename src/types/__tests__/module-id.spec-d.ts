@@ -3,8 +3,7 @@
  * @module mlly/types/tests/unit-d/ModuleId
  */
 
-import type { URL } from 'node:url'
-import type TestSubject from '../module-id'
+import type TestSubject from '#types/module-id'
 
 describe('unit-d:types/ModuleId', () => {
   it('should extract URL', () => {

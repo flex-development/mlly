@@ -41,10 +41,10 @@ jobs:
     steps:
       - id: debug
         name: Print environment variables and event payload
-        uses: hmarr/debug-action@v2.1.0
+        uses: hmarr/debug-action@v3.0.0
       - id: checkout
         name: Checkout main
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.7
         with:
           persist-credentials: false
           ref: main
@@ -53,7 +53,7 @@ jobs:
         run: echo "result=$(jq .version package.json -r)" >>$GITHUB_OUTPUT
       - id: query
         name: Query linked issues
-        uses: octokit/graphql-action@v2.2.25
+        uses: octokit/graphql-action@v2.3.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

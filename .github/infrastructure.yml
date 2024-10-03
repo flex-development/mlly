@@ -26,35 +26,22 @@ branches:
           - context: auto-review
           - context: build
           - context: changelog
-          - context: codecov/changes
-            app_id: 254
-          - context: codecov/patch
-            app_id: 254
-          - context: codecov/project
-            app_id: 254
-          - context: codecov/project/internal
-            app_id: 254
-          - context: codecov/project/utils
-            app_id: 254
           - context: commitlint
           - context: dependabot-dedupe
-          - context: docs
           - context: format
           - context: gitguardian
           - context: lint
           - context: spelling
-          - context: test (18)
-          - context: test (19)
-          - context: test (20)
-          - context: typescript (5.3.2)
-          - context: typescript (latest)
+          - context: test (22)
+          - context: typescript (5.0.4)
+          - context: typescript (5.4.5)
+          - context: typescript (5.5.4)
+          - context: typescript (5.6.2)
         strict: true
       restrictions: null
 environments:
-  - environment_name: docs
   - environment_name: gpr
   - environment_name: npm
-  - environment_name: preview
   - environment_name: release
 labels:
   - name: flag:breaking-change
