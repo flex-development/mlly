@@ -354,7 +354,7 @@ jobs:
       - id: codecov
         if: steps.test-files-check.outputs.files_exists == 'true'
         name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v4.5.0
+        uses: codecov/codecov-action@v4.6.0
         env:
           GITHUB_JOB: ${{ github.job }}
           GITHUB_REF: ${{ github.ref }}
