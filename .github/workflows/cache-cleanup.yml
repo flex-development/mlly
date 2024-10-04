@@ -46,7 +46,7 @@ jobs:
         uses: hmarr/debug-action@v3.0.0
       - id: checkout
         name: Checkout main
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
         with:
           persist-credentials: false
           ref: main

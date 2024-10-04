@@ -43,7 +43,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ github.head_ref || github.ref_name }}
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
         with:
           persist-credentials: false
           ref: ${{ github.head_ref || github.ref }}
