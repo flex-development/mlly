@@ -1009,7 +1009,7 @@ function packageTargetResolve(
             fs
           )
         } catch (e: unknown) {
-          error = <NonNullable<typeof error>>e
+          error = e as NonNullable<typeof error>
           if (error.code !== codes.ERR_INVALID_PACKAGE_TARGET) throw error
         }
 
@@ -1039,7 +1039,7 @@ function packageTargetResolve(
 
     // try resolving conditional target.
     for (const key of Object.getOwnPropertyNames(target)) {
-      if (conditions.has(<Condition>key) || key === 'default') {
+      if (conditions.has(key as Condition) || key === 'default') {
         /**
          * Resolved package target URL.
          *
@@ -1047,7 +1047,7 @@ function packageTargetResolve(
          */
         const resolved: URL | null | undefined = packageTargetResolve(
           packageUrl,
-          (<ConditionalTargets>target)[key],
+          (target as ConditionalTargets)[key],
           subpath,
           patternMatch,
           isImports,
@@ -1069,7 +1069,7 @@ function packageTargetResolve(
   throw invalidPackageTarget(
     packageUrl,
     subpath,
-    <never>target,
+    target as never,
     isImports,
     parent
   )

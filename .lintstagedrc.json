@@ -6,7 +6,7 @@
   ],
   "**/*.{cts,mts,ts}": "yarn test --changed --typecheck --mode=typecheck",
   "**/yarn.lock": "yarn dedupe --check",
-  "src/**/*.ts": [
+  "src/**/*.mts": [
     "yarn test --changed --coverage",
     "yarn build",
     "bash -c tsc -p tsconfig.build.json"

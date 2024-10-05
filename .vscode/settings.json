@@ -232,11 +232,6 @@
   ],
   "vsicons.associations.files": [
     {
-      "extensions": [".eslintrc.base.cjs"],
-      "format": "svg",
-      "icon": "eslint"
-    },
-    {
       "extensions": ["build.json", "typecheck.json"],
       "format": "svg",
       "icon": "tsconfig"
@@ -247,14 +242,9 @@
       "icon": "vitest"
     },
     {
-      "extensions": ["spec-d.ts"],
+      "extensions": ["spec-d.mts"],
       "format": "svg",
       "icon": "testts"
-    },
-    {
-      "extensions": ["yarnrc.yml"],
-      "format": "svg",
-      "icon": "yarn"
     }
   ],
   "vsicons.associations.folders": [
@@ -272,11 +262,6 @@
       "extensions": ["internal"],
       "format": "svg",
       "icon": "private"
-    },
-    {
-      "extensions": ["namespaces"],
-      "format": "svg",
-      "icon": "module"
     },
     {
       "extensions": ["patches"],

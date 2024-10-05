@@ -18,7 +18,7 @@ import { BaseSequencer, type WorkspaceSpec } from 'vitest/node'
 import tsconfigJson from './tsconfig.test.json'
 
 /**
- * Vitest configuration export.
+ * Vitest configuration.
  *
  * @const {UserConfigExport} config
  */
@@ -49,15 +49,16 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
         clean: true,
         cleanOnRerun: true,
         exclude: [
-          '**/__mocks__/**',
-          '**/__tests__/**',
+          '**/*.d.mts',
+          '**/__mocks__/',
+          '**/__tests__/',
           '**/interfaces/',
           '**/types/',
-          '**/index.ts',
-          '!src/index.ts',
-          'src/internal/*.browser.ts'
+          '**/index.mts',
+          '!src/index.mts',
+          'src/internal/*.browser.mts'
         ],
-        extension: ['.ts'],
+        extension: ['.mts'],
         include: ['src'],
         provider: 'v8',
         reportOnFailure: !ci,
@@ -71,7 +72,6 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
       environment: 'node',
       environmentOptions: {},
       exclude: [
-        '**/__tests__/*.bench.spec.ts?(x)',
         '.cache',
         '.git',
         '.idea',
@@ -81,7 +81,7 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
       globalSetup: [],
       globals: true,
       hookTimeout: 10 * 1000,
-      include: [`**/__tests__/*.${LINT_STAGED ? '{spec,spec-d}' : 'spec'}.ts`],
+      include: [`**/__tests__/*.${LINT_STAGED ? '{spec,spec-d}' : 'spec'}.mts`],
       mockReset: true,
       outputFile: {
         blob: `.vitest-reports/${env.mode}.blob.json`,
@@ -104,7 +104,7 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
       resolveSnapshotPath(file: string, extension: string): string {
         return pathe.resolve(
           pathe.resolve(pathe.dirname(pathe.dirname(file)), '__snapshots__'),
-          pathe.basename(file).replace(/\.spec.tsx?/, '') + extension
+          pathe.basename(file).replace(/\.spec.mts/, '') + extension
         )
       },
       restoreMocks: true,
@@ -138,7 +138,7 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
           }
         }
       },
-      setupFiles: ['./__tests__/setup/chai.ts', './__tests__/setup/faker.ts'],
+      setupFiles: ['./__tests__/setup/chai.mts', './__tests__/setup/faker.mts'],
       slowTestThreshold: 3000,
       snapshotFormat: {
         callToJSON: true,
@@ -146,12 +146,12 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
         printBasicPrototype: false,
         printFunctionName: true
       },
-      snapshotSerializers: ['./__tests__/serializers/cwd.ts'],
+      snapshotSerializers: ['./__tests__/serializers/cwd.mts'],
       typecheck: {
         allowJs: false,
         checker: 'tsc',
         ignoreSourceErrors: false,
-        include: ['**/__tests__/*.spec-d.ts'],
+        include: ['**/__tests__/*.spec-d.mts'],
         only: true,
         tsconfig: 'tsconfig.typecheck.json'
       },

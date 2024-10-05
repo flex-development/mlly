@@ -10,7 +10,7 @@ describe('unit:lib/toRelativeSpecifier', () => {
   it.each<Parameters<typeof testSubject>>([
     [
       pathe.pathToFileURL('src/lib'),
-      pathe.pathToFileURL('src/lib/resolve-alias.ts')
+      pathe.pathToFileURL('src/lib/resolve-alias.mts')
     ],
     [pathe.pathToFileURL('src/lib/cwd'), pathe.pathToFileURL('src/lib')],
     [pathe.pathToFileURL('src/lib/to-relative-specifier'), import.meta.url],

@@ -13,7 +13,7 @@ describe('unit:lib/isDirectory', () => {
   it.each<ModuleId>([
     'directory',
     new URL('node:fs'),
-    String(new URL('src/index.ts', cwd()))
+    String(new URL('src/index.mts', cwd()))
   ])('should return `false` if `id` is not a directory (%#)', id => {
     expect(testSubject(id, fs)).to.be.false
   })

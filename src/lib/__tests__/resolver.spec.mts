@@ -43,7 +43,7 @@ describe('unit:lib/resolver', () => {
           parent
         )
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -68,13 +68,13 @@ describe('unit:lib/resolver', () => {
         new Set<Condition>(['browser'])
       ],
       ['#lib/resolver', import.meta.url, fixtureConditions],
-      ['../resolver.ts', import.meta.url],
-      ['@flex-development/mkbuild', pathToFileURL('build.config.ts')],
+      ['../resolver.mts', import.meta.url],
+      ['@flex-development/mkbuild', pathToFileURL('build.config.mts')],
       ['fs', import.meta.url],
       ['node:fs/promises', import.meta.url],
       ['node:url', import.meta.url],
       ['vitest', import.meta.url],
-      [String(pathToFileURL('src/lib/index.ts')), import.meta.url],
+      [String(pathToFileURL('src/lib/index.mts')), import.meta.url],
       [errnode.name, import.meta.url],
       [exportsSugar.name, parent],
       [exportsSugarA.name, parent],
@@ -82,7 +82,7 @@ describe('unit:lib/resolver', () => {
       [legacyMain1.name, parent],
       [legacyMain2.name, parent],
       [pkg.name + '/package.json', import.meta.url],
-      [resolve('src/index.ts'), import.meta.url],
+      [resolve('src/index.mts'), import.meta.url],
       [subpathExports.name + '/lib/a', parent],
       [subpathExports.name + '/lib/a.js', parent]
     ])('should return resolved URL (%#)', (
@@ -123,7 +123,7 @@ describe('unit:lib/resolver', () => {
       try {
         testSubject.moduleResolve(sep + 'lib%2futils.mjs', import.meta.url)
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -141,7 +141,7 @@ describe('unit:lib/resolver', () => {
       try {
         testSubject.moduleResolve(specifier, import.meta.url)
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -153,14 +153,14 @@ describe('unit:lib/resolver', () => {
 
     it('should throw if `specifier` resolves to missing file', () => {
       // Arrange
-      const specifier: string = resolve('src/index.mts')
+      const specifier: string = resolve('src/index.ts')
       let error!: NodeError
 
       // Act
       try {
         testSubject.moduleResolve(specifier, import.meta.url)
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -202,7 +202,7 @@ describe('unit:lib/resolver', () => {
           fs
         )
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -222,12 +222,12 @@ describe('unit:lib/resolver', () => {
         testSubject.packageExportsResolve(
           cwd(),
           dot,
-          { [dot]: './dist/index.mjs', 'ts-node': './src/index.ts' },
+          { [dot]: './dist/index.mjs', 'ts-node': './src/index.mts' },
           null,
           import.meta.url
         )
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -251,7 +251,7 @@ describe('unit:lib/resolver', () => {
           import.meta.url
         )
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -271,7 +271,7 @@ describe('unit:lib/resolver', () => {
       try {
         testSubject.packageImportsResolve('#mocks', import.meta.url)
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -292,7 +292,7 @@ describe('unit:lib/resolver', () => {
       try {
         testSubject.packageImportsResolve(specifier, import.meta.url)
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -311,7 +311,7 @@ describe('unit:lib/resolver', () => {
       try {
         testSubject.packageResolve('missing-package', parent)
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -331,7 +331,7 @@ describe('unit:lib/resolver', () => {
       try {
         testSubject.packageResolve(specifier, parent)
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -372,7 +372,7 @@ describe('unit:lib/resolver', () => {
           import.meta.url
         )
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -397,7 +397,7 @@ describe('unit:lib/resolver', () => {
           import.meta.url
         )
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect
@@ -505,7 +505,7 @@ describe('unit:lib/resolver', () => {
           fs
         )
       } catch (e: unknown) {
-        error = <typeof error>e
+        error = e as typeof error
       }
 
       // Expect

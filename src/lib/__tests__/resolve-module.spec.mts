@@ -52,7 +52,7 @@ describe('unit:lib/resolveModule', () => {
     try {
       testSubject(specifier, parent, options)
     } catch (e: unknown) {
-      error = <typeof error>e
+      error = e as typeof error
     }
 
     // Expect

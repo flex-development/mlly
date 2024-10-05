@@ -39,16 +39,16 @@
   ],
   "exports": {
     ".": {
-      "mlly": "./src/index.ts",
+      "mlly": "./src/index.mts",
       "default": "./dist/index.mjs"
     },
     "./package.json": "./package.json"
   },
   "imports": {
-    "#build/*": "./build/*.ts",
-    "#fixtures/*": "./__fixtures__/*.ts",
+    "#build/*": "./build/*.mts",
+    "#fixtures/*": "./__fixtures__/*.mts",
     "#interfaces/*": {
-      "mlly": "./src/interfaces/*.ts",
+      "mlly": "./src/interfaces/*.mts",
       "default": "./dist/interfaces/*.d.mts"
     },
     "#internal/fs": {
@@ -57,30 +57,30 @@
         "default": "./dist/internal/fs.d.mts"
       },
       "browser": {
-        "mlly": "./src/internal/fs.browser.ts",
+        "mlly": "./src/internal/fs.browser.mts",
         "default": "./dist/internal/fs.browser.mjs"
       },
       "node": "fs",
       "default": "fs"
     },
     "#internal/*": {
-      "mlly": "./src/internal/*.ts",
+      "mlly": "./src/internal/*.mts",
       "default": "./dist/internal/*.mjs"
     },
     "#lib/*": {
-      "mlly": "./src/lib/*.ts",
+      "mlly": "./src/lib/*.mts",
       "default": "./dist/lib/*.mjs"
     },
-    "#tests/*": "./__tests__/*.ts",
+    "#tests/*": "./__tests__/*.mts",
     "#types/*": {
-      "mlly": "./src/types/*.ts",
+      "mlly": "./src/types/*.mts",
       "default": "./dist/types/*.d.mts"
     }
   },
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "scripts": {
-    "build": "yarn clean:build; node --conditions development --conditions mlly/build --conditions mlly --experimental-strip-types --experimental-transform-types ./build/build.ts",
+    "build": "yarn clean:build; node --conditions development --conditions mlly/build --conditions mlly --experimental-strip-types --experimental-transform-types ./build/build.mts",
     "check:ci": "yarn dedupe --check && yarn check:format && yarn check:lint && yarn check:spelling && yarn typecheck && yarn test:cov && yarn pack && yarn check:types:build && attw package.tgz && yarn clean:pack",
     "check:format": "dprint check --incremental=false",
     "check:lint": "eslint --exit-on-fatal-error --max-warnings 0 .",

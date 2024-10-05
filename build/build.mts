@@ -11,15 +11,15 @@ await make({
     {
       dts: 'only',
       entryPoints: [
-        'src/*.ts',
-        'src/interfaces/*.ts',
-        'src/lib/*.ts',
-        'src/types/*.ts'
+        'src/*.mts',
+        'src/interfaces/*.mts',
+        'src/lib/*.mts',
+        'src/types/*.mts'
       ]
     },
     {
       dts: false,
-      entryPoints: ['src/internal/*.ts', 'src/lib/*.ts', 'src/*.ts']
+      entryPoints: ['src/internal/*.mts', 'src/lib/*.mts', 'src/*.mts']
     }
   ],
   target: ['node18', tsconfig.compilerOptions.target],

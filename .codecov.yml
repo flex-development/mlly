@@ -27,11 +27,11 @@ component_management:
     - component_id: internal
       name: internal
       paths:
-        - src/internal/*.ts
+        - src/internal/*.mts
     - component_id: lib
       name: lib
       paths:
-        - src/lib/*.ts
+        - src/lib/*.mts
 
 coverage:
   precision: 2
@@ -89,14 +89,15 @@ github_checks:
   annotations: true
 
 ignore:
+  - '**/*.d.mts'
   - '**/__mocks__/**'
   - '**/__tests__/**'
-  - '**/index.ts'
+  - '**/index.mts'
   - '**/interfaces/**'
   - '**/types/**'
-  - '!src/index.ts'
-  - src/internal/*.browser.ts
+  - '!src/index.mts'
+  - src/internal/*.browser.mts
 
 profiling:
   critical_files_paths:
-    - src/lib/*.ts
+    - src/lib/*.mts

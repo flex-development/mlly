@@ -95,7 +95,7 @@ function resolveModule(
       // add @types resolution attempts if package resolution failed.
       if (
         e.code === codes.ERR_MODULE_NOT_FOUND &&
-        !(<ErrModuleNotFound>e).url
+        !(e as ErrModuleNotFound).url
       ) {
         tries = [
           specifier.startsWith('@types/') ? specifier : '@types/' + specifier
@@ -110,7 +110,7 @@ function resolveModule(
       // add extensionless file resolution attempts if file resolution failed.
       if (
         e.code === codes.ERR_MODULE_NOT_FOUND &&
-        (<ErrModuleNotFound>e).url
+        (e as ErrModuleNotFound).url
       ) {
         tries = extensions.map(ext => specifier + pathe.formatExt(ext))
       }

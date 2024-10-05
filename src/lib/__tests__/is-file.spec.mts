@@ -20,7 +20,7 @@ describe('unit:lib/isFile', () => {
 
   it.each<ModuleId>([
     pathToFileURL('package.json'),
-    String(new URL('vitest.config.ts', cwd()))
+    String(new URL('vitest.config.mts', cwd()))
   ])('should return `true` if `id` is a file (%#)', id => {
     expect(testSubject(id)).to.be.true
   })

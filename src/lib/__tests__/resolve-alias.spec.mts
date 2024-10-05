@@ -19,10 +19,10 @@ describe('unit:lib/resolveAlias', () => {
   it.each<Parameters<typeof testSubject>>([
     ['#lib', { aliases: { '#lib': ['src/lib/index'] } }],
     ['#lib/resolve-alias', {
-      aliases: { '#lib/*': ['src/lib/*.ts'] },
+      aliases: { '#lib/*': ['src/lib/*.mts'] },
       parent: import.meta.url
     }],
-    ['#tests/reporters/notifier.ts', {
+    ['#tests/reporters/notifier.mts', {
       absolute: true,
       aliases: { '#tests/*': ['__tests__/*'] }
     }],

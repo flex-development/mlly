@@ -2,7 +2,7 @@
 
 exports[`unit:lib/resolveModule > should return resolved URL ("#internal/fs") 1`] = `"node:fs"`;
 
-exports[`unit:lib/resolveModule > should return resolved URL ("../../../src") 1`] = `file://\${process.cwd()}/src/index.ts`;
+exports[`unit:lib/resolveModule > should return resolved URL ("../../../src") 1`] = `file://\${process.cwd()}/src/index.mts`;
 
 exports[`unit:lib/resolveModule > should return resolved URL ("../../lib") 1`] = `file://\${process.cwd()}/src/lib/index.mjs`;
 

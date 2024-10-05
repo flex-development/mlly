@@ -992,6 +992,17 @@ export default [
     }
   },
   {
+    files: ['**/*.+(cts|mts)'],
+    rules: {
+      '@typescript-eslint/consistent-type-assertions': [
+        2,
+        {
+          assertionStyle: 'as'
+        }
+      ]
+    }
+  },
+  {
     files: ['**/*.d.+(cts|mts|ts)'],
     rules: {
       '@typescript-eslint/triple-slash-reference': 0,
@@ -1011,17 +1022,21 @@ export default [
     }
   },
   {
-    files: ['**/*.interface.ts', '**/interfaces/*.ts', '**/types/*.ts'],
+    files: [
+      '**/*.interface.+(mts|ts)',
+      '**/interfaces/*.+(mts|ts)',
+      '**/types/*.+(mts|ts)'
+    ],
     rules: {
       '@typescript-eslint/no-invalid-void-type': 0
     }
   },
   {
     files: [
-      '**/__mocks__/**/*.+(ts|tsx)',
-      '**/__tests__/*.spec.+(ts|tsx)',
-      '**/__tests__/*.spec-d.ts',
-      '__tests__/setup/*.ts'
+      '**/__mocks__/**/*.+(mts|ts|tsx)',
+      '**/__tests__/*.spec.+(mts|ts|tsx)',
+      '**/__tests__/*.spec-d.+(mts|ts)',
+      '__tests__/setup/*.+(mts|ts|tsx)'
     ],
     languageOptions: {
       globals: {
@@ -1085,7 +1100,7 @@ export default [
     }
   },
   {
-    files: ['**/__tests__/*.spec-d.ts'],
+    files: ['**/__tests__/*.spec-d.+(mts|ts)'],
     languageOptions: {
       globals: {
         assertType: true,
@@ -1099,13 +1114,17 @@ export default [
     }
   },
   {
-    files: ['**/*.abstract.ts'],
+    files: ['**/*.abstract.+(mts|ts)'],
     rules: {
       '@typescript-eslint/no-useless-constructor': 0
     }
   },
   {
-    files: ['**/enums/*.ts', '**/interfaces/*.ts', '**/types/*.ts'],
+    files: [
+      '**/enums/*.+(mts|ts)',
+      '**/interfaces/*.+(mts|ts)',
+      '**/types/*.+(mts|ts)'
+    ],
     rules: {
       'unicorn/no-keyword-prefix': 0
     }

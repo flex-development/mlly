@@ -19,10 +19,12 @@ hmarr
 iife
 jchen
 kaisugi
+ksort
 lcov
 lintstagedrc
 mkbuild
 mlly
+nocheck
 nvmrc
 pathe
 pjson

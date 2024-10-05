@@ -67,7 +67,7 @@ function readPackageJson(
        *
        * @const {Error} cause
        */
-      const cause: Error = <Error>e
+      const cause: Error = e as Error
 
       /**
        * Invalid package config error.

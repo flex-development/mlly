@@ -99,27 +99,27 @@ import {
 
 This package exports the following identifiers:
 
-- [`canParseUrl`](./src/lib/can-parse-url.ts)
-- [`cwd`](./src/lib/cwd.ts)
-- [`defaultConditions`](./src/lib/default-conditions.ts)
-- [`defaultExtensions`](./src/lib/default-extensions.ts)
-- [`defaultMainFields`](./src/lib/default-main-fields.ts)
-- [`extensionFormatMap`](./src/lib/extension-format-map.ts)
-- [`formats`](./src/lib/formats.ts)
-- [`isAbsoluteSpecifier`](./src/lib/is-absolute-specifier.ts)
-- [`isArrayIndex`](./src/lib/is-array-index.ts)
-- [`isBareSpecifier`](./src/lib/is-bare-specifier.ts)
-- [`isDirectory`](./src/lib/is-directory.ts)
-- [`isFile`](./src/lib/is-file.ts)
-- [`isImportsSubpath`](./src/lib/is-imports-subpath.ts)
-- [`isRelativeSpecifier`](./src/lib/is-relative-specifier.ts)
-- [`lookupPackageScope`](./src/lib/lookup-package-scope.ts)
-- [`patternKeyCompare`](./src/lib/pattern-key-compare.ts)
-- [`patternMatch`](./src/lib/pattern-match.ts)
-- [`readPackageJson`](./src/lib/read-package-json.ts)
-- [`resolveAlias`](./src/lib/resolve-alias.ts)
-- [`resolveModule`](./src/lib/resolve-module.ts)
-- [`resolver`](./src/lib/resolver.ts)
+- [`canParseUrl`](./src/lib/can-parse-url.mts)
+- [`cwd`](./src/lib/cwd.mts)
+- [`defaultConditions`](./src/lib/default-conditions.mts)
+- [`defaultExtensions`](./src/lib/default-extensions.mts)
+- [`defaultMainFields`](./src/lib/default-main-fields.mts)
+- [`extensionFormatMap`](./src/lib/extension-format-map.mts)
+- [`formats`](./src/lib/formats.mts)
+- [`isAbsoluteSpecifier`](./src/lib/is-absolute-specifier.mts)
+- [`isArrayIndex`](./src/lib/is-array-index.mts)
+- [`isBareSpecifier`](./src/lib/is-bare-specifier.mts)
+- [`isDirectory`](./src/lib/is-directory.mts)
+- [`isFile`](./src/lib/is-file.mts)
+- [`isImportsSubpath`](./src/lib/is-imports-subpath.mts)
+- [`isRelativeSpecifier`](./src/lib/is-relative-specifier.mts)
+- [`lookupPackageScope`](./src/lib/lookup-package-scope.mts)
+- [`patternKeyCompare`](./src/lib/pattern-key-compare.mts)
+- [`patternMatch`](./src/lib/pattern-match.mts)
+- [`readPackageJson`](./src/lib/read-package-json.mts)
+- [`resolveAlias`](./src/lib/resolve-alias.mts)
+- [`resolveModule`](./src/lib/resolve-module.mts)
+- [`resolver`](./src/lib/resolver.mts)
   - `legacyMainResolve`
   - `moduleResolve`
   - `packageExportsResolve`
@@ -128,8 +128,8 @@ This package exports the following identifiers:
   - `packageResolve`
   - `packageSelfResolve`
   - `packageTargetResolve`
-- [`root`](./src/lib/root.ts)
-- [`toRelativeSpecifier`](./src/lib/to-relative-specifier.ts)
+- [`root`](./src/lib/root.mts)
+- [`toRelativeSpecifier`](./src/lib/to-relative-specifier.mts)
 
 There is no default export.
 
@@ -139,25 +139,25 @@ This package is fully typed with [TypeScript][].
 
 ### Interfaces
 
-- [`Aliases`](src/interfaces/aliases.ts)
-- [`FileSystem`](src/interfaces/file-system.ts)
-- [`MainFieldMap`](src/interfaces/main-field-map.ts)
-- [`ModuleFormatMap`](src/interfaces/module-format-map.ts)
-- [`ResolveAliasOptions`](src/interfaces/options-resolve-alias.ts)
-- [`ResolveModuleOptions`](src/interfaces/options-resolve-module.ts)
-- [`ProtocolMap`](src/interfaces/protocol-map.ts)
-- [`Stats`](src/interfaces/stats.ts)
+- [`Aliases`](src/interfaces/aliases.mts)
+- [`FileSystem`](src/interfaces/file-system.mts)
+- [`MainFieldMap`](src/interfaces/main-field-map.mts)
+- [`ModuleFormatMap`](src/interfaces/module-format-map.mts)
+- [`ResolveAliasOptions`](src/interfaces/options-resolve-alias.mts)
+- [`ResolveModuleOptions`](src/interfaces/options-resolve-module.mts)
+- [`ProtocolMap`](src/interfaces/protocol-map.mts)
+- [`Stats`](src/interfaces/stats.mts)
 
 ### Type Aliases
 
-- [`ChangeExtFn`](src/types/change-ext-fn.ts)
-- [`MainField`](src/types/main-field.ts)
-- [`ModuleFormat`](src/types/module-format.ts)
-- [`ModuleId`](src/types/module-id.ts)
-- [`Numeric`](src/types/numeric.ts)
-- [`PatternKeyCompareResult`](src/types/pattern-key-compare-result.ts)
-- [`PatternMatch`](src/types/pattern-match.ts)
-- [`Protocol`](src/types/protocol.ts)
+- [`ChangeExtFn`](src/types/change-ext-fn.mts)
+- [`MainField`](src/types/main-field.mts)
+- [`ModuleFormat`](src/types/module-format.mts)
+- [`ModuleId`](src/types/module-id.mts)
+- [`Numeric`](src/types/numeric.mts)
+- [`PatternKeyCompareResult`](src/types/pattern-key-compare-result.mts)
+- [`PatternMatch`](src/types/pattern-match.mts)
+- [`Protocol`](src/types/protocol.mts)
 
 ## Contribute
 

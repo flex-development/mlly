@@ -58,8 +58,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       cache-key: ${{ steps.cache-key.outputs.result }}
-      version: ${{ steps.version.outputs.result }}
+      test-files: ${{ steps.test-files.outputs.files_exists }}
+      typecheck-files: ${{ steps.typecheck-files.outputs.files_exists }}
       version-typescript: ${{ steps.version-typescript.outputs.result }}
+      version: ${{ steps.version.outputs.result }}
     steps:
       - id: debug
         name: Print environment variables and event payload
@@ -97,6 +99,16 @@ jobs:
       - id: version-typescript
         name: Get TypeScript version
         run: echo "result=$(jq .devDependencies.typescript package.json -r)" >>$GITHUB_OUTPUT
+      - id: test-files
+        name: Check for test files
+        uses: andstor/file-existence-action@v3.0.0
+        with:
+          files: '**/__tests__/*.spec.+(mts|tsx)'
+      - id: typecheck-files
+        name: Check for typecheck files
+        uses: andstor/file-existence-action@v3.0.0
+        with:
+          files: '**/__tests__/*.spec-d.mts'
   commitlint:
     needs: preflight
     runs-on: ubuntu-latest
@@ -248,6 +260,7 @@ jobs:
           - 5.5.4
           - 5.4.5
           - 5.0.4
+    if: ${{ fromJson(needs.preflight.outputs.typecheck-files) }}
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -255,13 +268,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
-      - id: test-files-check
-        name: Check for typecheck files
-        uses: andstor/file-existence-action@v3.0.0
-        with:
-          files: '**/__tests__/*.spec-d.ts'
       - id: node
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Setup Node.js
         uses: actions/setup-node@v4.0.4
         with:
@@ -269,22 +276,18 @@ jobs:
           cache-dependency-path: yarn.lock
           node-version-file: .nvmrc
       - id: cache
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Restore dependencies cache
         uses: actions/cache@v4.1.0
         with:
           key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
       - id: typescript
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Install typescript@${{ matrix.typescript-version }}
         run: yarn add -D typescript@${{ matrix.typescript-version }}
       - id: print-typescript-version
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Print TypeScript version
         run: jq .devDependencies.typescript package.json -r
       - id: typecheck
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Run typecheck
         run: yarn typecheck
   test:
@@ -302,6 +305,7 @@ jobs:
       COVERAGE_SUMMARY: ./coverage/coverage-summary.json
       PCT: .total.branches.pct + .total.functions.pct + .total.lines.pct + .total.statements.pct
       VITEST_REPORT: ./.vitest-reports/test.blob.json
+    if: ${{ fromJson(needs.preflight.outputs.test-files) }}
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -309,13 +313,7 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
-      - id: test-files-check
-        name: Check for test files
-        uses: andstor/file-existence-action@v3.0.0
-        with:
-          files: '**/__tests__/*.spec.+(ts|tsx)'
       - id: node
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Setup Node.js v${{ matrix.node-version }}
         uses: actions/setup-node@v4.0.4
         with:
@@ -324,27 +322,23 @@ jobs:
           check-latest: true
           node-version: ${{ matrix.node-version }}
       - id: cache
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Restore dependencies cache
         uses: actions/cache@v4.1.0
         with:
           key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
       - id: test
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Run tests
         run: |
           yarn test:cov --coverage.thresholds.100=false \
           && echo "coverage=$(jq '${{ env.PCT }}' ${{ env.COVERAGE_SUMMARY }} -r)" >>$GITHUB_OUTPUT
       - id: report
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Upload report
         uses: actions/upload-artifact@v4.4.0
         with:
           name: ${{ format('vitest-report-{0}-{1}.json', github.event.repository.name, env.SHA) }}
           path: ${{ env.VITEST_REPORT }}
       - id: coverage-summary
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Upload coverage summary
         uses: actions/upload-artifact@v4.4.0
         with:
@@ -352,7 +346,6 @@ jobs:
             ${{ format('coverage-summary-{0}-{1}.json', github.event.repository.name, env.SHA) }}
           path: ${{ env.COVERAGE_SUMMARY }}
       - id: codecov
-        if: steps.test-files-check.outputs.files_exists == 'true'
         name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v4.6.0
         env:
@@ -373,9 +366,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
       - id: coverage-failure
-        if: |
-          steps.test-files-check.outputs.files_exists == 'true'
-          && ${{ toJson(steps.test.outputs.coverage) }} != 400
+        if: ${{ toJson(steps.test.outputs.coverage) }} != 400
         name: Coverage threshold failure (${{ steps.test.outputs.coverage }})
         run: yarn test:cov:reports
   build:

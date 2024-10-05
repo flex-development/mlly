@@ -37,7 +37,7 @@ describe('unit:lib/readPackageJson', () => {
     try {
       testSubject(id, specifier, parent)
     } catch (e: unknown) {
-      error = <typeof error>e
+      error = e as typeof error
     }
 
     // Expect

@@ -7,12 +7,12 @@
     "typings/@faker-js/faker/global.d.ts",
     "typings/@flex-development/pkg-types/index.d.mts",
     "typings/typescript/lib.es5.d.ts",
-    "vitest-env.d.ts"
+    "vitest-env.d.mts"
   ],
   "include": [
-    "__fixtures__/**/**.ts",
-    "__tests__/**/**.ts",
-    "src/**/**.ts",
-    "src/**/.*.ts"
+    "__fixtures__/**/**.mts",
+    "__tests__/**/**.mts",
+    "src/**/**.mts",
+    "src/**/.*.mts"
   ]
 }

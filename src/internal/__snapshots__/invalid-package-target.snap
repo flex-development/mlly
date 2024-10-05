@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`unit:internal/invalidPackageTarget > should return new \`ERR_INVALID_PACKAGE_TARGET\` (0) 1`] = `Invalid "imports" target "./__fixtures__/node_modules/*" defined for '#nm/*' in the package config \${process.cwd()}/package.json imported from \${process.cwd()}/src/internal/__tests__/invalid-package-target.spec.ts`;
+exports[`unit:internal/invalidPackageTarget > should return new \`ERR_INVALID_PACKAGE_TARGET\` (0) 1`] = `Invalid "imports" target "./__fixtures__/node_modules/*" defined for '#nm/*' in the package config \${process.cwd()}/package.json imported from \${process.cwd()}/src/internal/__tests__/invalid-package-target.spec.mts`;
 
 exports[`unit:internal/invalidPackageTarget > should return new \`ERR_INVALID_PACKAGE_TARGET\` (1) 1`] = `Invalid "exports" main target "[null]" defined in the package config \${process.cwd()}/__fixtures__/node_modules/invalid-target-array/package.json; targets must start with "./"`;
 

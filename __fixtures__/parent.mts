@@ -10,6 +10,6 @@ import pathe from '@flex-development/pathe'
  *
  * @const {URL} parent
  */
-const parent: URL = pathe.pathToFileURL('__fixtures__/parent.ts')
+const parent: URL = pathe.pathToFileURL('__fixtures__/parent.mts')
 
 export default parent
