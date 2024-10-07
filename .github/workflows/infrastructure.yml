@@ -51,7 +51,7 @@ jobs:
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
       - id: checkout
         name: Checkout ${{ github.ref_name }}@${{ github.sha }}
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
         with:
           persist-credentials: false
           ref: ${{ github.sha }}
