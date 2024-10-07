@@ -47,7 +47,7 @@ jobs:
         uses: hmarr/debug-action@v3.0.0
       - id: checkout
         name: Checkout ${{ github.ref_name }}
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
         with:
           persist-credentials: false
           ref: ${{ github.ref }}
@@ -83,7 +83,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ github.ref_name }}
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
         with:
           persist-credentials: false
           ref: ${{ github.ref }}
@@ -122,7 +122,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ github.ref_name }}
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
         with:
           persist-credentials: false
           ref: ${{ github.ref }}
