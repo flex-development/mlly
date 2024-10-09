@@ -334,13 +334,13 @@ jobs:
           && echo "coverage=$(jq '${{ env.PCT }}' ${{ env.COVERAGE_SUMMARY }} -r)" >>$GITHUB_OUTPUT
       - id: report
         name: Upload report
-        uses: actions/upload-artifact@v4.4.2
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: ${{ format('vitest-report-{0}-{1}.json', github.event.repository.name, env.SHA) }}
           path: ${{ env.VITEST_REPORT }}
       - id: coverage-summary
         name: Upload coverage summary
-        uses: actions/upload-artifact@v4.4.2
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: |
             ${{ format('coverage-summary-{0}-{1}.json', github.event.repository.name, env.SHA) }}
@@ -412,7 +412,7 @@ jobs:
         run: attw ${{ env.TARFILE }}
       - id: archive
         name: Archive production artifacts
-        uses: actions/upload-artifact@v4.4.2
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: ${{ env.TARFILE }}
           path: ${{ env.TARFILE }}
