@@ -173,7 +173,7 @@
     "eslint-plugin-promise": "7.1.0",
     "eslint-plugin-unicorn": "56.0.0",
     "eslint-plugin-yml": "1.14.0",
-    "globals": "15.10.0",
+    "globals": "15.11.0",
     "growl": "1.10.5",
     "husky": "9.1.6",
     "import-meta-resolve": "4.1.0",
