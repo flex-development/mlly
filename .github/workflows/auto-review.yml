@@ -65,7 +65,7 @@ jobs:
           token: ${{ steps.bot-token.outputs.token }}
       - id: status-checks
         name: Wait for status checks to complete
-        uses: jchen1/wait-for-green@v1.0.8
+        uses: jchen1/wait-for-green@v2.0.0
         with:
           check_interval: 45
           commit: ${{ github.head_ref }}
