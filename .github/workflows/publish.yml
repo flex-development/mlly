@@ -92,7 +92,7 @@ jobs:
         run: rm .npmrc
       - id: npmrc
         name: Setup .npmrc file
-        uses: actions/setup-node@v4.0.4
+        uses: actions/setup-node@v4.1.0
         with:
           always-auth: true
           node-version-file: .nvmrc
@@ -131,7 +131,7 @@ jobs:
         run: rm .npmrc
       - id: npmrc
         name: Setup .npmrc file
-        uses: actions/setup-node@v4.0.4
+        uses: actions/setup-node@v4.1.0
         with:
           always-auth: true
           node-version-file: .nvmrc
