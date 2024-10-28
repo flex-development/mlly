@@ -833,58 +833,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dprint/darwin-arm64@npm:0.47.4":
-  version: 0.47.4
-  resolution: "@dprint/darwin-arm64@npm:0.47.4"
+"@dprint/darwin-arm64@npm:0.47.5":
+  version: 0.47.5
+  resolution: "@dprint/darwin-arm64@npm:0.47.5"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@dprint/darwin-x64@npm:0.47.4":
-  version: 0.47.4
-  resolution: "@dprint/darwin-x64@npm:0.47.4"
+"@dprint/darwin-x64@npm:0.47.5":
+  version: 0.47.5
+  resolution: "@dprint/darwin-x64@npm:0.47.5"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@dprint/linux-arm64-glibc@npm:0.47.4":
-  version: 0.47.4
-  resolution: "@dprint/linux-arm64-glibc@npm:0.47.4"
+"@dprint/linux-arm64-glibc@npm:0.47.5":
+  version: 0.47.5
+  resolution: "@dprint/linux-arm64-glibc@npm:0.47.5"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@dprint/linux-arm64-musl@npm:0.47.4":
-  version: 0.47.4
-  resolution: "@dprint/linux-arm64-musl@npm:0.47.4"
+"@dprint/linux-arm64-musl@npm:0.47.5":
+  version: 0.47.5
+  resolution: "@dprint/linux-arm64-musl@npm:0.47.5"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@dprint/linux-x64-glibc@npm:0.47.4":
-  version: 0.47.4
-  resolution: "@dprint/linux-x64-glibc@npm:0.47.4"
+"@dprint/linux-x64-glibc@npm:0.47.5":
+  version: 0.47.5
+  resolution: "@dprint/linux-x64-glibc@npm:0.47.5"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@dprint/linux-x64-musl@npm:0.47.4":
-  version: 0.47.4
-  resolution: "@dprint/linux-x64-musl@npm:0.47.4"
+"@dprint/linux-x64-musl@npm:0.47.5":
+  version: 0.47.5
+  resolution: "@dprint/linux-x64-musl@npm:0.47.5"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@dprint/win32-arm64@npm:0.47.4":
-  version: 0.47.4
-  resolution: "@dprint/win32-arm64@npm:0.47.4"
+"@dprint/win32-arm64@npm:0.47.5":
+  version: 0.47.5
+  resolution: "@dprint/win32-arm64@npm:0.47.5"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@dprint/win32-x64@npm:0.47.4":
-  version: 0.47.4
-  resolution: "@dprint/win32-x64@npm:0.47.4"
+"@dprint/win32-x64@npm:0.47.5":
+  version: 0.47.5
+  resolution: "@dprint/win32-x64@npm:0.47.5"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -1761,7 +1761,7 @@ __metadata:
     cross-env: "npm:7.0.3"
     cspell: "npm:8.15.4"
     devlop: "npm:1.1.0"
-    dprint: "npm:0.47.4"
+    dprint: "npm:0.47.5"
     editorconfig: "npm:2.0.0"
     esbuild: "npm:0.24.0"
     eslint: "npm:9.13.0"
@@ -4411,18 +4411,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dprint@npm:0.47.4":
-  version: 0.47.4
-  resolution: "dprint@npm:0.47.4"
+"dprint@npm:0.47.5":
+  version: 0.47.5
+  resolution: "dprint@npm:0.47.5"
   dependencies:
-    "@dprint/darwin-arm64": "npm:0.47.4"
-    "@dprint/darwin-x64": "npm:0.47.4"
-    "@dprint/linux-arm64-glibc": "npm:0.47.4"
-    "@dprint/linux-arm64-musl": "npm:0.47.4"
-    "@dprint/linux-x64-glibc": "npm:0.47.4"
-    "@dprint/linux-x64-musl": "npm:0.47.4"
-    "@dprint/win32-arm64": "npm:0.47.4"
-    "@dprint/win32-x64": "npm:0.47.4"
+    "@dprint/darwin-arm64": "npm:0.47.5"
+    "@dprint/darwin-x64": "npm:0.47.5"
+    "@dprint/linux-arm64-glibc": "npm:0.47.5"
+    "@dprint/linux-arm64-musl": "npm:0.47.5"
+    "@dprint/linux-x64-glibc": "npm:0.47.5"
+    "@dprint/linux-x64-musl": "npm:0.47.5"
+    "@dprint/win32-arm64": "npm:0.47.5"
+    "@dprint/win32-x64": "npm:0.47.5"
   dependenciesMeta:
     "@dprint/darwin-arm64":
       optional: true
@@ -4442,7 +4442,7 @@ __metadata:
       optional: true
   bin:
     dprint: bin.js
-  checksum: 10/1d7ac9cd55e937fc02f343693e65278e35f13f2f758d51928237372dc9c64bb25ba9a7a5508844ab0339ae7d9b68fd180e70151c612887a877876f66b061d3bb
+  checksum: 10/90b76f525dcb98267446fabd66ffbbe6f0d136979f47d80d4d8246004582ff5e2c277443745247c003ac8d3cf12826157231cd02cbd93fd4b6b3c0370f8c4835
   languageName: node
   linkType: hard
 
