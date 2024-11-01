@@ -3,6 +3,7 @@
  * @module dprint/remark
  */
 
+import { ok } from 'devlop'
 import { Transform } from 'node:stream'
 import remarkParse from 'remark-parse'
 import remarkStringify from 'remark-stringify'
@@ -23,16 +24,15 @@ process.stdin.pipe(new Transform({
    * @return {Promise<string>}
    *  Formatted file content
    */
-  async transform(buffer) {
+  async transform(buffer: Buffer): Promise<string> {
     /**
      * Virtual file.
      *
-     * @type {VFile}
-     * @const file
+     * @const {VFile} file
      */
-    const file = new VFile(buffer.toString())
+    const file: VFile = new VFile(buffer.toString())
 
-    file.path = process.argv.slice(2)[0]
+    file.path = process.argv.slice(2)[0]!
 
     await unified()
       .use(remarkParse)
@@ -40,7 +40,7 @@ process.stdin.pipe(new Transform({
       .use(remarkStringify)
       .process(file)
 
-    process.stdout.write(file.value)
-    return file.value
+    ok(typeof file.value === 'string', 'expected `file.value` to be a string')
+    return process.stdout.write(file.value), file.value
   }
 }))

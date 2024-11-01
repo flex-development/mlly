@@ -1,7 +1,7 @@
 /**
- * @file Vitest Configuration
+ * @file Configuration - Vitest
  * @module config/vitest
- * @see https://vitest.dev/config/
+ * @see https://vitest.dev/config
  */
 
 import tsconfigPaths from '#tests/plugins/tsconfig-paths'
@@ -15,7 +15,7 @@ import {
   type UserConfigExport
 } from 'vitest/config'
 import { BaseSequencer, type WorkspaceSpec } from 'vitest/node'
-import tsconfigJson from './tsconfig.test.json'
+import tsconfig from './tsconfig.test.json' with { type: 'json' }
 
 /**
  * Vitest configuration.
@@ -23,19 +23,10 @@ import tsconfigJson from './tsconfig.test.json'
  * @const {UserConfigExport} config
  */
 const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
-  /**
-   * [`lint-staged`][1] check.
-   *
-   * [1]: https://github.com/okonet/lint-staged
-   *
-   * @const {boolean} LINT_STAGED
-   */
-  const LINT_STAGED: boolean = !!Number.parseInt(process.env.LINT_STAGED ?? '0')
-
   return {
     define: {},
     plugins: [tsconfigPaths({ tsconfig: 'tsconfig.test.json' })],
-    resolve: { conditions: tsconfigJson.compilerOptions.customConditions },
+    resolve: { conditions: tsconfig.compilerOptions.customConditions },
     test: {
       allowOnly: !ci,
       chaiConfig: {
@@ -45,7 +36,7 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
       },
       clearMocks: true,
       coverage: {
-        all: !LINT_STAGED,
+        all: true,
         clean: true,
         cleanOnRerun: true,
         exclude: [
@@ -71,24 +62,18 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
       },
       environment: 'node',
       environmentOptions: {},
-      exclude: [
-        '.cache',
-        '.git',
-        '.idea',
-        'dist',
-        'node_modules'
-      ],
       globalSetup: [],
       globals: true,
-      hookTimeout: 10 * 1000,
-      include: [`**/__tests__/*.${LINT_STAGED ? '{spec,spec-d}' : 'spec'}.mts`],
+      include: ['src/**/__tests__/*.spec.mts'],
       mockReset: true,
       outputFile: {
         blob: `.vitest-reports/${env.mode}.blob.json`,
         json: pathe.join('__tests__', 'reports', env.mode + '.json')
       },
       passWithNoTests: true,
-      reporters: env.mode === 'reports'
+      reporters: JSON.parse(process.env.VITEST_UI ?? '0')
+        ? [new Notifier(), 'verbose']
+        : env.mode === 'reports'
         ? ['verbose']
         : [ci ? 'github-actions' : new Notifier(), 'blob', 'json', 'verbose'],
       /**
@@ -118,7 +103,7 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
          */
         sequencer: class Sequencer extends BaseSequencer {
           /**
-           * Determines test file execution order.
+           * Determine test file execution order.
            *
            * @public
            * @override
@@ -127,13 +112,15 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
            * @param {WorkspaceSpec[]} specs
            *  Workspace spec objects
            * @return {Promise<WorkspaceSpec[]>}
-           *  `files` sorted
+           *  Sorted `specs`
            */
           public override async sort(
             specs: WorkspaceSpec[]
           ): Promise<WorkspaceSpec[]> {
-            return (await super.sort(specs)).sort(([, file1], [, file2]) => {
-              return file1.localeCompare(file2)
+            return new Promise(resolve => {
+              return void resolve(specs.sort((a, b) => {
+                return a.moduleId.localeCompare(b.moduleId)
+              }))
             })
           }
         }

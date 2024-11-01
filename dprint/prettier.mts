@@ -3,10 +3,17 @@
  * @module dprint/prettier
  */
 
-import { includes } from '@flex-development/tutils'
+import { ok } from 'devlop'
 import editorconfig from 'editorconfig'
 import { Transform } from 'node:stream'
 import * as prettier from 'prettier'
+
+declare module 'editorconfig' {
+  interface KnownProps {
+    max_line_length?: number | undefined
+    single_attribute_per_line?: boolean | undefined
+  }
+}
 
 process.stdin.pipe(new Transform({
   /**
@@ -21,8 +28,9 @@ process.stdin.pipe(new Transform({
    * @return {Promise<string>}
    *  Formatted file content
    */
-  async transform(buffer) {
+  async transform(buffer: Buffer): Promise<string> {
     const [filepath] = process.argv.slice(2)
+    ok(typeof filepath === 'string', 'expected `filepath`')
 
     const {
       end_of_line = 'lf',
@@ -38,10 +46,9 @@ process.stdin.pipe(new Transform({
     /**
      * Formatted text.
      *
-     * @type {string}
-     * @const text
+     * @const {string} text
      */
-    const text = await prettier.format(buffer.toString(), {
+    const text: string = await prettier.format(buffer.toString(), {
       arrowParens: 'avoid',
       bracketSpacing: spaces_around_brackets === 'inside',
       endOfLine: end_of_line === 'unset' ? 'auto' : end_of_line,
@@ -55,10 +62,9 @@ process.stdin.pipe(new Transform({
       singleQuote: quote_type === 'single',
       tabWidth: tab_width === 'unset' ? 2 : tab_width,
       trailingComma: 'none',
-      useTabs: includes([indent_size, indent_style], 'tab')
+      useTabs: [indent_size, indent_style].includes('tab')
     })
 
-    process.stdout.write(text)
-    return text
+    return process.stdout.write(text), text
   }
 }))

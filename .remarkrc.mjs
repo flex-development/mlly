@@ -58,7 +58,6 @@ import remarkLintNoUndefinedReferences from 'remark-lint-no-undefined-references
 import remarkLintNoUnneededFullReferenceImage from 'remark-lint-no-unneeded-full-reference-image'
 import remarkLintNoUnneededFullReferenceLink from 'remark-lint-no-unneeded-full-reference-link'
 import remarkLintNoUnusedDefinitions from 'remark-lint-no-unused-definitions'
-import remarkLintNoTrailingSlash from 'remark-lint-no-url-trailing-slash'
 import remarkLintOrderedListMarkerStyle from 'remark-lint-ordered-list-marker-style'
 import remarkLintOrderedListMarkerValue from 'remark-lint-ordered-list-marker-value'
 import remarkLintRuleStyle from 'remark-lint-rule-style'
@@ -130,7 +129,6 @@ const lint = {
     remarkLintNoShortcutReferenceLink,
     remarkLintNoTableIndentation,
     remarkLintNoTabs,
-    remarkLintNoTrailingSlash,
     remarkLintNoUndefinedReferences,
     remarkLintNoUnneededFullReferenceImage,
     remarkLintNoUnneededFullReferenceLink,

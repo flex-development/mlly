@@ -13,7 +13,6 @@
   "failFast": false,
   "flagWords": [],
   "ignorePaths": [
-    "!scratch.*",
     "**/*.patch",
     "**/*.snap",
     "**/*.wasm",

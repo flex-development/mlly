@@ -33,10 +33,9 @@ branches:
           - context: lint
           - context: spelling
           - context: test (22)
-          - context: typescript (5.0.4)
-          - context: typescript (5.4.5)
-          - context: typescript (5.5.4)
-          - context: typescript (5.6.2)
+          - context: test (23)
+          - context: typescript (5.6.3)
+          - context: typescript (5.7.0-beta)
         strict: true
       restrictions: null
 environments:

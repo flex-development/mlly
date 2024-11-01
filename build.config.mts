@@ -5,18 +5,16 @@
  */
 
 import { defineBuildConfig, type Config } from '@flex-development/mkbuild'
-import tsconfig from './tsconfig.build.json' assert { type: 'json' }
+import tsconfig from './tsconfig.build.json' with { type: 'json' }
 
 /**
- * Build configuration options.
+ * Build config.
  *
- * @const {Config} config
+ * @type {Config}
  */
-const config: Config = defineBuildConfig({
+export default defineBuildConfig({
   charset: 'utf8',
   entries: [],
   target: ['node18', tsconfig.compilerOptions.target],
   tsconfig: 'tsconfig.build.json'
 })
-
-export default config

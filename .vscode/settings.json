@@ -131,6 +131,7 @@
     "*.log": "log",
     "*.snap": "jest-snapshot",
     ".env.zsh": "shellscript",
+    "*.map": "json",
     ".npmrc": "ini",
     ".remarkignore": "ignore",
     "commit-msg": "shellscript",

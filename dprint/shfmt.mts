@@ -3,10 +3,22 @@
  * @module dprint/shfmt
  */
 
-import * as tutils from '@flex-development/tutils'
+import { ok } from 'devlop'
 import editorconfig from 'editorconfig'
 import { Transform } from 'node:stream'
 import * as sh from 'sh-syntax'
+
+declare module 'editorconfig' {
+  interface KnownProps {
+    binary_next_line?: boolean | undefined
+    function_next_line?: boolean | undefined
+    keep_comments?: boolean | undefined
+    keep_padding?: boolean | undefined
+    shell_variant?: sh.LangVariant | undefined
+    space_redirects?: boolean | undefined
+    switch_case_indent?: boolean | undefined
+  }
+}
 
 process.stdin.pipe(new Transform({
   /**
@@ -22,8 +34,9 @@ process.stdin.pipe(new Transform({
    * @return {Promise<string>}
    *  Formatted file content
    */
-  async transform(buffer) {
+  async transform(buffer: Buffer): Promise<string> {
     const [filepath] = process.argv.slice(2)
+    ok(typeof filepath === 'string', 'expected `filepath`')
 
     const {
       binary_next_line = true,
@@ -41,49 +54,44 @@ process.stdin.pipe(new Transform({
     /**
      * Shell formatting options.
      *
-     * @type {tutils.Shake<Required<Omit<sh.ShOptions,'stopAt'>>>}
-     * @const opts
+     * @const {sh.ShOptions} options
      */
-    const opts = tutils.shake({
+    const options: sh.ShOptions = {
       binaryNextLine: binary_next_line,
       filepath,
       functionNextLine: function_next_line,
-      indent: indent_size,
+      indent: typeof indent_size === 'string' ? 2 : indent_size,
       keepComments: keep_comments,
       keepPadding: keep_padding,
       minify: false,
       spaceRedirects: space_redirects,
       switchCaseIndent: switch_case_indent,
-      tabWidth: tab_width,
+      tabWidth: tab_width === 'unset' ? 2 : tab_width,
       useTabs: indent_style === 'tab',
       variant: shell_variant
-    })
+    }
 
     /**
      * Text to format.
      *
-     * @type {string}
-     * @const originalText
+     * @const {string} originalText
      */
-    const originalText = buffer.toString()
+    const originalText: string = buffer.toString()
 
     /**
      * Formatted text AST.
      *
-     * @type {sh.File}
-     * @const ast
+     * @const {sh.File} ast
      */
-    const ast = await sh.parse(originalText, opts)
+    const ast: sh.File = await sh.parse(originalText, options)
 
     /**
      * Formatted text.
      *
-     * @type {string}
-     * @const text
+     * @const {string} text
      */
-    const text = await sh.print(ast, { ...opts, originalText })
+    const text: string = await sh.print(ast, { ...options, originalText })
 
-    process.stdout.write(text)
-    return text
+    return process.stdout.write(text), text
   }
 }))

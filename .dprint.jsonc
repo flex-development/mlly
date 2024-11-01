@@ -15,17 +15,17 @@
   "exec": {
     "commands": [
       {
-        "command": "node ./dprint/prettier.mjs {{file_path}}",
+        "command": "node --experimental-strip-types --experimental-transform-types ./dprint/prettier.mts {{file_path}}",
         "exts": ["css", "html", "json5", "scss", "yaml", "yml"],
         "stdin": true
       },
       {
-        "command": "node ./dprint/remark.mjs {{file_path}}",
+        "command": "node --experimental-strip-types --experimental-transform-types ./dprint/remark.mts {{file_path}}",
         "exts": ["md", "mdx"],
         "stdin": true
       },
       {
-        "command": "node ./dprint/shfmt.mjs {{file_path}}",
+        "command": "node --experimental-strip-types --experimental-transform-types ./dprint/shfmt.mts {{file_path}}",
         "exts": ["sh", "zsh"],
         "fileNames": [
           ".editorconfig",

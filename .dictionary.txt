@@ -21,7 +21,6 @@ jchen
 kaisugi
 ksort
 lcov
-lintstagedrc
 mkbuild
 mlly
 nocheck

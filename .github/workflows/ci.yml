@@ -257,9 +257,10 @@ jobs:
       matrix:
         typescript-version:
           - ${{ needs.preflight.outputs.version-typescript }}
-          - 5.5.4
-          - 5.4.5
-          - 5.0.4
+          - 5.6.3
+    env:
+      TYPESCRIPT_VERSION: ${{ matrix.typescript-version }}
+      VITEST_REPORT: ./.vitest-reports/typecheck.blob.json
     if: ${{ fromJson(needs.preflight.outputs.typecheck-files) }}
     steps:
       - id: checkout
@@ -282,14 +283,21 @@ jobs:
           key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
       - id: typescript
-        name: Install typescript@${{ matrix.typescript-version }}
-        run: yarn add -D typescript@${{ matrix.typescript-version }}
+        name: Install typescript@${{ env.TYPESCRIPT_VERSION }}
+        run: yarn add -D typescript@${{ env.TYPESCRIPT_VERSION }}
       - id: print-typescript-version
         name: Print TypeScript version
         run: jq .devDependencies.typescript package.json -r
       - id: typecheck
         name: Run typecheck
         run: yarn typecheck
+      - id: report
+        name: Upload report
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: |
+            ${{ format('typecheck-{0}-{1}-{2}.blob.json', env.TYPESCRIPT_VERSION, github.event.repository.name, env.SHA) }}
+          path: ${{ env.VITEST_REPORT }}
   test:
     needs:
       - commitlint
@@ -300,9 +308,11 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
+          - 23
           - 22
     env:
       COVERAGE_SUMMARY: ./coverage/coverage-summary.json
+      NODE_VERSION: ${{ matrix.node-version }}
       PCT: .total.branches.pct + .total.functions.pct + .total.lines.pct + .total.statements.pct
       VITEST_REPORT: ./.vitest-reports/test.blob.json
     if: ${{ fromJson(needs.preflight.outputs.test-files) }}
@@ -336,14 +346,15 @@ jobs:
         name: Upload report
         uses: actions/upload-artifact@v4.4.3
         with:
-          name: ${{ format('vitest-report-{0}-{1}.json', github.event.repository.name, env.SHA) }}
+          name: |
+            ${{ format('test-{0}-{1}-{2}.blob.json', env.NODE_VERSION, github.event.repository.name, env.SHA) }}
           path: ${{ env.VITEST_REPORT }}
       - id: coverage-summary
         name: Upload coverage summary
         uses: actions/upload-artifact@v4.4.3
         with:
           name: |
-            ${{ format('coverage-summary-{0}-{1}.json', github.event.repository.name, env.SHA) }}
+            ${{ format('coverage-summary-{0}-{1}-{2}.json', env.NODE_VERSION, github.event.repository.name, env.SHA) }}
           path: ${{ env.COVERAGE_SUMMARY }}
       - id: codecov
         name: Upload coverage report to Codecov
