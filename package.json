@@ -251,7 +251,7 @@
     "remark-lint-table-pipe-alignment": "4.0.0",
     "remark-lint-table-pipes": "5.0.0",
     "remark-lint-unordered-list-marker-style": "4.0.0",
-    "remark-validate-links": "13.0.1",
+    "remark-validate-links": "13.0.2",
     "sh-syntax": "0.4.2",
     "tinyrainbow": "1.2.0",
     "trash-cli": "6.0.0",
