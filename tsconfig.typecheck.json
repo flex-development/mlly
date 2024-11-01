@@ -7,10 +7,15 @@
   },
   "extends": "./tsconfig.json",
   "files": [
-    "typings/@faker-js/faker/global.d.ts",
-    "typings/@flex-development/pkg-types/index.d.mts",
-    "typings/typescript/lib.es5.d.ts",
-    "vitest-env.d.mts"
+    "./typings/@faker-js/faker/global.d.ts",
+    "./typings/@flex-development/pkg-types/index.d.mts",
+    "./typings/typescript/lib.es5.d.ts",
+    "./vitest-env.d.mts"
   ],
-  "include": ["./__fixtures__/**/*", "./__tests__/**/*", "./src/**.mts"]
+  "include": [
+    "./__fixtures__/**/*",
+    "./__tests__/**/*",
+    "./src/**.mts",
+    "./typings/**/*"
+  ]
 }
