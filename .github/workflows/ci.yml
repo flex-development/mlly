@@ -377,7 +377,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
       - id: coverage-failure
-        if: ${{ toJson(steps.test.outputs.coverage) }} != 400
+        if: ${{ toJson(steps.test.outputs.coverage) != 400 }}
         name: Coverage threshold failure (${{ steps.test.outputs.coverage }})
         run: yarn test:cov:reports
   build:

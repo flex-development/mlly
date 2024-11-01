@@ -1511,6 +1511,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/builtin-modules@npm:2.1.2":
+  version: 2.1.2
+  resolution: "@flex-development/builtin-modules@npm:2.1.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fbuiltin-modules%2F2.1.2%2Ff4d6b61c135889cf80f743e370b1576ee25dfac2"
+  checksum: 10/62ce59ebf6710e750fc306cf641674ea29c5c4a0d33e3360d99120248fbb7643a944301f438e59e8207ba79319bff566e5a1adb0dc6ac92433097b1fc36e57a8
+  languageName: node
+  linkType: hard
+
 "@flex-development/commitlint-config@npm:1.0.1":
   version: 1.0.1
   resolution: "@flex-development/commitlint-config@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fcommitlint-config%2F1.0.1%2F802e285802fe8188c2f02f68114ca31a20b6eb6d"
@@ -1675,6 +1682,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@flex-development/is-builtin@npm:3.2.0":
+  version: 3.2.0
+  resolution: "@flex-development/is-builtin@npm:3.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fis-builtin%2F3.2.0%2F555baad0f0c1a9b329b3b6e5aaa763490d2394ae"
+  dependencies:
+    "@flex-development/builtin-modules": "npm:2.1.2"
+  checksum: 10/3f52c5bd289b9518720b31d50458f1f9416523e502969f659174d8054b208b17a38d88e5d2e51402f56ca07c4f7d63e786745f6ced558a8f478a55ca0e97d67a
+  languageName: node
+  linkType: hard
+
 "@flex-development/mkbuild@npm:1.0.0-alpha.23":
   version: 1.0.0-alpha.23
   resolution: "@flex-development/mkbuild@npm:1.0.0-alpha.23::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fmkbuild%2F1.0.0-alpha.23%2F01fc88d62df2030b9fcc7a780061d20542e086a9"
@@ -1755,7 +1771,7 @@ __metadata:
     "@flex-development/ext-regex": "npm:2.0.0"
     "@flex-development/grease": "npm:3.0.0-alpha.9"
     "@flex-development/import-regex": "npm:3.0.0"
-    "@flex-development/is-builtin": "npm:3.1.0"
+    "@flex-development/is-builtin": "npm:3.2.0"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.23"
     "@flex-development/pathe": "npm:3.0.0"
     "@flex-development/pkg-types": "npm:4.1.0"
