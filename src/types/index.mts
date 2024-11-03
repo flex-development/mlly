@@ -3,7 +3,10 @@
  * @module mlly/types
  */
 
+export type { default as Awaitable } from '#types/awaitable'
 export type { default as ChangeExtFn } from '#types/change-ext-fn'
+export type { default as GetSourceHandler } from '#types/get-source-handler'
+export type { default as GetSourceHandlers } from '#types/get-source-handlers'
 export type { default as MainField } from '#types/main-field'
 export type { default as ModuleFormat } from '#types/module-format'
 export type { default as ModuleId } from '#types/module-id'

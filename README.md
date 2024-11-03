@@ -68,6 +68,7 @@ import {
   defaultMainFields,
   extensionFormatMap,
   formats,
+  getSource,
   isAbsoluteSpecifier,
   isArrayIndex,
   isBareSpecifier,
@@ -106,6 +107,7 @@ This package exports the following identifiers:
 - [`defaultMainFields`](./src/lib/default-main-fields.mts)
 - [`extensionFormatMap`](./src/lib/extension-format-map.mts)
 - [`formats`](./src/lib/formats.mts)
+- [`getSource`](./src/lib/get-source.mts)
 - [`isAbsoluteSpecifier`](./src/lib/is-absolute-specifier.mts)
 - [`isArrayIndex`](./src/lib/is-array-index.mts)
 - [`isBareSpecifier`](./src/lib/is-bare-specifier.mts)

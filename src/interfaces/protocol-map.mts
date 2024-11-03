@@ -11,26 +11,27 @@
  * @see https://url.spec.whatwg.org/#special-scheme
  */
 interface ProtocolMap {
-  'blob:': true
-  'content:': true
-  'cvs:': true
-  'data:': true
-  'dns:': true
-  'file:': true
-  'fish:': true
-  'ftp:': true
-  'git:': true
-  'http:': true
-  'https:': true
-  'mvn:': true
-  'redis:': true
-  'sftp:': true
-  'ssh:': true
-  'svn:': true
-  'urn:': true
-  'view-source:': true
-  'ws:': true
-  'wss:': true
+  blob: 'blob:'
+  content: 'content:'
+  cvs: 'cvs:'
+  data: 'data:'
+  dns: 'dns:'
+  file: 'file:'
+  fish: 'fish:'
+  ftp: 'ftp:'
+  git: 'git:'
+  http: 'http:'
+  https: 'https:'
+  mvn: 'mvn:'
+  node: 'node:'
+  redis: 'redis:'
+  sftp: 'sftp:'
+  ssh: 'ssh:'
+  svn: 'svn:'
+  urn: 'urn:'
+  viewSource: 'view-source:'
+  ws: 'ws:'
+  wss: 'wss:'
 }
 
 export type { ProtocolMap as default }

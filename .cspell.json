@@ -30,7 +30,7 @@
     "patches/",
     "yarn.lock"
   ],
-  "ignoreRegExpList": [],
+  "ignoreRegExpList": ["/data:.+;base64,.+/"],
   "ignoreWords": [],
   "language": "en-US",
   "patterns": [],

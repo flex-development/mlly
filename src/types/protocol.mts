@@ -11,6 +11,6 @@ import type { ProtocolMap } from '@flex-development/mlly'
  * To register new protocols, augment {@linkcode ProtocolMap}. They will be
  * added to this union automatically.
  */
-type Protocol = Extract<keyof ProtocolMap, string>
+type Protocol = ProtocolMap[keyof ProtocolMap]
 
 export type { Protocol as default }

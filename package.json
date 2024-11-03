@@ -63,6 +63,18 @@
       "node": "fs",
       "default": "fs"
     },
+    "#internal/process": {
+      "types": {
+        "mlly": "./src/internal/process.d.mts",
+        "default": "./dist/internal/process.d.mts"
+      },
+      "browser": {
+        "mlly": "./src/internal/process.browser.mts",
+        "default": "./dist/internal/process.browser.mjs"
+      },
+      "node": "process",
+      "default": "process"
+    },
     "#internal/*": {
       "mlly": "./src/internal/*.mts",
       "default": "./dist/internal/*.mjs"

@@ -4,9 +4,15 @@
  */
 
 export type { default as Aliases } from '#interfaces/aliases'
+export type {
+  default as GetSourceContext
+} from '#interfaces/context-get-source'
 export type { default as FileSystem } from '#interfaces/file-system'
 export type { default as MainFieldMap } from '#interfaces/main-field-map'
 export type { default as ModuleFormatMap } from '#interfaces/module-format-map'
+export type {
+  default as GetSourceOptions
+} from '#interfaces/options-get-source'
 export type {
   default as ResolveAliasOptions
 } from '#interfaces/options-resolve-alias'

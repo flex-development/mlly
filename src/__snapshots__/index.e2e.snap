@@ -9,6 +9,7 @@ exports[`e2e:mlly > should expose public api 1`] = `
   "defaultMainFields",
   "extensionFormatMap",
   "formats",
+  "getSource",
   "isAbsoluteSpecifier",
   "isArrayIndex",
   "isBareSpecifier",

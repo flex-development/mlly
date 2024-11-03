@@ -1,6 +1,6 @@
 /**
  * @file Internal - fs/browser
- * @module mlly/lib/fs/browser
+ * @module mlly/internal/fs/browser
  */
 
 import type { FileSystem } from '@flex-development/mlly'

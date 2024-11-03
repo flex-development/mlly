@@ -9,6 +9,7 @@
   "files": [
     "./typings/@faker-js/faker/global.d.ts",
     "./typings/@flex-development/pkg-types/index.d.mts",
+    "./typings/node/process.d.ts",
     "./typings/typescript/lib.es5.d.ts",
     "./vitest-env.d.mts"
   ],

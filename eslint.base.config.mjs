@@ -171,10 +171,12 @@ export default [
       globals: {
         ...globals.es2024,
         ...globals.node,
+        BufferEncoding: 'readonly',
         Chai: 'readonly',
         Console: 'readonly',
         NodeJS: 'readonly',
-        React: fs.existsSync('node_modules/react') ? 'readonly' : false
+        React: fs.existsSync('node_modules/react') ? 'readonly' : false,
+        RequestInit: 'readonly'
       },
       parser: /** @type {Parser} */ (ts.parser),
       parserOptions: {
