@@ -16,20 +16,22 @@ import pathe from '@flex-development/pathe'
  * @see {@linkcode FileSystem}
  * @see {@linkcode ModuleId}
  *
+ * @async
+ *
  * @param {ModuleId} url
  *  URL of module to get package scope for
  * @param {ModuleId | null | undefined} [end]
  *  URL of directory to end search, defaults to {@linkcode root}
  * @param {FileSystem | null | undefined} [fs]
  *  File system API
- * @return {URL | null}
+ * @return {Promise<URL | null>}
  *  URL of nearest directory containing `package.json` file or `null`
  */
-function lookupPackageScope(
+async function lookupPackageScope(
   url: ModuleId,
   end?: ModuleId | null | undefined,
   fs?: FileSystem | null | undefined
-): URL | null {
+): Promise<URL | null> {
   /**
    * Scope URL.
    *
@@ -47,7 +49,7 @@ function lookupPackageScope(
     if (/node_modules[/\\]$/.test(scopeUrl.pathname)) break
 
     // return scopeUrl if `package.json` file exists in directory
-    if (isFile(new URL('package.json', scopeUrl), fs)) return scopeUrl
+    if (await isFile(new URL('package.json', scopeUrl), fs)) return scopeUrl
   }
 
   return null

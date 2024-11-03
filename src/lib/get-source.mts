@@ -147,14 +147,19 @@ function data(this: GetSourceContext, url: URL): Buffer {
 }
 
 /**
+ * @async
+ *
  * @this {GetSourceContext}
  *
  * @param {URL} url
  *  Module URL
- * @return {Buffer | string | null}
+ * @return {Promise<Buffer | string | null>}
  *  Source code or `null` if module is not found
  */
-function file(this: GetSourceContext, url: URL): Buffer | string | null {
+async function file(
+  this: GetSourceContext,
+  url: URL
+): Promise<Buffer | string | null> {
   ok(url.protocol === 'file:', 'expected `file:` URL')
 
   /**
@@ -164,11 +169,13 @@ function file(this: GetSourceContext, url: URL): Buffer | string | null {
    */
   let code: Buffer | string | null = null
 
-  if (isFile(url, this.fs)) code = this.fs.readFileSync(url)
+  if (await isFile(url, this.fs)) code = await this.fs.readFile(url)
   return code
 }
 
 /**
+ * @async
+ *
  * @this {GetSourceContext}
  *
  * @param {URL} url

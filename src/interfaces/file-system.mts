@@ -3,7 +3,7 @@
  * @module mlly/interfaces/FileSystem
  */
 
-import type { ModuleId, Stats } from '@flex-development/mlly'
+import type { Awaitable, ModuleId, Stats } from '@flex-development/mlly'
 
 /**
  * File system API.
@@ -12,6 +12,8 @@ interface FileSystem {
   /**
    * Get the contents of `id`.
    *
+   * @see {@linkcode Awaitable}
+   * @see {@linkcode Buffer}
    * @see {@linkcode ModuleId}
    * @see https://nodejs.org/api/fs.html#fsreadfilepath-options-callback
    *
@@ -19,14 +21,15 @@ interface FileSystem {
    *
    * @param {ModuleId} id
    *  The path or `file:` URL to handle
-   * @return {Buffer | string}
+   * @return {Awaitable<Buffer | string>}
    *  File contents
    */
-  readFileSync(this: void, id: ModuleId): Buffer | string
+  readFile(this: void, id: ModuleId): Awaitable<Buffer | string>
 
   /**
    * Get the resolved pathname for `id`.
    *
+   * @see {@linkcode Awaitable}
    * @see {@linkcode ModuleId}
    * @see https://nodejs.org/api/fs.html#fsrealpathpath-options-callback
    *
@@ -34,14 +37,15 @@ interface FileSystem {
    *
    * @param {ModuleId} id
    *  The path or `file:` URL to handle
-   * @return {string}
+   * @return {Awaitable<string>}
    *  Resolved pathname
    */
-  realpathSync(this: void, id: ModuleId): string
+  realpath(this: void, id: ModuleId): Awaitable<string>
 
   /**
    * Get information about a directory or file.
    *
+   * @see {@linkcode Awaitable}
    * @see {@linkcode ModuleId}
    * @see {@linkcode Stats}
    *
@@ -49,10 +53,10 @@ interface FileSystem {
    *
    * @param {ModuleId} id
    *  The path or `file:` URL to handle
-   * @return {Stats}
+   * @return {Awaitable<Stats>}
    *  Info about `id`
    */
-  statSync(this: void, id: ModuleId): Stats
+  stat(this: void, id: ModuleId): Awaitable<Stats>
 }
 
 export type { FileSystem as default }

@@ -183,7 +183,7 @@ async function make(
    *
    * @const {PackageJson | null} pkg
    */
-  const pkg: PackageJson | null = readPackageJson(
+  const pkg: PackageJson | null = await readPackageJson(
     pathe.pathToFileURL(absWorkingDir + pathe.sep)
   )
 

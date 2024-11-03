@@ -18,8 +18,8 @@ const fs: FileSystem = {
    *  Never; not implemented
    * @throws {Error}
    */
-  readFileSync(): never {
-    throw new Error('[readFileSync] not implemented')
+  readFile(): never {
+    throw new Error('[readFile] not implemented')
   },
 
   /**
@@ -29,8 +29,8 @@ const fs: FileSystem = {
    *  Never; not implemented
    * @throws {Error}
    */
-  realpathSync(): never {
-    throw new Error('[realpathSync] not implemented')
+  realpath(): never {
+    throw new Error('[realpath] not implemented')
   },
 
   /**
@@ -40,8 +40,8 @@ const fs: FileSystem = {
    *  Never; not implemented
    * @throws {Error}
    */
-  statSync(): never {
-    throw new Error('[statSync] not implemented')
+  stat(): never {
+    throw new Error('[stat] not implemented')
   }
 }
 

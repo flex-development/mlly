@@ -4,11 +4,11 @@
  */
 
 import type TestSubject from '#interfaces/file-system'
-import type { ModuleId, Stats } from '@flex-development/mlly'
+import type { Awaitable, ModuleId, Stats } from '@flex-development/mlly'
 
 describe('unit-d:interfaces/FileSystem', () => {
-  describe('readFileSync', () => {
-    type Subject = TestSubject['readFileSync']
+  describe('readFile', () => {
+    type Subject = TestSubject['readFile']
 
     it('should match [this: void]', () => {
       expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
@@ -21,14 +21,16 @@ describe('unit-d:interfaces/FileSystem', () => {
     })
 
     describe('returns', () => {
-      it('should return Buffer | string', () => {
-        expectTypeOf<Subject>().returns.toEqualTypeOf<Buffer | string>()
+      it('should return Awaitable<Buffer | string>', () => {
+        expectTypeOf<Subject>()
+          .returns
+          .toEqualTypeOf<Awaitable<Buffer | string>>()
       })
     })
   })
 
-  describe('realpathSync', () => {
-    type Subject = TestSubject['realpathSync']
+  describe('realpath', () => {
+    type Subject = TestSubject['realpath']
 
     it('should match [this: void]', () => {
       expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
@@ -41,14 +43,14 @@ describe('unit-d:interfaces/FileSystem', () => {
     })
 
     describe('returns', () => {
-      it('should return string', () => {
-        expectTypeOf<Subject>().returns.toEqualTypeOf<string>()
+      it('should return Awaitable<string>', () => {
+        expectTypeOf<Subject>().returns.toEqualTypeOf<Awaitable<string>>()
       })
     })
   })
 
-  describe('statSync', () => {
-    type Subject = TestSubject['statSync']
+  describe('stat', () => {
+    type Subject = TestSubject['stat']
 
     it('should match [this: void]', () => {
       expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
@@ -61,8 +63,8 @@ describe('unit-d:interfaces/FileSystem', () => {
     })
 
     describe('returns', () => {
-      it('should return Stats', () => {
-        expectTypeOf<Subject>().returns.toEqualTypeOf<Stats>()
+      it('should return Awaitable<Stats>', () => {
+        expectTypeOf<Subject>().returns.toEqualTypeOf<Awaitable<Stats>>()
       })
     })
   })

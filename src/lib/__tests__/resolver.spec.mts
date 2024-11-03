@@ -30,13 +30,13 @@ import * as baseline from 'import-meta-resolve'
 
 describe('unit:lib/resolver', () => {
   describe('legacyMainResolve', () => {
-    it('should throw if main entry point is not found', () => {
+    it('should throw if main entry point is not found', async () => {
       // Arrange
       let error!: NodeError
 
       // Act
       try {
-        testSubject.legacyMainResolve(
+        await testSubject.legacyMainResolve(
           toPackageUrl(pkg.name),
           pkg as PackageJson,
           new Set(['unpkg'] as unknown as MainField[]),
@@ -85,7 +85,7 @@ describe('unit:lib/resolver', () => {
       [resolve('src/index.mts'), import.meta.url],
       [subpathExports.name + '/lib/a', parent],
       [subpathExports.name + '/lib/a.js', parent]
-    ])('should return resolved URL (%#)', (
+    ])('should return resolved URL (%#)', async (
       specifier,
       parent,
       conditions,
@@ -101,7 +101,7 @@ describe('unit:lib/resolver', () => {
       )
 
       // Act
-      const result = testSubject.moduleResolve(
+      const result = await testSubject.moduleResolve(
         specifier,
         parent,
         conditions,
@@ -115,13 +115,16 @@ describe('unit:lib/resolver', () => {
       expect(result).toMatchSnapshot()
     })
 
-    it('should throw if `specifier` contains encoded separators', () => {
+    it('should throw if `specifier` contains encoded separators', async () => {
       // Arrange
       let error!: NodeError
 
       // Act
       try {
-        testSubject.moduleResolve(sep + 'lib%2futils.mjs', import.meta.url)
+        await testSubject.moduleResolve(
+          sep + 'lib%2futils.mjs',
+          import.meta.url
+        )
       } catch (e: unknown) {
         error = e as typeof error
       }
@@ -132,14 +135,14 @@ describe('unit:lib/resolver', () => {
       expect(error.message).toMatchSnapshot()
     })
 
-    it('should throw if `specifier` resolves to a directory', () => {
+    it('should throw if `specifier` resolves to a directory', async () => {
       // Arrange
       const specifier: string = resolve('src') + sep
       let error!: NodeError
 
       // Act
       try {
-        testSubject.moduleResolve(specifier, import.meta.url)
+        await testSubject.moduleResolve(specifier, import.meta.url)
       } catch (e: unknown) {
         error = e as typeof error
       }
@@ -151,14 +154,14 @@ describe('unit:lib/resolver', () => {
       expect(error.message).toMatchSnapshot()
     })
 
-    it('should throw if `specifier` resolves to missing file', () => {
+    it('should throw if `specifier` resolves to missing file', async () => {
       // Arrange
       const specifier: string = resolve('src/index.ts')
       let error!: NodeError
 
       // Act
       try {
-        testSubject.moduleResolve(specifier, import.meta.url)
+        await testSubject.moduleResolve(specifier, import.meta.url)
       } catch (e: unknown) {
         error = e as typeof error
       }
@@ -179,7 +182,7 @@ describe('unit:lib/resolver', () => {
         'not-builtin',
         'data:text/javascript,export default import.meta.resolve("not-builtin")'
       ]
-    ])('should throw if module referrer is invalid (%#)', (
+    ])('should throw if module referrer is invalid (%#)', async (
       specifier,
       parent,
       conditions,
@@ -193,7 +196,7 @@ describe('unit:lib/resolver', () => {
 
       // Act
       try {
-        testSubject.moduleResolve(
+        await testSubject.moduleResolve(
           specifier,
           parent,
           conditions,
@@ -213,13 +216,13 @@ describe('unit:lib/resolver', () => {
   })
 
   describe('packageExportsResolve', () => {
-    it('should throw if `exports` object is invalid', () => {
+    it('should throw if `exports` object is invalid', async () => {
       // Arrange
       let error!: NodeError
 
       // Act
       try {
-        testSubject.packageExportsResolve(
+        await testSubject.packageExportsResolve(
           cwd(),
           dot,
           { [dot]: './dist/index.mjs', 'ts-node': './src/index.mts' },
@@ -236,14 +239,14 @@ describe('unit:lib/resolver', () => {
       expect(error.message).toMatchSnapshot()
     })
 
-    it('should throw if package path is not exported', () => {
+    it('should throw if package path is not exported', async () => {
       // Arrange
       const code: Code = codes.ERR_PACKAGE_PATH_NOT_EXPORTED
       let error!: NodeError
 
       // Act
       try {
-        testSubject.packageExportsResolve(
+        await testSubject.packageExportsResolve(
           cwd(),
           './utils',
           pkg.exports,
@@ -262,14 +265,14 @@ describe('unit:lib/resolver', () => {
   })
 
   describe('packageImportsResolve', () => {
-    it('should throw if package import is not defined', () => {
+    it('should throw if package import is not defined', async () => {
       // Arrange
       const code: Code = codes.ERR_PACKAGE_IMPORT_NOT_DEFINED
       let error!: NodeError
 
       // Act
       try {
-        testSubject.packageImportsResolve('#mocks', import.meta.url)
+        await testSubject.packageImportsResolve('#mocks', import.meta.url)
       } catch (e: unknown) {
         error = e as typeof error
       }
@@ -284,13 +287,13 @@ describe('unit:lib/resolver', () => {
       chars.hash,
       chars.hash + sep,
       pkg.name
-    ])('should throw if `specifier` is invalid (%#)', specifier => {
+    ])('should throw if `specifier` is invalid (%#)', async specifier => {
       // Arrange
       let error!: NodeError
 
       // Act
       try {
-        testSubject.packageImportsResolve(specifier, import.meta.url)
+        await testSubject.packageImportsResolve(specifier, import.meta.url)
       } catch (e: unknown) {
         error = e as typeof error
       }
@@ -303,13 +306,13 @@ describe('unit:lib/resolver', () => {
   })
 
   describe('packageResolve', () => {
-    it('should throw if `specifier` cannot be resolved', () => {
+    it('should throw if `specifier` cannot be resolved', async () => {
       // Arrange
       let error!: NodeError
 
       // Act
       try {
-        testSubject.packageResolve('missing-package', parent)
+        await testSubject.packageResolve('missing-package', parent)
       } catch (e: unknown) {
         error = e as typeof error
       }
@@ -323,13 +326,16 @@ describe('unit:lib/resolver', () => {
     it.each<Parameters<(typeof testSubject)['packageResolve']>>([
       ['@flex-development\\errnode', import.meta.url],
       [chars.at, import.meta.url]
-    ])('should throw if `specifier` is invalid (%#)', (specifier, parent) => {
+    ])('should throw if `specifier` is invalid (%#)', async (
+      specifier,
+      parent
+    ) => {
       // Arrange
       let error!: NodeError
 
       // Act
       try {
-        testSubject.packageResolve(specifier, parent)
+        await testSubject.packageResolve(specifier, parent)
       } catch (e: unknown) {
         error = e as typeof error
       }
@@ -342,12 +348,12 @@ describe('unit:lib/resolver', () => {
   })
 
   describe('packageSelfResolve', () => {
-    it('should return `undefined` if package scope is not found', () => {
+    it('should return `undefined` if package scope is not found', async () => {
       // Arrange
       const parent: URL = pathToFileURL('../loader.mjs')
 
       // Act
-      const result = testSubject.packageSelfResolve(pkg.name, dot, parent)
+      const result = await testSubject.packageSelfResolve(pkg.name, dot, parent)
 
       // Expect
       expect(result).to.be.undefined
@@ -355,13 +361,13 @@ describe('unit:lib/resolver', () => {
   })
 
   describe('packageTargetResolve', () => {
-    it('should throw if `patternMatch` contains invalid segments', () => {
+    it('should throw if `patternMatch` contains invalid segments', async () => {
       // Arrange
       let error!: NodeError
 
       // Act
       try {
-        testSubject.packageTargetResolve(
+        await testSubject.packageTargetResolve(
           toPackageUrl('invalid-pattern-match'),
           './__fixtures__/*',
           '#fixtures/*',
@@ -380,13 +386,13 @@ describe('unit:lib/resolver', () => {
       expect(error).to.have.property('code', codes.ERR_INVALID_MODULE_SPECIFIER)
     })
 
-    it('should throw if package config is invalid', () => {
+    it('should throw if package config is invalid', async () => {
       // Arrange
       let error!: NodeError
 
       // Act
       try {
-        testSubject.packageTargetResolve(
+        await testSubject.packageTargetResolve(
           toPackageUrl('invalid-package-config'),
           [{ 13: null }],
           dot,
@@ -477,7 +483,7 @@ describe('unit:lib/resolver', () => {
         null,
         import.meta.url
       ]
-    ])('should throw if package target is invalid (%#)', (
+    ])('should throw if package target is invalid (%#)', async (
       packageUrl,
       target,
       subpath,
@@ -493,7 +499,7 @@ describe('unit:lib/resolver', () => {
 
       // Act
       try {
-        testSubject.packageTargetResolve(
+        await testSubject.packageTargetResolve(
           packageUrl,
           target,
           subpath,

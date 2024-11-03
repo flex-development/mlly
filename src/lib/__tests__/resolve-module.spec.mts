@@ -28,9 +28,9 @@ describe('unit:lib/resolveModule', () => {
     [legacyMain1.name, parent],
     [legacyMain2.name, parent],
     [pkg.name + '/package.json', import.meta.url]
-  ])('should return resolved URL (%j)', (specifier, parent, options) => {
+  ])('should return resolved URL (%j)', async (specifier, parent, options) => {
     // Act
-    const result = testSubject(specifier, parent, options)
+    const result = await testSubject(specifier, parent, options)
 
     // Expect
     expect(result).to.be.instanceof(URL)
@@ -40,7 +40,7 @@ describe('unit:lib/resolveModule', () => {
   it.each<Parameters<typeof testSubject>>([
     ['#app', import.meta.url],
     ['../../src', import.meta.url]
-  ])('should throw if `specifier` cannot be resolved (%#)', (
+  ])('should throw if `specifier` cannot be resolved (%#)', async (
     specifier,
     parent,
     options
@@ -50,7 +50,7 @@ describe('unit:lib/resolveModule', () => {
 
     // Act
     try {
-      testSubject(specifier, parent, options)
+      await testSubject(specifier, parent, options)
     } catch (e: unknown) {
       error = e as typeof error
     }

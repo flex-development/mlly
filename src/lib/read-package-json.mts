@@ -23,6 +23,8 @@ import type { PackageJson } from '@flex-development/pkg-types'
  * @see {@linkcode ModuleId}
  * @see {@linkcode PackageJson}
  *
+ * @async
+ *
  * @param {ModuleId} id
  *  URL of package directory, `package.json` file, or module in the same
  *  directory as a `package.json` file
@@ -33,17 +35,17 @@ import type { PackageJson } from '@flex-development/pkg-types'
  *  URL of parent module
  * @param {FileSystem | null | undefined} [fs]
  *  File system API
- * @return {PackageJson | null}
+ * @return {Promise<PackageJson | null>}
  *  Parsed file contents or `null`
  * @throws {ErrInvalidPackageConfig}
  *  If `package.json` file does not parse as valid JSON
  */
-function readPackageJson(
+async function readPackageJson(
   id: ModuleId,
   specifier?: string | null | undefined,
   parent?: ModuleId | null | undefined,
   fs?: FileSystem | null | undefined
-): PackageJson | null {
+): Promise<PackageJson | null> {
   /**
    * URL of `package.json` file.
    *
@@ -51,13 +53,13 @@ function readPackageJson(
    */
   const url: URL = new URL('package.json', id)
 
-  if (isFile(url, fs)) {
+  if (await isFile(url, fs)) {
     /**
      * Stringified package config.
      *
      * @const {string} data
      */
-    const data: string = String((fs ?? dfs).readFileSync(url))
+    const data: string = String(await (fs ?? dfs).readFile(url))
 
     try {
       return JSON.parse(data) as PackageJson

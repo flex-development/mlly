@@ -92,6 +92,8 @@ export {
  * @see {@linkcode ModuleId}
  * @see {@linkcode PackageJson}
  *
+ * @async
+ *
  * @param {ModuleId} packageUrl
  *  URL of package directory, `package.json` file, or module in the same
  *  directory as a `package.json` file
@@ -103,17 +105,17 @@ export {
  *  URL of parent module
  * @param {FileSystem | null | undefined} [fs]
  *  File system API
- * @return {URL}
+ * @return {Promise<URL>}
  *  Resolved URL
  * @throws {ErrModuleNotFound}
  */
-function legacyMainResolve(
+async function legacyMainResolve(
   packageUrl: ModuleId,
   manifest?: PackageJson | null | undefined,
   mainFields?: MainField[] | Set<MainField> | null | undefined,
   parent?: ModuleId | null | undefined,
   fs?: FileSystem | null | undefined
-): URL {
+): Promise<URL> {
   if (manifest) {
     for (const field of mainFields ?? defaultMainFields) {
       /**
@@ -153,7 +155,7 @@ function legacyMainResolve(
 
       for (const input of tries) {
         resolved = new URL(input, packageUrl)
-        if (isFile(resolved, fs)) return resolved
+        if (await isFile(resolved, fs)) return resolved
       }
     }
   }
@@ -177,6 +179,8 @@ function legacyMainResolve(
  * @see {@linkcode ModuleId}
  * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
+ * @async
+ *
  * @param {string} specifier
  *  Module specifier to resolve
  * @param {ModuleId} parent
@@ -189,20 +193,20 @@ function legacyMainResolve(
  *  Keep symlinks instead of resolving them
  * @param {FileSystem | null | undefined} [fs]
  *  File system API
- * @return {URL}
+ * @return {Promise<URL>}
  *  Resolved URL
  * @throws {ErrInvalidModuleSpecifier}
  * @throws {ErrModuleNotFound}
  * @throws {ErrUnsupportedDirImport}
  */
-function moduleResolve(
+async function moduleResolve(
   specifier: string,
   parent: ModuleId,
   conditions?: Condition[] | Set<Condition> | null | undefined,
   mainFields?: MainField[] | Set<MainField> | null | undefined,
   preserveSymlinks?: boolean | null | undefined,
   fs?: FileSystem | null | undefined
-): URL {
+): Promise<URL> {
   /**
    * URL protocol of parent module.
    *
@@ -236,7 +240,7 @@ function moduleResolve(
       throw error
     }
   } else if (protocol === 'file:' && isImportsSubpath(specifier)) {
-    resolved = packageImportsResolve(
+    resolved = await packageImportsResolve(
       specifier,
       parent,
       conditions,
@@ -261,7 +265,7 @@ function moduleResolve(
         throw error
       }
 
-      resolved = packageResolve(
+      resolved = await packageResolve(
         specifier,
         parent,
         conditions,
@@ -284,7 +288,7 @@ function moduleResolve(
       )
     }
 
-    if (isDirectory(resolved, fs)) {
+    if (await isDirectory(resolved, fs)) {
       /**
        * Node error.
        *
@@ -302,7 +306,7 @@ function moduleResolve(
       throw error
     }
 
-    if (!isFile(resolved, fs)) {
+    if (!(await isFile(resolved, fs))) {
       throw new ERR_MODULE_NOT_FOUND(
         pathname,
         pathe.fileURLToPath(parent),
@@ -312,7 +316,7 @@ function moduleResolve(
 
     if (!preserveSymlinks) {
       fs ??= dfs
-      resolved = new URL(pathe.pathToFileURL(fs.realpathSync(resolved)))
+      resolved = new URL(pathe.pathToFileURL(await fs.realpath(resolved)))
       resolved.hash = hash
       resolved.search = search
     }
@@ -335,6 +339,8 @@ function moduleResolve(
  * @see {@linkcode ModuleId}
  * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
+ * @async
+ *
  * @param {ModuleId} packageUrl
  *  URL of package directory, `package.json` file, or module in the same
  *  directory as a `package.json` file
@@ -348,19 +354,19 @@ function moduleResolve(
  *  URL of parent module
  * @param {FileSystem | null | undefined} [fs]
  *  File system API
- * @return {URL}
+ * @return {Promise<URL>}
  *  Resolved URL
  * @throws {ErrInvalidPackageConfig}
  * @throws {ErrPackagePathNotExported}
  */
-function packageExportsResolve(
+async function packageExportsResolve(
   packageUrl: ModuleId,
   subpath: string,
   exports: Exports | undefined,
   conditions?: Condition[] | Set<Condition> | null | undefined,
   parent?: ModuleId | null | undefined,
   fs?: FileSystem | null | undefined
-): URL {
+): Promise<URL> {
   if (exports) {
     /**
      * Boolean indicating all {@linkcode exports} object keys must start with a
@@ -420,7 +426,7 @@ function packageExportsResolve(
       }
 
       if (mainExport !== undefined) {
-        resolved = packageTargetResolve(
+        resolved = await packageTargetResolve(
           packageUrl,
           mainExport,
           subpath,
@@ -436,7 +442,7 @@ function packageExportsResolve(
       ok(!Array.isArray(exports), 'expected `exports` to not be an array')
       ok(subpath.startsWith('./'), 'expected `subpath` to start with "./"')
 
-      resolved = packageImportsExportsResolve(
+      resolved = await packageImportsExportsResolve(
         subpath,
         exports,
         packageUrl,
@@ -470,6 +476,8 @@ function packageExportsResolve(
  * @see {@linkcode ModuleId}
  * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
+ * @async
+ *
  * @param {string} matchKey
  *  Package subpath from module specifier or dot character (`'.'`)
  * @param {ExportsObject | Imports | null | undefined} matchObject
@@ -486,10 +494,10 @@ function packageExportsResolve(
  *  URL of parent module
  * @param {FileSystem | null | undefined} [fs]
  *  File system API
- * @return {URL | null | undefined}
+ * @return {Promise<URL | null | undefined>}
  *  Resolved URL
  */
-function packageImportsExportsResolve(
+async function packageImportsExportsResolve(
   matchKey: string,
   matchObject: ExportsObject | Imports | null | undefined,
   packageUrl: ModuleId,
@@ -498,7 +506,7 @@ function packageImportsExportsResolve(
   mainFields?: MainField[] | Set<MainField> | null | undefined,
   parent?: ModuleId | null | undefined,
   fs?: FileSystem | null | undefined
-): URL | null | undefined {
+): Promise<URL | null | undefined> {
   if (typeof matchObject === 'object' && matchObject) {
     /**
      * List containing expansion key and subpath pattern match.
@@ -546,18 +554,18 @@ function packageImportsExportsResolve(
  *  List of legacy main fields
  * @param {FileSystem | null | undefined} [fs]
  *  File system API
- * @return {URL}
+ * @return {Promise<URL>}
  *  Resolved URL
  * @throws {ErrInvalidModuleSpecifier}
  * @throws {ErrPackageImportNotDefined}
  */
-function packageImportsResolve(
+async function packageImportsResolve(
   specifier: string,
   parent: ModuleId,
   conditions?: Condition[] | Set<Condition> | null | undefined,
   mainFields?: MainField[] | Set<MainField> | null | undefined,
   fs?: FileSystem | null | undefined
-): URL {
+): Promise<URL> {
   if (
     !specifier.startsWith(chars.hash) ||
     specifier === chars.hash ||
@@ -575,7 +583,7 @@ function packageImportsResolve(
    *
    * @const {URL | null} packageUrl
    */
-  const packageUrl: URL | null = lookupPackageScope(parent, null, fs)
+  const packageUrl: URL | null = await lookupPackageScope(parent, null, fs)
 
   if (packageUrl) {
     /**
@@ -583,7 +591,7 @@ function packageImportsResolve(
      *
      * @const {PackageJson | null} pjson
      */
-    const pjson: PackageJson | null = readPackageJson(
+    const pjson: PackageJson | null = await readPackageJson(
       packageUrl,
       specifier,
       parent,
@@ -596,16 +604,17 @@ function packageImportsResolve(
        *
        * @const {URL | null | undefined} resolved
        */
-      const resolved: URL | null | undefined = packageImportsExportsResolve(
-        specifier,
-        pjson.imports,
-        packageUrl,
-        true,
-        conditions,
-        mainFields,
-        parent,
-        fs
-      )
+      const resolved: URL | null | undefined =
+        await packageImportsExportsResolve(
+          specifier,
+          pjson.imports,
+          packageUrl,
+          true,
+          conditions,
+          mainFields,
+          parent,
+          fs
+        )
 
       if (resolved) return resolved
     }
@@ -639,6 +648,8 @@ function packageImportsResolve(
  * @see {@linkcode ModuleId}
  * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
+ * @async
+ *
  * @param {string} specifier
  *  The package specifier to resolve
  * @param {ModuleId} parent
@@ -649,18 +660,18 @@ function packageImportsResolve(
  *  List of legacy main fields
  * @param {FileSystem | null | undefined} [fs]
  *  File system API
- * @return {URL}
+ * @return {Promise<URL>}
  *  Resolved URL
  * @throws {ErrInvalidModuleSpecifier}
  * @throws {ErrModuleNotFound}
  */
-function packageResolve(
+async function packageResolve(
   specifier: string,
   parent: ModuleId,
   conditions?: Condition[] | Set<Condition> | null | undefined,
   mainFields?: MainField[] | Set<MainField> | null | undefined,
   fs?: FileSystem | null | undefined
-): URL {
+): Promise<URL> {
   if (isBuiltin(specifier)) {
     return new URL('node:' + specifier.replace(/^node:/, ''))
   }
@@ -727,7 +738,7 @@ function packageResolve(
    *
    * @const {URL | undefined} selfUrl
    */
-  const selfUrl: URL | undefined = packageSelfResolve(
+  const selfUrl: URL | undefined = await packageSelfResolve(
     packageName,
     packageSubpath,
     parent,
@@ -756,14 +767,14 @@ function packageResolve(
     parentUrl = new URL(pathe.dirname(parentUrl.href) + pathe.sep)
 
     // continue if the folder at packageUrl does not exist
-    if (!isDirectory(packageUrl, fs)) continue
+    if (!(await isDirectory(packageUrl, fs))) continue
 
     /**
      * Package manifest.
      *
      * @const {PackageJson | null} pjson
      */
-    const pjson: PackageJson | null = readPackageJson(
+    const pjson: PackageJson | null = await readPackageJson(
       packageUrl,
       null,
       parent,
@@ -801,6 +812,8 @@ function packageResolve(
  * @see {@linkcode ModuleId}
  * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
+ * @async
+ *
  * @param {string} name
  *  Package name
  * @param {string} subpath
@@ -811,22 +824,22 @@ function packageResolve(
  *  List of export conditions
  * @param {FileSystem | null | undefined} [fs]
  *  File system API
- * @return {URL | undefined}
+ * @return {Promise<URL | undefined>}
  *  Resolved URL
  */
-function packageSelfResolve(
+async function packageSelfResolve(
   name: string,
   subpath: string,
   parent: ModuleId,
   conditions?: Condition[] | Set<Condition> | null | undefined,
   fs?: FileSystem | null | undefined
-): URL | undefined {
+): Promise<URL | undefined> {
   /**
    * URL of package directory.
    *
    * @const {URL | null} packageUrl
    */
-  const packageUrl: URL | null = lookupPackageScope(parent, null, fs)
+  const packageUrl: URL | null = await lookupPackageScope(parent, null, fs)
 
   if (packageUrl) {
     /**
@@ -834,7 +847,7 @@ function packageSelfResolve(
      *
      * @const {PackageJson | null} pjson
      */
-    const pjson: PackageJson | null = readPackageJson(
+    const pjson: PackageJson | null = await readPackageJson(
       packageUrl,
       null,
       parent,
@@ -869,6 +882,8 @@ function packageSelfResolve(
  * @see {@linkcode Target}
  * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
+ * @async
+ *
  * @param {ModuleId} packageUrl
  *  URL of directory containing `package.json` file
  * @param {unknown} target
@@ -887,12 +902,12 @@ function packageSelfResolve(
  *  URL of parent module
  * @param {FileSystem | null | undefined} [fs]
  *  File system API
- * @return {URL | null | undefined}
+ * @return {Promise<URL | null | undefined>}
  *  Resolved URL
  * @throws {ErrInvalidPackageConfig}
  * @throws {ErrInvalidPackageTarget}
  */
-function packageTargetResolve(
+async function packageTargetResolve(
   packageUrl: ModuleId,
   target: unknown,
   subpath: string,
@@ -902,7 +917,7 @@ function packageTargetResolve(
   mainFields?: MainField[] | Set<MainField> | null | undefined,
   parent?: ModuleId | null | undefined,
   fs?: FileSystem | null | undefined
-): URL | null | undefined {
+): Promise<URL | null | undefined> {
   if (typeof target === 'string') {
     if (!target.startsWith(pathe.dot + pathe.sep)) {
       if (
@@ -997,7 +1012,7 @@ function packageTargetResolve(
         let resolved: URL | null | undefined
 
         try {
-          resolved = packageTargetResolve(
+          resolved = await packageTargetResolve(
             packageUrl,
             targetValue,
             subpath,
@@ -1045,7 +1060,7 @@ function packageTargetResolve(
          *
          * @const {URL | null | undefined} resolved
          */
-        const resolved: URL | null | undefined = packageTargetResolve(
+        const resolved: URL | null | undefined = await packageTargetResolve(
           packageUrl,
           (target as ConditionalTargets)[key],
           subpath,

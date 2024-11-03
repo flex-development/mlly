@@ -7,12 +7,12 @@ import testSubject from '#lib/lookup-package-scope'
 import { pathToFileURL, sep } from '@flex-development/pathe'
 
 describe('unit:lib/lookupPackageScope', () => {
-  it('should return `null` if package directory is not found', () => {
+  it('should return `null` if package directory is not found', async () => {
     // Arrange
     const url: URL = pathToFileURL('node_modules/@flex-development/404.mjs')
 
     // Act + Expect
-    expect(testSubject(url)).to.be.null
+    expect(await testSubject(url)).to.be.null
   })
 
   it.each<Parameters<typeof testSubject>>([
@@ -24,9 +24,9 @@ describe('unit:lib/lookupPackageScope', () => {
       'node_modules/@commitlint/cli/node_modules/@commitlint/config-validator/lib/validate.js'
     )],
     [pathToFileURL('node_modules/esbuild/lib/main.js')]
-  ])('should return URL of package directory (%#)', url => {
+  ])('should return URL of package directory (%#)', async url => {
     // Act
-    const result = testSubject(url)
+    const result = await testSubject(url)
     const resultStr = String(result)
 
     // Expect

@@ -2,7 +2,7 @@
 
 exports[`unit:lib/resolver > legacyMainResolve > should throw if main entry point is not found 1`] = `Cannot find package '\${process.cwd()}/__fixtures__/node_modules/@flex-development/mlly/' imported from \${process.cwd()}/__fixtures__/parent.mts`;
 
-exports[`unit:lib/resolver > moduleResolve > should return resolved URL (0) 1`] = `"node:fs"`;
+exports[`unit:lib/resolver > moduleResolve > should return resolved URL (0) 1`] = `"node:fs/promises"`;
 
 exports[`unit:lib/resolver > moduleResolve > should return resolved URL (1) 1`] = `file://\${process.cwd()}/src/internal/fs.browser.mts`;
 

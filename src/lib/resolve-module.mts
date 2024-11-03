@@ -40,23 +40,25 @@ export default resolveModule
  * @see {@linkcode NodeError}
  * @see {@linkcode ResolveModuleOptions}
  *
+ * @async
+ *
  * @param {string} specifier
  *  The module specifier to resolve
  * @param {ModuleId} parent
  *  URL of parent module
  * @param {ResolveModuleOptions | null | undefined} [options]
  *  Resolution options
- * @return {URL}
+ * @return {Promise<URL>}
  *  Resolved URL
  * @throws {NodeError}
  */
-function resolveModule(
+async function resolveModule(
   specifier: string,
   parent: ModuleId,
   options?: ResolveModuleOptions | null | undefined
-): URL {
+): Promise<URL> {
   try {
-    return changeExt(moduleResolve(
+    return changeExt(await moduleResolve(
       resolveAlias(specifier, { ...options, parent }) ?? specifier,
       parent,
       options?.conditions,
@@ -125,7 +127,7 @@ function resolveModule(
       // try module resolution attempts.
       for (const attempt of tries) {
         try {
-          return changeExt(moduleResolve(
+          return changeExt(await moduleResolve(
             attempt,
             parent,
             options?.conditions,

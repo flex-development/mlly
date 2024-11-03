@@ -60,8 +60,8 @@
         "mlly": "./src/internal/fs.browser.mts",
         "default": "./dist/internal/fs.browser.mjs"
       },
-      "node": "fs",
-      "default": "fs"
+      "node": "fs/promises",
+      "default": "fs/promises"
     },
     "#internal/process": {
       "types": {
