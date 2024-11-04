@@ -92,7 +92,8 @@ import {
   resolveModule,
   resolver,
   root,
-  toRelativeSpecifier
+  toRelativeSpecifier,
+  toUrl
 } from '@flex-development/mlly'
 ```
 
@@ -132,6 +133,7 @@ This package exports the following identifiers:
   - `packageTargetResolve`
 - [`root`](./src/lib/root.mts)
 - [`toRelativeSpecifier`](./src/lib/to-relative-specifier.mts)
+- [`toUrl`](./src/lib/to-url.mts)
 
 There is no default export.
 

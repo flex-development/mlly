@@ -3,6 +3,7 @@
  * @module mlly/lib/toRelativeSpecifier
  */
 
+import toUrl from '#lib/to-url'
 import type { ModuleId } from '@flex-development/mlly'
 import pathe from '@flex-development/pathe'
 
@@ -20,7 +21,7 @@ import pathe from '@flex-development/pathe'
  * @param {ModuleId} url
  *  The `file:` URL to convert
  * @param {ModuleId} parent
- *  URL of parent module
+ *  Parent module id
  * @return {string}
  *  Relative specifier
  */
@@ -31,8 +32,8 @@ function toRelativeSpecifier(url: ModuleId, parent: ModuleId): string {
    * @var {string} specifier
    */
   let specifier: string = pathe.relative(
-    pathe.fileURLToPath(parent),
-    pathe.fileURLToPath(url)
+    pathe.fileURLToPath(toUrl(parent)),
+    pathe.fileURLToPath(toUrl(url))
   )
 
   if (/(?:\.\.\/){2,}/.test(specifier)) {

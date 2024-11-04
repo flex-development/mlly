@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/toUrl > should return \`id\` as \`URL\` (0) 1`] = `"node:os"`;
+
+exports[`unit:lib/toUrl > should return \`id\` as \`URL\` (1) 1`] = `file://\${process.cwd()}/path`;
+
+exports[`unit:lib/toUrl > should return \`id\` as \`URL\` (2) 1`] = `file://\${process.cwd()}/src/lib/__tests__/to-url.spec.mts`;
+
+exports[`unit:lib/toUrl > should return \`id\` as \`URL\` (3) 1`] = `"node:test"`;
+
+exports[`unit:lib/toUrl > should return \`id\` as \`URL\` (4) 1`] = `file://\${process.cwd()}/tsconfig.build.json`;

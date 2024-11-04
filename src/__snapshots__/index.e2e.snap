@@ -34,5 +34,6 @@ exports[`e2e:mlly > should expose public api 1`] = `
   "resolver",
   "root",
   "toRelativeSpecifier",
+  "toUrl",
 ]
 `;

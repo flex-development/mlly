@@ -20,6 +20,7 @@ import lookupPackageScope from '#lib/lookup-package-scope'
 import patternMatch from '#lib/pattern-match'
 import readPackageJson from '#lib/read-package-json'
 import root from '#lib/root'
+import toUrl from '#lib/to-url'
 import {
   codes,
   ERR_INVALID_MODULE_SPECIFIER,
@@ -672,9 +673,7 @@ async function packageResolve(
   mainFields?: MainField[] | Set<MainField> | null | undefined,
   fs?: FileSystem | null | undefined
 ): Promise<URL> {
-  if (isBuiltin(specifier)) {
-    return new URL('node:' + specifier.replace(/^node:/, ''))
-  }
+  if (isBuiltin(specifier)) return toUrl(specifier)
 
   /**
    * Index of separator in {@linkcode specifier}.

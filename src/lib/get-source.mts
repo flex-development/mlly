@@ -5,13 +5,12 @@
 
 import fs from '#internal/fs'
 import process from '#internal/process'
-import canParseUrl from '#lib/can-parse-url'
 import isFile from '#lib/is-file'
+import toUrl from '#lib/to-url'
 import {
   ERR_UNSUPPORTED_ESM_URL_SCHEME,
   type ErrUnsupportedEsmUrlScheme
 } from '@flex-development/errnode'
-import { isBuiltin } from '@flex-development/is-builtin'
 import type {
   GetSourceContext,
   GetSourceHandler,
@@ -19,20 +18,12 @@ import type {
   ModuleId,
   Protocol
 } from '@flex-development/mlly'
-import pathe from '@flex-development/pathe'
 import { ok } from 'devlop'
 
 export default getSource
 
 /**
  * Get the source code for `id`.
- *
- * > 👉 **Note**: If `id` is not a [builtin module][builtin-module] and also
- * > cannot be parsed as an {@linkcode URL}, it will be assumed to be a path and
- * > converted to a [`file:` URL][file-url].
- *
- * [builtin-module]: https://nodejs.org/api/esm.html#builtin-modules
- * [file-url]: https://nodejs.org/api/esm.html#file-urls
  *
  * @see {@linkcode ErrUnsupportedEsmUrlScheme}
  * @see {@linkcode GetSourceOptions}
@@ -85,11 +76,7 @@ async function getSource(
    *
    * @const {URL} url
    */
-  const url: URL = isBuiltin(id)
-    ? new URL('node:' + String(id).replace(/^node:/, ''))
-    : canParseUrl(id)
-    ? new URL(id)
-    : (ok(typeof id === 'string', 'expected string'), pathe.pathToFileURL(id))
+  const url: URL = toUrl(id)
 
   /**
    * Source code handler for {@linkcode url}.
