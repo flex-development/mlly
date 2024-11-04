@@ -268,7 +268,7 @@
     "tinyrainbow": "1.2.0",
     "trash-cli": "6.0.0",
     "ts-dedent": "2.2.0",
-    "typescript": "5.7.0-beta",
+    "typescript": "5.7.0-dev.20241104",
     "typescript-eslint": "8.13.0",
     "unified": "11.0.5",
     "vfile": "6.0.3",
