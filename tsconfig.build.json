@@ -6,10 +6,9 @@
     "customConditions": ["mlly"],
     "declarationMap": false,
     "noEmitOnError": true,
-    "outDir": "./dist",
+    "outDir": "dist",
     "paths": {},
-    "rootDir": "./src",
-    "skipLibCheck": true,
+    "rootDir": "src",
     "sourceMap": false,
     "target": "es2023"
   },
@@ -20,5 +19,5 @@
     "./typings/node/process.d.ts",
     "./typings/typescript/lib.es5.d.ts"
   ],
-  "include": ["./dist/**/*", "./src/**/**.mts"]
+  "include": ["dist/**/*", "src/**/**.mts"]
 }

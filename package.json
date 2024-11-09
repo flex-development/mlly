@@ -151,6 +151,7 @@
     "@flex-development/tsconfig-utils": "2.0.2",
     "@flex-development/tutils": "6.0.0-alpha.25",
     "@stylistic/eslint-plugin": "2.10.1",
+    "@tsconfig/strictest": "2.0.5",
     "@types/chai": "5.0.0",
     "@types/chai-string": "1.4.5",
     "@types/eslint": "9.6.1",

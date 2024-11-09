@@ -2,9 +2,9 @@
   "compilerOptions": {
     "allowJs": false,
     "checkJs": false,
-    "customConditions": ["types", "mlly"],
-    "skipLibCheck": true
+    "customConditions": ["types", "mlly"]
   },
+  "exclude": [],
   "extends": "./tsconfig.json",
   "files": [
     "./typings/@faker-js/faker/global.d.ts",
@@ -14,9 +14,9 @@
     "./vitest-env.d.mts"
   ],
   "include": [
-    "./__fixtures__/**/*",
-    "./__tests__/**/*",
-    "./src/**.mts",
-    "./typings/**/*"
+    "__fixtures__/**/*",
+    "__tests__/**/*",
+    "src/**.mts",
+    "typings/**/*"
   ]
 }
