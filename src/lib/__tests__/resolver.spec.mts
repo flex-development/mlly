@@ -56,6 +56,7 @@ describe('unit:lib/resolver', () => {
 
   describe('moduleResolve', () => {
     it.each<Parameters<(typeof testSubject)['moduleResolve']>>([
+      ['#fixtures/tsconfig.json', import.meta.url],
       ['#internal/fs', import.meta.url, fixtureConditions],
       ['#internal/fs', import.meta.url, ['browser', ...fixtureConditions]],
       [
@@ -94,11 +95,16 @@ describe('unit:lib/resolver', () => {
       fs
     ) => {
       // Arrange
-      const expected: URL = baseline.moduleResolve(
-        specifier,
-        new URL(parent),
-        new Set(conditions ?? defaultConditions)
-      )
+      let expected: URL | null = null
+
+      // `import-meta-resolve` does not support empty pattern matches.
+      if (specifier !== '#fixtures/tsconfig.json') {
+        expected = baseline.moduleResolve(
+          specifier,
+          new URL(parent),
+          new Set(conditions ?? defaultConditions)
+        )
+      }
 
       // Act
       const result = await testSubject.moduleResolve(
@@ -111,7 +117,7 @@ describe('unit:lib/resolver', () => {
       )
 
       // Expect
-      expect(result).to.eql(expected)
+      expect(result).to.eql(expected ?? result)
       expect(result).toMatchSnapshot()
     })
 

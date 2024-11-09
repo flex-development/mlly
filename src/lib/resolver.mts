@@ -973,8 +973,8 @@ async function packageTargetResolve(
     }
 
     // replace `chars.asterisk` in `resolved` with `patternMatch`
-    if (patternMatch) {
-      if (checkInvalidSegments(patternMatch)) {
+    if (typeof patternMatch === 'string') {
+      if (patternMatch && checkInvalidSegments(patternMatch)) {
         throw invalidSubpath(
           subpath,
           patternMatch,

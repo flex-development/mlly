@@ -86,7 +86,10 @@ function patternMatch(
           !patternTrailer.length ||
           (
             matchKey.endsWith(patternTrailer) &&
-            matchKey.length >= expansionKey.length
+            (
+              matchKey.length >= expansionKey.length ||
+              matchKey === patternBase + patternTrailer
+            )
           )
         ) {
           return [

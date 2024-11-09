@@ -9,6 +9,7 @@ import pkg from '@flex-development/mlly/package.json'
 
 describe('unit:lib/patternMatch', () => {
   it.each<Parameters<typeof testSubject>>([
+    ['#fixtures/tsconfig.json', pkg.imports],
     ['#lib/pattern-match', pkg.imports],
     ['./lib/a.js', subpathExports.exports],
     ['./package.json', pkg.exports]

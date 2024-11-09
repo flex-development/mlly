@@ -46,6 +46,10 @@
   },
   "imports": {
     "#build/*": "./build/*.mts",
+    "#fixtures/tsconfig*.json": {
+      "types": "./__fixtures__/tsconfig.json.d.mts",
+      "default": "./__fixtures__/tsconfig*.json"
+    },
     "#fixtures/*": "./__fixtures__/*.mts",
     "#interfaces/*": {
       "mlly": "./src/interfaces/*.mts",

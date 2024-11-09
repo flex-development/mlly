@@ -10,7 +10,6 @@ import {
 } from '@flex-development/errnode'
 import type { ModuleId } from '@flex-development/mlly'
 import { fileURLToPath } from '@flex-development/pathe'
-import { ok } from 'devlop'
 
 /**
  * Create an {@linkcode ERR_INVALID_MODULE_SPECIFIER} error for an invalid
@@ -41,8 +40,6 @@ function invalidSubpath(
   isImports?: boolean | null | undefined,
   parent?: ModuleId | null | undefined
 ): ErrInvalidModuleSpecifier {
-  ok(patternMatch, 'expected `patternMatch`')
-
   return new ERR_INVALID_MODULE_SPECIFIER(
     subpath.replace(chars.asterisk, () => patternMatch),
     `request is not a valid match in pattern "${subpath}" for the ` +
