@@ -1896,7 +1896,7 @@ __metadata:
     tinyrainbow: "npm:1.2.0"
     trash-cli: "npm:6.0.0"
     ts-dedent: "npm:2.2.0"
-    typescript: "npm:5.7.0-beta"
+    typescript: "npm:5.7.0-dev.20241105"
     typescript-eslint: "npm:8.13.0"
     unified: "npm:11.0.5"
     vfile: "npm:6.0.3"
@@ -11068,13 +11068,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.7.0-beta":
-  version: 5.7.0-beta
-  resolution: "typescript@npm:5.7.0-beta"
+"typescript@npm:5.7.0-dev.20241105":
+  version: 5.7.0-dev.20241105
+  resolution: "typescript@npm:5.7.0-dev.20241105"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/4edffe5624a80b899e45d2de05014a09247133b2c446811ff9a84e708c360d48930b20924c3418f3dbf104ef3c123e4977ee4e5ec2be67b4a5c0fc9e71052c38
+  checksum: 10/aa57235a790624e08f82948e8c60d9e2bcfd908062cfbb5be164b32fb3000b134e346e35ea89255144bb3621c2b0040762c7638e03776a24668e75c3fec822d2
   languageName: node
   linkType: hard
 
@@ -11088,13 +11088,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.7.0-beta#optional!builtin<compat/typescript>":
-  version: 5.7.0-beta
-  resolution: "typescript@patch:typescript@npm%3A5.7.0-beta#optional!builtin<compat/typescript>::version=5.7.0-beta&hash=cef18b"
+"typescript@patch:typescript@npm%3A5.7.0-dev.20241105#optional!builtin<compat/typescript>":
+  version: 5.7.0-dev.20241105
+  resolution: "typescript@patch:typescript@npm%3A5.7.0-dev.20241105#optional!builtin<compat/typescript>::version=5.7.0-dev.20241105&hash=cef18b"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/eb91d3ef54b409df6e000926eb788855bd815da1adec4e967e0092f8e61352b9e42d10da42ac79c2f4a04ce6b2cc545678e1a41db734f865d20c67baad6b1a8a
+  checksum: 10/c5658b7663558218daee3371b829db4b0857b4ac09db997720ad3db26278d746561c4b338845df3d1cbaa7d578e78fb04854769d784df1f1ee4e365e874e1ad6
   languageName: node
   linkType: hard
 
