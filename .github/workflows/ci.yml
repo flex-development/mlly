@@ -358,7 +358,7 @@ jobs:
           path: ${{ env.COVERAGE_SUMMARY }}
       - id: codecov
         name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v4.6.0
+        uses: codecov/codecov-action@v5.0.0
         env:
           GITHUB_JOB: ${{ github.job }}
           GITHUB_REF: ${{ github.ref }}
