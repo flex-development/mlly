@@ -167,8 +167,8 @@
     "@typescript-eslint/eslint-plugin": "8.16.0",
     "@typescript-eslint/parser": "8.16.0",
     "@vates/toggle-scripts": "1.0.0",
-    "@vitest/coverage-v8": "2.1.5",
-    "@vitest/ui": "2.1.5",
+    "@vitest/coverage-v8": "2.1.6",
+    "@vitest/ui": "2.1.6",
     "chai": "5.1.2",
     "chai-each": "0.0.1",
     "chai-string": "1.5.0",
@@ -277,7 +277,7 @@
     "typescript-eslint": "8.16.0",
     "unified": "11.0.5",
     "vfile": "6.0.3",
-    "vitest": "2.1.5",
+    "vitest": "2.1.6",
     "yaml-eslint-parser": "1.2.3"
   },
   "engines": {
