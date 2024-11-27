@@ -174,7 +174,7 @@
     "chai-string": "1.5.0",
     "consola": "3.2.3",
     "cross-env": "7.0.3",
-    "cspell": "8.16.0",
+    "cspell": "8.16.1",
     "dprint": "0.47.5",
     "editorconfig": "2.0.0",
     "esbuild": "0.24.0",
