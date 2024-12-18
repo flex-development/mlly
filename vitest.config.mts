@@ -6,27 +6,30 @@
 
 import tsconfigPaths from '#tests/plugins/tsconfig-paths'
 import Notifier from '#tests/reporters/notifier'
+import VerboseReporter from '#tests/reporters/verbose'
 import pathe from '@flex-development/pathe'
 import ci from 'is-ci'
-import {
-  defineConfig,
-  type ConfigEnv,
-  type UserConfig,
-  type UserConfigExport
-} from 'vitest/config'
-import { BaseSequencer, type WorkspaceSpec } from 'vitest/node'
+import type { ConfigEnv, ViteUserConfig } from 'vitest/config'
+import { BaseSequencer, type TestSpecification } from 'vitest/node'
 import tsconfig from './tsconfig.test.json' with { type: 'json' }
 
 /**
- * Vitest configuration.
+ * Create a vitest configuration.
  *
- * @const {UserConfigExport} config
+ * @see {@linkcode ConfigEnv}
+ * @see {@linkcode ViteUserConfig}
+ *
+ * @param {ConfigEnv} env
+ *  Configuration environment
+ * @return {ViteUserConfig}
+ *  Vitest configuration object
  */
-const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
+function config(env: ConfigEnv): ViteUserConfig {
   return {
-    define: {},
     plugins: [tsconfigPaths({ tsconfig: 'tsconfig.test.json' })],
-    resolve: { conditions: tsconfig.compilerOptions.customConditions },
+    ssr: {
+      resolve: { conditions: tsconfig.compilerOptions.customConditions }
+    },
     test: {
       allowOnly: !ci,
       chaiConfig: {
@@ -71,11 +74,16 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
         json: pathe.join('__tests__', 'reports', env.mode + '.json')
       },
       passWithNoTests: true,
-      reporters: JSON.parse(process.env.VITEST_UI ?? '0')
-        ? [new Notifier(), 'verbose']
+      reporters: JSON.parse(process.env['VITEST_UI'] ?? '0')
+        ? [new Notifier(), new VerboseReporter()]
         : env.mode === 'reports'
-        ? ['verbose']
-        : [ci ? 'github-actions' : new Notifier(), 'blob', 'json', 'verbose'],
+        ? [new VerboseReporter()]
+        : [
+          ci ? 'github-actions' : new Notifier(),
+          'blob',
+          'json',
+          new VerboseReporter()
+        ],
       /**
        * Stores snapshots next to `file`'s directory.
        *
@@ -109,14 +117,14 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
            * @override
            * @async
            *
-           * @param {WorkspaceSpec[]} specs
+           * @param {TestSpecification[]} specs
            *  Workspace spec objects
-           * @return {Promise<WorkspaceSpec[]>}
+           * @return {Promise<TestSpecification[]>}
            *  Sorted `specs`
            */
           public override async sort(
-            specs: WorkspaceSpec[]
-          ): Promise<WorkspaceSpec[]> {
+            specs: TestSpecification[]
+          ): Promise<TestSpecification[]> {
             return new Promise(resolve => {
               return void resolve(specs.sort((a, b) => {
                 return a.moduleId.localeCompare(b.moduleId)
@@ -126,7 +134,6 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
         }
       },
       setupFiles: ['./__tests__/setup/chai.mts', './__tests__/setup/faker.mts'],
-      slowTestThreshold: 3000,
       snapshotFormat: {
         callToJSON: true,
         min: false,
@@ -146,6 +153,6 @@ const config: UserConfigExport = defineConfig((env: ConfigEnv): UserConfig => {
       unstubGlobals: true
     }
   }
-})
+}
 
 export default config

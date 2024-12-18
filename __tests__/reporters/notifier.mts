@@ -4,13 +4,15 @@
  * @see https://vitest.dev/advanced/reporters#exported-reporters
  */
 
+import type { Test } from '@vitest/runner'
+import { getTests } from '@vitest/runner/utils'
 import ci from 'is-ci'
 import notifier from 'node-notifier'
 import type { Notification } from 'node-notifier/notifiers/notificationcenter'
 import { performance } from 'node:perf_hooks'
 import { promisify } from 'node:util'
 import { dedent } from 'ts-dedent'
-import type { RunnerTask, RunnerTestCase, RunnerTestFile } from 'vitest'
+import type { RunnerTestFile } from 'vitest'
 import type { Vitest } from 'vitest/node'
 import type { Reporter } from 'vitest/reporters'
 
@@ -114,9 +116,9 @@ class Notifier implements Reporter {
     /**
      * Tests that have been run.
      *
-     * @const {RunnerTestCase[]} tests
+     * @const {Test[]} tests
      */
-    const tests: RunnerTestCase[] = this.tests(files)
+    const tests: Test[] = getTests(files)
 
     /**
      * Total number of failed tests.
@@ -178,30 +180,6 @@ class Notifier implements Reporter {
       sound: true,
       timeout: 15,
       title
-    })
-  }
-
-  /**
-   * Convert tasks to a list of test cases.
-   *
-   * @see {@linkcode RunnerTask}
-   * @see {@linkcode RunnerTestCase}
-   *
-   * @protected
-   * @instance
-   *
-   * @param {RunnerTask | RunnerTask[]} [tasks=[]]
-   *  Tasks to collect tests from
-   * @return {RunnerTestCase[]}
-   *  List of runner test cases
-   */
-  protected tests(tasks: RunnerTask | RunnerTask[] = []): RunnerTestCase[] {
-    return (Array.isArray(tasks) ? tasks : [tasks]).flatMap(task => {
-      return task.type === 'custom' || task.type === 'test'
-        ? [task as unknown as RunnerTestCase]
-        : 'tasks' in task
-        ? task.tasks.flatMap(task => this.tests(task))
-        : []
     })
   }
 }
