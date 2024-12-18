@@ -763,7 +763,7 @@ async function packageResolve(
     let packageUrl: URL = new URL(`node_modules/${packageName}/`, parentUrl)
 
     // set parentUrl to the parent folder URL of parentUrl
-    parentUrl = new URL(pathe.dirname(parentUrl.href) + pathe.sep)
+    parentUrl = new URL(pathe.dirname(parentUrl.href))
 
     // continue if the folder at packageUrl does not exist
     if (!(await isDirectory(packageUrl, fs))) continue
