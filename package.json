@@ -175,7 +175,7 @@
     "consola": "3.2.3",
     "cross-env": "7.0.3",
     "cspell": "8.17.1",
-    "dprint": "0.47.5",
+    "dprint": "0.47.6",
     "editorconfig": "2.0.0",
     "esbuild": "0.24.0",
     "eslint": "9.17.0",
