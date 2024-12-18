@@ -142,15 +142,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: checkout
-        name: Checkout ${{ env.REF_NAME }}
+        name: Checkout
         uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
-          persist-credentials: false
-          ref: ${{ env.REF }}
       - id: scan
-        name: Scan commits for secrets and policy breaches
-        uses: GitGuardian/ggshield-action@master
+        name: Scan commits with ggshield
+        uses: GitGuardian/ggshield-action@v1.34.0
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
           GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
@@ -158,7 +156,7 @@ jobs:
           GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
           GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
         with:
-          args: --all-policies --show-secrets --verbose
+          args: --all-policies --format sarif --show-secrets --with-incident-details --verbose
   format:
     needs:
       - commitlint
