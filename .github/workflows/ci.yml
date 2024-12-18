@@ -310,6 +310,7 @@ jobs:
           - 22
     env:
       COVERAGE_SUMMARY: ./coverage/coverage-summary.json
+      NODE_NO_WARNINGS: 1
       NODE_VERSION: ${{ matrix.node-version }}
       PCT: .total.branches.pct + .total.functions.pct + .total.lines.pct + .total.statements.pct
       VITEST_REPORT: ./.vitest-reports/test.blob.json
@@ -340,6 +341,9 @@ jobs:
         run: |
           yarn test:cov --coverage.thresholds.100=false \
           && echo "coverage=$(jq '${{ env.PCT }}' ${{ env.COVERAGE_SUMMARY }} -r)" >>$GITHUB_OUTPUT
+      - id: pct
+        name: Print coverage points
+        run: echo ${{ steps.test.outputs.coverage }}
       - id: report
         name: Upload report
         uses: actions/upload-artifact@v4.4.3
@@ -357,25 +361,20 @@ jobs:
       - id: codecov
         name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v5.0.7
-        env:
-          GITHUB_JOB: ${{ github.job }}
-          GITHUB_REF: ${{ github.ref }}
-          GITHUB_REF_TYPE: ${{ github.ref_type }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
-          GITHUB_SHA: ${{ env.SHA }}
-          GITHUB_WORKSPACE: ${{ github.workspace }}
         with:
-          env_vars: GITHUB_JOB,GITHUB_REF,GITHUB_REF_TYPE,GITHUB_RUN_ID,GITHUB_SHA,GITHUB_WORKSPACE
+          env_vars: GITHUB_JOB,GITHUB_REF_TYPE
           fail_ci_if_error: true
-          file: ./coverage/lcov.info
+          files: ./coverage/lcov.info
           flags: ${{ format('node{0}', matrix.node-version) }}
+          name: ${{ format('node{0}-{1}', matrix.node-version, env.SHA) }}
           override_branch: ${{ env.REF }}
           override_build: ${{ github.run_id }}
           override_commit: ${{ env.SHA }}
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
+          working-directory: ${{ github.workspace }}
       - id: coverage-failure
-        if: ${{ toJson(steps.test.outputs.coverage) != 400 }}
+        if: steps.test.outputs.coverage != '400'
         name: Coverage threshold failure (${{ steps.test.outputs.coverage }})
         run: yarn test:cov:reports
   build:
