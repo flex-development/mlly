@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`unit:lib/toRelativeSpecifier > should return relative specifier (0) 1`] = `"."`;
-
-exports[`unit:lib/toRelativeSpecifier > should return relative specifier (1) 1`] = `"./cwd"`;
-
-exports[`unit:lib/toRelativeSpecifier > should return relative specifier (2) 1`] = `"../to-relative-specifier"`;
-
-exports[`unit:lib/toRelativeSpecifier > should return relative specifier (3) 1`] = `"."`;

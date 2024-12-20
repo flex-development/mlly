@@ -123,7 +123,7 @@
     "prepublishOnly": "toggle-scripts -prepack",
     "release": "bash ./scripts/release.sh",
     "remark": "remark .",
-    "test": "cross-env NODE_OPTIONS=\"--conditions mlly --experimental-strip-types --experimental-transform-types\" vitest run",
+    "test": "yarn clean:build; cross-env NODE_OPTIONS=\"--conditions mlly --experimental-strip-types --experimental-transform-types\" vitest run",
     "test:cov": "yarn test --coverage",
     "test:cov:reports": "yarn test:cov --merge-reports --mode=reports",
     "test:cov:ui": "yarn test:ui --coverage",
