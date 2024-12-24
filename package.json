@@ -136,7 +136,7 @@
   "dependencies": {
     "@flex-development/errnode": "3.1.1",
     "@flex-development/is-builtin": "3.2.0",
-    "@flex-development/pathe": "4.0.0",
+    "@flex-development/pathe": "4.0.1",
     "@flex-development/pkg-types": "4.1.0",
     "devlop": "1.1.0"
   },
