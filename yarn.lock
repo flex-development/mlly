@@ -1787,7 +1787,7 @@ __metadata:
     "@flex-development/import-regex": "npm:3.0.0"
     "@flex-development/is-builtin": "npm:3.2.0"
     "@flex-development/mkbuild": "npm:1.0.0-alpha.23"
-    "@flex-development/pathe": "npm:4.0.0"
+    "@flex-development/pathe": "npm:4.0.1"
     "@flex-development/pkg-types": "npm:4.1.0"
     "@flex-development/tsconfig-utils": "npm:2.0.2"
     "@flex-development/tutils": "npm:6.0.0-alpha.25"
@@ -1941,15 +1941,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/pathe@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@flex-development/pathe@npm:4.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fpathe%2F4.0.0%2F6c58f274044f4d5a8d2453ed5f3de044a5e94da3"
+"@flex-development/pathe@npm:4.0.1":
+  version: 4.0.1
+  resolution: "@flex-development/pathe@npm:4.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40flex-development%2Fpathe%2F4.0.1%2F4d48670922460d504e2c70cf42da77895ee25c46"
   dependencies:
     "@flex-development/errnode": "npm:3.1.1"
     "@types/micromatch": "npm:4.0.9"
     micromatch: "npm:4.0.8"
     punycode.js: "npm:2.3.1"
-  checksum: 10/33489adc7e4d9f2ab73c98e854d2ed733a28e521fbbc59e6714ffe51dc5b6b68054525ec7ba44cef84c19a6e56313bcccf04a9b7943b67d587b87939825f1ae0
+  checksum: 10/808e0f66154e70a7eff601268aeac8e7c503a5f3d30477bd06fcbfdb0f39d8f76de352dd031b0aae3af0011751c954be27ea2b38bb81b998168778183d974ef7
   languageName: node
   linkType: hard
 
