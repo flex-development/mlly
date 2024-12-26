@@ -1809,7 +1809,7 @@ __metadata:
     chai: "npm:5.1.2"
     chai-each: "npm:0.0.1"
     chai-string: "npm:1.5.0"
-    consola: "npm:3.3.1"
+    consola: "npm:3.3.3"
     cross-env: "npm:7.0.3"
     cspell: "npm:8.17.1"
     devlop: "npm:1.1.0"
@@ -4005,10 +4005,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"consola@npm:3.3.1":
-  version: 3.3.1
-  resolution: "consola@npm:3.3.1"
-  checksum: 10/59a9470e07c591c407fb072500fd05b6851334b7685db73fdcbe93b8b18b0c5737f1f1340f9e0c1b8d10f077bd9d1f0f9769fbbe0bdc40feb1f75ce1da92c591
+"consola@npm:3.3.3":
+  version: 3.3.3
+  resolution: "consola@npm:3.3.3"
+  checksum: 10/b0e9a29195d5a87ec24f82cd2948109197745757d49f1bd57c8316d9e19f79941d60e25b997ee7b2ea0735c1a12b29917c3486bb80b4a8fb3be16ef70f019faf
   languageName: node
   linkType: hard
 
