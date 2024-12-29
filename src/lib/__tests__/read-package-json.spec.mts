@@ -14,18 +14,18 @@ import {
 import pkg from '@flex-development/mlly/package.json'
 
 describe('unit:lib/readPackageJson', () => {
-  it('should return `null` if `package.json` file is not found', async () => {
-    expect(await testSubject(import.meta.url)).to.be.null
+  it('should return `null` if `package.json` file is not found', () => {
+    expect(testSubject(import.meta.url)).to.be.null
   })
 
-  it('should return package manifest object', async () => {
-    expect(await testSubject(cwd())).to.eql(pkg)
+  it('should return package manifest object', () => {
+    expect(testSubject(cwd())).to.eql(pkg)
   })
 
   it.each<Parameters<typeof testSubject>>([
     [invalidJsonUrl, String(new URL('package.json', invalidJsonUrl))],
     [invalidJsonUrl, 'invalid-json', import.meta.url]
-  ])('should throw if package manifest is not valid JSON (%#)', async (
+  ])('should throw if package manifest is not valid JSON (%#)', (
     id,
     specifier,
     parent
@@ -35,7 +35,7 @@ describe('unit:lib/readPackageJson', () => {
 
     // Act
     try {
-      await testSubject(id, specifier, parent)
+      testSubject(id, specifier, parent)
     } catch (e: unknown) {
       error = e as typeof error
     }

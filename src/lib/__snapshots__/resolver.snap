@@ -4,7 +4,7 @@ exports[`unit:lib/resolver > legacyMainResolve > should throw if main entry poin
 
 exports[`unit:lib/resolver > moduleResolve > should return resolved URL (0) 1`] = `file://\${process.cwd()}/__fixtures__/tsconfig.json`;
 
-exports[`unit:lib/resolver > moduleResolve > should return resolved URL (1) 1`] = `"node:fs/promises"`;
+exports[`unit:lib/resolver > moduleResolve > should return resolved URL (1) 1`] = `"node:fs"`;
 
 exports[`unit:lib/resolver > moduleResolve > should return resolved URL (2) 1`] = `file://\${process.cwd()}/src/internal/fs.browser.mts`;
 

@@ -12,22 +12,20 @@ import type { FileSystem, ModuleId } from '@flex-development/mlly'
  * @see {@linkcode FileSystem}
  * @see {@linkcode ModuleId}
  *
- * @async
- *
  * @param {ModuleId} id
  *  Module id to check
  * @param {FileSystem | null | undefined} fs
  *  File system API
- * @return {Promise<boolean>}
+ * @return {boolean}
  *  `true` if file exists at `id`, `false` otherwise
  */
-async function isFile(
+function isFile(
   id: ModuleId,
   fs?: FileSystem | null | undefined
-): Promise<boolean> {
+): boolean {
   try {
     if (typeof id === 'string' && id.startsWith('file:')) id = new URL(id)
-    return (await (fs ?? dfs).stat(id)).isFile()
+    return (fs ?? dfs).statSync(id).isFile()
   } catch {
     return false
   }

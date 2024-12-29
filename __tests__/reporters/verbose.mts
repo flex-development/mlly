@@ -7,20 +7,8 @@
 import type { Task, TaskResultPack } from '@vitest/runner'
 import { getNames, getTests } from '@vitest/runner/utils'
 import colors, { type Colors } from 'tinyrainbow'
-import type { RunnerTask } from 'vitest'
+import type { RunnerTask, RunnerTestFile } from 'vitest'
 import { DefaultReporter, type Reporter } from 'vitest/reporters'
-
-/**
- * Verbose reporter options.
- */
-interface Options {
-  /**
-   * Enable summary reporter?
-   *
-   * @default true
-   */
-  summary?: boolean | null | undefined
-}
 
 /**
  * Verbose reporter.
@@ -43,13 +31,12 @@ class VerboseReporter extends DefaultReporter implements Reporter {
 
   /**
    * Create a new verbose reporter.
-   *
-   * @param {Options | null | undefined} [options]
-   *  Reporter options
    */
-  constructor(options?: Options | null | undefined) {
-    super({ summary: options?.summary ?? true })
+  constructor() {
+    super({ summary: true })
+
     this.colors = colors
+    this.renderSucceed = true
     this.verbose = true
   }
 
@@ -113,6 +100,29 @@ class VerboseReporter extends DefaultReporter implements Reporter {
   /**
    * Print tasks.
    *
+   * @see {@linkcode RunnerTestFile}
+   *
+   * @public
+   * @override
+   * @instance
+   *
+   * @param {RunnerTestFile[] | undefined} [files]
+   *  List of test files
+   * @param {unknown[] | undefined} [errors]
+   *  List of unhandled errors
+   * @return {undefined}
+   */
+  public override onFinished(
+    files?: RunnerTestFile[] | undefined,
+    errors?: unknown[] | undefined
+  ): undefined {
+    if (files) { for (const task of files) this.printTask(task, true) }
+    return void super.onFinished(files, errors)
+  }
+
+  /**
+   * Handle task updates.
+   *
    * @see {@linkcode TaskResultPack}
    *
    * @public
@@ -124,21 +134,7 @@ class VerboseReporter extends DefaultReporter implements Reporter {
    * @return {undefined}
    */
   public override onTaskUpdate(packs: TaskResultPack[]): undefined {
-    for (const pack of packs) {
-      /**
-       * Current task.
-       *
-       * @const {Task | undefined} task
-       */
-      const task: Task | undefined = this.ctx.state.idMap.get(pack[0])
-
-      // print top-level suite task and recursively print tests
-      if (task && task.type === 'suite' && 'filepath' in task) {
-        void this.printTask(task)
-      }
-    }
-
-    return void packs
+    return void (this.isTTY && void super.onTaskUpdate(packs))
   }
 
   /**
@@ -152,10 +148,20 @@ class VerboseReporter extends DefaultReporter implements Reporter {
    *
    * @param {Task | null | undefined} task
    *  The task to handle
+   * @param {boolean | null | undefined} [force]
+   *  Print `task` even when {@linkcode isTTY} is `false`?
    * @return {undefined}
    */
-  protected override printTask(task: Task | null | undefined): undefined {
-    if (task && task.result?.state !== 'run') {
+  protected override printTask(
+    task: Task | null | undefined,
+    force?: boolean | null | undefined
+  ): undefined {
+    if (
+      (!this.isTTY || force) &&
+      task?.result?.state &&
+      task.result.state !== 'queued' &&
+      task.result.state !== 'run'
+    ) {
       /**
        * Task skipped?
        *
@@ -197,7 +203,10 @@ class VerboseReporter extends DefaultReporter implements Reporter {
         state += skip ? this.colors.blackBright(suite) : suite
 
         this.log(state)
-        if (!skip) { for (const tsk of task.tasks) void this.printTask(tsk) }
+
+        if (!skip) {
+          for (const subtask of task.tasks) void this.printTask(subtask, force)
+        }
       }
     }
 

@@ -8,6 +8,7 @@ import parent from '#fixtures/parent'
 import chars from '#internal/chars'
 import cwd from '#lib/cwd'
 import defaultConditions from '#lib/default-conditions'
+import defaultMainFields from '#lib/default-main-fields'
 import * as testSubject from '#lib/resolver'
 import exportsSugarA from '#node_modules/exports-sugar-a/package.json'
 import exportsSugar from '#node_modules/exports-sugar/package.json'
@@ -24,7 +25,13 @@ import {
 import errnode from '@flex-development/errnode/package.json'
 import type { MainField } from '@flex-development/mlly'
 import pkg from '@flex-development/mlly/package.json'
-import { dot, pathToFileURL, resolve, sep } from '@flex-development/pathe'
+import {
+  dot,
+  isURL,
+  pathToFileURL,
+  resolve,
+  sep
+} from '@flex-development/pathe'
 import type { Condition, PackageJson } from '@flex-development/pkg-types'
 import * as baseline from 'import-meta-resolve'
 
@@ -267,6 +274,55 @@ describe('unit:lib/resolver', () => {
       expect(error).to.satisfy(isNodeError)
       expect(error).to.have.property('code', code)
       expect(error.message).toMatchSnapshot()
+    })
+  })
+
+  describe('packageImportsExportsResolve', () => {
+    it.each<Parameters<(typeof testSubject)['packageImportsExportsResolve']>>([
+      [
+        '#internal/fs',
+        pkg.imports,
+        cwd(),
+        true,
+        fixtureConditions,
+        defaultMainFields,
+        import.meta.url
+      ],
+      [
+        dot + sep + 'package.json',
+        pkg.exports,
+        cwd(),
+        false,
+        defaultConditions,
+        defaultMainFields,
+        import.meta.url
+      ]
+    ])('should return resolved package export or import URL (%j)', async (
+      matchKey,
+      matchObject,
+      packageUrl,
+      isImports,
+      conditions,
+      mainFields,
+      parent,
+      fs
+    ) => {
+      // Act
+      const result = await testSubject.packageImportsExportsResolve(
+        matchKey,
+        matchObject,
+        packageUrl,
+        isImports,
+        conditions,
+        mainFields,
+        parent,
+        fs
+      )
+
+      // Expect
+      expect(result).to.not.be.null
+      expect(result).to.not.be.undefined
+      expect(result).to.satisfy(isURL).and.not.be.a('string')
     })
   })
 

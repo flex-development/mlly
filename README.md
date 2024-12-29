@@ -77,14 +77,22 @@ import {
   isImportsSubpath,
   isRelativeSpecifier,
   legacyMainResolve,
+  legacyMainResolveSync,
   lookupPackageScope,
   moduleResolve,
+  moduleResolveSync,
   packageExportsResolve,
+  packageExportsResolveSync,
   packageImportsExportsResolve,
+  packageImportsExportsResolveSync,
   packageImportsResolve,
+  packageImportsResolveSync,
   packageResolve,
+  packageResolveSync,
   packageSelfResolve,
+  packageSelfResolveSync,
   packageTargetResolve,
+  packageTargetResolveSync,
   patternKeyCompare,
   patternMatch,
   readPackageJson,
@@ -124,13 +132,21 @@ This package exports the following identifiers:
 - [`resolveModule`](./src/lib/resolve-module.mts)
 - [`resolver`](./src/lib/resolver.mts)
   - `legacyMainResolve`
+  - `legacyMainResolveSync`
   - `moduleResolve`
+  - `moduleResolveSync`
   - `packageExportsResolve`
+  - `packageExportsResolveSync`
   - `packageImportsExportsResolve`
+  - `packageImportsExportsResolveSync`
   - `packageImportsResolve`
+  - `packageImportsResolveSync`
   - `packageResolve`
+  - `packageResolveSync`
   - `packageSelfResolve`
+  - `packageSelfResolveSync`
   - `packageTargetResolve`
+  - `packageTargetResolveSync`
 - [`root`](./src/lib/root.mts)
 - [`toRelativeSpecifier`](./src/lib/to-relative-specifier.mts)
 - [`toUrl`](./src/lib/to-url.mts)
