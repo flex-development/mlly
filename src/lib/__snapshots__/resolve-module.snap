@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`unit:lib/resolveModule > should return resolved URL ("#internal/fs") 1`] = `"node:fs/promises"`;
+exports[`unit:lib/resolveModule > should return resolved URL ("#internal/fs") 1`] = `"node:fs"`;
 
 exports[`unit:lib/resolveModule > should return resolved URL ("../../../src") 1`] = `file://\${process.cwd()}/src/index.mts`;
 
