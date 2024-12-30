@@ -1,3 +1,22 @@
+## [1.0.0-alpha.20](https://github.com/flex-development/mlly/compare/1.0.0-alpha.19...1.0.0-alpha.20) (2024-12-29)
+
+### ⚠ BREAKING CHANGES
+
+- **lib:** [`resolver`] synchronous methods
+
+### :package: Build
+
+- [[`a466da3`](https://github.com/flex-development/mlly/commit/a466da3a2220d5bf8b76d5a145c67c7767a4df2e)] **deps-dev:** Bump @stylistic/eslint-plugin from 2.11.0 to 2.12.1 ([#756](https://github.com/flex-development/mlly/issues/756))
+- [[`b55b400`](https://github.com/flex-development/mlly/commit/b55b400e8fd612cb4cd2fae681e82529649fcd69)] **deps-dev:** Bump consola from 3.2.3 to 3.3.1 ([#757](https://github.com/flex-development/mlly/issues/757))
+- [[`156b3d2`](https://github.com/flex-development/mlly/commit/156b3d2f047b07f74fef291f9880fece6635c628)] **deps-dev:** Bump consola from 3.3.1 to 3.3.3 ([#759](https://github.com/flex-development/mlly/issues/759))
+- [[`822d03a`](https://github.com/flex-development/mlly/commit/822d03a715735e4272c3682df634f93aef6630c5)] **deps-dev:** Bump dprint from 0.47.6 to 0.48.0 ([#755](https://github.com/flex-development/mlly/issues/755))
+- [[`51d471a`](https://github.com/flex-development/mlly/commit/51d471af89b6811c7732f73fe22c41a782cec4cb)] **deps-dev:** bump the typescript-eslint group from 8.18.1 to 8.18.3-alpha.5
+- [[`dc82de3`](https://github.com/flex-development/mlly/commit/dc82de388f9387b53a4cd551de44756f99d144fb)] **deps:** Bump @flex-development/pathe from 4.0.0 to 4.0.1 in the flex-development group ([#758](https://github.com/flex-development/mlly/issues/758))
+
+### :sparkles: Features
+
+- [[`a88c7f8`](https://github.com/flex-development/mlly/commit/a88c7f867397fc061371367c31086693c2f89e4f)] **lib:** [`resolver`] synchronous methods
+
 ## [1.0.0-alpha.19](https://github.com/flex-development/mlly/compare/1.0.0-alpha.18...1.0.0-alpha.19) (2024-12-20)
 
 ### ⚠ BREAKING CHANGES
@@ -1072,4 +1091,5 @@
 - [[`4615851`](https://github.com/flex-development/mlly/commit/46158510fdd0e3d8e0e60757290a655606ad836e)] **resolve:** [options] pass original module specifier to `ext`
 - [[`0266ca9`](https://github.com/flex-development/mlly/commit/0266ca9a5593d0c66e950ba1fe2c8f6df8422ff9)] **resolve:** sort `RESOLVE_EXTENSIONS` according to priority
 - [[`36c4b74`](https://github.com/flex-development/mlly/commit/36c4b7475c9bb6c924f5e75c8d6d215a8d23e79c)] **specifiers:** [`toBareSpecifier`] improve `exports` path search
+
 
