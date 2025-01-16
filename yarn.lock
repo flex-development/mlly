@@ -1930,7 +1930,7 @@ __metadata:
     remark-lint-unordered-list-marker-style: "npm:4.0.0"
     remark-validate-links: "npm:13.0.2"
     sh-syntax: "npm:0.4.2"
-    tinyrainbow: "npm:1.2.0"
+    tinyrainbow: "npm:2.0.0"
     trash-cli: "npm:6.0.0"
     ts-dedent: "npm:2.2.0"
     typescript: "npm:5.7.2"
@@ -10913,7 +10913,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyrainbow@npm:1.2.0, tinyrainbow@npm:^1.2.0":
+"tinyrainbow@npm:2.0.0":
+  version: 2.0.0
+  resolution: "tinyrainbow@npm:2.0.0"
+  checksum: 10/94d4e16246972614a5601eeb169ba94f1d49752426312d3cf8cc4f2cc663a2e354ffc653aa4de4eebccbf9eeebdd0caef52d1150271fdfde65d7ae7f3dcb9eb5
+  languageName: node
+  linkType: hard
+
+"tinyrainbow@npm:^1.2.0":
   version: 1.2.0
   resolution: "tinyrainbow@npm:1.2.0"
   checksum: 10/2924444db6804355e5ba2b6e586c7f77329d93abdd7257a069a0f4530dff9f16de484e80479094e3f39273462541b003a65ee3a6afc2d12555aa745132deba5d
