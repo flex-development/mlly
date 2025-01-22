@@ -1862,7 +1862,7 @@ __metadata:
     pretty-bytes: "npm:6.1.1"
     remark: "npm:15.0.1"
     remark-cli: "npm:12.0.1"
-    remark-directive: "npm:3.0.0"
+    remark-directive: "npm:3.0.1"
     remark-frontmatter: "npm:5.0.0"
     remark-gfm: "npm:4.0.0"
     remark-lint: "npm:10.0.0"
@@ -9110,15 +9110,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark-directive@npm:3.0.0":
-  version: 3.0.0
-  resolution: "remark-directive@npm:3.0.0"
+"remark-directive@npm:3.0.1":
+  version: 3.0.1
+  resolution: "remark-directive@npm:3.0.1"
   dependencies:
     "@types/mdast": "npm:^4.0.0"
     mdast-util-directive: "npm:^3.0.0"
     micromark-extension-directive: "npm:^3.0.0"
     unified: "npm:^11.0.0"
-  checksum: 10/fc23794c0996f5a926d4fd759632bd6fcbc8a1a34c47723d03e1a3aa3a1e5389549ae46fd679cd2ab571ca336b7ed53e76c459616559518200d3019984b5e147
+  checksum: 10/819073621cb645fc7d4e6a8e28d3d3c4dcf877fd87d4f931008b9e7e68a4e80c6c11b0345be595111b32b1f16e5868e2c1d48c1b2fb02a8313a3fefa208047a1
   languageName: node
   linkType: hard
 
