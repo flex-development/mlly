@@ -1836,7 +1836,7 @@ __metadata:
     cspell: "npm:8.17.3"
     devlop: "npm:1.1.0"
     dprint: "npm:0.48.0"
-    editorconfig: "npm:2.0.0"
+    editorconfig: "npm:2.0.1"
     esbuild: "npm:0.24.2"
     eslint: "npm:9.19.0"
     eslint-import-resolver-typescript: "npm:3.7.0"
@@ -2388,10 +2388,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@one-ini/wasm@npm:0.1.1":
-  version: 0.1.1
-  resolution: "@one-ini/wasm@npm:0.1.1"
-  checksum: 10/673c11518dba2e582e42415cbefe928513616f3af25e12f6e4e6b1b98b52b3e6c14bc251a361654af63cd64f208f22a1f7556fa49da2bf7efcf28cb14f16f807
+"@one-ini/wasm@npm:0.2.0":
+  version: 0.2.0
+  resolution: "@one-ini/wasm@npm:0.2.0"
+  checksum: 10/3949fb4a54c0f9373f9ff4b6dfa449c65e397acb11e191767dd0a6f64983fdf22fbc28c6f97032c99e2ebf0f3e56449f5df358c395fd77e05db1277d1f6f2692
   languageName: node
   linkType: hard
 
@@ -3950,13 +3950,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^11.0.0":
-  version: 11.1.0
-  resolution: "commander@npm:11.1.0"
-  checksum: 10/66bd2d8a0547f6cb1d34022efb25f348e433b0e04ad76a65279b1b09da108f59a4d3001ca539c60a7a46ea38bcf399fc17d91adad76a8cf43845d8dcbaf5cda1
-  languageName: node
-  linkType: hard
-
 "commander@npm:^13.1.0":
   version: 13.1.0
   resolution: "commander@npm:13.1.0"
@@ -4512,17 +4505,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"editorconfig@npm:2.0.0":
-  version: 2.0.0
-  resolution: "editorconfig@npm:2.0.0"
+"editorconfig@npm:2.0.1":
+  version: 2.0.1
+  resolution: "editorconfig@npm:2.0.1"
   dependencies:
-    "@one-ini/wasm": "npm:0.1.1"
-    commander: "npm:^11.0.0"
-    minimatch: "npm:9.0.2"
-    semver: "npm:^7.5.3"
+    "@one-ini/wasm": "npm:0.2.0"
+    commander: "npm:^13.1.0"
+    minimatch: "npm:10.0.1"
+    semver: "npm:^7.7.1"
   bin:
     editorconfig: bin/editorconfig
-  checksum: 10/897896a0bdc2b3fcf5ed1466943b0e9676fe4a9dac7c71bcd0e6455efeff2e4e358a5a46dd38b24fb047f2599b2dfb23d2f4dba839c5c76cbce670448b68c1c2
+  checksum: 10/5ee2770d0d3be7a09288a7123e5604d22280394ab5ac64ffb7b9bdf90ad8e7c29d40fb9a9cdd7136a7d606ef48274ce260d20f7246ba5da6352883ea95be1b03
   languageName: node
   linkType: hard
 
@@ -8039,12 +8032,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:9.0.2":
-  version: 9.0.2
-  resolution: "minimatch@npm:9.0.2"
+"minimatch@npm:10.0.1":
+  version: 10.0.1
+  resolution: "minimatch@npm:10.0.1"
   dependencies:
     brace-expansion: "npm:^2.0.1"
-  checksum: 10/b468863a8b5071ffdfd63ad2cbe01c2b708807d80907036102b3c1499502fcc6d8965f571707f8ff820aa23c67784344a77cc2c3e0e9ec7778dab56f76a61595
+  checksum: 10/082e7ccbc090d5f8c4e4e029255d5a1d1e3af37bda837da2b8b0085b1503a1210c91ac90d9ebfe741d8a5f286ece820a1abb4f61dc1f82ce602a055d461d93f3
   languageName: node
   linkType: hard
 
@@ -10327,6 +10320,15 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 10/36b1fbe1a2b6f873559cd57b238f1094a053dbfd997ceeb8757d79d1d2089c56d1321b9f1069ce263dc64cfa922fa1d2ad566b39426fe1ac6c723c1487589e10
+  languageName: node
+  linkType: hard
+
+"semver@npm:^7.7.1":
+  version: 7.7.1
+  resolution: "semver@npm:7.7.1"
+  bin:
+    semver: bin/semver.js
+  checksum: 10/4cfa1eb91ef3751e20fc52e47a935a0118d56d6f15a837ab814da0c150778ba2ca4f1a4d9068b33070ea4273629e615066664c2cfcd7c272caf7a8a0f6518b2c
   languageName: node
   linkType: hard
 
