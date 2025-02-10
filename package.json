@@ -204,7 +204,7 @@
     "remark-cli": "12.0.1",
     "remark-directive": "3.0.1",
     "remark-frontmatter": "5.0.0",
-    "remark-gfm": "4.0.0",
+    "remark-gfm": "4.0.1",
     "remark-lint": "10.0.1",
     "remark-lint-blockquote-indentation": "4.0.1",
     "remark-lint-checkbox-character-style": "5.0.1",
