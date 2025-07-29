@@ -148,7 +148,7 @@ jobs:
           fetch-depth: 0
       - id: scan
         name: Scan commits with ggshield
-        uses: GitGuardian/ggshield-action@v1.41.0
+        uses: GitGuardian/ggshield-action@v1.42.0
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
           GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
