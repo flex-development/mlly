@@ -72,7 +72,7 @@ jobs:
           exit 1
       - id: version
         name: Get release version
-        uses: kaisugi/action-regex-match@v1.0.1
+        uses: kaisugi/action-regex-match@v1.0.2
         with:
           regex: ${{ vars.RELEASE_CHORE_REGEX }}
           text: ${{ github.event.head_commit.message }}
