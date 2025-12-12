@@ -23,7 +23,7 @@ jobs:
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
       - id: lock
         name: Lock inactive issues and pull requests
-        uses: dessant/lock-threads@v5.0.1
+        uses: dessant/lock-threads@v6.0.0
         with:
           github-token: ${{ steps.bot-token.outputs.token }}
           issue-comment: |
