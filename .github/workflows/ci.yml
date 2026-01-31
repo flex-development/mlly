@@ -251,6 +251,7 @@ jobs:
           - 24
           - 23
           - 22
+          - 21
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
