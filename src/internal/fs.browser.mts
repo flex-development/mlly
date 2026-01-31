@@ -6,7 +6,7 @@
 import type { FileSystem } from '@flex-development/mlly'
 
 /**
- * File system API.
+ * The file system API.
  *
  * @const {FileSystem} fs
  */
@@ -18,8 +18,8 @@ const fs: FileSystem = {
    *  Never; not implemented
    * @throws {Error}
    */
-  readFileSync(): never {
-    throw new Error('[readFileSync] not implemented')
+  readFile(): never {
+    throw new Error('[readFile] not implemented')
   },
 
   /**
@@ -29,7 +29,7 @@ const fs: FileSystem = {
    *  Never; not implemented
    * @throws {Error}
    */
-  realpathSync(): never {
+  realpath(): never {
     throw new Error('[realpathSync] not implemented')
   },
 
@@ -40,8 +40,8 @@ const fs: FileSystem = {
    *  Never; not implemented
    * @throws {Error}
    */
-  statSync(): never {
-    throw new Error('[statSync] not implemented')
+  stat(): never {
+    throw new Error('[stat] not implemented')
   }
 }
 

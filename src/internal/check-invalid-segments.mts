@@ -10,21 +10,23 @@ import chars from '#internal/chars'
  *
  * @internal
  *
+ * @this {void}
+ *
  * @param {string} str
  *  The package target or subpath pattern match to check
  * @return {boolean}
  *  `true` if `str` contains invalid path segments, `false` otherwise
  */
-function checkInvalidSegments(str: string): boolean {
+function checkInvalidSegments(this: void, str: string): boolean {
   /**
-   * Regular expression matching path separators.
+   * The regular expression matching path separators.
    *
    * @const {RegExp} separator
    */
   const separator: RegExp = /\/|\\/
 
   /**
-   * Path segments.
+   * The list of path segments.
    *
    * @const {string[]} segments
    */
@@ -33,7 +35,7 @@ function checkInvalidSegments(str: string): boolean {
     : str.split(separator)
 
   /**
-   * Regular expressions matching invalid segments.
+   * The list of regular expressions matching invalid segments.
    *
    * @const {RegExp[]} checks
    */

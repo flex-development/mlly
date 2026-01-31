@@ -13,14 +13,16 @@ import type { ModuleId } from '@flex-development/mlly'
  *
  * @see {@linkcode ModuleId}
  *
+ * @this {void}
+ *
  * @param {unknown} input
- *  The absolute or relative input URL to parse
+ *  The input URL
  * @param {unknown} [base]
- *  Base URL to resolve against if `input` is not absolute
+ *  The base URL to resolve against if `input` is not absolute
  * @return {boolean}
  *  `true` if `input` can be parsed to a `URL`
  */
-function canParseUrl(input: unknown, base?: unknown): boolean {
+function canParseUrl(this: void, input: unknown, base?: unknown): boolean {
   try {
     new URL(input as ModuleId, (base ?? undefined) as ModuleId | undefined)
     return true

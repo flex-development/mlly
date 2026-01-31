@@ -6,18 +6,19 @@
 import type {
   Aliases,
   ChangeExtFn,
+  Condition,
   FileSystem,
+  List,
   MainField,
   ModuleId
 } from '@flex-development/mlly'
-import type { Condition } from '@flex-development/pkg-types'
 
 /**
  * Module resolution options.
  */
 interface ResolveModuleOptions {
   /**
-   * Path mappings.
+   * The path mappings dictionary.
    *
    * > 👉 **Note**: Paths should be relative to {@linkcode cwd}.
    *
@@ -26,19 +27,20 @@ interface ResolveModuleOptions {
   aliases?: Aliases | null | undefined
 
   /**
-   * List of export/import conditions.
+   * The list of export/import conditions.
    *
    * > 👉 **Note**: Should be sorted by priority.
    *
    * @see {@linkcode Condition}
+   * @see {@linkcode List}
    * @see https://nodejs.org/api/packages.html#conditional-exports
    *
    * @default defaultConditions
    */
-  conditions?: Condition[] | Set<Condition> | null | undefined
+  conditions?: List<Condition> | null | undefined
 
   /**
-   * URL of directory to resolve path aliases from.
+   * The URL of the directory to resolve path aliases from.
    *
    * @see {@linkcode ModuleId}
    *
@@ -47,7 +49,7 @@ interface ResolveModuleOptions {
   cwd?: ModuleId | null | undefined
 
   /**
-   * Replacement file extension or function that returns a file extension.
+   * A replacement file extension or a function that returns a file extension.
    *
    * An empty string (`''`) or `null` will remove a file extension.
    *
@@ -56,7 +58,7 @@ interface ResolveModuleOptions {
   ext?: ChangeExtFn | string | null | undefined
 
   /**
-   * Module extensions to probe for.
+   * The module extensions to probe for.
    *
    * > 👉 **Note**: Should be sorted by priority.
    *
@@ -65,25 +67,26 @@ interface ResolveModuleOptions {
   extensions?: Set<string> | string[] | null | undefined
 
   /**
-   * File system API.
+   * The file system API.
    *
    * @see {@linkcode FileSystem}
    */
   fs?: FileSystem | null | undefined
 
   /**
-   * List of legacy `main` fields.
+   * The list of legacy `main` fields.
    *
    * > 👉 **Note**: Should be sorted by priority.
    *
+   * @see {@linkcode List}
    * @see {@linkcode MainField}
    *
    * @default defaultMainFields
    */
-  mainFields?: MainField[] | Set<MainField> | null | undefined
+  mainFields?: List<MainField> | null | undefined
 
   /**
-   * Keep symlinks instead of resolving them.
+   * Whether to keep symlinks instead of resolving them.
    */
   preserveSymlinks?: boolean | null | undefined
 }

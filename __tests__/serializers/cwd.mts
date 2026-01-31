@@ -22,9 +22,9 @@ export default serializer
  * > 👉 `value` is expected to be a string.
  *
  * @param {unknown} value
- *  Value to print
+ *  The value to print
  * @return {string}
- *  Snapshot value
+ *  The snapshot value
  */
 function print(value: unknown): string {
   ok(test(value), 'expected `value` to pass `test`')
@@ -35,9 +35,9 @@ function print(value: unknown): string {
  * Check if `value` is a string containing {@linkcode process.cwd}.
  *
  * @param {unknown} value
- *  Value to check
+ *  The value to check
  * @return {value is string}
- *  `true` if `value` is string containing `process.cwd`
+ *  `true` if `value` is string containing `process.cwd`, `false` otherwise
  */
 function test(value: unknown): value is string {
   return typeof value === 'string' && value.includes(process.cwd())

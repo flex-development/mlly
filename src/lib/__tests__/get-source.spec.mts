@@ -3,48 +3,130 @@
  * @module mlly/lib/tests/unit/getSource
  */
 
+import fsa from '#fixtures/fsa'
+import isPromise from '#internal/is-promise'
 import testSubject from '#lib/get-source'
+import fsCaseType, { type FileSystemCaseType } from '#tests/utils/fs-case-type'
 import {
   codes,
   isNodeError,
   type NodeError
 } from '@flex-development/errnode'
+import type { FileSystem } from '@flex-development/mlly'
 import pathe from '@flex-development/pathe'
 
 describe('unit:lib/getSource', () => {
-  it.each<Parameters<typeof testSubject>>([
-    ['os'],
-    [new URL('node:test')]
-  ])('should return `undefined` if `id` is builtin module (%j)', async id => {
-    expect(await testSubject(id)).to.be.undefined
-  })
+  describe.each<[fst: FileSystemCaseType, fs?: FileSystem | null | undefined]>([
+    [fsCaseType.default],
+    [fsCaseType.onlyAsync, fsa]
+  ])('fs (%s)', (fsType, fs) => {
+    type Case = Parameters<typeof testSubject>
 
-  it.each<Parameters<typeof testSubject>>([
-    ['data:application/javascript;base64,SGVsbG8sIFdvcmxkIQ=='],
-    ['data:text/javascript,console.log("hello!");'],
-    ['https://esm.sh/@flex-development/mlly'],
-    [pathe.fileURLToPath(import.meta.url)],
-    [pathe.pathToFileURL('build.config.mts')]
-  ])('should return source code for `id` (%#)', async (id, options) => {
-    expect(await testSubject(id, options)).to.be.a('string')
-  })
+    let isAsync: boolean
 
-  it('should throw on unsupported url scheme (%#)', async () => {
-    // Arrange
-    let error!: NodeError
+    beforeAll(() => {
+      isAsync = fs === fsa
+    })
 
-    // Act
-    try {
-      await testSubject('git://github.com/flex-development/mlly.git', {
-        schemes: ['file']
+    it('should return `null` if no module `id`', () => {
+      expect(testSubject(null, { fs })).to.be.null
+    })
+
+    describe('ERR_UNSUPPORTED_ESM_URL_SCHEME', () => {
+      let git: string
+      let schemes: string[]
+
+      beforeAll(() => {
+        git = 'git://github.com/flex-development/mlly.git'
+        schemes = ['data']
       })
-    } catch (e: unknown) {
-      error = e as typeof error
-    }
 
-    // Expect
-    expect(error).to.satisfy(isNodeError)
-    expect(error).to.have.property('code', codes.ERR_UNSUPPORTED_ESM_URL_SCHEME)
-    expect(error).toMatchSnapshot()
+      it('should not throw if error is ignored', () => {
+        // Act
+        const result = testSubject(git, { fs, ignoreErrors: true, schemes })
+
+        // Expect
+        expect(result).to.be.undefined
+      })
+
+      it('should throw if error is not ignored', () => {
+        // Arrange
+        const code: NodeError['code'] = codes.ERR_UNSUPPORTED_ESM_URL_SCHEME
+        let error!: NodeError
+
+        // Act
+        try {
+          testSubject(git, { fs, schemes })
+        } catch (e: unknown) {
+          error = e as typeof error
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).to.have.property('code', code)
+      })
+    })
+
+    describe('data:', () => {
+      it.each<Case>([
+        ['data:application/javascript;base64,SGVsbG8sIFdvcmxkIQ=='],
+        [new URL('data:text/javascript,console.log("hello!");')]
+      ])('should return source code for `id` (%#)', (id, options) => {
+        // Act
+        const result = testSubject(id, { ...options, fs })
+
+        // Expect
+        expect(result).to.not.satisfy(isPromise)
+        expect(result).toMatchSnapshot()
+      })
+    })
+
+    describe('file:', () => {
+      it.each<Case>([
+        [pathe.pathToFileURL('src/internal/index.mts')]
+      ])('should return `null` if no file at `id` (%#)', async (
+        id,
+        options
+      ) => {
+        // Act
+        const result = testSubject(id, { ...options, fs })
+
+        // Expect
+        expect(isAsync ? await result : result).to.be.null
+      })
+
+      it.each<Case>([
+        [pathe.pathToFileURL('grease.config.json')],
+        [pathe.pathToFileURL('vite.config.mts').href]
+      ])('should return source code for `id` (%#)', async (id, options) => {
+        // Act
+        const result = testSubject(id, { ...options, fs })
+
+        // Expect
+        expect(isAsync ? await result : result).toMatchSnapshot()
+      })
+    })
+
+    describe('http[s]:', () => {
+      it.each<Case>([
+        [new URL('https://esm.sh/@flex-development/mlly')]
+      ])('should return source code for `id` (%#)', async (id, options) => {
+        // Act
+        const result = testSubject(id, { ...options, fs })
+
+        // Expect
+        expect(result).to.satisfy(isPromise)
+        expect(await result).toMatchSnapshot()
+      })
+    })
+
+    describe('node:', () => {
+      it.each<Case>([
+        ['os'],
+        [new URL('node:test')]
+      ])('should return `undefined` if `id` is builtin module (%#)', id => {
+        expect(testSubject(id, { fs })).to.be.undefined
+      })
+    })
   })
 })

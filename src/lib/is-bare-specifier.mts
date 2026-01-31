@@ -6,32 +6,32 @@
 import isAbsoluteSpecifier from '#lib/is-absolute-specifier'
 import isRelativeSpecifier from '#lib/is-relative-specifier'
 import { isBuiltin } from '@flex-development/is-builtin'
-import type { ModuleId } from '@flex-development/mlly'
 
 /**
- * Check if `specifier` is a *bare specifier*.
+ * Check if `value` is a *bare specifier*.
  *
  * ::: warning
  * Only checks specifier syntax. Does **not** guarantee the specifier references
  * a file that exists.
  * :::
  *
- * @see {@linkcode ModuleId}
  * @see https://nodejs.org/api/esm.html#terminology
  *
- * @param {ModuleId} specifier
- *  Specifier to check
+ * @this {void}
+ *
+ * @param {unknown} value
+ *  The value to check
  * @return {boolean}
- *  `true` if `specifier` is bare specifier, `false` otherwise
+ *  `true` if `value` is bare specifier, `false` otherwise
  */
-function isBareSpecifier(specifier: ModuleId): boolean {
-  if (isBuiltin(specifier)) return true
+function isBareSpecifier(this: void, value: unknown): boolean {
+  if (isBuiltin(value)) return true
 
   return (
-    typeof specifier === 'string' &&
-    !!specifier.length &&
-    !isAbsoluteSpecifier(specifier) &&
-    !isRelativeSpecifier(specifier)
+    typeof value === 'string' &&
+    !!value.length &&
+    !isAbsoluteSpecifier(value) &&
+    !isRelativeSpecifier(value)
   )
 }
 

@@ -1,0 +1,659 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/resolver > fs (default) > legacyMainResolve > should throw if main entry point is not found (0) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package '\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/' imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > legacyMainResolve > should throw if main entry point is not found (1) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package '\${process.cwd()}/__fixtures__/node_modules/@flex-development/mlly/' imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > legacyMainResolve > should throw if main entry point is not found (2) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package '\${process.cwd()}/__fixtures__/node_modules/@flex-development/mlly/' imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("#fixtures/tsconfig.json") 1`] = `file://\${process.cwd()}/__fixtures__/tsconfig.json`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("#internal/a") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-imports-1/internal/a.mjs`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("#internal/path") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/pathe/dist/index.mjs`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("#internal/path/posix") 1`] = `"node:path/posix"`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("#internal/path/windows") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-imports-1/internal/path/windows.browser.mjs`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("../resolver.mts") 1`] = `file://\${process.cwd()}/src/lib/resolver.mts`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("@flex-development/kronk/parsers") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/kronk/dist/parsers/index.mjs`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("@flex-development/mlly") 1`] = `file://\${process.cwd()}/src/index.mts`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("@flex-development/pathe") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/pathe/dist/index.mjs`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("css/index.css?inline") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/css/index.css?inline`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("exports-sugar") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/exports-sugar/index.mjs`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("exports-sugar-a") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/exports-sugar-a/index.mjs`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("import-meta-resolve") 1`] = `file://\${process.cwd()}/node_modules/import-meta-resolve/index.js`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("legacy-main-1") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/index.js`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("legacy-main-1/a.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/a.js`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("legacy-main-2") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-2/lib/index.js`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("legacy-main-3") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-3/index.node`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("manifest-only/package.json") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/manifest-only/package.json`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("module") 1`] = `"node:module"`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("node:url") 1`] = `"node:url"`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("subpath-exports") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/index.js`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("subpath-exports/lib/a") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/lib/a.js`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("subpath-exports/lib/b.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/lib/b.js`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` contains encoded separators (0) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '\${process.cwd()}/src/internal%2fidentity.mts' must not include encoded \\"/\\" or \\"\\\\\\" characters imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` resolves to a directory (0) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_DIR_IMPORT",
+  "url": "file://\${process.cwd()}/src/internal",
+  "message": "Directory import '\${process.cwd()}/src/internal' is not supported resolving ES modules imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` resolves to a directory (1) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_DIR_IMPORT",
+  "url": "file://\${process.cwd()}/src",
+  "message": "Directory import '\${process.cwd()}/src' is not supported resolving ES modules imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` resolves to a directory (2) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_DIR_IMPORT",
+  "url": "file://\${process.cwd()}/src/lib",
+  "message": "Directory import '\${process.cwd()}/src/lib' is not supported resolving ES modules imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` resolves to unknown module (0) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "url": "file://\${process.cwd()}/src/lib/__tests__/__mocks__",
+  "message": "Cannot find module '\${process.cwd()}/src/lib/__tests__/__mocks__' imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` resolves to unknown module (1) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "url": "file://\${process.cwd()}/__fixtures__/node_modules/subpath-imports-1/internal/b.mjs",
+  "message": "Cannot find module '\${process.cwd()}/__fixtures__/node_modules/subpath-imports-1/internal/b.mjs' imported from \${process.cwd()}/__fixtures__/node_modules/subpath-imports-1/index.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` resolves to unknown module (2) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package '@flex-development/path' imported from \${process.cwd()}/__fixtures__/node_modules/bad-subpath-imports/"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` resolves to unknown module (3) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "url": "file://\${process.cwd()}/dist/index.mjs",
+  "message": "Cannot find module '\${process.cwd()}/dist/index.mjs' imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` resolves to unknown module (4) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package 'mlly' imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if module referrer is invalid (0) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_RESOLVE_REQUEST",
+  "message": "Failed to resolve module specifier \\"./l.mjs\\" from \\"data:text/javascript,export default import.meta.resolve(\\"./l.mjs\\")\\": Invalid relative URL or base scheme is not hierarchical.",
+  "cause": {
+    "code": "ERR_INVALID_URL",
+    "input": "./l.mjs",
+    "base": "data:text/javascript,export default import.meta.resolve(\\"./l.mjs\\")"
+  }
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if module referrer is invalid (1) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_RESOLVE_REQUEST",
+  "message": "Failed to resolve module specifier \\"/e.mjs\\" from \\"data:text/javascript,export default import.meta.resolve(\\"/e.mjs\\")\\": Invalid relative URL or base scheme is not hierarchical.",
+  "cause": {
+    "code": "ERR_INVALID_URL",
+    "input": "/e.mjs",
+    "base": "data:text/javascript,export default import.meta.resolve(\\"/e.mjs\\")"
+  }
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if module referrer is invalid (2) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_RESOLVE_REQUEST",
+  "message": "Failed to resolve module specifier \\"x\\" from \\"data:text/javascript,export default import.meta.resolve(\\"x\\")\\": Invalid relative URL or base scheme is not hierarchical.",
+  "cause": {
+    "code": "ERR_INVALID_URL",
+    "input": "x"
+  }
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageExportsResolve > should throw if \`exports\` is invalid (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-exports-1/package.json while importing file://\${process.cwd()}/__fixtures__/parent.mts. \\"exports\\" cannot contain some keys starting with '.' and some not. The exports object must either be an object of package subpath keys or an object of main entry condition name keys only."
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageExportsResolve > should throw if \`exports\` is invalid (1) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-exports-2/package.json while importing file://\${process.cwd()}/__fixtures__/parent.mts. \\"exports\\" cannot contain some keys starting with '.' and some not. The exports object must either be an object of package subpath keys or an object of main entry condition name keys only."
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageExportsResolve > should throw if package path is not exported (0) 1`] = `
+{
+  "code": "ERR_PACKAGE_PATH_NOT_EXPORTED",
+  "message": "Package subpath './internal/chain-or-call' is not defined by 'exports' in \${process.cwd()}/package.json imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageExportsResolve > should throw if package path is not exported (1) 1`] = `
+{
+  "code": "ERR_PACKAGE_PATH_NOT_EXPORTED",
+  "message": "Package subpath './array.mjs' is not defined by 'exports' in \${process.cwd()}/__fixtures__/node_modules/exports-array/package.json imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageExportsResolve > should throw if package path is not exported (2) 1`] = `
+{
+  "code": "ERR_PACKAGE_PATH_NOT_EXPORTED",
+  "message": "No 'exports' main defined in \${process.cwd()}/__fixtures__/node_modules/manifest-only/package.json imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageExportsResolve > should throw if package path is not exported (3) 1`] = `
+{
+  "code": "ERR_PACKAGE_PATH_NOT_EXPORTED",
+  "message": "Package subpath './lib/a.mjs' is not defined by 'exports' in \${process.cwd()}/__fixtures__/node_modules/missing-exports/package.json imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageImportsExportsResolve > should return resolved package export or import URL ("#internal/fs") 1`] = `file://\${process.cwd()}/dist/internal/fs.node.mjs`;
+
+exports[`unit:lib/resolver > fs (default) > packageImportsExportsResolve > should return resolved package export or import URL ("./package.json") 1`] = `file://\${process.cwd()}/package.json`;
+
+exports[`unit:lib/resolver > fs (default) > packageImportsResolve > should throw if \`specifier\` is invalid (0) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '#' is not a valid internal imports specifier name imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageImportsResolve > should throw if \`specifier\` is invalid (1) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '#/' is not a valid internal imports specifier name imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageImportsResolve > should throw if \`specifier\` is invalid (2) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '@flex-development/mlly' is not a valid internal imports specifier name imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageImportsResolve > should throw if package import is not defined (0) 1`] = `
+{
+  "code": "ERR_PACKAGE_IMPORT_NOT_DEFINED",
+  "message": "Package import specifier '#internal/a' is not defined in package \${process.cwd()}/__fixtures__/node_modules/subpath-exports/package.json imported from \${process.cwd()}/__fixtures__/node_modules/subpath-exports/a.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageImportsResolve > should throw if package import is not defined (1) 1`] = `
+{
+  "code": "ERR_PACKAGE_IMPORT_NOT_DEFINED",
+  "message": "Package import specifier '#internal/identity' is not defined imported from \${process.cwd()}/"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageResolve > should throw if \`specifier\` cannot be resolved (0) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package 'missing-package' imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageResolve > should throw if \`specifier\` is invalid (0) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '@flex-development\\\\pathe' is not a valid package name imported from file://\${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageResolve > should throw if \`specifier\` is invalid (1) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '@' is not a valid package name imported from file://\${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageResolve > should throw if \`specifier\` is invalid (2) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '' is not a valid package name imported from file://\${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageTargetResolve > should throw if \`patternMatch\` has invalid segments (0) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '#fixtures/node_modules/legacy-main-1/package.json' request is not a valid match in pattern \\"#fixtures/*\\" for the \\"imports\\" resolution of \${process.cwd()}/__fixtures__/node_modules/invalid-pattern-match/package.json imported from \${process.cwd()}/__fixtures__/node_modules/invalid-pattern-match/parent.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageTargetResolve > should throw if \`target\` has invalid segments (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_TARGET",
+  "message": "Invalid \\"imports\\" target \\"./__fixtures__/node_modules/*\\" defined for '#node_modules/*' in the package config \${process.cwd()}/__fixtures__/node_modules/invalid-target-segment/package.json imported from \${process.cwd()}/__fixtures__/node_modules/invalid-target-segment/parent.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageTargetResolve > should throw if \`target\` has numeric property keys (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-target-numeric-keys/package.json while importing file://\${process.cwd()}/src/lib/__tests__/resolver.spec.mts. \\"exports\\" cannot contain numeric property keys"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageTargetResolve > should throw if \`target\` resolves outside package scope (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_TARGET",
+  "message": "Invalid \\"exports\\" main target \\"./index.mjs\\" defined in the package config \${process.cwd()}/__fixtures__/node_modules/package.json imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageTargetResolve > should throw if package target is invalid (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_TARGET",
+  "message": "Invalid \\"exports\\" main target \\"13\\" defined in the package config \${process.cwd()}/__fixtures__/node_modules/invalid-target-main/package.json imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts; targets must start with \\"./\\""
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageTargetResolve > should throw if package target is invalid (1) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_TARGET",
+  "message": "Invalid \\"imports\\" target \\"../fs.browser.mjs\\" defined for '#internal/fs' in the package config \${process.cwd()}/__fixtures__/node_modules/target-outside/package.json imported from \${process.cwd()}/__fixtures__/node_modules/target-outside/outside.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (default) > packageTargetResolve > should throw if package target is invalid (2) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_TARGET",
+  "message": "Invalid \\"imports\\" target \\"https://esm.sh/@flex-development/pathe\\" defined for '#internal/path' in the package config \${process.cwd()}/__fixtures__/node_modules/target-url/package.json imported from \${process.cwd()}/__fixtures__/node_modules/target-url/url.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > legacyMainResolve > should throw if main entry point is not found (0) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package '\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/' imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > legacyMainResolve > should throw if main entry point is not found (1) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package '\${process.cwd()}/__fixtures__/node_modules/@flex-development/mlly/' imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > legacyMainResolve > should throw if main entry point is not found (2) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package '\${process.cwd()}/__fixtures__/node_modules/@flex-development/mlly/' imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("#fixtures/tsconfig.json") 1`] = `file://\${process.cwd()}/__fixtures__/tsconfig.json`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("#internal/a") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-imports-1/internal/a.mjs`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("#internal/path") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/pathe/dist/index.mjs`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("#internal/path/posix") 1`] = `"node:path/posix"`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("#internal/path/windows") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-imports-1/internal/path/windows.browser.mjs`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("../resolver.mts") 1`] = `file://\${process.cwd()}/src/lib/resolver.mts`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("@flex-development/kronk/parsers") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/kronk/dist/parsers/index.mjs`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("@flex-development/mlly") 1`] = `file://\${process.cwd()}/src/index.mts`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("@flex-development/pathe") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/pathe/dist/index.mjs`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("css/index.css?inline") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/css/index.css?inline`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("exports-sugar") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/exports-sugar/index.mjs`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("exports-sugar-a") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/exports-sugar-a/index.mjs`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("import-meta-resolve") 1`] = `file://\${process.cwd()}/node_modules/import-meta-resolve/index.js`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("legacy-main-1") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/index.js`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("legacy-main-1/a.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/a.js`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("legacy-main-2") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-2/lib/index.js`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("legacy-main-3") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-3/index.node`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("manifest-only/package.json") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/manifest-only/package.json`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("module") 1`] = `"node:module"`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("node:url") 1`] = `"node:url"`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("subpath-exports") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/index.js`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("subpath-exports/lib/a") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/lib/a.js`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("subpath-exports/lib/b.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/lib/b.js`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` contains encoded separators (0) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '\${process.cwd()}/src/internal%2fidentity.mts' must not include encoded \\"/\\" or \\"\\\\\\" characters imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` resolves to a directory (0) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_DIR_IMPORT",
+  "url": "file://\${process.cwd()}/src/internal",
+  "message": "Directory import '\${process.cwd()}/src/internal' is not supported resolving ES modules imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` resolves to a directory (1) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_DIR_IMPORT",
+  "url": "file://\${process.cwd()}/src",
+  "message": "Directory import '\${process.cwd()}/src' is not supported resolving ES modules imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` resolves to a directory (2) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_DIR_IMPORT",
+  "url": "file://\${process.cwd()}/src/lib",
+  "message": "Directory import '\${process.cwd()}/src/lib' is not supported resolving ES modules imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` resolves to unknown module (0) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "url": "file://\${process.cwd()}/src/lib/__tests__/__mocks__",
+  "message": "Cannot find module '\${process.cwd()}/src/lib/__tests__/__mocks__' imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` resolves to unknown module (1) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "url": "file://\${process.cwd()}/__fixtures__/node_modules/subpath-imports-1/internal/b.mjs",
+  "message": "Cannot find module '\${process.cwd()}/__fixtures__/node_modules/subpath-imports-1/internal/b.mjs' imported from \${process.cwd()}/__fixtures__/node_modules/subpath-imports-1/index.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` resolves to unknown module (2) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package '@flex-development/path' imported from \${process.cwd()}/__fixtures__/node_modules/bad-subpath-imports/"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` resolves to unknown module (3) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "url": "file://\${process.cwd()}/dist/index.mjs",
+  "message": "Cannot find module '\${process.cwd()}/dist/index.mjs' imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` resolves to unknown module (4) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package 'mlly' imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if module referrer is invalid (0) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_RESOLVE_REQUEST",
+  "message": "Failed to resolve module specifier \\"./l.mjs\\" from \\"data:text/javascript,export default import.meta.resolve(\\"./l.mjs\\")\\": Invalid relative URL or base scheme is not hierarchical.",
+  "cause": {
+    "code": "ERR_INVALID_URL",
+    "input": "./l.mjs",
+    "base": "data:text/javascript,export default import.meta.resolve(\\"./l.mjs\\")"
+  }
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if module referrer is invalid (1) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_RESOLVE_REQUEST",
+  "message": "Failed to resolve module specifier \\"/e.mjs\\" from \\"data:text/javascript,export default import.meta.resolve(\\"/e.mjs\\")\\": Invalid relative URL or base scheme is not hierarchical.",
+  "cause": {
+    "code": "ERR_INVALID_URL",
+    "input": "/e.mjs",
+    "base": "data:text/javascript,export default import.meta.resolve(\\"/e.mjs\\")"
+  }
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if module referrer is invalid (2) 1`] = `
+{
+  "code": "ERR_UNSUPPORTED_RESOLVE_REQUEST",
+  "message": "Failed to resolve module specifier \\"x\\" from \\"data:text/javascript,export default import.meta.resolve(\\"x\\")\\": Invalid relative URL or base scheme is not hierarchical.",
+  "cause": {
+    "code": "ERR_INVALID_URL",
+    "input": "x"
+  }
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageExportsResolve > should throw if \`exports\` is invalid (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-exports-1/package.json while importing file://\${process.cwd()}/__fixtures__/parent.mts. \\"exports\\" cannot contain some keys starting with '.' and some not. The exports object must either be an object of package subpath keys or an object of main entry condition name keys only."
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageExportsResolve > should throw if \`exports\` is invalid (1) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-exports-2/package.json while importing file://\${process.cwd()}/__fixtures__/parent.mts. \\"exports\\" cannot contain some keys starting with '.' and some not. The exports object must either be an object of package subpath keys or an object of main entry condition name keys only."
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageExportsResolve > should throw if package path is not exported (0) 1`] = `
+{
+  "code": "ERR_PACKAGE_PATH_NOT_EXPORTED",
+  "message": "Package subpath './internal/chain-or-call' is not defined by 'exports' in \${process.cwd()}/package.json imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageExportsResolve > should throw if package path is not exported (1) 1`] = `
+{
+  "code": "ERR_PACKAGE_PATH_NOT_EXPORTED",
+  "message": "Package subpath './array.mjs' is not defined by 'exports' in \${process.cwd()}/__fixtures__/node_modules/exports-array/package.json imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageExportsResolve > should throw if package path is not exported (2) 1`] = `
+{
+  "code": "ERR_PACKAGE_PATH_NOT_EXPORTED",
+  "message": "No 'exports' main defined in \${process.cwd()}/__fixtures__/node_modules/manifest-only/package.json imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageExportsResolve > should throw if package path is not exported (3) 1`] = `
+{
+  "code": "ERR_PACKAGE_PATH_NOT_EXPORTED",
+  "message": "Package subpath './lib/a.mjs' is not defined by 'exports' in \${process.cwd()}/__fixtures__/node_modules/missing-exports/package.json imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageImportsExportsResolve > should return resolved package export or import URL ("#internal/fs") 1`] = `file://\${process.cwd()}/dist/internal/fs.node.mjs`;
+
+exports[`unit:lib/resolver > fs (only async) > packageImportsExportsResolve > should return resolved package export or import URL ("./package.json") 1`] = `file://\${process.cwd()}/package.json`;
+
+exports[`unit:lib/resolver > fs (only async) > packageImportsResolve > should throw if \`specifier\` is invalid (0) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '#' is not a valid internal imports specifier name imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageImportsResolve > should throw if \`specifier\` is invalid (1) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '#/' is not a valid internal imports specifier name imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageImportsResolve > should throw if \`specifier\` is invalid (2) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '@flex-development/mlly' is not a valid internal imports specifier name imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageImportsResolve > should throw if package import is not defined (0) 1`] = `
+{
+  "code": "ERR_PACKAGE_IMPORT_NOT_DEFINED",
+  "message": "Package import specifier '#internal/a' is not defined in package \${process.cwd()}/__fixtures__/node_modules/subpath-exports/package.json imported from \${process.cwd()}/__fixtures__/node_modules/subpath-exports/a.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageImportsResolve > should throw if package import is not defined (1) 1`] = `
+{
+  "code": "ERR_PACKAGE_IMPORT_NOT_DEFINED",
+  "message": "Package import specifier '#internal/identity' is not defined imported from \${process.cwd()}/"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageResolve > should throw if \`specifier\` cannot be resolved (0) 1`] = `
+{
+  "code": "ERR_MODULE_NOT_FOUND",
+  "message": "Cannot find package 'missing-package' imported from \${process.cwd()}/__fixtures__/parent.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageResolve > should throw if \`specifier\` is invalid (0) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '@flex-development\\\\pathe' is not a valid package name imported from file://\${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageResolve > should throw if \`specifier\` is invalid (1) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '@' is not a valid package name imported from file://\${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageResolve > should throw if \`specifier\` is invalid (2) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '' is not a valid package name imported from file://\${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageTargetResolve > should throw if \`patternMatch\` has invalid segments (0) 1`] = `
+{
+  "code": "ERR_INVALID_MODULE_SPECIFIER",
+  "message": "Invalid module '#fixtures/node_modules/legacy-main-1/package.json' request is not a valid match in pattern \\"#fixtures/*\\" for the \\"imports\\" resolution of \${process.cwd()}/__fixtures__/node_modules/invalid-pattern-match/package.json imported from \${process.cwd()}/__fixtures__/node_modules/invalid-pattern-match/parent.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageTargetResolve > should throw if \`target\` has invalid segments (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_TARGET",
+  "message": "Invalid \\"imports\\" target \\"./__fixtures__/node_modules/*\\" defined for '#node_modules/*' in the package config \${process.cwd()}/__fixtures__/node_modules/invalid-target-segment/package.json imported from \${process.cwd()}/__fixtures__/node_modules/invalid-target-segment/parent.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageTargetResolve > should throw if \`target\` has numeric property keys (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-target-numeric-keys/package.json while importing file://\${process.cwd()}/src/lib/__tests__/resolver.spec.mts. \\"exports\\" cannot contain numeric property keys"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageTargetResolve > should throw if \`target\` resolves outside package scope (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_TARGET",
+  "message": "Invalid \\"exports\\" main target \\"./index.mjs\\" defined in the package config \${process.cwd()}/__fixtures__/node_modules/package.json imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageTargetResolve > should throw if package target is invalid (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_TARGET",
+  "message": "Invalid \\"exports\\" main target \\"13\\" defined in the package config \${process.cwd()}/__fixtures__/node_modules/invalid-target-main/package.json imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts; targets must start with \\"./\\""
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageTargetResolve > should throw if package target is invalid (1) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_TARGET",
+  "message": "Invalid \\"imports\\" target \\"../fs.browser.mjs\\" defined for '#internal/fs' in the package config \${process.cwd()}/__fixtures__/node_modules/target-outside/package.json imported from \${process.cwd()}/__fixtures__/node_modules/target-outside/outside.mjs"
+}
+`;
+
+exports[`unit:lib/resolver > fs (only async) > packageTargetResolve > should throw if package target is invalid (2) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_TARGET",
+  "message": "Invalid \\"imports\\" target \\"https://esm.sh/@flex-development/pathe\\" defined for '#internal/path' in the package config \${process.cwd()}/__fixtures__/node_modules/target-url/package.json imported from \${process.cwd()}/__fixtures__/node_modules/target-url/url.mjs"
+}
+`;

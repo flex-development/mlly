@@ -18,14 +18,20 @@ import pathe from '@flex-development/pathe'
  * [builtin-module]: https://nodejs.org/api/esm.html#builtin-modules
  * [file-url]: https://nodejs.org/api/esm.html#file-urls
  *
+ * @this {void}
+ *
  * @param {ModuleId} id
  *  The module id to convert
  * @param {ModuleId | null | undefined} [parent]
- *  Base URL to resolve against if `id` is not absolute
+ *  The base URL to resolve against if `id` is not absolute
  * @return {URL}
- *  New URL
+ *  The new URL
  */
-function toUrl(id: ModuleId, parent?: ModuleId | null | undefined): URL {
+function toUrl(
+  this: void,
+  id: ModuleId,
+  parent?: ModuleId | null | undefined
+): URL {
   return canParseUrl(id, parent)
     ? new URL(id, parent ?? undefined)
     : isBuiltin(id)

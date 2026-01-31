@@ -5,7 +5,7 @@
 
 import testSubject from '#internal/invalid-subpath'
 import cwd from '#lib/cwd'
-import toPackageUrl from '#tests/utils/to-package-url'
+import toPackageUrl from '#tests/utils/to-scope-url'
 import { codes, isNodeError } from '@flex-development/errnode'
 
 describe('unit:internal/invalidSubpath', () => {

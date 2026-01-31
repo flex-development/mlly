@@ -10,6 +10,7 @@ import patternMatch from '#lib/pattern-match'
 import toRelativeSpecifier from '#lib/to-relative-specifier'
 import type { PatternMatch, ResolveAliasOptions } from '@flex-development/mlly'
 import pathe from '@flex-development/pathe'
+import { ok } from 'devlop'
 
 export default resolveAlias
 
@@ -18,53 +19,52 @@ export default resolveAlias
  *
  * @see {@linkcode ResolveAliasOptions}
  *
+ * @this {void}
+ *
  * @param {string} specifier
  *  The module specifier to resolve
  * @param {ResolveAliasOptions | null | undefined} [options]
  *  Alias resolution options
- * @return {string | null }
- *  Specifier of aliased module or `null` if path alias match is not found
+ * @return {string | null}
+ *  The specifier of the aliased module
  */
 function resolveAlias(
+  this: void,
   specifier: string,
   options?: ResolveAliasOptions | null | undefined
 ): string | null {
   /**
-   * Resolved alias.
+   * The expansion key and pattern match.
+   *
+   * @const {PatternMatch | null} match
+   */
+  const match: PatternMatch | null = patternMatch(specifier, options?.aliases)
+
+  /**
+   * The resolved alias.
    *
    * @var {string | null} aliased
    */
   let aliased: string | null = null
 
-  if (options) {
-    if (typeof options.aliases === 'object' && options.aliases) {
+  if (match) {
+    ok(options, 'expected `options`')
+    ok(options.aliases, 'expected `options.aliases`')
+
+    aliased = resolveAliasTarget(options.aliases[match[0]], match[1])
+
+    if (typeof aliased === 'string') {
       /**
-       * Tuple containing expansion key and pattern match.
+       * The URL of the aliased module.
        *
-       * @const {PatternMatch | null} match
+       * @const {URL} url
        */
-      const match: PatternMatch | null = patternMatch(
-        specifier,
-        options.aliases
-      )
+      const url: URL = new URL(aliased, options.cwd ?? cwd())
 
-      if (match) {
-        aliased = resolveAliasTarget(options.aliases[match[0]], match[1])
-
-        if (typeof aliased === 'string') {
-          /**
-           * URL of aliased module.
-           *
-           * @const {URL} url
-           */
-          const url: URL = new URL(aliased, options.cwd ?? cwd())
-
-          if (options.absolute) {
-            aliased = url.href
-          } else if (options.parent) {
-            aliased = toRelativeSpecifier(url, options.parent)
-          }
-        }
+      if (options.absolute) {
+        aliased = url.href
+      } else if (options.parent) {
+        aliased = toRelativeSpecifier(url, options.parent)
       }
     }
   }
@@ -77,20 +77,23 @@ function resolveAlias(
  *
  * @internal
  *
+ * @this {void}
+ *
  * @param {unknown} target
  *  The path alias target to resolve
  * @param {string | null | undefined} [patternMatch]
- *  Pattern match, replaces `*` in `target`
+ *  The pattern match, replaces `*` in `target`
  * @return {string | null}
- *  Matched alias
+ *  The matched alias
  */
 function resolveAliasTarget(
+  this: void,
   target: unknown,
   patternMatch?: string | null | undefined
 ): string | null {
   if (typeof target === 'string') {
     /**
-     * Matched alias.
+     * The matched alias.
      *
      * @var {string} match
      */
@@ -105,7 +108,7 @@ function resolveAliasTarget(
   if (Array.isArray<string | null | undefined>(target)) {
     for (const targetValue of target) {
       /**
-       * Resolved path alias.
+       * The resolved path alias.
        *
        * @const {string | null} resolved
        */

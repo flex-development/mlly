@@ -6,7 +6,7 @@
 import { dot, parse, pathToFileURL, resolve } from '@flex-development/pathe'
 
 /**
- * URL of file system root.
+ * The URL of the file system root.
  *
  * @const {URL} root
  */

@@ -5,7 +5,7 @@
 
 import testSubject from '#internal/invalid-package-target'
 import cwd from '#lib/cwd'
-import toPackageUrl from '#tests/utils/to-package-url'
+import toPackageUrl from '#tests/utils/to-scope-url'
 import { codes, isNodeError } from '@flex-development/errnode'
 import pathe from '@flex-development/pathe'
 

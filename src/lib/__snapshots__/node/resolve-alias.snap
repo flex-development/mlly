@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/resolveAlias > should return specifier of aliased module ("#lib") 1`] = `"./src/lib/index"`;
+
+exports[`unit:lib/resolveAlias > should return specifier of aliased module ("#lib/resolve-alias") 1`] = `"../resolve-alias.mts"`;
+
+exports[`unit:lib/resolveAlias > should return specifier of aliased module ("#node_modules/exports-sugar/package.json") 1`] = `"./__fixtures__/node_modules/exports-sugar/package.json"`;
+
+exports[`unit:lib/resolveAlias > should return specifier of aliased module ("#tests/reporters/notifier.mts") 1`] = `file://\${process.cwd()}/__tests__/reporters/notifier.mts`;
+
+exports[`unit:lib/resolveAlias > should return specifier of aliased module ("#types/awaitable") 1`] = `"./src/types/awaitable"`;

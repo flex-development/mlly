@@ -4,14 +4,21 @@
  */
 
 import testSubject from '#lib/pattern-match'
-import subpathExports from '#node_modules/subpath-exports/package.json'
 import pkg from '@flex-development/mlly/package.json'
 
 describe('unit:lib/patternMatch', () => {
   it.each<Parameters<typeof testSubject>>([
     ['#fixtures/tsconfig.json', pkg.imports],
     ['#lib/pattern-match', pkg.imports],
-    ['./lib/a.js', subpathExports.exports],
+    [
+      './lib/a.js',
+      {
+        '.': './index.js',
+        './lib': './lib/index.js',
+        './lib/*': './lib/*.js',
+        './lib/*.js': './lib/*.js'
+      }
+    ],
     ['./package.json', pkg.exports]
   ])('should return `PatternMatch` if subpath pattern match is found (%#)', (
     matchKey,

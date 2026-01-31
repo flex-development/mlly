@@ -13,14 +13,18 @@ import { ok } from 'devlop'
  *
  * @see {@linkcode PatternMatch}
  *
+ * @this {void}
+ *
  * @param {string} matchKey
  *  The string to expand
  * @param {unknown} matchObject
- *  Object containing match keys
+ *  The match keys object
  * @return {PatternMatch | null}
- *  List containing key of `matchObject` and subpath pattern match or `null`
+ *  List, where the first item is the key of a package exports
+ *  or imports target object, and the last is a subpath pattern match
  */
 function patternMatch(
+  this: void,
   matchKey: string,
   matchObject: unknown
 ): PatternMatch | null {

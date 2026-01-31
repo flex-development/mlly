@@ -31,7 +31,7 @@
     "yarn.lock"
   ],
   "ignoreRegExpList": ["/data:.+;base64,.+/"],
-  "ignoreWords": [],
+  "ignoreWords": ["fldv"],
   "language": "en-US",
   "patterns": [],
   "readonly": true,

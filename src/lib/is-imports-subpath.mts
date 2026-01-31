@@ -4,22 +4,26 @@
  */
 
 import chars from '#internal/chars'
-import type { ModuleId } from '@flex-development/mlly'
 import type { ImportsSubpath } from '@flex-development/pkg-types'
 
 /**
- * Check if `specifier` is an `imports` subpath.
+ * Check if `value` is an `imports` subpath.
  *
- * @see {@linkcode ModuleId}
+ * @see {@linkcode ImportsSubpath}
  * @see https://nodejs.org/api/packages.html#subpath-imports
  *
- * @param {ModuleId} specifier
- *  Specifier to check
- * @return {specifier is ImportsSubpath}
- *  `true` if `specifier` is `imports` subpath, `false` otherwise
+ * @this {void}
+ *
+ * @param {unknown} value
+ *  The value to check
+ * @return {value is ImportsSubpath}
+ *  `true` if `value` is `imports` subpath, `false` otherwise
  */
-function isImportsSubpath(specifier: ModuleId): specifier is ImportsSubpath {
-  return typeof specifier === 'string' && specifier[0] === chars.hash
+function isImportsSubpath(
+  this: void,
+  value: unknown
+): value is ImportsSubpath {
+  return typeof value === 'string' && value[0] === chars.hash
 }
 
 export default isImportsSubpath

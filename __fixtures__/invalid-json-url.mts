@@ -3,7 +3,7 @@
  * @module fixtures/invalidJsonUrl
  */
 
-import toPackageUrl from '#tests/utils/to-package-url'
+import toPackageUrl from '#tests/utils/to-scope-url'
 
 /**
  * URL of mock package directory containing `package.json` file.

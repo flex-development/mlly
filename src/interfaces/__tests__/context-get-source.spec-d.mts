@@ -12,11 +12,7 @@ import type {
 
 describe('unit-d:interfaces/GetSourceContext', () => {
   it('should extend GetSourceOptions', () => {
-    expectTypeOf<TestSubject>().toMatchTypeOf<GetSourceOptions>()
-  })
-
-  it('should match [error: boolean]', () => {
-    expectTypeOf<TestSubject>().toHaveProperty('error').toEqualTypeOf<boolean>()
+    expectTypeOf<TestSubject>().toExtend<GetSourceOptions>()
   })
 
   it('should match [fs: FileSystem]', () => {

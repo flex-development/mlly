@@ -8,7 +8,7 @@ import type { ModuleFormat } from '@flex-development/mlly'
 import type { Ext } from '@flex-development/pathe'
 
 /**
- * File extension to module format map.
+ * Map, where each key is a file extension and each value is a module format.
  *
  * @see {@linkcode Ext}
  * @see {@linkcode ModuleFormat}

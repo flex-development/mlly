@@ -12,7 +12,6 @@
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#push
 # - https://docs.github.com/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
-# - https://github.com/GitGuardian/ggshield-action
 # - https://github.com/actions/cache
 # - https://github.com/actions/cache/discussions/650
 # - https://github.com/actions/checkout
@@ -21,8 +20,12 @@
 # - https://github.com/actions/upload-artifact
 # - https://github.com/andstor/file-existence-action
 # - https://github.com/codecov/codecov-action
+# - https://github.com/dprint/check
 # - https://github.com/flex-development/grease
+# - https://github.com/flex-development/jq-action
+# - https://github.com/flex-development/manver-action
 # - https://github.com/hmarr/debug-action
+# - https://github.com/streetsidesoftware/cspell-action
 # - https://yarnpkg.com/cli/pack
 
 ---
@@ -37,11 +40,12 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  packages: read
 env:
   CACHE_PATH: node_modules
-  GITHUB_TOKEN: ${{ secrets.GH_REGISTRY_TOKEN }}
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  COVERAGE_SUMMARY: ./coverage/coverage-summary.json
   HUSKY: 0
+  PCT: .total.branches.pct + .total.functions.pct + .total.lines.pct + .total.statements.pct
   REF: ${{ github.head_ref || github.ref }}
   REF_NAME: ${{ github.head_ref || github.ref_name }}
   SHA: ${{ github.event.pull_request.head.sha || github.sha }}
@@ -51,17 +55,12 @@ concurrency:
 jobs:
   preflight:
     if: |
-      github.event.head_commit.author.name != 'dependabot[bot]'
-      && github.event.head_commit.author.username != 'flexdevelopment[bot]'
-      && !startsWith(github.event.head_commit.message, 'release:')
-      && !startsWith(github.event.head_commit.message, 'release(chore):')
+      github.event_name == 'pull_request' ||
+      github.event.head_commit.committer.username != 'web-flow'
     runs-on: ubuntu-latest
     outputs:
       cache-key: ${{ steps.cache-key.outputs.result }}
-      test-files: ${{ steps.test-files.outputs.files_exists }}
-      typecheck-files: ${{ steps.typecheck-files.outputs.files_exists }}
-      version-typescript: ${{ steps.version-typescript.outputs.result }}
-      version: ${{ steps.version.outputs.result }}
+      version: ${{ steps.version.outputs.build }}
     steps:
       - id: debug
         name: Print environment variables and event payload
@@ -79,14 +78,14 @@ jobs:
           cache: yarn
           cache-dependency-path: yarn.lock
           node-version-file: .nvmrc
-      - id: yarn
+      - id: dependencies
         name: Install dependencies
         env:
-          YARN_ENABLE_IMMUTABLE_INSTALLS: ${{ github.actor != 'dependabot[bot]' }}
+          YARN_ENABLE_IMMUTABLE_INSTALLS: ${{ github.actor != vars.DEPENDABOT }}
         run: yarn
       - id: cache-key
         name: Get cache key
-        run: echo "result=${{ runner.os }}-${{ github.run_id }}" >>$GITHUB_OUTPUT
+        run: echo "result=${{ hashFiles('yarn.lock') }}" >>$GITHUB_OUTPUT
       - id: cache
         name: Cache dependencies
         uses: actions/cache@v5.0.1
@@ -94,21 +93,8 @@ jobs:
           key: ${{ steps.cache-key.outputs.result }}
           path: ${{ env.CACHE_PATH }}
       - id: version
-        name: Get manifest version
-        run: echo "result=$(jq .version package.json -r)" >>$GITHUB_OUTPUT
-      - id: version-typescript
-        name: Get TypeScript version
-        run: echo "result=$(jq .devDependencies.typescript package.json -r)" >>$GITHUB_OUTPUT
-      - id: test-files
-        name: Check for test files
-        uses: andstor/file-existence-action@v3.0.0
-        with:
-          files: '**/__tests__/*.spec.+(mts|tsx)'
-      - id: typecheck-files
-        name: Check for typecheck files
-        uses: andstor/file-existence-action@v3.0.0
-        with:
-          files: '**/__tests__/*.spec-d.mts'
+        name: Extract version metadata
+        uses: flex-development/manver-action@1.1.0
   commitlint:
     needs: preflight
     runs-on: ubuntu-latest
@@ -137,31 +123,8 @@ jobs:
         name: Check commitlint status
         if: github.run_number != '1'
         run: yarn commitlint --from $SHA~${{ github.event.pull_request.commits || 1 }} --to $SHA
-  gitguardian:
-    needs: commitlint
-    runs-on: ubuntu-latest
-    steps:
-      - id: checkout
-        name: Checkout
-        uses: actions/checkout@v6.0.1
-        with:
-          fetch-depth: 0
-      - id: scan
-        name: Scan commits with ggshield
-        uses: GitGuardian/ggshield-action@v1.46.0
-        env:
-          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
-          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
-        with:
-          args: --all-policies --format sarif --show-secrets --with-incident-details --verbose
   format:
-    needs:
-      - commitlint
-      - gitguardian
-      - preflight
+    needs: preflight
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -183,14 +146,21 @@ jobs:
         with:
           key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
-      - id: format
-        name: Check code formatting
-        run: yarn check:format
+      - id: version
+        name: Get dprint version
+        uses: flex-development/jq-action@1.0.0
+        with:
+          data: package.json
+          filter: .devDependencies.dprint
+      - id: check
+        name: Check formatting
+        uses: dprint/check@v2.3
+        with:
+          args: --config-discovery=false --incremental=false --log-level=info
+          config-path: .dprint.jsonc
+          dprint-version: ${{ steps.version.outputs.result }}
   lint:
-    needs:
-      - commitlint
-      - gitguardian
-      - preflight
+    needs: preflight
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -212,54 +182,36 @@ jobs:
         with:
           key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
+      - id: remark
+        name: Check markdown files
+        run: yarn remark
       - id: lint
-        name: Check lint status
+        name: Check eslint files
         run: yarn check:lint
   spelling:
-    needs:
-      - commitlint
-      - gitguardian
-      - preflight
     runs-on: ubuntu-latest
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v6.0.1
         with:
+          fetch-depth: ${{ github.event_name == 'pull_request' && 0 || 1 }}
           persist-credentials: false
           ref: ${{ env.REF }}
-      - id: node
-        name: Setup Node.js
-        uses: actions/setup-node@v6.1.0
-        with:
-          cache: yarn
-          cache-dependency-path: yarn.lock
-          node-version-file: .nvmrc
-      - id: cache
-        name: Restore dependencies cache
-        uses: actions/cache@v5.0.1
-        with:
-          key: ${{ needs.preflight.outputs.cache-key }}
-          path: ${{ env.CACHE_PATH }}
       - id: spelling
         name: Check spelling
-        run: yarn check:spelling
+        uses: streetsidesoftware/cspell-action@v8.1.2
+        with:
+          check_dot_files: true
+          config: .cspell.json
+          incremental_files_only: ${{ github.event_name != 'pull_request' }}
+          inline: error
+          root: ${{ github.workspace }}
+          treat_flagged_words_as_errors: true
+          verbose: true
   typescript:
-    needs:
-      - commitlint
-      - gitguardian
-      - preflight
+    needs: preflight
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        typescript-version:
-          - ${{ needs.preflight.outputs.version-typescript }}
-          - 5.6.3
-    env:
-      TYPESCRIPT_VERSION: ${{ matrix.typescript-version }}
-      VITEST_REPORT: ./.vitest-reports/typecheck.blob.json
-    if: ${{ fromJson(needs.preflight.outputs.typecheck-files) }}
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -280,12 +232,6 @@ jobs:
         with:
           key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
-      - id: typescript
-        name: Install typescript@${{ env.TYPESCRIPT_VERSION }}
-        run: yarn add -D typescript@${{ env.TYPESCRIPT_VERSION }}
-      - id: print-typescript-version
-        name: Print TypeScript version
-        run: jq .devDependencies.typescript package.json -r
       - id: typecheck
         name: Run typecheck
         run: yarn typecheck
@@ -293,28 +239,18 @@ jobs:
         name: Upload report
         uses: actions/upload-artifact@v6.0.0
         with:
-          name: |
-            ${{ format('typecheck-{0}-{1}-{2}.blob.json', env.TYPESCRIPT_VERSION, github.event.repository.name, env.SHA) }}
-          path: ${{ env.VITEST_REPORT }}
+          name: ${{ format('{0}.typecheck.blob.json', env.SHA) }}
+          path: ./.vitest-reports/typecheck.blob.json
   test:
-    needs:
-      - commitlint
-      - gitguardian
-      - preflight
+    needs: preflight
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         node-version:
+          - 24
           - 23
           - 22
-    env:
-      COVERAGE_SUMMARY: ./coverage/coverage-summary.json
-      NODE_NO_WARNINGS: 1
-      NODE_VERSION: ${{ matrix.node-version }}
-      PCT: .total.branches.pct + .total.functions.pct + .total.lines.pct + .total.statements.pct
-      VITEST_REPORT: ./.vitest-reports/test.blob.json
-    if: ${{ fromJson(needs.preflight.outputs.test-files) }}
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -338,54 +274,65 @@ jobs:
           path: ${{ env.CACHE_PATH }}
       - id: test
         name: Run tests
-        run: |
-          yarn test:cov --coverage.thresholds.100=false \
-          && echo "coverage=$(jq '${{ env.PCT }}' ${{ env.COVERAGE_SUMMARY }} -r)" >>$GITHUB_OUTPUT
-      - id: pct
-        name: Print coverage points
-        run: echo ${{ steps.test.outputs.coverage }}
+        run: yarn test:cov --coverage.thresholds.100=false
+      - id: coverage
+        name: Get coverage points
+        uses: flex-development/jq-action@1.0.0
+        with:
+          data: ${{ env.COVERAGE_SUMMARY }}
+          filter: "'${{ env.PCT }}'"
       - id: report
         name: Upload report
         uses: actions/upload-artifact@v6.0.0
         with:
-          name: |
-            ${{ format('test-{0}-{1}-{2}.blob.json', env.NODE_VERSION, github.event.repository.name, env.SHA) }}
-          path: ${{ env.VITEST_REPORT }}
+          name: ${{ format('{0}.node{1}.blob.json', env.SHA, matrix.node-version) }}
+          path: ./.vitest-reports/test.blob.json
       - id: coverage-summary
         name: Upload coverage summary
         uses: actions/upload-artifact@v6.0.0
         with:
-          name: |
-            ${{ format('coverage-summary-{0}-{1}-{2}.json', env.NODE_VERSION, github.event.repository.name, env.SHA) }}
+          name: ${{ format('{0}.node{1}.coverage.json', env.SHA, matrix.node-version) }}
           path: ${{ env.COVERAGE_SUMMARY }}
-      - id: codecov
+      - id: codecov-results
+        if: ${{ !cancelled() }}
+        name: Upload test results to Codecov
+        uses: codecov/codecov-action@v5.5.2
+        with:
+          disable_search: true
+          env_vars: GITHUB_JOB,GITHUB_REF_TYPE
+          fail_ci_if_error: true
+          files: ./__tests__/reports/test.junit.xml
+          flags: ${{ format('node{0}', matrix.node-version) }}
+          name: ${{ format('{0}.node{1}', env.SHA, matrix.node-version) }}
+          override_branch: ${{ env.REF_NAME }}
+          report_type: test_results
+          verbose: true
+      - id: codecov-coverage
         name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v5.5.2
         with:
+          disable_file_fixes: true
+          disable_search: true
           env_vars: GITHUB_JOB,GITHUB_REF_TYPE
           fail_ci_if_error: true
           files: ./coverage/lcov.info
           flags: ${{ format('node{0}', matrix.node-version) }}
-          name: ${{ format('node{0}-{1}', matrix.node-version, env.SHA) }}
-          override_branch: ${{ env.REF }}
-          override_build: ${{ github.run_id }}
-          override_commit: ${{ env.SHA }}
-          token: ${{ secrets.CODECOV_TOKEN }}
+          name: ${{ format('{0}.node{1}', env.SHA, matrix.node-version) }}
+          override_branch: ${{ env.REF_NAME }}
           verbose: true
-          working-directory: ${{ github.workspace }}
       - id: coverage-failure
-        if: steps.test.outputs.coverage != '400'
-        name: Coverage threshold failure (${{ steps.test.outputs.coverage }})
+        if: fromJson(steps.coverage.outputs.result) != 400
+        name: Coverage threshold failure (${{ steps.coverage.outputs.result }})
         run: yarn test:cov:reports
-  build:
-    needs:
-      - commitlint
-      - gitguardian
-      - preflight
+  test-bun:
+    needs: preflight
     runs-on: ubuntu-latest
-    env:
-      TARFILE: |
-        ${{ startsWith(github.head_ref || github.ref_name, 'release/') && format('@{0}-{1}-{2}.tgz', github.repository_owner, github.event.repository.name, needs.preflight.outputs.version) || format('@{0}-{1}-{2}+{3}.tgz', github.repository_owner, github.event.repository.name, needs.preflight.outputs.version, github.event.pull_request.head.sha || github.sha) }}
+    strategy:
+      fail-fast: false
+      matrix:
+        bun-version:
+          - canary
+          - latest
     steps:
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
@@ -393,52 +340,85 @@ jobs:
         with:
           persist-credentials: false
           ref: ${{ env.REF }}
-      - id: node
-        name: Setup Node.js
-        uses: actions/setup-node@v6.1.0
+      - id: bun
+        name: Setup Bun (${{ matrix.bun-version }})
+        uses: oven-sh/setup-bun@v2.1.0
         with:
-          cache: yarn
-          cache-dependency-path: yarn.lock
-          node-version-file: .nvmrc
+          bun-version: ${{ matrix.bun-version }}
       - id: cache
         name: Restore dependencies cache
         uses: actions/cache@v5.0.1
         with:
           key: ${{ needs.preflight.outputs.cache-key }}
           path: ${{ env.CACHE_PATH }}
-      - id: local-binaries
-        name: Add local binaries to $PATH
-        run: echo "$GITHUB_WORKSPACE/$CACHE_PATH/.bin" >> $GITHUB_PATH
-      - id: pack
-        name: Pack project
-        run: yarn pack -o ${{ env.TARFILE }}
-      - id: typecheck
-        name: Run typecheck
-        run: yarn check:types:build
-      - id: attw
-        name: Analyze types distribution
-        run: attw ${{ env.TARFILE }}
-      - id: archive
-        name: Archive production artifacts
+      - id: test
+        name: Run tests
+        run: yarn test:cov --coverage.thresholds.100=false
+      - id: coverage
+        name: Get coverage points
+        uses: flex-development/jq-action@1.0.0
+        with:
+          data: ${{ env.COVERAGE_SUMMARY }}
+          filter: "'${{ env.PCT }}'"
+      - id: report
+        name: Upload report
         uses: actions/upload-artifact@v6.0.0
         with:
-          name: ${{ env.TARFILE }}
-          path: ${{ env.TARFILE }}
-  changelog:
+          name: ${{ format('{0}.bun-{1}.blob.json', env.SHA, matrix.bun-version) }}
+          path: ./.vitest-reports/test.blob.json
+      - id: coverage-summary
+        name: Upload coverage summary
+        uses: actions/upload-artifact@v6.0.0
+        with:
+          name: ${{ format('{0}.bun-{1}.coverage.json', env.SHA, matrix.bun-version) }}
+          path: ${{ env.COVERAGE_SUMMARY }}
+      - id: codecov-results
+        if: ${{ !cancelled() }}
+        name: Upload test results to Codecov
+        uses: codecov/codecov-action@v5.5.2
+        with:
+          disable_search: true
+          env_vars: GITHUB_JOB,GITHUB_REF_TYPE
+          fail_ci_if_error: true
+          files: ./__tests__/reports/test.junit.xml
+          flags: ${{ format('bun-{0}', matrix.bun-version) }}
+          name: ${{ format('{0}.bun-{1}', env.SHA, matrix.bun-version) }}
+          override_branch: ${{ env.REF_NAME }}
+          report_type: test_results
+          verbose: true
+      - id: codecov-coverage
+        name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v5.5.2
+        with:
+          disable_file_fixes: true
+          disable_search: true
+          env_vars: GITHUB_JOB,GITHUB_REF_TYPE
+          fail_ci_if_error: true
+          files: ./coverage/lcov.info
+          flags: ${{ format('bun-{0}', matrix.bun-version) }}
+          name: ${{ format('{0}.bun-{1}', env.SHA, matrix.bun-version) }}
+          override_branch: ${{ env.REF_NAME }}
+          verbose: true
+      - id: coverage-failure
+        if: fromJson(steps.coverage.outputs.result) != 400
+        name: Coverage threshold failure (${{ steps.coverage.outputs.result }})
+        run: yarn test:cov:reports
+  artifacts:
     needs:
-      - build
       - commitlint
       - format
-      - gitguardian
       - lint
       - preflight
       - spelling
       - test
+      - test-bun
       - typescript
     runs-on: ubuntu-latest
-    env:
-      NODE_NO_WARNINGS: 1
     steps:
+      - id: tarball
+        name: Get tarball path
+        run: |
+          echo "result=${{ format('@{0}-{1}-{2}.tgz', github.repository_owner, github.event.repository.name, needs.preflight.outputs.version) }}" >>$GITHUB_OUTPUT
       - id: checkout
         name: Checkout ${{ env.REF_NAME }}
         uses: actions/checkout@v6.0.1
@@ -461,9 +441,24 @@ jobs:
           path: ${{ env.CACHE_PATH }}
       - id: local-binaries
         name: Add local binaries to $PATH
-        run: echo "$GITHUB_WORKSPACE/$CACHE_PATH/.bin" >>$GITHUB_PATH
-      - id: summary
-        name: Get changelog preview
+        run: echo "$GITHUB_WORKSPACE/node_modules/.bin" >> $GITHUB_PATH
+      - id: changelog
+        name: Changelog preview
         env:
           TZ: ${{ vars.TZ }}
         run: echo "$(grease changelog)" >>$GITHUB_STEP_SUMMARY
+      - id: pack
+        name: Pack project
+        run: yarn pack -o ${{ steps.tarball.outputs.result }}
+      - id: typecheck
+        name: Run typecheck
+        run: yarn check:types:build
+      - id: attw
+        name: Analyze types distribution
+        run: attw ${{ steps.tarball.outputs.result }}
+      - id: archive
+        name: Archive production artifact
+        uses: actions/upload-artifact@v6.0.0
+        with:
+          name: ${{ steps.tarball.outputs.result }}
+          path: ${{ steps.tarball.outputs.result }}

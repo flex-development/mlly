@@ -1,6 +1,7 @@
 {
   "$schema": "https://dprint.dev/schemas/v0.json",
   "excludes": [
+    "!*.scratch.*",
     "!scratch.*",
     "**/*.patch",
     "**/*.snap",
@@ -10,21 +11,19 @@
     ".git/",
     ".husky/_/",
     ".yarn/",
+    "node_modules/",
     "yarn.lock"
   ],
   "exec": {
     "commands": [
       {
-        "command": "node --experimental-strip-types --experimental-transform-types ./dprint/prettier.mts {{file_path}}",
-        "exts": ["css", "html", "json5", "scss", "yaml", "yml"],
-        "stdin": true
-      },
-      {
+        "cacheKeyFiles": ["package.json"],
         "command": "node --experimental-strip-types --experimental-transform-types ./dprint/remark.mts {{file_path}}",
         "exts": ["md", "mdx"],
         "stdin": true
       },
       {
+        "cacheKeyFiles": [".editorconfig"],
         "command": "node --experimental-strip-types --experimental-transform-types ./dprint/shfmt.mts {{file_path}}",
         "exts": ["sh", "zsh"],
         "fileNames": [
@@ -61,9 +60,10 @@
   "lineWidth": 80,
   "newLineKind": "lf",
   "plugins": [
-    "https://plugins.dprint.dev/typescript-0.91.6.wasm",
-    "https://plugins.dprint.dev/json-0.19.3.wasm",
-    "https://plugins.dprint.dev/exec-0.5.0.json@8d9972eee71fa1590e04873540421f3eda7674d0f1aae3d7c788615e7b7413d0"
+    "https://plugins.dprint.dev/typescript-0.95.12.wasm",
+    "https://plugins.dprint.dev/json-0.21.0.wasm",
+    "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.1.wasm",
+    "https://plugins.dprint.dev/exec-0.6.0.json@a054130d458f124f9b5c91484833828950723a5af3f8ff2bd1523bd47b83b364"
   ],
   "typescript": {
     "arrowFunction.useParentheses": "preferNone",
@@ -129,5 +129,20 @@
     "useBraces": "maintain",
     "whileStatement.spaceAfterWhileKeyword": true
   },
-  "useTabs": false
+  "useTabs": false,
+  "yaml": {
+    "braceSpacing": false,
+    "bracketSpacing": false,
+    "flowMap.preferSingleLine": false,
+    "flowSequence.preferSingleLine": false,
+    "formatComments": true,
+    "ignoreCommentDirective": "dprint-ignore",
+    "indentBlockSequenceInMap": true,
+    "lineBreak": "lf",
+    "printWidth": 100,
+    "quotes": "preferSingle",
+    "trailingComma": false,
+    "trimTrailingWhitespaces": true,
+    "trimTrailingZero": false
+  }
 }

@@ -18,22 +18,15 @@
 # ------------------------------------------------------------------------------
 # TEXT FILE ATTRIBUTES
 # ------------------------------------------------------------------------------
-*.cjs text eol=lf
-*.cts text eol=lf
-*.gql text eol=lf
-*.html text eol=lf diff=html
-*.js text eol=lf
 *.json text eol=lf linguist-language=JSON-with-Comments
 *.json5 text eol=lf
-*.jsonc text eol=lf
-*.jsx text eol=lf
+*.jsonc text eol=lf linguist-language=JSON-with-Comments
 *.md text eol=lf diff=markdown
 *.mjs text eol=lf
 *.mts text eol=lf
 *.sh text eol=lf
 *.snap text eol=lf
 *.ts text eol=lf
-*.tsx text eol=lf
 *.txt text eol=lf
 *.yml text eol=lf
 

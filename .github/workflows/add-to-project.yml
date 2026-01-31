@@ -37,10 +37,13 @@ jobs:
         with:
           app-id: ${{ secrets.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+      - id: url
+        name: Get project url
+        run: |
+          echo "result=$(echo "${{ github.server_url }}/orgs/${{ github.repository_owner }}/projects/${{ vars.GH_PROJECT_NUMBER }}" | xargs)" >>$GITHUB_OUTPUT
       - id: add-item
         name: Add ${{ format('#{0}', github.event.number) }} to project
         uses: actions/add-to-project@v1.0.2
         with:
           github-token: ${{ steps.bot-token.outputs.token }}
-          project-url: |
-            ${{ format('{0}/orgs/{1}/projects/{2}', github.server_url, github.repository_owner, vars.GH_PROJECT_NUMBER) }}
+          project-url: ${{ steps.url.outputs.result }}

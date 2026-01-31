@@ -3,25 +3,52 @@
  * @module mlly/lib/tests/unit/isDirectory
  */
 
-import fs from '#internal/fs'
-import cwd from '#lib/cwd'
+import emptyArray from '#fixtures/empty-array'
+import fsa from '#fixtures/fsa'
 import testSubject from '#lib/is-directory'
-import type { ModuleId } from '@flex-development/mlly'
-import { pathToFileURL } from '@flex-development/pathe'
+import fsCaseType, { type FileSystemCaseType } from '#tests/utils/fs-case-type'
+import { faker } from '@faker-js/faker'
+import type { FileSystem } from '@flex-development/mlly'
+import pathe from '@flex-development/pathe'
 
 describe('unit:lib/isDirectory', () => {
-  it.each<ModuleId>([
-    'directory',
-    new URL('node:fs'),
-    String(new URL('src/index.mts', cwd()))
-  ])('should return `false` if `id` is not a directory (%#)', id => {
-    expect(testSubject(id, fs)).to.be.false
-  })
+  describe.each<[fst: FileSystemCaseType, fs?: FileSystem | null | undefined]>([
+    [fsCaseType.default],
+    [fsCaseType.onlyAsync, fsa]
+  ])('fs (%s)', (fsType, fs) => {
+    type Case = Parameters<typeof testSubject>
 
-  it.each<ModuleId>([
-    pathToFileURL('src'),
-    String(cwd())
-  ])('should return `true` if `id` is a directory (%#)', id => {
-    expect(testSubject(id)).to.be.true
+    let isAsync: boolean
+
+    beforeAll(() => {
+      isAsync = fs === fsa
+    })
+
+    it.each<Case>([
+      [emptyArray],
+      [faker.git.commitSha()],
+      [new URL(import.meta.url)],
+      [pathe.pathToFileURL('src/index.mts')],
+      [pathe.pathToFileURL('src/utils').href],
+      [pathe.resolve('src/lib/__mocks__')]
+    ])('should return `false` if `id` is not directory (%#)', async id => {
+      // Act
+      const result = testSubject(id, fs)
+
+      // Expect
+      expect(isAsync ? await result : result).to.be.false
+    })
+
+    it.each<Case>([
+      [new URL(pathe.dot, import.meta.url)],
+      [pathe.pathToFileURL('src/lib').href],
+      [pathe.resolve('src/internal/__tests__')]
+    ])('should return `true` if `id` is directory (%#)', async id => {
+      // Act
+      const result = testSubject(id, fs)
+
+      // Expect
+      expect(isAsync ? await result : result).to.be.true
+    })
   })
 })

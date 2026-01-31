@@ -19,20 +19,23 @@ import { fileURLToPath } from '@flex-development/pathe'
  *
  * @internal
  *
+ * @this {void}
+ *
  * @param {ModuleId} packageUrl
- *  URL of directory containing `package.json` file
+ *  The URL of the directory containing the `package.json` file
  * @param {string} subpath
- *  Subpath pattern
+ *  The subpath pattern
  * @param {unknown} target
  *  The invalid package target
  * @param {boolean | null | undefined} [isImports]
  *  Whether `target` is internal to the package
  * @param {ModuleId | null | undefined} [parent]
- *  URL of parent module
+ *  The URL of the parent module
  * @return {ErrInvalidPackageTarget}
  *  New node error
  */
 function invalidPackageTarget(
+  this: void,
   packageUrl: ModuleId,
   subpath: string,
   target: unknown,

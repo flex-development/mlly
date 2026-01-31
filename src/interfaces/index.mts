@@ -4,6 +4,7 @@
  */
 
 export type { default as Aliases } from '#interfaces/aliases'
+export type { default as ConditionMap } from '#interfaces/condition-map'
 export type {
   default as GetSourceContext
 } from '#interfaces/context-get-source'
@@ -19,5 +20,8 @@ export type {
 export type {
   default as ResolveModuleOptions
 } from '#interfaces/options-resolve-module'
+export type {
+  default as PatternKeyComparisonMap
+} from '#interfaces/pattern-key-comparison-map'
 export type { default as ProtocolMap } from '#interfaces/protocol-map'
 export type { default as Stats } from '#interfaces/stats'

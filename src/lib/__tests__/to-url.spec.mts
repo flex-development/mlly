@@ -3,6 +3,7 @@
  * @module mlly/lib/tests/unit/toUrl
  */
 
+import nodeUrl from '#fixtures/node-url'
 import cwd from '#lib/cwd'
 import testSubject from '#lib/to-url'
 import pathe from '@flex-development/pathe'
@@ -12,7 +13,7 @@ describe('unit:lib/toUrl', () => {
     ['os'],
     ['path', cwd()],
     [import.meta.url],
-    [new URL('node:test')],
+    [nodeUrl, cwd()],
     [pathe.resolve('tsconfig.build.json')]
   ])('should return `id` as `URL` (%#)', (id, parent) => {
     expect(testSubject(id, parent)).toMatchSnapshot()

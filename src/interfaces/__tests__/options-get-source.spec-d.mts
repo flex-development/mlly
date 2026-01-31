@@ -7,6 +7,7 @@ import type TestSubject from '#interfaces/options-get-source'
 import type {
   FileSystem,
   GetSourceHandlers,
+  List,
   ModuleFormat
 } from '@flex-development/mlly'
 import type { Nilable } from '@flex-development/tutils'
@@ -46,9 +47,9 @@ describe('unit-d:interfaces/GetSourceOptions', () => {
       .toEqualTypeOf<Nilable<RequestInit>>()
   })
 
-  it('should match [schemes?: Set<string> | readonly string[] | null | undefined]', () => {
+  it('should match [schemes?: List<string> | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('schemes')
-      .toEqualTypeOf<Nilable<Set<string> | readonly string[]>>()
+      .toEqualTypeOf<Nilable<List<string>>>()
   })
 })

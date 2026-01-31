@@ -3,10 +3,10 @@
  * @module mlly/lib/defaultConditions
  */
 
-import type { Condition } from '@flex-development/pkg-types'
+import type { Condition } from '@flex-development/mlly'
 
 /**
- * Default conditions.
+ * The default list of conditions.
  *
  * @see {@linkcode Condition}
  * @see https://nodejs.org/api/packages.html#conditional-exports

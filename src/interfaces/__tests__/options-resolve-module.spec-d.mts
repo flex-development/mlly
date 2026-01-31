@@ -6,10 +6,11 @@
 import type TestSubject from '#interfaces/options-resolve-module'
 import type {
   ChangeExtFn,
+  Condition,
   FileSystem,
+  List,
   MainField
 } from '@flex-development/mlly'
-import type { Condition } from '@flex-development/pkg-types'
 import type { Nilable } from '@flex-development/tutils'
 
 describe('unit-d:interfaces/ResolveModuleOptions', () => {
@@ -17,10 +18,10 @@ describe('unit-d:interfaces/ResolveModuleOptions', () => {
     assertType<TestSubject>({})
   })
 
-  it('should match [conditions?: Condition[] | Set<Condition> | null | undefined]', () => {
+  it('should match [conditions?: List<Condition> | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('conditions')
-      .toEqualTypeOf<Nilable<Condition[] | Set<Condition>>>()
+      .toEqualTypeOf<Nilable<List<Condition>>>()
   })
 
   it('should match [ext?: ChangeExtFn | string | null | undefined]', () => {
@@ -41,10 +42,10 @@ describe('unit-d:interfaces/ResolveModuleOptions', () => {
       .toEqualTypeOf<Nilable<FileSystem>>()
   })
 
-  it('should match [mainFields?: MainField[] | Set<MainField> | null | undefined]', () => {
+  it('should match [mainFields?: List<MainField> | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('mainFields')
-      .toEqualTypeOf<Nilable<MainField[] | Set<MainField>>>()
+      .toEqualTypeOf<Nilable<List<MainField>>>()
   })
 
   it('should match [preserveSymlinks?: boolean | null | undefined]', () => {

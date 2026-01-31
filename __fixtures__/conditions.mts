@@ -3,7 +3,7 @@
  * @module fixtures/conditions
  */
 
-import type { Condition } from '@flex-development/pkg-types'
+import type { Condition } from '@flex-development/mlly'
 
 /**
  * User conditions.

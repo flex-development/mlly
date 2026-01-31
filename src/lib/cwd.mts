@@ -8,10 +8,12 @@ import pathe from '@flex-development/pathe'
 /**
  * Get the URL of the current working directory.
  *
+ * @this {void}
+ *
  * @return {URL}
- *  URL of current working directory
+ *  The current working directory URL
  */
-function cwd(): URL {
+function cwd(this: void): URL {
   return pathe.pathToFileURL(pathe.cwd() + pathe.sep)
 }
 

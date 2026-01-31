@@ -3,213 +3,218 @@
  * @module mlly/lib/tests/unit/resolve
  */
 
+import browserConditions from '#fixtures/browser-conditions'
 import fixtureConditions from '#fixtures/conditions'
+import emptyArray from '#fixtures/empty-array'
+import emptySet from '#fixtures/empty-set'
+import fsa from '#fixtures/fsa'
 import parent from '#fixtures/parent'
+import importMetaResolve from '#fixtures/specifiers/import-meta-resolve'
+import moduleSpecifier from '#fixtures/specifiers/module'
+import nodeUrlSpecifier from '#fixtures/specifiers/node-url'
+import subpathImportEPM from '#fixtures/specifiers/subpath-import-epm'
 import chars from '#internal/chars'
 import cwd from '#lib/cwd'
 import defaultConditions from '#lib/default-conditions'
 import defaultMainFields from '#lib/default-main-fields'
 import * as testSubject from '#lib/resolver'
+import badSubpathImports from '#node_modules/bad-subpath-imports/package.json'
+import css from '#node_modules/css/package.json'
 import exportsSugarA from '#node_modules/exports-sugar-a/package.json'
 import exportsSugar from '#node_modules/exports-sugar/package.json'
+import invalidExports1 from '#node_modules/invalid-exports-1/package.json'
+import invalidExports2 from '#node_modules/invalid-exports-2/package.json'
 import legacyMain1 from '#node_modules/legacy-main-1/package.json'
 import legacyMain2 from '#node_modules/legacy-main-2/package.json'
+import legacyMain3 from '#node_modules/legacy-main-3/package.json'
+import manifestOnly from '#node_modules/manifest-only/package.json'
 import subpathExports from '#node_modules/subpath-exports/package.json'
-import toPackageUrl from '#tests/utils/to-package-url'
-import {
-  codes,
-  isNodeError,
-  type Code,
-  type NodeError
-} from '@flex-development/errnode'
-import errnode from '@flex-development/errnode/package.json'
-import type { MainField } from '@flex-development/mlly'
+import subpathImports1 from '#node_modules/subpath-imports-1/package.json'
+import subpathImports2 from '#node_modules/subpath-imports-2/package.json'
+import fsCaseType, { type FileSystemCaseType } from '#tests/utils/fs-case-type'
+import toScopeUrl from '#tests/utils/to-scope-url'
+import toScopedUrl from '#tests/utils/to-scoped-package-url'
+import { isNodeError, type NodeError } from '@flex-development/errnode'
+import pkgKronk from '@flex-development/kronk/package.json'
+import type { Awaitable, FileSystem } from '@flex-development/mlly'
 import pkg from '@flex-development/mlly/package.json'
-import {
-  dot,
-  isURL,
-  pathToFileURL,
-  resolve,
-  sep
-} from '@flex-development/pathe'
-import type { Condition, PackageJson } from '@flex-development/pkg-types'
+import pathe from '@flex-development/pathe'
+import pkgPathe from '@flex-development/pathe/package.json'
+import { cast } from '@flex-development/tutils'
 import * as baseline from 'import-meta-resolve'
 
 describe('unit:lib/resolver', () => {
-  describe('legacyMainResolve', () => {
-    it('should throw if main entry point is not found', async () => {
-      // Arrange
-      let error!: NodeError
+  describe.each<[fst: FileSystemCaseType, fs?: FileSystem | null | undefined]>([
+    [fsCaseType.default],
+    [fsCaseType.onlyAsync, fsa]
+  ])('fs (%s)', (fsType, fs) => {
+    let isAsync: boolean
 
-      // Act
-      try {
-        await testSubject.legacyMainResolve(
-          toPackageUrl(pkg.name),
-          pkg as PackageJson,
-          new Set(['unpkg'] as unknown as MainField[]),
-          parent
-        )
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_MODULE_NOT_FOUND)
-      expect(error).to.not.have.property('url')
-      expect(error.message).toMatchSnapshot()
+    beforeAll(() => {
+      isAsync = fs === fsa
     })
-  })
 
-  describe('moduleResolve', () => {
-    it.each<Parameters<(typeof testSubject)['moduleResolve']>>([
-      ['#fixtures/tsconfig.json', import.meta.url],
-      ['#internal/fs', import.meta.url, fixtureConditions],
-      ['#internal/fs', import.meta.url, ['browser', ...fixtureConditions]],
-      [
-        '#internal/path/posix',
-        pathToFileURL('__fixtures__/node_modules/subpath-imports/index.mjs')
-      ],
-      [
-        '#internal/path/windows',
-        pathToFileURL('__fixtures__/node_modules/subpath-imports/main.mjs'),
-        new Set<Condition>(['browser'])
-      ],
-      ['#lib/resolver', import.meta.url, fixtureConditions],
-      ['../resolver.mts', import.meta.url],
-      ['@flex-development/mkbuild', pathToFileURL('build.config.mts')],
-      ['fs', import.meta.url],
-      ['node:fs/promises', import.meta.url],
-      ['node:url', import.meta.url],
-      ['vitest', import.meta.url],
-      [String(pathToFileURL('src/lib/index.mts')), import.meta.url],
-      [errnode.name, import.meta.url],
-      [exportsSugar.name, parent],
-      [exportsSugarA.name, parent],
-      [legacyMain1.name + '/a.js', parent],
-      [legacyMain1.name, parent],
-      [legacyMain2.name, parent],
-      [pkg.name + '/package.json', import.meta.url],
-      [resolve('src/index.mts'), import.meta.url],
-      [subpathExports.name + '/lib/a', parent],
-      [subpathExports.name + '/lib/a.js', parent]
-    ])('should return resolved URL (%#)', async (
-      specifier,
-      parent,
-      conditions,
-      mainFields,
-      preserveSymlinks,
-      fs
-    ) => {
-      // Arrange
-      let expected: URL | null = null
+    describe('legacyMainResolve', () => {
+      it.each<Parameters<typeof testSubject['legacyMainResolve']>>([
+        [toScopeUrl(legacyMain1.name), null, null, parent],
+        [toScopeUrl(pkg.name), cast(pkg), new Set(['unpkg']), parent],
+        [toScopeUrl(pkg.name), cast(pkg), null, parent]
+      ])('should throw if main entry point is not found (%#)', async (
+        packageUrl,
+        manifest,
+        mainFields,
+        parent
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
 
-      // `import-meta-resolve` does not support empty pattern matches.
-      if (specifier !== '#fixtures/tsconfig.json') {
-        expected = baseline.moduleResolve(
-          specifier,
-          new URL(parent),
-          new Set(conditions ?? defaultConditions)
-        )
-      }
+        // Act
+        try {
+          result = testSubject.legacyMainResolve(
+            packageUrl,
+            manifest,
+            mainFields,
+            parent,
+            fs
+          )
 
-      // Act
-      const result = await testSubject.moduleResolve(
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+    })
+
+    describe('moduleResolve', () => {
+      type Case = Parameters<typeof testSubject['moduleResolve']>
+
+      it.each<Case>([
+        [
+          '../resolver.mts',
+          import.meta.url
+        ],
+        [
+          css.name + '/index.css?inline',
+          parent,
+          null,
+          null,
+          true
+        ],
+        [
+          exportsSugar.name,
+          parent
+        ],
+        [
+          exportsSugarA.name,
+          parent
+        ],
+        [
+          importMetaResolve,
+          import.meta.url
+        ],
+        [
+          legacyMain1.name + '/a.js',
+          parent
+        ],
+        [
+          legacyMain1.name,
+          parent
+        ],
+        [
+          legacyMain2.name,
+          parent
+        ],
+        [
+          legacyMain3.name,
+          parent
+        ],
+        [
+          manifestOnly.name + '/package.json',
+          parent
+        ],
+        [
+          moduleSpecifier,
+          import.meta.url
+        ],
+        [
+          nodeUrlSpecifier,
+          import.meta.url
+        ],
+        [
+          pkg.name,
+          import.meta.url,
+          fixtureConditions
+        ],
+        [
+          pkgKronk.name + '/parsers',
+          pathe.pathToFileURL(`node_modules/${pkgKronk.name}/dist/index.mjs`)
+        ],
+        [
+          pkgPathe.name,
+          import.meta.url
+        ],
+        [
+          subpathExports.name + '/lib/a',
+          parent
+        ],
+        [
+          subpathExports.name + '/lib/b.js',
+          parent
+        ],
+        [
+          subpathExports.name,
+          parent
+        ],
+        [
+          subpathImportEPM,
+          import.meta.url
+        ],
+        [
+          subpathImports1.specifiers.a,
+          toScopedUrl(subpathImports1.name, 'a.mjs')
+        ],
+        [
+          subpathImports1.specifiers.path_posix,
+          toScopedUrl(subpathImports1.name, 'path/posix.mjs')
+        ],
+        [
+          subpathImports1.specifiers.path_windows,
+          toScopedUrl(subpathImports1.name, 'path/windows.browser.mjs'),
+          browserConditions
+        ],
+        [
+          subpathImports2.specifiers.path,
+          toScopedUrl(subpathImports2.name, 'parent.mjs'),
+          browserConditions
+        ]
+      ])('should return resolved URL (%j)', async (
         specifier,
         parent,
         conditions,
         mainFields,
-        preserveSymlinks,
-        fs
-      )
+        preserveSymlinks
+      ) => {
+        // Arrange
+        let expected: URL | null = null
+        let result: Awaitable<URL>
 
-      // Expect
-      expect(result).to.eql(expected ?? result)
-      expect(result).toMatchSnapshot()
-    })
+        // `import-meta-resolve` does not support empty pattern matches.
+        if (specifier !== subpathImportEPM) {
+          expected = baseline.moduleResolve(
+            specifier,
+            new URL(parent),
+            new Set(conditions ?? defaultConditions),
+            preserveSymlinks ?? undefined
+          )
+        }
 
-    it('should throw if `specifier` contains encoded separators', async () => {
-      // Arrange
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.moduleResolve(
-          sep + 'lib%2futils.mjs',
-          import.meta.url
-        )
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_INVALID_MODULE_SPECIFIER)
-      expect(error.message).toMatchSnapshot()
-    })
-
-    it('should throw if `specifier` resolves to a directory', async () => {
-      // Arrange
-      const specifier: string = resolve('src') + sep
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.moduleResolve(specifier, import.meta.url)
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_UNSUPPORTED_DIR_IMPORT)
-      expect(error).to.have.property('url', String(pathToFileURL(specifier)))
-      expect(error.message).toMatchSnapshot()
-    })
-
-    it('should throw if `specifier` resolves to missing file', async () => {
-      // Arrange
-      const specifier: string = resolve('src/index.ts')
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.moduleResolve(specifier, import.meta.url)
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_MODULE_NOT_FOUND)
-      expect(error).to.have.property('url', String(pathToFileURL(specifier)))
-      expect(error.message).toMatchSnapshot()
-    })
-
-    it.each<Parameters<(typeof testSubject)['moduleResolve']>>([
-      [
-        './relative',
-        'data:text/javascript,export default import.meta.resolve("./relative")'
-      ],
-      [
-        'not-builtin',
-        'data:text/javascript,export default import.meta.resolve("not-builtin")'
-      ]
-    ])('should throw if module referrer is invalid (%#)', async (
-      specifier,
-      parent,
-      conditions,
-      mainFields,
-      preserveSymlinks,
-      fs
-    ) => {
-      // Arrange
-      const code: Code = codes.ERR_UNSUPPORTED_RESOLVE_REQUEST
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.moduleResolve(
+        // Act
+        result = testSubject.moduleResolve(
           specifier,
           parent,
           conditions,
@@ -217,368 +222,799 @@ describe('unit:lib/resolver', () => {
           preserveSymlinks,
           fs
         )
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
 
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', code)
-      expect(error.message).toMatchSnapshot()
-    })
-  })
+        if (isAsync) result = await result
 
-  describe('packageExportsResolve', () => {
-    it('should throw if `exports` object is invalid', async () => {
-      // Arrange
-      let error!: NodeError
+        // Expect
+        expect(result).to.eql(expected ?? result)
+        expect(result).toMatchSnapshot()
+      })
 
-      // Act
-      try {
-        await testSubject.packageExportsResolve(
-          cwd(),
-          dot,
-          { [dot]: './dist/index.mjs', 'ts-node': './src/index.mts' },
-          null,
+      it.each<Case>([
+        ['../../internal%2fidentity.mts', import.meta.url]
+      ])('should throw if `specifier` contains encoded separators (%#)', async (
+        specifier,
+        parent,
+        conditions,
+        mainFields,
+        preserveSymlinks
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
+
+        // Act
+        try {
+          result = testSubject.moduleResolve(
+            specifier,
+            parent,
+            conditions,
+            mainFields,
+            preserveSymlinks,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+
+      it.each<Case>([
+        ['../../internal', import.meta.url],
+        [pathe.pathToFileURL('src').href, import.meta.url],
+        [pathe.resolve('src/lib'), import.meta.url]
+      ])('should throw if `specifier` resolves to a directory (%#)', async (
+        specifier,
+        parent,
+        conditions,
+        mainFields,
+        preserveSymlinks
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
+
+        // Act
+        try {
+          result = testSubject.moduleResolve(
+            specifier,
+            parent,
+            conditions,
+            mainFields,
+            preserveSymlinks,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+
+      it.each<Case>([
+        [
+          './__mocks__',
           import.meta.url
-        )
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
+        ],
+        [
+          subpathImports1.specifiers.b,
+          toScopedUrl(subpathImports1.name, 'index.mjs')
+        ],
+        [
+          badSubpathImports.specifiers.path,
+          toScopedUrl(badSubpathImports.name, 'parent.mjs'),
+          browserConditions
+        ],
+        [
+          pkg.name,
+          import.meta.url
+        ],
+        [
+          pkg.name.slice(pkg.name.indexOf(pathe.sep) + 1),
+          import.meta.url
+        ]
+      ])('should throw if `specifier` resolves to unknown module (%#)', async (
+        specifier,
+        parent,
+        conditions,
+        mainFields,
+        preserveSymlinks
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
 
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_INVALID_PACKAGE_CONFIG)
-      expect(error.message).toMatchSnapshot()
+        // Act
+        try {
+          result = testSubject.moduleResolve(
+            specifier,
+            parent,
+            conditions,
+            mainFields,
+            preserveSymlinks,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+
+      it.each<Case>([
+        [
+          './l.mjs',
+          'data:text/javascript,export default import.meta.resolve("./l.mjs")'
+        ],
+        [
+          '/e.mjs',
+          'data:text/javascript,export default import.meta.resolve("/e.mjs")'
+        ],
+        [
+          'x',
+          'data:text/javascript,export default import.meta.resolve("x")'
+        ]
+      ])('should throw if module referrer is invalid (%#)', async (
+        specifier,
+        parent,
+        conditions,
+        mainFields,
+        preserveSymlinks
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
+
+        // Act
+        try {
+          result = testSubject.moduleResolve(
+            specifier,
+            parent,
+            conditions,
+            mainFields,
+            preserveSymlinks,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
     })
 
-    it('should throw if package path is not exported', async () => {
-      // Arrange
-      const code: Code = codes.ERR_PACKAGE_PATH_NOT_EXPORTED
-      let error!: NodeError
+    describe('packageExportsResolve', () => {
+      type Case = Parameters<typeof testSubject['packageExportsResolve']>
 
-      // Act
-      try {
-        await testSubject.packageExportsResolve(
+      it.each<Case>([
+        [
+          toScopeUrl('invalid-exports-1'),
+          pathe.dot,
+          invalidExports1.exports,
+          null,
+          parent
+        ],
+        [
+          toScopeUrl('invalid-exports-2'),
+          './lib/a',
+          invalidExports2.exports['./lib/*'],
+          new Set(['ts-node']),
+          parent
+        ]
+      ])('should throw if `exports` is invalid (%#)', async (
+        packageUrl,
+        subpath,
+        exports,
+        conditions,
+        parent
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
+
+        // Act
+        try {
+          result = testSubject.packageExportsResolve(
+            packageUrl,
+            subpath,
+            exports,
+            conditions,
+            parent,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+
+      it.each<Case>([
+        [
           cwd(),
-          './utils',
+          './internal/chain-or-call',
           pkg.exports,
           null,
           import.meta.url
-        )
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
+        ],
+        [
+          toScopeUrl('exports-array'),
+          './array.mjs',
+          emptyArray,
+          null,
+          parent
+        ],
+        [
+          toScopeUrl('manifest-only'),
+          pathe.dot,
+          manifestOnly.exports,
+          emptySet,
+          parent
+        ],
+        [
+          toScopeUrl('missing-exports'),
+          './lib/a.mjs',
+          undefined,
+          null,
+          parent
+        ]
+      ])('should throw if package path is not exported (%#)', async (
+        packageUrl,
+        subpath,
+        exports,
+        conditions,
+        parent
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
 
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', code)
-      expect(error.message).toMatchSnapshot()
+        // Act
+        try {
+          result = testSubject.packageExportsResolve(
+            packageUrl,
+            subpath,
+            exports,
+            conditions,
+            parent,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
     })
-  })
 
-  describe('packageImportsExportsResolve', () => {
-    it.each<Parameters<(typeof testSubject)['packageImportsExportsResolve']>>([
-      [
-        '#internal/fs',
-        pkg.imports,
-        cwd(),
-        true,
-        fixtureConditions,
-        defaultMainFields,
-        import.meta.url
-      ],
-      [
-        dot + sep + 'package.json',
-        pkg.exports,
-        cwd(),
-        false,
-        defaultConditions,
-        defaultMainFields,
-        import.meta.url
-      ]
-    ])('should return resolved package export or import URL (%j)', async (
-      matchKey,
-      matchObject,
-      packageUrl,
-      isImports,
-      conditions,
-      mainFields,
-      parent,
-      fs
-    ) => {
-      // Act
-      const result = await testSubject.packageImportsExportsResolve(
+    describe('packageImportsExportsResolve', () => {
+      it.each<Parameters<typeof testSubject['packageImportsExportsResolve']>>([
+        [
+          '#internal/fs',
+          pkg.imports,
+          cwd(),
+          true,
+          fixtureConditions,
+          defaultMainFields,
+          import.meta.url
+        ],
+        [
+          './package.json',
+          pkg.exports,
+          cwd(),
+          false,
+          defaultConditions,
+          defaultMainFields,
+          import.meta.url
+        ]
+      ])('should return resolved package export or import URL (%j)', async (
         matchKey,
         matchObject,
         packageUrl,
         isImports,
         conditions,
         mainFields,
-        parent,
-        fs
-      )
+        parent
+      ) => {
+        // Arrange
+        let result: Awaitable<URL>
 
-      // Expect
-      expect(result).to.not.be.null
-      expect(result).to.not.be.undefined
-      expect(result).to.satisfy(isURL).and.not.be.a('string')
-    })
-  })
-
-  describe('packageImportsResolve', () => {
-    it('should throw if package import is not defined', async () => {
-      // Arrange
-      const code: Code = codes.ERR_PACKAGE_IMPORT_NOT_DEFINED
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.packageImportsResolve('#mocks', import.meta.url)
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', code)
-      expect(error.message).toMatchSnapshot()
-    })
-
-    it.each<string>([
-      chars.hash,
-      chars.hash + sep,
-      pkg.name
-    ])('should throw if `specifier` is invalid (%#)', async specifier => {
-      // Arrange
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.packageImportsResolve(specifier, import.meta.url)
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_INVALID_MODULE_SPECIFIER)
-      expect(error.message).toMatchSnapshot()
-    })
-  })
-
-  describe('packageResolve', () => {
-    it('should throw if `specifier` cannot be resolved', async () => {
-      // Arrange
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.packageResolve('missing-package', parent)
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_MODULE_NOT_FOUND)
-      expect(error.message).toMatchSnapshot()
-    })
-
-    it.each<Parameters<(typeof testSubject)['packageResolve']>>([
-      ['@flex-development\\errnode', import.meta.url],
-      [chars.at, import.meta.url]
-    ])('should throw if `specifier` is invalid (%#)', async (
-      specifier,
-      parent
-    ) => {
-      // Arrange
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.packageResolve(specifier, parent)
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_INVALID_MODULE_SPECIFIER)
-      expect(error.message).toMatchSnapshot()
-    })
-  })
-
-  describe('packageSelfResolve', () => {
-    it('should return `undefined` if package scope is not found', async () => {
-      // Arrange
-      const parent: URL = pathToFileURL('../loader.mjs')
-
-      // Act
-      const result = await testSubject.packageSelfResolve(pkg.name, dot, parent)
-
-      // Expect
-      expect(result).to.be.undefined
-    })
-  })
-
-  describe('packageTargetResolve', () => {
-    it('should throw if `patternMatch` contains invalid segments', async () => {
-      // Arrange
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.packageTargetResolve(
-          toPackageUrl('invalid-pattern-match'),
-          './__fixtures__/*',
-          '#fixtures/*',
-          'node_modules/legacy-main-1/package.json',
-          true,
-          null,
-          null,
-          import.meta.url
-        )
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_INVALID_MODULE_SPECIFIER)
-    })
-
-    it('should throw if package config is invalid', async () => {
-      // Arrange
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.packageTargetResolve(
-          toPackageUrl('invalid-package-config'),
-          [{ 13: null }],
-          dot,
-          null,
-          false,
-          null,
-          null,
-          import.meta.url
-        )
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
-
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_INVALID_PACKAGE_CONFIG)
-      expect(error.message).toMatchSnapshot()
-    })
-
-    it.each<Parameters<(typeof testSubject)['packageTargetResolve']>>([
-      [
-        String(toPackageUrl('invalid-target')) + dot.repeat(2) + sep,
-        './index.mjs',
-        dot,
-        null,
-        false,
-        null,
-        null,
-        import.meta.url
-      ],
-      [
-        toPackageUrl('invalid-target'),
-        './__fixtures__/node_modules/*',
-        '#node_modules/*',
-        'legacy-main-2/package.json',
-        true,
-        null,
-        null,
-        import.meta.url
-      ],
-      [
-        toPackageUrl('invalid-target'),
-        'fs',
-        './fs',
-        null,
-        false,
-        null,
-        null,
-        import.meta.url
-      ],
-      [
-        toPackageUrl('invalid-target'),
-        'https://esm.sh/@flex-development/pathe',
-        '#internal/pathe',
-        null,
-        true,
-        null,
-        null,
-        import.meta.url
-      ],
-      [
-        toPackageUrl('invalid-target'),
-        dot.repeat(2) + sep + 'fs.browser.mjs',
-        '#internal/fs',
-        null,
-        true,
-        null,
-        null,
-        import.meta.url
-      ],
-      [
-        toPackageUrl('invalid-target'),
-        sep + 'os.browser.mjs',
-        '#internal/os',
-        null,
-        true,
-        null,
-        null,
-        import.meta.url
-      ],
-      [
-        toPackageUrl('invalid-target'),
-        [undefined, [13], [{}], {}],
-        dot,
-        null,
-        false,
-        null,
-        null,
-        import.meta.url
-      ]
-    ])('should throw if package target is invalid (%#)', async (
-      packageUrl,
-      target,
-      subpath,
-      patternMatch,
-      isImports,
-      conditions,
-      mainFields,
-      parent,
-      fs
-    ) => {
-      // Arrange
-      let error!: NodeError
-
-      // Act
-      try {
-        await testSubject.packageTargetResolve(
+        // Act
+        result = testSubject.packageImportsExportsResolve(
+          matchKey,
+          matchObject,
           packageUrl,
-          target,
-          subpath,
-          patternMatch,
           isImports,
           conditions,
           mainFields,
           parent,
           fs
         )
-      } catch (e: unknown) {
-        error = e as typeof error
-      }
 
-      // Expect
-      expect(error).to.satisfy(isNodeError)
-      expect(error).to.have.property('code', codes.ERR_INVALID_PACKAGE_TARGET)
+        if (isAsync) result = await result
+
+        // Expect
+        expect(result).to.be.instanceof(URL)
+        expect(result).toMatchSnapshot()
+      })
+    })
+
+    describe('packageImportsResolve', () => {
+      type Case = Parameters<typeof testSubject['packageImportsResolve']>
+
+      it.each<Case>([
+        [chars.hash, import.meta.url],
+        [chars.hash + pathe.sep, import.meta.url],
+        [pkg.name, import.meta.url, fixtureConditions]
+      ])('should throw if `specifier` is invalid (%#)', async (
+        specifier,
+        parent,
+        conditions,
+        mainFields
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
+
+        // Act
+        try {
+          result = testSubject.packageImportsResolve(
+            specifier,
+            parent,
+            conditions,
+            mainFields,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+
+      it.each<Case>([
+        ['#internal/a', toScopedUrl('subpath-exports', 'a.mjs')],
+        ['#internal/identity', cwd()]
+      ])('should throw if package import is not defined (%#)', async (
+        specifier,
+        parent,
+        conditions,
+        mainFields
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
+
+        // Act
+        try {
+          result = testSubject.packageImportsResolve(
+            specifier,
+            parent,
+            conditions,
+            mainFields,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+    })
+
+    describe('packageResolve', () => {
+      type Case = Parameters<typeof testSubject['packageResolve']>
+
+      it.each<Case>([
+        ['missing-package', parent]
+      ])('should throw if `specifier` cannot be resolved (%#)', async (
+        specifier,
+        parent,
+        conditions,
+        mainFields
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
+
+        // Act
+        try {
+          result = testSubject.packageResolve(
+            specifier,
+            parent,
+            conditions,
+            mainFields,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+
+      it.each<Case>([
+        [pkgPathe.name.replace(pathe.sep, '\\'), import.meta.url],
+        [chars.at, import.meta.url],
+        [chars.empty, import.meta.url]
+      ])('should throw if `specifier` is invalid (%#)', async (
+        specifier,
+        parent,
+        conditions,
+        mainFields
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL>
+
+        // Act
+        try {
+          result = testSubject.packageResolve(
+            specifier,
+            parent,
+            conditions,
+            mainFields,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+    })
+
+    describe('packageSelfResolve', () => {
+      it.each<Parameters<typeof testSubject['packageSelfResolve']>>([
+        [
+          pkg.name,
+          pathe.dot,
+          pathe.pathToFileURL('../parent.mjs'),
+          fixtureConditions
+        ]
+      ])('should return `undefined` if package scope is not found (%#)', async (
+        name,
+        subpath,
+        parent,
+        conditions
+      ) => {
+        // Arrange
+        let result: Awaitable<URL | undefined>
+
+        // Act
+        result = testSubject.packageSelfResolve(
+          name,
+          subpath,
+          parent,
+          conditions,
+          fs
+        )
+
+        if (isAsync) result = await result
+
+        // Expect
+        expect(result).to.be.undefined
+      })
+    })
+
+    describe('packageTargetResolve', () => {
+      type Case = Parameters<typeof testSubject['packageTargetResolve']>
+
+      it.each<Case>([
+        [
+          toScopeUrl('invalid-pattern-match'),
+          './__fixtures__/*',
+          '#fixtures/*',
+          'node_modules/legacy-main-1/package.json',
+          true,
+          null,
+          null,
+          toScopedUrl('invalid-pattern-match', 'parent.mjs')
+        ]
+      ])('should throw if `patternMatch` has invalid segments (%#)', async (
+        packageUrl,
+        target,
+        subpath,
+        patternMatch,
+        isImports,
+        conditions,
+        mainFields,
+        parent
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL | null | undefined>
+
+        // Act
+        try {
+          result = testSubject.packageTargetResolve(
+            packageUrl,
+            target,
+            subpath,
+            patternMatch,
+            isImports,
+            conditions,
+            mainFields,
+            parent,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+
+      it.each<Case>([
+        [
+          toScopeUrl('invalid-target-segment'),
+          [null, './__fixtures__/node_modules/*'],
+          '#node_modules/*',
+          'legacy-main-2/package.json',
+          true,
+          null,
+          null,
+          toScopedUrl('invalid-target-segment', 'parent.mjs')
+        ]
+      ])('should throw if `target` has invalid segments (%#)', async (
+        packageUrl,
+        target,
+        subpath,
+        patternMatch,
+        isImports,
+        conditions,
+        mainFields,
+        parent
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL | null | undefined>
+
+        // Act
+        try {
+          result = testSubject.packageTargetResolve(
+            packageUrl,
+            target,
+            subpath,
+            patternMatch,
+            isImports,
+            conditions,
+            mainFields,
+            parent,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+
+      it.each<Case>([
+        [
+          toScopeUrl('invalid-target-numeric-keys'),
+          [{ 13: null }],
+          pathe.dot,
+          null,
+          false,
+          null,
+          null,
+          import.meta.url
+        ]
+      ])('should throw if `target` has numeric property keys (%#)', async (
+        packageUrl,
+        target,
+        subpath,
+        patternMatch,
+        isImports,
+        conditions,
+        mainFields,
+        parent
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL | null | undefined>
+
+        // Act
+        try {
+          result = testSubject.packageTargetResolve(
+            packageUrl,
+            target,
+            subpath,
+            patternMatch,
+            isImports,
+            conditions,
+            mainFields,
+            parent,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+
+      it.each<Case>([
+        [
+          String(toScopeUrl('target-resolved-outside')) + '../',
+          './index.mjs',
+          pathe.dot,
+          null,
+          false,
+          null,
+          null,
+          import.meta.url
+        ]
+      ])('should throw if `target` resolves outside package scope (%#)', async (
+        packageUrl,
+        target,
+        subpath,
+        patternMatch,
+        isImports,
+        conditions,
+        mainFields,
+        parent
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL | null | undefined>
+
+        // Act
+        try {
+          result = testSubject.packageTargetResolve(
+            packageUrl,
+            target,
+            subpath,
+            patternMatch,
+            isImports,
+            conditions,
+            mainFields,
+            parent,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
+
+      it.each<Case>([
+        [
+          toScopeUrl('invalid-target-main'),
+          [undefined, [13], [{}], {}],
+          pathe.dot,
+          null,
+          false,
+          null,
+          null,
+          import.meta.url
+        ],
+        [
+          toScopeUrl('target-outside'),
+          {
+            browser: '../fs.browser.mjs',
+            node: 'fs', // eslint-disable-next-line sort-keys
+            default: 'fs'
+          },
+          '#internal/fs',
+          null,
+          true,
+          browserConditions,
+          null,
+          toScopedUrl('target-outside', 'outside.mjs')
+        ],
+        [
+          toScopeUrl('target-url'),
+          {
+            default: {
+              browser: [null, 'https://esm.sh/@flex-development/pathe'],
+              node: 'path', // eslint-disable-next-line sort-keys
+              default: 'path'
+            }
+          },
+          '#internal/path',
+          null,
+          true,
+          browserConditions,
+          null,
+          toScopedUrl('target-url', 'url.mjs')
+        ]
+      ])('should throw if package target is invalid (%#)', async (
+        packageUrl,
+        target,
+        subpath,
+        patternMatch,
+        isImports,
+        conditions,
+        mainFields,
+        parent
+      ) => {
+        // Arrange
+        let error!: NodeError
+        let result!: Awaitable<URL | null | undefined>
+
+        // Act
+        try {
+          result = testSubject.packageTargetResolve(
+            packageUrl,
+            target,
+            subpath,
+            patternMatch,
+            isImports,
+            conditions,
+            mainFields,
+            parent,
+            fs
+          )
+
+          if (isAsync) result = await result
+        } catch (e: unknown) {
+          error = (void result, e as typeof error)
+        }
+
+        // Expect
+        expect(error).to.satisfy(isNodeError)
+        expect(error).toMatchSnapshot()
+      })
     })
   })
 })

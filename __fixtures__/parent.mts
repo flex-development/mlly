@@ -3,13 +3,9 @@
  * @module fixtures/parent
  */
 
-import pathe from '@flex-development/pathe'
-
 /**
- * URL of parent module.
+ * The URL of the parent module.
  *
  * @const {URL} parent
  */
-const parent: URL = pathe.pathToFileURL('__fixtures__/parent.mts')
-
-export default parent
+export default new URL(import.meta.url)

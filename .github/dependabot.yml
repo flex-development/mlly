@@ -6,11 +6,6 @@
 
 ---
 version: 2
-registries:
-  github:
-    token: ${{ secrets.GH_REGISTRY_TOKEN }}
-    type: npm-registry
-    url: https://npm.pkg.github.com
 updates:
   - package-ecosystem: github-actions
     commit-message:
@@ -31,12 +26,6 @@ updates:
       commitlint:
         patterns:
           - '@commitlint/*'
-      eslint:
-        patterns:
-          - '@eslint/js'
-          - '@types/eslint'
-          - '@types/eslint__js'
-          - eslint
       flex-development:
         patterns:
           - '@flex-development/*'
@@ -44,10 +33,6 @@ updates:
         patterns:
           - 'remark-*'
           - remark
-      typescript-eslint:
-        patterns:
-          - '@typescript-eslint/*'
-          - typescript-eslint
       vitest:
         patterns:
           - '@vitest/*'
@@ -55,7 +40,5 @@ updates:
     labels:
       - scope:dependencies
       - type:build
-    registries:
-      - github
     schedule:
       interval: daily

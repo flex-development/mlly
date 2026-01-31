@@ -6,20 +6,22 @@
 import type { Aliases, ModuleId } from '@flex-development/mlly'
 
 /**
- * Path alias resolution options.
+ * Options for path alias resolution.
  */
 interface ResolveAliasOptions {
   /**
-   * Return resolved module URL as absolute specifier (a [`file:` URL][1]).
+   * Whether the resolved specifier should be absolute.
    *
-   * [1]: https://nodejs.org/api/esm.html#file-urls
+   * If `true`, the resolved specifier will be a [`file:` URL][file-url].
+   *
+   * [file-url]: https://nodejs.org/api/esm.html#file-urls
    *
    * @see https://nodejs.org/api/esm.html#terminology
    */
   absolute?: boolean | null | undefined
 
   /**
-   * Path mappings.
+   * The path mappings dictionary.
    *
    * > 👉 **Note**: Paths should be relative to {@linkcode cwd}.
    *
@@ -28,7 +30,7 @@ interface ResolveAliasOptions {
   aliases?: Aliases | null | undefined
 
   /**
-   * URL of directory to resolve non-absolute modules from.
+   * The URL of the directory to resolve non-absolute modules from.
    *
    * @see {@linkcode ModuleId}
    *
@@ -37,7 +39,7 @@ interface ResolveAliasOptions {
   cwd?: ModuleId | null | undefined
 
   /**
-   * URL of parent module.
+   * The URL of the parent module.
    *
    * @see {@linkcode ModuleId}
    */

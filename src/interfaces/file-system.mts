@@ -3,57 +3,61 @@
  * @module mlly/interfaces/FileSystem
  */
 
-import type { ModuleId, Stats } from '@flex-development/mlly'
+import type { Awaitable, ModuleId, Stats } from '@flex-development/mlly'
 
 /**
- * File system API.
+ * The file system API.
  */
 interface FileSystem {
   /**
-   * Get the contents of `id`.
+   * Read the entire contents of a file.
    *
+   * @see {@linkcode Awaitable}
    * @see {@linkcode Buffer}
    * @see {@linkcode ModuleId}
-   * @see https://nodejs.org/api/fs.html#fsreadfilepath-options-callback
    *
    * @this {void}
    *
    * @param {ModuleId} id
-   *  The path or `file:` URL to handle
-   * @return {Buffer | string}
-   *  File contents
+   *  The module id
+   * @return {Awaitable<Buffer | string>}
+   *  The file contents
    */
-  readFileSync(this: void, id: ModuleId): Buffer | string
+  readFile(this: void, id: ModuleId): Awaitable<Buffer | string>
 
   /**
-   * Get the resolved pathname for `id`.
+   * Compute a canonical pathname by resolving `.`, `..`, and symbolic links.
    *
+   * > 👉 **Note**: A canonical pathname is not necessarily unique.
+   * > Hard links and bind mounts can expose an entity through many pathnames.
+   *
+   * @see {@linkcode Awaitable}
    * @see {@linkcode ModuleId}
-   * @see https://nodejs.org/api/fs.html#fsrealpathpath-options-callback
    *
    * @this {void}
    *
    * @param {ModuleId} id
-   *  The path or `file:` URL to handle
-   * @return {string}
-   *  Resolved pathname
+   *  The module id
+   * @return {Awaitable<string>}
+   *  The canonical pathname
    */
-  realpathSync(this: void, id: ModuleId): string
+  realpath(this: void, id: ModuleId): Awaitable<string>
 
   /**
    * Get information about a directory or file.
    *
+   * @see {@linkcode Awaitable}
    * @see {@linkcode ModuleId}
    * @see {@linkcode Stats}
    *
    * @this {void}
    *
    * @param {ModuleId} id
-   *  The path or `file:` URL to handle
-   * @return {Stats}
-   *  Info about `id`
+   *  The module id
+   * @return {Awaitable<Stats>}
+   *  The info
    */
-  statSync(this: void, id: ModuleId): Stats
+  stat(this: void, id: ModuleId): Awaitable<Stats>
 }
 
 export type { FileSystem as default }

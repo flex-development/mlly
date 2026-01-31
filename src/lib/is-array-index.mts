@@ -10,24 +10,24 @@ import type { Numeric } from '@flex-development/mlly'
  *
  * @see {@linkcode Numeric}
  *
+ * @this {void}
+ *
  * @param {unknown} value
- *  Key to check
+ *  The value to check
  * @return {value is Numeric}
  *  `true` if `value` is valid array index, `false` otherwise
  */
-function isArrayIndex(value: unknown): value is Numeric {
-  if (typeof value === 'string') {
-    /**
-     * {@linkcode value} as number.
-     *
-     * @const {number} num
-     */
-    const num: number = +value
+function isArrayIndex(this: void, value: unknown): value is Numeric {
+  if (typeof value !== 'string') return false
 
-    return value === `${num}` && num >= 0 && num < 0xFFFF_FFFF
-  }
+  /**
+   * The {@linkcode value} as number.
+   *
+   * @const {number} num
+   */
+  const num: number = +value
 
-  return false
+  return value === `${num}` && num >= 0 && num < 0xFFFF_FFFF
 }
 
 export default isArrayIndex

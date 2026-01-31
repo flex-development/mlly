@@ -1,0 +1,65 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/readPackageJson > fs (default) > should throw if package manifest is not json object (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-manifest-1/package.json. Invalid package manifest object",
+  "cause": {}
+}
+`;
+
+exports[`unit:lib/readPackageJson > fs (default) > should throw if package manifest is not json object (1) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-manifest-2/package.json while importing \\"invalid-manifest-2\\" from \${process.cwd()}/src/lib/__tests__/read-package-json.spec.mts. Invalid package manifest object",
+  "cause": {}
+}
+`;
+
+exports[`unit:lib/readPackageJson > fs (default) > should throw if package manifest is not valid json (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-json/package.json while importing \\"package.json\\" from \${process.cwd()}/src/lib/__tests__/read-package-json.spec.mts. Unexpected token '/', \\"// comment\\"... is not valid JSON",
+  "cause": {}
+}
+`;
+
+exports[`unit:lib/readPackageJson > fs (default) > should throw if package manifest is not valid json (1) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-json/package.json while importing \${process.cwd()}/__fixtures__/node_modules/invalid-json/package.json. Unexpected token '/', \\"// comment\\"... is not valid JSON",
+  "cause": {}
+}
+`;
+
+exports[`unit:lib/readPackageJson > fs (only async) > should throw if package manifest is not json object (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-manifest-1/package.json. Invalid package manifest object",
+  "cause": {}
+}
+`;
+
+exports[`unit:lib/readPackageJson > fs (only async) > should throw if package manifest is not json object (1) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-manifest-2/package.json while importing \\"invalid-manifest-2\\" from \${process.cwd()}/src/lib/__tests__/read-package-json.spec.mts. Invalid package manifest object",
+  "cause": {}
+}
+`;
+
+exports[`unit:lib/readPackageJson > fs (only async) > should throw if package manifest is not valid json (0) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-json/package.json while importing \\"package.json\\" from \${process.cwd()}/src/lib/__tests__/read-package-json.spec.mts. Unexpected token '/', \\"// comment\\"... is not valid JSON",
+  "cause": {}
+}
+`;
+
+exports[`unit:lib/readPackageJson > fs (only async) > should throw if package manifest is not valid json (1) 1`] = `
+{
+  "code": "ERR_INVALID_PACKAGE_CONFIG",
+  "message": "Invalid package config \${process.cwd()}/__fixtures__/node_modules/invalid-json/package.json while importing \${process.cwd()}/__fixtures__/node_modules/invalid-json/package.json. Unexpected token '/', \\"// comment\\"... is not valid JSON",
+  "cause": {}
+}
+`;

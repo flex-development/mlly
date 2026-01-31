@@ -4,31 +4,36 @@
  */
 
 import canParseUrl from '#lib/can-parse-url'
-import type { ModuleId } from '@flex-development/mlly'
+import isModuleId from '#lib/is-module-id'
 import pathe from '@flex-development/pathe'
 
 /**
- * Check if `specifier` is an *absolute specifier*.
+ * Check if `value` is an *absolute specifier*.
  *
  * ::: warning
  * Only checks specifier syntax. Does **not** guarantee the specifier references
  * a file that exists.
  * :::
  *
- * @see {@linkcode ModuleId}
  * @see https://nodejs.org/api/esm.html#terminology
  *
- * @param {ModuleId} specifier
- *  Specifier to check
+ * @this {void}
+ *
+ * @param {unknown} value
+ *  The value to check
  * @return {boolean}
- *  `true` if `specifier` is absolute specifier, `false` otherwise
+ *  `true` if `value` is absolute specifier, `false` otherwise
  */
-function isAbsoluteSpecifier(specifier: ModuleId): boolean {
-  return typeof specifier === 'string'
-    ? specifier.startsWith('file:')
-      ? canParseUrl(specifier)
-      : pathe.isAbsolute(specifier)
-    : specifier.protocol === 'file:' && canParseUrl(specifier)
+function isAbsoluteSpecifier(this: void, value: unknown): boolean {
+  return (
+    !isModuleId(value)
+      ? false
+      : typeof value === 'string'
+      ? value.startsWith('file:')
+        ? canParseUrl(value)
+        : pathe.isAbsolute(value)
+      : value.protocol === 'file:' && canParseUrl(value)
+  )
 }
 
 export default isAbsoluteSpecifier

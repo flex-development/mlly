@@ -6,36 +6,38 @@
 import type {
   FileSystem,
   GetSourceHandlers,
+  List,
   ModuleFormat
 } from '@flex-development/mlly'
 
 /**
- * Source code retrieval options.
+ * Options for retrieving source code.
  */
 interface GetSourceOptions {
   /**
-   * Module format hint.
+   * The module format hint.
    *
    * @see {@linkcode ModuleFormat}
    */
   format?: ModuleFormat | null | undefined
 
   /**
-   * File system API.
+   * The file system API.
    *
    * @see {@linkcode FileSystem}
    */
   fs?: FileSystem | null | undefined
 
   /**
-   * URL handler map.
+   * Record, where each key is a URL protocol
+   * and each value is a source code handler.
    *
    * @see {@linkcode GetSourceHandlers}
    */
   handlers?: GetSourceHandlers | null | undefined
 
   /**
-   * Ignore [`ERR_UNSUPPORTED_ESM_URL_SCHEME`][err] if thrown.
+   * Whether to ignore [`ERR_UNSUPPORTED_ESM_URL_SCHEME`][err] if thrown.
    *
    * [err]: https://nodejs.org/api/errors.html#err_unsupported_esm_url_scheme
    */
@@ -49,11 +51,13 @@ interface GetSourceOptions {
   req?: RequestInit | null | undefined
 
   /**
-   * List of supported URL schemes.
+   * The list of supported URL schemes.
+   *
+   * @see {@linkcode List}
    *
    * @default ['data','file','http','https','node']
    */
-  schemes?: Set<string> | readonly string[] | null | undefined
+  schemes?: List<string> | null | undefined
 }
 
 export type { GetSourceOptions as default }

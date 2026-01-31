@@ -6,7 +6,7 @@
 import type { MainField } from '@flex-development/mlly'
 
 /**
- * Default main fields.
+ * The default list of main fields.
  *
  * @see {@linkcode MainField}
  *

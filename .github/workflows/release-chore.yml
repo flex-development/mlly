@@ -17,7 +17,9 @@
 # - https://github.com/actions/setup-node
 # - https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#yarn2-configuration
 # - https://github.com/flex-development/gh-commit
+# - https://github.com/flex-development/gh-release-url-action
 # - https://github.com/flex-development/grease
+# - https://github.com/flex-development/jq-action
 # - https://github.com/hmarr/debug-action
 # - https://github.com/kaisugi/action-regex-match
 # - https://regex101.com/r/OwpOr2
@@ -39,7 +41,7 @@ jobs:
     outputs:
       branch: ${{ steps.branch.outputs.result }}
       message: ${{ steps.message.outputs.result }}
-      tag: ${{ steps.tag.outputs.result }}
+      tag: ${{ steps.environment.outputs.tag }}
       version: ${{ steps.version.outputs.match }}
     steps:
       - id: debug
@@ -87,13 +89,21 @@ jobs:
           Message must match [`${{ vars.RELEASE_CHORE_REGEX }}`](https://regex101.com/r/OwpOr2)'
           echo "$ERR" >>$GITHUB_STEP_SUMMARY
           exit 1
-      - id: tag
+      - id: tag-prefix
+        name: Get release tag prefix
+        uses: flex-development/jq-action@1.0.0
+        with:
+          data: grease.config.json
+          filter: .tagprefix
+      - id: environment
         name: Get release tag
-        run: |
-          echo "result=$(jq .tagprefix grease.config.json -r)${{ steps.version.outputs.match }}" >>$GITHUB_OUTPUT
+        uses: flex-development/gh-release-url-action@2.1.0
+        with:
+          tag-prefix: ${{ steps.tag-prefix.outputs.result }}
+          version: ${{ steps.version.outputs.match }}
       - id: message
         name: Get release message
-        run: 'echo "result=release: ${{ steps.tag.outputs.result }}" >>$GITHUB_OUTPUT'
+        run: 'echo "result=release: ${{ steps.environment.outputs.tag }}" >>$GITHUB_OUTPUT'
       - id: branch
         name: Get release branch name
         run: echo "result=release/${{ steps.version.outputs.match }}" >>$GITHUB_OUTPUT
@@ -122,11 +132,7 @@ jobs:
     needs:
       - branch
       - preflight
-    permissions:
-      packages: read
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - id: bot-token
         name: Get bot token
@@ -164,11 +170,6 @@ jobs:
         run: |
           echo "$(grease changelog)" >>$GITHUB_STEP_SUMMARY
           grease changelog -sw
-      - id: build
-        name: Build project
-        env:
-          NODE_NO_WARNINGS: 1
-        run: yarn build
       - id: commit
         name: Commit and push release preparation
         uses: flex-development/gh-commit@1.0.0
@@ -244,6 +245,6 @@ jobs:
           - [x] tests added and/or updated
           - [x] documentation added or updated
           - [x] new, **tolerable** vulnerabilities and/or warnings documented, if any
-          - [x] [pr naming conventions][1]
+          - [x] [pr naming conventions][pr-naming]
 
-          [1]: https://github.com/${{ github.repository }}/blob/main/CONTRIBUTING.md#pull-request-titles'
+          [pr-naming]: https://github.com/${{ github.repository }}/blob/main/CONTRIBUTING.md#pull-request-titles'

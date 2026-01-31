@@ -4,12 +4,11 @@
  */
 
 import chars from '#internal/chars'
-import type { PatternKeyCompareResult } from '@flex-development/mlly'
+import type { PatternKeyComparison } from '@flex-development/mlly'
 import { ok } from 'devlop'
 
 /**
- * Compares two strings that may contain a wildcard character (`'*'`) and
- * returns a value indicating their order:
+ * Compare two pattern keys and return a value indicating their order:
  *
  * - `-1`: `a` should come before `b`
  * - `0`: `a` and `b` are equal
@@ -17,16 +16,23 @@ import { ok } from 'devlop'
  *
  * Implements the `PATTERN_KEY_COMPARE` algorithm.
  *
- * @see {@linkcode PatternKeyCompareResult}
+ * @see {@linkcode PatternKeyComparison}
+ * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm-specification
+ *
+ * @this {void}
  *
  * @param {string} a
- *  First string to compare
+ *  The first key
  * @param {string} b
- *  Second string to compare
- * @return {PatternKeyCompareResult}
- *  Comparsion result
+ *  The key to compare to `a`
+ * @return {PatternKeyComparison}
+ *  Pattern key comparsion result
  */
-function patternKeyCompare(a: string, b: string): PatternKeyCompareResult {
+function patternKeyCompare(
+  this: void,
+  a: string,
+  b: string
+): PatternKeyComparison {
   /**
    * Index of pattern character in {@linkcode a}.
    *

@@ -4,78 +4,42 @@
  * @see https://vitest.dev/advanced/reporters#exported-reporters
  */
 
-import type { Test } from '@vitest/runner'
-import { getTests } from '@vitest/runner/utils'
 import ci from 'is-ci'
 import notifier from 'node-notifier'
 import type { Notification } from 'node-notifier/notifiers/notificationcenter'
 import { performance } from 'node:perf_hooks'
 import { promisify } from 'node:util'
-import { dedent } from 'ts-dedent'
-import type { RunnerTestFile } from 'vitest'
-import type { Vitest } from 'vitest/node'
+import type { SerializedError } from 'vitest'
+import type { TestCase, TestModule, Vitest } from 'vitest/node'
 import type { Reporter } from 'vitest/reporters'
 
 /**
  * Test report summary notifier.
  *
- * @see {@linkcode Reporter}
- *
  * @implements {Reporter}
  */
 class Notifier implements Reporter {
   /**
-   * Reporter context.
+   * The reporter context.
    *
    * @see {@linkcode Vitest}
    *
-   * @public
+   * @protected
    * @instance
    * @member {Vitest} ctx
    */
-  public ctx!: Vitest
+  protected ctx!: Vitest
 
   /**
-   * Test run end time (in milliseconds).
+   * Map, where the first value is a timestamp indicating when all tests began
+   * running, and the last value is a timestamp indicating when those tests
+   * finished running.
    *
-   * @public
+   * @protected
    * @instance
-   * @member {number} end
+   * @member {[number, number]} timestamps
    */
-  public end!: number
-
-  /**
-   * Test run start time (in milliseconds).
-   *
-   * @public
-   * @instance
-   * @member {number} start
-   */
-  public start!: number
-
-  /**
-   * Send a notification after all tests have ran (in non ci/cd environments).
-   *
-   * @see {@linkcode RunnerTestFile}
-   *
-   * @public
-   * @instance
-   *
-   * @async
-   *
-   * @param {RunnerTestFile[] | undefined} [files=this.ctx.state.getFiles()]
-   *  List of test files
-   * @param {unknown[] | undefined} [errors=this.ctx.state.getUnhandledErrors()]
-   *  List of unhandled errors
-   * @return {undefined}
-   */
-  public async onFinished(
-    files: RunnerTestFile[] = this.ctx.state.getFiles(),
-    errors: unknown[] = this.ctx.state.getUnhandledErrors()
-  ): Promise<undefined> {
-    this.end = performance.now()
-    return void await (ci || this.reportSummary(files, errors))
-  }
+  protected timestamps!: [start: number, end: number]
 
   /**
    * Initialize the reporter.
@@ -86,86 +50,89 @@ class Notifier implements Reporter {
    * @instance
    *
    * @param {Vitest} ctx
-   *  Reporter context
+   *  The reporter context
    * @return {undefined}
    */
   public onInit(ctx: Vitest): undefined {
-    return void (this.ctx = ctx, this.start = performance.now())
+    this.timestamps = [-1, -1]
+    if (!ci) this.timestamps[0] = performance.now()
+    return void (this.ctx = ctx)
   }
 
   /**
-   * Send a notification.
-   *
-   * @see {@linkcode RunnerTestFile}
+   * Send a notification after a test run.
    *
    * @public
    * @instance
-   *
    * @async
    *
-   * @param {RunnerTestFile[] | undefined} [files=this.ctx.state.getFiles()]
-   *  List of test files
-   * @param {unknown[] | undefined} [errors=this.ctx.state.getUnhandledErrors()]
+   * @param {ReadonlyArray<TestModule>} modules
+   *  List of test modules
+   * @param {ReadonlyArray<SerializedError>} errors
    *  List of unhandled errors
    * @return {Promise<undefined>}
    */
-  public async reportSummary(
-    files: RunnerTestFile[] = this.ctx.state.getFiles(),
-    errors: unknown[] = this.ctx.state.getUnhandledErrors()
+  public async onTestRunEnd(
+    modules: readonly TestModule[],
+    errors: readonly SerializedError[]
   ): Promise<undefined> {
-    /**
-     * Tests that have been run.
-     *
-     * @const {Test[]} tests
-     */
-    const tests: Test[] = getTests(files)
+    if (ci) return void this
+    this.timestamps[1] = performance.now()
 
     /**
-     * Total number of failed tests.
+     * Map where each key is a test result state and each value is a list of
+     * test cases.
      *
-     * @const {number} fails
+     * @const {Record<'failed' | 'passed', TestCase[]>} tests
      */
-    const fails: number = tests.filter(t => t.result?.state === 'fail').length
+    const tests: Record<'failed' | 'passed', TestCase[]> = {
+      failed: [],
+      passed: []
+    }
+
+    // collect passing and failing tests.
+    for (const module of modules) {
+      for (const test of module.children.allTests()) {
+        const { state } = test.result()
+        if (state === 'failed' || state === 'passed') tests[state].push(test)
+      }
+    }
 
     /**
-     * Total number of passed tests.
+     * Total number of tests.
      *
-     * @const {number} passes
+     * @const {number} total
      */
-    const passes: number = tests.filter(t => t.result?.state === 'pass').length
+    const total: number = tests.failed.length + tests.passed.length
 
     /**
-     * Notification message.
+     * The notification message text.
      *
      * @var {string} message
      */
     let message: string = ''
 
     /**
-     * Notification title.
+     * The title of the notification.
      *
      * @var {string} title
      */
     let title: string = ''
 
-    // get notification title and message based on number of failed tests
-    if (fails || errors.length > 0) {
-      message = dedent`
-        ${fails} of ${tests.length} tests failed
-        ${errors.length} unhandled errors
-      `
-
+    if (tests.failed.length || errors.length > 0) {
       title = '\u274C Failed'
+      message = `${tests.failed.length} of ${total} tests failed`
+      message += `\n${errors.length} unhandled errors`
     } else {
       /**
-       * Time to run all tests (in milliseconds).
+       * Test run duration.
        *
        * @const {number} time
        */
-      const time: number = this.end - this.start
+      const time: number = this.timestamps[1] - this.timestamps[0]
 
-      message = dedent`
-        ${passes} tests passed in ${
+      message = String.raw`
+        ${tests.passed.length} tests passed in ${
         time > 1000
           ? `${(time / 1000).toFixed(2)}ms`
           : `${Math.round(time)}ms`

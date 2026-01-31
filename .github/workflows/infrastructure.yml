@@ -58,6 +58,6 @@ jobs:
           token: ${{ steps.bot-token.outputs.token }}
       - id: update
         name: Update repository infrastructure
-        uses: flex-development/rice-action@1.0.0
+        uses: flex-development/repostructure-action@1.0.0
         with:
           token: ${{ steps.bot-token.outputs.token }}

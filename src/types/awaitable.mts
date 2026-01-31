@@ -4,12 +4,10 @@
  */
 
 /**
- * Create a union of `T` and a `T` as a promise-like value.
- *
- * @see {@linkcode PromiseLike}
+ * Create a union of `T` and `T` as a promise-like object.
  *
  * @template {any} T
- *  Value
+ *  The value
  */
 type Awaitable<T> = PromiseLike<T> | T
 

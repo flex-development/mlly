@@ -1,6 +1,4 @@
 {
-  "compilerOptions": {
-    "customConditions": ["mlly", "development"]
-  },
+  "exclude": ["coverage", "build.config.mts", "dist", "node_modules"],
   "extends": "./tsconfig.json"
 }

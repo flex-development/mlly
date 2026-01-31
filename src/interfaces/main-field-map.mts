@@ -4,7 +4,16 @@
  */
 
 /**
- * Main fields registry.
+ * Registry of main fields.
+ *
+ * This interface can be augmented to register custom main fields.
+ *
+ * @example
+ *  declare module '@flex-development/mlly' {
+ *    interface MainFieldMap {
+ *      unpkg: 'unpkg'
+ *    }
+ *  }
  */
 interface MainFieldMap {
   main: 'main'

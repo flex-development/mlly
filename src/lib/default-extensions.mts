@@ -6,7 +6,7 @@
 import type { Ext } from '@flex-development/pathe'
 
 /**
- * Default resolvable file extensions.
+ * The default list of resolvable file extensions.
  *
  * @see {@linkcode Ext}
  *

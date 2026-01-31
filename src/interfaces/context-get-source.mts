@@ -18,14 +18,7 @@ import type {
  */
 interface GetSourceContext extends GetSourceOptions {
   /**
-   * Throw [`ERR_UNSUPPORTED_ESM_URL_SCHEME`][err]?
-   *
-   * [err]: https://nodejs.org/api/errors.html#err_unsupported_esm_url_scheme
-   */
-  error: boolean
-
-  /**
-   * File system API.
+   * The file system API.
    *
    * @see {@linkcode FileSystem}
    *
@@ -34,7 +27,8 @@ interface GetSourceContext extends GetSourceOptions {
   fs: FileSystem
 
   /**
-   * URL handler map.
+   * Record, where each key is a URL protocol
+   * and each value is a source code handler.
    *
    * @see {@linkcode GetSourceHandlers}
    *
@@ -45,15 +39,14 @@ interface GetSourceContext extends GetSourceOptions {
   /**
    * Request options for network based modules.
    *
-   * > 👉 **Note**: Only applicable if {@linkcode network} is
-   * > enabled.
+   * > 👉 **Note**: Only applicable if {@linkcode network} is enabled.
    *
    * @override
    */
   req: RequestInit
 
   /**
-   * List of supported URL schemes.
+   * The list of supported URL schemes.
    *
    * @override
    */

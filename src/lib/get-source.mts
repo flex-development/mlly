@@ -3,15 +3,20 @@
  * @module mlly/lib/getSource
  */
 
+import chainOrCall from '#internal/chain-or-call'
 import fs from '#internal/fs'
+import isPromise from '#internal/is-promise'
 import process from '#internal/process'
 import isFile from '#lib/is-file'
+import isModuleId from '#lib/is-module-id'
 import toUrl from '#lib/to-url'
 import {
   ERR_UNSUPPORTED_ESM_URL_SCHEME,
   type ErrUnsupportedEsmUrlScheme
 } from '@flex-development/errnode'
 import type {
+  Awaitable,
+  EmptyString,
   GetSourceContext,
   GetSourceHandler,
   GetSourceOptions,
@@ -23,37 +28,89 @@ import { ok } from 'devlop'
 export default getSource
 
 /**
- * Get the source code for `id`.
+ * Get the source code for a module.
  *
+ * @see {@linkcode EmptyString}
+ * @see {@linkcode GetSourceOptions}
+ *
+ * @this {void}
+ *
+ * @param {EmptyString | null | undefined} id
+ *  The module id
+ * @param {GetSourceOptions | null | undefined} [options]
+ *  Source code retrieval options
+ * @return {null}
+ *  The module source code
+ */
+function getSource(
+  this: void,
+  id: EmptyString | null | undefined,
+  options?: GetSourceOptions | null | undefined
+): null
+
+/**
+ * Get the source code for a module.
+ *
+ * > 👉 **Note**: Returns a promise if the handler for `id` is async.
+ *
+ * @see {@linkcode Awaitable}
  * @see {@linkcode ErrUnsupportedEsmUrlScheme}
  * @see {@linkcode GetSourceOptions}
  * @see {@linkcode ModuleId}
  *
- * @async
+ * @template {Awaitable<string | null | undefined>} T
+ *  The module source code
  *
  * @this {void}
  *
- * @param {ModuleId} id
- *  Module id to handle
+ * @param {ModuleId | null | undefined} id
+ *  The module id
  * @param {GetSourceOptions | null | undefined} [options]
  *  Source code retrieval options
- * @return {Promise<string | null | undefined>}
- *  Source code for `id`
+ * @return {T}
+ *  The module source code
  * @throws {ErrUnsupportedEsmUrlScheme}
  */
-async function getSource(
+function getSource<T extends Awaitable<string | null | undefined>>(
   this: void,
-  id: ModuleId,
+  id: ModuleId | null | undefined,
   options?: GetSourceOptions | null | undefined
-): Promise<string | null | undefined> {
+): T
+
+/**
+ * Get the source code for a module.
+ *
+ * > 👉 **Note**: Returns a promise if the handler for `id` is async.
+ *
+ * @see {@linkcode Awaitable}
+ * @see {@linkcode ErrUnsupportedEsmUrlScheme}
+ * @see {@linkcode GetSourceOptions}
+ * @see {@linkcode ModuleId}
+ *
+ * @this {void}
+ *
+ * @param {ModuleId | null | undefined} id
+ *  The module id
+ * @param {GetSourceOptions | null | undefined} [options]
+ *  Source code retrieval options
+ * @return {Awaitable<string | null | undefined>}
+ *  The module source code
+ * @throws {ErrUnsupportedEsmUrlScheme}
+ */
+function getSource(
+  this: void,
+  id: ModuleId | null | undefined,
+  options?: GetSourceOptions | null | undefined
+): Awaitable<string | null | undefined> {
+  if (!isModuleId(id)) return null
+
   /**
-   * Source code retrieval context.
+   * The source code retrieval context.
    *
    * @const {GetSourceContext} context
    */
   const context: GetSourceContext = {
     ...options,
-    error: false,
     fs: options?.fs ?? fs,
     handlers: {
       'data:': data,
@@ -72,36 +129,26 @@ async function getSource(
   }
 
   /**
-   * Module url.
+   * The module url.
    *
    * @const {URL} url
    */
   const url: URL = toUrl(id)
 
   /**
-   * Source code handler for {@linkcode url}.
+   * The source code handler for {@linkcode url}.
    *
-   * @const {GetSourceHandler} handle
+   * @var {GetSourceHandler | null | undefined} handle
    */
-  const handle: GetSourceHandler | null | undefined =
-    context.handlers[url.protocol as Protocol]
+  let handle: GetSourceHandler | null | undefined
 
-  /**
-   * Source code.
-   *
-   * @var {Uint8Array | string | null | undefined} code
-   */
-  let code: Uint8Array | string | null | undefined
+  // get source code handler.
+  handle = context.handlers[url.protocol as Protocol]
 
-  // get source code
-  if (handle) {
-    code = await handle.call(context, url)
-  } else {
-    context.error = true
-  }
+  // handle unsupported url scheme.
+  if (typeof handle !== 'function') {
+    if (context.ignoreErrors) return undefined
 
-  // throw on unsupported url scheme
-  if (context.error && !context.ignoreErrors) {
     throw new ERR_UNSUPPORTED_ESM_URL_SCHEME(
       url,
       [...context.schemes],
@@ -109,17 +156,35 @@ async function getSource(
     )
   }
 
-  if (code !== null && code !== undefined) code = String(code)
-  return code
+  /**
+   * The source code.
+   *
+   * @var {Awaitable<Uint8Array | string | null | undefined>} code
+   */
+  let code: Awaitable<Uint8Array | string | null | undefined> = handle.call(
+    context,
+    url
+  )
+
+  // resolve source code.
+  if (isPromise<Buffer | string | null>(code)) {
+    void code.then(resolved => (code = resolved))
+  }
+
+  return chainOrCall(code, () => {
+    ok(!isPromise(code), 'expected `code` to be resolved')
+    if (code !== null && code !== undefined) code = String(code)
+    return code
+  })
 }
 
 /**
  * @this {GetSourceContext}
  *
  * @param {URL} url
- *  Module URL
+ *  The module URL
  * @return {Buffer}
- *  Source code buffer
+ *  The source code buffer
  */
 function data(this: GetSourceContext, url: URL): Buffer {
   const [mime, data = ''] = url.pathname.split(',')
@@ -134,28 +199,32 @@ function data(this: GetSourceContext, url: URL): Buffer {
 }
 
 /**
+ * > 👉 **Note**: Returns a promise if `this.fs.readFile` or `this.fs.stat`
+ * > is async.
+ *
  * @this {GetSourceContext}
  *
  * @param {URL} url
- *  Module URL
- * @return {Buffer | string | null}
- *  Source code or `null` if module is not found
+ *  The module URL
+ * @return {Awaitable<Buffer | string | null>}
+ *  The source code
  */
 function file(
   this: GetSourceContext,
   url: URL
-): Buffer | string | null {
+): Awaitable<Buffer | string | null> {
   ok(url.protocol === 'file:', 'expected `file:` URL')
 
   /**
-   * Source code.
+   * Whether the file exists.
    *
-   * @var {Buffer | string | null} code
+   * @const {Awaitable<boolean>} exists
    */
-  let code: Buffer | string | null = null
+  const exists: Awaitable<boolean> = isFile(url, this.fs)
 
-  if (isFile(url, this.fs)) code = this.fs.readFileSync(url)
-  return code
+  return chainOrCall(exists, isFile => {
+    return isFile ?? exists ? this.fs.readFile(url) : null
+  })
 }
 
 /**
@@ -164,9 +233,9 @@ function file(
  * @this {GetSourceContext}
  *
  * @param {URL} url
- *  Module URL
+ *  The module URL
  * @return {Promise<string>}
- *  Source code
+ *  The source code
  */
 async function https(this: GetSourceContext, url: URL): Promise<string> {
   ok(/^https?:$/.test(url.protocol), 'expected `http:` or `https:` URL')
@@ -177,7 +246,7 @@ async function https(this: GetSourceContext, url: URL): Promise<string> {
  * @this {GetSourceContext}
  *
  * @param {URL} url
- *  Module URL
+ *  The module URL
  * @return {undefined}
  */
 function node(this: GetSourceContext, url: URL): undefined {

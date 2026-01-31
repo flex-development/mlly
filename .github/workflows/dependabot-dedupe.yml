@@ -25,16 +25,14 @@ on:
   pull_request:
     branches:
       - main
-permissions:
-  packages: read
 concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   dependabot-dedupe:
-    if: github.actor == 'dependabot[bot]' && startsWith(github.head_ref, 'dependabot/npm_and_yarn/')
-    permissions:
-      packages: read
+    if: |
+      github.actor == '${{ vars.DEPENDABOT }}'
+      && startsWith(github.head_ref, 'dependabot/npm_and_yarn/')
     runs-on: ubuntu-latest
     steps:
       - id: debug
@@ -63,7 +61,6 @@ jobs:
       - id: dedupe
         name: Deduplicate dependencies
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           YARN_ENABLE_GLOBAL_CACHE: true
           YARN_ENABLE_IMMUTABLE_INSTALLS: false
           YARN_ENABLE_SCRIPTS: false

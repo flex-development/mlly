@@ -6,18 +6,19 @@
 import type { Awaitable, GetSourceContext } from '@flex-development/mlly'
 
 /**
- * Get the source code for `url`.
+ * Get the source code for a module.
  *
  * @see {@linkcode Awaitable}
  * @see {@linkcode GetSourceContext}
  * @see {@linkcode URL}
  *
  * @this {GetSourceContext}
+ *  The retrieval context
  *
  * @param {URL} url
- *  Module URL
+ *  The module URL
  * @return {Awaitable<Uint8Array | string | null | undefined>}
- *  Source code
+ *  The source code
  */
 type GetSourceHandler = (
   this: GetSourceContext,

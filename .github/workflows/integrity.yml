@@ -29,16 +29,12 @@ on:
       - .yarnrc.yml
       - yarn.lock
   workflow_dispatch:
-permissions:
-  packages: read
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   integrity:
-    if: github.actor != 'dependabot[bot]'
+    if: github.actor != '${{ vars.DEPENDABOT }}'
     runs-on: ubuntu-latest
     steps:
       - id: checkout

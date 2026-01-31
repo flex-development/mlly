@@ -9,7 +9,7 @@ import {
   type ErrInvalidModuleSpecifier
 } from '@flex-development/errnode'
 import type { ModuleId } from '@flex-development/mlly'
-import { fileURLToPath } from '@flex-development/pathe'
+import pathe from '@flex-development/pathe'
 
 /**
  * Create an {@linkcode ERR_INVALID_MODULE_SPECIFIER} error for an invalid
@@ -20,20 +20,23 @@ import { fileURLToPath } from '@flex-development/pathe'
  *
  * @internal
  *
+ * @this {void}
+ *
  * @param {string} subpath
- *  Subpath pattern
+ *  The subpath pattern
  * @param {string} patternMatch
- *  Subpath pattern match
+ *  The subpath pattern match
  * @param {ModuleId} packageUrl
- *  URL of directory containing `package.json` file
+ *  The URL of the directory containing the `package.json` file
  * @param {boolean | null | undefined} [isImports]
  *  Whether `target` is internal to the package
  * @param {ModuleId | null | undefined} [parent]
- *  URL of parent module
+ *  The URL of the parent module
  * @return {ErrInvalidModuleSpecifier}
  *  New node error
  */
 function invalidSubpath(
+  this: void,
   subpath: string,
   patternMatch: string,
   packageUrl: ModuleId,
@@ -44,8 +47,8 @@ function invalidSubpath(
     subpath.replace(chars.asterisk, () => patternMatch),
     `request is not a valid match in pattern "${subpath}" for the ` +
       `"${isImports ? 'imports' : 'exports'}" resolution of ` +
-      `${fileURLToPath(new URL('package.json', packageUrl))}`,
-    parent && fileURLToPath(parent)
+      `${pathe.fileURLToPath(new URL('package.json', packageUrl))}`,
+    parent && pathe.fileURLToPath(parent)
   )
 }
 

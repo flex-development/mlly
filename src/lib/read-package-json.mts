@@ -3,93 +3,215 @@
  * @module mlly/lib/readPackageJson
  */
 
+import chainOrCall from '#internal/chain-or-call'
 import dfs from '#internal/fs'
+import canParseUrl from '#lib/can-parse-url'
 import isFile from '#lib/is-file'
+import isModuleId from '#lib/is-module-id'
 import {
   ERR_INVALID_PACKAGE_CONFIG,
   type ErrInvalidPackageConfig
 } from '@flex-development/errnode'
-import type { FileSystem, ModuleId } from '@flex-development/mlly'
+import type {
+  Awaitable,
+  EmptyString,
+  FileSystem,
+  ModuleId
+} from '@flex-development/mlly'
 import pathe from '@flex-development/pathe'
 import type { PackageJson } from '@flex-development/pkg-types'
+
+export default readPackageJson
+
+/**
+ * Read a `package.json` file.
+ *
+ * @see {@linkcode EmptyString}
+ *
+ * @this {void}
+ *
+ * @param {EmptyString | null | undefined} id
+ *  The URL of the package directory, the `package.json` file,
+ *  or a module in the same directory as a `package.json`
+ * @param {string | null | undefined} [specifier]
+ *  The module specifier that initiated the reading of the `package.json` file.\
+ *  Should be a `file:` URL if `parent` is not a URL
+ * @param {ModuleId | null | undefined} [parent]
+ *  The URL of the parent module
+ * @param {FileSystem | null | undefined} [fs]
+ *  The file system API
+ * @return {null}
+ *  The parsed file contents
+ */
+function readPackageJson(
+  this: void,
+  id: EmptyString | null | undefined,
+  specifier?: string | null | undefined,
+  parent?: ModuleId | null | undefined,
+  fs?: FileSystem | null | undefined
+): null
 
 /**
  * Read a `package.json` file.
  *
  * Implements the `READ_PACKAGE_JSON` algorithm.
  *
+ * > 👉 **Note**: Returns a promise if `fs.readFile` is async.
+ *
+ * @see {@linkcode Awaitable}
  * @see {@linkcode ErrInvalidPackageConfig}
  * @see {@linkcode FileSystem}
  * @see {@linkcode ModuleId}
  * @see {@linkcode PackageJson}
+ * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm-specification
  *
- * @async
+ * @template {Awaitable<PackageJson | null>} T
+ *  The parsed file contents
  *
- * @param {ModuleId} id
- *  URL of package directory, `package.json` file, or module in the same
- *  directory as a `package.json` file
+ * @this {void}
+ *
+ * @param {ModuleId | null | undefined} id
+ *  The URL of the package directory, the `package.json` file,
+ *  or a module in the same directory as a `package.json`
  * @param {string | null | undefined} [specifier]
- *  Module specifier that initiated reading of `package.json` file.\
- *  Should be a `file:` URL if `parent` is a not a URL
+ *  The module specifier that initiated the reading of the `package.json` file.\
+ *  Should be a `file:` URL if `parent` is not a URL
  * @param {ModuleId | null | undefined} [parent]
- *  URL of parent module
+ *  The URL of the parent module
  * @param {FileSystem | null | undefined} [fs]
- *  File system API
- * @return {PackageJson | null}
- *  Parsed file contents or `null`
+ *  The file system API
+ * @return {T}
+ *  The parsed file contents
  * @throws {ErrInvalidPackageConfig}
  *  If `package.json` file does not parse as valid JSON
+ *  or package manifest object is not a JSON object
  */
-function readPackageJson(
-  id: ModuleId,
+function readPackageJson<T extends Awaitable<PackageJson | null>>(
+  this: void,
+  id: ModuleId | null | undefined,
   specifier?: string | null | undefined,
   parent?: ModuleId | null | undefined,
   fs?: FileSystem | null | undefined
-): PackageJson | null {
-  /**
-   * URL of `package.json` file.
-   *
-   * @const {URL} url
-   */
-  const url: URL = new URL('package.json', id)
+): T
 
-  if (isFile(url, fs)) {
+/**
+ * Read a `package.json` file.
+ *
+ * Implements the `READ_PACKAGE_JSON` algorithm.
+ *
+ * > 👉 **Note**: Returns a promise if `fs.readFile` is async.
+ *
+ * @see {@linkcode Awaitable}
+ * @see {@linkcode ErrInvalidPackageConfig}
+ * @see {@linkcode FileSystem}
+ * @see {@linkcode ModuleId}
+ * @see {@linkcode PackageJson}
+ * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm-specification
+ *
+ * @this {void}
+ *
+ * @param {ModuleId | null | undefined} id
+ *  The URL of the package directory, the `package.json` file,
+ *  or a module in the same directory as a `package.json`
+ * @param {string | null | undefined} [specifier]
+ *  The module specifier that initiated the reading of the `package.json` file.\
+ *  Should be a `file:` URL if `parent` is not a URL
+ * @param {ModuleId | null | undefined} [parent]
+ *  The URL of the parent module
+ * @param {FileSystem | null | undefined} [fs]
+ *  The file system API
+ * @return {Awaitable<PackageJson | null>}
+ *  The parsed file contents
+ * @throws {ErrInvalidPackageConfig}
+ *  If `package.json` file does not parse as valid JSON
+ *  or package manifest object is not a JSON object
+ */
+function readPackageJson(
+  this: void,
+  id: ModuleId | null | undefined,
+  specifier?: string | null | undefined,
+  parent?: ModuleId | null | undefined,
+  fs?: FileSystem | null | undefined
+): Awaitable<PackageJson | null> {
+  if (isModuleId(id) && canParseUrl(id)) {
     /**
-     * Stringified package config.
+     * The URL of the `package.json` file.
      *
-     * @const {string} data
+     * @const {URL} url
      */
-    const data: string = String((fs ?? dfs).readFileSync(url))
+    const url: URL = new URL('package.json', id)
 
-    try {
-      return JSON.parse(data) as PackageJson
-    } catch (e: unknown) {
+    /**
+     * Whether the file exists.
+     *
+     * @const {Awaitable<boolean>} exists
+     */
+    const exists: Awaitable<boolean> = isFile(url, fs ??= dfs)
+
+    // read package manifest.
+    return chainOrCall(exists, isFile => {
+      if (!(isFile ?? exists)) return null
+
       /**
-       * Error cause.
+       * The stringified contents of the package manifest file.
        *
-       * @const {Error} cause
+       * @const {Awaitable<Buffer | string>} contents
        */
-      const cause: Error = e as Error
+      const contents: Awaitable<Buffer | string> = fs!.readFile(url)
 
-      /**
-       * Invalid package config error.
-       *
-       * @const {ErrInvalidPackageConfig} error
-       */
-      const error: ErrInvalidPackageConfig = new ERR_INVALID_PACKAGE_CONFIG(
-        url.pathname,
-        parent && specifier
-          ? `"${specifier}" from ${pathe.fileURLToPath(parent)}`
-          : specifier && pathe.fileURLToPath(specifier),
-        cause.message
-      )
+      // parse file content.
+      return chainOrCall(contents, data => {
+        data ??= contents as Buffer | string
 
-      error.cause = cause
-      throw error
-    }
+        try {
+          /**
+           * The parsed file contents.
+           *
+           * @const {any} parsed
+           */
+          const parsed: any = JSON.parse(String(data))
+
+          if (isPackageJson(parsed)) return parsed
+          throw new Error('Invalid package manifest object', { cause: parsed })
+        } catch (e: unknown) {
+          /**
+           * The cause of the error.
+           *
+           * @const {Error} cause
+           */
+          const cause: Error = e as Error
+
+          /**
+           * The invalid package config error.
+           *
+           * @const {ErrInvalidPackageConfig} error
+           */
+          const error: ErrInvalidPackageConfig = new ERR_INVALID_PACKAGE_CONFIG(
+            url.pathname,
+            parent && specifier
+              ? `"${specifier}" from ${pathe.fileURLToPath(parent)}`
+              : specifier && pathe.fileURLToPath(specifier),
+            cause.message
+          )
+
+          error.cause = cause
+          throw error
+        }
+      })
+    })
   }
 
   return null
 }
 
-export default readPackageJson
+/**
+ * @this {void}
+ *
+ * @param {unknown} value
+ *  The thing to check
+ * @return {value is PackageJson}
+ *  `true` if `value` looks like package manifest, `false` otherwise
+ */
+function isPackageJson(this: void, value: unknown): value is PackageJson {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
+}

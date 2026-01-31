@@ -22,20 +22,25 @@ branches:
       required_status_checks:
         checks:
           - context: add-to-project
+          - context: artifacts
           - context: auto-merge
           - context: auto-review
-          - context: build
-          - context: changelog
+          - context: codecov/changes
+          - context: codecov/patch
+          - context: codecov/project
+          - context: codecov/project/internal
+          - context: codecov/project/lib
           - context: commitlint
           - context: dependabot-dedupe
           - context: format
-          - context: gitguardian
           - context: lint
           - context: spelling
-          - context: test (22)
+          - context: test (24)
           - context: test (23)
-          - context: typescript (5.6.3)
-          - context: typescript (5.7.2)
+          - context: test (22)
+          - context: test-bun (canary)
+          - context: test-bun (latest)
+          - context: typescript
         strict: true
       restrictions: null
 environments:
@@ -157,11 +162,17 @@ labels:
   - name: type:docs
     description: documentation improvements
     color: 0052cc
+  - name: type:bug
+    description: bug reports
+    color: 0052cc
+  - name: type:epic
+    description: epics
+    color: 0052cc
   - name: type:feat
-    description: new features and improvements
+    description: new features
     color: 0052cc
   - name: type:fix
-    description: bug reports and fixes
+    description: bug fixes
     color: 0052cc
   - name: type:perf
     description: performance updates
@@ -171,6 +182,9 @@ labels:
     color: 0052cc
   - name: type:refactor
     description: code improvements
+    color: 0052cc
+  - name: type:story
+    description: user stories
     color: 0052cc
   - name: type:task
     description: project tasks
@@ -192,11 +206,6 @@ repository:
   homepage: https://github.com/flex-development/mlly
   is_template: false
   private: false
-  security_and_analysis:
-    secret_scanning:
-      status: enabled
-    secret_scanning_push_protection:
-      status: disabled
   squash_merge_commit_message: BLANK
   squash_merge_commit_title: PR_TITLE
   topics:

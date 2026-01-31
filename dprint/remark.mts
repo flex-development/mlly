@@ -3,44 +3,39 @@
  * @module dprint/remark
  */
 
+import remarkPreset from '@flex-development/remark-preset'
+import concat from 'concat-stream'
 import { ok } from 'devlop'
-import { Transform } from 'node:stream'
-import remarkParse from 'remark-parse'
-import remarkStringify from 'remark-stringify'
-import { unified } from 'unified'
-import { VFile } from 'vfile'
-import remarkPreset from '../.remarkrc.mjs'
+import { remark } from 'remark'
+import type { VFile } from 'vfile'
 
-process.stdin.pipe(new Transform({
+process.stdin.pipe(concat(
   /**
-   * Formats a file using `remark`.
+   * Format a file using `remark`.
    *
    * @see https://github.com/remarkjs/remark
    *
-   * @async
-   *
-   * @param {Buffer} buffer
-   *  Data buffer
-   * @return {Promise<string>}
-   *  Formatted file content
+   * @param {Buffer} chunk
+   *  The file content to format
+   * @return {undefined}
    */
-  async transform(buffer: Buffer): Promise<string> {
+  function(chunk: Buffer): undefined {
+    return void remark().use(remarkPreset).process(chunk, done)
+
     /**
-     * Virtual file.
-     *
-     * @const {VFile} file
+     * @param {Error | undefined} [e]
+     *  The error to handle, if any
+     * @param {VFile | undefined} [file]
+     *  The formatted file
+     * @return {undefined}
+     * @throws {Error}
      */
-    const file: VFile = new VFile(buffer.toString())
-
-    file.path = process.argv.slice(2)[0]!
-
-    await unified()
-      .use(remarkParse)
-      .use(remarkPreset)
-      .use(remarkStringify)
-      .process(file)
-
-    ok(typeof file.value === 'string', 'expected `file.value` to be a string')
-    return process.stdout.write(file.value), file.value
+    function done(
+      e?: Error | undefined,
+      file?: VFile | undefined
+    ): undefined {
+      if (e) throw e
+      return ok(file, 'expected `file`'), void process.stdout.write(file.value)
+    }
   }
-}))
+))

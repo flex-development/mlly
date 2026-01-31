@@ -4,6 +4,7 @@
  */
 
 import testSubject from '#lib/is-array-index'
+import { faker } from '@faker-js/faker'
 
 describe('unit:lib/isArrayIndex', () => {
   it('should return `false` if `value` is not valid array index', () => {

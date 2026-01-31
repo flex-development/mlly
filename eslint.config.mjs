@@ -1,33 +1,19 @@
 /**
- * @file ESLint Configuration - Root
+ * @file eslint
  * @module config/eslint
  * @see https://eslint.org/docs/user-guide/configuring
  */
 
+import fldv from '@flex-development/eslint-config'
+
 /**
- * Root eslint configuration object.
+ * eslint configuration.
  *
  * @type {import('eslint').Linter.Config[]}
+ * @const config
  */
-export default [
-  ...(await import('./eslint.base.config.mjs')).default,
-  {
-    ignores: [
-      '!**/__fixtures__/**/dist/',
-      '!**/__fixtures__/node_modules/',
-      '!**/typings/**/dist/',
-      '**/*config.*.timestamp*',
-      '**/.vitest-reports/',
-      '**/.yarn/',
-      '**/CHANGELOG.md',
-      '**/LICENSE.md',
-      '**/RELEASE_NOTES.md',
-      '**/__tests__/reports/',
-      '**/coverage/',
-      '**/dist/',
-      '**/tsconfig*temp.json'
-    ]
-  },
+const config = [
+  ...fldv.configs.node,
   {
     files: [
       '__fixtures__/**/dist/*.+(cjs|js|mjs)',
@@ -37,5 +23,28 @@ export default [
       'jsdoc/require-file-overview': 0,
       'unicorn/no-empty-file': 0
     }
+  },
+  {
+    files: ['src/internal/__tests__/is-promise.spec.mts'],
+    rules: {
+      'unicorn/no-thenable': 0
+    }
+  },
+  {
+    files: [
+      'src/internal/chain-or-call.mts',
+      'src/lib/get-source.mts',
+      'src/lib/is-directory.mts',
+      'src/lib/is-file.mts',
+      'src/lib/lookup-package-scope.mts',
+      'src/lib/read-package-json.mts',
+      'src/lib/resolve-module.mts',
+      'src/lib/resolver.mts'
+    ],
+    rules: {
+      'promise/prefer-await-to-then': 0
+    }
   }
 ]
+
+export default config
