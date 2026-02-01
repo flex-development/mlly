@@ -124,6 +124,7 @@ export {
  * @return {Awaitable<URL>}
  *  The resolved entry point URL
  * @throws {ErrModuleNotFound}
+ *  If the entry point cannot be resolved
  */
 function legacyMainResolve<T extends Awaitable<URL>>(
   this: void,
@@ -166,6 +167,7 @@ function legacyMainResolve<T extends Awaitable<URL>>(
  * @return {Awaitable<URL>}
  *  The resolved entry point URL
  * @throws {ErrModuleNotFound}
+ *  If the entry point cannot be resolved
  */
 function legacyMainResolve(
   this: void,

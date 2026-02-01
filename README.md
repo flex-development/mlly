@@ -370,9 +370,38 @@ Check if `value` is a *relative specifier*.
 
 <!--lint enable-->
 
+Resolve the [`main`][main] package entry point.
+
 Implements the legacy CommonJS resolution algorithm.
 
-**TODO**: `legacyMainResolve`
+> 👉 **Note**: Returns a promise if `fs.stat` is async.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<URL>`](#awaitablet))
+  — the resolved entry point url
+
+#### Parameters
+
+- `packageUrl` ([`ModuleId`](#moduleid))
+  — the url of the package directory, the `package.json` file, or a module in the same directory as a `package.json`
+- `manifest` ([`PackageJson`][pkg-package-json] | `null` | `undefined`)
+  — the package manifest
+- `mainFields` ([`List<MainField>`](#mainfield) | `null` | `undefined`)
+  — the list of legacy main fields
+  - **default**: [`defaultMainFields`](#defaultmainfields)
+- `parent` ([`ModuleId`](#moduleid) | `null` | `undefined`)
+  — the url of the parent module
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) The resolved entry point URL
+
+#### Throws
+
+- [`ERR_MODULE_NOT_FOUND`][err-module-not-found]
 
 ### `lookupPackageScope<T>(url[, end][, fs])`
 
@@ -689,7 +718,8 @@ This package is fully typed with [TypeScript][].
 
 ### `Aliases`
 
-Record, where each key is a path alias or pattern and each value is a path mapping configuration (interface).
+Record, where each key is a path alias or pattern
+and each value is a path mapping configuration (`interface`).
 
 ```ts
 interface Aliases {
@@ -709,7 +739,7 @@ declare module '@flex-development/mlly' {
 
 ### `Awaitable<T>`
 
-Create a union of `T` and `T` as a promise-like object (type).
+Create a union of `T` and `T` as a promise-like object (`type`).
 
 ```ts
 type Awaitable<T> = PromiseLike<T> | T
@@ -722,7 +752,7 @@ type Awaitable<T> = PromiseLike<T> | T
 
 ### `ChangeExtFn<[Ext]>`
 
-Get a new file extension for `url` (type).
+Get a new file extension for `url` (`type`).
 
 Returning an empty string (`''`), `null`, or `undefined` will remove the current file extension.
 
@@ -750,7 +780,7 @@ type ChangeExtFn<
 
 ### `ConditionMap`
 
-Registry of export/import conditions (interface).
+Registry of export/import conditions (`interface`).
 
 When developing extensions that use additional conditions, augment `ConditionMap` to register custom conditions:
 
@@ -764,7 +794,7 @@ declare module '@flex-development/mlly' {
 
 ### `Condition`
 
-Union of values that can occur where a export/import condition is expected (type).
+Union of values that can occur where a export/import condition is expected (`type`).
 
 To register new conditions, augment [`ConditionMap`](#conditionmap).
 They will be added to this union automatically.
@@ -775,7 +805,7 @@ type Condition = ConditionMap[keyof ConditionMap]
 
 ### `Dot`
 
-A dot character (`'.'`) (type).
+A dot character (`'.'`) (`type`).
 
 ```ts
 type Dot = '.'
@@ -783,7 +813,7 @@ type Dot = '.'
 
 ### `EmptyArray`
 
-An empty array (type).
+An empty array (`type`).
 
 ```ts
 type EmptyArray = []
@@ -791,7 +821,7 @@ type EmptyArray = []
 
 ### `EmptyObject`
 
-An empty object (type).
+An empty object (`type`).
 
 ```ts
 type EmptyObject = { [tag]?: never }
@@ -799,7 +829,7 @@ type EmptyObject = { [tag]?: never }
 
 ### `EmptyString`
 
-An empty string (type).
+An empty string (`type`).
 
 ```ts
 type EmptyString = ''
@@ -807,7 +837,7 @@ type EmptyString = ''
 
 ### `Ext`
 
-A file extension (type).
+A file extension (`type`).
 
 ```ts
 type Ext = `${Dot}${string}`
@@ -815,7 +845,7 @@ type Ext = `${Dot}${string}`
 
 ### `FileSystem`
 
-The file system API (interface).
+The file system API (`interface`).
 
 #### Properties
 
@@ -828,7 +858,7 @@ The file system API (interface).
 
 ### `GetSourceContext`
 
-Source code retrieval context (interface).
+Source code retrieval context (`interface`).
 
 #### Extends
 
@@ -847,7 +877,7 @@ Source code retrieval context (interface).
 
 ### `GetSourceHandler`
 
-Get the source code for a module (type).
+Get the source code for a module (`type`).
 
 ```ts
 type GetSourceHandler = (
@@ -869,7 +899,7 @@ type GetSourceHandler = (
 
 ### `GetSourceHandlers`
 
-Record, where key is a URL protocol and each value is a source code handler (type).
+Record, where key is a URL protocol and each value is a source code handler (`type`).
 
 ```ts
 type GetSourceHandlers = {
@@ -879,7 +909,7 @@ type GetSourceHandlers = {
 
 ### `GetSourceOptions`
 
-Options for retrieving source code (interface).
+Options for retrieving source code (`interface`).
 
 #### Properties
 
@@ -899,7 +929,7 @@ Options for retrieving source code (interface).
 
 ### `IsDirectory`
 
-Check if a stats object describes a directory (interface).
+Check if a stats object describes a directory (`interface`).
 
 #### Returns
 
@@ -907,7 +937,7 @@ Check if a stats object describes a directory (interface).
 
 ### `IsFile`
 
-Check if a stats object describes a file (interface).
+Check if a stats object describes a file (`interface`).
 
 #### Returns
 
@@ -915,7 +945,7 @@ Check if a stats object describes a file (interface).
 
 ### `List<[T]>`
 
-A list (type).
+A list (`type`).
 
 ```ts
 type List<T = unknown> = ReadonlySet<T> | readonly T[]
@@ -928,7 +958,7 @@ type List<T = unknown> = ReadonlySet<T> | readonly T[]
 
 ### `MainFieldMap`
 
-Registry of main fields (interface).
+Registry of main fields (`interface`).
 
 When developing extensions that use additional fields, augment `MainFieldMap` to register custom fields:
 
@@ -942,7 +972,7 @@ declare module '@flex-development/mlly' {
 
 ### `MainField`
 
-Union of values that can occur where a main field is expected (type).
+Union of values that can occur where a main field is expected (`type`).
 
 To register new main fields, augment [`MainFieldMap`](#mainfieldmap).
 They will be added to this union automatically.
@@ -953,7 +983,7 @@ type MainField = MainFieldMap[keyof MainFieldMap]
 
 ### `ModuleFormatMap`
 
-Registry of module formats (interface).
+Registry of module formats (`interface`).
 
 When developing extensions that use additional formats, augment `ModuleFormatMap` to register custom formats:
 
@@ -967,7 +997,7 @@ declare module '@flex-development/mlly' {
 
 ### `ModuleFormat`
 
-Union of values that can occur where a module format is expected (type).
+Union of values that can occur where a module format is expected (`type`).
 
 To register new main formats, augment [`ModuleFormatMap`](#moduleformatmap).
 They will be added to this union automatically.
@@ -978,7 +1008,7 @@ type ModuleFormat = ModuleFormatMap[keyof ModuleFormatMap]
 
 ### `ModuleId`
 
-Union of values that can occur where a ECMAScript (ES) module identifier is expected (type).
+Union of values that can occur where a ECMAScript (ES) module identifier is expected (`type`).
 
 ```ts
 type ModuleId = URL | string
@@ -986,7 +1016,7 @@ type ModuleId = URL | string
 
 ### `Numeric`
 
-A string that can be parsed to a valid number (type).
+A string that can be parsed to a valid number (`type`).
 
 ```ts
 type Numeric = `${number}`
@@ -994,7 +1024,7 @@ type Numeric = `${number}`
 
 ### `PatternKeyComparsionMap`
 
-Registry of [`PATTERN_KEY_COMPARE`][algorithm-pattern-key-compare] algorithm results (interface).
+Registry of [`PATTERN_KEY_COMPARE`][algorithm-pattern-key-compare] algorithm results (`interface`).
 
 When developing extensions that use additional results, augment `PatternKeyComparsionMap` to register custom results:
 
@@ -1009,7 +1039,7 @@ declare module '@flex-development/mlly' {
 ### `PatternKeyComparsion`
 
 Union of values that can occur where a [`PATTERN_KEY_COMPARE`][algorithm-pattern-key-compare] algorithm result
-is expected (type).
+is expected (`type`).
 
 To register new results, augment [`PatternKeyComparisonMap`](#patternkeycomparsionmap).
 They will be added to this union automatically.
@@ -1022,7 +1052,7 @@ type PatternKeyComparison =
 ### `PatternMatch`
 
 List, where the first item is the key of a package `exports` or `imports` target object,
-and the last is a subpath pattern match (type).
+and the last is a subpath pattern match (`type`).
 
 ```ts
 type PatternMatch = [expansionKey: string, patternMatch: string | null]
@@ -1030,7 +1060,7 @@ type PatternMatch = [expansionKey: string, patternMatch: string | null]
 
 ### `ProtocolMap`
 
-Registry of URL protocols (interface).
+Registry of URL protocols (`interface`).
 
 When developing extensions that use additional protocols, augment `ProtocolMap` to register custom protocols:
 
@@ -1044,7 +1074,7 @@ declare module '@flex-development/mlly' {
 
 ### `Protocol`
 
-Union of values that can occur where a URL protocol is expected (type).
+Union of values that can occur where a URL protocol is expected (`type`).
 
 To register new results, augment [`ProtocolMap`](#protocolmap).
 They will be added to this union automatically.
@@ -1055,7 +1085,7 @@ type Protocol = ProtocolMap[keyof ProtocolMap]
 
 ### `ReadFile`
 
-Read the entire contents of a file (interface).
+Read the entire contents of a file (`interface`).
 
 #### Parameters
 
@@ -1068,7 +1098,7 @@ Read the entire contents of a file (interface).
 
 ### `Realpath`
 
-Compute a canonical pathname by resolving `.`, `..`, and symbolic links (interface).
+Compute a canonical pathname by resolving `.`, `..`, and symbolic links (`interface`).
 
 > 👉 **Note**: A canonical pathname is not necessarily unique.
 > Hard links and bind mounts can expose an entity through many pathnames.
@@ -1084,7 +1114,7 @@ Compute a canonical pathname by resolving `.`, `..`, and symbolic links (interfa
 
 ### `ResolveAliasOptions`
 
-Options for path alias resolution (interface).
+Options for path alias resolution (`interface`).
 
 #### Properties
 
@@ -1102,7 +1132,7 @@ Options for path alias resolution (interface).
 
 ### `ResolveModuleOptions`
 
-Options for path alias resolution (interface).
+Options for path alias resolution (`interface`).
 
 #### Properties
 
@@ -1134,7 +1164,7 @@ Options for path alias resolution (interface).
 
 ### `Stat`
 
-Get information about a directory or file (interface).
+Get information about a directory or file (`interface`).
 
 #### Parameters
 
@@ -1147,7 +1177,7 @@ Get information about a directory or file (interface).
 
 ### `Stats`
 
-An object describing a directory or file (interface).
+An object describing a directory or file (`interface`).
 
 #### Properties
 
@@ -1187,6 +1217,8 @@ community you agree to abide by its terms.
 
 [err-invalid-package-config]: https://nodejs.org/api/errors.html#err_invalid_package_config
 
+[err-module-not-found]: https://nodejs.org/api/errors.html#err_module_not_found
+
 [err-unsupported-esm-url-scheme]: https://nodejs.org/api/errors.html#err_unsupported_esm_url_scheme
 
 [esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
@@ -1194,6 +1226,8 @@ community you agree to abide by its terms.
 [esmsh]: https://esm.sh
 
 [file-url]: https://nodejs.org/api/esm.html#file-urls
+
+[main]: https://github.com/nodejs/node/blob/v22.9.0/doc/api/packages.md#main
 
 [node-esm]: https://nodejs.org/api/esm.html
 
