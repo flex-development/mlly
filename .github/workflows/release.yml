@@ -50,7 +50,7 @@ jobs:
         uses: hmarr/debug-action@v3.0.0
       - id: checkout
         name: Checkout ${{ env.ref_name }}
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
       - id: tag-prefix
@@ -87,7 +87,7 @@ jobs:
     steps:
       - id: checkout
         name: Checkout ${{ env.ref_name }}
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
         with:
           fetch-depth: 0
           persist-credentials: true
