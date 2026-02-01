@@ -200,7 +200,7 @@ jobs:
           ref: ${{ env.REF }}
       - id: spelling
         name: Check spelling
-        uses: streetsidesoftware/cspell-action@v8.1.2
+        uses: streetsidesoftware/cspell-action@v8.2.0
         with:
           check_dot_files: true
           config: .cspell.json
