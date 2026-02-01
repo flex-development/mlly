@@ -63,7 +63,6 @@ function readPackageJson(
  * @see {@linkcode FileSystem}
  * @see {@linkcode ModuleId}
  * @see {@linkcode PackageJson}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm-specification
  *
  * @template {Awaitable<PackageJson | null>} T
  *  The parsed file contents
@@ -106,7 +105,6 @@ function readPackageJson<T extends Awaitable<PackageJson | null>>(
  * @see {@linkcode FileSystem}
  * @see {@linkcode ModuleId}
  * @see {@linkcode PackageJson}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm-specification
  *
  * @this {void}
  *

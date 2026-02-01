@@ -27,8 +27,9 @@ import pathe from '@flex-development/pathe'
 export default resolveModule
 
 /**
- * Resolve a module `specifier`
- * according to the [ESM Resolver algorithm][esm], mostly 😉.
+ * Resolve a module `specifier`.
+ *
+ * Implements the `ESM_RESOLVE` algorithm, mostly 😉.
  *
  * Adds support for:
  *
@@ -40,8 +41,6 @@ export default resolveModule
  *
  * > 👉 **Note**: Returns a promise if {@linkcode moduleResolve}
  * > returns a promise.
- *
- * [esm]: https://nodejs.org/api/esm.html#esm_resolver_algorithm
  *
  * @see {@linkcode Awaitable}
  * @see {@linkcode ModuleId}
@@ -71,8 +70,9 @@ function resolveModule<T extends Awaitable<URL>>(
 ): T
 
 /**
- * Resolve a module `specifier`
- * according to the [ESM Resolver algorithm][esm], mostly 😉.
+ * Resolve a module `specifier`.
+ *
+ * Implements the `ESM_RESOLVE` algorithm, mostly 😉.
  *
  * Adds support for:
  *
@@ -84,8 +84,6 @@ function resolveModule<T extends Awaitable<URL>>(
  *
  * > 👉 **Note**: Returns a promise if {@linkcode moduleResolve}
  * > returns a promise.
- *
- * [esm]: https://nodejs.org/api/esm.html#esm_resolver_algorithm
  *
  * @see {@linkcode Awaitable}
  * @see {@linkcode ModuleId}

@@ -89,8 +89,9 @@ export {
 }
 
 /**
- * Resolve the [`main`][main] package entry point
- * using the legacy CommonJS resolution algorithm.
+ * Resolve the [`main`][main] package entry point.
+ *
+ * Implements the legacy CommonJS resolution algorithm.
  *
  * > 👉 **Note**: Returns a promise if `fs.stat` is async.
  *
@@ -287,7 +288,6 @@ function legacyMainResolve(
  * @see {@linkcode FileSystem}
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @template {Awaitable<URL>} T
  *  The resolved URL
@@ -338,7 +338,6 @@ function moduleResolve<T extends Awaitable<URL>>(
  * @see {@linkcode FileSystem}
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @this {void}
  *
@@ -534,7 +533,6 @@ function moduleResolve(
  * @see {@linkcode Imports}
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @template {Awaitable<URL>} T
  *  The resolved package export URL
@@ -585,7 +583,6 @@ function packageExportsResolve<T extends Awaitable<URL>>(
  * @see {@linkcode Imports}
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @this {void}
  *
@@ -731,7 +728,6 @@ function packageExportsResolve(
  * @see {@linkcode Imports}
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @template {Awaitable<URL | null | undefined>} T
  *  The resolved package export or import URL
@@ -787,7 +783,6 @@ function packageImportsExportsResolve<
  * @see {@linkcode Imports}
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @this {void}
  *
@@ -860,7 +855,6 @@ function packageImportsExportsResolve(
  * @see {@linkcode FileSystem}
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @template {Awaitable<URL>} T
  *  The resolved package import URL
@@ -907,7 +901,6 @@ function packageImportsResolve<T extends Awaitable<URL>>(
  * @see {@linkcode FileSystem}
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @this {void}
  *
@@ -1051,7 +1044,6 @@ function packageImportsResolve(
  * @see {@linkcode List}
  * @see {@linkcode MainField}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @template {Awaitable<URL>} T
  *  The resolved package URL
@@ -1108,7 +1100,6 @@ function packageResolve<T extends Awaitable<URL>>(
  * @see {@linkcode List}
  * @see {@linkcode MainField}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @this {void}
  *
@@ -1363,7 +1354,6 @@ function packageResolve(
  * @see {@linkcode FileSystem}
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @template {Awaitable<URL | undefined>} T
  *  The resolved URL
@@ -1406,7 +1396,6 @@ function packageSelfResolve<T extends Awaitable<URL | undefined>>(
  * @see {@linkcode FileSystem}
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @this {void}
  *
@@ -1486,7 +1475,6 @@ function packageSelfResolve(
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
  * @see {@linkcode Target}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @template {Awaitable<URL | null | undefined>} T
  *  The resolved package target URL
@@ -1545,7 +1533,6 @@ function packageTargetResolve<T extends Awaitable<URL | null | undefined>>(
  * @see {@linkcode List}
  * @see {@linkcode ModuleId}
  * @see {@linkcode Target}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm
  *
  * @this {void}
  *

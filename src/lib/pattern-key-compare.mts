@@ -13,7 +13,6 @@ import { ok } from 'devlop'
  * Implements the `PATTERN_KEY_COMPARE` algorithm.
  *
  * @see {@linkcode PatternKeyComparison}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm-specification
  *
  * @this {void}
  *

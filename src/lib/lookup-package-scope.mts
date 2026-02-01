@@ -52,7 +52,6 @@ function lookupPackageScope(
  * @see {@linkcode Awaitable}
  * @see {@linkcode FileSystem}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm-specification
  *
  * @template {Awaitable<URL | null>} T
  *  The resolved package scope URL
@@ -85,7 +84,6 @@ function lookupPackageScope<T extends Awaitable<URL | null>>(
  * @see {@linkcode Awaitable}
  * @see {@linkcode FileSystem}
  * @see {@linkcode ModuleId}
- * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm-specification
  *
  * @this {void}
  *

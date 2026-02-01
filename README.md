@@ -88,6 +88,8 @@
   - [`ResolveModuleOptions`](#resolvemoduleoptions)
   - [`Stat`](#stat)
   - [`Stats`](#stats)
+- Additional Documentation
+  - [Resolution Algorithm](./docs/resolution-algorithm.md)
 - [Contribute](#contribute)
 
 ## What is this?
@@ -368,25 +370,42 @@ Check if `value` is a *relative specifier*.
 
 <!--lint enable-->
 
+Implements the legacy CommonJS resolution algorithm.
+
 **TODO**: `legacyMainResolve`
 
 ### `lookupPackageScope<T>(url[, end][, fs])`
 
 Get the package scope URL for a module `url`.
 
-Implements the `LOOKUP_PACKAGE_SCOPE` algorithm.
+Implements the [`LOOKUP_PACKAGE_SCOPE`][algorithm-lookup-package-scope] algorithm.
 
 > 👉 **Note**: Returns a promise if `fs.stat` is async.
 
 #### Overloads
 
-- `(this: void, url: EmptyString | null | undefined, url: ModuleId | null | undefined, end?: ModuleId | null | undefined, fs?: FileSystem | null | undefined): null`
-- `<T extends Awaitable<URL | null>>(this: void, url: ModuleId | null | undefined, end?: ModuleId | null | undefined, fs?: FileSystem | null | undefined)`
+```ts
+function lookupPackageScope(
+  this: void,
+  url: EmptyString | null | undefined,
+  end?: ModuleId | null | undefined,
+  fs?: FileSystem | null | undefined
+): null
+```
+
+```ts
+function lookupPackageScope<T extends Awaitable<URL | null>>(
+  this: void,
+  url: ModuleId | null | undefined,
+  end?: ModuleId | null | undefined,
+  fs?: FileSystem | null | undefined
+): T
+```
 
 #### Type Parameters
 
 - `T` ([`Awaitable<URL | null>`](#awaitablet))
-  — the resolved package scope URL
+  — the resolved package scope url
 
 #### Parameters
 
@@ -408,6 +427,8 @@ Implements the `LOOKUP_PACKAGE_SCOPE` algorithm.
 
 <!--lint enable-->
 
+Implements the [`ESM_RESOLVE`][algorithm-esm-resolve] algorithm.
+
 **TODO**: `moduleResolve`
 
 <!--lint disable-->
@@ -415,6 +436,8 @@ Implements the `LOOKUP_PACKAGE_SCOPE` algorithm.
 ### `packageExportsResolve<T>(packageUrl, subpath, exports[, conditions][, parent][, fs])`
 
 <!--lint enable-->
+
+Implements the [`PACKAGE_EXPORTS_RESOLVE`][algorithm-package-exports-resolve] algorithm.
 
 **TODO**: `packageExportsResolve`
 
@@ -424,6 +447,8 @@ Implements the `LOOKUP_PACKAGE_SCOPE` algorithm.
 
 <!--lint enable-->
 
+Implements the [`PACKAGE_IMPORTS_EXPORTS_RESOLVE`][algorithm-package-imports-exports-resolve] algorithm.
+
 **TODO**: `packageImportsExportsResolve`
 
 <!--lint disable-->
@@ -431,6 +456,8 @@ Implements the `LOOKUP_PACKAGE_SCOPE` algorithm.
 ### `packageImportsResolve<T>(specifier, parent[, conditions][, mainFields][, fs])`
 
 <!--lint enable-->
+
+Implements the [`PACKAGE_IMPORTS_RESOLVE`][algorithm-package-imports-resolve] algorithm.
 
 **TODO**: `packageImportsResolve`
 
@@ -440,6 +467,8 @@ Implements the `LOOKUP_PACKAGE_SCOPE` algorithm.
 
 <!--lint enable-->
 
+Implements the [`PACKAGE_RESOLVE`][algorithm-package-resolve] algorithm.
+
 **TODO**: `packageResolve`
 
 <!--lint disable-->
@@ -447,6 +476,8 @@ Implements the `LOOKUP_PACKAGE_SCOPE` algorithm.
 ### `packageSelfResolve<T>(name, subpath, parent[, conditions][, fs])`
 
 <!--lint enable-->
+
+Implements the [`PACKAGE_SELF_RESOLVE`][algorithm-package-self-resolve] algorithm.
 
 **TODO**: `packageSelfResolve`
 
@@ -456,13 +487,15 @@ Implements the `LOOKUP_PACKAGE_SCOPE` algorithm.
 
 <!--lint enable-->
 
+Implements the [`PACKAGE_TARGET_RESOLVE`][algorithm-package-target-resolve] algorithm.
+
 **TODO**: `packageTargetResolve`
 
 ### `patternKeyCompare(a, b)`
 
 Compare two pattern keys and return a value indicating their order.
 
-Implements the `PATTERN_KEY_COMPARE` algorithm.
+Implements the [`PATTERN_KEY_COMPARE`][algorithm-pattern-key-compare] algorithm.
 
 #### Parameters
 
@@ -495,14 +528,31 @@ object, and the last is a subpath pattern match
 
 Read a `package.json` file.
 
-Implements the `READ_PACKAGE_JSON` algorithm.
+Implements the [`READ_PACKAGE_JSON`][algorithm-read-package-json] algorithm.
 
 > 👉 **Note**: Returns a promise if `fs.readFile` is async.
 
 #### Overloads
 
-- `(this: void, id: EmptyString | null | undefined, specifier?: string | null | undefined, parent?: ModuleId | null | undefined, fs?: FileSystem | null | undefined): null`
-- `<T extends Awaitable<PackageJson | null>>(this: void, id: ModuleId | null | undefined, specifier?: string | null | undefined, parent?: ModuleId | null | undefined, fs?: FileSystem | null | undefined)`
+```ts
+function readPackageJson(
+  this: void,
+  id: EmptyString | null | undefined,
+  specifier?: string | null | undefined,
+  parent?: ModuleId | null | undefined,
+  fs?: FileSystem | null | undefined
+): null
+```
+
+```ts
+function readPackageJson<T extends Awaitable<PackageJson | null>>(
+  this: void,
+  id: ModuleId | null | undefined,
+  specifier?: string | null | undefined,
+  parent?: ModuleId | null | undefined,
+  fs?: FileSystem | null | undefined
+): T
+```
 
 #### Type Parameters
 
@@ -546,7 +596,9 @@ Resolve an aliased `specifier`.
 
 ### `resolveModule<T>(specifier, parent[, options])`
 
-Resolve a module `specifier` according to the [ESM Resolver algorithm][esm-resolver-algorithm], mostly \:wink:.
+Resolve a module `specifier`.
+
+Implements the [`ESM_RESOLVE`][algorithm-esm-resolve] algorithm, mostly \:wink:.
 
 Adds support for:
 
@@ -942,7 +994,7 @@ type Numeric = `${number}`
 
 ### `PatternKeyComparsionMap`
 
-Registry of `PATTERN_KEY_COMPARE` algorithm results (interface).
+Registry of [`PATTERN_KEY_COMPARE`][algorithm-pattern-key-compare] algorithm results (interface).
 
 When developing extensions that use additional results, augment `PatternKeyComparsionMap` to register custom results:
 
@@ -956,7 +1008,8 @@ declare module '@flex-development/mlly' {
 
 ### `PatternKeyComparsion`
 
-Union of values that can occur where a `PATTERN_KEY_COMPARE` algorithm result is expected (type).
+Union of values that can occur where a [`PATTERN_KEY_COMPARE`][algorithm-pattern-key-compare] algorithm result
+is expected (type).
 
 To register new results, augment [`PatternKeyComparisonMap`](#patternkeycomparsionmap).
 They will be added to this union automatically.
@@ -1110,13 +1163,31 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 This project has a [code of conduct](./CODE_OF_CONDUCT.md). By interacting with this repository, organization, or
 community you agree to abide by its terms.
 
+[algorithm-esm-resolve]: ./docs/resolution-algorithm.md#esm_resolvespecifier-parent-conditions-mainfields-preservesymlinks-extensionformatmap
+
+[algorithm-lookup-package-scope]: ./docs/resolution-algorithm.md#lookup_package_scopeurl-end
+
+[algorithm-package-exports-resolve]: ./docs/resolution-algorithm.md#package_exports_resolvepackageurl-subpath-exports-conditions-parent
+
+[algorithm-package-imports-exports-resolve]: ./docs/resolution-algorithm.md#package_imports_exports_resolvematchkey-matchobject-packageurl-isimports-conditions-mainfields-parent
+
+[algorithm-package-imports-resolve]: ./docs/resolution-algorithm.md#package_imports_resolvespecifier-parent-conditions-mainfields
+
+[algorithm-package-resolve]: ./docs/resolution-algorithm.md#package_resolvespecifier-parent-conditions-mainfields
+
+[algorithm-package-self-resolve]: ./docs/resolution-algorithm.md#package_self_resolvename-subpath-parent-conditions
+
+[algorithm-package-target-resolve]: ./docs/resolution-algorithm.md#package_target_resolvepackageurl-target-subpath-patternmatch-isimports-conditions-mainfields-parent
+
+[algorithm-pattern-key-compare]: ./docs/resolution-algorithm.md#pattern_key_comparea-b
+
+[algorithm-read-package-json]: ./docs/resolution-algorithm.md#read_package_jsonid
+
 [builtin-module]: https://nodejs.org/api/esm.html#builtin-modules
 
 [err-invalid-package-config]: https://nodejs.org/api/errors.html#err_invalid_package_config
 
 [err-unsupported-esm-url-scheme]: https://nodejs.org/api/errors.html#err_unsupported_esm_url_scheme
-
-[esm-resolver-algorithm]: https://nodejs.org/api/esm.html#esm_resolver_algorithm
 
 [esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
