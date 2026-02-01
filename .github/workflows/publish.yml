@@ -90,7 +90,7 @@ jobs:
           ref: ${{ github.ref }}
       - id: npmrc
         name: Setup .npmrc file
-        uses: actions/setup-node@v6.1.0
+        uses: actions/setup-node@v6.2.0
         with:
           node-version-file: .nvmrc
           registry-url: https://npm.pkg.github.com
@@ -128,7 +128,7 @@ jobs:
           ref: ${{ github.ref }}
       - id: npmrc
         name: Setup .npmrc file
-        uses: actions/setup-node@v6.1.0
+        uses: actions/setup-node@v6.2.0
         with:
           node-version-file: .nvmrc
           registry-url: https://registry.npmjs.org
