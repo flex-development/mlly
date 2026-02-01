@@ -3,7 +3,7 @@
  * @module mlly/interfaces/tests/unit-d/ResolveModuleOptions
  */
 
-import type TestSubject from '#interfaces/options-resolve-module'
+import type TestSubject from '#interfaces/resolve-module-options'
 import type {
   ChangeExtFn,
   Condition,
@@ -30,10 +30,10 @@ describe('unit-d:interfaces/ResolveModuleOptions', () => {
       .toEqualTypeOf<Nilable<ChangeExtFn | string>>()
   })
 
-  it('should match [extensions?: Set<string> | string[] | null | undefined]', () => {
+  it('should match [extensions?: List<string> | null | undefined]', () => {
     expectTypeOf<TestSubject>()
       .toHaveProperty('extensions')
-      .toEqualTypeOf<Nilable<Set<string> | string[]>>()
+      .toEqualTypeOf<Nilable<List<string>>>()
   })
 
   it('should match [fs?: FileSystem | null | undefined]', () => {

@@ -3,7 +3,7 @@
  * @module mlly/interfaces/tests/unit-d/GetSourceContext
  */
 
-import type TestSubject from '#interfaces/context-get-source'
+import type TestSubject from '#interfaces/get-source-context'
 import type {
   FileSystem,
   GetSourceHandlers,

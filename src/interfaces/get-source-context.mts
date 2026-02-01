@@ -39,8 +39,6 @@ interface GetSourceContext extends GetSourceOptions {
   /**
    * Request options for network based modules.
    *
-   * > 👉 **Note**: Only applicable if {@linkcode network} is enabled.
-   *
    * @override
    */
   req: RequestInit

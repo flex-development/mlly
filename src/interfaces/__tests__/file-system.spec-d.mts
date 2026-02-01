@@ -4,68 +4,22 @@
  */
 
 import type TestSubject from '#interfaces/file-system'
-import type { Awaitable, ModuleId, Stats } from '@flex-development/mlly'
+import type { ReadFile, Realpath, Stat } from '@flex-development/mlly'
 
 describe('unit-d:interfaces/FileSystem', () => {
-  describe('readFile', () => {
-    type Subject = TestSubject['readFile']
-
-    it('should match [this: void]', () => {
-      expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
-    })
-
-    describe('parameters', () => {
-      it('should be callable with [ModuleId]', () => {
-        expectTypeOf<Subject>().parameters.toEqualTypeOf<[ModuleId]>()
-      })
-    })
-
-    describe('returns', () => {
-      it('should return Awaitable<Buffer | string>', () => {
-        expectTypeOf<Subject>()
-          .returns
-          .toEqualTypeOf<Awaitable<Buffer | string>>()
-      })
-    })
+  it('should match [readFile: ReadFile]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('readFile')
+      .toEqualTypeOf<ReadFile>()
   })
 
-  describe('realpath', () => {
-    type Subject = TestSubject['realpath']
-
-    it('should match [this: void]', () => {
-      expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
-    })
-
-    describe('parameters', () => {
-      it('should be callable with [ModuleId]', () => {
-        expectTypeOf<Subject>().parameters.toEqualTypeOf<[ModuleId]>()
-      })
-    })
-
-    describe('returns', () => {
-      it('should return Awaitable<string>', () => {
-        expectTypeOf<Subject>().returns.toEqualTypeOf<Awaitable<string>>()
-      })
-    })
+  it('should match [realpath: Realpath]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('realpath')
+      .toEqualTypeOf<Realpath>()
   })
 
-  describe('stat', () => {
-    type Subject = TestSubject['stat']
-
-    it('should match [this: void]', () => {
-      expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
-    })
-
-    describe('parameters', () => {
-      it('should be callable with [ModuleId]', () => {
-        expectTypeOf<Subject>().parameters.toEqualTypeOf<[ModuleId]>()
-      })
-    })
-
-    describe('returns', () => {
-      it('should return Awaitable<Stats>', () => {
-        expectTypeOf<Subject>().returns.toEqualTypeOf<Awaitable<Stats>>()
-      })
-    })
+  it('should match [stat: Stat]', () => {
+    expectTypeOf<TestSubject>().toHaveProperty('stat').toEqualTypeOf<Stat>()
   })
 })

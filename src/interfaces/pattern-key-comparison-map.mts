@@ -4,9 +4,9 @@
  */
 
 /**
- * Registry of pattern key comparsion results.
+ * Registry of `PATTERN_KEY_COMPARE` algorithm results.
  *
- * This interface can be augmented to register custom comparsion results.
+ * This interface can be augmented to register custom results.
  *
  * @example
  *  declare module '@flex-development/mlly' {

@@ -40,7 +40,7 @@ interface ResolveModuleOptions {
   conditions?: List<Condition> | null | undefined
 
   /**
-   * The URL of the directory to resolve path aliases from.
+   * The URL of the directory to resolve path {@linkcode aliases} from.
    *
    * @see {@linkcode ModuleId}
    *
@@ -51,7 +51,8 @@ interface ResolveModuleOptions {
   /**
    * A replacement file extension or a function that returns a file extension.
    *
-   * An empty string (`''`) or `null` will remove a file extension.
+   * > 👉 **Note**: An empty string (`''`) or `null` will
+   * > remove a file extension.
    *
    * @see {@linkcode ChangeExtFn}
    */
@@ -62,9 +63,11 @@ interface ResolveModuleOptions {
    *
    * > 👉 **Note**: Should be sorted by priority.
    *
+   * @see {@linkcode List}
+   *
    * @default defaultExtensions
    */
-  extensions?: Set<string> | string[] | null | undefined
+  extensions?: List<string> | null | undefined
 
   /**
    * The file system API.

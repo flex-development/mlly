@@ -6,7 +6,8 @@
 import type { PatternKeyComparisonMap } from '@flex-development/mlly'
 
 /**
- * Union of `PATTERN_KEY_COMPARE` algorithm results.
+ * Union of values that can occur
+ * where a `PATTERN_KEY_COMPARE` algorithm result is expected.
  *
  * To register new results, augment {@linkcode PatternKeyComparisonMap}.
  * They will be added to this union automatically.

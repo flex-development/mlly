@@ -3,29 +3,25 @@
  * @module mlly/interfaces/Stats
  */
 
+import type { IsDirectory, IsFile } from '@flex-development/mlly'
+
 /**
- * File system metadata.
+ * An object describing a directory or file.
  */
 interface Stats {
   /**
-   * Check if the stats object describes a file system directory.
+   * Check if the stats object describes a directory.
    *
-   * @this {void}
-   *
-   * @return {boolean}
-   *  `true` if stats object describes directory, `false` otherwise
+   * @see {@linkcode IsDirectory}
    */
-  isDirectory(this: void): boolean
+  isDirectory: IsDirectory
 
   /**
-   * Check if the stats object describes a regular file.
+   * Check if the stats object describes a file.
    *
-   * @this {void}
-   *
-   * @return {boolean}
-   *  `true` if stats object describes regular file, `false` otherwise
+   * @see {@linkcode IsFile}
    */
-  isFile(this: void): boolean
+  isFile: IsFile
 }
 
 export type { Stats as default }

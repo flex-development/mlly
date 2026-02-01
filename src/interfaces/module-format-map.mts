@@ -4,7 +4,16 @@
  */
 
 /**
- * Module format registry.
+ * Registry of module formats.
+ *
+ * This interface can be augmented to register custom module formats.
+ *
+ * @example
+ *  declare module '@flex-development/mlly' {
+ *    interface ModuleFormatMap {
+ *      custom: 'custom'
+ *    }
+ *  }
  */
 interface ModuleFormatMap {
   builtin: 'builtin'

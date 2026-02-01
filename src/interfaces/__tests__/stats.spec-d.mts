@@ -4,46 +4,18 @@
  */
 
 import type TestSubject from '#interfaces/stats'
-import type { EmptyArray } from '@flex-development/tutils'
+import type { IsDirectory, IsFile } from '@flex-development/mlly'
 
 describe('unit-d:interfaces/Stats', () => {
-  describe('isDirectory', () => {
-    type Subject = TestSubject['isDirectory']
-
-    it('should match [this: void]', () => {
-      expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
-    })
-
-    describe('parameters', () => {
-      it('should be callable with []', () => {
-        expectTypeOf<Subject>().parameters.toEqualTypeOf<EmptyArray>()
-      })
-    })
-
-    describe('returns', () => {
-      it('should return boolean', () => {
-        expectTypeOf<Subject>().returns.toEqualTypeOf<boolean>()
-      })
-    })
+  it('should match [isDirectory: IsDirectory]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('isDirectory')
+      .toEqualTypeOf<IsDirectory>()
   })
 
-  describe('isFile', () => {
-    type Subject = TestSubject['isFile']
-
-    it('should match [this: void]', () => {
-      expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
-    })
-
-    describe('parameters', () => {
-      it('should be callable with []', () => {
-        expectTypeOf<Subject>().parameters.toEqualTypeOf<EmptyArray>()
-      })
-    })
-
-    describe('returns', () => {
-      it('should return boolean', () => {
-        expectTypeOf<Subject>().returns.toEqualTypeOf<boolean>()
-      })
-    })
+  it('should match [isFile: IsFile]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('isFile')
+      .toEqualTypeOf<IsFile>()
   })
 })

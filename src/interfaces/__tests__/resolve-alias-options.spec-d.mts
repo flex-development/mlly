@@ -3,7 +3,7 @@
  * @module mlly/interfaces/tests/unit-d/ResolveAliasOptions
  */
 
-import type TestSubject from '#interfaces/options-resolve-alias'
+import type TestSubject from '#interfaces/resolve-alias-options'
 import type {
   Aliases,
   ModuleId,

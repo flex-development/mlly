@@ -3,7 +3,7 @@
  * @module mlly/interfaces/tests/unit-d/GetSourceOptions
  */
 
-import type TestSubject from '#interfaces/options-get-source'
+import type TestSubject from '#interfaces/get-source-options'
 import type {
   FileSystem,
   GetSourceHandlers,

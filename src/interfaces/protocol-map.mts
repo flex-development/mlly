@@ -6,7 +6,7 @@
 /**
  * Registry of URL protocols.
  *
- * This interface can be augmented to register custom comparsion results.
+ * This interface can be augmented to register custom protocols.
  *
  * @see https://nodejs.org/api/url.html#urlprotocol
  * @see https://iana.org/assignments/uri-schemes/uri-schemes.xhtml

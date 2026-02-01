@@ -4,7 +4,8 @@
  */
 
 /**
- * Union of ECMAScript (ES) module identifiers.
+ * Union of values that can occur where a
+ * ECMAScript (ES) module identifier is expected.
  *
  * @see {@linkcode URL}
  */
