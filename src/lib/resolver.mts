@@ -8,6 +8,7 @@ import chars from '#internal/chars'
 import checkInvalidSegments from '#internal/check-invalid-segments'
 import constant from '#internal/constant'
 import dfs from '#internal/fs'
+import identity from '#internal/identity'
 import invalidPackageTarget from '#internal/invalid-package-target'
 import invalidSubpath from '#internal/invalid-subpath'
 import isPromise from '#internal/is-promise'
@@ -1585,31 +1586,15 @@ function packageTargetResolve(
 ): Awaitable<URL | null | undefined> {
   if (target === null) return target
 
-  /**
-   * The promise context.
-   *
-   * > 👉 **Note**: Only used if any function calls return a promise.
-   *
-   * @const {{ e?: NodeError; url?: URL | null }} context
-   */
-  const context: { e?: NodeError; url?: URL | null } = {}
-
-  /**
-   * The result of the promise chain.
-   *
-   * > 👉 **Note**: Only used if any function calls return a promise.
-   *
-   * @var {Awaitable<undefined>} promise
-   */
-  let promise: Awaitable<undefined>
-
   if (Array.isArray<TargetList[number]>(target)) {
     /**
-     * The error to code to skip.
+     * The promises to resolve.
      *
-     * @const {NodeError['code']} code
+     * > 👉 **Note**: Only used if {@linkcode packageResolve} return a promise.
+     *
+     * @const {Awaitable<NodeError | URL | null | undefined>[]} promises
      */
-    const code: NodeError['code'] = codes.ERR_INVALID_PACKAGE_TARGET
+    const promises: Awaitable<NodeError | URL | null | undefined>[] = []
 
     /**
      * The last node error.
@@ -1618,14 +1603,14 @@ function packageTargetResolve(
      */
     let error!: NodeError | null
 
-    for (const targetValue of target) {
-      /**
-       * The resolved URL.
-       *
-       * @var {Awaitable<URL | null | undefined>} resolved
-       */
-      let resolved: Awaitable<URL | null | undefined>
+    /**
+     * The resolved URL.
+     *
+     * @var {Awaitable<URL | null | undefined>} resolved
+     */
+    let resolved: Awaitable<URL | null | undefined>
 
+    for (const targetValue of target) {
       try {
         resolved = packageTargetResolve(
           packageUrl,
@@ -1640,30 +1625,35 @@ function packageTargetResolve(
         )
       } catch (e: unknown) {
         error = e as NonNullable<typeof error>
-        if (error.code !== code) throw error
+        if (error.code !== codes.ERR_INVALID_PACKAGE_TARGET) throw error
       }
 
+      // collect promises, or return resolved url.
       if (isPromise(resolved)) {
-        promise = resolved.then(curl, (e: unknown): undefined => {
-          context.e = e as NodeError
-          // `packageTargetResolve` is the only resolver method
-          // that throws `ERR_INVALID_PACKAGE_TARGET`, so the error
-          // will never be thrown by another async resolver method.
-          ok(context.e.code !== code, 'did not expect invalid package target')
-          throw e
-        })
-      } else if (resolved && !promise) {
+        // no need to check for `ERR_INVALID_PACKAGE_TARGET`.
+        // the only resolver method that throws it is `packageTargetResolve`.
+        // `packageResolve` is the only resolver method that can reach here,
+        // and it throws a different error when a url cannot be resolved.
+        promises.push(resolved.then(identity, identity))
+      } else if (resolved && !promises.length) {
         return resolved
       }
     }
 
-    if (isPromise(promise)) {
-      return promise.then(() => {
-        // a url is always returned from `packageResolve`, the only
-        // other resolver method used inside this resolver method.
-        // at this point, `context.url` should always be defined
-        // because `packageResolve` throws if it cannot return a url.
-        return ok(context.url, 'expected `context.url`'), context.url
+    // resolve package target url.
+    if (promises.length) {
+      return error = null, Promise.all(promises).then(resolved => {
+        // `packageResolve` is the only resolver method that can reach here.
+        // it throws when a url cannot be resolved, so this function will
+        // always return a url or throw an error.
+
+        for (const url of resolved) {
+          if (isModuleId(url)) return url // resolved package target.
+          /* v8 ignore else -- @preserve */ if (url) error = url
+        }
+
+        /* v8 ignore else -- @preserve */ if (error) throw error
+        /* v8 ignore next -- @preserve */ return null
       })
     }
 
@@ -1686,16 +1676,25 @@ function packageTargetResolve(
     conditions ??= defaultConditions
     if (Array.isArray(conditions)) conditions = new Set(conditions)
 
+    /**
+     * The promises to resolve.
+     *
+     * > 👉 **Note**: Only used if any function calls return a promise.
+     *
+     * @const {Awaitable<URL | null | undefined>[]} promises
+     */
+    const promises: Awaitable<URL | null | undefined>[] = []
+
+    /**
+     * The resolved URL.
+     *
+     * @var {Awaitable<URL | null | undefined>} resolved
+     */
+    let resolved: Awaitable<URL | null | undefined>
+
     // try resolving conditional target.
     for (const key of Object.getOwnPropertyNames(target)) {
       if (conditions.has(key as Condition) || key === 'default') {
-        /**
-         * The resolved package target URL.
-         *
-         * @var {Awaitable<URL | null | undefined>} resolved
-         */
-        let resolved: Awaitable<URL | null | undefined>
-
         resolved = packageTargetResolve(
           packageUrl,
           (target as ConditionalTargets)[key],
@@ -1708,15 +1707,21 @@ function packageTargetResolve(
           fs
         )
 
+        // collect promises, or return resolved url.
         if (isPromise(resolved)) {
-          promise = resolved.then(curl)
-        } else if (resolved !== undefined && !promise) {
+          promises.push(resolved.then(identity))
+        } else if (resolved !== undefined && !promises.length) {
           return resolved
         }
       }
     }
 
-    return chainOrCall(promise, () => context.url)
+    // resolve package target url.
+    if (promises.length) {
+      return Promise.all(promises).then(resolved => resolved.find(url => !!url))
+    }
+
+    return undefined
   }
 
   if (typeof target === 'string') {
@@ -1767,7 +1772,7 @@ function packageTargetResolve(
     let resolved: URL = new URL(target, packageUrl)
 
     // throw if `target` resolves to module outside of package directory.
-    if (!String(resolved).startsWith(String(packageUrl))) {
+    if (!resolved.href.startsWith(String(packageUrl))) {
       throw invalidPackageTarget(packageUrl, subpath, target, isImports, parent)
     }
 
@@ -1799,20 +1804,4 @@ function packageTargetResolve(
     isImports,
     parent
   )
-
-  /**
-   * @this {void}
-   *
-   * @param {URL | null | undefined} url
-   *  The url to handle
-   * @return {undefined}
-   */
-  function curl(url: URL | null | undefined): undefined {
-    // this function is only called when `packageResolve` returns a promise.
-    // this means `url` should always be defined because `packageResolve`
-    // will throw if it cannot return a url.
-    ok(url instanceof URL, 'expected `url` to be a URL')
-    if ('url' in context) return void url
-    return context.url = url, void 0
-  }
 }

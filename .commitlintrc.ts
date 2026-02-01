@@ -18,7 +18,15 @@ const config: UserConfig = {
     'scope-enum': [
       RuleConfigSeverity.Error,
       'always',
-      scopes(['analyze', 'chore', 'docs', 'resolve', 'specifiers', 'syntax'])
+      scopes([
+        'analyze',
+        'chore',
+        'docs',
+        'resolve',
+        'resolver',
+        'specifiers',
+        'syntax'
+      ])
     ]
   }
 }
