@@ -3,7 +3,7 @@
  * @module mlly/lib/defaultExtensions
  */
 
-import type { Ext } from '@flex-development/pathe'
+import type { Ext } from '@flex-development/mlly'
 
 /**
  * The default list of resolvable file extensions.

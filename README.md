@@ -58,9 +58,11 @@
   - [`ChangeExtFn`](#changeextfnext)
   - [`ConditionMap`](#conditionmap)
   - [`Condition`](#condition)
+  - [`Dot`](#dot)
   - [`EmptyArray`](#emptyarray)
   - [`EmptyObject`](#emptyobject)
   - [`EmptyString`](#emptystring)
+  - [`Ext`](#ext)
   - [`FileSystem`](#filesystem)
   - [`GetSourceContext`](#getsourcecontext)
   - [`GetSourceHandler`](#getsourcehandler)
@@ -142,23 +144,43 @@ In browsers with [`esm.sh`][esmsh]:
 
 ### `defaultConditions`
 
-**TODO**: `defaultConditions`
+[`Set<Condition>`](#condition)
+
+The default list of conditions.
 
 ### `defaultExtensions`
 
-**TODO**: `defaultExtensions`
+[`Set<Ext>`](#ext)
+
+The default list of resolvable file extensions.
 
 ### `defaultMainFields`
 
-**TODO**: `defaultMainFields`
+[`Set<MainField>`](#mainfield)
+
+The default list of main fields.
 
 ### `extensionFormatMap`
 
-**TODO**: `extensionFormatMap`
+`Map<Ext, ModuleFormat>`
+
+Map, where each key is a [file extension](#ext) and each value is a default [module format](#formats).
 
 ### `formats`
 
-**TODO**: `formats`
+Default module formats (`const enum`).
+
+```ts
+const enum formats {
+  builtin = 'builtin',
+  commonjs = 'commonjs',
+  cts = 'commonjs-typescript',
+  json = 'json',
+  module = 'module',
+  mts = 'module-typescript',
+  wasm = 'wasm'
+}
+```
 
 ### `getSource<T>(id[, options])`
 
@@ -299,7 +321,9 @@ An object containing resolution algorithm implementations.
 
 ### `root`
 
-**TODO**: `root`
+`URL`
+
+The URL of the file system root.
 
 ### `toRelativeSpecifier(url, parent)`
 
@@ -399,6 +423,14 @@ They will be added to this union automatically.
 type Condition = ConditionMap[keyof ConditionMap]
 ```
 
+### `Dot`
+
+A dot character (`'.'`) (type).
+
+```ts
+type Dot = '.'
+```
+
 ### `EmptyArray`
 
 An empty array (type).
@@ -421,6 +453,14 @@ An empty string (type).
 
 ```ts
 type EmptyString = ''
+```
+
+### `Ext`
+
+A file extension (type).
+
+```ts
+type Ext = `${Dot}${string}`
 ```
 
 ### `FileSystem`

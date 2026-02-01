@@ -4,11 +4,11 @@
  */
 
 import formats from '#lib/formats'
-import type { ModuleFormat } from '@flex-development/mlly'
-import type { Ext } from '@flex-development/pathe'
+import type { Ext, ModuleFormat } from '@flex-development/mlly'
 
 /**
- * Map, where each key is a file extension and each value is a module format.
+ * Map, where each key is a file extension
+ * and each value is a default module format.
  *
  * @see {@linkcode Ext}
  * @see {@linkcode ModuleFormat}

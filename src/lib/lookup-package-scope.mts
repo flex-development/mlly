@@ -9,8 +9,13 @@ import isFile from '#lib/is-file'
 import isModuleId from '#lib/is-module-id'
 import root from '#lib/root'
 import toUrl from '#lib/to-url'
-import type { Awaitable, FileSystem, ModuleId } from '@flex-development/mlly'
-import pathe, { type EmptyString } from '@flex-development/pathe'
+import type {
+  Awaitable,
+  EmptyString,
+  FileSystem,
+  ModuleId
+} from '@flex-development/mlly'
+import pathe from '@flex-development/pathe'
 
 export default lookupPackageScope
 

@@ -4,26 +4,25 @@
  */
 
 import type TestSubject from '#types/change-ext-fn'
-import type * as pathe from '@flex-development/pathe'
+import type { EmptyString, Ext } from '@flex-development/mlly'
 
 describe('unit-d:types/ChangeExtFn', () => {
+  type Extension = EmptyString | Ext
+  type Subject = TestSubject<Extension>
+
   it('should match [this: void]', () => {
-    expectTypeOf<TestSubject>().thisParameter.toEqualTypeOf<void>()
+    expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
   })
 
   describe('parameters', () => {
     it('should be callable with [URL, string]', () => {
-      expectTypeOf<TestSubject>().parameters.toEqualTypeOf<[URL, string]>()
+      expectTypeOf<Subject>().parameters.toEqualTypeOf<[URL, string]>()
     })
   })
 
   describe('returns', () => {
     it('should return Ext', () => {
-      // Arrange
-      type Ext = pathe.EmptyString | pathe.Ext
-
-      // Expect
-      expectTypeOf<TestSubject<Ext>>().returns.toEqualTypeOf<Ext>()
+      expectTypeOf<Subject>().returns.toEqualTypeOf<Extension>()
     })
   })
 })
