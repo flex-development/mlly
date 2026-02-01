@@ -22,7 +22,7 @@ export default resolveAlias
  * @this {void}
  *
  * @param {string} specifier
- *  The module specifier to resolve
+ *  The specifier using an alias
  * @param {ResolveAliasOptions | null | undefined} [options]
  *  Alias resolution options
  * @return {string | null}

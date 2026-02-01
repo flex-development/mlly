@@ -55,7 +55,7 @@
 - [Types](#types)
   - [`Aliases`](#aliases)
   - [`Awaitable<T>`](#awaitablet)
-  - [`ChangeExtFn`](#changeextfnext)
+  - [`ChangeExtFn<[Ext]>`](#changeextfnext)
   - [`ConditionMap`](#conditionmap)
   - [`Condition`](#condition)
   - [`Dot`](#dot)
@@ -132,15 +132,35 @@ In browsers with [`esm.sh`][esmsh]:
 
 ## API
 
-**TODO**: api
+`mlly` exports the identifiers listed below.
+
+There is no default export.
 
 ### `canParseUrl(input[, base])`
 
-**TODO**: `canParseUrl`
+Check if `input` can be parsed to a `URL`.
+
+> 👉 **Note**: If `input` is relative, `base` is required.
+> If `input` is absolute, `base` is ignored.
+
+#### Parameters
+
+- `id` (`unknown`)
+  — the input url
+- `base` (`unknown`)
+  — the base url to resolve against if `input` is not absolute
+
+#### Returns
+
+(`boolean`) `true` if `input` can be parsed to a `URL`, `false` otherwise
 
 ### `cwd()`
 
-**TODO**: `cwd`
+Get the URL of the current working directory.
+
+#### Returns
+
+(`URL`) The current working directory URL
 
 ### `defaultConditions`
 
@@ -184,39 +204,163 @@ const enum formats {
 
 ### `getSource<T>(id[, options])`
 
-**TODO**: `getSource`
+Get the source code for a module.
+
+> 👉 **Note**: Returns a promise if the [handler](#getsourcehandler) for `id` is async.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<string | null | undefined>`](#awaitablet))
+  — the module source code
+
+#### Parameters
+
+- `id` ([`ModuleId`](#moduleid) | `null` | `undefined`)
+  — the module id
+- `options` ([`GetSourceOptions`](#getsourceoptions) | `null` | `undefined`)
+  — source code retrieval options
+
+#### Returns
+
+(`T`) The module source code
+
+#### Throws
+
+- [`ERR_UNSUPPORTED_ESM_URL_SCHEME`][err-unsupported-esm-url-scheme]
 
 ### `isAbsoluteSpecifier(value)`
 
-**TODO**: `isAbsoluteSpecifier`
+Check if `value` is an *absolute specifier*.
+
+> 👉 **Note**: Only checks specifier syntax.\
+> Does **not** guarantee the specifier references an existing module.
+
+#### Parameters
+
+- `value` (`unknown`)
+  — the value to check
+
+#### Returns
+
+(`boolean`) `true` if `value` is absolute specifier, `false` otherwise
 
 ### `isArrayIndex(value)`
 
-**TODO**: `isArrayIndex`
+Check if `value` is a valid array index.
+
+#### Parameters
+
+- `value` (`unknown`)
+  — the value to check
+
+#### Returns
+
+([`value is Numeric`](#numeric)) `true` if `value` is valid array index, `false` otherwise
 
 ### `isBareSpecifier(value)`
 
-**TODO**: `isBareSpecifier`
+Check if `value` is a *bare specifier*.
+
+> 👉 **Note**: Only checks specifier syntax.\
+> Does **not** guarantee the specifier references an existing module.
+
+#### Parameters
+
+- `value` (`unknown`)
+  — the value to check
+
+#### Returns
+
+(`boolean`) `true` if `value` is bare specifier, `false` otherwise
 
 ### `isDirectory<T>(id[, fs])`
 
-**TODO**: `isDirectory`
+Check if a directory exists.
+
+> 👉 **Note**: Returns a promise if `fs.stat` is async.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<boolean>`](#awaitablet))
+  — the result of the check
+
+#### Parameters
+
+- `id` ([`ModuleId`](#moduleid))
+  — the module id to check
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) `true` if directory exists at `id`, `false` otherwise
 
 ### `isFile<T>(id[, fs])`
 
-**TODO**: `isFile`
+Check if a file exists.
+
+> 👉 **Note**: Returns a promise if `fs.stat` is async.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<boolean>`](#awaitablet))
+  — the result of the check
+
+#### Parameters
+
+- `id` ([`ModuleId`](#moduleid))
+  — the module id to check
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) `true` if file exists at `id`, `false` otherwise
 
 ### `isImportsSubpath(value)`
 
-**TODO**: `isImportsSubpath`
+Check if `value` is an [`imports`][subpath-imports] subpath.
+
+> 👉 **Note**: Only checks specifier syntax.\
+> Does **not** guarantee the specifier references an existing module.
+
+#### Parameters
+
+- `value` (`unknown`)
+  — the value to check
+
+#### Returns
+
+([`value is ImportsSubpath`][pkg-imports-subpath]) `true` if `value` is `imports` subpath, `false` otherwise
 
 ### `isModuleId(value)`
 
-**TODO**: `isModuleId`
+Check if `value` is a module id.
+
+#### Parameters
+
+- `value` (`unknown`)
+  — the value to check
+
+#### Returns
+
+([`value is ModuleId`](#moduleid)) `true` if `value` is module id, `false` otherwise
 
 ### `isRelativeSpecifier(value)`
 
-**TODO**: `isRelativeSpecifier`
+Check if `value` is a *relative specifier*.
+
+> 👉 **Note**: Only checks specifier syntax.\
+> Does **not** guarantee the specifier references an existing module.
+
+#### Parameters
+
+- `value` (`unknown`)
+  — the value to check
+
+#### Returns
+
+(`boolean`) `true` if `value` is relative specifier, `false` otherwise
 
 <!--lint disable-->
 
@@ -228,7 +372,35 @@ const enum formats {
 
 ### `lookupPackageScope<T>(url[, end][, fs])`
 
-**TODO**: `lookupPackageScope`
+Get the package scope URL for a module `url`.
+
+Implements the `LOOKUP_PACKAGE_SCOPE` algorithm.
+
+> 👉 **Note**: Returns a promise if `fs.stat` is async.
+
+#### Overloads
+
+- `(this: void, url: EmptyString | null | undefined, url: ModuleId | null | undefined, end?: ModuleId | null | undefined, fs?: FileSystem | null | undefined): null`
+- `<T extends Awaitable<URL | null>>(this: void, url: ModuleId | null | undefined, end?: ModuleId | null | undefined, fs?: FileSystem | null | undefined)`
+
+#### Type Parameters
+
+- `T` ([`Awaitable<URL | null>`](#awaitablet))
+  — the resolved package scope URL
+
+#### Parameters
+
+- `id` ([`ModuleId`](#moduleid) | `null` | `undefined`)
+  — the url of the module to scope
+- `end` ([`ModuleId`](#moduleid) | `null` | `undefined`)
+  — the url of the directory to end search at
+  - **default**: [`root`](#root)
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) The URL of nearest directory containing a `package.json` file
 
 <!--lint disable-->
 
@@ -288,23 +460,122 @@ const enum formats {
 
 ### `patternKeyCompare(a, b)`
 
-**TODO**: `patternKeyCompare`
+Compare two pattern keys and return a value indicating their order.
+
+Implements the `PATTERN_KEY_COMPARE` algorithm.
+
+#### Parameters
+
+- `a` (`string`)
+  — the first key
+- `b` (`string`)
+  — the key to compare against `a`
+
+#### Returns
+
+([`PatternKeyComparison`](#patternkeycomparsion)) The pattern key comparsion result
 
 ### `patternMatch(matchKey, matchObject)`
 
-**TODO**: `patternMatch`
+Get a subpath pattern match for `matchKey`.
+
+#### Parameters
+
+- `matchKey` (`string`)
+  — the key to expand
+- `matchObject` (`unknown`)
+  — the match keys object
+
+#### Returns
+
+([`PatternMatch`](#patternmatch) | `null`) List, where the first item is the key of a package exports or imports target
+object, and the last is a subpath pattern match
 
 ### `readPackageJson<T>(id[, specifier][, parent][, fs])`
 
-**TODO**: `readPackageJson`
+Read a `package.json` file.
+
+Implements the `READ_PACKAGE_JSON` algorithm.
+
+> 👉 **Note**: Returns a promise if `fs.readFile` is async.
+
+#### Overloads
+
+- `(this: void, id: EmptyString | null | undefined, specifier?: string | null | undefined, parent?: ModuleId | null | undefined, fs?: FileSystem | null | undefined): null`
+- `<T extends Awaitable<PackageJson | null>>(this: void, id: ModuleId | null | undefined, specifier?: string | null | undefined, parent?: ModuleId | null | undefined, fs?: FileSystem | null | undefined)`
+
+#### Type Parameters
+
+- `T` ([`Awaitable<PackageJson | null>`][pkg-package-json])
+  — the parsed file contents
+
+#### Parameters
+
+- `id` ([`ModuleId`](#moduleid) | `null` | `undefined`)
+  — the url of the package directory, the `package.json` file, or a module in the same directory as a `package.json`
+- `specifier` (`string` | `null` | `undefined`)
+  — the module specifier that initiated the reading of the `package.json` file
+  > 👉 **note**: should be a `file:` url if `parent` is not a url
+- `parent` ([`ModuleId`](#moduleid) | `null` | `undefined`)
+  — the url of the parent module
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) The parsed file contents
+
+#### Throws
+
+- [`ERR_INVALID_PACKAGE_CONFIG`][err-invalid-package-config]
 
 ### `resolveAlias(specifier[, options])`
 
-**TODO**: `resolveAlias`
+Resolve an aliased `specifier`.
+
+#### Parameters
+
+- `specifier` (`string`)
+  — the specifier using an alias
+- `options` ([`ResolveAliasOptions`](#resolvealiasoptions) | `null` | `undefined`)
+  — alias resolution options
+
+#### Returns
+
+(`string` | `null`) The specifier of the aliased module
 
 ### `resolveModule<T>(specifier, parent[, options])`
 
-**TODO**: `resolveModule`
+Resolve a module `specifier` according to the [ESM Resolver algorithm][esm-resolver-algorithm], mostly \:wink:.
+
+Adds support for:
+
+- Changing file extensions
+- Directory index resolution
+- Extensionless file resolution
+- Path alias resolution
+- Scopeless `@types/*` resolution (i.e. `unist` -> `@types/unist`)
+
+> 👉 **Note**: Returns a promise if
+> [`moduleResolve`](#moduleresolvetspecifier-parent-conditions-mainfields-preservesymlinks-fs) returns a promise.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<URL>`](#awaitablet))
+  — the resolved url
+
+#### Parameters
+
+- `specifier` (`string`)
+  — the module specifier to resolve
+- `parent` ([`ModuleId`](#moduleid))
+  — the url of the parent module
+- `options` ([`ResolveModuleOptions`](#resolvemoduleoptions))
+  — module resolution options
+
+#### Returns
+
+(`T`) The resolved URL
 
 ### `resolver`
 
@@ -327,11 +598,38 @@ The URL of the file system root.
 
 ### `toRelativeSpecifier(url, parent)`
 
-**TODO**: `toRelativeSpecifier`
+Turn `url` into a *relative specifier*.
+
+> 👉 **Note**: The relative specifier will only have a file extension if `specifier` also has an extension.
+
+#### Parameters
+
+- `url` ([`ModuleId`](#moduleid))
+  — the `file:` url to convert
+- `parent` ([`ModuleId`](#moduleid))
+  — the parent module id
+
+#### Returns
+
+(`string`) The relative specifier
 
 ### `toUrl(id[, parent])`
 
-**TODO**: `toUrl`
+Convert `id` to a `URL`.
+
+> 👉 **Note**: If `id` cannot be parsed as a `URL` and is also not a [builtin module][builtin-module],
+> it will be assumed to be a path and converted to a [`file:` URL][file-url].
+
+#### Parameters
+
+- `id` ([`ModuleId`](#moduleid))
+  — the module id to convert
+- `parent` ([`ModuleId`](#moduleid) | `null` | `undefined`)
+  — the base url to resolve against if `id` is not absolute
+
+#### Returns
+
+(`URL`) The new URL
 
 ## Types
 
@@ -812,7 +1110,13 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 This project has a [code of conduct](./CODE_OF_CONDUCT.md). By interacting with this repository, organization, or
 community you agree to abide by its terms.
 
+[builtin-module]: https://nodejs.org/api/esm.html#builtin-modules
+
+[err-invalid-package-config]: https://nodejs.org/api/errors.html#err_invalid_package_config
+
 [err-unsupported-esm-url-scheme]: https://nodejs.org/api/errors.html#err_unsupported_esm_url_scheme
+
+[esm-resolver-algorithm]: https://nodejs.org/api/esm.html#esm_resolver_algorithm
 
 [esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
@@ -821,6 +1125,12 @@ community you agree to abide by its terms.
 [file-url]: https://nodejs.org/api/esm.html#file-urls
 
 [node-esm]: https://nodejs.org/api/esm.html
+
+[pkg-imports-subpath]: https://github.com/flex-development/pkg-types/blob/main/src/imports-subpath.ts
+
+[pkg-package-json]: https://github.com/flex-development/pkg-types/blob/main/src/package-json.ts
+
+[subpath-imports]: https://nodejs.org/api/packages.html#subpath-imports
 
 [typescript]: https://www.typescriptlang.org
 

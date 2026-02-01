@@ -8,11 +8,7 @@ import type { PatternKeyComparison } from '@flex-development/mlly'
 import { ok } from 'devlop'
 
 /**
- * Compare two pattern keys and return a value indicating their order:
- *
- * - `-1`: `a` should come before `b`
- * - `0`: `a` and `b` are equal
- * - `1`: `a` should come after `b`
+ * Compare two pattern keys and return a value indicating their order.
  *
  * Implements the `PATTERN_KEY_COMPARE` algorithm.
  *
@@ -24,9 +20,9 @@ import { ok } from 'devlop'
  * @param {string} a
  *  The first key
  * @param {string} b
- *  The key to compare to `a`
+ *  The key to compare against `a`
  * @return {PatternKeyComparison}
- *  Pattern key comparsion result
+ *  The pattern key comparsion result
  */
 function patternKeyCompare(
   this: void,

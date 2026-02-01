@@ -11,8 +11,8 @@ import { ok } from 'devlop'
  * Turn `url` into a *relative specifier*.
  *
  * ::: info
- * The relative specifier will only include a file extension if `specifier`
- * includes a file extension.
+ * The relative specifier will only have a file extension
+ * if `specifier` also has an extension.
  * :::
  *
  * @see {@linkcode ModuleId}

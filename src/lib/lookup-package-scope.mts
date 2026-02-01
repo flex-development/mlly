@@ -28,12 +28,18 @@ export default lookupPackageScope
  *
  * @param {EmptyString | null | undefined} url
  *  The URL of the module to scope
+ * @param {ModuleId | null | undefined} [end]
+ *  The URL of the directory to end search at, defaults to {@linkcode root}
+ * @param {FileSystem | null | undefined} [fs]
+ *  The file system API
  * @return {null}
  *  The URL of nearest directory containing a `package.json` file
  */
 function lookupPackageScope(
   this: void,
-  url: EmptyString | null | undefined
+  url: EmptyString | null | undefined,
+  end?: ModuleId | null | undefined,
+  fs?: FileSystem | null | undefined
 ): null
 
 /**
@@ -49,7 +55,7 @@ function lookupPackageScope(
  * @see https://github.com/nodejs/node/blob/v22.9.0/doc/api/esm.md#resolution-algorithm-specification
  *
  * @template {Awaitable<URL | null>} T
- *  The resolved URL
+ *  The resolved package scope URL
  *
  * @this {void}
  *

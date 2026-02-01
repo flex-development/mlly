@@ -11,8 +11,8 @@ import pathe from '@flex-development/pathe'
  * Check if `value` is an *absolute specifier*.
  *
  * ::: warning
- * Only checks specifier syntax. Does **not** guarantee the specifier references
- * a file that exists.
+ * Only checks specifier syntax.
+ * Does **not** guarantee the specifier references an existing module.
  * :::
  *
  * @see https://nodejs.org/api/esm.html#terminology

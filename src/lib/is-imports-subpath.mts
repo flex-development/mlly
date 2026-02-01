@@ -7,10 +7,16 @@ import chars from '#internal/chars'
 import type { ImportsSubpath } from '@flex-development/pkg-types'
 
 /**
- * Check if `value` is an `imports` subpath.
+ * Check if `value` is an [`imports`][subpath-imports] subpath.
+ *
+ * ::: warning
+ * Only checks specifier syntax.
+ * Does **not** guarantee the specifier references an existing module.
+ * :::
+ *
+ * [subpath-imports]: https://nodejs.org/api/packages.html#subpath-imports
  *
  * @see {@linkcode ImportsSubpath}
- * @see https://nodejs.org/api/packages.html#subpath-imports
  *
  * @this {void}
  *

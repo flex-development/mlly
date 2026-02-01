@@ -16,7 +16,7 @@ import { ok } from 'devlop'
  * @this {void}
  *
  * @param {string} matchKey
- *  The string to expand
+ *  The key to expand
  * @param {unknown} matchObject
  *  The match keys object
  * @return {PatternMatch | null}

@@ -11,9 +11,9 @@ import pathe from '@flex-development/pathe'
 /**
  * Convert `id` to a {@linkcode URL}.
  *
- * > 👉 **Note**: If `id` cannot be parsed as a `URL` (in conjunction with
- * > `parent`) and is also not a [builtin module][builtin-module], it will be
- * > assumed to be a path and converted to a [`file:` URL][file-url].
+ * > 👉 **Note**: If `id` cannot be parsed as a `URL`, and is also not a
+ * > [builtin module][builtin-module], it will be assumed to be a path and
+ * > converted to a [`file:` URL][file-url].
  *
  * [builtin-module]: https://nodejs.org/api/esm.html#builtin-modules
  * [file-url]: https://nodejs.org/api/esm.html#file-urls

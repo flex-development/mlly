@@ -8,8 +8,8 @@ import type { ModuleId } from '@flex-development/mlly'
 /**
  * Check if `input` can be parsed to a {@linkcode URL}.
  *
- * > 👉 **Note**: If `input` is relative, `base` is required. If `input` is
- * > absolute, `base` is ignored.
+ * > 👉 **Note**: If `input` is relative, `base` is required.
+ * > If `input` is absolute, `base` is ignored.
  *
  * @see {@linkcode ModuleId}
  *
@@ -20,7 +20,7 @@ import type { ModuleId } from '@flex-development/mlly'
  * @param {unknown} [base]
  *  The base URL to resolve against if `input` is not absolute
  * @return {boolean}
- *  `true` if `input` can be parsed to a `URL`
+ *  `true` if `input` can be parsed to a `URL`, `false` otherwise
  */
 function canParseUrl(this: void, input: unknown, base?: unknown): boolean {
   try {

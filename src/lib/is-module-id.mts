@@ -6,7 +6,7 @@
 import type { ModuleId } from '@flex-development/mlly'
 
 /**
- * Check if `value` looks like a module id.
+ * Check if `value` is a module id.
  *
  * ::: warning
  * Does **not** guarantee `value` references an existing file or directory.
@@ -19,7 +19,7 @@ import type { ModuleId } from '@flex-development/mlly'
  * @param {unknown} value
  *  The value to check
  * @return {value is ModuleId}
- *  `true` if `value` looks like a module id, `false` otherwise
+ *  `true` if `value` is module id, `false` otherwise
  */
 function isModuleId(this: void, value: unknown): value is ModuleId {
   return typeof value === 'string' || value instanceof URL

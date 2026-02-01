@@ -34,8 +34,8 @@ export default readPackageJson
  *  The URL of the package directory, the `package.json` file,
  *  or a module in the same directory as a `package.json`
  * @param {string | null | undefined} [specifier]
- *  The module specifier that initiated the reading of the `package.json` file.\
- *  Should be a `file:` URL if `parent` is not a URL
+ *  The module specifier that initiated the reading of the `package.json` file
+ *  > 👉 **Note**: Should be a `file:` URL if `parent` is not a URL
  * @param {ModuleId | null | undefined} [parent]
  *  The URL of the parent module
  * @param {FileSystem | null | undefined} [fs]
@@ -74,8 +74,8 @@ function readPackageJson(
  *  The URL of the package directory, the `package.json` file,
  *  or a module in the same directory as a `package.json`
  * @param {string | null | undefined} [specifier]
- *  The module specifier that initiated the reading of the `package.json` file.\
- *  Should be a `file:` URL if `parent` is not a URL
+ *  The module specifier that initiated the reading of the `package.json` file
+ *  > 👉 **Note**: Should be a `file:` URL if `parent` is not a URL
  * @param {ModuleId | null | undefined} [parent]
  *  The URL of the parent module
  * @param {FileSystem | null | undefined} [fs]
@@ -114,8 +114,8 @@ function readPackageJson<T extends Awaitable<PackageJson | null>>(
  *  The URL of the package directory, the `package.json` file,
  *  or a module in the same directory as a `package.json`
  * @param {string | null | undefined} [specifier]
- *  The module specifier that initiated the reading of the `package.json` file.\
- *  Should be a `file:` URL if `parent` is not a URL
+ *  The module specifier that initiated the reading of the `package.json` file
+ *  > 👉 **Note**: Should be a `file:` URL if `parent` is not a URL
  * @param {ModuleId | null | undefined} [parent]
  *  The URL of the parent module
  * @param {FileSystem | null | undefined} [fs]
