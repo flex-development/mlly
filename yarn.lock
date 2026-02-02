@@ -112,20 +112,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:20.3.1":
-  version: 20.3.1
-  resolution: "@commitlint/cli@npm:20.3.1"
+"@commitlint/cli@npm:20.4.1":
+  version: 20.4.1
+  resolution: "@commitlint/cli@npm:20.4.1"
   dependencies:
-    "@commitlint/format": "npm:^20.3.1"
-    "@commitlint/lint": "npm:^20.3.1"
-    "@commitlint/load": "npm:^20.3.1"
-    "@commitlint/read": "npm:^20.3.1"
-    "@commitlint/types": "npm:^20.3.1"
+    "@commitlint/format": "npm:^20.4.0"
+    "@commitlint/lint": "npm:^20.4.1"
+    "@commitlint/load": "npm:^20.4.0"
+    "@commitlint/read": "npm:^20.4.0"
+    "@commitlint/types": "npm:^20.4.0"
     tinyexec: "npm:^1.0.0"
     yargs: "npm:^17.0.0"
   bin:
     commitlint: ./cli.js
-  checksum: 10/d9be1d922c35729e90ad1f87f3754afd48b9bf4a6ee0893de2ed2b9ff4859a1546f16cfdcbd0f8913649173e7bb16c5ac568ec67773e9b5d69eaad4804ee94fd
+  checksum: 10/1779ec9f7ee4dd867d62ba972737fcc4ec9c86678906cede08310609bbeff372c2a355d9293eedf8fd125a07ef46515a3fb260c6e70c2f82698debb67cac6ee1
   languageName: node
   linkType: hard
 
@@ -160,7 +160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/format@npm:^20.3.1":
+"@commitlint/format@npm:^20.4.0":
   version: 20.4.0
   resolution: "@commitlint/format@npm:20.4.0"
   dependencies:
@@ -180,7 +180,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/lint@npm:^20.3.1":
+"@commitlint/lint@npm:^20.4.1":
   version: 20.4.1
   resolution: "@commitlint/lint@npm:20.4.1"
   dependencies:
@@ -192,7 +192,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/load@npm:^20.3.1":
+"@commitlint/load@npm:^20.4.0":
   version: 20.4.0
   resolution: "@commitlint/load@npm:20.4.0"
   dependencies:
@@ -227,7 +227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/read@npm:^20.3.1":
+"@commitlint/read@npm:^20.4.0":
   version: 20.4.0
   resolution: "@commitlint/read@npm:20.4.0"
   dependencies:
@@ -291,17 +291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/types@npm:20.3.1":
-  version: 20.3.1
-  resolution: "@commitlint/types@npm:20.3.1"
-  dependencies:
-    "@types/conventional-commits-parser": "npm:^5.0.0"
-    chalk: "npm:^5.3.0"
-  checksum: 10/9ca85cdad3bc8604d98e71d3c0c35aca7f6e84777f6f49e5218f83b8df7f58777e6436ee1101ee72c2a776123de605086bf90372679f919ad0293d40382d1f91
-  languageName: node
-  linkType: hard
-
-"@commitlint/types@npm:^20.3.1, @commitlint/types@npm:^20.4.0":
+"@commitlint/types@npm:20.4.0, @commitlint/types@npm:^20.4.0":
   version: 20.4.0
   resolution: "@commitlint/types@npm:20.4.0"
   dependencies:
@@ -1826,8 +1816,8 @@ __metadata:
   resolution: "@flex-development/mlly@workspace:."
   dependencies:
     "@arethetypeswrong/cli": "npm:0.18.2"
-    "@commitlint/cli": "npm:20.3.1"
-    "@commitlint/types": "npm:20.3.1"
+    "@commitlint/cli": "npm:20.4.1"
+    "@commitlint/types": "npm:20.4.0"
     "@faker-js/faker": "npm:10.2.0"
     "@flex-development/commitlint-config": "npm:1.0.1"
     "@flex-development/errnode": "npm:3.1.1"
@@ -2934,15 +2924,6 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10/8497e539d1620b5f4a4d9dca3fa940168f6386b599743fdb0b10c51de7b5a3eb6cc127036052d4f68636a8d33b28b05af186f5c4070a8ed7943a762269413077
-  languageName: node
-  linkType: hard
-
-"@types/conventional-commits-parser@npm:^5.0.0":
-  version: 5.0.2
-  resolution: "@types/conventional-commits-parser@npm:5.0.2"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 10/c6f9a47f66dc4f8d0de89ba44f47a1574db010b012c082c43ff1a86856053424e84dd53f59f88ab7cd64b9b20f7ee8957553aba2408768a128a9feb8d0ecfd60
   languageName: node
   linkType: hard
 
@@ -4116,7 +4097,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.0.0, chalk@npm:^5.2.0, chalk@npm:^5.3.0, chalk@npm:^5.4.1, chalk@npm:^5.6.2":
+"chalk@npm:^5.0.0, chalk@npm:^5.2.0, chalk@npm:^5.4.1, chalk@npm:^5.6.2":
   version: 5.6.2
   resolution: "chalk@npm:5.6.2"
   checksum: 10/1b2f48f6fba1370670d5610f9cd54c391d6ede28f4b7062dd38244ea5768777af72e5be6b74fb6c6d54cb84c4a2dff3f3afa9b7cb5948f7f022cfd3d087989e0
