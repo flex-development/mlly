@@ -151,6 +151,11 @@ describe('unit:lib/resolver', () => {
           fixtureConditions
         ],
         [
+          pkg.name + '/read-package-json',
+          pathe.pathToFileURL('scratch.mts'),
+          fixtureConditions
+        ],
+        [
           pkgKronk.name + '/parsers',
           pathe.pathToFileURL(`node_modules/${pkgKronk.name}/dist/index.mjs`)
         ],
@@ -319,6 +324,11 @@ describe('unit:lib/resolver', () => {
           import.meta.url
         ],
         [
+          pkg.name + '/internal/chain-or-call',
+          pathe.pathToFileURL('scratch.mts'),
+          fixtureConditions
+        ],
+        [
           pkg.name.slice(pkg.name.indexOf(pathe.sep) + 1),
           import.meta.url
         ]
@@ -454,7 +464,7 @@ describe('unit:lib/resolver', () => {
         [
           cwd(),
           './internal/chain-or-call',
-          pkg.exports,
+          pkgKronk.exports,
           null,
           import.meta.url
         ],

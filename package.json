@@ -42,7 +42,11 @@
       "mlly": "./src/index.mts",
       "default": "./dist/index.mjs"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./*": {
+      "mlly": "./src/lib/*.mts",
+      "default": "./dist/lib/*.mjs"
+    }
   },
   "imports": {
     "#fixtures/tsconfig*.json": {
