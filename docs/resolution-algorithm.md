@@ -121,6 +121,25 @@ The resolver can throw the following errors:
    1. Set *format* the module format of the content type associated with the URL *resolved*
 9. Return *format* and *resolved* to the loading phase
 
+<!--lint disable-->
+
+## `LEGACY_MAIN_RESOLVE(packageUrl, manifest, mainFields)`
+
+<!--lint enable-->
+
+1. For each *mainField* in *mainFields*, do
+   1. Let *tries* be the list of possible entry point URL inputs
+   2. Let *mainFieldValue* be the result of `pjson[mainField]`
+   3. If *mainFieldValue* is a string, then
+      1. Push `./${value}.js`, `./${value}.json`, `./${value}.node`, `./${value}/index.js`, `./${value}/index.json`,
+         and `./${value}/index.node` into *tries*
+   4. Push `./index.js`, `./index.json`, and `./index.node` into *tries*
+   5. For each *input* in *tries*, do
+      1. Let *mainUrl* be the URL resolution of *input* relative to *packageUrl*
+      2. If the file at *mainUrl* exists,
+         1. Return *mainUrl*
+2. Throw [`ERR_MODULE_NOT_FOUND`][err-module-not-found]
+
 ## `LOOKUP_PACKAGE_SCOPE(url, end)`
 
 1. Let *scopeUrl* be `url`
@@ -201,7 +220,42 @@ The resolver can throw the following errors:
 
 ## `PACKAGE_RESOLVE(specifier, parent, conditions, mainFields)`
 
-**TODO**: `PACKAGE_RESOLVE`
+1. Let *packageName* be `undefined`
+2. If `specifier` is an empty string, then
+   1. Throw [`ERR_INVALID_MODULE_SPECIFIER`][err-invalid-module-specifier]
+3. If `specifier` is a Node.js builtin module name, then
+   1. Return `specifier` as a `node:` URL
+4. If `specifier` does not start with `'@'`, then
+   1. Set *packageName* to the substring of `specifier` until the first `'/'` separator or the end of the string
+5. Otherwise,
+   1. If `specifier` does not contain a `'/'` separator, then
+      1. Throw [`ERR_INVALID_MODULE_SPECIFIER`][err-invalid-module-specifier]
+   2. Set *packageName* to the substring of `specifier` until the second `'/'` separator or the end of the string
+6. If *packageName* starts with `'.'` or contains `'\\'` or `'%'`, then
+   1. Throw [`ERR_INVALID_MODULE_SPECIFIER`][err-invalid-module-specifier]
+7. Let *packageSubpath* be `'.'` concatenated with the substring of `specifier` from the position at the length of
+   *packageName*
+8. If *packageSubpath* ends in `'/'`, then
+   1. Throw [`ERR_INVALID_MODULE_SPECIFIER`][err-invalid-module-specifier]
+9. Let *selfUrl* be the result of
+   [`PACKAGE_SELF_RESOLVE(packageName, packageSubpath, parent, conditions)`][package-self-resolve]
+10. If *selfUrl* is not `undefined`,
+    1. Return *selfUrl*
+11. While *parentUrl* is not the file system root,
+    1. Let *packageUrl* be the URL resolution of `'node_modules/'` concatenated with `specifier`,
+       relative to *parentUrl*
+    2. Set *parentUrl* to the parent folder URL of *parentUrl*.
+    3. If the folder at *packageUrl* does not exist, then
+       1. Continue the next loop iteration
+    4. Let *pjson* be the result of [`READ_PACKAGE_JSON(packageUrl)`][read-package-json]
+    5. If *pjson* is not `null` and *pjson.exports* is not `null` or `undefined`, then
+       1. Return the result of
+          [`PACKAGE_EXPORTS_RESOLVE(packageUrl, packageSubpath, pjson.exports, conditions)`][package-exports-resolve]
+    6. Otherwise, if *packageSubpath* is equal to `'.'`, then
+       1. Return the result of [`LEGACY_MAIN_RESOLVE(packageUrl, pjson, mainFields)`][legacy-main-resolve]
+    7. Otherwise,
+       1. Return the URL resolution of *packageSubpath* in *packageUrl*
+12. Throw [`ERR_MODULE_NOT_FOUND`][err-module-not-found]
 
 ## `PACKAGE_SELF_RESOLVE(name, subpath, parent, conditions)`
 
@@ -270,6 +324,8 @@ The resolver can throw the following errors:
 [esm-file-format]: #esm_file_formaturl-extensionformatmap
 
 [esm-resolve]: #esm_resolvespecifier-parent-conditions-mainfields-preservesymlinks-extensionformatmap
+
+[legacy-main-resolve]: #legacy_main_resolvepackageurl-manifest-mainfields
 
 [lookup-package-scope]: #lookup_package_scopeurl-end
 

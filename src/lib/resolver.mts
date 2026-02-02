@@ -91,7 +91,7 @@ export {
 /**
  * Resolve the [`main`][main] package entry point.
  *
- * Implements the legacy CommonJS resolution algorithm.
+ * Implements the `LEGACY_MAIN_RESOLVE` algorithm.
  *
  * > 👉 **Note**: Returns a promise if `fs.stat` is async.
  *
@@ -136,8 +136,9 @@ function legacyMainResolve<T extends Awaitable<URL>>(
 ): T
 
 /**
- * Resolve the [`main`][main] package entry point
- * using the legacy CommonJS resolution algorithm.
+ * Resolve the [`main`][main] package entry point.
+ *
+ * Implements the `LEGACY_MAIN_RESOLVE` algorithm.
  *
  * > 👉 **Note**: Returns a promise if `fs.stat` is async.
  *
@@ -1023,13 +1024,13 @@ function packageImportsResolve(
 /**
  * Resolve a *bare specifier*.
  *
+ * Implements the `PACKAGE_RESOLVE` algorithm.
+ *
  * > *Bare specifiers* like `'some-package'` or `'some-package/shuffle'` refer
  * > to the main entry point of a package by package name, or a specific feature
  * > module within a package prefixed by the package name. Including the file
  * > extension is only necessary for packages without an [`"exports"`][exports]
  * > field.
- *
- * Implements the `PACKAGE_RESOLVE` algorithm.
  *
  * > 👉 **Note**: Returns a promise if `fs.stat` is async or one of the
  * > following methods returns a promise: {@linkcode legacyMainResolve},
@@ -1053,11 +1054,11 @@ function packageImportsResolve(
  * @this {void}
  *
  * @param {string} specifier
- *  The package specifier to resolve
+ *  The package specifier
  * @param {ModuleId} parent
- *  The id of the module to resolve `packageSpecifier` against
+ *  The URL of the parent module
  * @param {List<Condition> | null | undefined} [conditions]
- *  The list of export/import conditions
+ *  The list of export conditions
  * @param {List<MainField> | null | undefined} [mainFields]
  *  The list of legacy main fields
  * @param {FileSystem | null | undefined} [fs]
@@ -1079,13 +1080,13 @@ function packageResolve<T extends Awaitable<URL>>(
 /**
  * Resolve a *bare specifier*.
  *
+ * Implements the `PACKAGE_RESOLVE` algorithm.
+ *
  * > *Bare specifiers* like `'some-package'` or `'some-package/shuffle'` refer
  * > to the main entry point of a package by package name, or a specific feature
  * > module within a package prefixed by the package name. Including the file
  * > extension is only necessary for packages without an [`"exports"`][exports]
  * > field.
- *
- * Implements the `PACKAGE_RESOLVE` algorithm.
  *
  * > 👉 **Note**: Returns a promise if `fs.stat` is async or one of the
  * > following methods returns a promise: {@linkcode legacyMainResolve},
@@ -1106,11 +1107,11 @@ function packageResolve<T extends Awaitable<URL>>(
  * @this {void}
  *
  * @param {string} specifier
- *  The package specifier to resolve
+ *  The package specifier
  * @param {ModuleId} parent
- *  The id of the module to resolve `packageSpecifier` against
+ *  The URL of the parent module
  * @param {List<Condition> | null | undefined} [conditions]
- *  The list of export/import conditions
+ *  The list of export conditions
  * @param {List<MainField> | null | undefined} [mainFields]
  *  The list of legacy main fields
  * @param {FileSystem | null | undefined} [fs]

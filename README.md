@@ -372,7 +372,7 @@ Check if `value` is a *relative specifier*.
 
 Resolve the [`main`][main] package entry point.
 
-Implements the legacy CommonJS resolution algorithm.
+Implements the [`LEGACY_MAIN_RESOLVE`][algorithm-legacy-main-resolve] resolution algorithm.
 
 > 👉 **Note**: Returns a promise if `fs.stat` is async.
 
@@ -590,9 +590,48 @@ Implements the [`PACKAGE_IMPORTS_RESOLVE`][algorithm-package-imports-resolve] al
 
 <!--lint enable-->
 
+Resolve a *bare specifier*.
+
 Implements the [`PACKAGE_RESOLVE`][algorithm-package-resolve] algorithm.
 
-**TODO**: `packageResolve`
+> *Bare specifiers* like `'some-package'` or `'some-package/shuffle'` refer to the main entry point of a package by
+> package name, or a specific feature module within a package prefixed by the package name.
+> Including the file extension is only necessary for packages without an [`exports`][exports] field.
+
+> 👉 **Note**: Returns a promise if `fs.stat` is async or one of the following methods returns a promise:
+> [`legacyMainResolve`](#legacymainresolvetpackageurl-manifest-mainfields-parent-fs),
+> [`packageExportsResolve`](#packageexportsresolvetpackageurl-subpath-exports-conditions-parent-fs),
+> [`packageSelfResolve`](#packageselfresolvetname-subpath-parent-conditions-fs), or
+> [`readPackageJson`](#readpackagejsontid-specifier-parent-fs).
+
+#### Type Parameters
+
+- `T` ([`Awaitable<URL>`](#awaitablet))
+  — the resolved package url
+
+#### Parameters
+
+- `specifier` (`string`)
+  — the package specifier
+- `parent` ([`ModuleId`](#moduleid))
+  — the url of the parent module
+- `conditions` ([`List<Condition>`](#condition) | `null` | `undefined`)
+  — the list of export conditions
+  - **default**: [`defaultConditions`](#defaultconditions)
+- `mainFields` ([`List<MainField>`](#mainfield) | `null` | `undefined`)
+  — the list of legacy main fields
+  - **default**: [`defaultMainFields`](#defaultmainfields)
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) The resolved package URL
+
+#### Throws
+
+- [`ERR_INVALID_MODULE_SPECIFIER`][err-invalid-module-specifier]
+- [`ERR_MODULE_NOT_FOUND`][err-module-not-found]
 
 <!--lint disable-->
 
@@ -1316,6 +1355,8 @@ community you agree to abide by its terms.
 
 [algorithm-esm-resolve]: ./docs/resolution-algorithm.md#esm_resolvespecifier-parent-conditions-mainfields-preservesymlinks-extensionformatmap
 
+[algorithm-legacy-main-resolve]: ./docs/resolution-algorithm.md#legacy_main_resolvepackageurl-manifest-mainfields
+
 [algorithm-lookup-package-scope]: ./docs/resolution-algorithm.md#lookup_package_scopeurl-end
 
 [algorithm-package-exports-resolve]: ./docs/resolution-algorithm.md#package_exports_resolvepackageurl-subpath-exports-conditions-parent
@@ -1349,6 +1390,8 @@ community you agree to abide by its terms.
 [esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
 [esmsh]: https://esm.sh
+
+[exports]: https://nodejs.org/api/packages.html#exports
 
 [file-url]: https://nodejs.org/api/esm.html#file-urls
 
