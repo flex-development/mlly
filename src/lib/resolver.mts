@@ -242,7 +242,7 @@ function legacyMainResolve(
             if (!isFile || context.url) return
             return context.url = url, void 0
           }))
-        } else if (exists) {
+        } else if (exists && !promises.length) {
           return url
         }
       }
