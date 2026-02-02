@@ -476,9 +476,43 @@ Implements the [`PACKAGE_EXPORTS_RESOLVE`][algorithm-package-exports-resolve] al
 
 <!--lint enable-->
 
+Resolve a package export or import.
+
 Implements the [`PACKAGE_IMPORTS_EXPORTS_RESOLVE`][algorithm-package-imports-exports-resolve] algorithm.
 
-**TODO**: `packageImportsExportsResolve`
+> 👉 **Note**: Returns a promise if
+> [`packageTargetResolve`](#packagetargetresolvetpackageurl-target-subpath-patternmatch-isimports-conditions-mainfields-parent-fs),
+> returns a promise.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<URL | null | undefined>`](#awaitablet))
+  — the resolved package export or import url
+
+#### Parameters
+
+- `matchKey` (`string`)
+  — the package subpath extracted from a module specifier, or a dot character (`.`)
+- `matchObject` ([`ExportsObject`][pkg-exports-object] | [`Imports`][pkg-imports] | `null` | `undefined`)
+  — the package exports or imports
+- `packageUrl` ([`ModuleId`](#moduleid))
+  — the url of the directory containing the `package.json` file
+- `isImports` (`boolean` | `null` | `undefined`)
+  — whether `matchObject` is internal to the package
+- `conditions` ([`List<Condition>`](#condition) | `null` | `undefined`)
+  — the list of export/import conditions
+  - **default**: [`defaultConditions`](#defaultconditions)
+- `mainFields` ([`List<MainField>`](#mainfield) | `null` | `undefined`)
+  — the list of legacy main fields
+  - **default**: [`defaultMainFields`](#defaultmainfields)
+- `parent` ([`ModuleId`](#moduleid) | `null` | `undefined`)
+  — the url of the parent module
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) The resolved package export or import URL
 
 <!--lint disable-->
 
@@ -1295,7 +1329,11 @@ community you agree to abide by its terms.
 
 [node-esm]: https://nodejs.org/api/esm.html
 
+[pkg-exports-object]: https://github.com/flex-development/pkg-types/blob/main/src/exports-object.ts
+
 [pkg-imports-subpath]: https://github.com/flex-development/pkg-types/blob/main/src/imports-subpath.ts
+
+[pkg-imports]: https://github.com/flex-development/pkg-types/blob/main/src/imports.ts
 
 [pkg-package-json]: https://github.com/flex-development/pkg-types/blob/main/src/package-json.ts
 

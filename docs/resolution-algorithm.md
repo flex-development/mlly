@@ -146,7 +146,22 @@ The resolver can throw the following errors:
 
 <!--lint enable-->
 
-**TODO**: `PACKAGE_IMPORTS_EXPORTS_RESOLVE`
+1. If `matchKey` is a key of `matchObj` and does not contain `'*'`, then
+   1. Let *target* be the value of `matchObj[matchKey]`
+   2. Return the result of [`PACKAGE_TARGET_RESOLVE(packageUrl, target, null, isImports, conditions, mainFields, parent)`][package-target-resolve]
+2. Let *expansionKeys* be the list of keys of *matchObj* containing only a single `'*'`, sorted by the sorting function
+   [`PATTERN_KEY_COMPARE`][pattern-key-compare] which orders in descending order of specificity
+3. For each key *expansionKey* in *expansionKeys*, do
+   1. Let *patternBase* be the substring of *expansionKey* up to but excluding the first `'*'` character
+   2. If *matchKey* starts with, but is not equal, to *patternBase*, then
+      1. Let *patternTrailer* be the substring of *expansionKey* from the index after the first `'*'` character
+      2. If *patternTrailer* has zero length, or if *matchKey* ends with *patternTrailer* and the length of *matchKey*
+         is greater than or equal to the length of *expansionKey*, then
+         1. Let *target* be the value of `matchObj[matchKey]`
+         2. Let *patternMatch* be the substring of *matchKey* starting at the index of the length of *patternBase* up to
+            the length of *matchKey* minus the length of *patternTrailer*
+         3. Return the result of [`PACKAGE_TARGET_RESOLVE(packageUrl, target, patternMatch, isImports, conditions, mainFields, parent)`][package-target-resolve]
+4. Return `null`
 
 <!--lint disable-->
 
