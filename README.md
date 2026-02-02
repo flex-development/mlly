@@ -456,9 +456,39 @@ function lookupPackageScope<T extends Awaitable<URL | null>>(
 
 <!--lint enable-->
 
+Resolve a module `specifier`.
+
 Implements the [`ESM_RESOLVE`][algorithm-esm-resolve] algorithm.
 
-**TODO**: `moduleResolve`
+> 👉 **Note**: Returns a promise if
+> [`packageImportsResolve`](#packageimportsresolvetspecifier-parent-conditions-mainfields-fs) or
+> [`packageResolve`](#packageresolvetspecifier-parent-conditions-mainfields-fs) returns a promise.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<URL>`](#awaitablet))
+  — the resolved url
+
+#### Parameters
+
+- `specifier` (`string`)
+  — the module specifier to resolve
+- `parent` ([`ModuleId`](#moduleid))
+  — the url of the parent module
+- `conditions` ([`List<Condition>`](#condition) | `null` | `undefined`)
+  — the list of export/import conditions
+  - **default**: [`defaultConditions`](#defaultconditions)
+- `mainFields` ([`List<MainField>`](#mainfield) | `null` | `undefined`)
+  — the list of legacy main fields
+  - **default**: [`defaultMainFields`](#defaultmainfields)
+- `preserveSymlinks` (`boolean` | `null` | `undefined`)
+  — whether to keep symlinks instead of resolving them
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) The resolved URL
 
 <!--lint disable-->
 
