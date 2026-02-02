@@ -154,7 +154,18 @@ The resolver can throw the following errors:
 
 <!--lint enable-->
 
-**TODO**: `PACKAGE_IMPORTS_RESOLVE`
+1. ☝️ **Assert**: `specifier` begins with `'#'`
+2. If `specifier` is exactly equal to `'#'` or starts with `'#/'`\*, then
+   1. Throw [`ERR_INVALID_MODULE_SPECIFIER`][err-invalid-module-specifier]
+3. Let *packageUrl* be the result of [`LOOKUP_PACKAGE_SCOPE(parent)`][lookup-package-scope]
+4. If *packageUrl* is not `null`, then
+   1. Let *pjson* be the result of [`READ_PACKAGE_JSON(packageUrl)`][read-package-json]
+   2. If *pjson.imports* is a non-null `Object`, then
+      1. Let *resolved* be the result of
+         [`PACKAGE_IMPORTS_EXPORTS_RESOLVE(specifier, pjson.imports, packageUrl, true, conditions, mainFields, parent)`][package-imports-exports-resolve]
+      2. If *resolved* is not `null` or `undefined`,
+         1. Return *resolved*
+5. Throw [`ERR_PACKAGE_IMPORT_NOT_DEFINED`][err-package-import-not-defined]
 
 ## `PACKAGE_RESOLVE(specifier, parent, conditions, mainFields)`
 

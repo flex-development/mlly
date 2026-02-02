@@ -486,9 +486,42 @@ Implements the [`PACKAGE_IMPORTS_EXPORTS_RESOLVE`][algorithm-package-imports-exp
 
 <!--lint enable-->
 
+Resolve a package import.
+
 Implements the [`PACKAGE_IMPORTS_RESOLVE`][algorithm-package-imports-resolve] algorithm.
 
-**TODO**: `packageImportsResolve`
+> 👉 **Note**: Returns a promise if [`lookupPackageScope`](#lookuppackagescopeturl-end-fs),
+> [`packageImportsExportsResolve`](#packageimportsexportsresolvetmatchkey-matchobject-packageurl-isimports-conditions-mainfields-parent-fs),
+> or [`readPackageJson`](#readpackagejsontid-specifier-parent-fs) returns a promise.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<URL>`](#awaitablet))
+  — the resolved package import url
+
+#### Parameters
+
+- `specifier` (`string`)
+  — the import specifier to resolve
+- `parent` ([`ModuleId`](#moduleid))
+  — the url of the parent module
+- `conditions` ([`List<Condition>`](#condition) | `null` | `undefined`)
+  — the list of export conditions
+  - **default**: [`defaultConditions`](#defaultconditions)
+- `mainFields` ([`List<MainField>`](#mainfield) | `null` | `undefined`)
+  — the list of legacy main fields
+  - **default**: [`defaultMainFields`](#defaultmainfields)
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) The resolved package import URL
+
+#### Throws
+
+- [`ERR_INVALID_MODULE_SPECIFIER`][err-invalid-module-specifier]
+- [`ERR_PACKAGE_IMPORT_NOT_DEFINED`][err-package-import-not-defined]
 
 <!--lint disable-->
 
@@ -1242,9 +1275,13 @@ community you agree to abide by its terms.
 
 [builtin-module]: https://nodejs.org/api/esm.html#builtin-modules
 
+[err-invalid-module-specifier]: https://nodejs.org/api/errors.html#err_invalid_module_specifier
+
 [err-invalid-package-config]: https://nodejs.org/api/errors.html#err_invalid_package_config
 
 [err-module-not-found]: https://nodejs.org/api/errors.html#err_module_not_found
+
+[err-package-import-not-defined]: https://nodejs.org/api/errors.html#err_package_import_not_defined
 
 [err-unsupported-esm-url-scheme]: https://nodejs.org/api/errors.html#err_unsupported_esm_url_scheme
 
