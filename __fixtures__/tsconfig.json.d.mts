@@ -1,4 +1,4 @@
-import type { TSConfig as Tsconfig } from '@flex-development/tsconfig-utils'
+import type { Tsconfig } from '@flex-development/tsconfig-types'
 
 /**
  * TypeScript configuration.
