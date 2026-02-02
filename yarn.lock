@@ -1859,7 +1859,7 @@ __metadata:
     remark-cli: "npm:12.0.1"
     remark-lint-maximum-heading-length: "npm:4.1.1"
     sh-syntax: "npm:0.5.8"
-    trash-cli: "npm:7.0.0"
+    trash-cli: "npm:7.2.0"
     typescript: "npm:5.9.3"
     unified: "npm:11.0.5"
     vfile: "npm:6.0.3"
@@ -11342,19 +11342,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trash-cli@npm:7.0.0":
-  version: 7.0.0
-  resolution: "trash-cli@npm:7.0.0"
+"trash-cli@npm:7.2.0":
+  version: 7.2.0
+  resolution: "trash-cli@npm:7.2.0"
   dependencies:
+    globby: "npm:^14.1.0"
     meow: "npm:^14.0.0"
-    trash: "npm:^10.0.0"
+    trash: "npm:^10.1.0"
   bin:
     trash: cli.js
-  checksum: 10/b2d45dbd101d8513ce1a820059e383e7aacf71816ec96b2c12d07b76c7f94ac9198978cfe7a3a716a66de065a2441b96f49f6fd8a018228ffae2523cdbf0d553
+  checksum: 10/2b32c28ff50a0881ea46e63285fc05037520d0538445d608ee6a79787a556ea29053949e73cb180cd689712bea345f538ff7e63b0ca6256b6eba990d8c979711
   languageName: node
   linkType: hard
 
-"trash@npm:^10.0.0":
+"trash@npm:^10.1.0":
   version: 10.1.0
   resolution: "trash@npm:10.1.0"
   dependencies:
