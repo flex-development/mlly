@@ -344,7 +344,7 @@ jobs:
           ref: ${{ env.REF }}
       - id: bun
         name: Setup Bun (${{ matrix.bun-version }})
-        uses: oven-sh/setup-bun@v2.1.0
+        uses: oven-sh/setup-bun@v2.1.2
         with:
           bun-version: ${{ matrix.bun-version }}
       - id: cache
