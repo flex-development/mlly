@@ -89,7 +89,7 @@ export {
 }
 
 /**
- * Resolve the [`main`][main] package entry point.
+ * Resolve a [`main`][main]-like package entry point.
  *
  * Implements the `LEGACY_MAIN_RESOLVE` algorithm.
  *
@@ -136,7 +136,7 @@ function legacyMainResolve<T extends Awaitable<URL>>(
 ): T
 
 /**
- * Resolve the [`main`][main] package entry point.
+ * Resolve a [`main`][main]-like package entry point.
  *
  * Implements the `LEGACY_MAIN_RESOLVE` algorithm.
  *
@@ -197,7 +197,14 @@ function legacyMainResolve(
      */
     const promises: Awaitable<undefined>[] = []
 
-    for (const field of mainFields ?? defaultMainFields) {
+    for (const mainField of mainFields ?? defaultMainFields) {
+      /**
+       * The main field value.
+       *
+       * @const {JsonValue | undefined} value
+       */
+      const mainFieldValue: JsonValue | undefined = manifest[mainField]
+
       /**
        * Possible inputs for the entry point URL.
        *
@@ -206,34 +213,27 @@ function legacyMainResolve(
       const tries: string[] = []
 
       /**
-       * The main field value.
-       *
-       * @const {JsonValue} value
-       */
-      const value: JsonValue | undefined = manifest[field]
-
-      /**
        * Whether the current try exists.
        *
        * @var {Awaitable<boolean>} exists
        */
       let exists: Awaitable<boolean>
 
-      if (typeof value === 'string') {
+      if (typeof mainFieldValue === 'string') {
         tries.push(
-          value,
-          `./${value}.js`,
-          `./${value}.json`,
-          `./${value}.node`,
-          `./${value}/index.js`,
-          `./${value}/index.json`,
-          `./${value}/index.node`
+          mainFieldValue,
+          `./${mainFieldValue}.js`,
+          `./${mainFieldValue}.json`,
+          `./${mainFieldValue}.node`,
+          `./${mainFieldValue}/index.js`,
+          `./${mainFieldValue}/index.json`,
+          `./${mainFieldValue}/index.node`
         )
       }
 
       tries.push('./index.js', './index.json', './index.node')
 
-      for (let url of tries.map(input => new URL(input, packageUrl))) {
+      for (const url of tries.map(input => new URL(input, packageUrl))) {
         exists = isFile(url, fs) // check if entry point exists.
 
         // collect promises, or return url if entry point exists.
@@ -280,8 +280,9 @@ function legacyMainResolve(
  *
  * Implements the `ESM_RESOLVE` algorithm.
  *
- * > 👉 **Note**: Returns a promise if {@linkcode packageImportsResolve}
- * > or {@linkcode packageResolve} returns a promise.
+ * > 👉 **Note**: Returns a promise if `fs.realpath` or `fs.stat` is async,
+ * > or one of the following methods returns a promise:
+ * > {@linkcode packageImportsResolve}, {@linkcode packageResolve}.
  *
  * @see {@linkcode Awaitable}
  * @see {@linkcode Condition}
@@ -330,8 +331,9 @@ function moduleResolve<T extends Awaitable<URL>>(
  *
  * Implements the `ESM_RESOLVE` algorithm.
  *
- * > 👉 **Note**: Returns a promise if {@linkcode packageImportsResolve}
- * > or {@linkcode packageResolve} returns a promise.
+ * > 👉 **Note**: Returns a promise if `fs.realpath` or `fs.stat` is async,
+ * > or one of the following methods returns a promise:
+ * > {@linkcode packageImportsResolve}, {@linkcode packageResolve}.
  *
  * @see {@linkcode Awaitable}
  * @see {@linkcode Condition}

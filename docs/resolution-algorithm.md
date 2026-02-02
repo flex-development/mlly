@@ -131,8 +131,8 @@ The resolver can throw the following errors:
    1. Let *tries* be the list of possible entry point URL inputs
    2. Let *mainFieldValue* be the result of `manifest[mainField]`
    3. If *mainFieldValue* is a string, then
-      1. Push `./${value}.js`, `./${value}.json`, `./${value}.node`, `./${value}/index.js`, `./${value}/index.json`,
-         and `./${value}/index.node` into *tries*
+      1. Push *mainFieldValue*, `./${value}.js`, `./${value}.json`, `./${value}.node`, `./${value}/index.js`,
+         `./${value}/index.json`, and `./${value}/index.node` into *tries*
    4. Push `'./index.js'`, `'./index.json'`, and `'./index.node'` into *tries*
    5. For each item *input* in *tries*, do
       1. Let *mainUrl* be the URL resolution of *input* relative to *packageUrl*

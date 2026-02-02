@@ -130,7 +130,64 @@ In browsers with [`esm.sh`][esmsh]:
 
 ## Use
 
-**TODO**: use
+```ts
+import {
+  lookupPackageScope,
+  readPackageJson,
+  resolveModule,
+  type FileSystem
+} from '@flex-development/mlly'
+import pkg from '@flex-development/mlly/package.json' with { type: 'json' }
+import type { PackageJson } from '@flex-development/pkg-types'
+import nfs from 'node:fs'
+
+/**
+ * A file system API with both asynchronous and synchronous methods.
+ *
+ * @const {FileSystem} fs
+ */
+const fs: FileSystem = {
+  readFile: nfs.promises.readFile,
+  realpath: nfs.promises.realpath,
+  stat: nfs.statSync
+}
+
+/**
+ * The URL of the package directory.
+ *
+ * @const {URL | null} scope
+ */
+const scope: URL | null = lookupPackageScope(import.meta.url, null, fs)
+
+console.dir(scope) // file:///Users/lex/Projects/flex-development/mlly/
+
+/**
+ * The package manifest.
+ *
+ * @const {PackageJson | null} manifest
+ */
+const manifest: PackageJson | null = await readPackageJson(
+  scope,
+  null,
+  import.meta.url,
+  fs
+)
+
+console.dir(manifest?.name === pkg.name) // true
+console.dir(manifest) // `pkg`
+
+/**
+ * A fully resolved URL.
+ *
+ * @const {URL} resolved
+ */
+const resolved = resolveModule(pkg.name, import.meta.url, {
+  conditions: new Set(['mlly']),
+  ext: null
+})
+
+console.dir(resolved) // file:///Users/lex/Projects/flex-development/mlly/src/
+```
 
 ## API
 
@@ -370,7 +427,7 @@ Check if `value` is a *relative specifier*.
 
 <!--lint enable-->
 
-Resolve the [`main`][main] package entry point.
+Resolve a [`main`][main]-like package entry point.
 
 Implements the [`LEGACY_MAIN_RESOLVE`][algorithm-legacy-main-resolve] resolution algorithm.
 
@@ -460,9 +517,9 @@ Resolve a module `specifier`.
 
 Implements the [`ESM_RESOLVE`][algorithm-esm-resolve] algorithm.
 
-> 👉 **Note**: Returns a promise if
-> [`packageImportsResolve`](#packageimportsresolvetspecifier-parent-conditions-mainfields-fs) or
-> [`packageResolve`](#packageresolvetspecifier-parent-conditions-mainfields-fs) returns a promise.
+> 👉 **Note**: Returns a promise if `fs.realpath` or `fs.stat` is async, or one the following methods returns a promise:
+> [`packageImportsResolve`](#packageimportsresolvetspecifier-parent-conditions-mainfields-fs),
+> [`packageResolve`](#packageresolvetspecifier-parent-conditions-mainfields-fs).
 
 #### Type Parameters
 
@@ -789,7 +846,7 @@ Read a `package.json` file.
 
 Implements the [`READ_PACKAGE_JSON`][algorithm-read-package-json] algorithm.
 
-> 👉 **Note**: Returns a promise if `fs.readFile` is async.
+> 👉 **Note**: Returns a promise if `fs.readFile` or `fs.stat` is async.
 
 #### Overloads
 

@@ -56,7 +56,7 @@ function readPackageJson(
  *
  * Implements the `READ_PACKAGE_JSON` algorithm.
  *
- * > 👉 **Note**: Returns a promise if `fs.readFile` is async.
+ * > 👉 **Note**: Returns a promise if `fs.readFile` or `fs.stat` is async.
  *
  * @see {@linkcode Awaitable}
  * @see {@linkcode ErrInvalidPackageConfig}
@@ -98,7 +98,7 @@ function readPackageJson<T extends Awaitable<PackageJson | null>>(
  *
  * Implements the `READ_PACKAGE_JSON` algorithm.
  *
- * > 👉 **Note**: Returns a promise if `fs.readFile` is async.
+ * > 👉 **Note**: Returns a promise if `fs.readFile` or `fs.stat` is async.
  *
  * @see {@linkcode Awaitable}
  * @see {@linkcode ErrInvalidPackageConfig}
