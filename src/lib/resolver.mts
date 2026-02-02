@@ -545,7 +545,7 @@ function moduleResolve(
  *  The URL of the package directory, the `package.json` file,
  *  or a module in the same directory as a `package.json`
  * @param {string} subpath
- *  The package subpath to resolve
+ *  The package subpath
  * @param {Exports | undefined} exports
  *  The package exports
  * @param {List<Condition> | null | undefined} [conditions]
@@ -592,7 +592,7 @@ function packageExportsResolve<T extends Awaitable<URL>>(
  *  The URL of the package directory, the `package.json` file,
  *  or a module in the same directory as a `package.json`
  * @param {string} subpath
- *  The package subpath to resolve
+ *  The package subpath
  * @param {Exports | undefined} exports
  *  The package exports
  * @param {List<Condition> | null | undefined} [conditions]

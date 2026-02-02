@@ -466,9 +466,36 @@ Implements the [`ESM_RESOLVE`][algorithm-esm-resolve] algorithm.
 
 <!--lint enable-->
 
+Resolve a package export.
+
 Implements the [`PACKAGE_EXPORTS_RESOLVE`][algorithm-package-exports-resolve] algorithm.
 
-**TODO**: `packageExportsResolve`
+> 👉 **Note**: Never returns a promisee.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<URL>`](#awaitablet))
+  — the resolved package export url
+
+#### Parameters
+
+- `packageUrl` ([`ModuleId`](#moduleid))
+  — the url of the package directory, the `package.json` file, or a module in the same directory as a `package.json`
+- `subpath` (`string`)
+  — the package subpath
+- `exports` ([`Exports`][pkg-exports] | `undefined`)
+  — the package exports
+- `conditions` ([`List<Condition>`](#condition) | `null` | `undefined`)
+  — the list of export/import conditions
+  - **default**: [`defaultConditions`](#defaultconditions)
+- `parent` ([`ModuleId`](#moduleid) | `null` | `undefined`)
+  — the url of the parent module
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) The resolved package export URL
 
 <!--lint disable-->
 
@@ -1328,6 +1355,8 @@ community you agree to abide by its terms.
 [main]: https://github.com/nodejs/node/blob/v22.9.0/doc/api/packages.md#main
 
 [node-esm]: https://nodejs.org/api/esm.html
+
+[pkg-exports]: https://github.com/flex-development/pkg-types/blob/main/src/exports.ts
 
 [pkg-exports-object]: https://github.com/flex-development/pkg-types/blob/main/src/exports-object.ts
 

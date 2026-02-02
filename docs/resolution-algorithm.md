@@ -138,7 +138,24 @@ The resolver can throw the following errors:
 
 <!--lint enable-->
 
-**TODO**: `PACKAGE_EXPORTS_RESOLVE`
+1. If `exports` is an `Object` with both a key starting with `'.'` and a key not starting with `'.'`,
+   1. Throw [`ERR_INVALID_PACKAGE_CONFIG`][err-invalid-package-config]
+2. If `subpath` is equal to `'.'`, then
+   1. Let *mainExport* be `undefined`
+   2. If *exports* is a `Array`, `String` or an `Object` containing no keys starting with `'.'`, then
+      1. Set *mainExport* to `exports`
+   3. Otherwise if `exports` is an `Object` containing a `'.'` property, then
+      1. Set *mainExport* to `exports['.']`
+   4. If *mainExport* is not `undefined`, then
+      1. Let *resolved* be the result of [`PACKAGE_TARGET_RESOLVE(packageUrl, mainExport, null, false, conditions, undefined, parent)`][package-target-resolve]
+      2. If *resolved* is not `null` or `undefined`,
+         1. Return *resolved*
+3. Otherwise, if `exports` is an `Object` and all keys of `exports` start with `'.'`, then
+   1. ☝️ **Assert**: `subpath` begins with `'./'`
+   2. Let *resolved* be the result of [`PACKAGE_IMPORTS_EXPORTS_RESOLVE(subpath, exports, packageUrl, false, undefined, parent)`][package-imports-exports-resolve]
+   3. If *resolved* is not `null` or `undefined`,
+      1. Return *resolved*
+4. Throw [`ERR_PACKAGE_PATH_NOT_EXPORTED`][err-package-path-not-exported]
 
 <!--lint disable-->
 
