@@ -506,9 +506,36 @@ Implements the [`PACKAGE_RESOLVE`][algorithm-package-resolve] algorithm.
 
 <!--lint enable-->
 
+Resolve the self-import of a package.
+
 Implements the [`PACKAGE_SELF_RESOLVE`][algorithm-package-self-resolve] algorithm.
 
-**TODO**: `packageSelfResolve`
+> 👉 **Note**: Returns a promise if [`lookupPackageScope`](#lookuppackagescopeturl-end-fs),
+> [`packageExportsResolve`](#packageexportsresolvetpackageurl-subpath-exports-conditions-parent-fs),
+> or [`readPackageJson`](#readpackagejsontid-specifier-parent-fs) returns a promise.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<URL | undefined>`](#awaitablet))
+  — the resolved package url
+
+#### Parameters
+
+- `name` (`string`)
+  — the package name
+- `subpath` (`string`)
+  — the package subpath
+- `parent` ([`ModuleId`](#moduleid))
+  — the url of the parent module
+- `conditions` ([`List<Condition>`](#condition) | `null` | `undefined`)
+  — the list of export conditions
+  - **default**: [`defaultConditions`](#defaultconditions)
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) The resolved package URL
 
 <!--lint disable-->
 

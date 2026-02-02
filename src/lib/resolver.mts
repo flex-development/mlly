@@ -1358,7 +1358,7 @@ function packageResolve(
  * @see {@linkcode ModuleId}
  *
  * @template {Awaitable<URL | undefined>} T
- *  The resolved URL
+ *  The resolved package URL
  *
  * @this {void}
  *
@@ -1373,7 +1373,7 @@ function packageResolve(
  * @param {FileSystem | null | undefined} [fs]
  *  The file system API
  * @return {T}
- *  The resolved URL
+ *  The resolved package URL
  */
 function packageSelfResolve<T extends Awaitable<URL | undefined>>(
   this: void,
@@ -1412,7 +1412,7 @@ function packageSelfResolve<T extends Awaitable<URL | undefined>>(
  * @param {FileSystem | null | undefined} [fs]
  *  The file system API
  * @return {Awaitable<URL | undefined>}
- *  The resolved URL
+ *  The resolved package URL
  */
 function packageSelfResolve(
   this: void,

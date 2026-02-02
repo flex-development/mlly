@@ -162,7 +162,16 @@ The resolver can throw the following errors:
 
 ## `PACKAGE_SELF_RESOLVE(name, subpath, parent, conditions)`
 
-**TODO**: `PACKAGE_SELF_RESOLVE`
+1. Let *packageUrl* be the result of [`LOOKUP_PACKAGE_SCOPE(packageUrl)`][lookup-package-scope]
+2. If *packageUrl* is `null`, then
+   1. Return `undefined`
+3. Let *pjson* be the result of [`READ_PACKAGE_JSON(packageUrl)`][read-package-json]
+4. If *pjson* is `null` or if *pjson*.*exports* is `null` or `undefined`, then
+   1. Return `undefined`
+5. If *pjson*.*name* is equal to `name`, then
+   1. Return the result of
+      [`PACKAGE_EXPORTS_RESOLVE(packageUrl, subpath, pjson.exports, conditions)`][package-exports-resolve]
+6. Otherwise, return `undefined`
 
 <!--lint disable-->
 
