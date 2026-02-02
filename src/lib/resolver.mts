@@ -1467,8 +1467,8 @@ function packageSelfResolve(
  *
  * Implements the `PACKAGE_TARGET_RESOLVE` algorithm.
  *
- * > 👉 **Note**: Returns a promise if {@linkcode packageResolve}
- * > returns a promise.
+ * > 👉 **Note**: Returns a promise if `target` is internal to the package and
+ * > {@linkcode packageResolve} returns a promise.
  *
  * @see {@linkcode Awaitable}
  * @see {@linkcode Condition}
@@ -1491,7 +1491,7 @@ function packageSelfResolve(
  * @param {string} subpath
  *  The package subpath (i.e. a `exports`/`imports` key)
  * @param {string | null | undefined} [patternMatch]
- *  The subpath pattern match
+ *  The `subpath` pattern match
  * @param {boolean | null | undefined} [isImports]
  *  Whether `target` is internal to the package
  * @param {List<Condition> | null | undefined} [conditions]
@@ -1525,8 +1525,8 @@ function packageTargetResolve<T extends Awaitable<URL | null | undefined>>(
  *
  * Implements the `PACKAGE_TARGET_RESOLVE` algorithm.
  *
- * > 👉 **Note**: Returns a promise if {@linkcode packageResolve}
- * > returns a promise.
+ * > 👉 **Note**: Returns a promise if `target` is internal to the package and
+ * > {@linkcode packageResolve} returns a promise.
  *
  * @see {@linkcode Awaitable}
  * @see {@linkcode Condition}
@@ -1546,7 +1546,7 @@ function packageTargetResolve<T extends Awaitable<URL | null | undefined>>(
  * @param {string} subpath
  *  The package subpath (i.e. a `exports`/`imports` key)
  * @param {string | null | undefined} [patternMatch]
- *  The subpath pattern match
+ *  The `subpath` pattern match
  * @param {boolean | null | undefined} [isImports]
  *  Whether `target` is internal to the package
  * @param {List<Condition> | null | undefined} [conditions]

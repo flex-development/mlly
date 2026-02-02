@@ -706,9 +706,49 @@ Implements the [`PACKAGE_SELF_RESOLVE`][algorithm-package-self-resolve] algorith
 
 <!--lint enable-->
 
+Resolve a package target.
+
 Implements the [`PACKAGE_TARGET_RESOLVE`][algorithm-package-target-resolve] algorithm.
 
-**TODO**: `packageTargetResolve`
+> 👉 **Note**: Returns a promise if `target` is internal to the package and
+> [`packageResolve`](#packageresolvetspecifier-parent-conditions-mainfields-fs) returns a promise.
+
+#### Type Parameters
+
+- `T` ([`Awaitable<URL | null | undefined>`](#awaitablet))
+  — the resolved package target url
+
+#### Parameters
+
+- `packageUrl` ([`ModuleId`](#moduleid))
+  — the url of the directory containing the `package.json` file
+- `target` (`unknown`)
+  — the package target (i.e. a `exports`/`imports` value)
+- `subpath` (`string`)
+  — the package subpath (i.e. a `exports`/`imports` key)
+- `patternMatch` (`string` | `null` | `undefined`)
+  — the `subpath` pattern match
+- `isImports` (`boolean` | `null` | `undefined`)
+  — whether `target` is internal to the package
+- `conditions` ([`List<Condition>`](#condition) | `null` | `undefined`)
+  — the list of export/import conditions
+  - **default**: [`defaultConditions`](#defaultconditions)
+- `mainFields` ([`List<MainField>`](#mainfield) | `null` | `undefined`)
+  — the list of legacy main fields
+  - **default**: [`defaultMainFields`](#defaultmainfields)
+- `parent` ([`ModuleId`](#moduleid))
+  — the url of the parent module
+- `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
+  — the file system api
+
+#### Returns
+
+(`T`) The resolved package target URL
+
+#### Throws
+
+- [`ERR_INVALID_PACKAGE_CONFIG`][err-invalid-package-config]
+- [`ERR_INVALID_PACKAGE_TARGET`][err-invalid-package-target]
 
 ### `patternKeyCompare(a, b)`
 
@@ -1389,9 +1429,9 @@ community you agree to abide by its terms.
 
 [algorithm-lookup-package-scope]: ./docs/resolution-algorithm.md#lookup_package_scopeurl-end
 
-[algorithm-package-exports-resolve]: ./docs/resolution-algorithm.md#package_exports_resolvepackageurl-subpath-exports-conditions-parent
+[algorithm-package-exports-resolve]: ./docs/resolution-algorithm.md#package_exports_resolvepackageurl-subpath-exports-conditions
 
-[algorithm-package-imports-exports-resolve]: ./docs/resolution-algorithm.md#package_imports_exports_resolvematchkey-matchobject-packageurl-isimports-conditions-mainfields-parent
+[algorithm-package-imports-exports-resolve]: ./docs/resolution-algorithm.md#package_imports_exports_resolvematchkey-matchobject-packageurl-isimports-conditions-mainfields
 
 [algorithm-package-imports-resolve]: ./docs/resolution-algorithm.md#package_imports_resolvespecifier-parent-conditions-mainfields
 
@@ -1399,7 +1439,7 @@ community you agree to abide by its terms.
 
 [algorithm-package-self-resolve]: ./docs/resolution-algorithm.md#package_self_resolvename-subpath-parent-conditions
 
-[algorithm-package-target-resolve]: ./docs/resolution-algorithm.md#package_target_resolvepackageurl-target-subpath-patternmatch-isimports-conditions-mainfields-parent
+[algorithm-package-target-resolve]: ./docs/resolution-algorithm.md#package_target_resolvepackageurl-target-subpath-patternmatch-isimports-conditions-mainfields
 
 [algorithm-pattern-key-compare]: ./docs/resolution-algorithm.md#pattern_key_comparea-b
 
@@ -1410,6 +1450,8 @@ community you agree to abide by its terms.
 [err-invalid-module-specifier]: https://nodejs.org/api/errors.html#err_invalid_module_specifier
 
 [err-invalid-package-config]: https://nodejs.org/api/errors.html#err_invalid_package_config
+
+[err-invalid-package-target]: https://nodejs.org/api/errors.html#err_invalid_package_target
 
 [err-module-not-found]: https://nodejs.org/api/errors.html#err_module_not_found
 

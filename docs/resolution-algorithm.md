@@ -129,12 +129,12 @@ The resolver can throw the following errors:
 
 1. For each *mainField* in *mainFields*, do
    1. Let *tries* be the list of possible entry point URL inputs
-   2. Let *mainFieldValue* be the result of `pjson[mainField]`
+   2. Let *mainFieldValue* be the result of `manifest[mainField]`
    3. If *mainFieldValue* is a string, then
       1. Push `./${value}.js`, `./${value}.json`, `./${value}.node`, `./${value}/index.js`, `./${value}/index.json`,
          and `./${value}/index.node` into *tries*
-   4. Push `./index.js`, `./index.json`, and `./index.node` into *tries*
-   5. For each *input* in *tries*, do
+   4. Push `'./index.js'`, `'./index.json'`, and `'./index.node'` into *tries*
+   5. For each item *input* in *tries*, do
       1. Let *mainUrl* be the URL resolution of *input* relative to *packageUrl*
       2. If the file at *mainUrl* exists,
          1. Return *mainUrl*
@@ -147,13 +147,13 @@ The resolver can throw the following errors:
    1. Set *scopeUrl* to the parent URL of *scopeUrl*
    2. If *scopeUrl* ends in a `'node_modules'` path segment, return `null`
    3. Let *pjsonUrl* be the resolution of `'package.json'` within *scopeUrl*
-   4. if the file at *pjsonUrl* exists, then
+   4. If the file at *pjsonUrl* exists, then
       1. Return *scopeUrl*
 3. Return `null`
 
 <!--lint disable-->
 
-## `PACKAGE_EXPORTS_RESOLVE(packageUrl, subpath, exports, conditions, parent)`
+## `PACKAGE_EXPORTS_RESOLVE(packageUrl, subpath, exports, conditions)`
 
 <!--lint enable-->
 
@@ -166,25 +166,28 @@ The resolver can throw the following errors:
    3. Otherwise if `exports` is an `Object` containing a `'.'` property, then
       1. Set *mainExport* to `exports['.']`
    4. If *mainExport* is not `undefined`, then
-      1. Let *resolved* be the result of [`PACKAGE_TARGET_RESOLVE(packageUrl, mainExport, null, false, conditions, undefined, parent)`][package-target-resolve]
+      1. Let *resolved* be the result of
+         [`PACKAGE_TARGET_RESOLVE(packageUrl, mainExport, null, false, conditions)`][package-target-resolve]
       2. If *resolved* is not `null` or `undefined`,
          1. Return *resolved*
 3. Otherwise, if `exports` is an `Object` and all keys of `exports` start with `'.'`, then
    1. ☝️ **Assert**: `subpath` begins with `'./'`
-   2. Let *resolved* be the result of [`PACKAGE_IMPORTS_EXPORTS_RESOLVE(subpath, exports, packageUrl, false, undefined, parent)`][package-imports-exports-resolve]
+   2. Let *resolved* be the result of
+      [`PACKAGE_IMPORTS_EXPORTS_RESOLVE(subpath, exports, packageUrl, false)`][package-imports-exports-resolve]
    3. If *resolved* is not `null` or `undefined`,
       1. Return *resolved*
 4. Throw [`ERR_PACKAGE_PATH_NOT_EXPORTED`][err-package-path-not-exported]
 
 <!--lint disable-->
 
-## `PACKAGE_IMPORTS_EXPORTS_RESOLVE(matchKey, matchObject, packageUrl, isImports, conditions, mainFields, parent)`
+## `PACKAGE_IMPORTS_EXPORTS_RESOLVE(matchKey, matchObject, packageUrl, isImports, conditions, mainFields)`
 
 <!--lint enable-->
 
 1. If `matchKey` is a key of `matchObj` and does not contain `'*'`, then
    1. Let *target* be the value of `matchObj[matchKey]`
-   2. Return the result of [`PACKAGE_TARGET_RESOLVE(packageUrl, target, null, isImports, conditions, mainFields, parent)`][package-target-resolve]
+   2. Return the result of
+      [`PACKAGE_TARGET_RESOLVE(packageUrl, target, null, isImports, conditions, mainFields)`][package-target-resolve]
 2. Let *expansionKeys* be the list of keys of *matchObj* containing only a single `'*'`, sorted by the sorting function
    [`PATTERN_KEY_COMPARE`][pattern-key-compare] which orders in descending order of specificity
 3. For each key *expansionKey* in *expansionKeys*, do
@@ -193,10 +196,10 @@ The resolver can throw the following errors:
       1. Let *patternTrailer* be the substring of *expansionKey* from the index after the first `'*'` character
       2. If *patternTrailer* has zero length, or if *matchKey* ends with *patternTrailer* and the length of *matchKey*
          is greater than or equal to the length of *expansionKey*, then
-         1. Let *target* be the value of `matchObj[matchKey]`
+         1. Let *target* the value of `matchObj[expansionKey]`
          2. Let *patternMatch* be the substring of *matchKey* starting at the index of the length of *patternBase* up to
             the length of *matchKey* minus the length of *patternTrailer*
-         3. Return the result of [`PACKAGE_TARGET_RESOLVE(packageUrl, target, patternMatch, isImports, conditions, mainFields, parent)`][package-target-resolve]
+         3. Return the result of [`PACKAGE_TARGET_RESOLVE(packageUrl, target, patternMatch, isImports, conditions, mainFields)`][package-target-resolve]
 4. Return `null`
 
 <!--lint disable-->
@@ -212,8 +215,7 @@ The resolver can throw the following errors:
 4. If *packageUrl* is not `null`, then
    1. Let *pjson* be the result of [`READ_PACKAGE_JSON(packageUrl)`][read-package-json]
    2. If *pjson.imports* is a non-null `Object`, then
-      1. Let *resolved* be the result of
-         [`PACKAGE_IMPORTS_EXPORTS_RESOLVE(specifier, pjson.imports, packageUrl, true, conditions, mainFields, parent)`][package-imports-exports-resolve]
+      1. Let *resolved* be the result of [`PACKAGE_IMPORTS_EXPORTS_RESOLVE(specifier, pjson.imports, packageUrl, true, conditions, mainFields)`][package-imports-exports-resolve]
       2. If *resolved* is not `null` or `undefined`,
          1. Return *resolved*
 5. Throw [`ERR_PACKAGE_IMPORT_NOT_DEFINED`][err-package-import-not-defined]
@@ -259,24 +261,66 @@ The resolver can throw the following errors:
 
 ## `PACKAGE_SELF_RESOLVE(name, subpath, parent, conditions)`
 
-1. Let *packageUrl* be the result of [`LOOKUP_PACKAGE_SCOPE(packageUrl)`][lookup-package-scope]
+1. Let *packageUrl* be the result of [`LOOKUP_PACKAGE_SCOPE(parent)`][lookup-package-scope]
 2. If *packageUrl* is `null`, then
    1. Return `undefined`
 3. Let *pjson* be the result of [`READ_PACKAGE_JSON(packageUrl)`][read-package-json]
-4. If *pjson* is `null` or if *pjson*.*exports* is `null` or `undefined`, then
+4. If *pjson* is `null` or if *pjson.exports* is `null` or `undefined`, then
    1. Return `undefined`
-5. If *pjson*.*name* is equal to `name`, then
+5. If *pjson.name* is equal to `name`, then
    1. Return the result of
       [`PACKAGE_EXPORTS_RESOLVE(packageUrl, subpath, pjson.exports, conditions)`][package-exports-resolve]
 6. Otherwise, return `undefined`
 
 <!--lint disable-->
 
-## `PACKAGE_TARGET_RESOLVE(packageUrl, target, subpath, patternMatch, isImports, conditions, mainFields, parent)`
+## `PACKAGE_TARGET_RESOLVE(packageUrl, target, subpath, patternMatch, isImports, conditions, mainFields)`
 
 <!--lint enable-->
 
-**TODO**: `PACKAGE_TARGET_RESOLVE`
+1. If `target` is a `String`, then
+   1. If `target` does not start with `'./'`, then
+      1. If `isImports` is `false`, or if `target` starts with `'../'` or `'/'`, or if `target` is a valid URL, then
+         1. Throw [`ERR_INVALID_PACKAGE_TARGET`][err-invalid-package-target]
+      2. If `patternMatch` is a `String`, then
+         1. Let *matchedTarget* be `target` with every instance of `'*'` replaced by `patternMatch`
+         2. Return [`PACKAGE_RESOLVE(matchedTarget, packageUrl + '/', conditions, mainFields)`][package-resolve]
+      3. Return [`PACKAGE_RESOLVE(target, packageUrl + '/', conditions, mainFields)`][package-resolve]
+   2. If `target` split on `'/'` or `'\\'` contains any `''`, `'.'`, `'..'`, or `'node_modules'` segments after the
+      first `'.'` segment, case insensitive and including percent encoded variants,
+      1. Throw [`ERR_INVALID_PACKAGE_TARGET`][err-invalid-package-target]
+   3. Let *resolvedTarget* be the URL resolution of the concatenation of `packageUrl` and `target`
+   4. ☝️ **Assert**: `packageUrl` is contained in *resolvedTarget*
+   5. If *patternMatch* is `null`, then
+      1. Return *resolvedTarget*
+   6. If *patternMatch* split on `'/'` or `'\\'` contains any `''`, `'.'`, `'..'`, or `'node_modules'` segments, case
+      insensitive and including percent encoded variants,
+      1. Throw [`ERR_INVALID_MODULE_SPECIFIER`][err-invalid-module-specifier]
+   7. Return the URL resolution of *resolvedTarget* with every instance of `'*'` replaced with *patternMatch*
+2. Otherwise, if `target` is a non-null `Object`, then
+   1. If `target` contains any index property keys, as defined in [ECMA-262 6.1.7 Array Index][ecma-integer-index],
+      1. Throw [`ERR_INVALID_PACKAGE_CONFIG`][err-invalid-package-config]
+   2. For each property *p* of `target`, in object insertion order as,
+      1. If *p* equals `'default'` or `conditions` contains an entry for *p*, then
+         1. Let *targetValue* be the value of the *p* property in `target`
+         2. Let *resolved* be the result of `PACKAGE_TARGET_RESOLVE(packageUrl, targetValue, patternMatch, isImports, mainFields)`
+         3. If *resolved* is not `undefined`, then
+            1. Return *resolved*
+         4. Otherwise, continue the loop
+   3. Return `undefined`
+3. Otherwise, if `target` is an `Array`, then
+   1. If `target.length` is zero (`0`), return `null`
+   2. For each item *targetValue* in `target`, do
+      1. Let *resolved* be the result of `PACKAGE_TARGET_RESOLVE(packageUrl, targetValue, patternMatch, isImports, mainFields)`,
+         continuing the loop on any [`ERR_INVALID_PACKAGE_TARGET`][err-invalid-package-target]
+      2. If *resolved* is not `undefined`, then
+         1. Return *resolved*
+      3. Otherwise, continue the loop
+   3. Throw the last fallback resolution error or return `null`.
+4. Otherwise, if `target` is `null`, then
+   1. Return `target`
+5. Otherwise,
+   1. Throw [`ERR_INVALID_PACKAGE_TARGET`][err-invalid-package-target]
 
 ## `PATTERN_KEY_COMPARE(a, b)`
 
@@ -307,6 +351,8 @@ The resolver can throw the following errors:
 
 [detect-module-syntax]: #detect_module_syntaxsource
 
+[ecma-integer-index]: https://tc39.es/ecma262/#integer-index
+
 [err-invalid-module-specifier]: https://nodejs.org/api/errors.html#err_invalid_module_specifier
 
 [err-invalid-package-config]: https://nodejs.org/api/errors.html#err_invalid_package_config
@@ -329,9 +375,9 @@ The resolver can throw the following errors:
 
 [lookup-package-scope]: #lookup_package_scopeurl-end
 
-[package-exports-resolve]: #package_exports_resolvepackageurl-subpath-exports-conditions-parent
+[package-exports-resolve]: #package_exports_resolvepackageurl-subpath-exports-conditions
 
-[package-imports-exports-resolve]: #package_imports_exports_resolvematchkey-matchobject-packageurl-isimports-conditions-mainfields-parent
+[package-imports-exports-resolve]: #package_imports_exports_resolvematchkey-matchobject-packageurl-isimports-conditions-mainfields
 
 [package-imports-resolve]: #package_imports_resolvespecifier-parent-conditions-mainfields
 
@@ -339,7 +385,7 @@ The resolver can throw the following errors:
 
 [package-self-resolve]: #package_self_resolvename-subpath-parent-conditions
 
-[package-target-resolve]: #package_target_resolvepackageurl-target-subpath-patternmatch-isimports-conditions-mainfields-parent
+[package-target-resolve]: #package_target_resolvepackageurl-target-subpath-patternmatch-isimports-conditions-mainfields
 
 [pattern-key-compare]: #pattern_key_comparea-b
 
