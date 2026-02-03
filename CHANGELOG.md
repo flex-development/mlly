@@ -1,3 +1,20 @@
+## [1.0.0-beta.3](https://github.com/flex-development/mlly/compare/1.0.0-beta.2...1.0.0-beta.3) (2026-02-03)
+
+### ⚠ BREAKING CHANGES
+
+- **lib:** [`getSource`] return `FileContent`
+- **ts:** [`ReadFile`] return string given `encoding`
+
+### :package: Build
+
+- [[`2a5ffdb`](https://github.com/flex-development/mlly/commit/2a5ffdb20ce9b1fc5be481bd1de15cf429d0aafa)] **deps-dev:** Bump cspell from 9.6.2 to 9.6.3 ([#960](https://github.com/flex-development/mlly/issues/960))
+
+### :mechanical_arm: Refactors
+
+- [[`eaca2a7`](https://github.com/flex-development/mlly/commit/eaca2a7549deadd7362f8a2f5993167d9313bb45)] **lib:** [`getSource`] return `FileContent`
+- [[`490d72c`](https://github.com/flex-development/mlly/commit/490d72cba0f59cb4f2fe4ff27cac4b81fa597cc6)] **ts:** match `this` context to node
+- [[`cd54387`](https://github.com/flex-development/mlly/commit/cd54387ed7324085ed94d7b5ebb996e5cac85b4e)] **ts:** [`ReadFile`] return string given `encoding`
+
 ## [1.0.0-beta.2](https://github.com/flex-development/mlly/compare/1.0.0-beta.1...1.0.0-beta.2) (2026-02-02)
 
 ### :sparkles: Features
@@ -1258,5 +1275,6 @@
 - [[`4615851`](https://github.com/flex-development/mlly/commit/46158510fdd0e3d8e0e60757290a655606ad836e)] **resolve:** [options] pass original module specifier to `ext`
 - [[`0266ca9`](https://github.com/flex-development/mlly/commit/0266ca9a5593d0c66e950ba1fe2c8f6df8422ff9)] **resolve:** sort `RESOLVE_EXTENSIONS` according to priority
 - [[`36c4b74`](https://github.com/flex-development/mlly/commit/36c4b7475c9bb6c924f5e75c8d6d215a8d23e79c)] **specifiers:** [`toBareSpecifier`] improve `exports` path search
+
 
 
