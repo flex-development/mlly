@@ -10,15 +10,14 @@ import type { Awaitable, ModuleId } from '@flex-development/mlly'
  *
  * > 👉 **Note**: A canonical pathname is not necessarily unique.
  * > Hard links and bind mounts can expose an entity through many pathnames.
- *
- * @see {@linkcode Awaitable}
- *
- * @template {Awaitable<string>} [T]
- *  The canonical pathname
  */
-interface Realpath<T extends Awaitable<string> = Awaitable<string>> {
+interface Realpath {
   /**
+   * @see {@linkcode Awaitable}
    * @see {@linkcode ModuleId}
+   *
+   * @template {Awaitable<string>} T
+   *  The canonical pathname
    *
    * @this {unknown}
    *
@@ -27,7 +26,7 @@ interface Realpath<T extends Awaitable<string> = Awaitable<string>> {
    * @return {T}
    *  The canonical pathname
    */
-  (id: ModuleId): T
+  <T extends Awaitable<string>>(id: ModuleId): T
 }
 
 export type { Realpath as default }

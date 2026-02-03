@@ -87,11 +87,11 @@
   - [`PatternMatch`](#patternmatch)
   - [`ProtocolMap`](#protocolmap)
   - [`Protocol`](#protocol)
-  - [`ReadFile<[T]>`](#readfilet)
-  - [`Realpath<[T]>`](#realpatht)
+  - [`ReadFile`](#readfile)
+  - [`Realpath`](#realpath)
   - [`ResolveAliasOptions`](#resolvealiasoptions)
   - [`ResolveModuleOptions`](#resolvemoduleoptions)
-  - [`Stat<[T]>`](#statt)
+  - [`Stat`](#stat)
   - [`Stats`](#stats)
 - Additional Documentation
   - [Resolution Algorithm](./docs/resolution-algorithm.md)
@@ -1174,11 +1174,11 @@ The file system API (`interface`).
 
 #### Properties
 
-- `readFile` ([`ReadFile`](#readfilet))
+- `readFile` ([`ReadFile`](#readfile))
   — read the entire contents of a file
-- `realpath` ([`Realpath`](#realpatht))
+- `realpath` ([`Realpath`](#realpath))
   — compute a canonical pathname by resolving `.`, `..`, and symbolic links
-- `stat` ([`Stat`](#statt))
+- `stat` ([`Stat`](#stat))
   — get information about a directory or file
 
 ### `GetSourceContext`
@@ -1411,7 +1411,7 @@ They will be added to this union automatically.
 type Protocol = ProtocolMap[keyof ProtocolMap]
 ```
 
-### `ReadFile<[T]>`
+### `ReadFile`
 
 Read the entire contents of a file (`interface`).
 
@@ -1419,7 +1419,7 @@ Read the entire contents of a file (`interface`).
 
 ```ts
 (id: ModuleId, encoding: BufferEncoding): Awaitable<string>
-(id: ModuleId, encoding?: BufferEncoding | null | undefined): T
+<T extends Awaitable<FileContent | null | undefined>>(id: ModuleId, encoding?: BufferEncoding | null | undefined): T
 ```
 
 #### Type Parameters
@@ -1439,7 +1439,7 @@ Read the entire contents of a file (`interface`).
 
 (`T`) The file contents
 
-### `Realpath<[T]>`
+### `Realpath`
 
 Compute a canonical pathname by resolving `.`, `..`, and symbolic links (`interface`).
 
@@ -1510,7 +1510,7 @@ Options for path alias resolution (`interface`).
 - `preserveSymlinks?` (`boolean` | `null` | `undefined`)
   — whether to keep symlinks instead of resolving them
 
-### `Stat<[T]>`
+### `Stat`
 
 Get information about a directory or file (`interface`).
 

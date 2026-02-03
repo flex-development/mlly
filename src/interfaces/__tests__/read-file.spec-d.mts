@@ -13,9 +13,6 @@ import type {
 import type * as fs from 'node:fs'
 
 describe('unit-d:interfaces/ReadFile', () => {
-  type T = Promise<FileContent | null | undefined>
-  type Subject = TestSubject<T>
-
   it('should allow fs.promises.readFile', () => {
     expectTypeOf<typeof fs['promises']['readFile']>().toExtend<TestSubject>()
   })
@@ -25,12 +22,12 @@ describe('unit-d:interfaces/ReadFile', () => {
   })
 
   it('should match [this: unknown]', () => {
-    expectTypeOf<Subject>().thisParameter.toEqualTypeOf<unknown>()
+    expectTypeOf<TestSubject>().thisParameter.toEqualTypeOf<unknown>()
   })
 
   describe('parameters', () => {
     it('should be callable with [ModuleId, (BufferEncoding | null | undefined)?]', () => {
-      expectTypeOf<Subject>().parameters.toEqualTypeOf<
+      expectTypeOf<TestSubject>().parameters.toEqualTypeOf<
         | [ModuleId, (BufferEncoding | null | undefined)?]
         | [ModuleId, BufferEncoding]
       >()
@@ -38,8 +35,10 @@ describe('unit-d:interfaces/ReadFile', () => {
   })
 
   describe('returns', () => {
-    it('should return Awaitable<string> | T', () => {
-      expectTypeOf<Subject>().returns.toEqualTypeOf<Awaitable<string> | T>()
+    it('should return Awaitable<FileContent | null | undefined>', () => {
+      expectTypeOf<TestSubject>()
+        .returns
+        .toExtend<Awaitable<FileContent | null | undefined>>()
     })
   })
 })
