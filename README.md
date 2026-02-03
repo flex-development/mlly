@@ -103,7 +103,7 @@ It exposes several tools to bridge the gap between developer experience and the 
 
 This package is [ESM only][esm].
 
-In Node.js (version 18+) with [yarn][]:
+In Node.js (version 20+) with [yarn][]:
 
 ```sh
 yarn add @flex-development/mlly
