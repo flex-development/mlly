@@ -84,11 +84,11 @@
   - [`PatternMatch`](#patternmatch)
   - [`ProtocolMap`](#protocolmap)
   - [`Protocol`](#protocol)
-  - [`ReadFile`](#readfile)
-  - [`Realpath`](#realpath)
+  - [`ReadFile<[T]>`](#readfilet)
+  - [`Realpath<[T]>`](#realpatht)
   - [`ResolveAliasOptions`](#resolvealiasoptions)
   - [`ResolveModuleOptions`](#resolvemoduleoptions)
-  - [`Stat`](#stat)
+  - [`Stat<[T]>`](#statt)
   - [`Stats`](#stats)
 - Additional Documentation
   - [Resolution Algorithm](./docs/resolution-algorithm.md)
@@ -1138,11 +1138,11 @@ The file system API (`interface`).
 
 #### Properties
 
-- `readFile` ([`ReadFile`](#readfile))
+- `readFile` ([`ReadFile`](#readfilet))
   — read the entire contents of a file
-- `realpath` ([`Realpath`](#realpath))
+- `realpath` ([`Realpath`](#realpatht))
   — compute a canonical pathname by resolving `.`, `..`, and symbolic links
-- `stat` ([`Stat`](#stat))
+- `stat` ([`Stat`](#statt))
   — get information about a directory or file
 
 ### `GetSourceContext`
@@ -1372,9 +1372,14 @@ They will be added to this union automatically.
 type Protocol = ProtocolMap[keyof ProtocolMap]
 ```
 
-### `ReadFile`
+### `ReadFile<[T]>`
 
 Read the entire contents of a file (`interface`).
+
+#### Type Parameters
+
+- `T` ([`Awaitable<Buffer | string>`](#awaitablet), optional)
+  — the file contents
 
 #### Parameters
 
@@ -1383,15 +1388,20 @@ Read the entire contents of a file (`interface`).
 
 #### Returns
 
-([`Awaitable<Buffer | string>`](#awaitablet)) The file contents
+(`T`) The file contents
 
-### `Realpath`
+### `Realpath<[T]>`
 
 Compute a canonical pathname by resolving `.`, `..`, and symbolic links (`interface`).
 
 > 👉 **Note**: A canonical pathname is not necessarily unique.
 > Hard links and bind mounts can expose an entity through many pathnames.
 
+#### Type Parameters
+
+- `T` ([`Awaitable<string>`](#awaitablet), optional)
+  — the canonical pathname
+
 #### Parameters
 
 - `id` ([`ModuleId`](#moduleid))
@@ -1399,7 +1409,7 @@ Compute a canonical pathname by resolving `.`, `..`, and symbolic links (`interf
 
 #### Returns
 
-([`Awaitable<string>`](#awaitablet)) The canonical pathname
+(`T`) The canonical pathname
 
 ### `ResolveAliasOptions`
 
@@ -1451,9 +1461,14 @@ Options for path alias resolution (`interface`).
 - `preserveSymlinks?` (`boolean` | `null` | `undefined`)
   — whether to keep symlinks instead of resolving them
 
-### `Stat`
+### `Stat<[T]>`
 
 Get information about a directory or file (`interface`).
+
+#### Type Parameters
+
+- `T` ([`Awaitable<Stats>`](#stats), optional)
+  — the info
 
 #### Parameters
 
@@ -1462,7 +1477,7 @@ Get information about a directory or file (`interface`).
 
 #### Returns
 
-([`Awaitable<Stats>`](#stats)) The info
+(`T`) The info
 
 ### `Stats`
 

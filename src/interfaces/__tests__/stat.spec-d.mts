@@ -4,22 +4,25 @@
  */
 
 import type TestSubject from '#interfaces/stat'
-import type { Awaitable, ModuleId, Stats } from '@flex-development/mlly'
+import type { ModuleId, Stats } from '@flex-development/mlly'
 
 describe('unit-d:interfaces/Stat', () => {
+  type T = Promise<Stats>
+  type Subject = TestSubject<T>
+
   it('should match [this: void]', () => {
-    expectTypeOf<TestSubject>().thisParameter.toEqualTypeOf<void>()
+    expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
   })
 
   describe('parameters', () => {
     it('should be callable with [ModuleId]', () => {
-      expectTypeOf<TestSubject>().parameters.toEqualTypeOf<[ModuleId]>()
+      expectTypeOf<Subject>().parameters.toEqualTypeOf<[ModuleId]>()
     })
   })
 
   describe('returns', () => {
-    it('should return Awaitable<Stats>', () => {
-      expectTypeOf<TestSubject>().returns.toEqualTypeOf<Awaitable<Stats>>()
+    it('should return T', () => {
+      expectTypeOf<Subject>().returns.toEqualTypeOf<T>()
     })
   })
 })

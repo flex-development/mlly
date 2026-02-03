@@ -7,21 +7,25 @@ import type { Awaitable, ModuleId, Stats } from '@flex-development/mlly'
 
 /**
  * Get information about a directory or file.
+ *
+ * @see {@linkcode Awaitable}
+ * @see {@linkcode Stats}
+ *
+ * @template {Awaitable<Stats>} [T]
+ *  The info
  */
-interface Stat {
+interface Stat<T extends Awaitable<Stats> = Awaitable<Stats>> {
   /**
-   * @see {@linkcode Awaitable}
    * @see {@linkcode ModuleId}
-   * @see {@linkcode Stats}
    *
    * @this {void}
    *
    * @param {ModuleId} id
    *  The module id
-   * @return {Awaitable<Stats>}
+   * @return {T}
    *  The info
    */
-  (this: void, id: ModuleId): Awaitable<Stats>
+  (this: void, id: ModuleId): T
 }
 
 export type { Stat as default }
