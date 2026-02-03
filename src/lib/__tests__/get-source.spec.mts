@@ -77,7 +77,8 @@ describe('unit:lib/getSource', () => {
 
         // Expect
         expect(result).to.not.satisfy(isPromise)
-        expect(result).toMatchSnapshot()
+        expect(result).to.not.be.a('string')
+        expect(String(result)).toMatchSnapshot()
       })
     })
 

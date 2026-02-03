@@ -274,7 +274,7 @@ Get the source code for a module.
 
 #### Type Parameters
 
-- `T` ([`Awaitable<string | null | undefined>`](#awaitablet))
+- `T` ([`Awaitable<FileContent | null | undefined>`](#filecontent))
   — the module source code
 
 #### Parameters

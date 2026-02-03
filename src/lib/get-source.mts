@@ -59,7 +59,7 @@ function getSource(
  * @see {@linkcode GetSourceOptions}
  * @see {@linkcode ModuleId}
  *
- * @template {Awaitable<string | null | undefined>} T
+ * @template {Awaitable<FileContent | null | undefined>} T
  *  The module source code
  *
  * @this {void}
@@ -72,7 +72,7 @@ function getSource(
  *  The module source code
  * @throws {ErrUnsupportedEsmUrlScheme}
  */
-function getSource<T extends Awaitable<string | null | undefined>>(
+function getSource<T extends Awaitable<FileContent | null | undefined>>(
   this: void,
   id: ModuleId | null | undefined,
   options?: GetSourceOptions | null | undefined
@@ -94,7 +94,7 @@ function getSource<T extends Awaitable<string | null | undefined>>(
  *  The module id
  * @param {GetSourceOptions | null | undefined} [options]
  *  Source code retrieval options
- * @return {Awaitable<string | null | undefined>}
+ * @return {Awaitable<FileContent | null | undefined>}
  *  The module source code
  * @throws {ErrUnsupportedEsmUrlScheme}
  */
@@ -102,7 +102,7 @@ function getSource(
   this: void,
   id: ModuleId | null | undefined,
   options?: GetSourceOptions | null | undefined
-): Awaitable<string | null | undefined> {
+): Awaitable<FileContent | null | undefined> {
   if (!isModuleId(id)) return null
 
   /**
@@ -170,9 +170,7 @@ function getSource(
   }
 
   return chainOrCall(code, () => {
-    ok(!isPromise(code), 'expected `code` to be resolved')
-    if (code !== null && code !== undefined) code = String(code)
-    return code
+    return ok(!isPromise(code), 'expected `code` to be resolved'), code
   })
 }
 
