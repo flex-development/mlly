@@ -4,6 +4,9 @@
  */
 
 export type { default as Aliases } from '#interfaces/aliases'
+export type {
+  default as BufferEncodingMap
+} from '#interfaces/buffer-encoding-map'
 export type { default as ConditionMap } from '#interfaces/condition-map'
 export type { default as FileSystem } from '#interfaces/file-system'
 export type {

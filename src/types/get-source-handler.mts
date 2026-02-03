@@ -3,12 +3,17 @@
  * @module mlly/types/GetSourceHandler
  */
 
-import type { Awaitable, GetSourceContext } from '@flex-development/mlly'
+import type {
+  Awaitable,
+  FileContent,
+  GetSourceContext
+} from '@flex-development/mlly'
 
 /**
  * Get the source code for a module.
  *
  * @see {@linkcode Awaitable}
+ * @see {@linkcode FileContent}
  * @see {@linkcode GetSourceContext}
  * @see {@linkcode URL}
  *
@@ -17,12 +22,12 @@ import type { Awaitable, GetSourceContext } from '@flex-development/mlly'
  *
  * @param {URL} url
  *  The module URL
- * @return {Awaitable<Uint8Array | string | null | undefined>}
+ * @return {Awaitable<FileContent | null | undefined>}
  *  The source code
  */
 type GetSourceHandler = (
   this: GetSourceContext,
   url: URL
-) => Awaitable<Uint8Array | string | null | undefined>
+) => Awaitable<FileContent | null | undefined>
 
 export type { GetSourceHandler as default }

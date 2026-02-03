@@ -153,21 +153,19 @@ function readPackageJson(
       /**
        * The stringified contents of the package manifest file.
        *
-       * @const {Awaitable<Buffer | string>} contents
+       * @const {Awaitable<string>} contents
        */
-      const contents: Awaitable<Buffer | string> = fs!.readFile(url)
+      const contents: Awaitable<string> = fs!.readFile(url, 'utf8')
 
       // parse file content.
-      return chainOrCall(contents, data => {
-        data ??= contents as Buffer | string
-
+      return chainOrCall(contents, (data = contents as string) => {
         try {
           /**
            * The parsed file contents.
            *
-           * @const {any} parsed
+           * @const {unknown} parsed
            */
-          const parsed: any = JSON.parse(String(data))
+          const parsed: unknown = JSON.parse(data)
 
           if (isPackageJson(parsed)) return parsed
           throw new Error('Invalid package manifest object', { cause: parsed })

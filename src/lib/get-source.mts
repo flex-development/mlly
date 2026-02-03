@@ -17,6 +17,7 @@ import {
 import type {
   Awaitable,
   EmptyString,
+  FileContent,
   GetSourceContext,
   GetSourceHandler,
   GetSourceOptions,
@@ -159,15 +160,12 @@ function getSource(
   /**
    * The source code.
    *
-   * @var {Awaitable<Uint8Array | string | null | undefined>} code
+   * @var {ReturnType<GetSourceHandler>} code
    */
-  let code: Awaitable<Uint8Array | string | null | undefined> = handle.call(
-    context,
-    url
-  )
+  let code: ReturnType<GetSourceHandler> = handle.call(context, url)
 
   // resolve source code.
-  if (isPromise<Buffer | string | null>(code)) {
+  if (isPromise(code)) {
     void code.then(resolved => (code = resolved))
   }
 
@@ -206,13 +204,10 @@ function data(this: GetSourceContext, url: URL): Buffer {
  *
  * @param {URL} url
  *  The module URL
- * @return {Awaitable<Buffer | string | null>}
+ * @return {Awaitable<FileContent | null>}
  *  The source code
  */
-function file(
-  this: GetSourceContext,
-  url: URL
-): Awaitable<Buffer | string | null> {
+function file(this: GetSourceContext, url: URL): Awaitable<FileContent | null> {
   ok(url.protocol === 'file:', 'expected `file:` URL')
 
   /**
@@ -223,7 +218,7 @@ function file(
   const exists: Awaitable<boolean> = isFile(url, this.fs)
 
   return chainOrCall(exists, isFile => {
-    return isFile ?? exists ? this.fs.readFile(url) : null
+    return isFile ?? exists ? this.fs.readFile(url, this.encoding) : null
   })
 }
 

@@ -100,7 +100,7 @@ describe('unit:lib/getSource', () => {
         [pathe.pathToFileURL('vite.config.mts').href]
       ])('should return source code for `id` (%#)', async (id, options) => {
         // Act
-        const result = testSubject(id, { ...options, fs })
+        const result = testSubject(id, { ...options, encoding: 'utf8', fs })
 
         // Expect
         expect(isAsync ? await result : result).toMatchSnapshot()

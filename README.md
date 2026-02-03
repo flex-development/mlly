@@ -57,6 +57,8 @@
 - [Types](#types)
   - [`Aliases`](#aliases)
   - [`Awaitable<T>`](#awaitablet)
+  - [`BufferEncodingMap`](#bufferencodingmap)
+  - [`BufferEncoding`](#bufferencoding)
   - [`ChangeExtFn<[Ext]>`](#changeextfnext)
   - [`ConditionMap`](#conditionmap)
   - [`Condition`](#condition)
@@ -65,6 +67,7 @@
   - [`EmptyObject`](#emptyobject)
   - [`EmptyString`](#emptystring)
   - [`Ext`](#ext)
+  - [`FileContent`](#filecontent)
   - [`FileSystem`](#filesystem)
   - [`GetSourceContext`](#getsourcecontext)
   - [`GetSourceHandler`](#getsourcehandler)
@@ -1039,6 +1042,31 @@ type Awaitable<T> = PromiseLike<T> | T
 - `T` (`any`)
   - the value
 
+### `BufferEncodingMap`
+
+Registry of character encodings that can be used when working with `Buffer` objects (`interface`).
+
+When developing extensions that use additional encodings, augment `BufferEncodingMap` to register custom encodings:
+
+```ts
+declare module '@flex-development/mlly' {
+  interface BufferEncodingMap {
+    custom: 'custom'
+  }
+}
+```
+
+### `BufferEncoding`
+
+Union of values that can occur where a buffer encoding is expected (`type`).
+
+To register new encodings, augment [`BufferEncodingMap`](#bufferencodingmap).
+They will be added to this union automatically.
+
+```ts
+type BufferEncoding = BufferEncodingMap[keyof BufferEncodingMap]
+```
+
 ### `ChangeExtFn<[Ext]>`
 
 Get a new file extension for `url` (`type`).
@@ -1132,6 +1160,14 @@ A file extension (`type`).
 type Ext = `${Dot}${string}`
 ```
 
+### `FileContent`
+
+Union of values that can occur where file content is expected (`type`).
+
+```ts
+type FileContent = Uint8Array | string
+```
+
 ### `FileSystem`
 
 The file system API (`interface`).
@@ -1172,7 +1208,7 @@ Get the source code for a module (`type`).
 type GetSourceHandler = (
   this: GetSourceContext,
   url: URL
-) => Awaitable<Uint8Array | string | null | undefined>
+) => Awaitable<FileContent | null | undefined>
 ```
 
 #### Parameters
@@ -1184,7 +1220,7 @@ type GetSourceHandler = (
 
 #### Returns
 
-([`Awaitable<Uint8Array | string | null | undefined>`](#awaitablet)) The source code
+([`Awaitable<FileContent | null | undefined>`](#filecontent)) The source code
 
 ### `GetSourceHandlers`
 
@@ -1202,6 +1238,9 @@ Options for retrieving source code (`interface`).
 
 #### Properties
 
+- `encoding?` ([`BufferEncoding`](#bufferencoding) | `null` | `undefined`)
+  — the encoding of the result
+  > 👉 **note**: used when the `file:` handler is called
 - `format?` ([`ModuleFormat`](#moduleformat) | `null` | `undefined`)
   — the module format hint
 - `fs?` ([`FileSystem`](#filesystem) | `null` | `undefined`)
@@ -1376,15 +1415,25 @@ type Protocol = ProtocolMap[keyof ProtocolMap]
 
 Read the entire contents of a file (`interface`).
 
+#### Overloads
+
+```ts
+(this: void, id: ModuleId, encoding: BufferEncoding): Awaitable<string>
+(this: void, id: ModuleId, encoding?: BufferEncoding | null | undefined): T
+```
+
 #### Type Parameters
 
-- `T` ([`Awaitable<Buffer | string>`](#awaitablet), optional)
+- `T` ([`Awaitable<FileContent | null | undefined>`](#filecontent), optional)
   — the file contents
+  - **default**: [`Awaitable<FileContent>`](#filecontent)
 
 #### Parameters
 
 - `id` ([`ModuleId`](#moduleid))
   — the module id
+- `encoding` ([`BufferEncoding`](#bufferencoding))
+  — the encoding of the file contents
 
 #### Returns
 

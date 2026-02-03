@@ -25,6 +25,15 @@ const config = [
     }
   },
   {
+    files: [
+      'src/interfaces/__tests__/buffer-encoding-map.spec-d.mts',
+      'src/interfaces/buffer-encoding-map.mts'
+    ],
+    rules: {
+      'unicorn/text-encoding-identifier-case': 0
+    }
+  },
+  {
     files: ['src/internal/__tests__/is-promise.spec.mts'],
     rules: {
       'unicorn/no-thenable': 0

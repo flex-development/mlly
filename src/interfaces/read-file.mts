@@ -3,7 +3,12 @@
  * @module mlly/interfaces/ReadFile
  */
 
-import type { Awaitable, ModuleId } from '@flex-development/mlly'
+import type {
+  Awaitable,
+  BufferEncoding,
+  FileContent,
+  ModuleId
+} from '@flex-development/mlly'
 
 /**
  * Read the entire contents of a file.
@@ -11,11 +16,11 @@ import type { Awaitable, ModuleId } from '@flex-development/mlly'
  * @see {@linkcode Awaitable}
  * @see {@linkcode Buffer}
  *
- * @template {Awaitable<Buffer | string>} [T]
+ * @template {Awaitable<FileContent | null | undefined>} [T]
  *  The file contents
  */
 interface ReadFile<
-  T extends Awaitable<Buffer | string> = Awaitable<Buffer | string>
+  T extends Awaitable<FileContent | null | undefined> = Awaitable<FileContent>
 > {
   /**
    * @see {@linkcode ModuleId}
@@ -24,10 +29,26 @@ interface ReadFile<
    *
    * @param {ModuleId} id
    *  The module id
+   * @param {BufferEncoding} encoding
+   *  The encoding of the file contents
+   * @return {Awaitable<string>}
+   *  The file contents
+   */
+  (this: void, id: ModuleId, encoding: BufferEncoding): Awaitable<string>
+
+  /**
+   * @see {@linkcode ModuleId}
+   *
+   * @this {void}
+   *
+   * @param {ModuleId} id
+   *  The module id
+   * @param {BufferEncoding | null | undefined} [encoding]
+   *  The encoding of the file contents
    * @return {T}
    *  The file contents
    */
-  (this: void, id: ModuleId): T
+  (this: void, id: ModuleId, encoding?: BufferEncoding | null | undefined): T
 }
 
 export type { ReadFile as default }

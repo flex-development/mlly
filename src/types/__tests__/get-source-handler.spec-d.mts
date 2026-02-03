@@ -4,7 +4,11 @@
  */
 
 import type TestSubject from '#types/get-source-handler'
-import type { Awaitable, GetSourceContext } from '@flex-development/mlly'
+import type {
+  Awaitable,
+  FileContent,
+  GetSourceContext
+} from '@flex-development/mlly'
 
 describe('unit-d:types/GetSourceHandler', () => {
   it('should match [this: GetSourceContext]', () => {
@@ -18,10 +22,10 @@ describe('unit-d:types/GetSourceHandler', () => {
   })
 
   describe('returns', () => {
-    it('should return Awaitable<Uint8Array | string | null | undefined>', () => {
+    it('should return Awaitable<FileContent | null | undefined>', () => {
       expectTypeOf<TestSubject>()
         .returns
-        .toEqualTypeOf<Awaitable<Uint8Array | string | null | undefined>>()
+        .toEqualTypeOf<Awaitable<FileContent | null | undefined>>()
     })
   })
 })

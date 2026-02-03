@@ -5,6 +5,7 @@
 
 import type TestSubject from '#interfaces/get-source-options'
 import type {
+  BufferEncoding,
   FileSystem,
   GetSourceHandlers,
   List,
@@ -15,6 +16,12 @@ import type { Nilable } from '@flex-development/tutils'
 describe('unit-d:interfaces/GetSourceOptions', () => {
   it('should allow empty object', () => {
     assertType<TestSubject>({})
+  })
+
+  it('should match [encoding?: BufferEncoding | null | undefined]', () => {
+    expectTypeOf<TestSubject>()
+      .toHaveProperty('encoding')
+      .toEqualTypeOf<Nilable<BufferEncoding>>()
   })
 
   it('should match [format?: ModuleFormat | null | undefined]', () => {

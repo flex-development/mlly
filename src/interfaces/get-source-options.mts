@@ -4,6 +4,7 @@
  */
 
 import type {
+  BufferEncoding,
   FileSystem,
   GetSourceHandlers,
   List,
@@ -14,6 +15,15 @@ import type {
  * Options for retrieving source code.
  */
 interface GetSourceOptions {
+  /**
+   * The encoding of the result.
+   *
+   * > 👉 **Note**: Used when the `file:` handler is called.
+   *
+   * @see {@linkcode BufferEncoding}
+   */
+  encoding?: BufferEncoding | null | undefined
+
   /**
    * The module format hint.
    *
