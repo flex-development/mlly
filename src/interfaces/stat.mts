@@ -18,14 +18,14 @@ interface Stat<T extends Awaitable<Stats> = Awaitable<Stats>> {
   /**
    * @see {@linkcode ModuleId}
    *
-   * @this {void}
+   * @this {unknown}
    *
    * @param {ModuleId} id
    *  The module id
    * @return {T}
    *  The info
    */
-  (this: void, id: ModuleId): T
+  (id: ModuleId): T
 }
 
 export type { Stat as default }

@@ -13,7 +13,7 @@ interface IsFile {
    * @return {boolean}
    *  `true` if stats object describes regular file, `false` otherwise
    */
-  (this: void): boolean
+  (): boolean
 }
 
 export type { IsFile as default }

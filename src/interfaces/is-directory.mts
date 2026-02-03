@@ -8,12 +8,12 @@
  */
 interface IsDirectory {
   /**
-   * @this {void}
+   * @this {unknown}
    *
    * @return {boolean}
    *  `true` if stats describes directory, `false` otherwise
    */
-  (this: void): boolean
+  (): boolean
 }
 
 export type { IsDirectory as default }

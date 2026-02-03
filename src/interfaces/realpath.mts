@@ -20,14 +20,14 @@ interface Realpath<T extends Awaitable<string> = Awaitable<string>> {
   /**
    * @see {@linkcode ModuleId}
    *
-   * @this {void}
+   * @this {unknown}
    *
    * @param {ModuleId} id
    *  The module id
    * @return {T}
    *  The canonical pathname
    */
-  (this: void, id: ModuleId): T
+  (id: ModuleId): T
 }
 
 export type { Realpath as default }

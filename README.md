@@ -1418,8 +1418,8 @@ Read the entire contents of a file (`interface`).
 #### Overloads
 
 ```ts
-(this: void, id: ModuleId, encoding: BufferEncoding): Awaitable<string>
-(this: void, id: ModuleId, encoding?: BufferEncoding | null | undefined): T
+(id: ModuleId, encoding: BufferEncoding): Awaitable<string>
+(id: ModuleId, encoding?: BufferEncoding | null | undefined): T
 ```
 
 #### Type Parameters

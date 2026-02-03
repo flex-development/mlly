@@ -10,8 +10,8 @@ describe('unit-d:interfaces/Stat', () => {
   type T = Promise<Stats>
   type Subject = TestSubject<T>
 
-  it('should match [this: void]', () => {
-    expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
+  it('should match [this: unknown]', () => {
+    expectTypeOf<Subject>().thisParameter.toEqualTypeOf<unknown>()
   })
 
   describe('parameters', () => {

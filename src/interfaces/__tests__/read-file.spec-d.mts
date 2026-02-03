@@ -24,8 +24,8 @@ describe('unit-d:interfaces/ReadFile', () => {
     expectTypeOf<typeof fs['readFileSync']>().toExtend<TestSubject>()
   })
 
-  it('should match [this: void]', () => {
-    expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
+  it('should match [this: unknown]', () => {
+    expectTypeOf<Subject>().thisParameter.toEqualTypeOf<unknown>()
   })
 
   describe('parameters', () => {

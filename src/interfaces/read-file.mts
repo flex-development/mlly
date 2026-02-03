@@ -25,7 +25,7 @@ interface ReadFile<
   /**
    * @see {@linkcode ModuleId}
    *
-   * @this {void}
+   * @this {unknown}
    *
    * @param {ModuleId} id
    *  The module id
@@ -34,12 +34,12 @@ interface ReadFile<
    * @return {Awaitable<string>}
    *  The file contents
    */
-  (this: void, id: ModuleId, encoding: BufferEncoding): Awaitable<string>
+  (id: ModuleId, encoding: BufferEncoding): Awaitable<string>
 
   /**
    * @see {@linkcode ModuleId}
    *
-   * @this {void}
+   * @this {unknown}
    *
    * @param {ModuleId} id
    *  The module id
@@ -48,7 +48,7 @@ interface ReadFile<
    * @return {T}
    *  The file contents
    */
-  (this: void, id: ModuleId, encoding?: BufferEncoding | null | undefined): T
+  (id: ModuleId, encoding?: BufferEncoding | null | undefined): T
 }
 
 export type { ReadFile as default }

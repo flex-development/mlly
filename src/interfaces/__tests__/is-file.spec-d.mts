@@ -7,8 +7,8 @@ import type TestSubject from '#interfaces/is-file'
 import type { EmptyArray } from '@flex-development/mlly'
 
 describe('unit-d:interfaces/IsFile', () => {
-  it('should match [this: void]', () => {
-    expectTypeOf<TestSubject>().thisParameter.toEqualTypeOf<void>()
+  it('should match [this: unknown]', () => {
+    expectTypeOf<TestSubject>().thisParameter.toEqualTypeOf<unknown>()
   })
 
   describe('parameters', () => {
