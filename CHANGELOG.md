@@ -1,3 +1,21 @@
+## [1.0.0-beta.4](https://github.com/flex-development/mlly/compare/1.0.0-beta.3...1.0.0-beta.4) (2026-02-06)
+
+### ⚠ BREAKING CHANGES
+
+- **ts:** pass type parameters to fs methods
+
+### :package: Build
+
+- [[`77f0333`](https://github.com/flex-development/mlly/commit/77f0333d3f83eec60d0ee41270d36bd7ac5828a4)] **deps-dev:** Bump @faker-js/faker from 10.2.0 to 10.3.0 ([#966](https://github.com/flex-development/mlly/issues/966))
+- [[`d71a814`](https://github.com/flex-development/mlly/commit/d71a8145cd3773743411d70e84742ec93838af16)] **deps-dev:** Bump cspell from 9.6.3 to 9.6.4 ([#965](https://github.com/flex-development/mlly/issues/965))
+- [[`4f6f9c3`](https://github.com/flex-development/mlly/commit/4f6f9c3fb24a41ce22031a35345c8b85f16ef732)] **deps-dev:** Bump msw from 2.12.7 to 2.12.8 ([#964](https://github.com/flex-development/mlly/issues/964))
+- [[`b08edac`](https://github.com/flex-development/mlly/commit/b08edac9f21e7c91ca554e8938bba0b814605e7d)] **deps-dev:** bump msw from 2.12.8 to 2.12.9
+- [[`893c030`](https://github.com/flex-development/mlly/commit/893c030d8d438871ad94b29a786eb59fa144a571)] **deps:** Bump @isaacs/brace-expansion from 5.0.0 to 5.0.1 ([#963](https://github.com/flex-development/mlly/issues/963))
+
+### :mechanical_arm: Refactors
+
+- [[`cc5109c`](https://github.com/flex-development/mlly/commit/cc5109cc76949d287f1b53e54e47559ed1a902b3)] **ts:** pass type parameters to fs methods
+
 ## [1.0.0-beta.3](https://github.com/flex-development/mlly/compare/1.0.0-beta.2...1.0.0-beta.3) (2026-02-03)
 
 ### ⚠ BREAKING CHANGES
@@ -1275,6 +1293,7 @@
 - [[`4615851`](https://github.com/flex-development/mlly/commit/46158510fdd0e3d8e0e60757290a655606ad836e)] **resolve:** [options] pass original module specifier to `ext`
 - [[`0266ca9`](https://github.com/flex-development/mlly/commit/0266ca9a5593d0c66e950ba1fe2c8f6df8422ff9)] **resolve:** sort `RESOLVE_EXTENSIONS` according to priority
 - [[`36c4b74`](https://github.com/flex-development/mlly/commit/36c4b7475c9bb6c924f5e75c8d6d215a8d23e79c)] **specifiers:** [`toBareSpecifier`] improve `exports` path search
+
 
 
 
