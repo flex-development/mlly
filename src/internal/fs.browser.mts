@@ -12,7 +12,7 @@ import type { FileSystem } from '@flex-development/mlly'
  */
 const fs: FileSystem = {
   /**
-   * Get the contents of a file.
+   * Read the entire contents of a file.
    *
    * @return {never}
    *  Never; not implemented
@@ -23,18 +23,18 @@ const fs: FileSystem = {
   },
 
   /**
-   * Get the resolved pathname of a file.
+   * Compute a canonical pathname by resolving `.`, `..`, and symbolic links.
    *
    * @return {never}
    *  Never; not implemented
    * @throws {Error}
    */
   realpath(): never {
-    throw new Error('[realpathSync] not implemented')
+    throw new Error('[realpath] not implemented')
   },
 
   /**
-   * Get information about a file.
+   * Get information about a directory or file.
    *
    * @return {never}
    *  Never; not implemented

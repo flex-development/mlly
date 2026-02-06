@@ -1876,7 +1876,7 @@ __metadata:
     husky: "npm:9.1.7"
     import-meta-resolve: "npm:4.2.0"
     is-ci: "npm:4.1.0"
-    msw: "npm:2.12.8"
+    msw: "npm:2.12.9"
     node-notifier: "npm:10.0.1"
     remark: "npm:15.0.1"
     remark-cli: "npm:12.0.1"
@@ -2405,9 +2405,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mswjs/interceptors@npm:^0.41.0":
-  version: 0.41.0
-  resolution: "@mswjs/interceptors@npm:0.41.0"
+"@mswjs/interceptors@npm:^0.41.2":
+  version: 0.41.2
+  resolution: "@mswjs/interceptors@npm:0.41.2"
   dependencies:
     "@open-draft/deferred-promise": "npm:^2.2.0"
     "@open-draft/logger": "npm:^0.3.0"
@@ -2415,7 +2415,7 @@ __metadata:
     is-node-process: "npm:^1.2.0"
     outvariant: "npm:^1.4.3"
     strict-event-emitter: "npm:^0.5.1"
-  checksum: 10/8fb754a4484aaefd0e9fe5b7bef84dac169fe37d3b466347ef7e169ac72aa55f5dd6792d69cdafe47ed961680dc99f838cb5949bd83faf1c20507e9e405add73
+  checksum: 10/417c5ebdfe620f1c026352a57493ced51bee7f7a7dfa68e48abea86330776752660a0f7a34a514c19f91bce57cc17d849aaa83a61a13a791f6690c29bb3ea671
   languageName: node
   linkType: hard
 
@@ -8508,12 +8508,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:2.12.8":
-  version: 2.12.8
-  resolution: "msw@npm:2.12.8"
+"msw@npm:2.12.9":
+  version: 2.12.9
+  resolution: "msw@npm:2.12.9"
   dependencies:
     "@inquirer/confirm": "npm:^5.0.0"
-    "@mswjs/interceptors": "npm:^0.41.0"
+    "@mswjs/interceptors": "npm:^0.41.2"
     "@open-draft/deferred-promise": "npm:^2.2.0"
     "@types/statuses": "npm:^2.0.6"
     cookie: "npm:^1.0.2"
@@ -8537,7 +8537,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: 10/40f8553c868f30f8c6b67473bed93979c85148bb96edf8a355fdd8ec5e682d5bf64a8d18472d023e211d9731f66bcd9179cbd71d217b95881226c87ef25b1346
+  checksum: 10/b6681356a7de1a17038670c5def2368463bc4595af365844d41e83b50fe8ea28e8f7380f041a048a660da2f5e5fcc21fb76b115171f604af8f5f4ce20f2d0823
   languageName: node
   linkType: hard
 
