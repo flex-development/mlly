@@ -198,7 +198,7 @@
     "typescript": "5.9.3",
     "unified": "11.0.5",
     "vfile": "6.0.3",
-    "vite-tsconfig-paths": "6.0.5",
+    "vite-tsconfig-paths": "6.1.0",
     "vitest": "4.0.18"
   },
   "resolutions": {
