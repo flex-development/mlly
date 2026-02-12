@@ -19,7 +19,13 @@
 - [What is this?](#what-is-this)
 - [Why this package?](#why-this-package)
 - [Install](#install)
-- [Use](#use)
+- [Quick Start](#quick-start)
+  - [Resolve like Node.js](#resolve-like-nodejs)
+  - [Resolve with custom conditions](#resolve-with-custom-conditions)
+  - [Resolve a directory index](#resolve-a-directory-index)
+  - [Rewrite an extension](#rewrite-an-extension)
+  - [Use a custom file system](#use-a-custom-file-system)
+- [Use Cases](#use-cases)
 - [Design Goals](#design-goals)
 - [API](#api)
   - [`canParseUrl(input[, base])`](#canparseurlinput-base)
@@ -166,66 +172,95 @@ In browsers with [`esm.sh`][esmsh]:
 </script>
 ```
 
-## Use
+## Quick Start
+
+### Resolve like Node.js
 
 ```ts
-import {
-  lookupPackageScope,
-  readPackageJson,
-  resolveModule,
-  type FileSystem
-} from '@flex-development/mlly'
-import pkg from '@flex-development/mlly/package.json' with { type: 'json' }
-import type { PackageJson } from '@flex-development/pkg-types'
-import nfs from 'node:fs'
+import { moduleResolve } from '@flex-development/mlly'
 
 /**
- * A file system API with both asynchronous and synchronous methods.
- *
- * @const {FileSystem} fs
- */
-const fs: FileSystem = {
-  readFile: nfs.promises.readFile,
-  realpath: nfs.promises.realpath,
-  stat: nfs.statSync
-}
-
-/**
- * The URL of the package directory.
- *
- * @const {URL | null} scope
- */
-const scope: URL | null = lookupPackageScope(import.meta.url, null, fs)
-
-console.dir(scope) // file:///Users/lex/Projects/flex-development/mlly/
-
-/**
- * The package manifest.
- *
- * @const {PackageJson | null} manifest
- */
-const manifest: PackageJson | null = await readPackageJson(
-  scope,
-  null,
-  import.meta.url,
-  fs
-)
-
-console.dir(manifest?.name === pkg.name) // true
-console.dir(manifest) // `pkg`
-
-/**
- * A fully resolved URL.
+ * The resolved URL.
  *
  * @const {URL} resolved
  */
-const resolved = resolveModule(pkg.name, import.meta.url, {
-  conditions: new Set(['mlly']),
-  ext: null
-})
-
-console.dir(resolved) // file:///Users/lex/Projects/flex-development/mlly/src/
+const resolved: URL = moduleResolve('typescript', import.meta.url)
 ```
+
+### Resolve with custom conditions
+
+```ts
+import { moduleResolve } from '@flex-development/mlly'
+
+/**
+ * The resolved URL.
+ *
+ * @const {URL} resolved
+ */
+const resolved: URL = moduleResolve('devlop', import.meta.url, ['development'])
+```
+
+### Resolve a directory index
+
+```ts
+import { resolveModule } from '@flex-development/mlly'
+
+/**
+ * The resolved URL.
+ *
+ * @const {URL} resolved
+ */
+const resolved: URL = resolveModule('./src/lib', import.meta.url, {
+  extensions: ['.mts']
+})
+```
+
+### Rewrite an extension
+
+```ts
+import { resolveModule } from '@flex-development/mlly'
+
+/**
+ * The resolved URL.
+ *
+ * @const {URL} resolved
+ */
+const resolved: URL = resolveModule('./src/index.ts', import.meta.url, {
+  ext: { '.cts': '.cjs', '.mts': '.mjs', '.ts': '.js' }
+})
+```
+
+### Use a custom file system
+
+```ts
+import vfs from '#internal/vfs' // a virtual, async file system
+import { resolveModule } from '@flex-development/mlly'
+
+/**
+ * The resolved URL.
+ *
+ * @const {URL} resolved
+ */
+const resolved: URL = await resolveModule('react', import.meta.url, { fs: vfs })
+```
+
+<br />
+
+> \:eyes: See the [API reference](#api) for lower-level building blocks and resolution primitives.
+
+## Use Cases
+
+`mlly` is designed for developers who need Node-compatible ESM resolution behavior.
+
+Common use cases include:
+
+- CLI tools that load user config files and/or plugins
+- Plugin systems that resolve modules relative to a project root
+- Bundlers and transpilers that need to interpret `exports`, `imports`, and `main` fields
+- Test runners and code execution tools
+- Monorepo tooling that resolves workspace dependencies
+- Runtime loaders and developer tools that operate on virtual filesystems
+- Framework tooling that needs resolution behavior matching Node.js
 
 ## Design Goals
 
@@ -247,7 +282,7 @@ There is no default export.
 
 Check if `input` can be parsed to a `URL`.
 
-> 👉 **Note**: If `input` is relative, `base` is required.
+> \:point\_right: **Note**: If `input` is relative, `base` is required.
 > If `input` is absolute, `base` is ignored.
 
 #### Parameters
@@ -313,7 +348,7 @@ const enum formats {
 
 Get the source code for a module.
 
-> 👉 **Note**: Returns a promise if the [handler](#getsourcehandler) for `id` is async.
+> \:point\_right: **Note**: Returns a promise if the [handler](#getsourcehandler) for `id` is async.
 
 #### Type Parameters
 
@@ -339,7 +374,7 @@ Get the source code for a module.
 
 Check if `value` is an *absolute specifier*.
 
-> 👉 **Note**: Only checks specifier syntax.\
+> \:point\_right: **Note**: Only checks specifier syntax.\
 > Does **not** guarantee the specifier references an existing module.
 
 #### Parameters
@@ -368,7 +403,7 @@ Check if `value` is a valid array index.
 
 Check if `value` is a *bare specifier*.
 
-> 👉 **Note**: Only checks specifier syntax.\
+> \:point\_right: **Note**: Only checks specifier syntax.\
 > Does **not** guarantee the specifier references an existing module.
 
 #### Parameters
@@ -384,7 +419,7 @@ Check if `value` is a *bare specifier*.
 
 Check if a directory exists.
 
-> 👉 **Note**: Returns a promise if `fs.stat` is async.
+> \:point\_right: **Note**: Returns a promise if `fs.stat` is async.
 
 #### Type Parameters
 
@@ -406,7 +441,7 @@ Check if a directory exists.
 
 Check if a file exists.
 
-> 👉 **Note**: Returns a promise if `fs.stat` is async.
+> \:point\_right: **Note**: Returns a promise if `fs.stat` is async.
 
 #### Type Parameters
 
@@ -428,7 +463,7 @@ Check if a file exists.
 
 Check if `value` is an [`imports`][subpath-imports] subpath.
 
-> 👉 **Note**: Only checks specifier syntax.\
+> \:point\_right: **Note**: Only checks specifier syntax.\
 > Does **not** guarantee the specifier references an existing module.
 
 #### Parameters
@@ -457,7 +492,7 @@ Check if `value` is a module id.
 
 Check if `value` is a *relative specifier*.
 
-> 👉 **Note**: Only checks specifier syntax.\
+> \:point\_right: **Note**: Only checks specifier syntax.\
 > Does **not** guarantee the specifier references an existing module.
 
 #### Parameters
@@ -479,7 +514,7 @@ Resolve a [`main`][main]-like package entry point.
 
 Implements the [`LEGACY_MAIN_RESOLVE`][algorithm-legacy-main-resolve] resolution algorithm.
 
-> 👉 **Note**: Returns a promise if `fs.stat` is async.
+> \:point\_right: **Note**: Returns a promise if `fs.stat` is async.
 
 #### Type Parameters
 
@@ -514,7 +549,7 @@ Get the package scope URL for a module `url`.
 
 Implements the [`LOOKUP_PACKAGE_SCOPE`][algorithm-lookup-package-scope] algorithm.
 
-> 👉 **Note**: Returns a promise if `fs.stat` is async.
+> \:point\_right: **Note**: Returns a promise if `fs.stat` is async.
 
 #### Overloads
 
@@ -565,8 +600,8 @@ Resolve a module `specifier`.
 
 Implements the [`ESM_RESOLVE`][algorithm-esm-resolve] algorithm.
 
-> 👉 **Note**: Returns a promise if `fs.realpath` or `fs.stat` is async, or one the following methods returns a promise:
-> [`packageImportsResolve`](#packageimportsresolvetspecifier-parent-conditions-mainfields-fs),
+> \:point\_right: **Note**: Returns a promise if `fs.realpath` or `fs.stat` is async, or one the following methods
+> returns a promise: [`packageImportsResolve`](#packageimportsresolvetspecifier-parent-conditions-mainfields-fs),
 > [`packageResolve`](#packageresolvetspecifier-parent-conditions-mainfields-fs).
 
 #### Type Parameters
@@ -605,7 +640,7 @@ Resolve a package export.
 
 Implements the [`PACKAGE_EXPORTS_RESOLVE`][algorithm-package-exports-resolve] algorithm.
 
-> 👉 **Note**: Never returns a promisee.
+> \:point\_right: **Note**: Never returns a promisee.
 
 #### Type Parameters
 
@@ -642,7 +677,7 @@ Resolve a package export or import.
 
 Implements the [`PACKAGE_IMPORTS_EXPORTS_RESOLVE`][algorithm-package-imports-exports-resolve] algorithm.
 
-> 👉 **Note**: Returns a promise if
+> \:point\_right: **Note**: Returns a promise if
 > [`packageTargetResolve`](#packagetargetresolvetpackageurl-target-subpath-patternmatch-isimports-conditions-mainfields-parent-fs),
 > returns a promise.
 
@@ -686,7 +721,7 @@ Resolve a package import.
 
 Implements the [`PACKAGE_IMPORTS_RESOLVE`][algorithm-package-imports-resolve] algorithm.
 
-> 👉 **Note**: Returns a promise if [`lookupPackageScope`](#lookuppackagescopeturl-end-fs),
+> \:point\_right: **Note**: Returns a promise if [`lookupPackageScope`](#lookuppackagescopeturl-end-fs),
 > [`packageImportsExportsResolve`](#packageimportsexportsresolvetmatchkey-matchobject-packageurl-isimports-conditions-mainfields-parent-fs),
 > or [`readPackageJson`](#readpackagejsontid-specifier-parent-fs) returns a promise.
 
@@ -733,7 +768,7 @@ Implements the [`PACKAGE_RESOLVE`][algorithm-package-resolve] algorithm.
 > package name, or a specific feature module within a package prefixed by the package name.
 > Including the file extension is only necessary for packages without an [`exports`][exports] field.
 
-> 👉 **Note**: Returns a promise if `fs.stat` is async or one of the following methods returns a promise:
+> \:point\_right: **Note**: Returns a promise if `fs.stat` is async or one of the following methods returns a promise:
 > [`legacyMainResolve`](#legacymainresolvetpackageurl-manifest-mainfields-parent-fs),
 > [`packageExportsResolve`](#packageexportsresolvetpackageurl-subpath-exports-conditions-parent-fs),
 > [`packageSelfResolve`](#packageselfresolvetname-subpath-parent-conditions-fs), or
@@ -778,7 +813,7 @@ Resolve the self-import of a package.
 
 Implements the [`PACKAGE_SELF_RESOLVE`][algorithm-package-self-resolve] algorithm.
 
-> 👉 **Note**: Returns a promise if [`lookupPackageScope`](#lookuppackagescopeturl-end-fs),
+> \:point\_right: **Note**: Returns a promise if [`lookupPackageScope`](#lookuppackagescopeturl-end-fs),
 > [`packageExportsResolve`](#packageexportsresolvetpackageurl-subpath-exports-conditions-parent-fs),
 > or [`readPackageJson`](#readpackagejsontid-specifier-parent-fs) returns a promise.
 
@@ -815,7 +850,7 @@ Resolve a package target.
 
 Implements the [`PACKAGE_TARGET_RESOLVE`][algorithm-package-target-resolve] algorithm.
 
-> 👉 **Note**: Returns a promise if `target` is internal to the package and
+> \:point\_right: **Note**: Returns a promise if `target` is internal to the package and
 > [`packageResolve`](#packageresolvetspecifier-parent-conditions-mainfields-fs) returns a promise.
 
 #### Type Parameters
@@ -894,7 +929,7 @@ Read a `package.json` file.
 
 Implements the [`READ_PACKAGE_JSON`][algorithm-read-package-json] algorithm.
 
-> 👉 **Note**: Returns a promise if `fs.readFile` or `fs.stat` is async.
+> \:point\_right: **Note**: Returns a promise if `fs.readFile` or `fs.stat` is async.
 
 #### Overloads
 
@@ -929,7 +964,7 @@ function readPackageJson<T extends Awaitable<PackageJson | null>>(
   — the url of the package directory, the `package.json` file, or a module in the same directory as a `package.json`
 - `specifier` (`string` | `null` | `undefined`)
   — the module specifier that initiated the reading of the `package.json` file
-  > 👉 **note**: should be a `file:` url if `parent` is not a url
+  > \:point\_right: **note**: should be a `file:` url if `parent` is not a url
 - `parent` ([`ModuleId`](#moduleid) | `null` | `undefined`)
   — the url of the parent module
 - `fs` ([`FileSystem`](#filesystem) | `null` | `undefined`)
@@ -971,7 +1006,7 @@ Adds support for:
 - Rewrite file extensions
 - Scopeless `@types/*` resolution (i.e. `unist` -> `@types/unist`)
 
-> 👉 **Note**: Returns a promise if
+> \:point\_right: **Note**: Returns a promise if
 > [`moduleResolve`](#moduleresolvetspecifier-parent-conditions-mainfields-preservesymlinks-fs) returns a promise.
 
 #### Type Parameters
@@ -1015,7 +1050,7 @@ The URL of the file system root.
 
 Turn `url` into a *relative specifier*.
 
-> 👉 **Note**: The relative specifier will only have a file extension if `specifier` also has an extension.
+> \:point\_right: **Note**: The relative specifier will only have a file extension if `specifier` also has an extension.
 
 #### Parameters
 
@@ -1032,7 +1067,7 @@ Turn `url` into a *relative specifier*.
 
 Convert `id` to a `URL`.
 
-> 👉 **Note**: If `id` cannot be parsed as a `URL` and is also not a [builtin module][builtin-module],
+> \:point\_right: **Note**: If `id` cannot be parsed as a `URL` and is also not a [builtin module][builtin-module],
 > it will be assumed to be a path and converted to a [`file:` URL][file-url].
 
 #### Parameters
@@ -1282,7 +1317,7 @@ Options for retrieving source code (`interface`).
 
 - `encoding?` ([`BufferEncoding`](#bufferencoding) | `null` | `undefined`)
   — the encoding of the result
-  > 👉 **note**: used when the `file:` handler is called
+  > \:point\_right: **note**: used when the `file:` handler is called
 - `format?` ([`ModuleFormat`](#moduleformat) | `null` | `undefined`)
   — the module format hint
 - `fs?` ([`FileSystem`](#filesystem) | `null` | `undefined`)
@@ -1485,7 +1520,7 @@ Read the entire contents of a file (`interface`).
 
 Compute a canonical pathname by resolving `.`, `..`, and symbolic links (`interface`).
 
-> 👉 **Note**: A canonical pathname is not necessarily unique.
+> \:point\_right: **Note**: A canonical pathname is not necessarily unique.
 > Hard links and bind mounts can expose an entity through many pathnames.
 
 #### Type Parameters
@@ -1513,7 +1548,7 @@ Options for path alias resolution (`interface`).
   if `true`, the resolved specifier will be a [`file:` URL][file-url]
 - `aliases?` ([`Aliases`](#aliases) | `null` | `undefined`)
   — the path mappings dictionary
-  > 👉 **note**: paths should be relative to `cwd`
+  > \:point\_right: **note**: paths should be relative to `cwd`
 - `cwd?` ([`ModuleId`](#moduleid) | `null` | `undefined`)
   — the url of the directory to resolve non-absolute modules from
   - **default**: [`cwd()`](#cwd)
@@ -1528,27 +1563,27 @@ Options for path alias resolution (`interface`).
 
 - `aliases?` ([`Aliases`](#aliases) | `null` | `undefined`)
   — the path mappings dictionary
-  > 👉 **note**: paths should be relative to `cwd`
+  > \:point\_right: **note**: paths should be relative to `cwd`
 - `conditions?` ([`List<Condition>`](#condition) | `null` | `undefined`)
   — the list of export/import conditions
   - **default**: [`defaultConditions`](#defaultconditions)
-  > 👉 **note**: should be sorted by priority
+  > \:point\_right: **note**: should be sorted by priority
 - `cwd?` ([`ModuleId`](#moduleid) | `null` | `undefined`)
   — the url of the directory to resolve path `aliases` from
   - **default**: [`cwd()`](#cwd)
 - `ext?` ([`ChangeExtFn`](#changeextfnext) | `string` | `null` | `undefined`)
   — a replacement file extension or a function that returns a file extension.
-  > 👉 **note**: an empty string (`''`) or `null` will remove a file extension
+  > \:point\_right: **note**: an empty string (`''`) or `null` will remove a file extension
 - `extensions?` ([`List<string>`](#listt) | `null` | `undefined`)
   — the module extensions to probe for
   - **default**: [`defaultExtensions`](#defaultextensions)
-  > 👉 **note**: should be sorted by priority
+  > \:point\_right: **note**: should be sorted by priority
 - `fs?` ([`FileSystem`](#filesystem) | `null` | `undefined`)
   — the file system api
 - `mainFields?` ([`List<MainField>`](#mainfield) | `null` | `undefined`)
   — the list of legacy `main` fields
   - **default**: [`defaultMainFields`](#defaultmainfields)
-  > 👉 **note**: should be sorted by priority
+  > \:point\_right: **note**: should be sorted by priority
 - `preserveSymlinks?` (`boolean` | `null` | `undefined`)
   — whether to keep symlinks instead of resolving them
 

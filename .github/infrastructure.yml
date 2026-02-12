@@ -201,7 +201,7 @@ repository:
   automated_security_fixes: true
   default_branch: main
   delete_branch_on_merge: true
-  description: ECMAScript module utilities
+  description: ESM utilities for modern tooling
   has_issues: true
   has_projects: true
   has_wiki: false
