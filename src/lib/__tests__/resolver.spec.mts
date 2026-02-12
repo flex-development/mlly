@@ -151,17 +151,17 @@ describe('unit:lib/resolver', () => {
           fixtureConditions
         ],
         [
-          pkg.name + '/read-package-json',
-          pathe.pathToFileURL('scratch.mts'),
-          fixtureConditions
-        ],
-        [
           pkgKronk.name + '/parsers',
           pathe.pathToFileURL(`node_modules/${pkgKronk.name}/dist/index.mjs`)
         ],
         [
           pkgPathe.name,
           import.meta.url
+        ],
+        [
+          pkgPathe.name + '/dirname',
+          pathe.pathToFileURL('scratch.mts'),
+          fixtureConditions
         ],
         [
           subpathExports.name + '/lib/a',
@@ -320,13 +320,13 @@ describe('unit:lib/resolver', () => {
           browserConditions
         ],
         [
-          pkg.name,
-          import.meta.url
+          legacyMain1.name + '/f.mjs',
+          parent,
+          fixtureConditions
         ],
         [
-          pkg.name + '/internal/chain-or-call',
-          pathe.pathToFileURL('scratch.mts'),
-          fixtureConditions
+          pkg.name,
+          import.meta.url
         ],
         [
           pkg.name.slice(pkg.name.indexOf(pathe.sep) + 1),

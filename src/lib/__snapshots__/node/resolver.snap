@@ -37,9 +37,9 @@ exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolv
 
 exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("@flex-development/mlly") 1`] = `file://\${process.cwd()}/src/index.mts`;
 
-exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("@flex-development/mlly/read-package-json") 1`] = `file://\${process.cwd()}/src/lib/read-package-json.mts`;
-
 exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("@flex-development/pathe") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/pathe/dist/index.mjs`;
+
+exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("@flex-development/pathe/dirname") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/pathe/dist/lib/dirname.mjs`;
 
 exports[`unit:lib/resolver > fs (default) > moduleResolve > should return resolved URL ("css/index.css?inline") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/css/index.css?inline`;
 
@@ -126,16 +126,16 @@ exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`sp
 exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` resolves to unknown module (3) 1`] = `
 {
   "code": "ERR_MODULE_NOT_FOUND",
-  "url": "file://\${process.cwd()}/dist/index.mjs",
-  "message": "Cannot find module '\${process.cwd()}/dist/index.mjs' imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+  "url": "file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/f.mjs",
+  "message": "Cannot find module '\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/f.mjs' imported from \${process.cwd()}/__fixtures__/parent.mts"
 }
 `;
 
 exports[`unit:lib/resolver > fs (default) > moduleResolve > should throw if \`specifier\` resolves to unknown module (4) 1`] = `
 {
   "code": "ERR_MODULE_NOT_FOUND",
-  "url": "file://\${process.cwd()}/src/lib/internal/chain-or-call.mts",
-  "message": "Cannot find module '\${process.cwd()}/src/lib/internal/chain-or-call.mts' imported from \${process.cwd()}/scratch.mts"
+  "url": "file://\${process.cwd()}/dist/index.mjs",
+  "message": "Cannot find module '\${process.cwd()}/dist/index.mjs' imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
 }
 `;
 
@@ -376,9 +376,9 @@ exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return res
 
 exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("@flex-development/mlly") 1`] = `file://\${process.cwd()}/src/index.mts`;
 
-exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("@flex-development/mlly/read-package-json") 1`] = `file://\${process.cwd()}/src/lib/read-package-json.mts`;
-
 exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("@flex-development/pathe") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/pathe/dist/index.mjs`;
+
+exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("@flex-development/pathe/dirname") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/pathe/dist/lib/dirname.mjs`;
 
 exports[`unit:lib/resolver > fs (only async) > moduleResolve > should return resolved URL ("css/index.css?inline") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/css/index.css?inline`;
 
@@ -465,16 +465,16 @@ exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \
 exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` resolves to unknown module (3) 1`] = `
 {
   "code": "ERR_MODULE_NOT_FOUND",
-  "url": "file://\${process.cwd()}/dist/index.mjs",
-  "message": "Cannot find module '\${process.cwd()}/dist/index.mjs' imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
+  "url": "file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/f.mjs",
+  "message": "Cannot find module '\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/f.mjs' imported from \${process.cwd()}/__fixtures__/parent.mts"
 }
 `;
 
 exports[`unit:lib/resolver > fs (only async) > moduleResolve > should throw if \`specifier\` resolves to unknown module (4) 1`] = `
 {
   "code": "ERR_MODULE_NOT_FOUND",
-  "url": "file://\${process.cwd()}/src/lib/internal/chain-or-call.mts",
-  "message": "Cannot find module '\${process.cwd()}/src/lib/internal/chain-or-call.mts' imported from \${process.cwd()}/scratch.mts"
+  "url": "file://\${process.cwd()}/dist/index.mjs",
+  "message": "Cannot find module '\${process.cwd()}/dist/index.mjs' imported from \${process.cwd()}/src/lib/__tests__/resolver.spec.mts"
 }
 `;
 

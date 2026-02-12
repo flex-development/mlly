@@ -59,11 +59,7 @@
       "mlly": "./src/index.mts",
       "default": "./dist/index.mjs"
     },
-    "./package.json": "./package.json",
-    "./*": {
-      "mlly": "./src/lib/*.mts",
-      "default": "./dist/lib/*.mjs"
-    }
+    "./package.json": "./package.json"
   },
   "imports": {
     "#fixtures/tsconfig*.json": {
@@ -127,7 +123,8 @@
     ]
   },
   "scripts": {
-    "build": "yarn clean:build && tsc -p tsconfig.build.json --noEmit false && yarn minify:build && trash ./dist/{interfaces,types}/*.mjs || exit 0 && trash ./dist/internal/*.d.mts || exit 0",
+    "build": "yarn clean:build && tsc -p tsconfig.build.json --noEmit false && yarn bundle:dts && yarn minify:build",
+    "bundle:dts": "dtsroll --conditions=mlly && trash ./dist/{interfaces,types} && trash ./dist/{internal,lib}/index.d.mts || exit 0",
     "check:ci": "yarn dedupe --check && yarn check:format && yarn check:lint && yarn check:spelling && yarn typecheck && yarn check:types && yarn test:cov && yarn pack && yarn check:types:build && attw package.tgz && yarn clean:pack",
     "check:format": "dprint check --incremental=false",
     "check:lint": "eslint --exit-on-fatal-error --max-warnings 0 .",
@@ -200,6 +197,7 @@
     "cross-env": "10.1.0",
     "cspell": "9.6.4",
     "dprint": "0.51.1",
+    "dtsroll": "1.7.6",
     "editorconfig": "3.0.1",
     "esbuild": "0.27.3",
     "eslint": "9.39.2",
@@ -209,6 +207,7 @@
     "is-ci": "4.1.0",
     "msw": "2.12.10",
     "node-notifier": "10.0.1",
+    "pkg-size": "2.4.0",
     "remark": "15.0.1",
     "remark-cli": "12.0.1",
     "remark-lint-maximum-heading-length": "4.1.1",
