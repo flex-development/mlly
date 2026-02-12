@@ -33,10 +33,9 @@ export default resolveModule
  *
  * Adds support for:
  *
- * - Changing file extensions
- * - Directory index resolution
- * - Extensionless file resolution
+ * - Extensionless and directory index resolution
  * - Path alias resolution
+ * - Rewrite file extensions
  * - Scopeless `@types/*` resolution (i.e. `unist` -> `@types/unist`)
  *
  * > 👉 **Note**: Returns a promise if {@linkcode moduleResolve}
@@ -76,10 +75,9 @@ function resolveModule<T extends Awaitable<URL>>(
  *
  * Adds support for:
  *
- * - Changing file extensions
- * - Directory index resolution
- * - Extensionless file resolution
+ * - Extensionless and directory index resolution
  * - Path alias resolution
+ * - Rewrite file extensions
  * - Scopeless `@types/*` resolution (i.e. `unist` -> `@types/unist`)
  *
  * > 👉 **Note**: Returns a promise if {@linkcode moduleResolve}

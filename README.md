@@ -12,13 +12,15 @@
 [![vitest](https://img.shields.io/badge/-vitest-6e9f18?style=flat\&logo=vitest\&logoColor=ffffff)](https://vitest.dev)
 [![yarn](https://img.shields.io/badge/-yarn-2c8ebb?style=flat\&logo=yarn\&logoColor=ffffff)](https://yarnpkg.com)
 
-[ECMAScript module][node-esm] utilities.
+[ESM][node-esm] utilities for modern tooling — spec-compliant, developer-friendly, and fully typed.
 
 ## Contents
 
 - [What is this?](#what-is-this)
+- [Why this package?](#why-this-package)
 - [Install](#install)
 - [Use](#use)
+- [Design Goals](#design-goals)
 - [API](#api)
   - [`canParseUrl(input[, base])`](#canparseurlinput-base)
   - [`cwd()`](#cwd)
@@ -94,13 +96,44 @@
   - [`Stat`](#stat)
   - [`Stats`](#stats)
 - Additional Documentation
-  - [Resolution Algorithm](./docs/resolution-algorithm.md)
+  - [Resolution Algorithm][resolution-algorithm]
+- [Sponsors](#sponsors)
 - [Contribute](#contribute)
 
 ## What is this?
 
-`mlly` is a set of [ECMAScript module][node-esm] (ESM) utilities.\
-It exposes several tools to bridge the gap between developer experience and the current state of ECMAScript modules.
+`@flex-development/mlly` is a set of [ECMAScript module][node-esm] (ESM) utilities
+for building modern, Node.js-compatible tooling. It implements Node's [resolution algorithms][resolution-algorithm]
+and provides additional helpers for resolving modules in real-world projects.
+
+### Features
+
+- Comply with Node.js [resolution algorithms][resolution-algorithm]
+  - Resolve `exports` and `imports` maps (including subpaths + patterns)
+  - Support condition-based resolution (`development`, `production`, custom conditions, etc.)
+  - Support configurable `main` fields for legacy / fallback entrypoints
+- Enhance DX/UX with high-level [`resolveModule`](#resolvemoduletspecifier-parent-options) ergonomics
+  on top of spec-compliant resolution
+  - Extensionless and directory index resolution
+  - Path alias resolution (TypeScript-style mappings)
+  - Rewrite file extensions (useful for TS/MTS/CTS, build outputs, or dual publishing)
+  - Scopeless `@types/*` resolution (`unist` → `@types/unist`)
+- Utilities for specifier classification and conversion
+- Work with custom file system adapters (sync/async, in-memory, browser)
+
+## Why this package?
+
+Node's ESM support is powerful, but writing tooling around it can be painful.
+
+If you're building a CLI, bundler, runtime tool, or plugin system, you often need to:
+
+- resolve modules the same way Node does
+- support `exports` / `imports` correctly
+- work with custom resolution conditions
+- handle extensionless paths, directory indexes, and TypeScript configurations
+
+`@flex-development/mlly` provides these building blocks in a spec-aligned way,
+while also bridging gaps in developer experience.
 
 ## Install
 
@@ -193,6 +226,16 @@ const resolved = resolveModule(pkg.name, import.meta.url, {
 
 console.dir(resolved) // file:///Users/lex/Projects/flex-development/mlly/src/
 ```
+
+## Design Goals
+
+This package is built around a few core goals:
+
+- Spec-compliant behavior where it matters (resolution rules, `exports`/`imports`)
+- Developer-friendly ergonomics for real-world projects and workflows
+- TypeScript-first APIs with strong typing and predictable return values
+- Composable building blocks (low-level primitives + high-level helpers)
+- Testability and deterministic behavior across environments
 
 ## API
 
@@ -923,10 +966,9 @@ Implements the [`ESM_RESOLVE`][algorithm-esm-resolve] algorithm, mostly \:wink:.
 
 Adds support for:
 
-- Changing file extensions
-- Directory index resolution
-- Extensionless file resolution
+- Extensionless and directory index resolution
 - Path alias resolution
+- Rewrite file extensions
 - Scopeless `@types/*` resolution (i.e. `unist` -> `@types/unist`)
 
 > 👉 **Note**: Returns a promise if
@@ -1040,7 +1082,7 @@ type Awaitable<T> = PromiseLike<T> | T
 #### Type Parameters
 
 - `T` (`any`)
-  - the value
+  — the value
 
 ### `BufferEncodingMap`
 
@@ -1282,7 +1324,7 @@ type List<T = unknown> = ReadonlySet<T> | readonly T[]
 #### Type Parameters
 
 - `T` (`any`, optional)
-  — list item type
+  — the list item type
 
 ### `MainFieldMap`
 
@@ -1539,12 +1581,16 @@ An object describing a directory or file (`interface`).
 - `isFile` ([`IsFile`](#isfile))
   — check if the stats object describes a file
 
+## Sponsors
+
+If you find this package helpful, consider sponsoring to support maintenance, tests, and long-term stability.
+
 ## Contribute
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-This project has a [code of conduct](./CODE_OF_CONDUCT.md). By interacting with this repository, organization, or
-community you agree to abide by its terms.
+This project has a [code of conduct](./CODE_OF_CONDUCT.md).
+By interacting with this repository, organization, or community you agree to abide by its terms.
 
 [algorithm-esm-resolve]: ./docs/resolution-algorithm.md#esm_resolvespecifier-parent-conditions-mainfields-preservesymlinks-extensionformatmap
 
@@ -1603,6 +1649,8 @@ community you agree to abide by its terms.
 [pkg-imports]: https://github.com/flex-development/pkg-types/blob/main/src/imports.ts
 
 [pkg-package-json]: https://github.com/flex-development/pkg-types/blob/main/src/package-json.ts
+
+[resolution-algorithm]: ./docs/resolution-algorithm.md
 
 [subpath-imports]: https://nodejs.org/api/packages.html#subpath-imports
 
