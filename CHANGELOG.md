@@ -1,3 +1,17 @@
+## [1.0.0-beta.6](https://github.com/flex-development/mlly/compare/1.0.0-beta.5...1.0.0-beta.6) (2026-02-12)
+
+### ⚠ BREAKING CHANGES
+
+- **lib:** [`resolveModule`] support extension rewrite map
+
+### :package: Build
+
+- [[`38c36b4`](https://github.com/flex-development/mlly/commit/38c36b4a6df62494e87aeb6ba7d9ce8466ab22cc)] **deps-dev:** Bump vite-tsconfig-paths from 6.1.0 to 6.1.1 ([#975](https://github.com/flex-development/mlly/issues/975))
+
+### :sparkles: Features
+
+- [[`efdcc40`](https://github.com/flex-development/mlly/commit/efdcc40de2380932f7cfac80b0d7e96a2cdb8e48)] **lib:** [`resolveModule`] support extension rewrite map
+
 ## [1.0.0-beta.5](https://github.com/flex-development/mlly/compare/1.0.0-beta.4...1.0.0-beta.5) (2026-02-12)
 
 ### :package: Build
@@ -1307,6 +1321,7 @@
 - [[`4615851`](https://github.com/flex-development/mlly/commit/46158510fdd0e3d8e0e60757290a655606ad836e)] **resolve:** [options] pass original module specifier to `ext`
 - [[`0266ca9`](https://github.com/flex-development/mlly/commit/0266ca9a5593d0c66e950ba1fe2c8f6df8422ff9)] **resolve:** sort `RESOLVE_EXTENSIONS` according to priority
 - [[`36c4b74`](https://github.com/flex-development/mlly/commit/36c4b7475c9bb6c924f5e75c8d6d215a8d23e79c)] **specifiers:** [`toBareSpecifier`] improve `exports` path search
+
 
 
 
