@@ -26,7 +26,7 @@ exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("mo
 
 exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("node:test") 1`] = `"node:test"`;
 
-exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("subpath-exports/lib/a.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/lib/a.js`;
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("subpath-exports/lib/a.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/lib/a`;
 
 exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("unist") 1`] = `file://\${process.cwd()}/node_modules/@types/unist/index.d.ts`;
 
@@ -56,6 +56,6 @@ exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL (
 
 exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("node:test") 1`] = `"node:test"`;
 
-exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("subpath-exports/lib/a.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/lib/a.js`;
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("subpath-exports/lib/a.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/lib/a`;
 
 exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("unist") 1`] = `file://\${process.cwd()}/node_modules/@types/unist/index.d.ts`;

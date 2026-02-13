@@ -24,7 +24,7 @@ export default resolveAlias
  * @param {string} specifier
  *  The specifier using an alias
  * @param {ResolveAliasOptions | null | undefined} [options]
- *  Alias resolution options
+ *  Options for alias resolution
  * @return {string | null}
  *  The specifier of the aliased module
  */

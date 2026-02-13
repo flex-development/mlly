@@ -18,7 +18,6 @@ import {
 } from '@flex-development/errnode'
 import type {
   Awaitable,
-  ChangeExtFn,
   ModuleId,
   ResolveModuleOptions
 } from '@flex-development/mlly'
@@ -56,7 +55,7 @@ export default resolveModule
  * @param {ModuleId} parent
  *  The URL of the parent module
  * @param {ResolveModuleOptions | null | undefined} [options]
- *  Module resolution options
+ *  Options for module resolution
  * @return {T}
  *  The resolved URL
  * @throws {NodeError}
@@ -95,7 +94,7 @@ function resolveModule<T extends Awaitable<URL>>(
  * @param {ModuleId} parent
  *  The URL of the parent module
  * @param {ResolveModuleOptions | null | undefined} [options]
- *  Resolution options
+ *  Options for module resolution
  * @return {Awaitable<URL>}
  *  The resolved URL
  * @throws {NodeError}
@@ -106,6 +105,8 @@ function resolveModule(
   parent: ModuleId,
   options?: ResolveModuleOptions | null | undefined
 ): Awaitable<URL> {
+  specifier = resolveAlias(specifier, { ...options, parent }) ?? specifier
+
   /**
    * The resolved URL.
    *
@@ -115,7 +116,7 @@ function resolveModule(
 
   try {
     resolved = moduleResolve(
-      resolveAlias(specifier, { ...options, parent }) ?? specifier,
+      specifier,
       parent,
       options?.conditions,
       options?.mainFields,
@@ -128,41 +129,12 @@ function resolveModule(
 
   if (isPromise(resolved)) {
     return resolved.then(
-      (url: URL): URL => changeExt(url, specifier, options?.ext),
+      (url: URL): URL => rewriteExtension(url, specifier, options?.ext),
       (e: unknown): Awaitable<URL> => retry(e, specifier, parent, options)
     )
   }
 
-  return changeExt(resolved, specifier, options?.ext)
-}
-
-/**
- * @this {void}
- *
- * @param {URL} url
- *  The resolved URL
- * @param {string} specifier
- *  The module specifier being resolved
- * @param {ChangeExtFn | string | null | undefined} [ext]
- *  The replacement file extension or a function that returns a file extension
- * @return {URL}
- *  The modified `url`
- */
-function changeExt(
-  this: void,
-  url: URL,
-  specifier: string,
-  ext?: ChangeExtFn | string | null | undefined
-): URL {
-  if (url.protocol === 'file:' && ext !== undefined) {
-    url.href = typeof ext === 'function'
-      ? pathe.changeExt(url.href, ext(url, specifier))
-      : pathe.changeExt(url.href, ext)
-
-    url = new URL(pathe.toPosix(url.href).replace(/\/index$/, pathe.sep))
-  }
-
-  return url
+  return rewriteExtension(resolved, specifier, options?.ext)
 }
 
 /**
@@ -271,7 +243,7 @@ function retry(
         )
 
         if (!isPromise(resolved)) {
-          return changeExt(resolved, specifier, options?.ext)
+          return rewriteExtension(resolved, specifier, options?.ext)
         }
       } catch {
         continue // swallow error to continue resolution attempts.
@@ -284,7 +256,7 @@ function retry(
     if (promises.length) {
       return Promise.all(promises).then(resolved => {
         for (const url of resolved) {
-          if (url) return changeExt(url, specifier, options?.ext)
+          if (url) return rewriteExtension(url, specifier, options?.ext)
         }
 
         throw e // could not resolve specifier.
@@ -293,4 +265,49 @@ function retry(
   }
 
   throw e
+}
+
+/**
+ * @this {void}
+ *
+ * @param {URL} url
+ *  The resolved URL
+ * @param {string} specifier
+ *  The module specifier being resolved
+ * @param {ResolveModuleOptions['ext']} [ext]
+ *  The replacement file extension record
+ *  or a function that returns a file extension
+ * @return {URL}
+ *  The modified `url`
+ */
+function rewriteExtension(
+  this: void,
+  url: URL,
+  specifier: string,
+  ext?: ResolveModuleOptions['ext']
+): URL {
+  if (url.protocol === 'file:' && ext !== undefined) {
+    /**
+     * The replacement file extension.
+     *
+     * @var {string | false | null | undefined} replacer
+     */
+    let replacer: string | false | null | undefined
+
+    if (typeof ext === 'function') {
+      replacer = ext(url, specifier)
+    } else if (typeof ext === 'object' && ext) {
+      replacer = pathe.extToValue(url.href, ext)
+    } else {
+      replacer = ext
+    }
+
+    // rewrite file extension.
+    url.href = pathe.changeExt(url.href, replacer || null)
+
+    // replace '/index' ending with '/'.
+    url = new URL(pathe.toPosix(url.href).replace(/\/index$/, pathe.sep))
+  }
+
+  return url
 }

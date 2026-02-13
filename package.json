@@ -72,9 +72,7 @@
       "default": "./dist/interfaces/*.d.mts"
     },
     "#internal/fs": {
-      "types": {
-        "mlly": "./src/internal/fs.d.mts"
-      },
+      "types": "./src/internal/fs.d.mts",
       "browser": {
         "mlly": "./src/internal/fs.browser.mts",
         "default": "./dist/internal/fs.browser.mjs"

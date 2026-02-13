@@ -5,16 +5,17 @@
 
 import type {
   Aliases,
-  ChangeExtFn,
   Condition,
+  ExtensionRewrites,
   FileSystem,
+  GetNewExtension,
   List,
   MainField,
   ModuleId
 } from '@flex-development/mlly'
 
 /**
- * Module resolution options.
+ * Options for module resolution.
  */
 interface ResolveModuleOptions {
   /**
@@ -49,14 +50,17 @@ interface ResolveModuleOptions {
   cwd?: ModuleId | null | undefined
 
   /**
-   * A replacement file extension or a function that returns a file extension.
+   * A replacement file extension, a record of replacement file extensions,
+   * or a function that returns a replacement file extension.
    *
-   * > 👉 **Note**: An empty string (`''`) or `null` will
-   * > remove a file extension.
+   * > 👉 **Note**: Replacement file extensions are normalized and do not
+   * > need to begin with a dot character (`'.'`); an empty string (`''`),
+   * > `false`, or `null` will remove an extension.
    *
-   * @see {@linkcode ChangeExtFn}
+   * @see {@linkcode ExtensionRewrites}
+   * @see {@linkcode GetNewExtension}
    */
-  ext?: ChangeExtFn | string | null | undefined
+  ext?: ExtensionRewrites | GetNewExtension | string | false | null | undefined
 
   /**
    * The module extensions to probe for.

@@ -1,14 +1,14 @@
 /**
- * @file Type Tests - ChangeExtFn
- * @module mlly/types/tests/unit-d/ChangeExtFn
+ * @file Type Tests - GetNewExtension
+ * @module mlly/types/tests/unit-d/GetNewExtension
  */
 
-import type TestSubject from '#types/change-ext-fn'
+import type TestSubject from '#types/get-new-extension'
 import type { EmptyString, Ext } from '@flex-development/mlly'
 
-describe('unit-d:types/ChangeExtFn', () => {
-  type Extension = EmptyString | Ext
-  type Subject = TestSubject<Extension>
+describe('unit-d:types/GetNewExtension', () => {
+  type T = EmptyString | Ext | false | null | undefined
+  type Subject = TestSubject<T>
 
   it('should match [this: void]', () => {
     expectTypeOf<Subject>().thisParameter.toEqualTypeOf<void>()
@@ -21,8 +21,8 @@ describe('unit-d:types/ChangeExtFn', () => {
   })
 
   describe('returns', () => {
-    it('should return Ext', () => {
-      expectTypeOf<Subject>().returns.toEqualTypeOf<Extension>()
+    it('should return T', () => {
+      expectTypeOf<Subject>().returns.toEqualTypeOf<T>()
     })
   })
 })

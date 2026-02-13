@@ -52,7 +52,7 @@ describe('unit:lib/resolveModule', () => {
       [pkg.name + '/package.json', import.meta.url],
       [pkgKronk.name, import.meta.url],
       [pkgPathe.name + '/dot', import.meta.url],
-      [subpathExports.name + '/lib/a.js', parent]
+      [subpathExports.name + '/lib/a.js', parent, { ext: { '.js': false } }]
     ])('should return resolved URL (%j)', async (
       specifier,
       parent,

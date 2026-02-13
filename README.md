@@ -23,6 +23,7 @@
   - [Resolve like Node.js](#resolve-like-nodejs)
   - [Resolve with custom conditions](#resolve-with-custom-conditions)
   - [Resolve a directory index](#resolve-a-directory-index)
+  - [Resolve path aliases](#resolve-path-aliases)
   - [Rewrite an extension](#rewrite-an-extension)
   - [Use a custom file system](#use-a-custom-file-system)
 - [Use Cases](#use-cases)
@@ -67,7 +68,6 @@
   - [`Awaitable<T>`](#awaitablet)
   - [`BufferEncodingMap`](#bufferencodingmap)
   - [`BufferEncoding`](#bufferencoding)
-  - [`ChangeExtFn<[Ext]>`](#changeextfnext)
   - [`ConditionMap`](#conditionmap)
   - [`Condition`](#condition)
   - [`Dot`](#dot)
@@ -75,8 +75,10 @@
   - [`EmptyObject`](#emptyobject)
   - [`EmptyString`](#emptystring)
   - [`Ext`](#ext)
+  - [`ExtensionRewrites`](#extensionrewrites)
   - [`FileContent`](#filecontent)
   - [`FileSystem`](#filesystem)
+  - [`GetNewExtension<[T]>`](#getnewextensiont)
   - [`GetSourceContext`](#getsourcecontext)
   - [`GetSourceHandler`](#getsourcehandler)
   - [`GetSourceHandlers`](#getsourcehandlers)
@@ -213,6 +215,39 @@ import { resolveModule } from '@flex-development/mlly'
 const resolved: URL = resolveModule('./src/lib', import.meta.url, {
   extensions: ['.mts']
 })
+```
+
+### Resolve path aliases
+
+```ts
+import { resolveModule, type Aliases } from '@flex-development/mlly'
+
+/**
+ * The path mappings dictionary.
+ *
+ * @const {Aliases} aliases
+ */
+const aliases: Aliases = {
+  '@/internal': './src/internal',
+  '@/internal/*': './src/internal/*'
+}
+
+/**
+ * The resolved directory URL.
+ *
+ * @const {URL} directory
+ */
+const directory: URL = resolveModule('@/internal', import.meta.url, { aliases })
+
+/**
+ * The resolved file URL.
+ *
+ * @const {URL} file
+ */
+const file: URL = resolveModule('@/internal/fs', import.meta.url, { aliases })
+
+console.dir(directory)
+console.dir(file)
 ```
 
 ### Rewrite an extension
@@ -987,7 +1022,7 @@ Resolve an aliased `specifier`.
 - `specifier` (`string`)
   — the specifier using an alias
 - `options` ([`ResolveAliasOptions`](#resolvealiasoptions) | `null` | `undefined`)
-  — alias resolution options
+  — options for alias resolution
 
 #### Returns
 
@@ -1021,7 +1056,7 @@ Adds support for:
 - `parent` ([`ModuleId`](#moduleid))
   — the url of the parent module
 - `options` ([`ResolveModuleOptions`](#resolvemoduleoptions))
-  — module resolution options
+  — options for module resolution
 
 #### Returns
 
@@ -1144,34 +1179,6 @@ They will be added to this union automatically.
 type BufferEncoding = BufferEncodingMap[keyof BufferEncodingMap]
 ```
 
-### `ChangeExtFn<[Ext]>`
-
-Get a new file extension for `url` (`type`).
-
-Returning an empty string (`''`), `null`, or `undefined` will remove the current file extension.
-
-```ts
-type ChangeExtFn<
-  Ext extends string | null | undefined = string | null | undefined
-> = (this: void, url: URL, specifier: string) => Ext
-```
-
-#### Type Parameters
-
-- `Ext` (`string` | `null` | `undefined`, optional)
-  — the new file extension
-
-#### Parameters
-
-- `url` (`URL`)
-  — the resolved module URL
-- `specifier` (`string`)
-  — the module specifier being resolved
-
-#### Returns
-
-(`Ext`) The new file extension
-
 ### `ConditionMap`
 
 Registry of export/import conditions (`interface`).
@@ -1237,6 +1244,20 @@ A file extension (`type`).
 type Ext = `${Dot}${string}`
 ```
 
+### `ExtensionRewrites`
+
+Record, where each key is the file extension of a module specifier
+and each value is a replacement file extension (`type`).
+
+> 👉 **Note**: Replacement file extensions are normalized and do not need to begin with a dot character (`'.'`);
+> falsy values will remove an extension.
+
+```ts
+type ExtensionRewrites = {
+  [K in EmptyString | Ext]?: string | false | null | undefined
+}
+```
+
 ### `FileContent`
 
 Union of values that can occur where file content is expected (`type`).
@@ -1257,6 +1278,38 @@ The file system API (`interface`).
   — compute a canonical pathname by resolving `.`, `..`, and symbolic links
 - `stat` ([`Stat`](#stat))
   — get information about a directory or file
+
+### `GetNewExtension<[T]>`
+
+Get a new file extension for a `url` (`type`).
+
+Returning an empty string (`''`), `false`, `null`, or `undefined` will remove the current file extension.
+
+```ts
+type GetNewExtension<
+  T extends string | false | null | undefined =
+    | string
+    | false
+    | null
+    | undefined
+> = (this: void, url: URL, specifier: string) => T
+```
+
+#### Type Parameters
+
+- `T` (`string` | `false` | `null` | `undefined`, optional)
+  — the new file extension
+
+#### Parameters
+
+- `url` (`URL`)
+  — the resolved module URL
+- `specifier` (`string`)
+  — the module specifier being resolved
+
+#### Returns
+
+(`T`) The new file extension
 
 ### `GetSourceContext`
 
@@ -1557,7 +1610,7 @@ Options for path alias resolution (`interface`).
 
 ### `ResolveModuleOptions`
 
-Options for path alias resolution (`interface`).
+Options for module resolution (`interface`).
 
 #### Properties
 
@@ -1571,9 +1624,12 @@ Options for path alias resolution (`interface`).
 - `cwd?` ([`ModuleId`](#moduleid) | `null` | `undefined`)
   — the url of the directory to resolve path `aliases` from
   - **default**: [`cwd()`](#cwd)
-- `ext?` ([`ChangeExtFn`](#changeextfnext) | `string` | `null` | `undefined`)
-  — a replacement file extension or a function that returns a file extension.
-  > \:point\_right: **note**: an empty string (`''`) or `null` will remove a file extension
+  <!--lint disable-->
+- `ext?` ([`ExtensionRewrites`](#extensionrewrites) | [`GetNewExtension`](#getnewextensiont) | `false` | `string` | `null` | `undefined`)
+  — a replacement file extension, a record of replacement file extensions, or a function that returns a replacement file extension
+  <!--lint enable-->
+  > \:point\_right: **note**: replacement file extensions are normalized and do not need to begin
+  > with a dot character (`'.'`); an empty string (`''`), `false`, or `null` will remove an extension
 - `extensions?` ([`List<string>`](#listt) | `null` | `undefined`)
   — the module extensions to probe for
   - **default**: [`defaultExtensions`](#defaultextensions)

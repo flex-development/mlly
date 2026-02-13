@@ -5,9 +5,10 @@
 
 import type TestSubject from '#interfaces/resolve-module-options'
 import type {
-  ChangeExtFn,
   Condition,
+  ExtensionRewrites,
   FileSystem,
+  GetNewExtension,
   List,
   MainField
 } from '@flex-development/mlly'
@@ -24,10 +25,12 @@ describe('unit-d:interfaces/ResolveModuleOptions', () => {
       .toEqualTypeOf<Nilable<List<Condition>>>()
   })
 
-  it('should match [ext?: ChangeExtFn | string | null | undefined]', () => {
-    expectTypeOf<TestSubject>()
-      .toHaveProperty('ext')
-      .toEqualTypeOf<Nilable<ChangeExtFn | string>>()
+  it('should match [ext?: ExtensionRewrites | GetNewExtension | string | false | null | undefined]', () => {
+    // Arrange
+    type Expect = Nilable<ExtensionRewrites | GetNewExtension | string | false>
+
+    // Expect
+    expectTypeOf<TestSubject>().toHaveProperty('ext').toEqualTypeOf<Expect>()
   })
 
   it('should match [extensions?: List<string> | null | undefined]', () => {
