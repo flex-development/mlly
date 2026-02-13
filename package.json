@@ -1,7 +1,7 @@
 {
   "name": "@flex-development/mlly",
   "description": "ESM utilities for modern tooling — spec-compliant, developer-friendly, and fully typed",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "keywords": [
     "bundle",
     "cli",
