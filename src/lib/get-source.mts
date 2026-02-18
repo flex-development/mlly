@@ -3,9 +3,8 @@
  * @module mlly/lib/getSource
  */
 
-import chainOrCall from '#internal/chain-or-call'
 import fs from '#internal/fs'
-import isPromise from '#internal/is-promise'
+import identity from '#internal/identity'
 import process from '#internal/process'
 import isFile from '#lib/is-file'
 import isModuleId from '#lib/is-module-id'
@@ -24,6 +23,7 @@ import type {
   ModuleId,
   Protocol
 } from '@flex-development/mlly'
+import when from '@flex-development/when'
 import { ok } from 'devlop'
 
 export default getSource
@@ -157,21 +157,7 @@ function getSource(
     )
   }
 
-  /**
-   * The source code.
-   *
-   * @var {ReturnType<GetSourceHandler>} code
-   */
-  let code: ReturnType<GetSourceHandler> = handle.call(context, url)
-
-  // resolve source code.
-  if (isPromise(code)) {
-    void code.then(resolved => (code = resolved))
-  }
-
-  return chainOrCall(code, () => {
-    return ok(!isPromise(code), 'expected `code` to be resolved'), code
-  })
+  return when(handle.call(context, url), identity)
 }
 
 /**
@@ -208,15 +194,8 @@ function data(this: GetSourceContext, url: URL): Buffer {
 function file(this: GetSourceContext, url: URL): Awaitable<FileContent | null> {
   ok(url.protocol === 'file:', 'expected `file:` URL')
 
-  /**
-   * Whether the file exists.
-   *
-   * @const {Awaitable<boolean>} exists
-   */
-  const exists: Awaitable<boolean> = isFile(url, this.fs)
-
-  return chainOrCall(exists, isFile => {
-    return isFile ?? exists ? this.fs.readFile(url, this.encoding) : null
+  return when(isFile(url, this.fs), exists => {
+    return exists ? this.fs.readFile(url, this.encoding) : null
   })
 }
 

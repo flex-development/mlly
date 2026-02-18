@@ -4,7 +4,6 @@
  */
 
 import fsa from '#fixtures/fsa'
-import isPromise from '#internal/is-promise'
 import testSubject from '#lib/get-source'
 import fsCaseType, { type FileSystemCaseType } from '#tests/utils/fs-case-type'
 import {
@@ -14,6 +13,7 @@ import {
 } from '@flex-development/errnode'
 import type { FileSystem } from '@flex-development/mlly'
 import pathe from '@flex-development/pathe'
+import { isThenable } from '@flex-development/when'
 
 describe('unit:lib/getSource', () => {
   describe.each<[fst: FileSystemCaseType, fs?: FileSystem | null | undefined]>([
@@ -76,7 +76,7 @@ describe('unit:lib/getSource', () => {
         const result = testSubject(id, { ...options, fs })
 
         // Expect
-        expect(result).to.not.satisfy(isPromise)
+        expect(result).to.not.satisfy(isThenable)
         expect(result).to.not.be.a('string')
         expect(String(result)).toMatchSnapshot()
       })
@@ -116,7 +116,7 @@ describe('unit:lib/getSource', () => {
         const result = testSubject(id, { ...options, fs })
 
         // Expect
-        expect(result).to.satisfy(isPromise)
+        expect(result).to.satisfy(isThenable)
         expect(await result).toMatchSnapshot()
       })
     })

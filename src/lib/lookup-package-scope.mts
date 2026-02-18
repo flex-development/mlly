@@ -3,7 +3,6 @@
  * @module mlly/lib/lookupPackageScope
  */
 
-import isPromise from '#internal/is-promise'
 import canParseUrl from '#lib/can-parse-url'
 import isFile from '#lib/is-file'
 import isModuleId from '#lib/is-module-id'
@@ -16,6 +15,7 @@ import type {
   ModuleId
 } from '@flex-development/mlly'
 import pathe from '@flex-development/pathe'
+import { isThenable } from '@flex-development/when'
 
 export default lookupPackageScope
 
@@ -160,7 +160,7 @@ function lookupPackageScope(
       exists = isFile(packageUrl, fs)
 
       // collect promises, or return scope url if manifest exists.
-      if (isPromise<boolean>(exists)) {
+      if (isThenable(exists)) {
         promises.push(exists.then(isFile => {
           if (!isFile || context.scope) return
           return context.scope = scopeUrl, void 0

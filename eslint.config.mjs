@@ -34,14 +34,7 @@ const config = [
     }
   },
   {
-    files: ['src/internal/__tests__/is-promise.spec.mts'],
-    rules: {
-      'unicorn/no-thenable': 0
-    }
-  },
-  {
     files: [
-      'src/internal/chain-or-call.mts',
       'src/lib/get-source.mts',
       'src/lib/is-directory.mts',
       'src/lib/is-file.mts',

@@ -3,7 +3,6 @@
  * @module mlly/lib/readPackageJson
  */
 
-import chainOrCall from '#internal/chain-or-call'
 import dfs from '#internal/fs'
 import canParseUrl from '#lib/can-parse-url'
 import isFile from '#lib/is-file'
@@ -20,6 +19,7 @@ import type {
 } from '@flex-development/mlly'
 import pathe from '@flex-development/pathe'
 import type { PackageJson } from '@flex-development/pkg-types'
+import when from '@flex-development/when'
 
 export default readPackageJson
 
@@ -139,33 +139,19 @@ function readPackageJson(
      */
     const url: URL = new URL('package.json', id)
 
-    /**
-     * Whether the file exists.
-     *
-     * @const {Awaitable<boolean>} exists
-     */
-    const exists: Awaitable<boolean> = isFile(url, fs ??= dfs)
-
     // read package manifest.
-    return chainOrCall(exists, isFile => {
-      if (!(isFile ?? exists)) return null
-
-      /**
-       * The stringified contents of the package manifest file.
-       *
-       * @const {Awaitable<string>} contents
-       */
-      const contents: Awaitable<string> = fs!.readFile(url, 'utf8')
+    return when(isFile(url, fs ??= dfs), exists => {
+      if (!exists) return null
 
       // parse file content.
-      return chainOrCall(contents, (data = contents as string) => {
+      return when(fs!.readFile(url, 'utf8'), contents => {
         try {
           /**
            * The parsed file contents.
            *
            * @const {unknown} parsed
            */
-          const parsed: unknown = JSON.parse(data)
+          const parsed: unknown = JSON.parse(contents)
 
           if (isPackageJson(parsed)) return parsed
           throw new Error('Invalid package manifest object', { cause: parsed })

@@ -38,7 +38,7 @@ describe('unit:lib/resolveModule', () => {
     })
 
     it.each<Case>([
-      ['#internal/chain-or-call', import.meta.url, { conditions, ext: 'mjs' }],
+      ['#internal/identity', import.meta.url, { conditions, ext: 'mjs' }],
       ['../../lib', import.meta.url, { ext: () => 'mjs' }],
       ['@types/unist', import.meta.url],
       ['data:text/javascript,', import.meta.url],

@@ -3,15 +3,12 @@
  * @module mlly/lib/resolver
  */
 
-import chainOrCall from '#internal/chain-or-call'
 import chars from '#internal/chars'
 import checkInvalidSegments from '#internal/check-invalid-segments'
-import constant from '#internal/constant'
 import dfs from '#internal/fs'
 import identity from '#internal/identity'
 import invalidPackageTarget from '#internal/invalid-package-target'
 import invalidSubpath from '#internal/invalid-subpath'
-import isPromise from '#internal/is-promise'
 import canParseUrl from '#lib/can-parse-url'
 import defaultConditions from '#lib/default-conditions'
 import defaultMainFields from '#lib/default-main-fields'
@@ -66,6 +63,7 @@ import type {
   Target,
   TargetList
 } from '@flex-development/pkg-types'
+import { isThenable, when } from '@flex-development/when'
 import { ok } from 'devlop'
 
 declare module '@flex-development/errnode' {
@@ -237,7 +235,7 @@ function legacyMainResolve(
         exists = isFile(url, fs) // check if entry point exists.
 
         // collect promises, or return url if entry point exists.
-        if (isPromise<boolean>(exists)) {
+        if (isThenable(exists)) {
           promises.push(exists.then(isFile => {
             if (!isFile || context.url) return
             return context.url = url, void 0
@@ -435,13 +433,8 @@ function moduleResolve(
     }
   }
 
-  if (isPromise<URL>(resolved)) {
-    void resolved.then(url => (resolved = url), constant(null))
-  }
-
-  return chainOrCall(resolved, (): Awaitable<URL> => {
-    ok(isModuleId(resolved), 'expected `resolved` to be a URL')
-    if (resolved.protocol !== 'file:') return resolved
+  return when(resolved, url => {
+    if (url.protocol !== 'file:') return url
 
     /**
      * The path to the parent module.
@@ -449,13 +442,6 @@ function moduleResolve(
      * @const {string} parentPath
      */
     const parentPath: string = pathe.fileURLToPath(parent)
-
-    /**
-     * The resolved URL.
-     *
-     * @var {URL} url
-     */
-    let url: URL = resolved
 
     // check for encoded separators.
     if (/%2f|%5c/i.test(url.pathname)) {
@@ -469,15 +455,8 @@ function moduleResolve(
       throw new ERR_INVALID_MODULE_SPECIFIER(url.pathname, reason, parentPath)
     }
 
-    /**
-     * Whether the resolved URL points to a directory.
-     *
-     * @const {Awaitable<boolean>} directory
-     */
-    const directory: Awaitable<boolean> = isDirectory(url, fs)
-
-    return chainOrCall(directory, (isDirectory?: boolean): Awaitable<URL> => {
-      if (isDirectory ?? directory) {
+    return when(isDirectory(url, fs), isDirectory => {
+      if (isDirectory) {
         /**
          * The node error.
          *
@@ -491,29 +470,17 @@ function moduleResolve(
         throw error
       }
 
-      /**
-       * Whether the resolved URL points to a file.
-       *
-       * @const {Awaitable<boolean>} file
-       */
-      const file: Awaitable<boolean> = isFile(url, fs)
+      return when(isFile(url, fs), isFile => {
+        if (isFile) {
+          if (!preserveSymlinks) {
+            return when((fs ?? dfs).realpath(url), realpath => {
+              const { hash, search } = url
+              url = new URL(pathe.pathToFileURL(realpath))
+              return url.hash = hash, url.search = search, url
+            })
+          }
 
-      return chainOrCall(file, (isFile?: boolean): Awaitable<URL> => {
-        if (isFile ?? file) {
-          if (preserveSymlinks) return url
-
-          /**
-           * The canonical pathname of the resolved URL.
-           *
-           * @const {Awaitable<string>} canonical
-           */
-          const canonical: Awaitable<string> = (fs ?? dfs).realpath(url)
-
-          return chainOrCall(canonical, (realpath?: string): Awaitable<URL> => {
-            const { hash, search } = url
-            url = new URL(pathe.pathToFileURL(realpath ?? canonical as string))
-            return url.hash = hash, url.search = search, url
-          })
+          return url
         }
 
         throw new ERR_MODULE_NOT_FOUND(url.pathname, parentPath, url)
@@ -707,7 +674,7 @@ function packageExportsResolve(
       )
     }
 
-    ok(!isPromise(resolved), 'expected `resolved` not to be a promise')
+    ok(!isThenable(resolved), 'expected `resolved` not to be a promise')
     if (resolved) return resolved
   }
 
@@ -944,35 +911,9 @@ function packageImportsResolve(
     )
   }
 
-  /**
-   * The package scope URL.
-   *
-   * @var {Awaitable<URL | null>} scope
-   */
-  let scope: Awaitable<URL | null> = lookupPackageScope(parent, null, fs)
-
-  // capture resolved scope url.
-  if (isPromise(scope)) {
-    void scope.then(resolved => (scope = resolved), constant(null))
-  }
-
-  return chainOrCall(scope, (): Awaitable<URL> => {
-    ok(!isPromise(scope), 'expected `scope` to be resolved')
-
-    /**
-     * The package manifest.
-     *
-     * @const {Awaitable<PackageJson | null>} pjson
-     */
-    const pjson: Awaitable<PackageJson | null> = readPackageJson(
-      scope,
-      specifier,
-      parent,
-      fs
-    )
-
-    return chainOrCall(pjson, (pkg?: PackageJson | null): Awaitable<URL> => {
-      if ((pkg = pkg === undefined ? pjson as PackageJson | null : pkg)) {
+  return when(lookupPackageScope(parent, null, fs), scope => {
+    return when(readPackageJson(scope, specifier, parent, fs), pjson => {
+      if (pjson) {
         ok(scope instanceof URL, 'expected `scope` to be a URL')
 
         /**
@@ -984,7 +925,7 @@ function packageImportsResolve(
 
         url = packageImportsExportsResolve(
           specifier,
-          pkg.imports,
+          pjson.imports,
           scope,
           true,
           conditions,
@@ -993,7 +934,7 @@ function packageImportsResolve(
           fs
         )
 
-        if (isPromise(url)) return url.then(check)
+        if (isThenable(url)) return url.then(check)
         if (url) return url
       }
 
@@ -1010,8 +951,6 @@ function packageImportsResolve(
      * @throws {ErrPackagePathNotExported}
      */
     function check(this: void, url: URL | null | undefined): URL {
-      ok(!isPromise(scope), 'expected `scope` to be resolved')
-
       if (url) return url
 
       throw new ERR_PACKAGE_IMPORT_NOT_DEFINED(
@@ -1192,9 +1131,9 @@ function packageResolve(
   /**
    * The resolved self-import URL.
    *
-   * @var {Awaitable<URL | undefined>} self
+   * @const {Awaitable<URL | undefined>} self
    */
-  let self: Awaitable<URL | undefined> = packageSelfResolve(
+  const self: Awaitable<URL | undefined> = packageSelfResolve(
     packageName,
     packageSubpath,
     parent,
@@ -1202,13 +1141,7 @@ function packageResolve(
     fs
   )
 
-  // capture resolved self-import url.
-  if (isPromise(self)) {
-    void self.then(resolved => (self = resolved), constant(null))
-  }
-
-  return chainOrCall(self, (): Awaitable<URL> => {
-    ok(!isPromise(self), 'expected `self` to be resolved')
+  return when(self, self => {
     if (self) return self
 
     /**
@@ -1256,7 +1189,7 @@ function packageResolve(
 
       // chain `isDirectory` promises,
       // or return resolved url if package directory exists.
-      if (isPromise(exists)) {
+      if (isThenable(exists)) {
         promises.push(exists.then(isDirectory => {
           if (!isDirectory || context.url) return
           return context.url = resolve(scope), void 0
@@ -1270,8 +1203,8 @@ function packageResolve(
     }
 
     if (promises.length) {
-      return chainOrCall(Promise.all(promises), (): Awaitable<URL> => {
-        if (isPromise(context.url)) return context.url.then(check)
+      return when(Promise.all(promises), (): Awaitable<URL> => {
+        if (isThenable(context.url)) return context.url.then(check)
         return check(context.url)
       })
     }
@@ -1306,25 +1239,7 @@ function packageResolve(
    *  The resolved URL
    */
   function resolve(this: void, packageUrl: URL): Awaitable<URL> {
-    /**
-     * The package manifest.
-     *
-     * @var {Awaitable<PackageJson | null>} pjson
-     */
-    let pjson: Awaitable<PackageJson | null> = readPackageJson(
-      packageUrl,
-      null,
-      parent,
-      fs
-    )
-
-    if (isPromise(pjson)) {
-      void pjson.then(resolved => (pjson = resolved), constant(null))
-    }
-
-    return chainOrCall(pjson, (): Awaitable<URL> => {
-      ok(!isPromise(pjson), 'expected `pjson` to be resolved')
-
+    return when(readPackageJson(packageUrl, null, parent, fs), pjson => {
       if (pjson?.exports) {
         return packageExportsResolve(
           packageUrl,
@@ -1425,34 +1340,13 @@ function packageSelfResolve(
   conditions?: List<Condition> | null | undefined,
   fs?: FileSystem | null | undefined
 ): Awaitable<URL | undefined> {
-  /**
-   * The URL of the package directory.
-   *
-   * @const {Awaitable<URL | null>} packageUrl
-   */
-  const packageUrl: Awaitable<URL | null> = lookupPackageScope(parent, null, fs)
-
-  return chainOrCall(packageUrl, scope => {
-    /**
-     * The package manifest.
-     *
-     * @const {Awaitable<PackageJson | null>} pjson
-     */
-    const pjson: Awaitable<PackageJson | null> = readPackageJson(
-      scope = scope === undefined ? packageUrl as URL | null : scope,
-      null,
-      parent,
-      fs
-    )
-
-    return chainOrCall(pjson, pkg => {
-      if (pkg === undefined) pkg = pjson as PackageJson | null
-
-      if (pkg?.exports && name === pkg.name) {
+  return when(lookupPackageScope(parent, null, fs), scope => {
+    return when(readPackageJson(scope, null, parent, fs), pjson => {
+      if (pjson?.exports && name === pjson.name) {
         return ok(scope, 'expected `scope`'), packageExportsResolve(
           scope,
           subpath,
-          pkg.exports,
+          pjson.exports,
           conditions,
           parent,
           fs
@@ -1621,7 +1515,7 @@ function packageTargetResolve(
       }
 
       // collect promises, or return resolved url.
-      if (isPromise(resolved)) {
+      if (isThenable(resolved)) {
         // no need to check for `ERR_INVALID_PACKAGE_TARGET`.
         // the only resolver method that throws it is `packageTargetResolve`.
         // `packageResolve` is the only resolver method that can reach here,
@@ -1700,7 +1594,7 @@ function packageTargetResolve(
         )
 
         // collect promises, or return resolved url.
-        if (isPromise(resolved)) {
+        if (isThenable(resolved)) {
           promises.push(resolved.then(identity))
         } else if (resolved !== undefined && !promises.length) {
           return resolved

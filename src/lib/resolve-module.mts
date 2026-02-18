@@ -5,7 +5,6 @@
 
 import constant from '#internal/constant'
 import identity from '#internal/identity'
-import isPromise from '#internal/is-promise'
 import defaultExtensions from '#lib/default-extensions'
 import resolveAlias from '#lib/resolve-alias'
 import { moduleResolve } from '#lib/resolver'
@@ -22,6 +21,7 @@ import type {
   ResolveModuleOptions
 } from '@flex-development/mlly'
 import pathe from '@flex-development/pathe'
+import { isThenable, when } from '@flex-development/when'
 
 export default resolveModule
 
@@ -127,14 +127,10 @@ function resolveModule(
     return retry(e, specifier, parent, options)
   }
 
-  if (isPromise(resolved)) {
-    return resolved.then(
-      (url: URL): URL => rewriteExtension(url, specifier, options?.ext),
-      (e: unknown): Awaitable<URL> => retry(e, specifier, parent, options)
-    )
-  }
-
-  return rewriteExtension(resolved, specifier, options?.ext)
+  return when(resolved, {
+    chain: (url: URL): URL => rewriteExtension(url, specifier, options?.ext),
+    reject: (e: unknown): Awaitable<URL> => retry(e, specifier, parent, options)
+  })
 }
 
 /**
@@ -242,7 +238,7 @@ function retry(
           options?.fs
         )
 
-        if (!isPromise(resolved)) {
+        if (!isThenable(resolved)) {
           return rewriteExtension(resolved, specifier, options?.ext)
         }
       } catch {

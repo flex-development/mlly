@@ -3,18 +3,11 @@
  * @module mlly/lib/isDirectory
  */
 
-import chainOrCall from '#internal/chain-or-call'
 import constant from '#internal/constant'
 import dfs from '#internal/fs'
-import identity from '#internal/identity'
-import isPromise from '#internal/is-promise'
 import isModuleId from '#lib/is-module-id'
-import type {
-  Awaitable,
-  FileSystem,
-  ModuleId,
-  Stats
-} from '@flex-development/mlly'
+import type { Awaitable, FileSystem } from '@flex-development/mlly'
+import when from '@flex-development/when'
 
 export default isDirectory
 
@@ -66,28 +59,14 @@ function isDirectory(
   id: unknown,
   fs?: FileSystem | null | undefined
 ): Awaitable<boolean> {
-  if (isModuleId(id)) {
-    try {
-      if (typeof id === 'string' && id.startsWith('file:')) id = new URL(id)
+  if (typeof id === 'string' && id.startsWith('file:')) id = new URL(id)
+  if (!isModuleId(id)) return false
 
-      /**
-       * The stats object.
-       *
-       * @var {Awaitable<Stats | null>} stats
-       */
-      let stats: Awaitable<Stats | null> = (fs ?? dfs).stat(id as ModuleId)
+  fs ??= dfs
 
-      // resolve the stats object.
-      if (isPromise<Stats>(stats)) stats = stats.then(identity, constant(null))
-
-      return chainOrCall(stats, (): Awaitable<boolean> => {
-        if (!isPromise(stats)) return stats.isDirectory()
-        return stats.then(stats => stats?.isDirectory() ?? false)
-      })
-    } catch {
-      // swallow error.
-    }
+  try {
+    return when(fs.stat(id), stats => stats.isDirectory(), constant(false))
+  } catch {
+    return false // swallow error.
   }
-
-  return false
 }

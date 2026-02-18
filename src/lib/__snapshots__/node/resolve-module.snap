@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("#internal/chain-or-call") 1`] = `file://\${process.cwd()}/src/internal/chain-or-call.mjs`;
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("#internal/identity") 1`] = `file://\${process.cwd()}/src/internal/identity.mjs`;
 
 exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("../../lib") 1`] = `file://\${process.cwd()}/src/lib/index.mjs`;
 
@@ -30,7 +30,7 @@ exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("su
 
 exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("unist") 1`] = `file://\${process.cwd()}/node_modules/@types/unist/index.d.ts`;
 
-exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("#internal/chain-or-call") 1`] = `file://\${process.cwd()}/src/internal/chain-or-call.mjs`;
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("#internal/identity") 1`] = `file://\${process.cwd()}/src/internal/identity.mjs`;
 
 exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("../../lib") 1`] = `file://\${process.cwd()}/src/lib/index.mjs`;
 
