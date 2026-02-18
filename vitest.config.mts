@@ -14,10 +14,7 @@ import {
   type ConfigEnv,
   type ViteUserConfig
 } from 'vitest/config'
-import type {
-  ResolveSnapshotPathHandlerContext,
-  TypecheckConfig
-} from 'vitest/node'
+import type { ResolveSnapshotPathHandlerContext } from 'vitest/node'
 import pkg from './package.json' with { type: 'json' }
 import tsconfig from './tsconfig.json' with { type: 'json' }
 
@@ -37,21 +34,6 @@ export default defineConfig(config)
  *  Root vitest configuration object
  */
 function config(this: void, env: ConfigEnv): ViteUserConfig {
-  /**
-   * Options used to configure typechecks.
-   *
-   * @const {Partial<TypecheckConfig>} typecheck
-   */
-  const typecheck: Partial<TypecheckConfig> = {
-    allowJs: false,
-    checker: 'tsc',
-    enabled: env.mode === 'typecheck',
-    ignoreSourceErrors: false,
-    include: ['**/__tests__/*.spec-d.mts'],
-    only: true,
-    tsconfig: 'tsconfig.test.json'
-  }
-
   return {
     plugins: [tsconfigPaths({ configNames: ['tsconfig.json'] })],
     test: {
@@ -96,21 +78,33 @@ function config(this: void, env: ConfigEnv): ViteUserConfig {
       },
       passWithNoTests: true,
       projects: [
-        {
-          extends: true,
-          ssr: {
-            resolve: { conditions: tsconfig.compilerOptions.customConditions }
-          },
-          test: {
-            env: { VITEST_ENVIRONMENT: 'node' },
-            environment: 'node',
-            environmentOptions: {},
-            name: 'node',
-            setupFiles: [],
-            typecheck
+        'node' as const,
+        'edge-runtime' as const
+      ].map((environment, groupOrder) => ({
+        extends: true,
+        ssr: {
+          resolve: {
+            conditions: tsconfig.compilerOptions.customConditions
+          }
+        },
+        test: {
+          env: { VITEST_ENVIRONMENT: environment },
+          environment,
+          environmentOptions: {},
+          name: { label: environment },
+          sequence: { groupOrder },
+          setupFiles: [],
+          typecheck: {
+            allowJs: false,
+            checker: 'tsc',
+            enabled: env.mode === 'typecheck',
+            ignoreSourceErrors: false,
+            include: ['**/__tests__/*.spec-d.mts'],
+            only: true,
+            tsconfig: 'tsconfig.test.json'
           }
         }
-      ],
+      })),
       reporters: JSON.parse(process.env['VITEST_UI'] ?? '0')
         ? [new Notifier(), ['tree']]
         : env.mode === 'reports'

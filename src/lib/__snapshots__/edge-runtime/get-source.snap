@@ -1,0 +1,99 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/getSource > fs (default) > data: > should return source code for \`id\` (0) 1`] = `"Hello, World!"`;
+
+exports[`unit:lib/getSource > fs (default) > data: > should return source code for \`id\` (1) 1`] = `"console.log("hello!");"`;
+
+exports[`unit:lib/getSource > fs (default) > file: > should return source code for \`id\` (0) 1`] = `
+"{
+  "$schema": "https://raw.githubusercontent.com/flex-development/grease/main/grease.schema.json",
+  "tag": {
+    "message": "release: {tag}",
+    "sign": true
+  },
+  "tagprefix": ""
+}
+"
+`;
+
+exports[`unit:lib/getSource > fs (default) > file: > should return source code for \`id\` (1) 1`] = `
+"/**
+ * @file Configuration - Vite
+ * @module config/vite
+ * @see https://vite.dev/config
+ */
+
+import type { UserConfig } from 'vite'
+import tsconfig from './tsconfig.json' with { type: 'json' }
+
+/**
+ * Vite configuration.
+ *
+ * @const {UserConfig} config
+ */
+const config: UserConfig = {
+  resolve: {
+    conditions: ['browser', ...tsconfig.compilerOptions.customConditions]
+  }
+}
+
+export default config
+"
+`;
+
+exports[`unit:lib/getSource > fs (default) > http[s]: > should return source code for \`id\` (0) 1`] = `
+"
+      /* esm.sh - @flex-development/mlly@1.0.0-alpha.20 */
+      import "/#lib/index?target=es2022";
+      export * from "/@flex-development/mlly@1.0.0-alpha.20/es2022/mlly.mjs";
+    "
+`;
+
+exports[`unit:lib/getSource > fs (only async) > data: > should return source code for \`id\` (0) 1`] = `"Hello, World!"`;
+
+exports[`unit:lib/getSource > fs (only async) > data: > should return source code for \`id\` (1) 1`] = `"console.log("hello!");"`;
+
+exports[`unit:lib/getSource > fs (only async) > file: > should return source code for \`id\` (0) 1`] = `
+"{
+  "$schema": "https://raw.githubusercontent.com/flex-development/grease/main/grease.schema.json",
+  "tag": {
+    "message": "release: {tag}",
+    "sign": true
+  },
+  "tagprefix": ""
+}
+"
+`;
+
+exports[`unit:lib/getSource > fs (only async) > file: > should return source code for \`id\` (1) 1`] = `
+"/**
+ * @file Configuration - Vite
+ * @module config/vite
+ * @see https://vite.dev/config
+ */
+
+import type { UserConfig } from 'vite'
+import tsconfig from './tsconfig.json' with { type: 'json' }
+
+/**
+ * Vite configuration.
+ *
+ * @const {UserConfig} config
+ */
+const config: UserConfig = {
+  resolve: {
+    conditions: ['browser', ...tsconfig.compilerOptions.customConditions]
+  }
+}
+
+export default config
+"
+`;
+
+exports[`unit:lib/getSource > fs (only async) > http[s]: > should return source code for \`id\` (0) 1`] = `
+"
+      /* esm.sh - @flex-development/mlly@1.0.0-alpha.20 */
+      import "/#lib/index?target=es2022";
+      export * from "/@flex-development/mlly@1.0.0-alpha.20/es2022/mlly.mjs";
+    "
+`;

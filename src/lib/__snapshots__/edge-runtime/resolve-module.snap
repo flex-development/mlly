@@ -1,0 +1,61 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("#internal/identity") 1`] = `file://\${process.cwd()}/src/internal/identity.mjs`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("../../lib") 1`] = `file://\${process.cwd()}/src/lib/index.mjs`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("@flex-development/kronk") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/kronk/dist/index.mjs`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("@flex-development/mlly/package.json") 1`] = `file://\${process.cwd()}/package.json`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("@flex-development/pathe/dot") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/pathe/dist/lib/dot.mjs`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("@types/unist") 1`] = `file://\${process.cwd()}/node_modules/@types/unist/index.d.ts`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("data:text/javascript,") 1`] = `"data:text/javascript,"`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("https://esm.sh/@flex-development/mlly") 1`] = `"https://esm.sh/@flex-development/mlly"`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("import-meta-resolve") 1`] = `file://\${process.cwd()}/node_modules/import-meta-resolve/index.js`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("legacy-main-1/a.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/a.js`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("legacy-main-2") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-2/lib/index.js`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("module") 1`] = `"node:module"`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("node:test") 1`] = `"node:test"`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("subpath-exports/lib/a.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/lib/a`;
+
+exports[`unit:lib/resolveModule > fs (default) > should return resolved URL ("unist") 1`] = `file://\${process.cwd()}/node_modules/@types/unist/index.d.ts`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("#internal/identity") 1`] = `file://\${process.cwd()}/src/internal/identity.mjs`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("../../lib") 1`] = `file://\${process.cwd()}/src/lib/index.mjs`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("@flex-development/kronk") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/kronk/dist/index.mjs`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("@flex-development/mlly/package.json") 1`] = `file://\${process.cwd()}/package.json`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("@flex-development/pathe/dot") 1`] = `file://\${process.cwd()}/node_modules/@flex-development/pathe/dist/lib/dot.mjs`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("@types/unist") 1`] = `file://\${process.cwd()}/node_modules/@types/unist/index.d.ts`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("data:text/javascript,") 1`] = `"data:text/javascript,"`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("https://esm.sh/@flex-development/mlly") 1`] = `"https://esm.sh/@flex-development/mlly"`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("import-meta-resolve") 1`] = `file://\${process.cwd()}/node_modules/import-meta-resolve/index.js`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("legacy-main-1/a.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-1/a.js`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("legacy-main-2") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/legacy-main-2/lib/index.js`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("module") 1`] = `"node:module"`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("node:test") 1`] = `"node:test"`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("subpath-exports/lib/a.js") 1`] = `file://\${process.cwd()}/__fixtures__/node_modules/subpath-exports/lib/a`;
+
+exports[`unit:lib/resolveModule > fs (only async) > should return resolved URL ("unist") 1`] = `file://\${process.cwd()}/node_modules/@types/unist/index.d.ts`;

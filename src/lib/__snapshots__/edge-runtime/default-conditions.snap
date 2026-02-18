@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`unit:lib/defaultConditions > should contain default conditions 1`] = `
+Set {
+  "node",
+  "import",
+}
+`;

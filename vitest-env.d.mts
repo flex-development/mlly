@@ -2,6 +2,6 @@
 
 namespace NodeJS {
   interface ProcessEnv extends Dict<string> {
-    VITEST_ENVIRONMENT?: 'happy-dom' | 'node'
+    VITEST_ENVIRONMENT?: import('vitest/node').BuiltinEnvironment
   }
 }
