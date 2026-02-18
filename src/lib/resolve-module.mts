@@ -50,7 +50,7 @@ export default resolveModule
  *
  * @this {void}
  *
- * @param {string} specifier
+ * @param {ModuleId} specifier
  *  The module specifier to resolve
  * @param {ModuleId} parent
  *  The URL of the parent module
@@ -62,7 +62,7 @@ export default resolveModule
  */
 function resolveModule<T extends Awaitable<URL>>(
   this: void,
-  specifier: string,
+  specifier: ModuleId,
   parent: ModuleId,
   options?: ResolveModuleOptions | null | undefined
 ): T
@@ -89,7 +89,7 @@ function resolveModule<T extends Awaitable<URL>>(
  *
  * @this {void}
  *
- * @param {string} specifier
+ * @param {ModuleId} specifier
  *  The module specifier to resolve
  * @param {ModuleId} parent
  *  The URL of the parent module
@@ -101,10 +101,11 @@ function resolveModule<T extends Awaitable<URL>>(
  */
 function resolveModule(
   this: void,
-  specifier: string,
+  specifier: ModuleId,
   parent: ModuleId,
   options?: ResolveModuleOptions | null | undefined
 ): Awaitable<URL> {
+  specifier = String(specifier)
   specifier = resolveAlias(specifier, { ...options, parent }) ?? specifier
 
   /**

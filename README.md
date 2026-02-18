@@ -1051,7 +1051,7 @@ Adds support for:
 
 #### Parameters
 
-- `specifier` (`string`)
+- `specifier` ([`ModuleId`](#moduleid))
   — the module specifier to resolve
 - `parent` ([`ModuleId`](#moduleid))
   — the url of the parent module

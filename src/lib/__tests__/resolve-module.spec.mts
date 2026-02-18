@@ -48,7 +48,7 @@ describe('unit:lib/resolveModule', () => {
       [legacyMain1.name + '/a.js', parent],
       [legacyMain2.name, parent],
       [moduleSpecifier, import.meta.url],
-      [nodeUrl.href, import.meta.url],
+      [nodeUrl, import.meta.url],
       [pkg.name + '/package.json', import.meta.url],
       [pkgKronk.name, import.meta.url],
       [pkgPathe.name + '/dot', import.meta.url],
