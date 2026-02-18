@@ -1,3 +1,18 @@
+## [1.0.0-beta.7](https://github.com/flex-development/mlly/compare/1.0.0-beta.6...1.0.0-beta.7) (2026-02-18)
+
+### :package: Build
+
+- [[`d1d72a8`](https://github.com/flex-development/mlly/commit/d1d72a8ad498328f8bd9e1e030c18ac58441a879)] **deps:** use @flex-development/when
+- [[`fc3e70a`](https://github.com/flex-development/mlly/commit/fc3e70addbd8172f1464ba5fcef8dcf24cdd22e1)] **pkg:** bundle dts files with rollup only
+
+### :sparkles: Features
+
+- [[`20cd201`](https://github.com/flex-development/mlly/commit/20cd2010a3e4ba5fb3d6cfea649ee12996aebea7)] **lib:** [`resolveModule`] allow `specifier` to be `URL`
+
+### :white_check_mark: Testing
+
+- [[`b598060`](https://github.com/flex-development/mlly/commit/b59806093cf5bbdb8b06ec9bcea9972054bd2902)] add `edge-runtime` environment tests
+
 ## [1.0.0-beta.6](https://github.com/flex-development/mlly/compare/1.0.0-beta.5...1.0.0-beta.6) (2026-02-12)
 
 ### ⚠ BREAKING CHANGES
@@ -1321,6 +1336,7 @@
 - [[`4615851`](https://github.com/flex-development/mlly/commit/46158510fdd0e3d8e0e60757290a655606ad836e)] **resolve:** [options] pass original module specifier to `ext`
 - [[`0266ca9`](https://github.com/flex-development/mlly/commit/0266ca9a5593d0c66e950ba1fe2c8f6df8422ff9)] **resolve:** sort `RESOLVE_EXTENSIONS` according to priority
 - [[`36c4b74`](https://github.com/flex-development/mlly/commit/36c4b7475c9bb6c924f5e75c8d6d215a8d23e79c)] **specifiers:** [`toBareSpecifier`] improve `exports` path search
+
 
 
 
