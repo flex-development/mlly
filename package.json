@@ -165,7 +165,7 @@
     "@flex-development/is-builtin": "3.2.0",
     "@flex-development/pathe": "4.0.2",
     "@flex-development/pkg-types": "4.1.0",
-    "@flex-development/when": "1.0.0",
+    "@flex-development/when": "3.0.0",
     "devlop": "1.1.0"
   },
   "devDependencies": {
