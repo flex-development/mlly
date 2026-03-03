@@ -170,8 +170,8 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.2",
-    "@commitlint/cli": "20.4.2",
-    "@commitlint/types": "20.4.0",
+    "@commitlint/cli": "20.4.3",
+    "@commitlint/types": "20.4.3",
     "@edge-runtime/vm": "5.0.0",
     "@faker-js/faker": "10.3.0",
     "@flex-development/commitlint-config": "1.0.1",
