@@ -1870,7 +1870,7 @@ __metadata:
     "@flex-development/remark-preset": "npm:1.0.0"
     "@flex-development/tsconfig-types": "npm:5.1.0"
     "@flex-development/tutils": "npm:6.0.0-alpha.25"
-    "@flex-development/when": "npm:1.0.0"
+    "@flex-development/when": "npm:3.0.0"
     "@rollup/plugin-node-resolve": "npm:16.0.3"
     "@tsconfig/strictest": "npm:2.0.8"
     "@types/chai": "npm:5.2.3"
@@ -2256,10 +2256,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flex-development/when@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@flex-development/when@npm:1.0.0"
-  checksum: 10/3e71b9a00a93964223b6f36819553c226264ab2375933f6d8681dfd2302b3a21dc21aeed3d5230699d6bb35bd41e95872be5f45e8deadcb1fda4b43e35372e54
+"@flex-development/when@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@flex-development/when@npm:3.0.0"
+  checksum: 10/68b4221f5eeae1abeb2d368be28446a014cfa934e22e5d51201aa755136cdef5a166ed9eeac5e94f330d5537a77f40d58c69fbef13acf59d9ad84a40945717bb
   languageName: node
   linkType: hard
 
