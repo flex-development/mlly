@@ -1915,7 +1915,7 @@ __metadata:
     husky: "npm:9.1.7"
     import-meta-resolve: "npm:4.2.0"
     is-ci: "npm:4.1.0"
-    msw: "npm:2.12.14"
+    msw: "npm:2.13.1"
     node-notifier: "npm:10.0.1"
     pkg-size: "npm:2.4.0"
     remark: "npm:15.0.1"
@@ -8657,9 +8657,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:2.12.14":
-  version: 2.12.14
-  resolution: "msw@npm:2.12.14"
+"msw@npm:2.13.1":
+  version: 2.13.1
+  resolution: "msw@npm:2.13.1"
   dependencies:
     "@inquirer/confirm": "npm:^5.0.0"
     "@mswjs/interceptors": "npm:^0.41.2"
@@ -8686,7 +8686,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: 10/df70384ed9922a4bdc2461fb6306b65c8462326b21c7e2cb1c65650c5bf03291320a7beb7074b714198da51a731e672a8f0bc5b95402902130e5049ac6cc2fe3
+  checksum: 10/527c3bbae39460270ef7b2ec4bcb706bceef3eb07d45b305e50c654490c2f16cc5ba735cc294f981caff84f120f8c6084b42988f68d891f0e1230228bbdd56db
   languageName: node
   linkType: hard
 
