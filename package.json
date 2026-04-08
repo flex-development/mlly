@@ -197,7 +197,7 @@
     "concat-stream": "2.0.0",
     "cross-env": "10.1.0",
     "cspell": "10.0.0",
-    "dprint": "0.53.2",
+    "dprint": "0.54.0",
     "editorconfig": "3.0.2",
     "esbuild": "0.28.0",
     "eslint": "9.39.2",
