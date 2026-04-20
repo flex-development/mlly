@@ -106,7 +106,7 @@ jobs:
           trust_level: 5
       - id: node
         name: Setup Node.js
-        uses: actions/setup-node@v6.3.0
+        uses: actions/setup-node@v6.4.0
         with:
           cache: yarn
           cache-dependency-path: yarn.lock
