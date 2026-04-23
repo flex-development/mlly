@@ -205,7 +205,7 @@
     "husky": "9.1.7",
     "import-meta-resolve": "4.2.0",
     "is-ci": "4.1.0",
-    "msw": "2.13.4",
+    "msw": "2.13.5",
     "node-notifier": "10.0.1",
     "pkg-size": "2.4.0",
     "remark": "15.0.1",
