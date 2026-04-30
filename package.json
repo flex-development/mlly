@@ -200,7 +200,7 @@
     "dprint": "0.54.0",
     "editorconfig": "3.0.2",
     "esbuild": "0.28.0",
-    "eslint": "9.39.2",
+    "eslint": "10.2.1",
     "growl": "1.10.5",
     "husky": "9.1.7",
     "import-meta-resolve": "4.2.0",
