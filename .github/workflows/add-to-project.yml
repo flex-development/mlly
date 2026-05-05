@@ -43,7 +43,7 @@ jobs:
           echo "result=$(echo "${{ github.server_url }}/orgs/${{ github.repository_owner }}/projects/${{ vars.GH_PROJECT_NUMBER }}" | xargs)" >>$GITHUB_OUTPUT
       - id: add-item
         name: Add ${{ format('#{0}', github.event.number) }} to project
-        uses: actions/add-to-project@v1.0.2
+        uses: actions/add-to-project@v2.0.0
         with:
           github-token: ${{ steps.bot-token.outputs.token }}
           project-url: ${{ steps.url.outputs.result }}
