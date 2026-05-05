@@ -2093,7 +2093,7 @@ __metadata:
     husky: "npm:9.1.7"
     import-meta-resolve: "npm:4.2.0"
     is-ci: "npm:4.1.0"
-    msw: "npm:2.14.2"
+    msw: "npm:2.14.3"
     node-notifier: "npm:10.0.1"
     pkg-size: "npm:2.4.0"
     remark: "npm:15.0.1"
@@ -8921,9 +8921,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:2.14.2":
-  version: 2.14.2
-  resolution: "msw@npm:2.14.2"
+"msw@npm:2.14.3":
+  version: 2.14.3
+  resolution: "msw@npm:2.14.3"
   dependencies:
     "@inquirer/confirm": "npm:^6.0.11"
     "@mswjs/interceptors": "npm:^0.41.3"
@@ -8936,7 +8936,7 @@ __metadata:
     outvariant: "npm:^1.4.3"
     path-to-regexp: "npm:^6.3.0"
     picocolors: "npm:^1.1.1"
-    rettime: "npm:^0.11.7"
+    rettime: "npm:^0.11.11"
     statuses: "npm:^2.0.2"
     strict-event-emitter: "npm:^0.5.1"
     tough-cookie: "npm:^6.0.1"
@@ -8950,7 +8950,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: 10/af2b6d45991f539674fa51aaff599a409de620863ae991ff821fcec8893687a38d793ab837e5444934396ca4003ded99bb2a313daa4d7ae04e0b199fba42847a
+  checksum: 10/e6d24f64f5f9d7225e5dc33fbfdd105dd0785ef1e9ba46025acea1ade0b5c6f985d3fd3b25e7a2fd645b4afda7736cc6e23e922c00f8b610332635b17f8c461f
   languageName: node
   linkType: hard
 
@@ -10889,10 +10889,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rettime@npm:^0.11.7":
-  version: 0.11.7
-  resolution: "rettime@npm:0.11.7"
-  checksum: 10/bb986507587a110f6af68ab28176bd788ac59bd1864671a7c0426f29a3d50a1f3328638e6043515f78c3d3af715d6b77b5cb1d1f281b6d123f63634a465e5339
+"rettime@npm:^0.11.11":
+  version: 0.11.11
+  resolution: "rettime@npm:0.11.11"
+  checksum: 10/4e21795ca6dee6fde1f120d1228c2b9b0e0f061f7b0ea82b985f63c1b508ba9d35c839a2d70320a4dc4da6c027366868ed59b73a32497ae33581b8ef0adea11f
   languageName: node
   linkType: hard
 
